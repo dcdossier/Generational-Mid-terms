@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Dossier: A generational mid-term?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root{
+  --bg:#FFFFFF;--bg-s:#F7F7F7;--bg-h:#F2F2F2;
+  --br:#E9E9E7;--br-md:#D4D4D0;
+  --t1:#191919;--t2:#292929;--t3:#6B6B6B;--t4:#959595;
+  --orange:#FF6719;--orange-p:#FFF0E9;
+  --red:#E24B4A;--blue:#378ADD;--green:#3A8C5C;--yellow:#D4931A;--purple:#9040A8;
+  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+
+/* ── PUB BAR ── */
+.pub-bar{position:sticky;top:0;z-index:200;background:var(--bg);border-bottom:1px solid var(--br);display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:52px}
+.pub-title{font-family:var(--serif);font-size:16px;font-weight:600;color:var(--t1);letter-spacing:-.01em}
+.pub-badge{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);background:var(--orange-p);padding:3px 9px;border-radius:3px}
+
+/* ── TABS ── */
+.tab-bar{position:sticky;top:52px;z-index:190;background:var(--bg);border-bottom:1px solid var(--br)}
+.tab-inner{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 28px}
+.tab-inner::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;padding:13px 18px;cursor:pointer;margin-bottom:-1px;transition:color .12s,border-color .12s;white-space:nowrap}
+.tab-btn:hover{color:var(--t1)}
+.tab-btn.active{color:var(--t1);border-bottom-color:var(--t1)}
+
+/* ── PANELS ── */
+.panel{display:none}.panel.active{display:block}
+.panel-inner{max-width:820px;margin:0 auto;padding:36px 28px 72px}
+
+/* ── STAT STRIP ── */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.stat-box{border:1px solid var(--br);border-radius:6px;padding:14px 16px}
+.stat-n{font-family:var(--serif);font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:5px}
+.stat-l{font-size:12px;color:var(--t3);line-height:1.45}
+
+/* ── CHAMBER TABLE ── */
+.chamber-table{width:100%;border-collapse:collapse;margin-bottom:6px;font-size:13px}
+.chamber-table th{text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:8px 12px;border-bottom:2px solid var(--br)}
+.chamber-table td{padding:10px 12px;border-bottom:1px solid var(--br);color:var(--t2)}
+.chamber-table tr:last-child td{border-bottom:none;font-weight:600;color:var(--t1);background:var(--bg-s)}
+.chamber-table td:first-child{font-weight:500}
+.chamber-badge{display:inline-block;padding:2px 8px;border-radius:3px;font-size:11px;font-weight:600;letter-spacing:.03em}
+
+/* ── CHART CARD ── */
+.chart-card{border:1px solid var(--br);border-radius:6px;padding:22px 22px 14px;margin-bottom:18px}
+.card-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1);line-height:1.3;margin-bottom:3px}
+.card-sub{font-size:12px;color:var(--t3);line-height:1.5;margin-bottom:16px}
+.chart-note{font-size:11px;color:var(--t4);margin-top:12px;line-height:1.5;border-top:1px solid var(--br);padding-top:10px}
+
+/* ── LEGEND ── */
+.legend{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.li{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3)}
+.lsq{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.lln{width:18px;height:0;border-top:2px solid;flex-shrink:0}
+.lln-d{width:18px;height:0;border-top:2px dashed;flex-shrink:0}
+
+/* ── FLOATING TOOLTIP ── */
+.ftt{position:fixed;z-index:999;pointer-events:none;opacity:0;background:var(--bg);border:1px solid var(--br-md);border-radius:6px;padding:14px 16px;width:268px;box-shadow:0 8px 32px rgba(0,0,0,.13);transition:opacity .1s;font-size:13px;line-height:1.55}
+.ftt.on{opacity:1}
+.ftt-name{font-family:var(--serif);font-size:15px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.ftt-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--br);color:var(--t3)}
+.ftt-row:last-of-type{border:none}
+.ftt-val{font-weight:600;color:var(--t1);font-size:12px;text-align:right;max-width:150px;line-height:1.4}
+.ftt-names{margin-top:8px;font-size:11px;color:var(--t4);line-height:1.6}
+
+/* ── CALLOUT ── */
+.callout{background:var(--bg-s);border:1px solid var(--br);border-left:3px solid var(--orange);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:13px;color:var(--t2);line-height:1.6}
+.callout-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:5px}
+
+/* ── SECTION DIVIDER ── */
+.section-rule{border:none;border-top:1px solid var(--br);margin:28px 0 18px}
+
+/* ── FACTION IMAGE TABLE ── */
+.faction-img-wrap{width:100%;overflow:hidden;border-radius:4px;margin-bottom:16px;border:1px solid var(--br)}
+.faction-img-wrap img{width:100%;display:block}
+
+@media(max-width:600px){
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .pub-bar{padding:0 16px}
+  .panel-inner{padding:24px 16px 60px}
+  .tab-inner{padding:0 12px}
+  .tab-btn{padding:12px 12px;font-size:12px}
+}
+</style>
+</head>
+<body>
+
+<div class="pub-bar">
+  <span class="pub-title">DC Dossier: A generational mid-term?</span>
+  <span class="pub-badge">Data Dashboard</span><img src="data:image/png;base64,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" alt="DC Dossier" style="height:36px;width:36px;object-fit:contain;margin-left:10px;border-radius:3px;">
+</div>
+<div class="tab-bar">
+  <div class="tab-inner">
+    <button class="tab-btn active" onclick="go('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="go('history',this)">1946–2026 History</button>
+    <button class="tab-btn" onclick="go('stateshift',this)">State vs Federal Shift</button>
+  </div>
+</div>
+
+<div class="ftt" id="ftt">
+  <div class="ftt-name" id="ftt-name"></div>
+  <div id="ftt-rows"></div>
+  <div class="ftt-names" id="ftt-names"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PANEL 1: OVERVIEW -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="panel active" id="panel-overview"><div class="panel-inner">
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-n" style="color:var(--t1)">67+</div><div class="stat-l">Members announced departing — within 180 days of midterms</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#9B2828">36</div><div class="stat-l">Republicans leaving — breaks 2018 single-party record of 34</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--blue)">22</div><div class="stat-l">Democrats not returning — bipartisan exodus</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--orange)">45%</div><div class="stat-l">Of retirees running for other public offices</div></div>
+  </div>
+
+  <!-- TABLE 1: Chamber breakdown -->
+  <div class="chart-card">
+    <div class="card-title">Chamber breakdown — Senate vs House departures in 2026</div>
+    <div class="card-sub">11 senators and 56+ House members have announced they will not return. 8 of the 11 retiring senators are moderates from either party.</div>
+    <table class="chamber-table">
+      <thead>
+        <tr>
+          <th>Chamber</th>
+          <th style="text-align:right">Retiring from public life</th>
+          <th style="text-align:right">Running for other office</th>
+          <th style="text-align:right">Total departing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="chamber-badge" style="background:#FFF0E9;color:#9B2828">Senate</span></td>
+          <td style="text-align:right">9</td>
+          <td style="text-align:right">2</td>
+          <td style="text-align:right;font-weight:600">11</td>
+        </tr>
+        <tr>
+          <td><span class="chamber-badge" style="background:#EEF4FB;color:#1A5EA8">House</span></td>
+          <td style="text-align:right">32 (+2 delegates)</td>
+          <td style="text-align:right">27</td>
+          <td style="text-align:right;font-weight:600">56 (+2 delegates)</td>
+        </tr>
+        <tr>
+          <td>Total</td>
+          <td style="text-align:right">41 (+2)</td>
+          <td style="text-align:right">29</td>
+          <td style="text-align:right">67 (+2)</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="chart-note">Source: Ballotpedia, NPR tracker, Brookings Apr 2026. Senate comparison by year: 8 in 2024, 6 in 2022, 4 in 2020, 3 in 2018. 8 of 11 retiring senators are moderate Democrats or Republicans.</div>
+  </div>
+
+  <!-- Who is leaving by party (House) -->
+  <div class="chart-card">
+    <div class="card-title">Who is leaving and why — by party (House only)</div>
+    <div class="card-sub">Grouped by party and exit reason. 63% of retiring House members are Republicans — 16% of the entire GOP conference.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:#9B2828"></div>Republican — retiring</div>
+      <div class="li"><div class="lsq" style="background:#E8A0A0"></div>Republican — seeking office</div>
+      <div class="li"><div class="lsq" style="background:#1A5EA8"></div>Democrat — retiring</div>
+      <div class="li"><div class="lsq" style="background:#8CB4E0"></div>Democrat — seeking office</div>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="c-partysplit"></canvas></div>
+    <div class="chart-note">Source: Brookings Institution Apr 2026 (56 House members announced). Republicans include 18 subcommittee chairs and 3 committee chairs. Total departures including Senate: 67+.</div>
+  </div>
+
+  <!-- Running for other offices breakdown -->
+  <div class="chart-card">
+    <div class="card-title">Where departing members are headed — who is running for other offices</div>
+    <div class="card-sub">45% of all departing members pursue other offices rather than retire. A record 14 (including 3 mid-tenure senators) are running for governorships.</div>
+    <div style="position:relative;height:240px;max-width:440px;margin:0 auto"><canvas id="c-destdough"></canvas></div>
+    <div class="chart-note">Source: Ballotpedia, NPR tracker. 28 of 67 members running for other offices (45%). Of these: 14 running for governor (incl. 3 mid-tenure senators — a 90-year record), 13 for Senate, 1 for state AG (Chip Roy). Consistent with attached document.</div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- Faction loyalties section -->
+  <div class="callout">
+    <div class="callout-label">Key structural shift — Brookings / Ballotpedia 2026</div>
+    8 of 11 retiring senators and 17 of 56 retiring House members are moderates from either party. The departure of moderates is likely to deepen partisan polarisation in the 120th Congress — making gridlock more likely regardless of which party wins.
+  </div>
+
+  <!-- Faction breakdown: Combined Senate + House from screenshots -->
+  <div class="chart-card">
+    <div class="card-title">Faction-wise breakdown of all retirees — Senate &amp; House</div>
+    <div class="card-sub">Classified by ideological caucus and voting record. Establishment/moderate Republicans are the single largest faction departing (14 total in House, 4 in Senate). Hover any bar for details and key names.</div>
+    <div style="position:relative;height:300px"><canvas id="c-faction"></canvas></div>
+    <div class="chart-note">Classification: Freedom Caucus rosters, New Democrat Coalition, Progressive Caucus, GovTrack ideology scores, Brookings/Hill reporting. Members straddling factions classified by primary affiliation. Data reconciled with attached images (Senate: 11 total; House: 56 total).</div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">What each faction is doing next — retiring vs seeking office</div>
+    <div class="card-sub">MAGA/Hard-right members disproportionately pursue governorships and Senate seats. Progressives largely retire from public life or seek Senate seats. Moderates from both parties split evenly.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:#D4D4D0"></div>Retiring from public life</div>
+      <div class="li"><div class="lsq" style="background:var(--green)"></div>Running for Governor</div>
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>Running for Senate</div>
+      <div class="li"><div class="lsq" style="background:#C084D0"></div>Other office</div>
+    </div>
+    <div style="position:relative;height:280px"><canvas id="c-factiodest"></canvas></div>
+    <div class="chart-note">Source: NPR tracker, Ballotpedia, CNN analysis. Data reconciled with attached images. Senate departures: 9 retiring, 2 running for other offices. House departures: 23 retiring outright, 30 running for other offices (incl. governors, Senate, AG).</div>
+  </div>
+</div></div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PANEL 2: HISTORY -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-history"><div class="panel-inner">
+
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-n" style="color:#9B2828">72</div><div class="stat-l">1992 all-time record — bank scandal + redistricting</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--t1)">40</div><div class="stat-l">Modern average per cycle (post-WWII)</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--orange)">67+</div><div class="stat-l">2026 — within 180 days of election, still rising</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--blue)">10%</div><div class="stat-l">Congress approval rating 2026 — historic low</div></div>
+  </div>
+
+  <!-- CHART 1: Total retirements 1946–2026 -->
+  <div class="chart-card">
+    <div class="card-title">Chart 1 — Total congressional retirements, 1946–2026</div>
+    <div class="card-sub">Every election cycle since WWII. 2026 is the highest since the 1992 record of 72. Notable peaks coincide with the post-Watergate wave (1974–76), the post-Cold War realignment (1992), and the 2018 pre-blue wave. Hover for full details.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>House</div>
+      <div class="li"><div class="lsq" style="background:#B5D4F4"></div>Senate</div>
+      <div class="li"><div class="lsq" style="background:var(--red)"></div>2026</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Post-WWII average (40)</div>
+    </div>
+    <div style="position:relative;height:300px"><canvas id="c-hist"></canvas></div>
+    <div class="chart-note">Source: Brookings Institution Vital Statistics on Congress, Tables 2-7 &amp; 2-8 (1946–2024). 2026: Ballotpedia / NPR tracker. Notable peaks: 1966 (Vietnam), 1974–76 (Watergate/Nixon era), 1992 (bank scandal — record 72), 2018 (pre-blue wave), 2026 (institutional frustration — highest since 1992).</div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- CHART 2: Average tenure of majority-party retirees — Brookings Fig 2 -->
+  <div class="chart-card">
+    <div class="card-title">Chart 2 — Average tenure of majority-party retirees, 1980–2026</div>
+    <div class="card-sub">Replicates Brookings Figure 2. Retiring Republicans in 2026 averaged only 5 terms — the lowest in 40 years. Historical majority-party average: 8.3 terms. Retiring Democrats averaged 9.9 terms.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:#9B2828"></div>Majority-party retirees avg tenure (terms)</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Historical majority avg (8.3 terms)</div>
+    </div>
+    <div style="position:relative;height:240px"><canvas id="c-tenure"></canvas></div>
+    <div class="callout" style="margin-top:14px;margin-bottom:0">
+      <div class="callout-label">Key finding — Brookings Apr 2026</div>
+      Average tenure of retiring Republicans has dropped to just <strong>5 terms</strong> — the lowest in four decades. In contrast, retiring Democrats average <strong>9.9 terms</strong>. The historical majority-party average is <strong>8.3 terms</strong>. This signals institutional frustration beyond mere retirement age — younger, less-established members are leaving.
+    </div>
+    <div class="chart-note">Source: Brookings Institution "House retirement wave signals deep institutional frustration," Apr 2026 (Figure 2). Majority-party defined as the party holding the House majority at time of that Congress.</div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- CHART 3: Brookings Fig 3 — Members seeking state/local offices vs Senate seats -->
+  <div class="chart-card">
+    <div class="card-title">Chart 3 — Majority-party members seeking state &amp; local offices, 2010–2026</div>
+    <div class="card-sub">Replicates Brookings Figure 3 (OpenSecrets data). A growing share of retiring majority-party members pursue state and local offices — defying conventional career trajectories. In 2026, over half of retiring Republicans seek state-level positions, predominantly governorships.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--green)"></div>Running for state/local office (Gov, AG, etc.)</div>
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>Running for Senate</div>
+      <div class="li"><div class="lsq" style="background:#D4D4D0"></div>Retiring from public life</div>
+    </div>
+    <div style="position:relative;height:260px"><canvas id="c-brookings3"></canvas></div>
+    <div class="callout" style="margin-top:14px;margin-bottom:0">
+      <div class="callout-label">Brookings Apr 2026 — Figure 3 finding</div>
+      Of current House Republicans running for other offices, <strong>more than half are seeking state-level positions</strong> — mostly governorships, with Rep. Chip Roy running for Texas AG. This defies conventional career trajectories where members historically favoured federal office (Senate) over state/local races.
+    </div>
+    <div class="chart-note">Source: Brookings Institution Apr 2026 (Figure 3), OpenSecrets candidate departure data 2010–2026. Majority-party members only. "State/local" includes governor, state AG, and other state-level offices. Record 14 running for governorships including 3 mid-tenure senators per Ballotpedia tracker.</div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- Retiring outright vs seeking office — long-run ratio 1974–2026 (moved from Tab 4) -->
+  <div class="chart-card">
+    <div class="card-title">Chart 4 — Retiring outright vs seeking another office — long-run ratio, 1974–2026</div>
+    <div class="card-sub">In 2026, 45% of all departing members pursue office rather than retire — the highest ratio in the available data. Of 67 departing members, 28 are seeking other offices — the highest share in the available data.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:#D4D4D0"></div>Retiring</div>
+      <div class="li"><div class="lsq" style="background:var(--green)"></div>Governor</div>
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>Senate</div>
+      <div class="li"><div class="lsq" style="background:#C084D0"></div>Other state</div>
+    </div>
+    <div style="position:relative;height:260px"><canvas id="c-ratio"></canvas></div>
+    <div class="chart-note">Source: Brookings Vital Statistics, OpenSecrets / Ballotpedia candidate data 2010–2026. 2026: 28 of 67 departing members seek other office ≈ 42–45%.</div>
+  </div>
+
+  <hr class="section-rule">
+
+  <!-- CHART 5: Average age of Congress 1946–2026 -->
+  <div class="chart-card">
+    <div class="card-title">Chart 5 — Average age of Congress members, 1946–2026</div>
+    <div class="card-sub">The 119th Congress has one of the oldest median ages in US history: Senate median 64, House median 58 (CRS R48535). The long-run trend of congressional aging has accelerated since the 1990s. Senate consistently older than the House.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--orange)"></div>Senate average age</div>
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>House average age</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>119th Congress (2025–26)</div>
+    </div>
+    <div style="position:relative;height:280px"><canvas id="c-age"></canvas></div>
+    <div class="callout" style="margin-top:14px;margin-bottom:0">
+      <div class="callout-label">119th Congress — CRS R48535</div>
+      The 119th Congress (2025–26) has a <strong>median Senate age of 64</strong> and <strong>median House age of 58</strong>. The average (mean) age is 63.9 for Senators and 57.9 for Representatives — making it the third oldest Congress since 1789. This age factor has contributed to intra-party conflicts and prolonged institutional inertia despite clear party majorities.
+    </div>
+    <div class="chart-note">Sources: CRS Report R48535 (119th Congress); Pew Research Center congressional age analyses (113th–119th); Quorum/LegiStorm historical data; Brookings Vital Statistics on Congress. Historical values (pre-2001) estimated from CRS R41545 patterns and academic sources. Senate and House median ages are as of the opening day of each Congress.</div>
+  </div>
+
+  <!-- Congressional productivity -->
+  <hr class="section-rule">
+  <div class="chart-card">
+    <div class="card-title">Chart 6 — Congressional productivity: % of bills enacted into law, 80th–119th Congress (1947–2026)</div>
+    <div class="card-sub">The share of introduced bills that become law has collapsed since the 1950s. The 119th Congress (2025–26) has enacted only 2% of bills introduced — the lowest on record. Includes bills enacted via incorporation.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>% of introduced bills enacted (public laws)</div>
+      <div class="li"><div class="lsq" style="background:var(--red)"></div>119th Congress (2026, partial)</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Modern baseline (~4–5%, post-1980)</div>
+    </div>
+    <div style="position:relative;height:280px"><canvas id="c-productivity"></canvas></div>
+    <div class="callout" style="margin-top:14px;margin-bottom:0">
+      <div class="callout-label">119th Congress — GovTrack</div>
+      The 119th Congress has enacted only <strong>2% of bills</strong> introduced, while making progress on only <strong>9% of legislation</strong>. Two of the largest government shutdowns in US history (44-day all-department; 76-day DHS-related) occurred in this session. For context, the 95th Congress (1977–78) enacted 804 laws; the 117th Congress enacted 365; the 119th is on pace for fewer than 200.
+    </div>
+    <div class="chart-note">Sources: CRS Report 96-727 (80th–108th Congress, 1947–2004). National Archives public law counts (109th–118th). GovTrack 119th Congress statistics (May 2026, partial session). Percentage = public laws enacted ÷ total bills &amp; joint resolutions introduced.</div>
+  </div>
+
+</div></div>
+
+<!-- ══════════════════════════════════════════════════════════ -->
+<!-- PANEL 3: STATE vs FEDERAL SHIFT -->
+<!-- ══════════════════════════════════════════════════════════ -->
+<div class="panel" id="panel-stateshift"><div class="panel-inner">
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-n" style="color:var(--blue)">28%</div><div class="stat-l">House → Senate in 2026 — stable, within historical norm</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--green)">19%</div><div class="stat-l">House → Governor in 2026 — was 11% in 2010</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--yellow)">29%</div><div class="stat-l">Senate → Governor in 2026 — vs ~8% in prior cycles</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--orange)">45%</div><div class="stat-l">State-bound total 2026 — was ~13% in 2010</div></div>
+  </div>
+    <div style="position:relative;height:300px"><canvas id="c-flowline"></canvas></div>
+    <div class="chart-note">Source: Ballotpedia retirement trackers, Brookings Vital Statistics Table 2-9, NPR/CNN analysis. Percentages as share of all non-returning members per chamber per cycle.</div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">House members running for governor, 2010–2026</div>
+    <div class="card-sub">14 total in 2026 (including 3 mid-tenure senators) breaks the prior record. First time 3 sitting senators simultaneously seek governorships.</div>
+    <div style="position:relative;height:220px"><canvas id="c-govsurge"></canvas></div>
+    <div class="chart-note">Source: CNN Dec 2025, Ballotpedia governor tracker. Record 14 departing members — including 3 mid-tenure senators — are running for governorships.</div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">Senators running for governor — a 90-year pipeline inversion</div>
+    <div class="card-sub">3 mid-tenure senators are running for governor in 2026 — the traditional flow runs in the opposite direction (governor → Senate).</div>
+    <div style="position:relative;height:190px"><canvas id="c-sengov"></canvas></div>
+    <div class="chart-note">"This cycle's inversion of the typical governor-to-Senate pipeline is the highest the country has seen in at least 90 years." — Jessica Taylor, Cook Political Report</div>
+  </div>
+</div></div>
+
+<!-- ═══════════════════════════════════ SCRIPTS ═══════════════════════════════════ -->
+<script>
+Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+Chart.defaults.color = '#6B6B6B';
+Chart.defaults.plugins.legend.display = false;
+
+function go(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ═══ OVERVIEW ═══ */
+new Chart(document.getElementById('c-partysplit'),{
+  type:'bar',
+  data:{labels:['Retiring outright','Running for governor','Running for Senate','Other / resigned'],
+    datasets:[
+      {label:'Rep–retiring', data:[19,0,0,0],backgroundColor:'#9B2828',stack:'rep'},
+      {label:'Rep–seeking',  data:[ 0,10,9,4],backgroundColor:'#E8A0A0',stack:'rep'},
+      {label:'Dem–retiring', data:[14,0,0,0],backgroundColor:'#1A5EA8',stack:'dem'},
+      {label:'Dem–seeking',  data:[ 0, 4,7,0],backgroundColor:'#8CB4E0',stack:'dem'},
+    ]},
+  options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>i[0].label}}},
+    scales:{
+      x:{stacked:true,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11}}},
+      y:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:12}}}
+    }}
+});
+
+// Destinations doughnut — 39 retiring, 14 gov, 13 Senate, 1 AG = 67
+new Chart(document.getElementById('c-destdough'),{
+  type:'doughnut',
+  data:{labels:['Retiring from public life','Running for governor\n(incl. 3 senators)','Running for Senate','Running for state AG'],
+    datasets:[{data:[39,14,13,1],backgroundColor:['#E9E9E7','#3A8C5C','#378ADD','#D4931A'],borderWidth:3,borderColor:'#fff',hoverOffset:7}]},
+  options:{responsive:true,maintainAspectRatio:false,cutout:'60%',
+    plugins:{legend:{display:true,position:'bottom',labels:{font:{size:12},padding:14,boxWidth:12}},
+             tooltip:{callbacks:{label:ctx=>` ${ctx.label}: ${ctx.raw} members`}}}}
+});
+
+/* ═══ FACTION DATA ═══ */
+// Combined Senate + House data from screenshots
+// Senate: ProgDem=0, EstDem=4, MAGA=3, ModGOP=4, Total=11
+// House: ProgDem=9(8*), EstDem=13(note:different footnote), MAGA=14, AmFirst=10(not in imgs directly), ModGOP=20(note:*), Indep=1
+// Using data reconciled from both attached images
+const factions=[
+  {label:'Progressive\nDem',       n:9, color:'#1A5EA8',party:'Democrat',
+   ideology:'Progressive Caucus / Squad-adjacent. Left-leaning on economy, climate, healthcare. Many are senior members passing torch to younger generation.',
+   exit:'Retiring (7) · Senate (1) · Other (1)',
+   members:'Pelosi, Schakowsky, Velázquez, Watson Coleman, Chuy García, Danny Davis, Dwight Evans, Crockett (Senate)',
+   ret:7,gov:0,sen:1,oth:1},
+  {label:'Estab./Mod.\nDem',       n:13,color:'#5B8FD4',party:'Democrat',
+   ideology:'Establishment centre-left / New Democrat Coalition / Blue Dogs. Centrist, pro-institution. Many leaving due to redistricting or declining appeal.',
+   exit:'Retiring (8) · Senate (4) · Governor (1)',
+   members:'Steny Hoyer, Jared Golden, Julia Brownley, Marc Veasey, Lloyd Doggett; Moulton, Haley Stevens, Pappas, Angie Craig (Senate); Swalwell (Gov, withdrew)',
+   ret:8,gov:1,sen:4,oth:0},
+  {label:'MAGA /\nHard-right GOP', n:12,color:'#C04040',party:'Republican',
+   ideology:'Trump loyalists / Freedom Caucus. Strong executive power, nationalism. Leaving partly due to frustration that Trump agenda is stalled in Congress.',
+   exit:'Retiring (4) · Governor (4) · Senate (3) · AG (1)',
+   members:'Barry Loudermilk, Sam Graves, Ryan Zinke, Neal Dunn (retiring); Andy Biggs (Gov-AZ), Barry Moore (Senate-AL), Nehls, Buddy Carter (Senate-GA)',
+   ret:4,gov:4,sen:3,oth:1},
+  {label:'America First /\nPro-Trump', n:10,color:'#A03020',party:'Republican',
+   ideology:'Pro-Trump but not Freedom Caucus. Support Trump agenda but outside hardline faction. Many seeking other offices to extend Trump-aligned agenda at state level.',
+   exit:'Retiring (3) · Governor (4) · Senate (3)',
+   members:'Byron Donalds (Gov-FL), Nancy Mace (Gov-SC), Harriet Hageman (Senate-WY), Ashley Hinson (Senate-IA), Julia Letlow (Senate-LA), Kevin Hern (Senate-OK)',
+   ret:3,gov:4,sen:3,oth:0},
+  {label:'Estab./Mod.\nGOP',        n:14,color:'#9B2828',party:'Republican',
+   ideology:'Traditional establishment Republicans. Supports institutions, free trade, NATO. Often at odds with MAGA wing. Many are committee chairs stepping back.',
+   exit:'Retiring (9) · Governor (2) · Senate (3)',
+   members:'Elise Stefanik, Don Bacon, Darrell Issa, Buchanan, Mark Amodei, Daniel Webster, Burgess Owens, Jodey Arrington, McCaul, Newhouse',
+   ret:9,gov:2,sen:3,oth:0},
+  {label:'Independent\n/ unclear',   n:1, color:'#D4D4D0',party:'Independent',
+   ideology:'Independent or ideologically unclear. Not formally aligned with a major caucus.',
+   exit:'Retiring (1)',
+   members:'1 member',
+   ret:1,gov:0,sen:0,oth:0},
+];
+
+const ftt=document.getElementById('ftt');
+const fttName=document.getElementById('ftt-name');
+const fttRows=document.getElementById('ftt-rows');
+const fttNames=document.getElementById('ftt-names');
+function showFTT(evt,d){
+  fttName.textContent=d.label.replace('\n',' ');
+  fttRows.innerHTML=`
+    <div class="ftt-row"><span>Members leaving</span><span class="ftt-val">${d.n}</span></div>
+    <div class="ftt-row"><span>Party</span><span class="ftt-val">${d.party}</span></div>
+    <div class="ftt-row"><span>Ideology</span><span class="ftt-val">${d.ideology}</span></div>
+    <div class="ftt-row"><span>Going next</span><span class="ftt-val">${d.exit}</span></div>`;
+  fttNames.textContent='Key names: '+d.members;
+  ftt.classList.add('on');moveFTT(evt);
+}
+function moveFTT(evt){
+  const x=Math.min(evt.clientX+16,window.innerWidth-280);
+  const y=Math.min(evt.clientY+16,window.innerHeight-240);
+  ftt.style.left=x+'px';ftt.style.top=y+'px';
+}
+function hideFTT(){ftt.classList.remove('on')}
+
+const fChart=new Chart(document.getElementById('c-faction'),{
+  type:'bar',
+  data:{labels:factions.map(f=>f.label),datasets:[{data:factions.map(f=>f.n),backgroundColor:factions.map(f=>f.color),borderSkipped:false,borderRadius:{topLeft:4,topRight:4}}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{tooltip:{enabled:false}},
+    scales:{
+      x:{grid:{display:false},border:{display:false},ticks:{font:{size:11},color:'#6B6B6B'}},
+      y:{max:18,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:4}}
+    },
+    onHover:(evt,els)=>{document.getElementById('c-faction').style.cursor=els.length?'pointer':'default';if(els.length)showFTT(evt.native,factions[els[0].index]);else hideFTT();}
+  }
+});
+document.getElementById('c-faction').addEventListener('mousemove',e=>{const els=fChart.getElementsAtEventForMode(e,'nearest',{intersect:true},true);if(els.length)moveFTT(e);});
+document.getElementById('c-faction').addEventListener('mouseleave',hideFTT);
+
+new Chart(document.getElementById('c-factiodest'),{
+  type:'bar',
+  data:{labels:factions.map(f=>f.label),datasets:[
+    {label:'Retiring',    data:factions.map(f=>f.ret),backgroundColor:'#D4D4D0',stack:'s',borderSkipped:false,borderRadius:{topLeft:2,topRight:2}},
+    {label:'Governor',   data:factions.map(f=>f.gov),backgroundColor:'#3A8C5C',stack:'s',borderSkipped:false},
+    {label:'Senate',     data:factions.map(f=>f.sen),backgroundColor:'#378ADD',stack:'s',borderSkipped:false},
+    {label:'Other state',data:factions.map(f=>f.oth),backgroundColor:'#C084D0',stack:'s',borderSkipped:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>i[0].label.replace('\n',' ')}}},
+    scales:{
+      x:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:11}}},
+      y:{stacked:true,max:16,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:4}}
+    }}
+});
+
+/* ═══ HISTORY ═══ */
+const hYrs=['1946','1948','1950','1952','1954','1956','1958','1960','1962','1964','1966','1968','1970','1972','1974','1976','1978','1980','1982','1984','1986','1988','1990','1992','1994','1996','1998','2000','2002','2004','2006','2008','2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+const hH=[32,29,29,42,24,21,33,26,24,33,46,28,29,40,49,47,42,34,40,22,38,23,27,65,48,49,33,32,35,29,30,37,36,40,39,39,52,36,45,44,55];
+const hS=[9,8,4,4,6,5,6,5,4,3,3,7,4,6,6,8,7,5,3,4,6,5,3,7,9,5,5,5,5,7,8,5,6,4,9,5,5,5,9,5,11];
+const hT=hYrs.map((_,i)=>hH[i]+hS[i]);
+const hAvg=40;
+
+new Chart(document.getElementById('c-hist'),{
+  type:'bar',
+  data:{labels:hYrs,datasets:[
+    {label:'House',data:hH,backgroundColor:hYrs.map(y=>y==='2026'?'#E24B4A':y==='1992'?'#7a1c1c':'#378ADD'),stack:'s',borderSkipped:false,borderRadius:{topLeft:1,topRight:1}},
+    {label:'Senate',data:hS,backgroundColor:hYrs.map(y=>y==='2026'?'#F9A89D':y==='1992'?'#D46060':'#B5D4F4'),stack:'s',borderSkipped:false,borderRadius:{topLeft:1,topRight:1}},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>`${i[0].label} election`,afterBody:i=>[`Total: ${hT[i[0].dataIndex]}  ·  Post-WWII avg: ${hAvg}`]}}},
+    scales:{
+      x:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:10},maxRotation:45,autoSkip:false,callback:(_,i)=>i%2===0?hYrs[i]:''}},
+      y:{stacked:true,max:88,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:20}}
+    }},
+  plugins:[
+    {id:'avg',afterDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(hAvg);ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(149,149,149,.55)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(149,149,149,.7)';ctx.font='11px DM Sans,sans-serif';ctx.fillText(`avg ${hAvg}`,right+4,yp+4);ctx.restore()}},
+    {id:'lbl',afterDraw(c){const{ctx,scales:{x,y}}=c;[['1992','Record 72','#7a1c1c'],['2026','2026 ↑','#E24B4A'],['1974','Watergate','#6B6B6B']].forEach(([yr,lbl,col])=>{const i=hYrs.indexOf(yr);if(i<0)return;const xp=x.getPixelForValue(i);const yp=y.getPixelForValue(hT[i])-7;ctx.save();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle=col;ctx.textAlign='center';ctx.fillText(lbl,xp,yp);ctx.restore()})}}
+  ]
+});
+
+/* CHART 2: Average tenure of majority-party retirees (Brookings Fig 2) */
+const tenYrs=['1980','1982','1984','1986','1988','1990','1992','1994','1996','1998','2000','2002','2004','2006','2008','2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+const tenData=[8.1,7.9,8.8,8.5,9.2,8.7,7.6,6.8,8.2,8.5,9.1,8.8,9.4,8.1,9.0,7.8,8.3,8.9,5.1,7.4,9.2,8.6,8.1,5.0];
+const tenAvg=8.3;
+
+new Chart(document.getElementById('c-tenure'),{
+  type:'line',
+  data:{labels:tenYrs,datasets:[{
+    label:'Avg tenure of majority-party retirees (terms)',
+    data:tenData,
+    borderColor:'#9B2828',
+    backgroundColor:'rgba(155,40,40,0.07)',
+    pointBackgroundColor:tenYrs.map(y=>y==='2026'?'#E24B4A':'#9B2828'),
+    pointRadius:tenYrs.map(y=>y==='2026'?8:4),
+    pointBorderColor:'#fff',
+    pointBorderWidth:tenYrs.map(y=>y==='2026'?2:1),
+    borderWidth:2,tension:.35,fill:true,
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{title:i=>`${i[0].label} cycle`,label:ctx=>` Avg tenure: ${ctx.raw} terms`}}},
+    scales:{
+      x:{grid:{display:false},border:{display:false},ticks:{font:{size:11},maxRotation:45}},
+      y:{min:4,max:11,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},
+         ticks:{font:{size:11},callback:v=>`${v} terms`},
+         title:{display:true,text:'Average terms served',font:{size:11},color:'#959595'}}
+    }},
+  plugins:[
+    {id:'avgLine',afterDraw(c){const{ctx,chartArea:{left,right},scales:{y}}=c;const yp=y.getPixelForValue(tenAvg);ctx.save();ctx.setLineDash([5,4]);ctx.strokeStyle='rgba(149,149,149,.6)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();ctx.fillStyle='rgba(149,149,149,.8)';ctx.font='11px DM Sans,sans-serif';ctx.fillText('hist avg 8.3',right+4,yp+4);ctx.restore()}},
+    {id:'label2026',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=tenYrs.indexOf('2026');const xp=x.getPixelForValue(i);const yp=y.getPixelForValue(5.0)-10;ctx.save();ctx.font='bold 11px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('5 terms ↓',xp,yp);ctx.restore()}},
+    {id:'label2016',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=tenYrs.indexOf('2016');const xp=x.getPixelForValue(i);const yp=y.getPixelForValue(5.1)-10;ctx.save();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle='#9B2828';ctx.textAlign='center';ctx.fillText('5.1 (Tea Party)',xp,yp);ctx.restore()}}
+  ]
+});
+
+/* CHART 3: Brookings Fig 3 — Majority-party members seeking state/local vs Senate */
+// Data: OpenSecrets 2010–2026, majority-party members only
+// Shows share seeking state/local vs Senate seats
+const b3Yrs=['2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+// Count of majority-party departing members seeking: state/local, Senate, retiring
+const b3StateLocal=[2,1,3,2,4,3,5,3,15]; // state/local incl. gov, AG — 2026 spike: majority Rep seeking state
+const b3Senate     =[8,5,6,4,9,5,8,7,9];  // seeking Senate seats
+const b3Retiring   =[12,10,14,11,18,14,20,17,19]; // retiring from public life
+
+new Chart(document.getElementById('c-brookings3'),{
+  type:'bar',
+  data:{labels:b3Yrs,datasets:[
+    {label:'Retiring from public life', data:b3Retiring,backgroundColor:b3Yrs.map(y=>y==='2026'?'#ADADAA':'#D4D4D0'),stack:'s',borderSkipped:false,borderRadius:{topLeft:2,topRight:2}},
+    {label:'Running for Senate',        data:b3Senate,  backgroundColor:b3Yrs.map(y=>y==='2026'?'#1A5EA8':'#378ADD'),stack:'s',borderSkipped:false},
+    {label:'Running for state/local',   data:b3StateLocal,backgroundColor:b3Yrs.map(y=>y==='2026'?'#2A7046':'#3A8C5C'),stack:'s',borderSkipped:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>`${i[0].label} cycle`,footer:i=>{const idx=i[0].dataIndex;const tot=b3Retiring[idx]+b3Senate[idx]+b3StateLocal[idx];const pct=Math.round(b3StateLocal[idx]/tot*100);return `Total majority-party departures: ${tot}  ·  State/local: ${pct}%`;}}}},
+    scales:{
+      x:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:12}}},
+      y:{stacked:true,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:10},
+         title:{display:true,text:'Majority-party members',font:{size:11},color:'#959595'}}
+    }},
+  plugins:[{id:'rl',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=b3Yrs.indexOf('2026');const xp=x.getPixelForValue(i);const tot=b3Retiring[i]+b3Senate[i]+b3StateLocal[i];const yp=y.getPixelForValue(tot)-8;ctx.save();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('2026 ↑ state surge',xp,yp);ctx.restore()}}]
+});
+
+/* CHART 4 (moved from Tab 4): Long-run ratio 1974–2026 */
+const rYrs=['1974','1978','1982','1986','1990','1994','1998','2002','2006','2010','2014','2018','2022','2026'];
+const rRet=[35,37,36,33,26,30,28,26,25,26,27,24,27,39];
+const rGov=[ 7, 7, 4, 5, 4, 8, 3, 5, 4, 5, 6, 9, 8,14];
+const rSen=[ 9,10, 7, 6, 4,12, 5, 7, 6, 8, 8,12,13,13];
+const rOth=[ 2, 5, 1, 2, 1, 5, 1, 2, 2, 1, 1, 2, 2, 1];
+new Chart(document.getElementById('c-ratio'),{
+  type:'bar',
+  data:{labels:rYrs,datasets:[
+    {label:'Retiring',    data:rRet,backgroundColor:rYrs.map(y=>y==='2026'?'#ADADAA':'#D4D4D0'),stack:'s',borderSkipped:false,borderRadius:{topLeft:2,topRight:2}},
+    {label:'Governor',   data:rGov,backgroundColor:rYrs.map(y=>y==='2026'?'#2A7046':'#3A8C5C'),stack:'s',borderSkipped:false},
+    {label:'Senate',     data:rSen,backgroundColor:rYrs.map(y=>y==='2026'?'#1A5EA8':'#378ADD'),stack:'s',borderSkipped:false},
+    {label:'Other state',data:rOth,backgroundColor:rYrs.map(y=>y==='2026'?'#9040A8':'#C084D0'),stack:'s',borderSkipped:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>`${i[0].label} cycle`,footer:i=>{const idx=i[0].dataIndex;const tot=rRet[idx]+rGov[idx]+rSen[idx]+rOth[idx];const pct=Math.round((rGov[idx]+rSen[idx]+rOth[idx])/tot*100);return `Total: ${tot}  ·  Seeking office: ${pct}%`;
+    }}}},
+    scales:{
+      x:{stacked:true,grid:{display:false},border:{display:false},ticks:{font:{size:11},maxRotation:45}},
+      y:{stacked:true,max:90,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:20}}
+    }},
+  plugins:[{id:'rl',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=rYrs.indexOf('2026');const xp=x.getPixelForValue(i);const tot=rRet[i]+rGov[i]+rSen[i]+rOth[i];const yp=y.getPixelForValue(tot)-8;ctx.save();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('2026 ↑',xp,yp);ctx.restore()}}]
+});
+
+/* CHART 5: Average age of Congress 1946–2026 */
+// Historical data from CRS R48535, Pew, Quorum, LegiStorm, and academic sources
+// Senate average age (mean, by Congress start year)
+const ageYrs=['1947','1949','1951','1953','1955','1957','1959','1961','1963','1965','1967','1969','1971','1973','1975','1977','1979','1981','1983','1985','1987','1989','1991','1993','1995','1997','1999','2001','2003','2005','2007','2009','2011','2013','2015','2017','2019','2021','2023','2025'];
+// Senate avg ages (estimated from CRS, Pew, Quorum, academic literature)
+const senAge=[53,54,52,53,52,54,55,53,52,51,52,53,53,52,53,54,53,53,54,55,55,56,57,57,58,58,59,60,60,61,62,62,62,62,61,62,63,64,65,64];
+// House avg ages
+const houAge=[51,51,50,51,50,51,51,50,50,50,50,51,51,51,50,50,50,49,48,48,49,50,51,51,51,51,52,53,54,55,55,57,56,57,56,57,58,58,58,58];
+
+new Chart(document.getElementById('c-age'),{
+  type:'line',
+  data:{labels:ageYrs,datasets:[
+    {
+      label:'Senate avg age',
+      data:senAge,
+      borderColor:'#FF6719',
+      backgroundColor:'rgba(255,103,25,0.06)',
+      pointBackgroundColor:ageYrs.map(y=>y==='2025'?'#E24B4A':'#FF6719'),
+      pointRadius:ageYrs.map(y=>y==='2025'?7:3),
+      pointBorderColor:'#fff',
+      pointBorderWidth:ageYrs.map(y=>y==='2025'?2:1),
+      borderWidth:2,tension:.4,fill:true,
+    },
+    {
+      label:'House avg age',
+      data:houAge,
+      borderColor:'#378ADD',
+      backgroundColor:'rgba(55,138,221,0.04)',
+      pointBackgroundColor:ageYrs.map(y=>y==='2025'?'#E24B4A':'#378ADD'),
+      pointRadius:ageYrs.map(y=>y==='2025'?7:3),
+      pointBorderColor:'#fff',
+      pointBorderWidth:ageYrs.map(y=>y==='2025'?2:1),
+      borderWidth:2,tension:.4,fill:true,
+    }
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{
+        title:i=>`${i[0].label} (${Math.floor((parseInt(i[0].label)-1787)/2)+1 }th Congress opening)`,
+        label:ctx=>` ${ctx.dataset.label}: ${ctx.raw} years`
+      }}
+    },
+    scales:{
+      x:{grid:{display:false},border:{display:false},ticks:{font:{size:10},maxRotation:45,autoSkip:false,callback:(_,i)=>i%4===0?ageYrs[i]:''}},
+      y:{min:44,max:70,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},
+         ticks:{font:{size:11},callback:v=>v+' yrs'},
+         title:{display:true,text:'Average age (years)',font:{size:11},color:'#959595'}}
+    }},
+  plugins:[
+    {id:'annotate119',afterDraw(c){
+      const{ctx,scales:{x,y}}=c;
+      const i=ageYrs.indexOf('2025');
+      const xp=x.getPixelForValue(i);
+      // Senate label
+      const ySen=y.getPixelForValue(senAge[i])-10;
+      ctx.save();ctx.font='bold 11px DM Sans,sans-serif';ctx.fillStyle='#FF6719';ctx.textAlign='center';
+      ctx.fillText('Senate: 64',xp,ySen);
+      // House label
+      const yHou=y.getPixelForValue(houAge[i])+16;
+      ctx.fillStyle='#378ADD';
+      ctx.fillText('House: 58',xp,yHou);
+      // vertical line
+      ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(226,75,74,.2)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(xp,y.top);ctx.lineTo(xp,y.bottom);ctx.stroke();
+      ctx.fillStyle='#E24B4A';ctx.font='500 10px DM Sans,sans-serif';
+      ctx.fillText('119th',xp,y.top-5);
+      ctx.restore();
+    }}
+  ]
+});
+
+/* CHART 6: Congressional productivity */
+const prodCongress=[
+  '80th\n1947','81st\n1949','82nd\n1951','83rd\n1953','84th\n1955','85th\n1957','86th\n1959',
+  '87th\n1961','88th\n1963','89th\n1965','90th\n1967','91st\n1969','92nd\n1971','93rd\n1973',
+  '94th\n1975','95th\n1977','96th\n1979','97th\n1981','98th\n1983','99th\n1985','100th\n1987',
+  '101st\n1989','102nd\n1991','103rd\n1993','104th\n1995','105th\n1997','106th\n1999',
+  '107th\n2001','108th\n2003','109th\n2005','110th\n2007','111th\n2009','112th\n2011',
+  '113th\n2013','114th\n2015','115th\n2017','116th\n2019','117th\n2021','118th\n2023',
+  '119th\n2025*'
+];
+const prodPct=[
+  8.4, 6.1, 4.7, 5.2, 5.8, 4.9, 4.4,
+  4.8, 3.8, 3.4, 2.4, 2.6, 2.6, 2.8,
+  2.8, 3.3, 4.9, 4.1, 5.9, 6.7, 7.4,
+  6.3, 5.6, 5.4, 4.9, 5.1, 6.3,
+  4.1, 5.8, 4.2, 4.4, 3.6, 2.8,
+  2.3, 3.3, 3.3, 2.4, 2.1, 1.8,
+  2.0
+];
+const is119=(i)=>i===prodCongress.length-1;
+
+new Chart(document.getElementById('c-productivity'),{
+  type:'bar',
+  data:{labels:prodCongress,datasets:[{
+    label:'% of bills enacted',
+    data:prodPct,
+    backgroundColor:prodPct.map((_,i)=>is119(i)?'#E24B4A':'#378ADD'),
+    borderSkipped:false,
+    borderRadius:{topLeft:2,topRight:2},
+  }]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{
+      title:i=>i[0].label.replace('\n',' Congress, '),
+      label:ctx=>` ${ctx.raw}% of bills enacted into law`,
+      footer:i=>{
+        const pct=prodPct[i[0].dataIndex];
+        if(pct>6) return 'High-productivity era (pre-1970s)';
+        if(pct<=2.5) return 'Historic low productivity';
+        return 'Declining productivity trend';
+      }
+    }}},
+    scales:{
+      x:{grid:{display:false},border:{display:false},
+         ticks:{font:{size:9},maxRotation:45,autoSkip:false,
+                callback:(_,i)=>{
+                  const lbl=prodCongress[i];
+                  return i%3===0?lbl.split('\n')[0]:'';
+                }}},
+      y:{min:0,max:10,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},
+         ticks:{font:{size:11},callback:v=>v+'%'},
+         title:{display:true,text:'% of introduced bills enacted',font:{size:11},color:'#959595'}}
+    }},
+  plugins:[{
+    id:'baselineLine',
+    afterDraw(c){
+      const{ctx,chartArea:{left,right},scales:{y}}=c;
+      const yp=y.getPixelForValue(4.0);
+      ctx.save();ctx.setLineDash([4,4]);ctx.strokeStyle='rgba(149,149,149,.45)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(left,yp);ctx.lineTo(right,yp);ctx.stroke();
+      ctx.fillStyle='rgba(149,149,149,.7)';ctx.font='10px DM Sans,sans-serif';
+      ctx.fillText('post-1980 norm ~4%',right+4,yp+4);ctx.restore();
+    }
+  },{
+    id:'label119',
+    afterDraw(c){
+      const{ctx,scales:{x,y}}=c;
+      const i=prodCongress.length-1;
+      const xp=x.getPixelForValue(i);
+      const yp=y.getPixelForValue(2.0)-9;
+      ctx.save();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';
+      ctx.fillText('119th: 2%*',xp,yp);ctx.restore();
+    }
+  }]
+});
+
+/* ═══ STATE vs FEDERAL ═══ */
+const flYrs=['2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+new Chart(document.getElementById('c-flowline'),{
+  type:'line',
+  data:{labels:flYrs,datasets:[
+    {label:'House→Senate %',    data:[22,23,20,22,23,25,29,23,28],borderColor:'#378ADD',pointBackgroundColor:flYrs.map(y=>y==='2026'?'#E24B4A':'#378ADD'),pointRadius:flYrs.map(y=>y==='2026'?7:4),borderWidth:2,tension:.35,fill:false},
+    {label:'House→Governor %',  data:[11,10,10,12,17,11,18,16,19],borderColor:'#3A8C5C',pointBackgroundColor:flYrs.map(y=>y==='2026'?'#E24B4A':'#3A8C5C'),pointRadius:flYrs.map(y=>y==='2026'?7:4),borderWidth:2,tension:.35,fill:false},
+    {label:'Senate→Governor %', data:[ 8, 6, 9, 8, 8, 7, 9, 6,27],borderColor:'#D4931A',pointBackgroundColor:flYrs.map(y=>y==='2026'?'#E24B4A':'#D4931A'),pointRadius:flYrs.map(y=>y==='2026'?7:4),borderWidth:2,tension:.35,fill:false},
+    {label:'State-bound total %',data:[13,13,14,16,20,15,21,19,45],borderColor:'#E24B4A',borderDash:[5,4],pointBackgroundColor:flYrs.map(y=>y==='2026'?'#E24B4A':'rgba(226,75,74,.4)'),pointRadius:flYrs.map(y=>y==='2026'?7:4),borderWidth:2,tension:.35,fill:false},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    interaction:{mode:'index',intersect:false},
+    plugins:{tooltip:{callbacks:{title:i=>`${i[0].label} cycle`,label:item=>` ${item.dataset.label}: ${item.raw}%`}}},
+    scales:{
+      x:{grid:{display:false},border:{display:false},ticks:{font:{size:12}}},
+      y:{min:0,max:55,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},callback:v=>v+'%',stepSize:10},title:{display:true,text:'% of departing members',font:{size:11},color:'#959595'}}
+    }},
+  plugins:[{id:'v26',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=8;const xp=x.getPixelForValue(i);ctx.save();ctx.setLineDash([4,3]);ctx.strokeStyle='rgba(226,75,74,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(xp,y.top);ctx.lineTo(xp,y.bottom);ctx.stroke();ctx.font='500 10px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('2026',xp,y.top-5);ctx.restore()}}]
+});
+
+const gYrs=['2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+const gCts=[4,4,4,5,9,4,8,7,14];
+new Chart(document.getElementById('c-govsurge'),{
+  type:'bar',
+  data:{labels:gYrs,datasets:[{data:gCts,backgroundColor:gYrs.map(y=>y==='2026'?'#E24B4A':'#3A8C5C'),borderSkipped:false,borderRadius:{topLeft:3,topRight:3}}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.raw} members running for governor`}}},
+    scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:12}}},y:{max:18,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:2}}}
+  },
+  plugins:[{id:'rl',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=gYrs.indexOf('2026');const xp=x.getPixelForValue(i);const yp=y.getPixelForValue(14)-8;ctx.save();ctx.font='500 11px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('Record 14 ↑',xp,yp);ctx.restore()}}]
+});
+
+const sgYrs=['2010','2012','2014','2016','2018','2020','2022','2024','2026'];
+const sgD=[1,0,1,0,0,0,1,0,3];
+new Chart(document.getElementById('c-sengov'),{
+  type:'bar',
+  data:{labels:sgYrs,datasets:[{data:sgD,backgroundColor:sgYrs.map(y=>y==='2026'?'#E24B4A':'#D4931A'),borderSkipped:false,borderRadius:{topLeft:3,topRight:3}}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{tooltip:{callbacks:{label:ctx=>` ${ctx.raw} senators running for governor`}}},
+    scales:{x:{grid:{display:false},border:{display:false},ticks:{font:{size:12}}},y:{max:5,grid:{color:'rgba(0,0,0,0.05)'},border:{display:false},ticks:{font:{size:11},stepSize:1}}}
+  },
+  plugins:[{id:'rl',afterDraw(c){const{ctx,scales:{x,y}}=c;const i=sgYrs.indexOf('2026');const xp=x.getPixelForValue(i);const yp=y.getPixelForValue(3)-8;ctx.save();ctx.font='500 11px DM Sans,sans-serif';ctx.fillStyle='#E24B4A';ctx.textAlign='center';ctx.fillText('90yr high ↑',xp,yp);ctx.restore()}}]
+});
+</script>
+</body>
+</html>

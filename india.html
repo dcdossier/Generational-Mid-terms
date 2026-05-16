@@ -4,21 +4,789 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DC Dossier: India's Interest</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#f7f7f7;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'DM Sans',sans-serif}
-.placeholder{text-align:center;padding:60px 40px}
-.placeholder h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;color:#191919;margin-bottom:12px}
-.placeholder p{font-size:14px;color:#6B6B6B;line-height:1.6;max-width:460px;margin:0 auto}
-.badge{display:inline-block;background:#FFF0E9;color:#FF6719;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;margin-bottom:20px}
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f8fa;
+  --bg3: #eef0f3;
+  --text: #191919;
+  --text2: #4a4a4a;
+  --text3: #6b6b6b;
+  --border: #e2e5ea;
+  --gold: #c9a84c;
+  --navy: #0d1b2e;
+  --accent: #1a3f8a;
+  --saffron: #e8832a;
+  --saffron-lt: #FFF3E8;
+  --green-in: #138808;
+  --green-lt: #EAF6EA;
+  --sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --radius: 6px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* SUB-NAV */
+.sub-nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.sub-tab {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  white-space: nowrap;
+}
+.sub-tab:hover { color: var(--text); }
+.sub-tab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.nav-spacer { flex: 1; }
+.flag-strip {
+  display: flex;
+  gap: 0;
+  height: 4px;
+  width: 32px;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 16px;
+}
+.flag-strip span { flex: 1; display: block; }
+
+/* PANELS */
+.panel { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+.panel.active { display: flex; }
+
+/* PAGE BODY */
+.page-body { max-width: 900px; margin: 0 auto; padding: 36px 28px 60px; width: 100%; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3f8a 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 36px 40px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -30px; top: -30px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(201,168,76,.10);
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 14px;
+  color: #fff;
+}
+.hero p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.80);
+  max-width: 620px;
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hstat { display: flex; flex-direction: column; gap: 4px; }
+.hstat-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.hstat-label { font-size: 11px; color: rgba(255,255,255,.60); text-transform: uppercase; letter-spacing: .06em; }
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 10px;
+}
+.section-header h2 {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-header .section-sub { font-size: 12px; color: var(--text3); }
+.section { margin-bottom: 44px; }
+
+/* POLICY CARDS */
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.policy-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow .15s;
+}
+.policy-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.policy-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.policy-card h3 { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--text); }
+.policy-card p { font-size: 12.5px; color: var(--text2); line-height: 1.6; flex: 1; }
+.policy-status {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 3px 9px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+.status-bipartisan { background: #E8F4FE; color: #1A5276; }
+.status-contested  { background: #FEF3C7; color: #92400E; }
+.status-critical   { background: #FEE2E2; color: #991B1B; }
+.status-watch      { background: #F3EEFF; color: #5B21B6; }
+
+/* PARTY COMPARE */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.compare-table th {
+  padding: 10px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-bottom: 2px solid var(--border);
+}
+.compare-table th:first-child { color: var(--text3); width: 30%; }
+.compare-table th.rep-h { color: #9a1c1c; }
+.compare-table th.dem-h { color: #1A3F8A; }
+.compare-table td {
+  padding: 12px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+.compare-table td:first-child { font-weight: 600; color: var(--text2); font-size: 12.5px; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(--bg2); }
+.rep-cell { color: #6b1a1a; }
+.dem-cell { color: #1a3050; }
+.bipartisan-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  background: #E8F4FE;
+  color: #1A5276;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+/* CONGRESS MEMBERS */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+}
+.member-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.member-name { font-family: var(--serif); font-size: 14px; font-weight: 600; color: var(--text); }
+.member-seat { font-size: 12px; color: var(--text3); }
+.member-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.pill {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.pill-d { background: #DBEAFE; color: #1E3A8A; }
+.pill-r { background: #FEE2E2; color: #9A1C1C; }
+.pill-house { background: #F3EEFF; color: #4C1D95; }
+.pill-senate { background: #CCFBF1; color: #134E4A; }
+.pill-gov { background: #FEF3C7; color: #92400E; }
+.pill-bid { background: #FFF3E8; color: #C4470E; border: 1px dashed #e8832a; }
+.member-note { font-size: 11px; color: var(--text3); line-height: 1.5; margin-top: 4px; }
+
+/* INFLUENCE TABLE */
+.influence-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.influence-table th {
+  background: var(--bg2);
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+}
+.influence-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.influence-table tr:last-child td { border-bottom: none; }
+.influence-table tr:hover td { background: var(--bg2); }
+.pop-bar-wrap { width: 120px; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
+.pop-bar { height: 8px; border-radius: 4px; background: var(--saffron); }
+.state-name { font-weight: 600; color: var(--text); }
+.competitiveness {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.comp-swing    { background: #FEF3C7; color: #92400E; }
+.comp-lean-d   { background: #DBEAFE; color: #1E3A8A; }
+.comp-lean-r   { background: #FEE2E2; color: #9A1C1C; }
+.comp-safe-d   { background: #1A3F8A; color: #fff; }
+.comp-safe-r   { background: #7a1c1c; color: #fff; }
+
+/* CALLOUT BOX */
+.callout {
+  background: var(--saffron-lt);
+  border-left: 3px solid var(--saffron);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text2);
+}
+.callout strong { color: var(--text); }
+
+/* COMMITTEES */
+.committee-list { display: flex; flex-direction: column; gap: 12px; }
+.committee-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 14px 16px;
+  background: var(--bg2);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.committee-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.committee-body { display: flex; flex-direction: column; gap: 4px; }
+.committee-name { font-weight: 600; font-size: 13.5px; color: var(--text); }
+.committee-why { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+.committee-chamber {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 24px 20px; }
+  .hero h1 { font-size: 20px; }
+  .page-body { padding: 20px 16px 48px; }
+  .policy-grid { grid-template-columns: 1fr; }
+  .member-grid { grid-template-columns: 1fr 1fr; }
+  .compare-table { font-size: 12px; }
+  .compare-table td, .compare-table th { padding: 9px 10px; }
+}
 </style>
 </head>
 <body>
-<div class="placeholder">
-  <div class="badge">Coming Soon</div>
-  <h1>India's Interest</h1>
-  <p>Analysis of how the 2026 midterm results affect India&#8212;US relations, trade policy, immigration, and geopolitical alignment. Indian-American electoral influence tracker coming shortly.</p>
-</div>
+
+<!-- SUB-NAV -->
+<nav class="sub-nav">
+  <button class="sub-tab active" data-tab="stakes" onclick="switchTab('stakes')">Policy &amp; Stakes</button>
+  <button class="sub-tab" data-tab="presence" onclick="switchTab('presence')">Electoral Presence</button>
+  <div class="nav-spacer"></div>
+  <div class="flag-strip" title="India">
+    <span style="background:#FF9933"></span>
+    <span style="background:#ffffff;border-top:1px solid #e2e5ea;border-bottom:1px solid #e2e5ea"></span>
+    <span style="background:#138808"></span>
+  </div>
+</nav>
+
+<!-- PANEL: POLICY & STAKES -->
+<div id="panel-stakes" class="panel active">
+<div class="page-body">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">2026 US Midterms &mdash; India's Angle</div>
+    <h1>Why November 2026 Matters for India</h1>
+    <p>Control of the 119th Congress shapes trade policy, high-skilled immigration rules, defence co-production agreements, and America's Indo-Pacific posture. The party that holds the House and Senate will chair every committee that touches the bilateral relationship.</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <span class="hstat-num">4.4M</span>
+        <span class="hstat-label">Indian-Americans</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">6</span>
+        <span class="hstat-label">IA members of Congress</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">$146B</span>
+        <span class="hstat-label">India-US trade (2024)</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">~70%</span>
+        <span class="hstat-label">H-1B visas to Indian nationals</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLICY STAKES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Key Policy Areas at Stake</h2>
+      <span class="section-sub">How congressional control shapes the bilateral relationship</span>
+    </div>
+    <div class="policy-grid">
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#FFF3E8">&#9992;&#65039;</div>
+        <h3>H-1B &amp; High-Skilled Immigration</h3>
+        <p>Roughly 70% of H-1B visas go to Indian nationals each year. Congress sets visa caps, employer fee structures, and the backlog clearance mechanism that leaves hundreds of thousands of Indian-born workers waiting decades for green cards.</p>
+        <span class="policy-status status-critical">Critical</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#EAF6EA">&#128200;</div>
+        <h3>Trade &amp; GSP Restoration</h3>
+        <p>India was the largest beneficiary of the Generalised System of Preferences before its expiry in 2020. Renewed reciprocal trade tensions and tariff negotiations hinge on which party controls the House Ways and Means Committee.</p>
+        <span class="policy-status status-contested">Contested</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#E8F4FE">&#128737;&#65039;</div>
+        <h3>Defence Co-production &amp; ITAR</h3>
+        <p>The INDUS-X initiative, GE jet engine transfer, and future co-production deals require congressional notifications and ITAR waiver approvals. Armed Services Committee chairs in both chambers hold significant influence over the pace of these agreements.</p>
+        <span class="policy-status status-bipartisan">Bipartisan</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#F3EEFF">&#128187;</div>
+        <h3>Semiconductors &amp; Technology</h3>
+        <p>CHIPS Act implementation, AI governance frameworks, and export control regimes for advanced chips directly affect India's semiconductor ambitions and the commercial technology relationship. The Science and Commerce committees are central.</p>
+        <span class="policy-status status-watch">Watch</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#FEE2E2">&#127758;</div>
+        <h3>China Policy &amp; the Quad</h3>
+        <p>Both parties support the Quad framework and treat India as a counterweight to China. However, the depth of security guarantees, intelligence sharing agreements, and the pace of diplomatic engagement vary by administration and congressional posture.</p>
+        <span class="policy-status status-bipartisan">Bipartisan</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#CCFBF1">&#9728;&#65039;</div>
+        <h3>Climate &amp; Clean Energy</h3>
+        <p>US-India climate finance, the International Solar Alliance partnership, and critical minerals supply chains depend on whether the Inflation Reduction Act's international clean energy provisions survive congressional scrutiny in a divided government.</p>
+        <span class="policy-status status-contested">Contested</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PARTY COMPARISON -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Republican vs Democrat: India Policy Positions</h2>
+      <span class="section-sub">Based on platform documents, committee records, and member statements</span>
+    </div>
+    <div class="callout">
+      <strong>Note:</strong> India-US relations enjoy unusually strong bipartisan support at the strategic level. Differences are most pronounced on immigration, trade mechanisms, and climate finance rather than on the core defence and geopolitical partnership.
+    </div>
+    <div style="overflow-x:auto">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th class="rep-h">Republican majority</th>
+          <th class="dem-h">Democrat majority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>H-1B / High-Skilled Visas</td>
+          <td class="rep-cell">Mixed: some members support H-1B expansion for tech; restrictionist wing wants lower caps and stricter enforcement. No consensus on backlog relief.</td>
+          <td class="dem-cell">Generally supportive of raising caps and clearing the employment-based backlog; several Indian-American members have introduced relief bills.</td>
+        </tr>
+        <tr>
+          <td>Trade with India</td>
+          <td class="rep-cell">Favours bilateral reciprocal deal; sceptical of multilateral frameworks. Retaliatory tariff posture could complicate GSP restoration.</td>
+          <td class="dem-cell">More open to GSP renewal and WTO-compatible frameworks, but labour and environmental standards provisions create friction.</td>
+        </tr>
+        <tr>
+          <td>Defence Partnership <span class="bipartisan-pill">Bipartisan</span></td>
+          <td class="rep-cell">Strong support for INDUS-X, arms sales, and co-production. Prioritises transactional outcomes over multilateral commitments.</td>
+          <td class="dem-cell">Supports INDUS-X and Quad framework; places greater emphasis on human rights conditionalities in arms transfer decisions.</td>
+        </tr>
+        <tr>
+          <td>Quad &amp; Indo-Pacific <span class="bipartisan-pill">Bipartisan</span></td>
+          <td class="rep-cell">Strong support. Frames Quad primarily as China-containment architecture.</td>
+          <td class="dem-cell">Strong support. Frames Quad as rules-based order initiative; values multilateral diplomatic dimension.</td>
+        </tr>
+        <tr>
+          <td>Export Controls &amp; Tech</td>
+          <td class="rep-cell">Hawkish on China-facing controls; generally supportive of expanding technology access for India as a trusted partner.</td>
+          <td class="dem-cell">Similar approach; more emphasis on multilateral coordination through Wassenaar and other regimes.</td>
+        </tr>
+        <tr>
+          <td>Climate Finance &amp; Energy</td>
+          <td class="rep-cell">Sceptical of international climate funds; may rescind IRA provisions affecting India-US clean energy cooperation.</td>
+          <td class="dem-cell">Supports US-India Climate and Clean Energy Agenda; maintains IRA international clean energy provisions.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- KEY COMMITTEES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Committees That Matter for India</h2>
+      <span class="section-sub">Chairs are determined by which party holds the majority</span>
+    </div>
+    <div class="committee-list">
+      <div class="committee-row">
+        <div class="committee-icon">&#9878;&#65039;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Foreign Relations Committee</div>
+          <div class="committee-why">Confirms ambassadors, holds hearings on India-US strategic partnership, and can block or advance bilateral agreements and arms sale notifications.</div>
+          <div class="committee-chamber">Senate</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#128737;&#65039;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate &amp; House Armed Services Committees</div>
+          <div class="committee-why">Authorise defence budgets and co-production programmes. ITAR waiver notifications and INDUS-X legislative support run through these panels.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#128200;</div>
+        <div class="committee-body">
+          <div class="committee-name">House Ways and Means / Senate Finance</div>
+          <div class="committee-why">Control trade legislation including GSP renewal, tariff schedules, and bilateral trade deal fast-track authority.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#128084;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Judiciary / House Judiciary</div>
+          <div class="committee-why">Write immigration law. H-1B caps, employment-based green card backlog relief, and visa category reforms all originate here.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#128187;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Commerce / House Science &amp; Technology</div>
+          <div class="committee-why">Oversee CHIPS Act implementation, semiconductor export controls, AI governance, and the science &amp; technology cooperation frameworks that underpin the iCET initiative.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+</div><!-- /panel-stakes -->
+
+<!-- PANEL: ELECTORAL PRESENCE -->
+<div id="panel-presence" class="panel">
+<div class="page-body">
+
+  <!-- CURRENT CONGRESS -->
+  <div class="section" style="margin-top:8px">
+    <div class="section-header">
+      <h2>Indian-Americans in the 119th Congress</h2>
+      <span class="section-sub">Six members as of January 2025</span>
+    </div>
+    <div class="callout">
+      The 119th Congress seated six Indian-American members, the highest number in US history. All serve in the House. No Indian-American currently holds a Senate seat, making the 2026 cycle a potential watershed: multiple members are actively campaigning for Senate.
+    </div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-name">Ami Bera</div>
+        <div class="member-seat">California 6th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Longest-serving Indian-American in Congress. Internist and former Sacramento County Chief Medical Officer. Sits on Foreign Affairs and Science committees.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Ro Khanna</div>
+        <div class="member-seat">California 17th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+          <span class="pill pill-bid">Senate Bid</span>
+        </div>
+        <div class="member-note">Silicon Valley progressive. Announced 2026 California Senate bid. Strong advocate for domestic semiconductor manufacturing and H-1B reform.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Pramila Jayapal</div>
+        <div class="member-seat">Washington 7th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Chair of the Congressional Progressive Caucus. Immigrant rights advocate. First Indian-American woman elected to the House.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Raja Krishnamoorthi</div>
+        <div class="member-seat">Illinois 8th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+          <span class="pill pill-bid">Senate Bid</span>
+        </div>
+        <div class="member-note">Announced 2026 Illinois Senate bid to succeed Dick Durbin. Sits on Intelligence and Oversight committees. National security and anti-corruption focus.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Suhas Subramanyam</div>
+        <div class="member-seat">Virginia 10th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Freshman elected in 2024. First Indian-American to represent Virginia in Congress. Former state senator and technology policy adviser.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Shri Thanedar</div>
+        <div class="member-seat">Michigan 13th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Entrepreneur and chemist, born in Belgaum, Karnataka. Won a competitive primary in a majority-minority Detroit district. Progressive economics focus.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTABLE 2026 BIDS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Notable 2026 Bids by Indian-Americans</h2>
+      <span class="section-sub">Senate, House, and Governor races</span>
+    </div>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-name">Ro Khanna</div>
+        <div class="member-seat">California Senate Race</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-senate">Senate</span>
+        </div>
+        <div class="member-note">Running to succeed Senator Laphonza Butler. A Khanna victory would make him the first Indian-American US Senator. California is rated Safe D.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Raja Krishnamoorthi</div>
+        <div class="member-seat">Illinois Senate Race</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-senate">Senate</span>
+        </div>
+        <div class="member-note">Running for the open Illinois seat vacated by retiring Dick Durbin. Illinois leans Democrat. Another potential first Indian-American Senator.</div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Vivek Ramaswamy</div>
+        <div class="member-seat">Ohio Governor Race</div>
+        <div class="member-pills">
+          <span class="pill pill-r">Republican</span>
+          <span class="pill pill-gov">Governor</span>
+        </div>
+        <div class="member-note">Biotech entrepreneur and 2024 presidential candidate. Announced Ohio gubernatorial bid. Ohio is a competitive state; race is closely watched nationally.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFLUENCE MAP -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Indian-American Voter Influence by State</h2>
+      <span class="section-sub">States where the community is large enough to influence competitive races</span>
+    </div>
+    <div class="callout">
+      Indian-Americans vote at <strong>higher-than-average rates</strong> and are concentrated in suburban districts that have become the most competitive battlegrounds in modern US elections. In several swing states, the community exceeds the margin of victory in recent Senate and presidential races.
+    </div>
+    <div style="overflow-x:auto">
+    <table class="influence-table">
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Est. Population</th>
+          <th>Share of State</th>
+          <th>Relative Size</th>
+          <th>2026 Competitiveness</th>
+          <th>Key Races</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="state-name">California</span></td>
+          <td>~620,000</td>
+          <td>1.6%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:100%"></div></div></td>
+          <td><span class="competitiveness comp-safe-d">Safe D</span></td>
+          <td>Senate (Khanna bid); multiple competitive House seats</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Texas</span></td>
+          <td>~430,000</td>
+          <td>1.5%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:69%"></div></div></td>
+          <td><span class="competitiveness comp-lean-r">Lean R</span></td>
+          <td>Several suburban Houston and Dallas House seats rated Toss-up or Lean</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">New Jersey</span></td>
+          <td>~390,000</td>
+          <td>4.4%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:63%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>NJ-07 and NJ-11 rated Toss-up; Senate seat rated Lean D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">New York</span></td>
+          <td>~340,000</td>
+          <td>1.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:55%"></div></div></td>
+          <td><span class="competitiveness comp-lean-d">Lean D</span></td>
+          <td>Multiple Long Island and suburban NY competitive House races</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Illinois</span></td>
+          <td>~215,000</td>
+          <td>1.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:35%"></div></div></td>
+          <td><span class="competitiveness comp-lean-d">Lean D</span></td>
+          <td>Senate race (Krishnamoorthi bid); IL-06 competitive</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Georgia</span></td>
+          <td>~115,000</td>
+          <td>1.1%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:19%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Senate seat rated Toss-up; Ossoff among most vulnerable incumbents</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Virginia</span></td>
+          <td>~155,000</td>
+          <td>1.8%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:25%"></div></div></td>
+          <td><span class="competitiveness comp-lean-d">Lean D</span></td>
+          <td>VA-10 (Subramanyam incumbent); VA-07 competitive</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Michigan</span></td>
+          <td>~95,000</td>
+          <td>0.9%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:15%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Open Senate seat rated Toss-up; MI-13 (Thanedar incumbent)</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Pennsylvania</span></td>
+          <td>~90,000</td>
+          <td>0.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:15%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Senate seat rated Lean R; multiple suburban Philly House seats competitive</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Wisconsin</span></td>
+          <td>~40,000</td>
+          <td>0.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:6%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Senate race rated Toss-up; community concentrated in Madison and Milwaukee suburbs</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+</div><!-- /panel-presence -->
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+}
+</script>
 </body>
 </html>

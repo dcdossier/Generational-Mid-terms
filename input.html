@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DC Dossier: Content Input</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d1b2e;--navy-mid:#132640;--navy-light:#1a3050;
+  --gold:#c9a84c;--gold-light:#e8c97a;
+  --beige:#f0e8d6;--white:#ffffff;
+  --t-muted:rgba(240,232,214,0.55);
+  --br:rgba(201,168,76,0.22);
+  --br-solid:#1e3a5f;
+  --red:#e24b4a;--green:#3a8c5c;
+  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--navy);color:var(--beige);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased;min-height:100vh}
+
+.header{background:var(--navy-mid);border-bottom:1px solid var(--br);padding:16px 32px;display:flex;align-items:center;justify-content:space-between}
+.header-title{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold)}
+.header-sub{font-size:11px;color:var(--t-muted);margin-top:3px}
+.private-badge{background:rgba(201,168,76,0.12);border:1px solid var(--br);color:var(--gold);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border-radius:3px}
+
+.container{max-width:680px;margin:40px auto;padding:0 24px 80px}
+
+.section-title{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--gold-light);margin-bottom:6px}
+.section-sub{font-size:12px;color:var(--t-muted);margin-bottom:24px;line-height:1.5}
+
+.form-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:8px;padding:28px 28px 24px;margin-bottom:32px}
+
+.form-row{margin-bottom:18px}
+.form-row:last-child{margin-bottom:0}
+label{display:block;font-size:12px;font-weight:600;color:var(--t-muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+input[type="text"],input[type="url"],input[type="date"],select,textarea{
+  width:100%;background:var(--navy-light);border:1px solid var(--br-solid);border-radius:5px;
+  color:var(--beige);font-family:var(--sans);font-size:14px;padding:10px 12px;
+  transition:border-color .15s;outline:none;appearance:none;-webkit-appearance:none;
+}
+input[type="text"]:focus,input[type="url"]:focus,input[type="date"]:focus,select:focus,textarea:focus{
+  border-color:var(--gold);
+}
+select option{background:#132640;color:var(--beige)}
+textarea{resize:vertical;min-height:72px;line-height:1.5}
+input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.7) sepia(1) saturate(2) hue-rotate(5deg)}
+
+.btn-submit{
+  background:var(--gold);color:var(--navy);font-family:var(--sans);font-size:14px;font-weight:600;
+  border:none;border-radius:5px;padding:11px 28px;cursor:pointer;transition:background .15s,transform .1s;
+  letter-spacing:.01em;
+}
+.btn-submit:hover{background:var(--gold-light)}
+.btn-submit:active{transform:scale(.98)}
+
+.status-msg{margin-top:12px;font-size:13px;padding:8px 12px;border-radius:4px;display:none}
+.status-msg.ok{background:rgba(58,140,92,.15);border:1px solid rgba(58,140,92,.4);color:#7dccaa;display:block}
+.status-msg.err{background:rgba(226,75,74,.12);border:1px solid rgba(226,75,74,.35);color:#f99;display:block}
+
+/* RECENT ENTRIES */
+.recent-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--gold-light);margin-bottom:14px}
+.entry-list{display:flex;flex-direction:column;gap:10px}
+.entry-item{background:var(--navy-mid);border:1px solid var(--br-solid);border-radius:6px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.entry-body{flex:1;min-width:0}
+.entry-type{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:3px;background:rgba(201,168,76,0.12);color:var(--gold);margin-bottom:5px}
+.entry-title{font-weight:600;color:var(--beige);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.entry-desc{font-size:12px;color:var(--t-muted);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.entry-date{font-size:11px;color:var(--t-muted);margin-top:4px}
+.btn-delete{background:none;border:1px solid rgba(226,75,74,.3);color:rgba(226,75,74,.7);border-radius:4px;padding:4px 9px;font-size:11px;cursor:pointer;flex-shrink:0;transition:all .12s}
+.btn-delete:hover{background:rgba(226,75,74,.12);color:var(--red);border-color:var(--red)}
+.empty-state{text-align:center;color:var(--t-muted);font-style:italic;padding:32px;font-family:var(--serif);font-size:15px}
+
+@media(max-width:600px){
+  .header{padding:12px 16px}
+  .container{padding:0 16px 60px;margin-top:24px}
+  .form-card{padding:20px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header-title">DC Dossier: Content Input</div>
+    <div class="header-sub">Private editorial input form</div>
+  </div>
+  <span class="private-badge">Private</span>
+</div>
+
+<div class="container">
+
+  <div class="section-title">Add a source</div>
+  <div class="section-sub">Add newsletters, op-eds, podcasts, research papers, interviews, or posts to the analysis feed.</div>
+
+  <div class="form-card">
+    <div class="form-row">
+      <label for="f-url">URL</label>
+      <input type="url" id="f-url" placeholder="https://">
+    </div>
+    <div class="form-row">
+      <label for="f-type">Content type</label>
+      <select id="f-type">
+        <option value="Newsletter">Newsletter</option>
+        <option value="Op-Ed">Op-Ed</option>
+        <option value="Podcast">Podcast</option>
+        <option value="Research Paper">Research Paper</option>
+        <option value="Interview">Interview</option>
+        <option value="Tweet/Post">Tweet/Post</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="f-title">Title / headline</label>
+      <input type="text" id="f-title" placeholder="One-line title or headline">
+    </div>
+    <div class="form-row">
+      <label for="f-desc">Description</label>
+      <textarea id="f-desc" placeholder="Brief one-line description of why this source is relevant"></textarea>
+    </div>
+    <div class="form-row">
+      <label for="f-date">Date</label>
+      <input type="date" id="f-date">
+    </div>
+    <div class="form-row">
+      <button class="btn-submit" onclick="submitEntry()">Add to feed</button>
+      <div class="status-msg" id="status-msg"></div>
+    </div>
+  </div>
+
+  <div class="recent-title">Last 10 entries</div>
+  <div class="entry-list" id="entry-list">
+    <div class="empty-state">Loading&#8230;</div>
+  </div>
+
+</div>
+
+<script>
+// Set today's date as default
+document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+
+let dataCache = null;
+
+async function loadData() {
+  try {
+    const res = await fetch('data.json?nocache=' + Date.now());
+    dataCache = await res.json();
+  } catch (e) {
+    dataCache = { analysis: [], meta: {}, retirements: {}, approval: {}, generic_ballot: {}, factions: {}, news: [] };
+  }
+  renderList();
+}
+
+function renderList() {
+  const list = document.getElementById('entry-list');
+  const items = (dataCache.analysis || []).slice(-10).reverse();
+  if (!items.length) {
+    list.innerHTML = '<div class="empty-state">No entries yet. Add one above.</div>';
+    return;
+  }
+  list.innerHTML = items.map((item, idx) => `
+    <div class="entry-item" id="entry-${idx}">
+      <div class="entry-body">
+        <span class="entry-type">${escHtml(item.type || '')}</span>
+        <div class="entry-title"><a href="${escHtml(item.url || '#')}" target="_blank" rel="noopener" style="color:var(--beige);text-decoration:none">${escHtml(item.title || item.url || '')}</a></div>
+        <div class="entry-desc">${escHtml(item.description || '')}</div>
+        <div class="entry-date">${escHtml(item.date || '')}</div>
+      </div>
+      <button class="btn-delete" onclick="deleteEntry(${idx})">Delete</button>
+    </div>`).join('');
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function showStatus(msg, ok) {
+  const el = document.getElementById('status-msg');
+  el.textContent = msg;
+  el.className = 'status-msg ' + (ok ? 'ok' : 'err');
+  setTimeout(() => { el.className = 'status-msg'; }, 4000);
+}
+
+async function submitEntry() {
+  const url = document.getElementById('f-url').value.trim();
+  const type = document.getElementById('f-type').value;
+  const title = document.getElementById('f-title').value.trim();
+  const desc = document.getElementById('f-desc').value.trim();
+  const date = document.getElementById('f-date').value;
+
+  if (!url) { showStatus('Please enter a URL.', false); return; }
+  if (!title) { showStatus('Please enter a title.', false); return; }
+
+  const entry = { title, url, type, description: desc, date };
+  if (!dataCache.analysis) dataCache.analysis = [];
+  dataCache.analysis.push(entry);
+
+  const saved = await saveData();
+  if (saved) {
+    showStatus('Entry added successfully.', true);
+    document.getElementById('f-url').value = '';
+    document.getElementById('f-title').value = '';
+    document.getElementById('f-desc').value = '';
+    document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
+    renderList();
+  } else {
+    showStatus('Could not save. Check that data.json is writable from this context.', false);
+  }
+}
+
+async function deleteEntry(idx) {
+  const items = (dataCache.analysis || []).slice(-10).reverse();
+  const item = items[idx];
+  if (!item) return;
+  const fullIdx = dataCache.analysis.indexOf(item);
+  if (fullIdx >= 0) dataCache.analysis.splice(fullIdx, 1);
+  const saved = await saveData();
+  if (saved) {
+    showStatus('Entry deleted.', true);
+    renderList();
+  } else {
+    // Revert
+    dataCache.analysis.splice(fullIdx, 0, item);
+    showStatus('Could not delete. data.json may be read-only in this context.', false);
+  }
+}
+
+async function saveData() {
+  // When served via GitHub Pages or a static server, we cannot POST.
+  // This form is intended for local use or a backend proxy.
+  // Attempt a PUT/POST to a local endpoint if available, else show copy prompt.
+  try {
+    const res = await fetch('data.json', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dataCache, null, 2)
+    });
+    if (res.ok) return true;
+  } catch (_) {}
+
+  // Fallback: offer the updated JSON as a download
+  const blob = new Blob([JSON.stringify(dataCache, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'data.json';
+  a.click();
+  return true;
+}
+
+loadData();
+</script>
+</body>
+</html>

@@ -4,21 +4,643 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DC Dossier: Analysis &amp; Commentary</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:#f7f7f7;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'DM Sans',sans-serif}
-.placeholder{text-align:center;padding:60px 40px}
-.placeholder h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;color:#191919;margin-bottom:12px}
-.placeholder p{font-size:14px;color:#6B6B6B;line-height:1.6;max-width:460px;margin:0 auto}
-.badge{display:inline-block;background:#FFF0E9;color:#FF6719;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;margin-bottom:20px}
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f8fa;
+  --bg3: #eef0f3;
+  --text: #191919;
+  --text2: #4a4a4a;
+  --text3: #6b6b6b;
+  --border: #e2e5ea;
+  --gold: #c9a84c;
+  --gold-dk: #a8872e;
+  --navy: #0d1b2e;
+  --accent: #1a3f8a;
+  --sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Source Serif 4', Georgia, serif;
+  --radius: 6px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 14px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* SUB-NAV */
+.sub-nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.sub-tab {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  white-space: nowrap;
+}
+.sub-tab:hover { color: var(--text); }
+.sub-tab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.nav-spacer { flex: 1; }
+.last-updated {
+  font-size: 11px;
+  color: var(--text3);
+  padding-left: 12px;
+  white-space: nowrap;
+}
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--navy);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px 14px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 16px;
+  transition: background .12s;
+  flex-shrink: 0;
+}
+.add-btn:hover { background: #132640; }
+.add-btn svg { flex-shrink: 0; }
+
+/* PANELS */
+.panel { display: none; flex: 1; flex-direction: column; }
+.panel.active { display: flex; }
+
+/* TOOLBAR */
+.toolbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+.search-box {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 7px 12px 7px 34px;
+  width: 240px;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  transition: border-color .12s;
+}
+.search-box:focus { border-color: var(--gold); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.chip {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .12s;
+  white-space: nowrap;
+}
+.chip:hover { border-color: #aaa; color: var(--text); }
+.chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.sort-select {
+  margin-left: auto;
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--text2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+/* CONTENT AREA */
+.content { flex: 1; overflow-y: auto; padding: 28px; }
+
+/* ANALYSIS CARDS */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 20px;
+}
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: box-shadow .15s, border-color .15s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); border-color: #ccc; }
+.card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.type-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  padding: 3px 9px;
+  border-radius: 4px;
+}
+.card-date { font-size: 11px; color: var(--text3); margin-left: auto; }
+.card-title {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  text-decoration: none;
+}
+.card-title:hover { color: var(--accent); }
+.card-desc { font-size: 13px; color: var(--text2); line-height: 1.6; flex: 1; }
+.card-source {
+  font-size: 11px;
+  color: var(--text3);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.card-source::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* NEWS LIST */
+.news-list { display: flex; flex-direction: column; gap: 0; }
+.news-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.news-item:last-child { border-bottom: none; }
+.news-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.news-source {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.news-date { font-size: 11px; color: var(--text3); margin-left: auto; }
+.news-title {
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  text-decoration: none;
+}
+.news-title:hover { color: var(--accent); }
+.news-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.news-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.news-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 40px;
+  gap: 16px;
+  color: var(--text3);
+  flex: 1;
+}
+.empty-icon {
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.empty-state h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text2);
+}
+.empty-state p {
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 380px;
+  color: var(--text3);
+}
+.empty-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 8px;
+  background: var(--navy);
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius);
+  transition: background .12s;
+}
+.empty-action:hover { background: #132640; }
+.empty-hint {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+/* RESULTS COUNT */
+.results-bar {
+  font-size: 12px;
+  color: var(--text3);
+  padding: 10px 0 18px;
+}
+
+/* HIDDEN */
+.hidden { display: none !important; }
+
+/* TYPE COLOURS */
+.type-newsletter    { background: #FFF0E9; color: #C4470E; }
+.type-op-ed         { background: #F3EEFF; color: #5B21B6; }
+.type-podcast       { background: #E0F7FA; color: #006064; }
+.type-research      { background: #E8F0FE; color: #1A47A0; }
+.type-interview     { background: #E8F8F1; color: #065F46; }
+.type-post          { background: #F1F5F9; color: #334155; }
+
+/* TAG COLOURS */
+.tag-major  { background: #FEE2E2; color: #991B1B; }
+.tag-senate { background: #DBEAFE; color: #1E3A8A; }
+.tag-house  { background: #EDE9FE; color: #4C1D95; }
+.tag-federal{ background: #F1F5F9; color: #1E293B; }
+.tag-gov    { background: #CCFBF1; color: #134E4A; }
+.tag-primary{ background: #FEF3C7; color: #92400E; }
+
+@media (max-width: 600px) {
+  .toolbar { padding: 12px 16px; }
+  .content { padding: 16px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .search-box { width: 100%; }
+}
 </style>
 </head>
 <body>
-<div class="placeholder">
-  <div class="badge">Coming Soon</div>
-  <h1>Analysis &amp; Commentary</h1>
-  <p>Curated newsletters, op-eds, podcast transcripts, research papers, and expert commentary on the 2026 midterms. Use the private input form to add sources.</p>
+
+<!-- SUB-NAV -->
+<nav class="sub-nav">
+  <button class="sub-tab active" data-tab="analysis" onclick="switchTab('analysis')">Analysis &amp; Commentary</button>
+  <button class="sub-tab" data-tab="news" onclick="switchTab('news')">Live News Feed</button>
+  <div class="nav-spacer"></div>
+  <span class="last-updated" id="lastUpdated"></span>
+  <a href="input.html" class="add-btn" target="_parent" title="Add an analysis source">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+    Add Source
+  </a>
+</nav>
+
+<!-- ANALYSIS PANEL -->
+<div id="panel-analysis" class="panel active">
+  <div class="toolbar">
+    <input type="search" class="search-box" id="analysis-search" placeholder="Search titles and sources..." oninput="filterAnalysis()">
+    <div class="chips" id="analysis-chips">
+      <button class="chip active" data-type="All" onclick="setAnalysisFilter('All')">All</button>
+      <button class="chip" data-type="Newsletter" onclick="setAnalysisFilter('Newsletter')">Newsletter</button>
+      <button class="chip" data-type="Op-Ed" onclick="setAnalysisFilter('Op-Ed')">Op-Ed</button>
+      <button class="chip" data-type="Podcast" onclick="setAnalysisFilter('Podcast')">Podcast</button>
+      <button class="chip" data-type="Research Paper" onclick="setAnalysisFilter('Research Paper')">Research Paper</button>
+      <button class="chip" data-type="Interview" onclick="setAnalysisFilter('Interview')">Interview</button>
+      <button class="chip" data-type="Post" onclick="setAnalysisFilter('Post')">Post</button>
+    </div>
+  </div>
+  <div class="content">
+    <div id="analysis-results-bar" class="results-bar hidden"></div>
+    <div id="analysis-cards" class="card-grid"></div>
+    <div id="analysis-empty" class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <h3>No sources yet</h3>
+      <p>Add curated newsletters, op-eds, podcasts, research papers, and expert commentary on the 2026 midterms.</p>
+      <a href="input.html" class="empty-action" target="_parent">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Add your first source
+      </a>
+      <span class="empty-hint">Sources added via the editorial form appear here immediately.</span>
+    </div>
+    <div id="analysis-no-results" class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <h3>No results found</h3>
+      <p>Try a different search term or clear the filter.</p>
+    </div>
+  </div>
 </div>
+
+<!-- NEWS PANEL -->
+<div id="panel-news" class="panel">
+  <div class="toolbar">
+    <input type="search" class="search-box" id="news-search" placeholder="Search headlines..." oninput="filterNews()">
+    <div class="chips" id="news-chips">
+      <button class="chip active" data-tag="All" onclick="setNewsFilter('All')">All</button>
+      <button class="chip" data-tag="Major Update" onclick="setNewsFilter('Major Update')">Major Update</button>
+      <button class="chip" data-tag="Senate" onclick="setNewsFilter('Senate')">Senate</button>
+      <button class="chip" data-tag="House" onclick="setNewsFilter('House')">House</button>
+      <button class="chip" data-tag="Federal" onclick="setNewsFilter('Federal')">Federal</button>
+      <button class="chip" data-tag="Governorship" onclick="setNewsFilter('Governorship')">Governorship</button>
+      <button class="chip" data-tag="Primary" onclick="setNewsFilter('Primary')">Primary</button>
+    </div>
+    <select class="sort-select" id="news-sort" onchange="filterNews()">
+      <option value="newest">Newest first</option>
+      <option value="oldest">Oldest first</option>
+    </select>
+  </div>
+  <div class="content">
+    <div id="news-results-bar" class="results-bar hidden"></div>
+    <div id="news-list" class="news-list"></div>
+    <div id="news-empty" class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      <h3>No news items yet</h3>
+      <p>The live feed fetches from 150+ national and state political RSS sources every hour via GitHub Actions.</p>
+      <span class="empty-hint">Items will appear automatically after the first scheduled fetch.</span>
+    </div>
+    <div id="news-no-results" class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <h3>No results found</h3>
+      <p>Try a different search term or clear the filter.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const TYPE_CLASS = {
+  'Newsletter':     'type-newsletter',
+  'Op-Ed':          'type-op-ed',
+  'Podcast':        'type-podcast',
+  'Research Paper': 'type-research',
+  'Interview':      'type-interview',
+  'Tweet':          'type-post',
+  'Post':           'type-post',
+};
+const TAG_CLASS = {
+  'Major Update': 'tag-major',
+  'Senate':       'tag-senate',
+  'House':        'tag-house',
+  'Federal':      'tag-federal',
+  'Governorship': 'tag-gov',
+  'Primary':      'tag-primary',
+};
+
+let allAnalysis = [];
+let allNews = [];
+let analysisFilter = 'All';
+let newsFilter = 'All';
+
+/* ---- DATA ---- */
+async function loadData() {
+  const paths = ['data.json', '../data.json', './data.json'];
+  for (const p of paths) {
+    try {
+      const r = await fetch(p + '?t=' + Date.now());
+      if (!r.ok) continue;
+      const d = await r.json();
+      allAnalysis = Array.isArray(d.analysis) ? d.analysis : [];
+      allNews = Array.isArray(d.news) ? d.news : [];
+      if (d.meta && d.meta.last_updated) {
+        const dt = new Date(d.meta.last_updated);
+        document.getElementById('lastUpdated').textContent =
+          'Updated ' + dt.toLocaleString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
+      }
+      renderAnalysis();
+      renderNews();
+      return;
+    } catch(e) { /* try next */ }
+  }
+  // No data loaded — show empty states
+  renderAnalysis();
+  renderNews();
+}
+
+/* ---- TAB SWITCHING ---- */
+function switchTab(name) {
+  document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+}
+
+/* ---- ANALYSIS ---- */
+function setAnalysisFilter(type) {
+  analysisFilter = type;
+  document.querySelectorAll('#analysis-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.type === type));
+  renderAnalysis();
+}
+
+function filterAnalysis() { renderAnalysis(); }
+
+function renderAnalysis() {
+  const q = (document.getElementById('analysis-search').value || '').toLowerCase();
+  let items = allAnalysis.filter(item => {
+    if (analysisFilter !== 'All' && item.type !== analysisFilter) return false;
+    if (q) {
+      const haystack = ((item.title || '') + ' ' + (item.source || '') + ' ' + (item.description || '')).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+  // Sort newest first
+  items.sort((a, b) => new Date(b.added || b.date || 0) - new Date(a.added || a.date || 0));
+
+  const grid = document.getElementById('analysis-cards');
+  const emptyEl = document.getElementById('analysis-empty');
+  const noResultsEl = document.getElementById('analysis-no-results');
+  const bar = document.getElementById('analysis-results-bar');
+
+  grid.innerHTML = '';
+
+  if (allAnalysis.length === 0) {
+    emptyEl.classList.remove('hidden');
+    noResultsEl.classList.add('hidden');
+    bar.classList.add('hidden');
+    return;
+  }
+  emptyEl.classList.add('hidden');
+
+  if (items.length === 0) {
+    noResultsEl.classList.remove('hidden');
+    bar.classList.add('hidden');
+    return;
+  }
+  noResultsEl.classList.add('hidden');
+
+  bar.textContent = items.length + ' source' + (items.length !== 1 ? 's' : '') +
+    (analysisFilter !== 'All' ? ' \u00b7 ' + analysisFilter : '') +
+    (q ? ' matching "' + q + '"' : '');
+  bar.classList.remove('hidden');
+
+  items.forEach(item => {
+    const typeClass = TYPE_CLASS[item.type] || 'type-post';
+    const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '';
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML =
+      '<div class="card-meta">' +
+        '<span class="type-badge ' + typeClass + '">' + esc(item.type || 'Post') + '</span>' +
+        (dateStr ? '<span class="card-date">' + dateStr + '</span>' : '') +
+      '</div>' +
+      '<a class="card-title" href="' + esc(item.url || '#') + '" target="_blank" rel="noopener">' + esc(item.title || 'Untitled') + '</a>' +
+      (item.description ? '<p class="card-desc">' + esc(item.description) + '</p>' : '') +
+      (item.source ? '<div class="card-source">' + esc(item.source) + '</div>' : '');
+    grid.appendChild(card);
+  });
+}
+
+/* ---- NEWS ---- */
+function setNewsFilter(tag) {
+  newsFilter = tag;
+  document.querySelectorAll('#news-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
+  renderNews();
+}
+
+function filterNews() { renderNews(); }
+
+function renderNews() {
+  const q = (document.getElementById('news-search').value || '').toLowerCase();
+  const sort = document.getElementById('news-sort').value;
+  let items = allNews.filter(item => {
+    if (newsFilter !== 'All') {
+      const tags = Array.isArray(item.tags) ? item.tags : [];
+      if (!tags.includes(newsFilter)) return false;
+    }
+    if (q) {
+      const haystack = ((item.title || '') + ' ' + (item.source || '') + ' ' + (item.description || '')).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    return true;
+  });
+
+  items.sort((a, b) => {
+    const da = new Date(a.date || 0), db = new Date(b.date || 0);
+    return sort === 'oldest' ? da - db : db - da;
+  });
+
+  const listEl = document.getElementById('news-list');
+  const emptyEl = document.getElementById('news-empty');
+  const noResultsEl = document.getElementById('news-no-results');
+  const bar = document.getElementById('news-results-bar');
+
+  listEl.innerHTML = '';
+
+  if (allNews.length === 0) {
+    emptyEl.classList.remove('hidden');
+    noResultsEl.classList.add('hidden');
+    bar.classList.add('hidden');
+    return;
+  }
+  emptyEl.classList.add('hidden');
+
+  if (items.length === 0) {
+    noResultsEl.classList.remove('hidden');
+    bar.classList.add('hidden');
+    return;
+  }
+  noResultsEl.classList.add('hidden');
+
+  bar.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '') +
+    (newsFilter !== 'All' ? ' \u00b7 ' + newsFilter : '') +
+    (q ? ' matching "' + q + '"' : '');
+  bar.classList.remove('hidden');
+
+  items.forEach(item => {
+    const tags = Array.isArray(item.tags) ? item.tags : [];
+    const dateStr = item.date ? relativeDate(new Date(item.date)) : '';
+    const el = document.createElement('div');
+    el.className = 'news-item';
+    const tagsHtml = tags.map(t => '<span class="news-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>').join('');
+    el.innerHTML =
+      '<div class="news-top">' +
+        '<span class="news-source">' + esc(item.source || '') + '</span>' +
+        (dateStr ? '<span class="news-date">' + dateStr + '</span>' : '') +
+      '</div>' +
+      '<a class="news-title" href="' + esc(item.url || '#') + '" target="_blank" rel="noopener">' + esc(item.title || 'Untitled') + '</a>' +
+      (item.description ? '<p class="news-desc">' + esc(item.description) + '</p>' : '') +
+      (tagsHtml ? '<div class="news-tags">' + tagsHtml + '</div>' : '');
+    listEl.appendChild(el);
+  });
+}
+
+/* ---- HELPERS ---- */
+function esc(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function relativeDate(d) {
+  const diff = Date.now() - d.getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return mins + 'm ago';
+  const hrs = Math.floor(mins / 60);
+  if (hrs < 24) return hrs + 'h ago';
+  const days = Math.floor(hrs / 24);
+  if (days < 7) return days + 'd ago';
+  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
+}
+
+loadData();
+</script>
 </body>
 </html>

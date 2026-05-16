@@ -3,9 +3,9 @@
 
 /**
  * fetch-news.js
- * Fetches RSS feeds from national political sources, filters for midterm-relevant
- * items, auto-tags them, deduplicates against existing data.json, and writes
- * the updated news array back to data.json.
+ * Fetches RSS feeds from 154 national and state-level sources (midterm_rss_feeds_v2.xlsx),
+ * filters for midterm-relevant items, auto-tags them, deduplicates against existing
+ * data.json, and writes the updated news array back to data.json.
  */
 
 const fs = require('fs');
@@ -16,26 +16,210 @@ const { XMLParser } = require('fast-xml-parser');
 const DATA_PATH = path.resolve(__dirname, '../data.json');
 
 // ── RSS SOURCES ────────────────────────────────────────────────────────────────
+// Generated from midterm_rss_feeds_v2.xlsx (v2)
+// Columns: source name, feed URL, state/level
 const FEEDS = [
-  { url: 'https://thehill.com/feed/',                        source: 'The Hill' },
-  { url: 'https://thehill.com/homenews/house/feed/',         source: 'The Hill (House)' },
-  { url: 'https://thehill.com/homenews/senate/feed/',        source: 'The Hill (Senate)' },
-  { url: 'https://rss.politico.com/congress.xml',            source: 'Politico' },
-  { url: 'https://rss.politico.com/politics-news.xml',       source: 'Politico' },
-  { url: 'https://api.axios.com/feed/',                      source: 'Axios' },
-  { url: 'https://rollcall.com/feed/',                       source: 'Roll Call' },
-  { url: 'https://www.theguardian.com/us-news/us-politics/rss', source: 'The Guardian' },
-  { url: 'https://www.realclearpolitics.com/xml/rss.xml',    source: 'RealClearPolitics' },
-  { url: 'https://insideelections.com/feed/',                source: 'Inside Elections' },
-  { url: 'https://centerforpolitics.org/crystalball/feed/',  source: 'Sabato\'s Crystal Ball' },
-  {
-    url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:apnews.com+congress+midterm',
-    source: 'AP News (via Google)'
-  },
-  {
-    url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:reuters.com+congress+midterm',
-    source: 'Reuters (via Google)'
-  },
+
+  // NATIONAL NEWS
+  { url: 'https://thehill.com/feed/',                                                                                               source: 'The Hill' },
+  { url: 'https://thehill.com/homenews/house/feed/',                                                                               source: 'The Hill (House)' },
+  { url: 'https://thehill.com/homenews/senate/feed/',                                                                              source: 'The Hill (Senate)' },
+  { url: 'https://rss.politico.com/congress.xml',                                                                                  source: 'Politico' },
+  { url: 'https://rss.politico.com/politics-news.xml',                                                                             source: 'Politico Elections' },
+  { url: 'https://api.axios.com/feed/',                                                                                            source: 'Axios' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:apnews.com+congress+midterm',                       source: 'AP News' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:reuters.com+congress+midterm',                      source: 'Reuters' },
+  { url: 'https://rollcall.com/feed/',                                                                                             source: 'Roll Call' },
+  { url: 'https://ballotpedia.org/wiki/index.php?title=Special:RecentChanges&feed=rss',                                            source: 'Ballotpedia' },
+  { url: 'https://www.theguardian.com/us-news/us-politics/rss',                                                                    source: 'The Guardian' },
+
+  // NATIONAL POLLING
+  { url: 'https://www.realclearpolitics.com/xml/rss.xml',                                                                         source: 'RealClearPolitics' },
+  { url: 'https://www.pewresearch.org/feed/',                                                                                      source: 'Pew Research' },
+  { url: 'https://news.gallup.com/rss/gallup_politics_rss.xml',                                                                   source: 'Gallup' },
+  { url: 'https://yougov.com/en-us/rss',                                                                                          source: 'YouGov' },
+  { url: 'https://www.cookpolitical.com/feed',                                                                                     source: 'Cook Political Report' },
+  { url: 'https://insideelections.com/feed/',                                                                                      source: 'Inside Elections' },
+  { url: 'https://centerforpolitics.org/crystalball/feed/',                                                                        source: "Sabato's Crystal Ball" },
+  { url: 'https://www.brookings.edu/feed/',                                                                                        source: 'Brookings' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Politico+poll+congress+senate+house+2026',               source: 'Politico Polling' },
+
+  // ARIZONA
+  { url: 'https://azmirror.com/feed/localFeed/',                                                                                   source: 'Arizona Mirror' },
+  { url: 'https://azcapitoltimes.com/feed/',                                                                                       source: 'Arizona Capitol Times' },
+  { url: 'https://www.azcentral.com/arcio/rss/',                                                                                   source: 'Arizona Republic' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Arizona+2026',                              source: 'Emerson (AZ)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Arizona+2026',                           source: 'Quinnipiac (AZ)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Arizona+2026',                              source: 'Suffolk (AZ)' },
+
+  // CALIFORNIA
+  { url: 'https://calmatters.org/feed/',                                                                                           source: 'CalMatters' },
+  { url: 'https://www.latimes.com/rss2.0.xml',                                                                                    source: 'Los Angeles Times' },
+  { url: 'https://www.sacbee.com/arcio/rss/',                                                                                     source: 'Sacramento Bee' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Berkeley+IGS+poll+California+2026',                      source: 'UC Berkeley IGS Poll' },
+  { url: 'https://www.ppic.org/feed/',                                                                                             source: 'PPIC' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+California+2026',                           source: 'Emerson (CA)' },
+
+  // COLORADO
+  { url: 'https://coloradosun.com/feed/',                                                                                          source: 'Colorado Sun' },
+  { url: 'https://www.coloradopolitics.com/feed/',                                                                                 source: 'Colorado Politics' },
+  { url: 'https://cpr.org/feed/',                                                                                                  source: 'CPR News' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Colorado+2026',                             source: 'Emerson (CO)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Colorado+2026',                          source: 'Quinnipiac (CO)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Colorado+2026',                             source: 'Suffolk (CO)' },
+
+  // FLORIDA
+  { url: 'https://floridapolitics.com/feed/',                                                                                      source: 'Florida Politics' },
+  { url: 'https://floridaphoenix.com/feed/localFeed/',                                                                             source: 'Florida Phoenix' },
+  { url: 'https://www.tampabay.com/feed/',                                                                                         source: 'Tampa Bay Times' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Stetson+poll+Florida+2026',                              source: 'Stetson Poll (FL)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Florida+2026',                              source: 'Emerson (FL)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Florida+2026',                           source: 'Quinnipiac (FL)' },
+
+  // GEORGIA
+  { url: 'https://georgiarecorder.com/feed/localFeed/',                                                                            source: 'Georgia Recorder' },
+  { url: 'https://www.ajc.com/arcio/rss/',                                                                                        source: 'Atlanta Journal-Constitution' },
+  { url: 'https://www.gpb.org/rss.xml',                                                                                           source: 'GPB News' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Georgia+2026',                              source: 'Emerson (GA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Georgia+2026',                           source: 'Quinnipiac (GA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Georgia+2026',                              source: 'Suffolk (GA)' },
+
+  // IOWA
+  { url: 'https://iowacapitaldispatch.com/feed/localFeed/',                                                                        source: 'Iowa Capital Dispatch' },
+  { url: 'https://iowastartingline.com/feed/',                                                                                     source: 'Iowa Starting Line' },
+  { url: 'http://www.thegazette.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                       source: 'The Gazette (IA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Selzer+poll+Iowa+2026',                                  source: 'Selzer (IA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Iowa+2026',                                 source: 'Emerson (IA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Iowa+2026',                              source: 'Quinnipiac (IA)' },
+
+  // MAINE
+  { url: 'https://mainemorningstar.com/feed/localFeed/',                                                                           source: 'Maine Morning Star' },
+  { url: 'https://www.pressherald.com/feed/',                                                                                      source: 'Portland Press Herald' },
+  { url: 'https://www.bangordailynews.com/feed/',                                                                                  source: 'Bangor Daily News' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Maine+2026',                                source: 'Emerson (ME)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Maine+2026',                                source: 'Suffolk (ME)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Maine+2026',                             source: 'Quinnipiac (ME)' },
+
+  // MICHIGAN
+  { url: 'https://bridgemi.com/feed/',                                                                                             source: 'Bridge Michigan' },
+  { url: 'https://michiganadvance.com/feed/localFeed/',                                                                            source: 'Michigan Advance' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:detroitnews.com+Michigan+election+2026',            source: 'Detroit News' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=EPIC-MRA+poll+Michigan+2026',                            source: 'EPIC-MRA (MI)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Glengariff+poll+Michigan+2026',                          source: 'Glengariff (MI)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Michigan+2026',                          source: 'Quinnipiac (MI)' },
+
+  // MONTANA
+  { url: 'https://montanafreepress.org/feed/',                                                                                     source: 'Montana Free Press' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:billingsgazette.com+Montana+election+2026',         source: 'Billings Gazette' },
+  { url: 'https://www.mtpr.org/index.rss',                                                                                        source: 'Montana Public Radio' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Montana+2026',                              source: 'Emerson (MT)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Montana+2026',                           source: 'Quinnipiac (MT)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Montana+2026',                              source: 'Suffolk (MT)' },
+
+  // NEBRASKA
+  { url: 'https://nebraskaexaminer.com/feed/localFeed/',                                                                           source: 'Nebraska Examiner' },
+  { url: 'http://omaha.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                                source: 'Omaha World-Herald' },
+  { url: 'http://journalstar.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                          source: 'Lincoln Journal Star' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Selzer+poll+Nebraska+2026',                              source: 'Selzer (NE)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Siena+poll+Nebraska+2026',                               source: 'Siena/NYT (NE)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Nebraska+2026',                             source: 'Emerson (NE)' },
+
+  // NEVADA
+  { url: 'https://thenevadaindependent.com/feed/',                                                                                 source: 'Nevada Independent' },
+  { url: 'https://nevadacurrent.com/feed/localFeed/',                                                                              source: 'Nevada Current' },
+  { url: 'https://www.reviewjournal.com/feed/',                                                                                    source: 'Las Vegas Review-Journal' },
+  { url: 'https://thenevadaindependent.com/articles/polls/feed/',                                                                  source: 'Nevada Ind. Polls' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Nevada+2026',                               source: 'Emerson (NV)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Nevada+2026',                            source: 'Quinnipiac (NV)' },
+
+  // NEW HAMPSHIRE
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:unionleader.com+New+Hampshire+election+2026',       source: 'NH Union Leader' },
+  { url: 'https://www.concordmonitor.com/feed/',                                                                                   source: 'Concord Monitor' },
+  { url: 'https://newhampshirebulletin.com/feed/localFeed/',                                                                       source: 'NH Bulletin' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Saint+Anselm+NHIOP+poll+New+Hampshire+2026',             source: 'Saint Anselm NHIOP' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=UNH+Survey+Center+poll+New+Hampshire+2026',              source: 'UNH Survey Center' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+New+Hampshire+2026',                        source: 'Suffolk (NH)' },
+
+  // NEW JERSEY
+  { url: 'https://njspotlightnews.org/feed/',                                                                                      source: 'NJ Spotlight News' },
+  { url: 'https://njmonitor.com/feed/',                                                                                            source: 'NJ Monitor' },
+  { url: 'https://insidernj.com/feed/',                                                                                            source: 'Insider NJ' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Monmouth+poll+New+Jersey+2026',                          source: 'Monmouth (NJ)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+Jersey+2026',                        source: 'Quinnipiac (NJ)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+New+Jersey+2026',                           source: 'Suffolk (NJ)' },
+
+  // NEW MEXICO
+  { url: 'https://nmpoliticalreport.com/feed/',                                                                                    source: 'NM Political Report' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:abqjournal.com+New+Mexico+election+2026',           source: 'Albuquerque Journal' },
+  { url: 'https://sourcenm.com/feed/localFeed/',                                                                                   source: 'Source New Mexico' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+New+Mexico+2026',                           source: 'Emerson (NM)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+New+Mexico+2026',                           source: 'Suffolk (NM)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+Mexico+2026',                        source: 'Quinnipiac (NM)' },
+
+  // NEW YORK
+  { url: 'https://www.cityandstateny.com/rss.xml',                                                                                source: 'City & State NY' },
+  { url: 'https://nystateofpolitics.com/feed/',                                                                                    source: 'NY State of Politics' },
+  { url: 'https://www.timesunion.com/rss/',                                                                                       source: 'Times Union (Albany)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Siena+poll+New+York+2026',                               source: 'Siena College (NY)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+York+2026',                          source: 'Quinnipiac (NY)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Marist+poll+New+York+2026',                              source: 'Marist Poll (NY)' },
+
+  // NORTH CAROLINA
+  { url: 'https://ncnewsline.com/feed/localFeed/',                                                                                 source: 'NC Newsline' },
+  { url: 'https://carolinapublicpress.org/feed/',                                                                                  source: 'Carolina Public Press' },
+  { url: 'https://www.wunc.org/politics.rss',                                                                                     source: 'WUNC Politics' },
+  { url: 'https://www.elon.edu/u/elon-poll/feed/',                                                                                source: 'Elon Poll (NC)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Meredith+poll+North+Carolina+2026',                      source: 'Meredith College Poll (NC)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=High+Point+University+poll+North+Carolina+2026',         source: 'HPU Survey Research (NC)' },
+
+  // OHIO
+  { url: 'https://ohiocapitaljournal.com/feed/localFeed/',                                                                         source: 'Ohio Capital Journal' },
+  { url: 'https://www.cleveland.com/arc/outboundfeeds/rss/',                                                                      source: 'Cleveland Plain Dealer' },
+  { url: 'https://www.dispatch.com/arcio/rss/',                                                                                   source: 'Columbus Dispatch' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=BGSU+poll+Ohio+2026',                                    source: 'BGSU Poll (OH)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Ohio+2026',                              source: 'Quinnipiac (OH)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Baldwin+Wallace+poll+Ohio+2026',                         source: 'Baldwin Wallace (OH)' },
+
+  // PENNSYLVANIA
+  { url: 'https://www.spotlightpa.org/feeds/full.xml',                                                                            source: 'Spotlight PA' },
+  { url: 'https://www.inquirer.com/arcio/rss/',                                                                                   source: 'Philadelphia Inquirer' },
+  { url: 'https://www.post-gazette.com/rss',                                                                                      source: 'Pittsburgh Post-Gazette' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Franklin+Marshall+poll+Pennsylvania+2026',               source: 'Franklin & Marshall Poll (PA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Pennsylvania+2026',                      source: 'Quinnipiac (PA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Muhlenberg+poll+Pennsylvania+2026',                      source: 'Muhlenberg Poll (PA)' },
+
+  // TEXAS
+  { url: 'https://www.texastribune.org/feed/',                                                                                    source: 'Texas Tribune' },
+  { url: 'https://www.houstonchronicle.com/arcio/rss/',                                                                           source: 'Houston Chronicle' },
+  { url: 'https://www.texasobserver.org/feed/',                                                                                    source: 'Texas Observer' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=UT+Texas+Politics+poll+Texas+2026',                      source: 'UT Texas Politics Poll' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=UT+Tyler+poll+Texas+2026',                               source: 'UT Tyler Poll (TX)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Texas+2026',                                source: 'Emerson (TX)' },
+
+  // VIRGINIA
+  { url: 'https://virginiamercury.com/feed/localFeed/',                                                                            source: 'Virginia Mercury' },
+  { url: 'https://richmond.com/feed/',                                                                                             source: 'Richmond Times-Dispatch' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=VPAP+Virginia+election+2026',                            source: 'VPAP' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=CNU+Wason+poll+Virginia+2026',                           source: 'CNU Wason Center (VA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Virginia+2026',                             source: 'Emerson (VA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Virginia+2026',                             source: 'Suffolk (VA)' },
+
+  // WASHINGTON STATE
+  { url: 'https://washingtonstatestandard.com/feed/localFeed/',                                                                    source: 'Washington State Standard' },
+  { url: 'https://www.cascadepbs.org/articles/briefs/rss/',                                                                       source: 'Crosscut / Cascade PBS' },
+  { url: 'https://www.seattletimes.com/feed/',                                                                                    source: 'Seattle Times' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Elway+Research+poll+Washington+2026',                    source: 'Elway Research (WA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Washington+state+2026',                     source: 'Emerson (WA)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Washington+state+2026',                     source: 'Suffolk (WA)' },
+
+  // WISCONSIN
+  { url: 'https://wisconsinexaminer.com/feed/localFeed/',                                                                          source: 'Wisconsin Examiner' },
+  { url: 'https://www.jsonline.com/arcio/rss/',                                                                                   source: 'Milwaukee Journal Sentinel' },
+  { url: 'https://wisconsinwatch.org/feed/',                                                                                      source: 'Wisconsin Watch' },
+  { url: 'https://law.marquette.edu/poll/feed/',                                                                                   source: 'Marquette Law Poll (WI)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Wisconsin+2026',                            source: 'Emerson (WI)' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Wisconsin+2026',                         source: 'Quinnipiac (WI)' },
+
 ];
 
 // ── KEYWORD FILTERS ────────────────────────────────────────────────────────────

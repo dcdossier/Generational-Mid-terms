@@ -4,21 +4,799 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DC Dossier: Race Review</title>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
+:root {
+  --bg:#FFFFFF; --bg-s:#F7F7F7; --bg-h:#F2F2F2;
+  --br:#E9E9E7; --br-md:#D4D4D0;
+  --t1:#191919; --t2:#292929; --t3:#6B6B6B; --t4:#959595;
+  --orange:#FF6719; --orange-p:#FFF0E9;
+  --red:#E24B4A; --blue:#378ADD; --green:#3A8C5C; --yellow:#D4931A;
+  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Source Serif 4',Georgia,serif;
+  /* Rating palette */
+  --sr-bg:#7a1c1c; --sr-tx:#fff;
+  --lr-bg:#C04040; --lr-tx:#fff;
+  --er-bg:#E8A0A0; --er-tx:#4a0000;
+  --tu-bg:#D4931A; --tu-tx:#fff;
+  --ed-bg:#8CB4E0; --ed-tx:#001a3d;
+  --ld-bg:#378ADD; --ld-tx:#fff;
+  --sd-bg:#1A3F8A; --sd-tx:#fff;
+  --nr-bg:#E9E9E7; --nr-tx:#959595;
+}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#f7f7f7;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:'DM Sans',sans-serif}
-.placeholder{text-align:center;padding:60px 40px}
-.placeholder h1{font-family:'Source Serif 4',Georgia,serif;font-size:28px;color:#191919;margin-bottom:12px}
-.placeholder p{font-size:14px;color:#6B6B6B;line-height:1.6;max-width:460px;margin:0 auto}
-.badge{display:inline-block;background:#FFF0E9;color:#FF6719;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 12px;border-radius:3px;margin-bottom:20px}
+body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
+
+/* ── SUBTAB BAR ── */
+.subtab-bar{position:sticky;top:0;z-index:190;background:var(--bg);border-bottom:1px solid var(--br)}
+.subtab-inner{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 28px;align-items:center;justify-content:space-between}
+.subtab-inner::-webkit-scrollbar{display:none}
+.subtab-left{display:flex}
+.subtab-btn{flex-shrink:0;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;padding:13px 16px;cursor:pointer;margin-bottom:-1px;transition:color .12s,border-color .12s;white-space:nowrap}
+.subtab-btn:hover{color:var(--t1)}
+.subtab-btn.active{color:var(--t1);border-bottom-color:var(--t1)}
+.source-note{font-size:10px;color:var(--t4);padding:0 4px;flex-shrink:0;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+
+/* ── PANELS ── */
+.subpanel{display:none}.subpanel.active{display:block}
+.panel-inner{max-width:900px;margin:0 auto;padding:32px 28px 72px}
+
+/* ── STAT STRIP ── */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.stat-box{border:1px solid var(--br);border-radius:6px;padding:14px 16px}
+.stat-n{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:5px}
+.stat-l{font-size:12px;color:var(--t3);line-height:1.45}
+
+/* ── SECTION HEADER ── */
+.section-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.section-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1)}
+.section-sub{font-size:12px;color:var(--t3);margin-top:2px;margin-bottom:14px;line-height:1.5}
+
+/* ── SENATE BALANCE BAR ── */
+.balance-wrap{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px 20px;margin-bottom:20px}
+.balance-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--t4);margin-bottom:10px;display:flex;justify-content:space-between}
+.balance-bar{display:flex;height:28px;border-radius:4px;overflow:hidden;position:relative}
+.balance-r{background:var(--sr-bg);display:flex;align-items:center;justify-content:flex-start;padding-left:10px;transition:width .6s ease;color:#fff;font-size:12px;font-weight:700}
+.balance-d{background:var(--sd-bg);display:flex;align-items:center;justify-content:flex-end;padding-right:10px;transition:width .6s ease;color:#fff;font-size:12px;font-weight:700}
+.balance-mid{position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff;transform:translateX(-50%);z-index:2}
+.balance-mid::after{content:'50';position:absolute;top:32px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--t4);white-space:nowrap}
+.balance-footer{display:flex;justify-content:space-between;margin-top:10px;font-size:12px}
+.balance-r-label{color:var(--sr-bg);font-weight:600}
+.balance-d-label{color:var(--sd-bg);font-weight:600}
+.balance-note{font-size:11px;color:var(--t4);text-align:center;margin-top:6px}
+
+/* ── RATING LEGEND ── */
+.rating-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.rating-chip{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;cursor:pointer;transition:opacity .12s;border:2px solid transparent}
+.rating-chip.dimmed{opacity:.35}
+.rating-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── STATE TILE MAP ── */
+.map-wrap{overflow-x:auto;padding-bottom:8px;margin-bottom:20px}
+.state-grid{display:grid;grid-template-columns:repeat(12,52px);grid-template-rows:repeat(7,52px);gap:4px;width:fit-content;margin:0 auto}
+.state-tile{width:52px;height:52px;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:default;font-family:var(--sans);transition:transform .12s,box-shadow .12s;position:relative;border:2px solid transparent}
+.state-tile.has-race{cursor:pointer}
+.state-tile.has-race:hover{transform:scale(1.1);box-shadow:0 4px 18px rgba(0,0,0,.22);z-index:10}
+.state-tile.selected{border-color:var(--t1)!important;z-index:5}
+.state-tile .st-abbr{font-size:12px;font-weight:700;line-height:1}
+.state-tile .st-tag{font-size:9px;font-weight:600;line-height:1;margin-top:2px;opacity:.85;letter-spacing:.03em}
+.state-tile .st-open{position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.4)}
+
+/* ── RACE DETAIL CARD ── */
+.detail-card{background:var(--bg-s);border:1px solid var(--br-md);border-radius:8px;padding:20px 22px;margin-bottom:20px;display:none}
+.detail-card.visible{display:block}
+.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.detail-state{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--t1)}
+.detail-incumbent{font-size:14px;color:var(--t3);margin-top:2px}
+.detail-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.detail-rating-badge{font-size:13px;font-weight:700;padding:6px 14px;border-radius:4px;color:#fff;white-space:nowrap}
+.detail-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.badge-party{font-size:11px;font-weight:600;padding:3px 9px;border-radius:3px}
+.badge-open{font-size:11px;font-weight:600;padding:3px 9px;border-radius:3px;background:var(--orange-p);color:var(--orange)}
+.detail-note{font-size:13px;color:var(--t2);line-height:1.65;border-top:1px solid var(--br);padding-top:12px}
+.detail-close{background:none;border:none;cursor:pointer;color:var(--t4);font-size:18px;line-height:1;padding:2px;margin-top:-2px;transition:color .1s}
+.detail-close:hover{color:var(--t1)}
+
+/* ── RACE TABLE ── */
+.chart-card{border:1px solid var(--br);border-radius:6px;padding:22px 22px 14px;margin-bottom:18px}
+.card-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1);margin-bottom:3px}
+.card-sub{font-size:12px;color:var(--t3);margin-bottom:16px;line-height:1.5}
+.chart-note{font-size:11px;color:var(--t4);margin-top:12px;line-height:1.5;border-top:1px solid var(--br);padding-top:10px}
+
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
+.filter-btn{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;border:1.5px solid var(--br-md);background:none;cursor:pointer;color:var(--t3);transition:all .12s}
+.filter-btn:hover{border-color:var(--t3);color:var(--t2)}
+.filter-btn.active{border-color:var(--t1);background:var(--t1);color:#fff}
+.filter-label{font-size:12px;color:var(--t4);margin-right:4px}
+
+.race-table{width:100%;border-collapse:collapse;font-size:13px}
+.race-table th{text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:8px 10px;border-bottom:2px solid var(--br);cursor:pointer;user-select:none;white-space:nowrap}
+.race-table th:hover{color:var(--t2)}
+.race-table th.sorted-asc::after{content:' ↑'}
+.race-table th.sorted-desc::after{content:' ↓'}
+.race-table td{padding:9px 10px;border-bottom:1px solid var(--br);vertical-align:middle}
+.race-table tr:last-child td{border-bottom:none}
+.race-table tr:hover td{background:var(--bg-s)}
+.race-table tr.open-seat td:first-child::before{content:'◈ ';font-size:9px;color:var(--orange);vertical-align:middle}
+
+.rating-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:12px;font-size:11px;font-weight:700;white-space:nowrap}
+.party-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700}
+.party-pill.R{background:#FBEAEA;color:#7a1c1c}
+.party-pill.D{background:#EEF4FB;color:#1A3F8A}
+.state-link{font-weight:600;color:var(--t1);cursor:pointer;text-decoration:none}
+.state-link:hover{text-decoration:underline}
+
+/* ── SEAT VISUALISER ── */
+.seat-vis-wrap{margin-bottom:20px}
+.seat-vis-bar{display:flex;height:36px;border-radius:5px;overflow:hidden;gap:2px}
+.sv-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;transition:flex .5s ease;cursor:default;position:relative}
+.sv-seg[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);background:var(--t1);color:#fff;font-size:11px;padding:5px 10px;border-radius:4px;white-space:nowrap;z-index:20;font-family:var(--sans)}
+.majority-line{position:relative;margin-top:4px;height:18px}
+.majority-line::before{content:'';position:absolute;left:50%;top:0;width:2px;height:8px;background:var(--br-md);transform:translateX(-50%)}
+.majority-line::after{content:'Majority: 218 seats';position:absolute;left:50%;top:10px;transform:translateX(-50%);font-size:10px;color:var(--t4);white-space:nowrap}
+
+/* ── COMPETITIVE RACE TABLE ── */
+.pvp-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-size:11px;font-weight:700}
+.pvp-pill.R{background:#FBEAEA;color:#7a1c1c}
+.pvp-pill.D{background:#EEF4FB;color:#1A3F8A}
+
+/* ── GOV GRID ── */
+.gov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:18px}
+.gov-card{border:1px solid var(--br);border-radius:6px;padding:16px 18px}
+.gov-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.gov-state{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--t1)}
+.gov-incumbent{font-size:12px;color:var(--t3);margin-top:1px}
+.gov-note{font-size:12px;color:var(--t2);line-height:1.5}
+.gov-open-badge{display:inline-block;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:3px;background:var(--orange-p);color:var(--orange);margin-top:4px}
+
+/* ── CALLOUT ── */
+.callout{background:var(--bg-s);border:1px solid var(--br);border-left:3px solid var(--orange);border-radius:6px;padding:14px 18px;margin-bottom:18px;font-size:13px;color:var(--t2);line-height:1.6}
+.callout-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:5px}
+.section-rule{border:none;border-top:1px solid var(--br);margin:28px 0 18px}
+
+@media(max-width:700px){
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .panel-inner{padding:20px 14px 60px}
+  .subtab-inner{padding:0 12px}
+  .state-grid{grid-template-columns:repeat(12,36px);grid-template-rows:repeat(7,36px);gap:3px}
+  .state-tile{width:36px;height:36px;border-radius:3px}
+  .state-tile .st-abbr{font-size:9px}
+  .state-tile .st-tag{display:none}
+  .gov-grid{grid-template-columns:1fr}
+  .source-note{display:none}
+}
 </style>
 </head>
 <body>
-<div class="placeholder">
-  <div class="badge">Coming Soon</div>
-  <h1>Race Review</h1>
-  <p>Interactive district map, competitive race ratings, and seat-by-seat analysis for the 2026 midterm elections. Data pipeline in development.</p>
+
+<div class="subtab-bar">
+  <div class="subtab-inner">
+    <div class="subtab-left">
+      <button class="subtab-btn active" onclick="goSub('senate',this)">Senate</button>
+      <button class="subtab-btn" onclick="goSub('house',this)">House</button>
+      <button class="subtab-btn" onclick="goSub('governor',this)">Governor</button>
+    </div>
+    <span class="source-note" id="source-note">Loading&#8230;</span>
+  </div>
 </div>
+
+<!-- ══════════════════════════════════════════════
+     SENATE PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel active" id="subpanel-senate">
+<div class="panel-inner">
+
+  <div class="stat-strip" id="sen-stat-strip">
+    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (Class 2)</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="ss-r-held">&#8230;</div><div class="stat-l">Currently Republican&#8209;held seats at stake</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="ss-d-held">&#8230;</div><div class="stat-l">Currently Democrat&#8209;held seats at stake</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="ss-tossups">&#8230;</div><div class="stat-l">Toss&#8209;up seats &#8212; election outcome uncertain</div></div>
+  </div>
+
+  <!-- BALANCE BAR -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label" id="bal-r-label">&#8230; Republican</span>
+      <span style="color:var(--t4);font-size:11px">Current Senate balance &#8212; 100 seats total</span>
+      <span class="balance-d-label" id="bal-d-label">Democrat &#8230;</span>
+    </div>
+    <div class="balance-bar" id="balance-bar">
+      <div class="balance-r" id="bal-r-seg" style="width:53%">53R</div>
+      <div class="balance-d" id="bal-d-seg" style="width:47%">47D</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-footer">
+      <span id="bal-proj-r" style="font-size:12px;color:var(--t4)">&#8230;</span>
+      <span style="font-size:11px;color:var(--t4)">&#9650; Projected based on current ratings (preliminary)</span>
+      <span id="bal-proj-d" style="font-size:12px;color:var(--t4)">&#8230;</span>
+    </div>
+  </div>
+
+  <!-- RATING LEGEND -->
+  <div class="rating-legend" id="rating-legend"></div>
+
+  <!-- STATE MAP -->
+  <div class="section-hdr">
+    <div>
+      <div class="section-title">Senate race map &#8212; Class 2 seats, 2026</div>
+      <div class="section-sub">Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
+    </div>
+  </div>
+
+  <div class="map-wrap">
+    <div class="state-grid" id="senate-map"></div>
+  </div>
+
+  <!-- DETAIL CARD -->
+  <div class="detail-card" id="detail-card">
+    <div class="detail-top">
+      <div>
+        <div class="detail-state" id="dc-state">&#8230;</div>
+        <div class="detail-incumbent" id="dc-incumbent">&#8230;</div>
+      </div>
+      <div class="detail-right">
+        <button class="detail-close" onclick="closeDetail()" title="Close">&#x2715;</button>
+        <div class="detail-rating-badge" id="dc-rating-badge">&#8230;</div>
+        <div class="detail-badges">
+          <span class="badge-party" id="dc-party-badge">&#8230;</span>
+          <span class="badge-open" id="dc-open-badge" style="display:none">Open seat</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-note" id="dc-note">&#8230;</div>
+  </div>
+
+  <!-- FILTER ROW -->
+  <div class="chart-card">
+    <div class="card-title">All 33 Senate races &#8212; 2026</div>
+    <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
+    <div class="filter-row">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterTable('all',this)">All races</button>
+      <button class="filter-btn" onclick="filterTable('Toss-up',this)">Toss-up</button>
+      <button class="filter-btn" onclick="filterTable('Lean',this)">Lean R / Lean D</button>
+      <button class="filter-btn" onclick="filterTable('Likely',this)">Likely R / Likely D</button>
+      <button class="filter-btn" onclick="filterTable('Safe',this)">Safe R / Safe D</button>
+      <button class="filter-btn" onclick="filterTable('open',this)">Open seats</button>
+    </div>
+    <table class="race-table" id="race-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">State</th>
+          <th onclick="sortTable(1)">Incumbent</th>
+          <th onclick="sortTable(2)">Party</th>
+          <th onclick="sortTable(3)">Rating</th>
+          <th onclick="sortTable(4)">Open?</th>
+        </tr>
+      </thead>
+      <tbody id="race-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-note" id="senate-source-note">Source: Preliminary analyst estimates</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HOUSE PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel" id="subpanel-house">
+<div class="panel-inner">
+
+  <div class="stat-strip" id="house-stat-strip">
+    <div class="stat-box"><div class="stat-n">435</div><div class="stat-l">Total House seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="hs-r">220</div><div class="stat-l">Current Republican seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="hs-d">215</div><div class="stat-l">Current Democrat seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="hs-tu">&#8230;</div><div class="stat-l">Toss&#8209;up districts &#8212; either party can win</div></div>
+  </div>
+
+  <!-- SEAT BALANCE -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label" id="hbal-r-label">220 Republican</span>
+      <span style="color:var(--t4);font-size:11px">Current House balance &#8212; 218 seats needed for majority</span>
+      <span class="balance-d-label" id="hbal-d-label">Democrat 215</span>
+    </div>
+    <div class="balance-bar">
+      <div class="balance-r" id="hbal-r-seg" style="width:50.6%">220R</div>
+      <div class="balance-d" id="hbal-d-seg" style="width:49.4%">215D</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>2-seat working majority</strong>. Historical pattern: the president&#8217;s party loses an average of 26 House seats at the first midterm.</div>
+  </div>
+
+  <!-- SEAT DISTRIBUTION CHART -->
+  <div class="chart-card">
+    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
+    <div class="card-sub">Preliminary analyst ratings. The 22 Toss-up seats will determine majority control.</div>
+    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
+    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
+  </div>
+
+  <!-- COMPETITIVE RACES -->
+  <div class="callout">
+    <div class="callout-label">Path to the majority</div>
+    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). There are <strong>22 Toss-up districts</strong>, almost all held by Republicans in districts that Biden or Harris carried. Historical first-midterm headwinds and high presidential disapproval typically accelerate Democratic gains.
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title">Top 20 competitive districts</div>
+    <div class="card-sub">Districts rated Toss-up, Lean R, or Lean D. PVP = Presidential Vote Performance (2024 presidential margin in the district).</div>
+    <table class="race-table" id="comp-table">
+      <thead>
+        <tr>
+          <th onclick="sortCompTable(0)">District</th>
+          <th onclick="sortCompTable(1)">Incumbent</th>
+          <th onclick="sortCompTable(2)">Party</th>
+          <th onclick="sortCompTable(3)">Rating</th>
+          <th onclick="sortCompTable(4)">PVP (2024)</th>
+        </tr>
+      </thead>
+      <tbody id="comp-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-note">Source: Cook Political Report, Inside Elections. PVP = 2024 presidential vote performance in district. Positive R = district voted more Republican than national average.</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     GOVERNOR PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel" id="subpanel-governor">
+<div class="panel-inner">
+
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-n" id="gov-total">17</div><div class="stat-l">Key governor races tracked</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="gov-r-lean">&#8230;</div><div class="stat-l">Leaning or safe Republican</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="gov-d-lean">&#8230;</div><div class="stat-l">Leaning or safe Democrat</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="gov-tu">&#8230;</div><div class="stat-l">Toss-up races</div></div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Governor context &#8212; 2026</div>
+    Governors elected in 2022 are up for re&#8209;election in 2026. Several key states &#8212; Michigan, Wisconsin, Nevada, Maine &#8212; feature genuinely competitive races. Three states have term&#8209;limited incumbents (California, Florida, Georgia), creating open&#8209;seat dynamics. New Hampshire and Vermont hold 2&#8209;year governor terms and vote every cycle.
+  </div>
+
+  <div class="section-title" style="margin-bottom:14px">Key governor races by rating</div>
+
+  <!-- Toss-up / Lean races -->
+  <div id="gov-tossup-section">
+    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Toss-up &amp; Competitive</div>
+    <div class="gov-grid" id="gov-competitive-grid"></div>
+  </div>
+
+  <hr class="section-rule">
+
+  <div id="gov-lean-section">
+    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Lean R / Lean D</div>
+    <div class="gov-grid" id="gov-lean-grid"></div>
+  </div>
+
+  <hr class="section-rule">
+
+  <div id="gov-likely-section">
+    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Likely R / Likely D</div>
+    <div class="gov-grid" id="gov-likely-grid"></div>
+  </div>
+
+  <div class="chart-note" id="gov-source-note" style="margin-top:8px">Source: Preliminary analyst estimates</div>
+
+</div>
+</div>
+
+<script>
+Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+Chart.defaults.color = '#6B6B6B';
+Chart.defaults.plugins.legend.display = false;
+
+// ── SUB-TAB NAV ──────────────────────────────────────────────────────────────
+function goSub(id, btn) {
+  document.querySelectorAll('.subpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('subpanel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── RATING CONFIG ─────────────────────────────────────────────────────────────
+const RC = {
+  'Safe R':   { bg: '#7a1c1c', tx: '#fff',    border: '#5a0a0a', short: 'SR',  order: 0 },
+  'Likely R': { bg: '#C04040', tx: '#fff',    border: '#9a2020', short: 'LR',  order: 1 },
+  'Lean R':   { bg: '#E8A0A0', tx: '#4a0000', border: '#c87070', short: 'R+',  order: 2 },
+  'Toss-up':  { bg: '#D4931A', tx: '#fff',    border: '#a06800', short: 'TU',  order: 3 },
+  'Lean D':   { bg: '#8CB4E0', tx: '#001a3d', border: '#5890c8', short: 'D+',  order: 4 },
+  'Likely D': { bg: '#378ADD', tx: '#fff',    border: '#1a5aaa', short: 'LD',  order: 5 },
+  'Safe D':   { bg: '#1A3F8A', tx: '#fff',    border: '#0d2460', short: 'SD',  order: 6 },
+};
+
+// ── STATE GRID POSITIONS (col 1-12, row 1-7) ──────────────────────────────────
+const GRID = {
+  AK:{c:1,r:1},                                                                                  ME:{c:12,r:1},
+  WA:{c:2,r:2},MT:{c:3,r:2},ND:{c:4,r:2},MN:{c:5,r:2},WI:{c:6,r:2},MI:{c:7,r:2},             VT:{c:11,r:2},NH:{c:12,r:2},
+  OR:{c:2,r:3},ID:{c:3,r:3},WY:{c:4,r:3},SD:{c:5,r:3},IA:{c:6,r:3},IN:{c:7,r:3},OH:{c:8,r:3},PA:{c:9,r:3},NY:{c:10,r:3},MA:{c:11,r:3},CT:{c:12,r:3},
+  CA:{c:2,r:4},NV:{c:3,r:4},CO:{c:4,r:4},NE:{c:5,r:4},MO:{c:6,r:4},KY:{c:7,r:4},WV:{c:8,r:4},VA:{c:9,r:4},NJ:{c:10,r:4},RI:{c:11,r:4},DE:{c:12,r:4},
+              AZ:{c:3,r:5},NM:{c:4,r:5},KS:{c:5,r:5},AR:{c:6,r:5},TN:{c:7,r:5},NC:{c:8,r:5},MD:{c:9,r:5},
+  HI:{c:1,r:6},             OK:{c:5,r:6},LA:{c:6,r:6},MS:{c:7,r:6},AL:{c:8,r:6},SC:{c:9,r:6},GA:{c:10,r:6},
+                                          TX:{c:5,r:7},                                          FL:{c:10,r:7},
+};
+
+// ── LOAD DATA ─────────────────────────────────────────────────────────────────
+let DATA = null;
+
+async function loadData() {
+  for (const path of ['data.json', '../data.json', './data.json']) {
+    try {
+      const res = await fetch(path + '?v=' + Date.now());
+      if (res.ok) { DATA = await res.json(); break; }
+    } catch(_) {}
+  }
+  if (DATA && DATA.races) renderAll();
+  else document.querySelectorAll('[id$="-tbody"],[id$="-grid"]').forEach(el => { el.innerHTML = '<tr><td colspan="5" style="color:var(--t4);text-align:center;padding:24px">Could not load data.json</td></tr>'; });
+}
+
+// ── MAIN RENDER ───────────────────────────────────────────────────────────────
+function renderAll() {
+  renderSenate(DATA.races.senate);
+  renderHouse(DATA.races.house);
+  renderGovernor(DATA.races.governor);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SENATE
+// ─────────────────────────────────────────────────────────────────────────────
+function renderSenate(sen) {
+  // Stat strip
+  const rs = sen.ratings_summary;
+  const rHeld = sen.races.filter(r => r.party === 'R').length;
+  const dHeld = sen.races.filter(r => r.party === 'D').length;
+  document.getElementById('ss-seats-up').textContent   = sen.seats_up;
+  document.getElementById('ss-r-held').textContent     = rHeld;
+  document.getElementById('ss-d-held').textContent     = dHeld;
+  document.getElementById('ss-tossups').textContent    = rs.toss_up;
+  document.getElementById('source-note').textContent   = sen.source;
+  document.getElementById('senate-source-note').textContent = 'Source: ' + sen.source;
+
+  // Balance bar
+  const cur = sen.current_balance;
+  const rPct = (cur.r / 100 * 100).toFixed(1);
+  const dPct = (cur.d / 100 * 100).toFixed(1);
+  document.getElementById('bal-r-seg').style.width = rPct + '%';
+  document.getElementById('bal-r-seg').textContent = cur.r + 'R';
+  document.getElementById('bal-d-seg').style.width = dPct + '%';
+  document.getElementById('bal-d-seg').textContent = cur.d + 'D';
+  document.getElementById('bal-r-label').textContent = cur.r + ' Republican';
+  document.getElementById('bal-d-label').textContent = 'Democrat ' + cur.d;
+
+  // Projected
+  const notUpR = cur.r - rHeld;
+  const notUpD = cur.d - dHeld;
+  const projR = notUpR + rs.safe_r + rs.likely_r + rs.lean_r + Math.round(rs.toss_up / 2);
+  const projD = notUpD + rs.safe_d + rs.likely_d + rs.lean_d + Math.floor(rs.toss_up / 2);
+  document.getElementById('bal-proj-r').textContent = 'Proj. R: ' + projR;
+  document.getElementById('bal-proj-d').textContent = 'Proj. D: ' + projD;
+
+  // Legend
+  buildLegend(rs);
+
+  // Map
+  buildSenateMap(sen.races);
+
+  // Table
+  buildSenateTable(sen.races);
+}
+
+let activeFilter = 'all';
+let sortCol = 0, sortDir = 1;
+
+function buildLegend(rs) {
+  const wrap = document.getElementById('rating-legend');
+  const entries = [
+    ['Safe R',   rs.safe_r],
+    ['Likely R', rs.likely_r],
+    ['Lean R',   rs.lean_r],
+    ['Toss-up',  rs.toss_up],
+    ['Lean D',   rs.lean_d],
+    ['Likely D', rs.likely_d],
+    ['Safe D',   rs.safe_d],
+  ];
+  wrap.innerHTML = entries.map(([label, count]) => {
+    const c = RC[label];
+    return `<div class="rating-chip" data-rating="${label}" onclick="toggleLegendFilter('${label}',this)" style="background:${c.bg};color:${c.tx}">
+      <span>${label}</span><span style="opacity:.7;font-size:10px">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+let legendFilter = null;
+function toggleLegendFilter(rating, chip) {
+  if (legendFilter === rating) {
+    legendFilter = null;
+    document.querySelectorAll('.rating-chip').forEach(c => c.classList.remove('dimmed'));
+  } else {
+    legendFilter = rating;
+    document.querySelectorAll('.rating-chip').forEach(c => {
+      c.classList.toggle('dimmed', c.dataset.rating !== rating);
+    });
+  }
+  highlightMapByRating(legendFilter);
+  if (legendFilter) filterTable(legendFilter.includes('Toss') ? 'Toss-up' : legendFilter.split(' ')[0], null);
+  else filterTable('all', null);
+}
+
+function highlightMapByRating(rating) {
+  document.querySelectorAll('.state-tile.has-race').forEach(tile => {
+    if (!rating || tile.dataset.rating === rating) {
+      tile.style.opacity = '1';
+    } else {
+      tile.style.opacity = '0.25';
+    }
+  });
+}
+
+function buildSenateMap(races) {
+  const raceByCode = {};
+  races.forEach(r => { raceByCode[r.code] = r; });
+
+  const grid = document.getElementById('senate-map');
+  grid.innerHTML = '';
+
+  Object.entries(GRID).forEach(([code, pos]) => {
+    const tile = document.createElement('div');
+    tile.className = 'state-tile';
+    tile.style.gridColumn = pos.c;
+    tile.style.gridRow    = pos.r;
+
+    const race = raceByCode[code];
+    if (race) {
+      const cfg = RC[race.rating] || { bg: '#ccc', tx: '#333' };
+      tile.style.background = cfg.bg;
+      tile.style.color = cfg.tx;
+      tile.classList.add('has-race');
+      tile.dataset.code   = code;
+      tile.dataset.rating = race.rating;
+      tile.innerHTML = `<span class="st-abbr">${code}</span><span class="st-tag">${cfg.short}</span>${race.open ? '<span class="st-open" title="Open seat"></span>' : ''}`;
+      tile.title = `${race.state}: ${race.rating}${race.open ? ' (Open)' : ''}`;
+      tile.addEventListener('click', () => showDetail(race, tile));
+    } else {
+      tile.style.background = '#E9E9E7';
+      tile.style.color = '#aaa';
+      tile.innerHTML = `<span class="st-abbr">${code}</span>`;
+      tile.title = code + ' — no Senate race in 2026';
+    }
+    grid.appendChild(tile);
+  });
+}
+
+let selectedTile = null;
+function showDetail(race, tile) {
+  if (selectedTile) selectedTile.classList.remove('selected');
+  if (selectedTile === tile) { selectedTile = null; closeDetail(); return; }
+  selectedTile = tile;
+  tile.classList.add('selected');
+
+  const cfg = RC[race.rating] || { bg: '#ccc', tx: '#fff' };
+  document.getElementById('dc-state').textContent     = race.state;
+  document.getElementById('dc-incumbent').textContent = race.open
+    ? `Open seat — ${race.incumbent} not seeking re-election`
+    : `${race.incumbent} (incumbent)`;
+  const badge = document.getElementById('dc-rating-badge');
+  badge.textContent = race.rating;
+  badge.style.background = cfg.bg;
+  badge.style.color = cfg.tx;
+
+  const pb = document.getElementById('dc-party-badge');
+  pb.textContent = race.party === 'R' ? 'Republican' : race.party === 'D' ? 'Democrat' : race.party;
+  pb.className = 'badge-party ' + race.party;
+
+  const ob = document.getElementById('dc-open-badge');
+  ob.style.display = race.open ? 'inline-block' : 'none';
+
+  document.getElementById('dc-note').textContent = race.note;
+
+  const card = document.getElementById('detail-card');
+  card.classList.add('visible');
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeDetail() {
+  document.getElementById('detail-card').classList.remove('visible');
+  if (selectedTile) { selectedTile.classList.remove('selected'); selectedTile = null; }
+}
+
+// Table
+function buildSenateTable(races) {
+  renderTable(races, activeFilter, sortCol, sortDir);
+}
+
+function filterTable(filter, btn) {
+  activeFilter = filter;
+  if (btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderTable(DATA.races.senate.races, filter, sortCol, sortDir);
+}
+
+function sortTable(col) {
+  if (sortCol === col) sortDir = -sortDir;
+  else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('.race-table th').forEach((th, i) => {
+    th.classList.toggle('sorted-asc',  i === col && sortDir === 1);
+    th.classList.toggle('sorted-desc', i === col && sortDir === -1);
+  });
+  renderTable(DATA.races.senate.races, activeFilter, sortCol, sortDir);
+}
+
+function renderTable(races, filter, col, dir) {
+  let filtered = races.filter(r => {
+    if (filter === 'all')    return true;
+    if (filter === 'open')   return r.open;
+    if (filter === 'Toss-up') return r.rating === 'Toss-up';
+    return r.rating.includes(filter);
+  });
+
+  const keys = ['state','incumbent','party','rating','open'];
+  filtered = [...filtered].sort((a,b) => {
+    let av = a[keys[col]], bv = b[keys[col]];
+    if (col === 3) { av = RC[av] ? RC[av].order : 99; bv = RC[bv] ? RC[bv].order : 99; }
+    if (typeof av === 'boolean') { av = av ? 1 : 0; bv = bv ? 1 : 0; }
+    if (av < bv) return -dir; if (av > bv) return dir; return 0;
+  });
+
+  const tbody = document.getElementById('race-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t4);padding:18px">No races match this filter.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    return `<tr class="${r.open ? 'open-seat' : ''}">
+      <td><a class="state-link" onclick="clickTableRow('${r.code}')">${r.state}</a></td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party === 'R' ? 'R' : 'D'}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
+      <td>${r.open ? '<span style="color:var(--orange);font-weight:600">Open</span>' : '&#8212;'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function clickTableRow(code) {
+  const race = DATA.races.senate.races.find(r => r.code === code);
+  const tile = document.querySelector(`.state-tile[data-code="${code}"]`);
+  if (race && tile) {
+    goSub('senate', document.querySelector('.subtab-btn.active') || document.querySelector('.subtab-btn'));
+    showDetail(race, tile);
+    tile.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HOUSE
+// ─────────────────────────────────────────────────────────────────────────────
+let houseChartBuilt = false;
+
+function renderHouse(house) {
+  const rs = house.ratings_summary;
+  document.getElementById('hs-r').textContent  = house.current_balance.r;
+  document.getElementById('hs-d').textContent  = house.current_balance.d;
+  document.getElementById('hs-tu').textContent = rs.toss_up;
+  document.getElementById('hbal-r-label').textContent = house.current_balance.r + ' Republican';
+  document.getElementById('hbal-d-label').textContent = 'Democrat ' + house.current_balance.d;
+  document.getElementById('house-source-note').textContent = 'Source: ' + house.source;
+
+  if (!houseChartBuilt) {
+    houseChartBuilt = true;
+    new Chart(document.getElementById('c-house-ratings'), {
+      type: 'bar',
+      data: {
+        labels: ['Safe R','Likely R','Lean R','Toss-up','Lean D','Likely D','Safe D'],
+        datasets: [{
+          data: [rs.safe_r, rs.likely_r, rs.lean_r, rs.toss_up, rs.lean_d, rs.likely_d, rs.safe_d],
+          backgroundColor: ['#7a1c1c','#C04040','#E8A0A0','#D4931A','#8CB4E0','#378ADD','#1A3F8A'],
+          borderSkipped: false,
+          borderRadius: { topLeft: 3, topRight: 3 },
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { tooltip: { callbacks: { label: ctx => ` ${ctx.raw} seats` } } },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 } } },
+          y: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: ['#7a1c1c','#C04040','#8a5050','#8a6010','#335080','#1a5aaa','#1A3F8A'] } }
+        }
+      }
+    });
+  }
+
+  renderCompTable(house.competitive);
+}
+
+let compSortCol = 0, compSortDir = 1;
+function sortCompTable(col) {
+  if (compSortCol === col) compSortDir = -compSortDir;
+  else { compSortCol = col; compSortDir = 1; }
+  renderCompTable(DATA.races.house.competitive);
+}
+
+function renderCompTable(races) {
+  const keys = ['district','incumbent','party','rating','pvp'];
+  const sorted = [...races].sort((a,b) => {
+    let av = a[keys[compSortCol]], bv = b[keys[compSortCol]];
+    if (compSortCol === 3) { av = RC[av] ? RC[av].order : 99; bv = RC[bv] ? RC[bv].order : 99; }
+    if (av < bv) return -compSortDir; if (av > bv) return compSortDir; return 0;
+  });
+
+  const tbody = document.getElementById('comp-tbody');
+  tbody.innerHTML = sorted.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    const pvpR = r.pvp.startsWith('R');
+    return `<tr>
+      <td style="font-weight:600">${r.district}</td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
+      <td><span class="pvp-pill ${pvpR ? 'R' : 'D'}">${r.pvp}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GOVERNOR
+// ─────────────────────────────────────────────────────────────────────────────
+function renderGovernor(gov) {
+  document.getElementById('gov-source-note').textContent = 'Source: ' + gov.source;
+
+  const races = gov.races;
+  let rLean = 0, dLean = 0, tu = 0;
+  races.forEach(r => {
+    if (r.rating.includes('R')) rLean++;
+    else if (r.rating.includes('D')) dLean++;
+    else tu++;
+  });
+  document.getElementById('gov-r-lean').textContent = rLean;
+  document.getElementById('gov-d-lean').textContent = dLean;
+  document.getElementById('gov-tu').textContent = tu;
+  document.getElementById('gov-total').textContent = races.length;
+
+  const competitive = races.filter(r => r.rating === 'Toss-up');
+  const lean        = races.filter(r => r.rating.startsWith('Lean'));
+  const likely      = races.filter(r => r.rating.startsWith('Likely'));
+
+  document.getElementById('gov-competitive-grid').innerHTML = govCards(competitive);
+  document.getElementById('gov-lean-grid').innerHTML        = govCards(lean);
+  document.getElementById('gov-likely-grid').innerHTML      = govCards(likely);
+}
+
+function govCards(races) {
+  if (!races.length) return '<p style="color:var(--t4);font-size:13px">None in this category.</p>';
+  return races.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    return `<div class="gov-card">
+      <div class="gov-card-top">
+        <div>
+          <div class="gov-state">${r.state}</div>
+          <div class="gov-incumbent">${r.incumbent}</div>
+          ${r.open ? '<span class="gov-open-badge">Open seat</span>' : ''}
+        </div>
+        <span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx};font-size:11px">${r.rating}</span>
+      </div>
+      <div class="gov-note">${r.note}</div>
+    </div>`;
+  }).join('');
+}
+
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+loadData();
+</script>
 </body>
 </html>

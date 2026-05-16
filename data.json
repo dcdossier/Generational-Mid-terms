@@ -10,188 +10,963 @@
     "seeking_office_pct": 45,
     "senate": 11,
     "house": 56,
-    "compare_2024": {"senate": 8, "house": 42},
-    "compare_2022": {"senate": 6, "house": 38},
-    "compare_2018": {"senate": 4, "house": 48},
+    "compare_2024": {
+      "senate": 8,
+      "house": 42
+    },
+    "compare_2022": {
+      "senate": 6,
+      "house": 38
+    },
+    "compare_2018": {
+      "senate": 4,
+      "house": 48
+    },
     "party_split_chart": {
-      "labels": ["Retiring outright", "Running for governor", "Running for Senate", "Other / resigned"],
+      "labels": [
+        "Retiring outright",
+        "Running for governor",
+        "Running for Senate",
+        "Other / resigned"
+      ],
       "datasets": [
-        {"label": "Rep\u2013retiring",  "data": [19, 0, 0, 0], "backgroundColor": "#9B2828", "stack": "rep"},
-        {"label": "Rep\u2013seeking",  "data": [0, 10, 9, 4],  "backgroundColor": "#E8A0A0", "stack": "rep"},
-        {"label": "Dem\u2013retiring", "data": [14, 0, 0, 0],  "backgroundColor": "#1A5EA8", "stack": "dem"},
-        {"label": "Dem\u2013seeking",  "data": [0, 4, 7, 0],   "backgroundColor": "#8CB4E0", "stack": "dem"}
+        {
+          "label": "Rep\u2013retiring",
+          "data": [
+            19,
+            0,
+            0,
+            0
+          ],
+          "backgroundColor": "#9B2828",
+          "stack": "rep"
+        },
+        {
+          "label": "Rep\u2013seeking",
+          "data": [
+            0,
+            10,
+            9,
+            4
+          ],
+          "backgroundColor": "#E8A0A0",
+          "stack": "rep"
+        },
+        {
+          "label": "Dem\u2013retiring",
+          "data": [
+            14,
+            0,
+            0,
+            0
+          ],
+          "backgroundColor": "#1A5EA8",
+          "stack": "dem"
+        },
+        {
+          "label": "Dem\u2013seeking",
+          "data": [
+            0,
+            4,
+            7,
+            0
+          ],
+          "backgroundColor": "#8CB4E0",
+          "stack": "dem"
+        }
       ]
     },
     "destination_doughnut": {
-      "labels": ["Retiring from public life", "Running for governor (incl. 3 senators)", "Running for Senate", "Running for state AG"],
-      "data": [39, 14, 13, 1],
-      "backgroundColor": ["#E9E9E7", "#3A8C5C", "#378ADD", "#D4931A"]
+      "labels": [
+        "Retiring from public life",
+        "Running for governor (incl. 3 senators)",
+        "Running for Senate",
+        "Running for state AG"
+      ],
+      "data": [
+        39,
+        14,
+        13,
+        1
+      ],
+      "backgroundColor": [
+        "#E9E9E7",
+        "#3A8C5C",
+        "#378ADD",
+        "#D4931A"
+      ]
     },
     "factions": [
       {
-        "label": "Progressive\nDem", "n": 9, "color": "#1A5EA8", "party": "Democrat",
+        "label": "Progressive\nDem",
+        "n": 9,
+        "color": "#1A5EA8",
+        "party": "Democrat",
         "ideology": "Progressive Caucus / Squad-adjacent. Left-leaning on economy, climate, healthcare. Many are senior members passing torch to younger generation.",
         "exit": "Retiring (7) \u00b7 Senate (1) \u00b7 Other (1)",
         "members": "Pelosi, Schakowsky, Vel\u00e1zquez, Watson Coleman, Chuy Garc\u00eda, Danny Davis, Dwight Evans, Crockett (Senate)",
-        "ret": 7, "gov": 0, "sen": 1, "oth": 1
+        "ret": 7,
+        "gov": 0,
+        "sen": 1,
+        "oth": 1
       },
       {
-        "label": "Estab./Mod.\nDem", "n": 13, "color": "#5B8FD4", "party": "Democrat",
+        "label": "Estab./Mod.\nDem",
+        "n": 13,
+        "color": "#5B8FD4",
+        "party": "Democrat",
         "ideology": "Establishment centre-left / New Democrat Coalition / Blue Dogs. Centrist, pro-institution. Many leaving due to redistricting or declining appeal.",
         "exit": "Retiring (8) \u00b7 Senate (4) \u00b7 Governor (1)",
         "members": "Steny Hoyer, Jared Golden, Julia Brownley, Marc Veasey, Lloyd Doggett; Moulton, Haley Stevens, Pappas, Angie Craig (Senate); Swalwell (Gov, withdrew)",
-        "ret": 8, "gov": 1, "sen": 4, "oth": 0
+        "ret": 8,
+        "gov": 1,
+        "sen": 4,
+        "oth": 0
       },
       {
-        "label": "MAGA /\nHard-right GOP", "n": 12, "color": "#C04040", "party": "Republican",
+        "label": "MAGA /\nHard-right GOP",
+        "n": 12,
+        "color": "#C04040",
+        "party": "Republican",
         "ideology": "Trump loyalists / Freedom Caucus. Strong executive power, nationalism. Leaving partly due to frustration that Trump agenda is stalled in Congress.",
         "exit": "Retiring (4) \u00b7 Governor (4) \u00b7 Senate (3) \u00b7 AG (1)",
         "members": "Barry Loudermilk, Sam Graves, Ryan Zinke, Neal Dunn (retiring); Andy Biggs (Gov-AZ), Barry Moore (Senate-AL), Nehls, Buddy Carter (Senate-GA)",
-        "ret": 4, "gov": 4, "sen": 3, "oth": 1
+        "ret": 4,
+        "gov": 4,
+        "sen": 3,
+        "oth": 1
       },
       {
-        "label": "America First /\nPro-Trump", "n": 10, "color": "#A03020", "party": "Republican",
+        "label": "America First /\nPro-Trump",
+        "n": 10,
+        "color": "#A03020",
+        "party": "Republican",
         "ideology": "Pro-Trump but not Freedom Caucus. Support Trump agenda but outside hardline faction. Many seeking other offices to extend Trump-aligned agenda at state level.",
         "exit": "Retiring (3) \u00b7 Governor (4) \u00b7 Senate (3)",
         "members": "Byron Donalds (Gov-FL), Nancy Mace (Gov-SC), Harriet Hageman (Senate-WY), Ashley Hinson (Senate-IA), Julia Letlow (Senate-LA), Kevin Hern (Senate-OK)",
-        "ret": 3, "gov": 4, "sen": 3, "oth": 0
+        "ret": 3,
+        "gov": 4,
+        "sen": 3,
+        "oth": 0
       },
       {
-        "label": "Estab./Mod.\nGOP", "n": 14, "color": "#9B2828", "party": "Republican",
+        "label": "Estab./Mod.\nGOP",
+        "n": 14,
+        "color": "#9B2828",
+        "party": "Republican",
         "ideology": "Traditional establishment Republicans. Supports institutions, free trade, NATO. Often at odds with MAGA wing. Many are committee chairs stepping back.",
         "exit": "Retiring (9) \u00b7 Governor (2) \u00b7 Senate (3)",
         "members": "Elise Stefanik, Don Bacon, Darrell Issa, Buchanan, Mark Amodei, Daniel Webster, Burgess Owens, Jodey Arrington, McCaul, Newhouse",
-        "ret": 9, "gov": 2, "sen": 3, "oth": 0
+        "ret": 9,
+        "gov": 2,
+        "sen": 3,
+        "oth": 0
       },
       {
-        "label": "Independent\n/ unclear", "n": 1, "color": "#D4D4D0", "party": "Independent",
+        "label": "Independent\n/ unclear",
+        "n": 1,
+        "color": "#D4D4D0",
+        "party": "Independent",
         "ideology": "Independent or ideologically unclear. Not formally aligned with a major caucus.",
         "exit": "Retiring (1)",
         "members": "1 member",
-        "ret": 1, "gov": 0, "sen": 0, "oth": 0
+        "ret": 1,
+        "gov": 0,
+        "sen": 0,
+        "oth": 0
       }
     ],
     "historical_chart": [
-      {"year": "1946", "house": 32, "senate": 9},
-      {"year": "1948", "house": 29, "senate": 8},
-      {"year": "1950", "house": 29, "senate": 4},
-      {"year": "1952", "house": 42, "senate": 4},
-      {"year": "1954", "house": 24, "senate": 6},
-      {"year": "1956", "house": 21, "senate": 5},
-      {"year": "1958", "house": 33, "senate": 6},
-      {"year": "1960", "house": 26, "senate": 5},
-      {"year": "1962", "house": 24, "senate": 4},
-      {"year": "1964", "house": 33, "senate": 3},
-      {"year": "1966", "house": 46, "senate": 3},
-      {"year": "1968", "house": 28, "senate": 7},
-      {"year": "1970", "house": 29, "senate": 4},
-      {"year": "1972", "house": 40, "senate": 6},
-      {"year": "1974", "house": 49, "senate": 6},
-      {"year": "1976", "house": 47, "senate": 8},
-      {"year": "1978", "house": 42, "senate": 7},
-      {"year": "1980", "house": 34, "senate": 5},
-      {"year": "1982", "house": 40, "senate": 3},
-      {"year": "1984", "house": 22, "senate": 4},
-      {"year": "1986", "house": 38, "senate": 6},
-      {"year": "1988", "house": 23, "senate": 5},
-      {"year": "1990", "house": 27, "senate": 3},
-      {"year": "1992", "house": 65, "senate": 7},
-      {"year": "1994", "house": 48, "senate": 9},
-      {"year": "1996", "house": 49, "senate": 5},
-      {"year": "1998", "house": 33, "senate": 5},
-      {"year": "2000", "house": 32, "senate": 5},
-      {"year": "2002", "house": 35, "senate": 5},
-      {"year": "2004", "house": 29, "senate": 7},
-      {"year": "2006", "house": 30, "senate": 8},
-      {"year": "2008", "house": 37, "senate": 5},
-      {"year": "2010", "house": 36, "senate": 6},
-      {"year": "2012", "house": 40, "senate": 4},
-      {"year": "2014", "house": 39, "senate": 9},
-      {"year": "2016", "house": 39, "senate": 5},
-      {"year": "2018", "house": 52, "senate": 5},
-      {"year": "2020", "house": 36, "senate": 5},
-      {"year": "2022", "house": 45, "senate": 9},
-      {"year": "2024", "house": 44, "senate": 5},
-      {"year": "2026", "house": 55, "senate": 11}
+      {
+        "year": "1946",
+        "house": 32,
+        "senate": 9
+      },
+      {
+        "year": "1948",
+        "house": 29,
+        "senate": 8
+      },
+      {
+        "year": "1950",
+        "house": 29,
+        "senate": 4
+      },
+      {
+        "year": "1952",
+        "house": 42,
+        "senate": 4
+      },
+      {
+        "year": "1954",
+        "house": 24,
+        "senate": 6
+      },
+      {
+        "year": "1956",
+        "house": 21,
+        "senate": 5
+      },
+      {
+        "year": "1958",
+        "house": 33,
+        "senate": 6
+      },
+      {
+        "year": "1960",
+        "house": 26,
+        "senate": 5
+      },
+      {
+        "year": "1962",
+        "house": 24,
+        "senate": 4
+      },
+      {
+        "year": "1964",
+        "house": 33,
+        "senate": 3
+      },
+      {
+        "year": "1966",
+        "house": 46,
+        "senate": 3
+      },
+      {
+        "year": "1968",
+        "house": 28,
+        "senate": 7
+      },
+      {
+        "year": "1970",
+        "house": 29,
+        "senate": 4
+      },
+      {
+        "year": "1972",
+        "house": 40,
+        "senate": 6
+      },
+      {
+        "year": "1974",
+        "house": 49,
+        "senate": 6
+      },
+      {
+        "year": "1976",
+        "house": 47,
+        "senate": 8
+      },
+      {
+        "year": "1978",
+        "house": 42,
+        "senate": 7
+      },
+      {
+        "year": "1980",
+        "house": 34,
+        "senate": 5
+      },
+      {
+        "year": "1982",
+        "house": 40,
+        "senate": 3
+      },
+      {
+        "year": "1984",
+        "house": 22,
+        "senate": 4
+      },
+      {
+        "year": "1986",
+        "house": 38,
+        "senate": 6
+      },
+      {
+        "year": "1988",
+        "house": 23,
+        "senate": 5
+      },
+      {
+        "year": "1990",
+        "house": 27,
+        "senate": 3
+      },
+      {
+        "year": "1992",
+        "house": 65,
+        "senate": 7
+      },
+      {
+        "year": "1994",
+        "house": 48,
+        "senate": 9
+      },
+      {
+        "year": "1996",
+        "house": 49,
+        "senate": 5
+      },
+      {
+        "year": "1998",
+        "house": 33,
+        "senate": 5
+      },
+      {
+        "year": "2000",
+        "house": 32,
+        "senate": 5
+      },
+      {
+        "year": "2002",
+        "house": 35,
+        "senate": 5
+      },
+      {
+        "year": "2004",
+        "house": 29,
+        "senate": 7
+      },
+      {
+        "year": "2006",
+        "house": 30,
+        "senate": 8
+      },
+      {
+        "year": "2008",
+        "house": 37,
+        "senate": 5
+      },
+      {
+        "year": "2010",
+        "house": 36,
+        "senate": 6
+      },
+      {
+        "year": "2012",
+        "house": 40,
+        "senate": 4
+      },
+      {
+        "year": "2014",
+        "house": 39,
+        "senate": 9
+      },
+      {
+        "year": "2016",
+        "house": 39,
+        "senate": 5
+      },
+      {
+        "year": "2018",
+        "house": 52,
+        "senate": 5
+      },
+      {
+        "year": "2020",
+        "house": 36,
+        "senate": 5
+      },
+      {
+        "year": "2022",
+        "house": 45,
+        "senate": 9
+      },
+      {
+        "year": "2024",
+        "house": 44,
+        "senate": 5
+      },
+      {
+        "year": "2026",
+        "house": 55,
+        "senate": 11
+      }
     ],
     "tenure_chart": [
-      {"year": "1980", "avg_tenure": 8.1},
-      {"year": "1982", "avg_tenure": 7.9},
-      {"year": "1984", "avg_tenure": 8.8},
-      {"year": "1986", "avg_tenure": 8.5},
-      {"year": "1988", "avg_tenure": 9.2},
-      {"year": "1990", "avg_tenure": 8.7},
-      {"year": "1992", "avg_tenure": 7.6},
-      {"year": "1994", "avg_tenure": 6.8},
-      {"year": "1996", "avg_tenure": 8.2},
-      {"year": "1998", "avg_tenure": 8.5},
-      {"year": "2000", "avg_tenure": 9.1},
-      {"year": "2002", "avg_tenure": 8.8},
-      {"year": "2004", "avg_tenure": 9.4},
-      {"year": "2006", "avg_tenure": 8.1},
-      {"year": "2008", "avg_tenure": 9.0},
-      {"year": "2010", "avg_tenure": 7.8},
-      {"year": "2012", "avg_tenure": 8.3},
-      {"year": "2014", "avg_tenure": 8.9},
-      {"year": "2016", "avg_tenure": 5.1},
-      {"year": "2018", "avg_tenure": 7.4},
-      {"year": "2020", "avg_tenure": 9.2},
-      {"year": "2022", "avg_tenure": 8.6},
-      {"year": "2024", "avg_tenure": 8.1},
-      {"year": "2026", "avg_tenure": 5.0}
+      {
+        "year": "1980",
+        "avg_tenure": 8.1
+      },
+      {
+        "year": "1982",
+        "avg_tenure": 7.9
+      },
+      {
+        "year": "1984",
+        "avg_tenure": 8.8
+      },
+      {
+        "year": "1986",
+        "avg_tenure": 8.5
+      },
+      {
+        "year": "1988",
+        "avg_tenure": 9.2
+      },
+      {
+        "year": "1990",
+        "avg_tenure": 8.7
+      },
+      {
+        "year": "1992",
+        "avg_tenure": 7.6
+      },
+      {
+        "year": "1994",
+        "avg_tenure": 6.8
+      },
+      {
+        "year": "1996",
+        "avg_tenure": 8.2
+      },
+      {
+        "year": "1998",
+        "avg_tenure": 8.5
+      },
+      {
+        "year": "2000",
+        "avg_tenure": 9.1
+      },
+      {
+        "year": "2002",
+        "avg_tenure": 8.8
+      },
+      {
+        "year": "2004",
+        "avg_tenure": 9.4
+      },
+      {
+        "year": "2006",
+        "avg_tenure": 8.1
+      },
+      {
+        "year": "2008",
+        "avg_tenure": 9.0
+      },
+      {
+        "year": "2010",
+        "avg_tenure": 7.8
+      },
+      {
+        "year": "2012",
+        "avg_tenure": 8.3
+      },
+      {
+        "year": "2014",
+        "avg_tenure": 8.9
+      },
+      {
+        "year": "2016",
+        "avg_tenure": 5.1
+      },
+      {
+        "year": "2018",
+        "avg_tenure": 7.4
+      },
+      {
+        "year": "2020",
+        "avg_tenure": 9.2
+      },
+      {
+        "year": "2022",
+        "avg_tenure": 8.6
+      },
+      {
+        "year": "2024",
+        "avg_tenure": 8.1
+      },
+      {
+        "year": "2026",
+        "avg_tenure": 5.0
+      }
     ],
     "destination_chart": [
-      {"year": "1974", "retiring": 35, "governor": 7,  "senate": 9,  "other": 2},
-      {"year": "1978", "retiring": 37, "governor": 7,  "senate": 10, "other": 5},
-      {"year": "1982", "retiring": 36, "governor": 4,  "senate": 7,  "other": 1},
-      {"year": "1986", "retiring": 33, "governor": 5,  "senate": 6,  "other": 2},
-      {"year": "1990", "retiring": 26, "governor": 4,  "senate": 4,  "other": 1},
-      {"year": "1994", "retiring": 30, "governor": 8,  "senate": 12, "other": 5},
-      {"year": "1998", "retiring": 28, "governor": 3,  "senate": 5,  "other": 1},
-      {"year": "2002", "retiring": 26, "governor": 5,  "senate": 7,  "other": 2},
-      {"year": "2006", "retiring": 25, "governor": 4,  "senate": 6,  "other": 2},
-      {"year": "2010", "retiring": 26, "governor": 5,  "senate": 8,  "other": 1},
-      {"year": "2014", "retiring": 27, "governor": 6,  "senate": 8,  "other": 1},
-      {"year": "2018", "retiring": 24, "governor": 9,  "senate": 12, "other": 2},
-      {"year": "2022", "retiring": 27, "governor": 8,  "senate": 13, "other": 2},
-      {"year": "2026", "retiring": 39, "governor": 14, "senate": 13, "other": 1}
+      {
+        "year": "1974",
+        "retiring": 35,
+        "governor": 7,
+        "senate": 9,
+        "other": 2
+      },
+      {
+        "year": "1978",
+        "retiring": 37,
+        "governor": 7,
+        "senate": 10,
+        "other": 5
+      },
+      {
+        "year": "1982",
+        "retiring": 36,
+        "governor": 4,
+        "senate": 7,
+        "other": 1
+      },
+      {
+        "year": "1986",
+        "retiring": 33,
+        "governor": 5,
+        "senate": 6,
+        "other": 2
+      },
+      {
+        "year": "1990",
+        "retiring": 26,
+        "governor": 4,
+        "senate": 4,
+        "other": 1
+      },
+      {
+        "year": "1994",
+        "retiring": 30,
+        "governor": 8,
+        "senate": 12,
+        "other": 5
+      },
+      {
+        "year": "1998",
+        "retiring": 28,
+        "governor": 3,
+        "senate": 5,
+        "other": 1
+      },
+      {
+        "year": "2002",
+        "retiring": 26,
+        "governor": 5,
+        "senate": 7,
+        "other": 2
+      },
+      {
+        "year": "2006",
+        "retiring": 25,
+        "governor": 4,
+        "senate": 6,
+        "other": 2
+      },
+      {
+        "year": "2010",
+        "retiring": 26,
+        "governor": 5,
+        "senate": 8,
+        "other": 1
+      },
+      {
+        "year": "2014",
+        "retiring": 27,
+        "governor": 6,
+        "senate": 8,
+        "other": 1
+      },
+      {
+        "year": "2018",
+        "retiring": 24,
+        "governor": 9,
+        "senate": 12,
+        "other": 2
+      },
+      {
+        "year": "2022",
+        "retiring": 27,
+        "governor": 8,
+        "senate": 13,
+        "other": 2
+      },
+      {
+        "year": "2026",
+        "retiring": 39,
+        "governor": 14,
+        "senate": 13,
+        "other": 1
+      }
     ],
     "gov_surge_chart": {
-      "years": ["2010","2012","2014","2016","2018","2020","2022","2024","2026"],
-      "counts": [4, 4, 4, 5, 9, 4, 8, 7, 14]
+      "years": [
+        "2010",
+        "2012",
+        "2014",
+        "2016",
+        "2018",
+        "2020",
+        "2022",
+        "2024",
+        "2026"
+      ],
+      "counts": [
+        4,
+        4,
+        4,
+        5,
+        9,
+        4,
+        8,
+        7,
+        14
+      ]
     },
     "senator_gov_chart": {
-      "years": ["2010","2012","2014","2016","2018","2020","2022","2024","2026"],
-      "counts": [1, 0, 1, 0, 0, 0, 1, 0, 3]
+      "years": [
+        "2010",
+        "2012",
+        "2014",
+        "2016",
+        "2018",
+        "2020",
+        "2022",
+        "2024",
+        "2026"
+      ],
+      "counts": [
+        1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        1,
+        0,
+        3
+      ]
     },
     "flow_chart": {
-      "years": ["2010","2012","2014","2016","2018","2020","2022","2024","2026"],
-      "house_to_senate_pct":  [22, 23, 20, 22, 23, 25, 29, 23, 28],
-      "house_to_gov_pct":     [11, 10, 10, 12, 17, 11, 18, 16, 19],
-      "senate_to_gov_pct":    [8,  6,  9,  8,  8,  7,  9,  6,  27],
-      "state_bound_total_pct":[13, 13, 14, 16, 20, 15, 21, 19, 45]
+      "years": [
+        "2010",
+        "2012",
+        "2014",
+        "2016",
+        "2018",
+        "2020",
+        "2022",
+        "2024",
+        "2026"
+      ],
+      "house_to_senate_pct": [
+        22,
+        23,
+        20,
+        22,
+        23,
+        25,
+        29,
+        23,
+        28
+      ],
+      "house_to_gov_pct": [
+        11,
+        10,
+        10,
+        12,
+        17,
+        11,
+        18,
+        16,
+        19
+      ],
+      "senate_to_gov_pct": [
+        8,
+        6,
+        9,
+        8,
+        8,
+        7,
+        9,
+        6,
+        27
+      ],
+      "state_bound_total_pct": [
+        13,
+        13,
+        14,
+        16,
+        20,
+        15,
+        21,
+        19,
+        45
+      ]
     },
     "age_chart": {
-      "years": ["1947","1949","1951","1953","1955","1957","1959","1961","1963","1965","1967","1969","1971","1973","1975","1977","1979","1981","1983","1985","1987","1989","1991","1993","1995","1997","1999","2001","2003","2005","2007","2009","2011","2013","2015","2017","2019","2021","2023","2025"],
-      "senate_avg": [53,54,52,53,52,54,55,53,52,51,52,53,53,52,53,54,53,53,54,55,55,56,57,57,58,58,59,60,60,61,62,62,62,62,61,62,63,64,65,64],
-      "house_avg":  [51,51,50,51,50,51,51,50,50,50,50,51,51,51,50,50,50,49,48,48,49,50,51,51,51,51,52,53,54,55,55,57,56,57,56,57,58,58,58,58]
+      "years": [
+        "1947",
+        "1949",
+        "1951",
+        "1953",
+        "1955",
+        "1957",
+        "1959",
+        "1961",
+        "1963",
+        "1965",
+        "1967",
+        "1969",
+        "1971",
+        "1973",
+        "1975",
+        "1977",
+        "1979",
+        "1981",
+        "1983",
+        "1985",
+        "1987",
+        "1989",
+        "1991",
+        "1993",
+        "1995",
+        "1997",
+        "1999",
+        "2001",
+        "2003",
+        "2005",
+        "2007",
+        "2009",
+        "2011",
+        "2013",
+        "2015",
+        "2017",
+        "2019",
+        "2021",
+        "2023",
+        "2025"
+      ],
+      "senate_avg": [
+        53,
+        54,
+        52,
+        53,
+        52,
+        54,
+        55,
+        53,
+        52,
+        51,
+        52,
+        53,
+        53,
+        52,
+        53,
+        54,
+        53,
+        53,
+        54,
+        55,
+        55,
+        56,
+        57,
+        57,
+        58,
+        58,
+        59,
+        60,
+        60,
+        61,
+        62,
+        62,
+        62,
+        62,
+        61,
+        62,
+        63,
+        64,
+        65,
+        64
+      ],
+      "house_avg": [
+        51,
+        51,
+        50,
+        51,
+        50,
+        51,
+        51,
+        50,
+        50,
+        50,
+        50,
+        51,
+        51,
+        51,
+        50,
+        50,
+        50,
+        49,
+        48,
+        48,
+        49,
+        50,
+        51,
+        51,
+        51,
+        51,
+        52,
+        53,
+        54,
+        55,
+        55,
+        57,
+        56,
+        57,
+        56,
+        57,
+        58,
+        58,
+        58,
+        58
+      ]
     },
     "productivity_chart": {
-      "labels": ["80th\n1947","81st\n1949","82nd\n1951","83rd\n1953","84th\n1955","85th\n1957","86th\n1959","87th\n1961","88th\n1963","89th\n1965","90th\n1967","91st\n1969","92nd\n1971","93rd\n1973","94th\n1975","95th\n1977","96th\n1979","97th\n1981","98th\n1983","99th\n1985","100th\n1987","101st\n1989","102nd\n1991","103rd\n1993","104th\n1995","105th\n1997","106th\n1999","107th\n2001","108th\n2003","109th\n2005","110th\n2007","111th\n2009","112th\n2011","113th\n2013","114th\n2015","115th\n2017","116th\n2019","117th\n2021","118th\n2023","119th\n2025*"],
-      "pct": [8.4,6.1,4.7,5.2,5.8,4.9,4.4,4.8,3.8,3.4,2.4,2.6,2.6,2.8,2.8,3.3,4.9,4.1,5.9,6.7,7.4,6.3,5.6,5.4,4.9,5.1,6.3,4.1,5.8,4.2,4.4,3.6,2.8,2.3,3.3,3.3,2.4,2.1,1.8,2.0]
+      "labels": [
+        "80th\n1947",
+        "81st\n1949",
+        "82nd\n1951",
+        "83rd\n1953",
+        "84th\n1955",
+        "85th\n1957",
+        "86th\n1959",
+        "87th\n1961",
+        "88th\n1963",
+        "89th\n1965",
+        "90th\n1967",
+        "91st\n1969",
+        "92nd\n1971",
+        "93rd\n1973",
+        "94th\n1975",
+        "95th\n1977",
+        "96th\n1979",
+        "97th\n1981",
+        "98th\n1983",
+        "99th\n1985",
+        "100th\n1987",
+        "101st\n1989",
+        "102nd\n1991",
+        "103rd\n1993",
+        "104th\n1995",
+        "105th\n1997",
+        "106th\n1999",
+        "107th\n2001",
+        "108th\n2003",
+        "109th\n2005",
+        "110th\n2007",
+        "111th\n2009",
+        "112th\n2011",
+        "113th\n2013",
+        "114th\n2015",
+        "115th\n2017",
+        "116th\n2019",
+        "117th\n2021",
+        "118th\n2023",
+        "119th\n2025*"
+      ],
+      "pct": [
+        8.4,
+        6.1,
+        4.7,
+        5.2,
+        5.8,
+        4.9,
+        4.4,
+        4.8,
+        3.8,
+        3.4,
+        2.4,
+        2.6,
+        2.6,
+        2.8,
+        2.8,
+        3.3,
+        4.9,
+        4.1,
+        5.9,
+        6.7,
+        7.4,
+        6.3,
+        5.6,
+        5.4,
+        4.9,
+        5.1,
+        6.3,
+        4.1,
+        5.8,
+        4.2,
+        4.4,
+        3.6,
+        2.8,
+        2.3,
+        3.3,
+        3.3,
+        2.4,
+        2.1,
+        1.8,
+        2.0
+      ]
     },
     "majority_party_chart": {
-      "years": ["2010","2012","2014","2016","2018","2020","2022","2024","2026"],
-      "state_local": [2, 1, 3, 2, 4, 3, 5, 3, 15],
-      "senate":      [8, 5, 6, 4, 9, 5, 8, 7, 9],
-      "retiring":    [12,10,14,11,18,14,20,17,19]
+      "years": [
+        "2010",
+        "2012",
+        "2014",
+        "2016",
+        "2018",
+        "2020",
+        "2022",
+        "2024",
+        "2026"
+      ],
+      "state_local": [
+        2,
+        1,
+        3,
+        2,
+        4,
+        3,
+        5,
+        3,
+        15
+      ],
+      "senate": [
+        8,
+        5,
+        6,
+        4,
+        9,
+        5,
+        8,
+        7,
+        9
+      ],
+      "retiring": [
+        12,
+        10,
+        14,
+        11,
+        18,
+        14,
+        20,
+        17,
+        19
+      ]
     }
   },
   "approval": {
-    "trump":            {"approve": 0, "disapprove": 0, "unsure": 0, "trend": 0},
-    "congress":         {"approve": 10, "disapprove": 0, "trend": 0},
-    "democrat_party":   {"approve": 0, "disapprove": 0},
-    "republican_party": {"approve": 0, "disapprove": 0}
+    "trump": {
+      "approve": 0,
+      "disapprove": 0,
+      "unsure": 0,
+      "trend": 0
+    },
+    "congress": {
+      "approve": 10,
+      "disapprove": 0,
+      "trend": 0
+    },
+    "democrat_party": {
+      "approve": 0,
+      "disapprove": 0
+    },
+    "republican_party": {
+      "approve": 0,
+      "disapprove": 0
+    }
   },
   "generic_ballot": {
     "democrat": 0,
@@ -201,16 +976,674 @@
   },
   "factions": {
     "republican": [
-      {"name": "MAGA",          "approval": 0},
-      {"name": "America First", "approval": 0},
-      {"name": "Freedom Caucus","approval": 0}
+      {
+        "name": "MAGA",
+        "approval": 0
+      },
+      {
+        "name": "America First",
+        "approval": 0
+      },
+      {
+        "name": "Freedom Caucus",
+        "approval": 0
+      }
     ],
     "democrat": [
-      {"name": "Progressive", "approval": 0},
-      {"name": "Squad",       "approval": 0},
-      {"name": "Moderate",    "approval": 0}
+      {
+        "name": "Progressive",
+        "approval": 0
+      },
+      {
+        "name": "Squad",
+        "approval": 0
+      },
+      {
+        "name": "Moderate",
+        "approval": 0
+      }
     ]
   },
   "news": [],
-  "analysis": []
+  "analysis": [],
+  "races": {
+    "senate": {
+      "cycle": 2026,
+      "senate_class": 2,
+      "seats_up": 33,
+      "current_balance": {
+        "r": 53,
+        "d": 47
+      },
+      "source": "Preliminary analyst estimates \u2014 Cook Political Report / Inside Elections / Sabato's Crystal Ball",
+      "ratings_summary": {
+        "safe_r": 11,
+        "likely_r": 5,
+        "lean_r": 4,
+        "toss_up": 2,
+        "lean_d": 2,
+        "likely_d": 5,
+        "safe_d": 4
+      },
+      "races": [
+        {
+          "state": "Alabama",
+          "code": "AL",
+          "incumbent": "Tommy Tuberville",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Tuberville won by 20 pts in 2020; no credible challenger."
+        },
+        {
+          "state": "Alaska",
+          "code": "AK",
+          "incumbent": "Dan Sullivan",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Sullivan won by 7 pts in 2020. Democrats targeting but Alaska leans R."
+        },
+        {
+          "state": "Arkansas",
+          "code": "AR",
+          "incumbent": "Tom Cotton",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Cotton is safe; Arkansas is deep-red."
+        },
+        {
+          "state": "Colorado",
+          "code": "CO",
+          "incumbent": "John Hickenlooper",
+          "party": "D",
+          "open": false,
+          "rating": "Lean D",
+          "note": "Hickenlooper won by 9 pts in 2020 but Colorado is trending closer in federal races."
+        },
+        {
+          "state": "Delaware",
+          "code": "DE",
+          "incumbent": "Chris Coons",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Coons is safe in this reliably Democratic state."
+        },
+        {
+          "state": "Georgia",
+          "code": "GA",
+          "incumbent": "Jon Ossoff",
+          "party": "D",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Ossoff won his January 2021 runoff by under 1 pt. Georgia is a perennial battleground."
+        },
+        {
+          "state": "Idaho",
+          "code": "ID",
+          "incumbent": "Jim Risch",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Risch not seeking re-election. Idaho is safe Republican \u2014 open-seat primary underway."
+        },
+        {
+          "state": "Illinois",
+          "code": "IL",
+          "incumbent": "Dick Durbin",
+          "party": "D",
+          "open": true,
+          "rating": "Likely D",
+          "note": "Durbin retiring after 28 years. Illinois leans Democratic but open seat invites competition."
+        },
+        {
+          "state": "Iowa",
+          "code": "IA",
+          "incumbent": "Joni Ernst",
+          "party": "R",
+          "open": false,
+          "rating": "Lean R",
+          "note": "Ernst won by 3 pts in 2020. Iowa has shifted R but Democrats recruiting strong challenger."
+        },
+        {
+          "state": "Kansas",
+          "code": "KS",
+          "incumbent": "Roger Marshall",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Marshall is safe in deep-red Kansas."
+        },
+        {
+          "state": "Kentucky",
+          "code": "KY",
+          "incumbent": "Mitch McConnell",
+          "party": "R",
+          "open": true,
+          "rating": "Likely R",
+          "note": "McConnell not seeking re-election after stepping down as leader. Kentucky safely Republican; open-seat primary crowded."
+        },
+        {
+          "state": "Louisiana",
+          "code": "LA",
+          "incumbent": "Bill Cassidy",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Cassidy survived a censure for his impeachment vote; faces primary challenge but Louisiana is solidly R."
+        },
+        {
+          "state": "Maine",
+          "code": "ME",
+          "incumbent": "Susan Collins",
+          "party": "R",
+          "open": false,
+          "rating": "Lean R",
+          "note": "Collins has won in blue-leaning Maine four times. Faces toughest map yet but a formidable fundraiser."
+        },
+        {
+          "state": "Massachusetts",
+          "code": "MA",
+          "incumbent": "Ed Markey",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Markey is safe; Massachusetts is one of the most Democratic states."
+        },
+        {
+          "state": "Michigan",
+          "code": "MI",
+          "incumbent": "Gary Peters",
+          "party": "D",
+          "open": false,
+          "rating": "Lean D",
+          "note": "Peters won by 1.5 pts in 2020. Michigan is a key battleground \u2014 Republicans recruiting hard."
+        },
+        {
+          "state": "Minnesota",
+          "code": "MN",
+          "incumbent": "Tina Smith",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Smith won by 5 pts in 2020. Minnesota leans D in Senate races."
+        },
+        {
+          "state": "Mississippi",
+          "code": "MS",
+          "incumbent": "Cindy Hyde-Smith",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Hyde-Smith is safe in solidly Republican Mississippi."
+        },
+        {
+          "state": "Montana",
+          "code": "MT",
+          "incumbent": "Steve Daines",
+          "party": "R",
+          "open": false,
+          "rating": "Lean R",
+          "note": "Daines won by 10 pts in 2020 but Democrats see an opening as Montana has split-ticket history."
+        },
+        {
+          "state": "Nebraska",
+          "code": "NE",
+          "incumbent": "Pete Ricketts",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Ricketts was appointed after Ben Sasse resigned. Won full-term election in 2024. Nebraska is safe R."
+        },
+        {
+          "state": "New Hampshire",
+          "code": "NH",
+          "incumbent": "Jeanne Shaheen",
+          "party": "D",
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Shaheen retiring after three terms. New Hampshire is the ultimate swing state \u2014 this will be the most expensive race of the cycle."
+        },
+        {
+          "state": "New Jersey",
+          "code": "NJ",
+          "incumbent": "Cory Booker",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Booker won by 16 pts in 2020. New Jersey leans Democratic in federal races."
+        },
+        {
+          "state": "New Mexico",
+          "code": "NM",
+          "incumbent": "Martin Heinrich",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Heinrich won by 16 pts in 2020. New Mexico is safe D."
+        },
+        {
+          "state": "North Carolina",
+          "code": "NC",
+          "incumbent": "Thom Tillis",
+          "party": "R",
+          "open": false,
+          "rating": "Lean R",
+          "note": "Tillis survived 2020 by under 1.8 pts \u2014 NC is a perennial battleground. Democrats are competitive."
+        },
+        {
+          "state": "Oklahoma",
+          "code": "OK",
+          "incumbent": "James Lankford",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Lankford won the 2022 special to fill Inhofe's seat. Oklahoma is safe Republican."
+        },
+        {
+          "state": "Oregon",
+          "code": "OR",
+          "incumbent": "Jeff Merkley",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Merkley won by 17 pts in 2020. Oregon leans D in Senate races."
+        },
+        {
+          "state": "Rhode Island",
+          "code": "RI",
+          "incumbent": "Sheldon Whitehouse",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Whitehouse is safe in one of the most Democratic states."
+        },
+        {
+          "state": "South Carolina",
+          "code": "SC",
+          "incumbent": "Lindsey Graham",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Graham won by 10 pts in 2020 in a surprisingly competitive race. SC leans R but not completely safe for him."
+        },
+        {
+          "state": "South Dakota",
+          "code": "SD",
+          "incumbent": "Mike Rounds",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Rounds is safe in deep-red South Dakota."
+        },
+        {
+          "state": "Tennessee",
+          "code": "TN",
+          "incumbent": "Bill Hagerty",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Hagerty won by 26 pts in 2020. Tennessee is safe Republican."
+        },
+        {
+          "state": "Texas",
+          "code": "TX",
+          "incumbent": "John Cornyn",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Cornyn won by 10 pts in 2020 but Texas has been narrowing. No top-tier Democratic challenger yet."
+        },
+        {
+          "state": "Virginia",
+          "code": "VA",
+          "incumbent": "Mark Warner",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Warner won by 12 pts in 2020. Virginia has shifted D at the federal level."
+        },
+        {
+          "state": "West Virginia",
+          "code": "WV",
+          "incumbent": "Shelley Capito",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Capito won by 27 pts in 2020. West Virginia is deep-red."
+        },
+        {
+          "state": "Wyoming",
+          "code": "WY",
+          "incumbent": "Cynthia Lummis",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Lummis is safe in the most Republican state by margin."
+        }
+      ]
+    },
+    "house": {
+      "cycle": 2026,
+      "total_seats": 435,
+      "current_balance": {
+        "r": 220,
+        "d": 215
+      },
+      "needed_majority": 218,
+      "source": "Preliminary analyst estimates \u2014 Cook Political Report / Inside Elections",
+      "ratings_summary": {
+        "safe_r": 183,
+        "likely_r": 14,
+        "lean_r": 11,
+        "toss_up": 22,
+        "lean_d": 9,
+        "likely_d": 13,
+        "safe_d": 183
+      },
+      "competitive": [
+        {
+          "district": "CA-13",
+          "incumbent": "John Duarte",
+          "party": "R",
+          "rating": "Toss-up",
+          "pvp": "R+0"
+        },
+        {
+          "district": "CA-27",
+          "incumbent": "Mike Garcia",
+          "party": "R",
+          "rating": "Toss-up",
+          "pvp": "D+4"
+        },
+        {
+          "district": "CO-08",
+          "incumbent": "Yadira Caraveo",
+          "party": "D",
+          "rating": "Toss-up",
+          "pvp": "R+1"
+        },
+        {
+          "district": "ME-02",
+          "incumbent": "Jared Golden",
+          "party": "D",
+          "rating": "Lean D",
+          "pvp": "R+6"
+        },
+        {
+          "district": "MI-07",
+          "incumbent": "Tom Barrett",
+          "party": "R",
+          "rating": "Toss-up",
+          "pvp": "D+1"
+        },
+        {
+          "district": "MT-01",
+          "incumbent": "Ryan Zinke",
+          "party": "R",
+          "rating": "Lean R",
+          "pvp": "R+8"
+        },
+        {
+          "district": "NE-02",
+          "incumbent": "Don Bacon",
+          "party": "R",
+          "rating": "Lean R",
+          "pvp": "D+2"
+        },
+        {
+          "district": "NH-01",
+          "incumbent": "Chris Pappas",
+          "party": "D",
+          "rating": "Lean D",
+          "pvp": "R+1"
+        },
+        {
+          "district": "NM-02",
+          "incumbent": "Gabe Vasquez",
+          "party": "D",
+          "rating": "Toss-up",
+          "pvp": "R+5"
+        },
+        {
+          "district": "NY-03",
+          "incumbent": "Tom Suozzi",
+          "party": "D",
+          "rating": "Lean D",
+          "pvp": "R+4"
+        },
+        {
+          "district": "NY-04",
+          "incumbent": "Anthony D'Esposito",
+          "party": "R",
+          "rating": "Lean D",
+          "pvp": "D+6"
+        },
+        {
+          "district": "NY-17",
+          "incumbent": "Mike Lawler",
+          "party": "R",
+          "rating": "Lean D",
+          "pvp": "D+10"
+        },
+        {
+          "district": "NY-22",
+          "incumbent": "Marc Molinaro",
+          "party": "R",
+          "rating": "Toss-up",
+          "pvp": "D+4"
+        },
+        {
+          "district": "OH-09",
+          "incumbent": "Open (Marcy Kaptur retired)",
+          "party": "D",
+          "rating": "Lean R",
+          "pvp": "R+5"
+        },
+        {
+          "district": "OR-05",
+          "incumbent": "Lori Chavez-DeRemer",
+          "party": "R",
+          "rating": "Lean D",
+          "pvp": "D+1"
+        },
+        {
+          "district": "PA-07",
+          "incumbent": "Susan Wild",
+          "party": "D",
+          "rating": "Toss-up",
+          "pvp": "R+1"
+        },
+        {
+          "district": "PA-08",
+          "incumbent": "Matt Cartwright",
+          "party": "D",
+          "rating": "Lean D",
+          "pvp": "R+8"
+        },
+        {
+          "district": "TX-34",
+          "incumbent": "Vicente Gonzalez",
+          "party": "D",
+          "rating": "Lean D",
+          "pvp": "R+3"
+        },
+        {
+          "district": "VA-02",
+          "incumbent": "Jen Kiggans",
+          "party": "R",
+          "rating": "Lean R",
+          "pvp": "R+4"
+        },
+        {
+          "district": "WA-03",
+          "incumbent": "Marie Perez",
+          "party": "D",
+          "rating": "Toss-up",
+          "pvp": "R+3"
+        }
+      ]
+    },
+    "governor": {
+      "cycle": 2026,
+      "source": "Preliminary analyst estimates \u2014 Ballotpedia / Cook Political Report",
+      "races": [
+        {
+          "state": "California",
+          "code": "CA",
+          "incumbent": "Open (Newsom TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Likely D",
+          "note": "Newsom term-limited. California is reliably D but an open seat in a headwind environment draws attention."
+        },
+        {
+          "state": "Florida",
+          "code": "FL",
+          "incumbent": "Open (DeSantis TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Likely R",
+          "note": "DeSantis term-limited. Florida has shifted R; open seat primary is crowded on both sides."
+        },
+        {
+          "state": "Georgia",
+          "code": "GA",
+          "incumbent": "Open (Kemp TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Lean R",
+          "note": "Kemp term-limited. Georgia remains competitive. Stacey Abrams seen as likely Democratic nominee."
+        },
+        {
+          "state": "Illinois",
+          "code": "IL",
+          "incumbent": "JB Pritzker",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Pritzker running for re-election. Illinois leans D in statewide races."
+        },
+        {
+          "state": "Maine",
+          "code": "ME",
+          "incumbent": "Open (Mills TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Mills term-limited. Maine is a true toss-up. Republicans see opportunity in an open-seat year."
+        },
+        {
+          "state": "Michigan",
+          "code": "MI",
+          "incumbent": "Gretchen Whitmer",
+          "party": "D",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Whitmer is a top Democratic target. Republicans see Michigan governor as winnable in a midterm environment."
+        },
+        {
+          "state": "Minnesota",
+          "code": "MN",
+          "incumbent": "Open (Walz VP)",
+          "party": "D",
+          "open": true,
+          "rating": "Lean D",
+          "note": "Walz left to run for VP; Lt. Gov. Flanagan became governor and is expected to run."
+        },
+        {
+          "state": "Nevada",
+          "code": "NV",
+          "incumbent": "Joe Lombardo",
+          "party": "R",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Lombardo won in 2022 by under 1 pt. Nevada is the ultimate toss-up state."
+        },
+        {
+          "state": "New Hampshire",
+          "code": "NH",
+          "incumbent": "Kelly Ayotte",
+          "party": "R",
+          "open": false,
+          "rating": "Lean R",
+          "note": "Ayotte won in 2024. NH has 2-year governor terms; both parties competitive here."
+        },
+        {
+          "state": "Ohio",
+          "code": "OH",
+          "incumbent": "Mike DeWine",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "DeWine is running again. Ohio has shifted R in recent cycles."
+        },
+        {
+          "state": "Oregon",
+          "code": "OR",
+          "incumbent": "Tina Kotek",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Kotek won in 2022. Oregon leans D in statewide races."
+        },
+        {
+          "state": "Pennsylvania",
+          "code": "PA",
+          "incumbent": "Josh Shapiro",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Shapiro is a strong incumbent. Pennsylvania remains competitive but he has wide approval."
+        },
+        {
+          "state": "Texas",
+          "code": "TX",
+          "incumbent": "Greg Abbott",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Abbott running again. Texas is reliably R at the governor level despite Senate competitiveness."
+        },
+        {
+          "state": "Vermont",
+          "code": "VT",
+          "incumbent": "Phil Scott",
+          "party": "R",
+          "open": false,
+          "rating": "Likely R",
+          "note": "Scott is one of the most popular governors in the country. Vermont has 2-year terms."
+        },
+        {
+          "state": "Wisconsin",
+          "code": "WI",
+          "incumbent": "Tony Evers",
+          "party": "D",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Evers won in 2022 by 3.4 pts. Wisconsin is the definitive swing state. This will be closely watched."
+        },
+        {
+          "state": "Arizona",
+          "code": "AZ",
+          "incumbent": "Katie Hobbs",
+          "party": "D",
+          "open": false,
+          "rating": "Lean D",
+          "note": "Hobbs won in 2022 by 0.5 pts. Arizona leans slightly D at the governor level now."
+        },
+        {
+          "state": "Colorado",
+          "code": "CO",
+          "incumbent": "Jared Polis",
+          "party": "D",
+          "open": false,
+          "rating": "Lean D",
+          "note": "Polis is a strong incumbent. Colorado is competitive but leans D statewide."
+        }
+      ]
+    }
+  }
 }

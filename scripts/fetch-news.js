@@ -220,6 +220,10 @@ const FEEDS = [
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Wisconsin+2026',                            source: 'Emerson (WI)' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Wisconsin+2026',                         source: 'Quinnipiac (WI)' },
 
+
+  // REDISTRICTING (force-tagged)
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=redistricting+2026+congress', source: 'Google News - Redistricting', forceTags: ['Major Update', 'Redistricting'] },
+
 ];
 
 // ── KEYWORD FILTERS ────────────────────────────────────────────────────────────
@@ -236,6 +240,7 @@ const TAG_RULES = [
   { tag: 'Federal',       keywords: ['congress', 'federal', 'white house', 'administration', 'legislation', 'bill', 'vote'] },
   { tag: 'Governorship',  keywords: ['governor', 'gubernatorial', 'statehouse'] },
   { tag: 'Primary',       keywords: ['primary', 'runoff', 'nomination'] },
+  { tag: 'Redistricting',  keywords: ['redistrict', 'gerrymander', 'congressional map', 'district map', 'remap'] },
 ];
 
 const MAX_NEWS_ITEMS = 100;
@@ -303,7 +308,7 @@ async function fetchFeed(feed) {
       const url         = String(item.link || item['@_href'] || item.id || '').trim().replace(/^<|>$/g, '');
       const description = stripHtml(item.description || item.summary || item.content || '').slice(0, 280);
       const date        = parseDate(item.pubDate || item.published || item.updated || item['dc:date']);
-      return { title, url, source: feed.source, date, description };
+      return { title, url, source: feed.source, date, description, forceTags: feed.forceTags || [] };
     }).filter(i => i.url && i.title);
   } catch (err) {
     console.warn(`[ERROR] ${feed.source}: ${err.message}`);
@@ -344,7 +349,7 @@ async function main() {
     if (!relevant) continue;
 
     // Auto-tag
-    const tags = autoTag(item.title, item.description);
+    const tags = [...new Set([...autoTag(item.title, item.description), ...(item.forceTags || [])])];
 
     data.news.push({
       title: item.title,

@@ -8,6 +8,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{
   --bg:#FFFFFF;--bg-s:#F7F7F7;--bg-h:#F2F2F2;
@@ -87,6 +89,45 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   .subtab-inner{padding:0 12px}
   .subtab-btn{padding:12px 10px;font-size:12px}
 }
+
+/* ── REDISTRICTING WATCH ─────────────────────────────────────── */
+.rd-scoreboard{display:grid;grid-template-columns:repeat(4,1fr);background:#0d1b2e;border-radius:6px;overflow:hidden;margin-bottom:24px}
+.rd-sbox{padding:20px 18px;border-right:1px solid rgba(201,162,39,.15);display:flex;flex-direction:column;gap:6px}
+.rd-sbox:last-child{border-right:none}
+.rd-sn{font-family:var(--serif);font-size:30px;font-weight:700;color:#C9A227;letter-spacing:-.02em;line-height:1}
+.rd-sl{font-size:12px;line-height:1.4}
+.rd-sl-r{color:#E8A0A0}.rd-sl-d{color:#8CB4E0}.rd-sl-g{color:rgba(255,255,255,.5)}
+.rd-slider-wrap{margin-bottom:16px}
+.rd-slider-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:6px}
+.rd-slider{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:#D4D4D0;outline:none;cursor:pointer;touch-action:pan-y}
+.rd-slider::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#C9A227;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.rd-slider::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#C9A227;cursor:pointer;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.rd-pos-label{text-align:center;font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-top:10px;min-height:20px}
+.rd-map-wrap{position:relative}
+.rd-map{height:400px;border-radius:4px;overflow:hidden;border:1px solid var(--br)}
+.rd-map-loading{position:absolute;inset:0;background:rgba(247,247,247,.85);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--t3);border-radius:4px;pointer-events:none}
+.rd-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:10px;border-top:1px solid var(--br)}
+.rd-li{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3)}
+.rd-sq{width:12px;height:12px;border-radius:2px;flex-shrink:0;border:1px solid transparent}
+.rd-states-hd{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1);margin:24px 0 14px}
+.rd-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rd-card{border:1px solid var(--br);border-radius:6px;padding:16px;display:flex;flex-direction:column;gap:8px;transition:box-shadow .15s}
+.rd-card:hover{box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.rd-card-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.rd-card-state{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1)}
+.rd-badge{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:4px}
+.rd-badge-enacted{background:#D4EDDA;color:#155724}
+.rd-badge-blocked{background:#F8D7DA;color:#721C24}
+.rd-badge-litigation{background:#FFF3CD;color:#856404}
+.rd-badge-pending{background:#E9ECEF;color:#495057}
+.rd-badge-special{background:#FFF3E8;color:#C4470E;border:1px solid #E8832A}
+.rd-card-summary{font-size:12.5px;color:var(--t2);line-height:1.55}
+.rd-card-impact{font-size:12px;font-weight:600;color:var(--t3)}
+.rd-card-impact.r-gain{color:#9B2828}.rd-card-impact.d-gain{color:var(--blue)}
+.rd-card-link{font-size:11px;color:var(--blue);text-decoration:none;margin-top:2px}
+.rd-card-link:hover{text-decoration:underline}
+@media(max-width:900px){.rd-cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.rd-scoreboard{grid-template-columns:repeat(2,1fr)}.rd-cards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -100,6 +141,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <button class="subtab-btn" onclick="goSub('favourability',this)">Party Favourability</button>
       <button class="subtab-btn" onclick="goSub('congress-approval',this)">Congress Approval</button>
       <button class="subtab-btn" onclick="goSub('factions',this)">Faction Tracker</button>
+      <button class="subtab-btn" onclick="goSub('redistricting',this)">Redistricting Watch</button>
     </div>
     <span class="last-updated" id="last-updated-ts">Updated: loading&#8230;</span>
   </div>
@@ -338,6 +380,71 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 <div class="subpanel" id="subpanel-congress-approval"><div class="panel-inner"><div class="coming-soon">Congress Approval &#8212; Coming Soon</div></div></div>
 <div class="subpanel" id="subpanel-factions"><div class="panel-inner"><div class="coming-soon">Faction Tracker &#8212; Coming Soon</div></div></div>
 
+
+<!-- REDISTRICTING WATCH SUB-PANEL -->
+<div class="subpanel" id="subpanel-redistricting">
+<div class="panel-inner">
+
+  <!-- SECTION A: SCOREBOARD -->
+  <div class="rd-scoreboard">
+    <div class="rd-sbox">
+      <div class="rd-sn" id="rd-r-gains">0</div>
+      <div class="rd-sl rd-sl-r">R Projected Gains</div>
+    </div>
+    <div class="rd-sbox">
+      <div class="rd-sn" id="rd-d-gains">0</div>
+      <div class="rd-sl rd-sl-d">D Projected Gains</div>
+    </div>
+    <div class="rd-sbox">
+      <div class="rd-sn" id="rd-contested">0</div>
+      <div class="rd-sl rd-sl-g">Contested / Blocked</div>
+    </div>
+    <div class="rd-sbox">
+      <div class="rd-sn" id="rd-net">+0</div>
+      <div class="rd-sl rd-sl-g">Net House Impact</div>
+    </div>
+  </div>
+
+  <!-- SECTION B: SLIDER + MAP -->
+  <div class="chart-card">
+    <div class="card-title">US Congressional District Map</div>
+    <div class="card-sub">Slide to compare district ratings across three scenario snapshots. Districts changed from the 119th Congress baseline are highlighted in gold.</div>
+
+    <div class="rd-slider-wrap">
+      <div class="rd-slider-labels">
+        <span>119th Congress Baseline</span>
+        <span style="text-align:center">Current 2026 Maps</span>
+        <span style="text-align:right">Still In Play</span>
+      </div>
+      <input type="range" min="0" max="2" step="1" value="1" class="rd-slider" id="rd-slider">
+      <div class="rd-pos-label" id="rd-pos-label">Current 2026 Maps</div>
+    </div>
+
+    <div class="rd-map-wrap">
+      <div id="rd-map" class="rd-map"></div>
+      <div class="rd-map-loading" id="rd-map-loading">Loading district map&#8230;</div>
+    </div>
+
+    <div class="rd-legend">
+      <div class="rd-li"><div class="rd-sq" style="background:#1a3d80"></div>Safe D</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#4c8de0"></div>Lean D</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#888888"></div>Toss-up</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#e05555"></div>Lean R</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#8b1c2e"></div>Safe R</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#ddd;border:2px solid #C9A227"></div>Changed from baseline</div>
+    </div>
+    <div class="chart-note">District ratings from Cook Political Report, Inside Elections, and Sabato's Crystal Ball. Colour reflects the rating for the active slider position. Districts with no entry in data.json shown in neutral grey.</div>
+  </div>
+
+  <!-- SECTION C: STATE CARDS -->
+  <div class="rd-states-hd">State-by-State Redistricting Status</div>
+  <div class="rd-cards" id="rd-state-cards">
+    <div style="color:var(--t4);font-style:italic;grid-column:1/-1;padding:20px 0;text-align:center">Loading&#8230;</div>
+  </div>
+
+</div>
+</div>
+
 <script>
 Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
 Chart.defaults.color = '#6B6B6B';
@@ -348,6 +455,10 @@ function goSub(id, btn) {
   document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('subpanel-' + id).classList.add('active');
   btn.classList.add('active');
+  if (id === 'redistricting') {
+    setTimeout(initRedistrictingMap, 50);
+    rdUpdateScoreboard(parseInt(document.getElementById('rd-slider').value, 10));
+  }
 }
 
 // ── LOAD DATA.JSON AND RENDER ──
@@ -371,6 +482,7 @@ async function loadData() {
 
 function renderAll() {
   if (!DATA) return;
+  rdData = DATA; renderStateCards(); rdUpdateScoreboard(1);
   const r = DATA.retirements;
   const meta = DATA.meta;
 
@@ -702,6 +814,147 @@ function renderCharts(r) {
     },
     plugins: [{ id: 'rl', afterDraw(c) { const { ctx, scales: { x, y } } = c; const i = sgc.years.indexOf('2026'); const xp = x.getPixelForValue(i); const yp = y.getPixelForValue(3) - 8; ctx.save(); ctx.font = '500 11px DM Sans,sans-serif'; ctx.fillStyle = '#E24B4A'; ctx.textAlign = 'center'; ctx.fillText('90yr high ↑', xp, yp); ctx.restore(); } }]
   });
+}
+
+
+// ── REDISTRICTING WATCH ───────────────────────────────────────────────────────
+let rdMap = null, rdGeoLayer = null, rdData = null;
+const rdDistrictLookup = {};
+const RD_POS_LABELS = ['119th Congress Baseline', 'Current 2026 Maps', 'Still In Play'];
+const RD_SB_KEYS    = ['baseline', 'current', 'pending'];
+const RATING_COLORS = {
+  'Safe D':'#1a3d80','Lean D':'#4c8de0','Toss-up':'#888888',
+  'Lean R':'#e05555','Safe R':'#8b1c2e'
+};
+const STATUS_BADGE_CLS = {
+  'Enacted':'rd-badge-enacted','Blocked':'rd-badge-blocked',
+  'In Litigation':'rd-badge-litigation','Pending':'rd-badge-pending',
+  'Special Session':'rd-badge-special'
+};
+
+document.getElementById('rd-slider').addEventListener('input', function() {
+  const pos = parseInt(this.value, 10);
+  document.getElementById('rd-pos-label').textContent = RD_POS_LABELS[pos];
+  rdUpdateScoreboard(pos);
+  rdUpdateMapColors(pos);
+});
+
+function rdUpdateScoreboard(pos) {
+  if (!rdData || !rdData.redistricting) return;
+  const sb = rdData.redistricting.scoreboard[RD_SB_KEYS[pos]];
+  if (!sb) return;
+  document.getElementById('rd-r-gains').textContent  = sb.r_gains;
+  document.getElementById('rd-d-gains').textContent  = sb.d_gains;
+  document.getElementById('rd-contested').textContent = sb.contested;
+  const net = sb.net;
+  const netEl = document.getElementById('rd-net');
+  netEl.textContent  = (net > 0 ? '+' : '') + net;
+  netEl.style.color  = net > 0 ? '#E8A0A0' : net < 0 ? '#8CB4E0' : '#C9A227';
+}
+
+function rdFeatureKey(feature) {
+  const p = feature.properties || {};
+  const state = p.state || '';
+  const dist  = parseInt(p.district || '0', 10);
+  return state + '-' + dist;
+}
+
+function rdColorForFeature(feature, pos) {
+  const d = rdDistrictLookup[rdFeatureKey(feature)];
+  const rating = d ? (pos === 0 ? d.baseline_rating : d.current_rating) : null;
+  return RATING_COLORS[rating] || '#cccccc';
+}
+
+function rdUpdateMapColors(pos) {
+  if (!rdGeoLayer) return;
+  rdGeoLayer.setStyle(function(feature) {
+    const d = rdDistrictLookup[rdFeatureKey(feature)];
+    const changed = d && pos > 0 && d.baseline_rating !== d.current_rating;
+    return {
+      fillColor:   rdColorForFeature(feature, pos),
+      fillOpacity: 0.75,
+      color:       changed ? '#C9A227' : '#ffffff',
+      weight:      changed ? 2 : 0.5,
+      opacity:     1
+    };
+  });
+}
+
+function initRedistrictingMap() {
+  if (rdMap) return;
+
+  // Build district lookup from data.json
+  if (rdData && rdData.redistricting && Array.isArray(rdData.redistricting.districts)) {
+    rdData.redistricting.districts.forEach(function(d) {
+      const key = d.state + '-' + parseInt(d.district, 10);
+      rdDistrictLookup[key] = d;
+    });
+  }
+
+  rdMap = L.map('rd-map', {
+    center: [38.5, -96.5], zoom: 4,
+    minZoom: 3, maxZoom: 8,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '\u00a9 <a href="https://carto.com/">CARTO</a> \u00a9 OpenStreetMap',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(rdMap);
+
+  const loadingEl = document.getElementById('rd-map-loading');
+
+  fetch('https://raw.githubusercontent.com/unitedstates/districts/gh-pages/cds/2022/national.geojson')
+    .then(function(r) { return r.json(); })
+    .then(function(geo) {
+      const pos = parseInt(document.getElementById('rd-slider').value, 10);
+      rdGeoLayer = L.geoJSON(geo, {
+        style: function(feature) {
+          const d = rdDistrictLookup[rdFeatureKey(feature)];
+          const changed = d && pos > 0 && d.baseline_rating !== d.current_rating;
+          return {
+            fillColor:   rdColorForFeature(feature, pos),
+            fillOpacity: 0.75,
+            color:       changed ? '#C9A227' : '#ffffff',
+            weight:      changed ? 2 : 0.5,
+            opacity:     1
+          };
+        },
+        onEachFeature: function(feature, layer) {
+          const p = feature.properties || {};
+          layer.bindTooltip(
+            (p.state || '') + '-' + (p.district || ''),
+            { sticky: true, className: 'rd-tip' }
+          );
+        }
+      }).addTo(rdMap);
+      if (loadingEl) loadingEl.style.display = 'none';
+    })
+    .catch(function(err) {
+      console.warn('[rd-map] GeoJSON error:', err);
+      if (loadingEl) loadingEl.textContent = 'Map unavailable. Check network connection.';
+    });
+}
+
+function renderStateCards() {
+  const grid = document.getElementById('rd-state-cards');
+  if (!rdData || !rdData.redistricting || !Array.isArray(rdData.redistricting.states) || rdData.redistricting.states.length === 0) {
+    grid.innerHTML = '<div style="color:var(--t4);font-style:italic;grid-column:1/-1;padding:20px 0;text-align:center">No state data available.</div>';
+    return;
+  }
+  grid.innerHTML = rdData.redistricting.states.map(function(s) {
+    const badgeCls  = STATUS_BADGE_CLS[s.status] || 'rd-badge-pending';
+    const impactCls = /R/.test(s.impact) ? 'r-gain' : /D/.test(s.impact) ? 'd-gain' : '';
+    return '<div class="rd-card">'
+      + '<div class="rd-card-top">'
+      +   '<span class="rd-card-state">' + s.state + '</span>'
+      +   '<span class="rd-badge ' + badgeCls + '">' + s.status + '</span>'
+      + '</div>'
+      + '<div class="rd-card-summary">' + s.summary + '</div>'
+      + '<div class="rd-card-impact ' + impactCls + '">' + s.impact + '</div>'
+      + '<a class="rd-card-link" href="' + s.url + '" target="_blank" rel="noopener">View on Ballotpedia &#8599;</a>'
+      + '</div>';
+  }).join('');
 }
 
 loadData();

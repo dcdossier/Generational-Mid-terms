@@ -121,6 +121,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .rd-badge-litigation{background:#FFF3CD;color:#856404}
 .rd-badge-pending{background:#E9ECEF;color:#495057}
 .rd-badge-special{background:#FFF3E8;color:#C4470E;border:1px solid #E8832A}
+/* Redistricting map Leaflet legend */
+.rdml-ctrl{background:#fff;border:1px solid var(--br);border-radius:6px;padding:10px 12px;min-width:210px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.rdml-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t4);margin-bottom:8px}
+.rdml-item{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--t2);margin-bottom:5px}
+.rdml-item:last-child{margin-bottom:0}
+.rdml-sw{width:22px;height:14px;border-radius:2px;flex-shrink:0;border:1px solid rgba(0,0,0,.12)}
+.rdml-solid{background:#888888}
+.rdml-stripe{background:repeating-linear-gradient(45deg,#F0A030 0px,#F0A030 3px,rgba(240,160,48,.15) 3px,rgba(240,160,48,.15) 6px)}
+.rdml-dashed{background:#e0e0e0;outline:2px dashed #C9A227;outline-offset:-2px}
+.rdml-base{background:#e0e0e0;border-color:rgba(255,255,255,.8)}
 .rd-card-summary{font-size:12.5px;color:var(--t2);line-height:1.55}
 .rd-card-impact{font-size:12px;font-weight:600;color:var(--t3)}
 .rd-card-impact.r-gain{color:#9B2828}.rd-card-impact.d-gain{color:var(--blue)}
@@ -1743,7 +1753,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="rd-li"><div class="rd-sq" style="background:#888888"></div>Toss-up</div>
       <div class="rd-li"><div class="rd-sq" style="background:#e05555"></div>Lean R</div>
       <div class="rd-li"><div class="rd-sq" style="background:#8b1c2e"></div>Safe R</div>
-      <div class="rd-li"><div class="rd-sq" style="background:#ddd;border:2px solid #C9A227"></div>Changed from baseline</div>
+      <div class="rd-li"><div class="rd-sq" style="background:repeating-linear-gradient(45deg,#F0A030 0px,#F0A030 3px,rgba(240,160,48,.18) 3px,rgba(240,160,48,.18) 6px)"></div>In Litigation (boundaries may change)</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#e0e0e0;outline:2px dashed #C9A227;outline-offset:-2px"></div>Pending (new map expected)</div>
+      <div class="rd-li"><div class="rd-sq" style="background:#e0e0e0;border-color:#fff"></div>119th baseline unchanged</div>
     </div>
     <div class="chart-note">District ratings from Cook Political Report, Inside Elections, and Sabato's Crystal Ball. Colour reflects the rating for the active slider position. Districts with no entry in data.json shown in neutral grey.</div>
   </div>
@@ -2144,7 +2156,7 @@ function renderCharts(r) {
 
 
 // ── REDISTRICTING WATCH ───────────────────────────────────────────────────────
-let rdMap = null, rdGeoLayer = null, rdData = null;
+let rdMap = null, rdGeoLayer = null, rdStripeLayer = null, rdData = null;
 const rdDistrictLookup = {};
 const RD_POS_LABELS = ['119th Congress Baseline', 'Current 2026 Maps', 'Still In Play'];
 const RD_SB_KEYS    = ['baseline', 'current', 'pending'];
@@ -2157,6 +2169,9 @@ const STATUS_BADGE_CLS = {
   'In Litigation':'rd-badge-litigation','Pending':'rd-badge-pending',
   'Special Session':'rd-badge-special'
 };
+// States whose districts receive visual redistricting indicators on the map
+const LITIGATION_STATES = new Set(['TX','LA','AL','GA']); // amber diagonal stripe
+const PENDING_STATES    = new Set(['FL','TN']);            // gold dashed border
 
 document.getElementById('rd-slider').addEventListener('input', function() {
   const pos = parseInt(this.value, 10);
@@ -2191,19 +2206,99 @@ function rdColorForFeature(feature, pos) {
   return RATING_COLORS[rating] || '#cccccc';
 }
 
+// ── Per-state GeoJSON override ─────────────────────────────────────────────────
+// If /geojson/{STATE}.geojson exists in the repo, its features replace the
+// baseline for that state.  Returns merged GeoJSON (or unchanged baseline).
+async function rdMergeCustomGeoJSON(baseGeo) {
+  const OVERRIDE_STATES = ['TX','LA','AL','GA','FL','TN','VA','NC','OH','MO','UT','CA'];
+  const customs = await Promise.all(OVERRIDE_STATES.map(function(st) {
+    return fetch('/geojson/' + st + '.geojson')
+      .then(function(r) { return r.ok ? r.json().then(function(g) { return { st, g }; }) : null; })
+      .catch(function() { return null; });
+  }));
+  const overrideMap = {};
+  customs.forEach(function(c) { if (c && c.g && c.g.features) overrideMap[c.st] = c.g.features; });
+  if (!Object.keys(overrideMap).length) return baseGeo;
+  const kept = baseGeo.features.filter(function(f) {
+    return !overrideMap[(f.properties || {}).state || ''];
+  });
+  const extra = Object.values(overrideMap).flat();
+  return Object.assign({}, baseGeo, { features: kept.concat(extra) });
+}
+
+// ── SVG stripe pattern ──────────────────────────────────────────────────────────
+function rdInjectStripePattern() {
+  if (!rdMap) return;
+  var pane = rdMap.getPanes().overlayPane;
+  var svg  = pane && pane.querySelector('svg');
+  if (!svg || svg.querySelector('#rd-stripe-pat')) return;
+  var ns   = 'http://www.w3.org/2000/svg';
+  var defs = document.createElementNS(ns, 'defs');
+  var pat  = document.createElementNS(ns, 'pattern');
+  pat.setAttribute('id', 'rd-stripe-pat');
+  pat.setAttribute('patternUnits', 'userSpaceOnUse');
+  pat.setAttribute('width', '8');
+  pat.setAttribute('height', '8');
+  pat.setAttribute('patternTransform', 'rotate(45)');
+  var rect = document.createElementNS(ns, 'rect');
+  rect.setAttribute('x', '0'); rect.setAttribute('y', '0');
+  rect.setAttribute('width', '4'); rect.setAttribute('height', '8');
+  rect.setAttribute('fill', '#F0A030');
+  rect.setAttribute('fill-opacity', '0.5');
+  pat.appendChild(rect);
+  defs.appendChild(pat);
+  svg.insertBefore(defs, svg.firstChild);
+}
+
+// Apply stripe fill to litigation-state paths in rdStripeLayer
+function rdApplyStripes() {
+  if (!rdStripeLayer) return;
+  rdInjectStripePattern();
+  rdStripeLayer.eachLayer(function(layer) {
+    var st = ((layer.feature || {}).properties || {}).state || '';
+    if (LITIGATION_STATES.has(st) && layer._path) {
+      layer._path.setAttribute('fill', 'url(#rd-stripe-pat)');
+      layer._path.setAttribute('fill-opacity', '1');
+    }
+  });
+}
+
 function rdUpdateMapColors(pos) {
   if (!rdGeoLayer) return;
   rdGeoLayer.setStyle(function(feature) {
-    const d = rdDistrictLookup[rdFeatureKey(feature)];
-    const changed = d && pos > 0 && d.baseline_rating !== d.current_rating;
+    var state = ((feature || {}).properties || {}).state || '';
+    var d = rdDistrictLookup[rdFeatureKey(feature)];
+    var changed = d && pos > 0 && d.baseline_rating !== d.current_rating;
+    // Pending states: gold dashed border; others: white border (changed=gold solid)
+    var isPending    = PENDING_STATES.has(state);
+    var isLitigation = LITIGATION_STATES.has(state);
     return {
       fillColor:   rdColorForFeature(feature, pos),
       fillOpacity: 0.75,
-      color:       changed ? '#C9A227' : '#ffffff',
-      weight:      changed ? 2 : 0.5,
+      color:       isPending ? '#C9A227' : (changed ? '#C9A227' : '#ffffff'),
+      weight:      isPending ? 2 : (changed ? 2 : 0.5),
+      dashArray:   isPending ? '6 4' : null,
       opacity:     1
     };
   });
+  // Re-apply stripe fills (setStyle resets them)
+  rdApplyStripes();
+}
+
+function rdAddLegend() {
+  var ctrl = L.control({ position: 'bottomleft' });
+  ctrl.onAdd = function() {
+    var div = L.DomUtil.create('div', 'rdml-ctrl');
+    div.innerHTML =
+      '<div class="rdml-title">Map key</div>'
+      + '<div class="rdml-item"><div class="rdml-sw rdml-solid"></div>Confirmed 2026 map in effect</div>'
+      + '<div class="rdml-item"><div class="rdml-sw rdml-stripe"></div>In Litigation — boundaries may change</div>'
+      + '<div class="rdml-item"><div class="rdml-sw rdml-dashed"></div>Pending — new map expected</div>'
+      + '<div class="rdml-item"><div class="rdml-sw rdml-base"></div>119th Congress baseline unchanged</div>';
+    L.DomEvent.disableClickPropagation(div);
+    return div;
+  };
+  ctrl.addTo(rdMap);
 }
 
 function initRedistrictingMap() {
@@ -2212,7 +2307,7 @@ function initRedistrictingMap() {
   // Build district lookup from data.json
   if (rdData && rdData.redistricting && Array.isArray(rdData.redistricting.districts)) {
     rdData.redistricting.districts.forEach(function(d) {
-      const key = d.state + '-' + parseInt(d.district, 10);
+      var key = d.state + '-' + parseInt(d.district, 10);
       rdDistrictLookup[key] = d;
     });
   }
@@ -2228,32 +2323,63 @@ function initRedistrictingMap() {
     subdomains: 'abcd', maxZoom: 19
   }).addTo(rdMap);
 
-  const loadingEl = document.getElementById('rd-map-loading');
+  var loadingEl = document.getElementById('rd-map-loading');
+  var pos = parseInt(document.getElementById('rd-slider').value, 10);
+
+  // Base style function (shared by both layers)
+  function baseStyle(feature) {
+    var state = ((feature || {}).properties || {}).state || '';
+    var d = rdDistrictLookup[rdFeatureKey(feature)];
+    var changed    = d && pos > 0 && d.baseline_rating !== d.current_rating;
+    var isPending  = PENDING_STATES.has(state);
+    return {
+      fillColor:   rdColorForFeature(feature, pos),
+      fillOpacity: 0.75,
+      color:       isPending ? '#C9A227' : (changed ? '#C9A227' : '#ffffff'),
+      weight:      isPending ? 2 : (changed ? 2 : 0.5),
+      dashArray:   isPending ? '6 4' : null,
+      opacity:     1
+    };
+  }
 
   fetch('https://raw.githubusercontent.com/unitedstates/districts/gh-pages/cds/2022/national.geojson')
     .then(function(r) { return r.json(); })
+    .then(function(baseGeo) { return rdMergeCustomGeoJSON(baseGeo); })
     .then(function(geo) {
-      const pos = parseInt(document.getElementById('rd-slider').value, 10);
+      // ── Base district layer ────────────────────────────────────────────────
       rdGeoLayer = L.geoJSON(geo, {
-        style: function(feature) {
-          const d = rdDistrictLookup[rdFeatureKey(feature)];
-          const changed = d && pos > 0 && d.baseline_rating !== d.current_rating;
-          return {
-            fillColor:   rdColorForFeature(feature, pos),
-            fillOpacity: 0.75,
-            color:       changed ? '#C9A227' : '#ffffff',
-            weight:      changed ? 2 : 0.5,
-            opacity:     1
-          };
-        },
+        style: baseStyle,
         onEachFeature: function(feature, layer) {
-          const p = feature.properties || {};
-          layer.bindTooltip(
-            (p.state || '') + '-' + (p.district || ''),
-            { sticky: true, className: 'rd-tip' }
-          );
+          var p = feature.properties || {};
+          var state = p.state || '';
+          var dist  = p.district || '';
+          var rd    = rdDistrictLookup[state + '-' + parseInt(dist, 10)];
+          var tipText = state + '-' + dist;
+          if (rd) tipText += ' — ' + (rd.current_rating || rd.baseline_rating || '');
+          layer.bindTooltip(tipText, { sticky: true, className: 'rd-tip' });
         }
       }).addTo(rdMap);
+
+      // ── Stripe overlay layer (litigation states only, non-interactive) ─────
+      rdStripeLayer = L.geoJSON(geo, {
+        style: function(feature) {
+          var state = ((feature || {}).properties || {}).state || '';
+          return LITIGATION_STATES.has(state)
+            ? { fillColor: '#F0A030', fillOpacity: 0, color: 'none', weight: 0 }
+            : { fillOpacity: 0, color: 'none', weight: 0 };
+        },
+        interactive: false
+      }).addTo(rdMap);
+
+      // Inject SVG pattern defs and set stripe fills
+      rdApplyStripes();
+
+      // Re-inject after zoom (SVG pane transform changes but defs persist)
+      rdMap.on('zoomend moveend', rdApplyStripes);
+
+      // Legend
+      rdAddLegend();
+
       if (loadingEl) loadingEl.style.display = 'none';
     })
     .catch(function(err) {

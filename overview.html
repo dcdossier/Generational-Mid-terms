@@ -237,7 +237,15 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .gb-context-box{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px}
 .gb-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .gb-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
-@media(max-width:600px){.gb-context-grid{grid-template-columns:1fr}.gb-pollster-bar-wrap{width:70px}}
+@media(max-width:600px){.gb-context-grid{grid-template-columns:1fr}.gb-pollster-bar-wrap{width:70px}.gb-comp-grid{grid-template-columns:1fr}}
+.gb-comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.gb-comp-item{background:var(--bg-s);border:1px solid var(--br);border-radius:8px;padding:16px;text-align:center;position:relative}
+.gb-comp-item.gb-comp-current{border-color:var(--orange);background:#fffaf2}
+.gb-comp-year{font-family:var(--serif);font-size:36px;font-weight:700;color:var(--t1);line-height:1}
+.gb-comp-margin{font-size:13px;font-weight:600;margin:4px 0 10px}
+.gb-comp-result{font-size:18px;font-weight:700;margin-bottom:4px}
+.gb-comp-ctx{font-size:11px;color:var(--t4);line-height:1.55}
+.gb-comp-badge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;background:var(--orange);color:#fff;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
 /* Generic ballot margin chart thresholds legend */
 .gb-thresh-row{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 6px}
 .gb-thresh-chip{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
@@ -1151,6 +1159,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </div>
     </div>
     <div class="chart-note">Regression based on 6 completed midterm cycles 2006&#8211;2022. One-standard-deviation range shown. The structural Republican geographic advantage means a D+3 lead is approximately equivalent to zero net seat change; a D+5 lead has historically produced +15 to +35 Democratic seats.</div>
+  </div>
+
+  <!-- ANALOGOUS MIDTERMS COMPARISON -->
+  <div class="chart-card">
+    <div class="card-title">Analogous midterms &#8212; closest margin matches</div>
+    <div class="card-sub">Historical midterm cycles whose final generic ballot margin was closest to the current reading. These comparison points bracket the structural range of Democratic seat outcomes in November 2026.</div>
+    <div class="gb-comp-grid" id="gb-comp-grid">
+      <div style="color:var(--t4);font-style:italic;text-align:center;padding:18px;grid-column:1/-1">Loading&#8230;</div>
+    </div>
+    <div class="chart-note">Selected by smallest absolute difference in D-R ballot margin vs current live reading. D seat change = net Democratic gain or loss. The structural Republican geographic advantage means even small D margins under-translate to seats.</div>
   </div>
 
   <!-- CONTEXT BOXES -->
@@ -3031,6 +3049,42 @@ function renderBallotStats() {
   renderPollsterTable(gb.pollsters || []);
   renderHistTable(gb.historical_midterms || []);
 
+  // ── Analogous midterms comparison grid ─────────────────────────────────────
+  const compGrid = document.getElementById('gb-comp-grid');
+  if (compGrid && Array.isArray(gb.historical_midterms)) {
+    const past = gb.historical_midterms.filter(h => h.year !== 2026 && h.d_seat_change !== null);
+    const sorted = past.slice().sort((a, b) =>
+      Math.abs((a.democrat - a.republican) - margin) - Math.abs((b.democrat - b.republican) - margin)
+    );
+    const top3 = sorted.slice(0, 3);
+    const cur2026 = gb.historical_midterms.find(h => h.year === 2026);
+    const items = cur2026 ? [cur2026, ...top3] : top3;
+    const GB_CTX = {
+      2006: 'Iraq War backlash, D wave', 2010: 'ACA backlash, Tea Party wave',
+      2014: 'Second-term drag, low turnout', 2018: 'Anti-Trump wave',
+      2022: 'Dobbs backlash offset by redistricting', 2026: 'Current cycle'
+    };
+    compGrid.innerHTML = items.map(h => {
+      const isCur = h.year === 2026;
+      const hm = h.democrat - h.republican;
+      const hmStr = hm > 0 ? '<span style="color:var(--blue)">D+' + hm + '</span>'
+                  : hm < 0 ? '<span style="color:#9B2828">R+' + Math.abs(hm) + '</span>'
+                  : '<span style="color:var(--t3)">Even</span>';
+      const sc = h.d_seat_change;
+      const scStr = sc === null
+        ? '<span style="color:var(--t4);font-style:italic">TBD</span>'
+        : sc > 0 ? '<span style="color:var(--green)">D+' + sc + ' seats</span>'
+        : '<span style="color:var(--red)">D' + sc + ' seats</span>';
+      return '<div class="gb-comp-item' + (isCur ? ' gb-comp-current' : '') + '">'
+        + (isCur ? '<div class="gb-comp-badge">2026</div>' : '')
+        + '<div class="gb-comp-year">' + h.year + '</div>'
+        + '<div class="gb-comp-margin">' + hmStr + ' ballot margin</div>'
+        + '<div class="gb-comp-result">' + scStr + '</div>'
+        + '<div class="gb-comp-ctx">' + (GB_CTX[h.year] || '') + '</div>'
+        + '</div>';
+    }).join('');
+  }
+
   // ── Dynamic context box "Current trajectory" ───────────────────────────────
   const trajEl = document.querySelector('#subpanel-ballot .gb-context-box:last-child p');
   if (trajEl && margin !== null) {
@@ -3052,8 +3106,14 @@ function renderBallotStats() {
 
 function renderPollsterTable(pollsters) {
   const tbody = document.getElementById('gb-pollster-tbody');
-  if (!pollsters.length) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--t4);text-align:center;padding:18px">No pollster data available.</td></tr>'; return; }
-  tbody.innerHTML = pollsters.map(p => {
+  // Filter out fetch-script artefacts: names containing '/' or values out of realistic range
+  const clean = pollsters.filter(p =>
+    !p.name.includes('/') &&
+    p.democrat >= 30 && p.democrat <= 65 &&
+    p.republican >= 30 && p.republican <= 65
+  );
+  if (!clean.length) { tbody.innerHTML = '<tr><td colspan="6" style="color:var(--t4);text-align:center;padding:18px">No pollster data available.</td></tr>'; return; }
+  tbody.innerHTML = clean.map(p => {
     const m = (p.democrat - p.republican).toFixed(1);
     const mStr = m > 0 ? '<span style="color:var(--blue)">D+' + m + '</span>' : m < 0 ? '<span style="color:#9B2828">R+' + Math.abs(m) + '</span>' : 'Even';
     const dW = Math.round(p.democrat / (p.democrat + p.republican) * 100);
@@ -3154,9 +3214,10 @@ function renderBallotCharts() {
         scales: {
           x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
           y: {
-            min: 38, max: 56,
+            min: Math.max(30, Math.floor((Math.min(...demData, ...repData) - 3) / 2) * 2),
+            max: Math.min(65, Math.ceil((Math.max(...demData, ...repData) + 3) / 2) * 2),
             grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
-            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 4 },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 2 },
             title: { display: true, text: 'Generic ballot %', font: { size: 11 }, color: '#959595' }
           }
         }
@@ -3204,8 +3265,8 @@ function renderBallotCharts() {
   }
 
   // Scatter: ballot margin vs seat change
+  // Use live gb.democrat/republican for the 2026 projection point (not stale historical_midterms row)
   const hist = (gb.historical_midterms || []).filter(h => h.d_seat_change !== null);
-  const current = gb.historical_midterms ? gb.historical_midterms.find(h => h.year === 2026) : null;
   const scatterCompleted = hist.map(h => ({ x: h.democrat - h.republican, y: h.d_seat_change, year: h.year }));
   // Simple linear regression for projection line
   const n = scatterCompleted.length;
@@ -3220,7 +3281,8 @@ function renderBallotCharts() {
     { x: xMin, y: Math.round(slope * xMin + intercept) },
     { x: xMax, y: Math.round(slope * xMax + intercept) }
   ];
-  const currentMargin = current ? current.democrat - current.republican : null;
+  // Live margin from top-level gb fields (updated by fetch-polls), not the stale midterms row
+  const currentMargin = (gb.democrat != null && gb.republican != null) ? gb.democrat - gb.republican : null;
   const projectedSeats = currentMargin !== null ? Math.round(slope * currentMargin + intercept) : null;
 
   new Chart(document.getElementById('c-gb-scatter'), {

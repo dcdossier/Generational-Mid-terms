@@ -1275,32 +1275,324 @@
     ]
   },
   "factions": {
-    "republican": [
+    "house": {
+      "republican": [
+        {
+          "name": "Freedom Caucus",
+          "abbr": "FC",
+          "members": 42,
+          "color": "#C04040",
+          "influence": "High",
+          "leader": "Andy Harris (MD)",
+          "ideology": "Hard-right conservative. Anti-establishment. Willing to block leadership priorities.",
+          "unity_score": 94,
+          "retirement_exposure": 5,
+          "seats_at_risk": 8,
+          "midterm_outlook": "mixed",
+          "outlook_label": "Mixed \u2014 leverages slim majority; suburban exposure",
+          "key_issues": [
+            "Immigration",
+            "Spending cuts",
+            "Deregulation"
+          ]
+        },
+        {
+          "name": "Republican Study Committee",
+          "abbr": "RSC",
+          "members": 176,
+          "color": "#D4504A",
+          "influence": "Very High",
+          "leader": "Richard Hudson (NC)",
+          "ideology": "Broad conservative umbrella \u2014 largest House caucus. Pushes right-of-centre legislative agenda.",
+          "unity_score": 89,
+          "retirement_exposure": 18,
+          "seats_at_risk": 22,
+          "midterm_outlook": "mixed",
+          "outlook_label": "Strong in safe seats; exposure in competitive districts",
+          "key_issues": [
+            "Tax cuts",
+            "National security",
+            "Regulatory rollback"
+          ]
+        },
+        {
+          "name": "Main Street Caucus",
+          "abbr": "MSC",
+          "members": 58,
+          "color": "#E08070",
+          "influence": "Moderate",
+          "leader": "Dusty Johnson (SD)",
+          "ideology": "Pragmatic, business-friendly Republicans. Moderate on immigration and social issues.",
+          "unity_score": 76,
+          "retirement_exposure": 9,
+          "seats_at_risk": 14,
+          "midterm_outlook": "positive",
+          "outlook_label": "Best-positioned if economy and tariffs stabilise",
+          "key_issues": [
+            "Trade",
+            "Agricultural policy",
+            "Bipartisanship"
+          ]
+        },
+        {
+          "name": "Problem Solvers (R)",
+          "abbr": "PS-R",
+          "members": 29,
+          "color": "#9B7BBE",
+          "influence": "Moderate",
+          "leader": "Brian Fitzpatrick (PA)",
+          "ideology": "Bipartisan centrists. Most likely to cross party lines. Hold genuinely competitive seats.",
+          "unity_score": 68,
+          "retirement_exposure": 4,
+          "seats_at_risk": 11,
+          "midterm_outlook": "negative",
+          "outlook_label": "High exposure \u2014 most seats competitive (PVI R+0 to R+3)",
+          "key_issues": [
+            "Infrastructure",
+            "Healthcare",
+            "Bipartisan compromise"
+          ]
+        }
+      ],
+      "democrat": [
+        {
+          "name": "Progressive Caucus",
+          "abbr": "CPC",
+          "members": 101,
+          "color": "#1A5EA8",
+          "influence": "High",
+          "leader": "Pramila Jayapal (WA)",
+          "ideology": "Left-progressive. Medicare for All, Green New Deal, housing reform. Energising base in opposition.",
+          "unity_score": 94,
+          "retirement_exposure": 12,
+          "seats_at_risk": 6,
+          "midterm_outlook": "positive",
+          "outlook_label": "Safe seats; energising base for potential 2026 wave",
+          "key_issues": [
+            "Healthcare",
+            "Climate",
+            "Economic justice"
+          ]
+        },
+        {
+          "name": "New Democrat Coalition",
+          "abbr": "NDC",
+          "members": 98,
+          "color": "#4A8FD8",
+          "influence": "High",
+          "leader": "Scott Peters (CA)",
+          "ideology": "Centrist, pro-business Democrats. Technology, trade, and fiscal responsibility focus.",
+          "unity_score": 83,
+          "retirement_exposure": 14,
+          "seats_at_risk": 18,
+          "midterm_outlook": "mixed",
+          "outlook_label": "Key battleground \u2014 holds most swing-district D seats",
+          "key_issues": [
+            "Tech regulation",
+            "Trade",
+            "Fiscal responsibility"
+          ]
+        },
+        {
+          "name": "Blue Dog Coalition",
+          "abbr": "BDC",
+          "members": 14,
+          "color": "#7BA8D4",
+          "influence": "Low",
+          "leader": "Sanford Bishop (GA)",
+          "ideology": "Conservative Democrats. Fiscally hawkish, moderate on social issues. Shrinking caucus each cycle.",
+          "unity_score": 71,
+          "retirement_exposure": 3,
+          "seats_at_risk": 5,
+          "midterm_outlook": "negative",
+          "outlook_label": "Diminishing \u2014 caucus shrinking with each election cycle",
+          "key_issues": [
+            "Deficit reduction",
+            "Rural issues",
+            "Bipartisanship"
+          ]
+        },
+        {
+          "name": "Problem Solvers (D)",
+          "abbr": "PS-D",
+          "members": 29,
+          "color": "#9B7BBE",
+          "influence": "Moderate",
+          "leader": "Josh Gottheimer (NJ)",
+          "ideology": "Bipartisan centrists. Work with Republican counterparts on compromise legislation.",
+          "unity_score": 69,
+          "retirement_exposure": 5,
+          "seats_at_risk": 9,
+          "midterm_outlook": "positive",
+          "outlook_label": "Mixed \u2014 suburban districts trended blue in 2024",
+          "key_issues": [
+            "Infrastructure",
+            "Healthcare",
+            "Bipartisan bills"
+          ]
+        },
+        {
+          "name": "The Squad",
+          "abbr": "SQ",
+          "members": 6,
+          "color": "#0D3580",
+          "influence": "Medium",
+          "leader": "Alexandria Ocasio-Cortez (NY)",
+          "ideology": "Democratic socialist. Outsized national media presence. Galvanises progressive grassroots.",
+          "unity_score": 97,
+          "retirement_exposure": 1,
+          "seats_at_risk": 2,
+          "midterm_outlook": "positive",
+          "outlook_label": "Safe \u2014 focus on expanding progressive wing nationally",
+          "key_issues": [
+            "Medicare for All",
+            "Climate",
+            "Palestine"
+          ]
+        }
+      ]
+    },
+    "senate": {
+      "republican": [
+        {
+          "name": "Conference Mainstream",
+          "members": 38,
+          "color": "#C04040",
+          "leader": "John Thune (SD)",
+          "note": "Broadly supportive of Trump agenda; occasionally breaks on norms"
+        },
+        {
+          "name": "Trump Loyalists",
+          "members": 12,
+          "color": "#8B0000",
+          "leader": "Tommy Tuberville (AL)",
+          "note": "Hold up procedural votes for leverage; push aggressive nominees"
+        },
+        {
+          "name": "Moderates / Swing",
+          "members": 3,
+          "color": "#E08070",
+          "leader": "Susan Collins (ME)",
+          "note": "Occasional swing votes \u2014 critical on judicial nominees and social riders"
+        }
+      ],
+      "democrat": [
+        {
+          "name": "Progressive Bloc",
+          "members": 12,
+          "color": "#1A5EA8",
+          "leader": "Ed Markey (MA)",
+          "note": "Highly unified in opposition; push bold progressive legislation"
+        },
+        {
+          "name": "Moderate / Centrist",
+          "members": 22,
+          "color": "#4A8FD8",
+          "leader": "Mark Warner (VA)",
+          "note": "Seek compromise; defend swing-state interests"
+        },
+        {
+          "name": "Independents (caucus D)",
+          "members": 4,
+          "color": "#7BA8D4",
+          "leader": "Bernie Sanders (VT)",
+          "note": "Caucus with Democrats; Sanders leads Budget push"
+        }
+      ]
+    },
+    "swing_blocs": [
       {
-        "name": "MAGA",
-        "approval": 0
+        "name": "Problem Solvers Caucus",
+        "total": 58,
+        "republican": 29,
+        "democrat": 29,
+        "leader_r": "Brian Fitzpatrick (PA)",
+        "leader_d": "Josh Gottheimer (NJ)",
+        "description": "Equal-membership bipartisan House caucus. Produced key infrastructure and budget compromise proposals in the 119th Congress.",
+        "recent_wins": [
+          "Bipartisan infrastructure framework",
+          "Government shutdown compromise text",
+          "Debt ceiling negotiation bridge"
+        ]
       },
       {
-        "name": "America First",
-        "approval": 0
-      },
-      {
-        "name": "Freedom Caucus",
-        "approval": 0
+        "name": "Bipartisan Senate Group",
+        "total": 12,
+        "republican": 7,
+        "democrat": 5,
+        "leader_r": "Susan Collins (ME)",
+        "leader_d": "Jeanne Shaheen (NH, ret.)",
+        "description": "Informal Senate coalition that negotiates cross-party deals on high-stakes legislation and emergency measures.",
+        "recent_wins": [
+          "Disaster relief compromise",
+          "Foreign aid package",
+          "Gang of 10 budget talks"
+        ]
       }
     ],
-    "democrat": [
+    "unity_history": [
       {
-        "name": "Progressive",
-        "approval": 0
+        "month": "Jan 25",
+        "fc": 96,
+        "rsc": 87,
+        "cpc": 93,
+        "ndc": 82
       },
       {
-        "name": "Squad",
-        "approval": 0
+        "month": "Mar 25",
+        "fc": 94,
+        "rsc": 89,
+        "cpc": 91,
+        "ndc": 84
       },
       {
-        "name": "Moderate",
-        "approval": 0
+        "month": "May 25",
+        "fc": 91,
+        "rsc": 88,
+        "cpc": 92,
+        "ndc": 83
+      },
+      {
+        "month": "Jul 25",
+        "fc": 89,
+        "rsc": 86,
+        "cpc": 94,
+        "ndc": 81
+      },
+      {
+        "month": "Sep 25",
+        "fc": 93,
+        "rsc": 90,
+        "cpc": 96,
+        "ndc": 85
+      },
+      {
+        "month": "Nov 25",
+        "fc": 92,
+        "rsc": 88,
+        "cpc": 95,
+        "ndc": 82
+      },
+      {
+        "month": "Jan 26",
+        "fc": 94,
+        "rsc": 89,
+        "cpc": 91,
+        "ndc": 83
+      },
+      {
+        "month": "Mar 26",
+        "fc": 90,
+        "rsc": 87,
+        "cpc": 93,
+        "ndc": 80
+      },
+      {
+        "month": "May 26",
+        "fc": 88,
+        "rsc": 85,
+        "cpc": 94,
+        "ndc": 79
       }
     ]
   },

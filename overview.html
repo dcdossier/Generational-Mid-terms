@@ -299,6 +299,59 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .ca-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .ca-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
 @media(max-width:640px){.ca-chamber-grid{grid-template-columns:1fr}.ca-context-grid{grid-template-columns:1fr}.ca-big-num{font-size:52px}}
+
+/* ── Faction Tracker ── */
+.ft-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:700px){.ft-columns{grid-template-columns:1fr}}
+.ft-col-header{font:600 13px var(--sans);padding:8px 12px;border-radius:6px 6px 0 0;color:#fff;margin-bottom:8px}
+.ft-col-r{background:#9B2226}
+.ft-col-d{background:#00509E}
+.ft-card{border:1px solid #E8E8E8;border-radius:8px;padding:14px;margin-bottom:10px}
+.ft-card-r{border-left:4px solid #C04040}
+.ft-card-d{border-left:4px solid #1A5EA8}
+.ft-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.ft-faction-name{font:700 14px var(--sans);color:#191919}
+.ft-leader{font:400 12px var(--sans);color:#6B6B6B;margin-top:2px}
+.ft-abbr{font:700 20px var(--sans);color:#ccc}
+.ft-members-num{font:700 28px var(--sans);color:#191919;line-height:1;margin:6px 0 4px}
+.ft-members-num span{font:400 13px var(--sans);color:#6B6B6B;margin-left:4px}
+.ft-bar-label{font:500 11px var(--sans);color:#6B6B6B;display:flex;justify-content:space-between;margin-bottom:3px}
+.ft-unity-track{background:#F0F0F0;border-radius:4px;height:6px;overflow:hidden;margin-bottom:10px}
+.ft-unity-fill-r{background:linear-gradient(90deg,#C04040,#E08070);height:100%;border-radius:4px}
+.ft-unity-fill-d{background:linear-gradient(90deg,#1A5EA8,#5B8FD4);height:100%;border-radius:4px}
+.ft-meta{display:flex;gap:12px;font:500 11px var(--sans);color:#6B6B6B;margin-bottom:8px;flex-wrap:wrap}
+.ft-outlook{display:inline-block;font:600 11px var(--sans);padding:2px 8px;border-radius:12px;margin-bottom:8px}
+.ft-outlook-positive{background:#D1FAE5;color:#065F46}
+.ft-outlook-mixed{background:#FEF3C7;color:#92400E}
+.ft-outlook-negative{background:#FEE2E2;color:#991B1B}
+.ft-issues{display:flex;flex-wrap:wrap;gap:4px}
+.ft-issue-tag{font:500 10px var(--sans);background:#F5F5F5;color:#555;padding:2px 7px;border-radius:10px}
+.ft-swing-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:700px){.ft-swing-grid{grid-template-columns:1fr}}
+.ft-swing-card{border:2px solid #C9A227;border-radius:10px;padding:18px}
+.ft-swing-name{font:700 16px var(--sans);color:#0d1b2e;margin-bottom:4px}
+.ft-swing-total{font:400 13px var(--sans);color:#888;margin-bottom:8px}
+.ft-swing-desc{font:400 13px var(--sans);color:#444;margin:8px 0;line-height:1.5}
+.ft-swing-split{display:flex;gap:10px;margin:10px 0}
+.ft-swing-side{flex:1;padding:8px;border-radius:6px;text-align:center}
+.ft-swing-side-r{background:rgba(192,64,64,.08)}
+.ft-swing-side-d{background:rgba(26,94,168,.08)}
+.ft-swing-count{font:700 28px var(--sans)}
+.ft-swing-count-r{color:#9B2226}
+.ft-swing-count-d{color:#00509E}
+.ft-swing-wins{margin-top:8px}
+.ft-swing-win{font:400 12px var(--sans);color:#555;padding:4px 0;border-bottom:1px solid #F0F0F0}
+.ft-swing-win::before{content:"✓ ";color:#C9A227;font-weight:700}
+.ft-senate-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+@media(max-width:700px){.ft-senate-grid{grid-template-columns:1fr}}
+.ft-senate-table{width:100%;border-collapse:collapse;font:400 12px var(--sans)}
+.ft-senate-table tr{border-bottom:1px solid #F0F0F0}
+.ft-senate-table td{padding:8px 6px;vertical-align:top}
+.ft-sname{font:600 13px var(--sans);color:#191919}
+.ft-scount{font:700 20px var(--sans);color:#C9A227;text-align:right;white-space:nowrap;padding-right:10px}
+.ft-snote{font:400 11px var(--sans);color:#888;line-height:1.4}
+.ft-sleader{font:500 12px var(--sans);color:#555;margin-bottom:2px}
+
 </style>
 </head>
 <body>
@@ -1248,7 +1301,58 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
 </div>
 </div>
-<div class="subpanel" id="subpanel-factions"><div class="panel-inner"><div class="coming-soon">Faction Tracker &#8212; Coming Soon</div></div></div>
+<div class="subpanel" id="subpanel-factions">
+<div class="panel-inner">
+
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-num" id="ft-stat-factions">16</div><div class="stat-label">Factions Tracked</div></div>
+    <div class="stat-box"><div class="stat-num" id="ft-stat-gop">305</div><div class="stat-label">GOP Caucus Members</div></div>
+    <div class="stat-box"><div class="stat-num" id="ft-stat-dem">248</div><div class="stat-label">Dem Caucus Members</div></div>
+    <div class="stat-box"><div class="stat-num" id="ft-stat-swing">58</div><div class="stat-label">Problem Solvers Bloc</div></div>
+  </div>
+
+  <h3 class="section-title">House of Representatives &mdash; Faction Landscape</h3>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 12px">Each faction card shows membership, legislative unity score (party-line vote %, Jan 2025&ndash;May 2026), retirement exposure, and competitive seat count heading into November 2026.</p>
+  <div class="ft-columns">
+    <div>
+      <div class="ft-col-header ft-col-r">&#9654; Republican Caucuses</div>
+      <div id="ft-gop-cards"></div>
+    </div>
+    <div>
+      <div class="ft-col-header ft-col-d">&#9654; Democratic Caucuses</div>
+      <div id="ft-dem-cards"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:20px">
+    <div class="card-title">Legislative Unity Score &mdash; Key Factions (119th Congress)</div>
+    <div class="card-sub">Party-line vote unity by faction, Jan 2025&ndash;May 2026. Higher = more cohesive bloc. Freedom Caucus and Squad maintain highest unity; Main Street Caucus and Blue Dogs most likely to cross the aisle.</div>
+    <div style="position:relative;height:260px"><canvas id="c-ft-unity"></canvas></div>
+    <div class="chart-note">Source: ProPublica Congress API, GovTrack.us party unity scores. Updated through May 2026. Unity score = share of votes cast with party majority.</div>
+  </div>
+
+  <h3 class="section-title" style="margin-top:24px">Swing Bloc Spotlight</h3>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 12px">Bipartisan caucuses that negotiate cross-party compromise on high-stakes legislation. With a slim 4-seat House majority, these blocs often determine whether bills pass at all.</p>
+  <div class="ft-swing-grid" id="ft-swing-cards"></div>
+
+  <h3 class="section-title" style="margin-top:24px">Senate Caucuses</h3>
+  <div class="ft-senate-grid">
+    <div>
+      <div class="ft-col-header ft-col-r">Republican Conference &mdash; 53 seats</div>
+      <table class="ft-senate-table" id="ft-senate-r"></table>
+    </div>
+    <div>
+      <div class="ft-col-header ft-col-d">Democratic Caucus &mdash; 47 seats</div>
+      <table class="ft-senate-table" id="ft-senate-d"></table>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:24px">
+    <strong>Slim Majority Dynamics:</strong> With Republicans holding only a 4&ndash;5 seat majority in the House, the Freedom Caucus (42 members) can single-handedly block any legislation, giving hardliners outsized leverage. Any 5+ Freedom Caucus defections sink a bill. This structural tension &mdash; between the governing majority&rsquo;s need to legislate and the hard-right&rsquo;s veto power &mdash; is a central driver of Congress&rsquo;s 16% approval rating and the &ldquo;throw the bums out&rdquo; sentiment heading into 2026.
+  </div>
+
+</div>
+</div>
 
 
 <!-- REDISTRICTING WATCH SUB-PANEL -->
@@ -1329,6 +1433,7 @@ function goSub(id, btn) {
   if (id === 'ballot') renderBallotCharts();
   if (id === 'favourability') renderFavourabilityCharts();
   if (id === 'congress-approval') renderCongressApprovalCharts();
+  if (id === 'factions') renderFactionCharts();
   if (id === 'redistricting') {
     setTimeout(initRedistrictingMap, 50);
     rdUpdateScoreboard(parseInt(document.getElementById('rd-slider').value, 10));
@@ -1361,6 +1466,7 @@ function renderAll() {
   renderBallotStats();
   renderFavourabilityStats();
   renderCongressApprovalStats();
+  renderFactionStats();
   const r = DATA.retirements;
   const meta = DATA.meta;
 
@@ -2913,6 +3019,124 @@ function renderCongressApprovalCharts() {
       ]
     });
   }
+}
+
+
+// ── FACTION TRACKER ──────────────────────────────────────────────────────────
+let ftChartsReady = false;
+
+function buildFactionCard(f, side) {
+  const fillClass = side === 'r' ? 'ft-unity-fill-r' : 'ft-unity-fill-d';
+  const cardClass = side === 'r' ? 'ft-card-r' : 'ft-card-d';
+  return `
+    <div class="ft-card ${cardClass}">
+      <div class="ft-card-top">
+        <div>
+          <div class="ft-faction-name">${f.name}</div>
+          <div class="ft-leader">${f.leader}</div>
+        </div>
+        <div class="ft-abbr">${f.abbr}</div>
+      </div>
+      <div class="ft-members-num">${f.members}<span>members</span></div>
+      <div class="ft-bar-label"><span>Legislative Unity</span><span>${f.unity_score}%</span></div>
+      <div class="ft-unity-track"><div class="${fillClass}" style="width:${f.unity_score}%"></div></div>
+      <div class="ft-meta">
+        <span>&#8599; ${f.retirement_exposure} retiring</span>
+        <span>&#9888; ${f.seats_at_risk} seats at risk</span>
+      </div>
+      <div class="ft-outlook ft-outlook-${f.midterm_outlook}">${f.outlook_label}</div>
+      <div class="ft-issues">${f.key_issues.map(i => `<span class="ft-issue-tag">${i}</span>`).join('')}</div>
+    </div>`;
+}
+
+function buildSwingCard(b) {
+  return `
+    <div class="ft-swing-card">
+      <div class="ft-swing-name">${b.name}</div>
+      <div class="ft-swing-total">${b.total} members total</div>
+      <div class="ft-swing-split">
+        <div class="ft-swing-side ft-swing-side-r">
+          <div class="ft-swing-count ft-swing-count-r">${b.republican}</div>
+          <div style="font:500 11px var(--sans);color:#9B2226;margin-bottom:3px">Republicans</div>
+          <div style="font:400 11px var(--sans);color:#6B6B6B">${b.leader_r}</div>
+        </div>
+        <div class="ft-swing-side ft-swing-side-d">
+          <div class="ft-swing-count ft-swing-count-d">${b.democrat}</div>
+          <div style="font:500 11px var(--sans);color:#00509E;margin-bottom:3px">Democrats</div>
+          <div style="font:400 11px var(--sans);color:#6B6B6B">${b.leader_d}</div>
+        </div>
+      </div>
+      <div class="ft-swing-desc">${b.description}</div>
+      <div class="ft-swing-wins">${b.recent_wins.map(w => `<div class="ft-swing-win">${w}</div>`).join('')}</div>
+    </div>`;
+}
+
+function renderFactionStats() {
+  if (!DATA || !DATA.factions) return;
+  const fac = DATA.factions;
+  const houseR = fac.house.republican;
+  const houseD = fac.house.democrat;
+
+  const totalFactions = houseR.length + houseD.length + fac.senate.republican.length + fac.senate.democrat.length + fac.swing_blocs.length;
+  const gopMembers = houseR.reduce((s,f) => s+f.members, 0);
+  const demMembers = houseD.reduce((s,f) => s+f.members, 0);
+  const swingTotal = fac.swing_blocs[0].total;
+
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+  set('ft-stat-factions', totalFactions);
+  set('ft-stat-gop', gopMembers);
+  set('ft-stat-dem', demMembers);
+  set('ft-stat-swing', swingTotal);
+
+  const gopCards = document.getElementById('ft-gop-cards');
+  if (gopCards) gopCards.innerHTML = houseR.map(f => buildFactionCard(f, 'r')).join('');
+  const demCards = document.getElementById('ft-dem-cards');
+  if (demCards) demCards.innerHTML = houseD.map(f => buildFactionCard(f, 'd')).join('');
+
+  const swingGrid = document.getElementById('ft-swing-cards');
+  if (swingGrid) swingGrid.innerHTML = fac.swing_blocs.map(buildSwingCard).join('');
+
+  const buildRow = s => `<tr>
+    <td>
+      <div class="ft-sname">${s.name}</div>
+      <div class="ft-sleader">${s.leader}</div>
+      <div class="ft-snote">${s.note}</div>
+    </td>
+    <td class="ft-scount">${s.members}</td>
+  </tr>`;
+  const senR = document.getElementById('ft-senate-r');
+  if (senR) senR.innerHTML = fac.senate.republican.map(buildRow).join('');
+  const senD = document.getElementById('ft-senate-d');
+  if (senD) senD.innerHTML = fac.senate.democrat.map(buildRow).join('');
+}
+
+function renderFactionCharts() {
+  if (ftChartsReady || !DATA || !DATA.factions) return;
+  ftChartsReady = true;
+  const uh = DATA.factions.unity_history;
+  new Chart(document.getElementById('c-ft-unity'), {
+    type: 'line',
+    data: {
+      labels: uh.map(d => d.month),
+      datasets: [
+        { label: 'Freedom Caucus (R)', data: uh.map(d => d.fc), borderColor: '#C04040', backgroundColor: 'rgba(192,64,64,.07)', fill: true, tension: 0.4, pointRadius: 3, borderWidth: 2 },
+        { label: 'Rep. Study Committee (R)', data: uh.map(d => d.rsc), borderColor: '#E08070', backgroundColor: 'transparent', tension: 0.4, pointRadius: 3, borderWidth: 2, borderDash: [4,2] },
+        { label: 'Progressive Caucus (D)', data: uh.map(d => d.cpc), borderColor: '#1A5EA8', backgroundColor: 'rgba(26,94,168,.07)', fill: true, tension: 0.4, pointRadius: 3, borderWidth: 2 },
+        { label: 'New Dem Coalition (D)', data: uh.map(d => d.ndc), borderColor: '#5B8FD4', backgroundColor: 'transparent', tension: 0.4, pointRadius: 3, borderWidth: 2, borderDash: [4,2] }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 14, boxWidth: 12 } },
+        tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+      },
+      scales: {
+        x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B' } },
+        y: { min: 60, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false }, ticks: { font: { size: 11 }, callback: v => v + '%' } }
+      }
+    }
+  });
 }
 
 loadData();

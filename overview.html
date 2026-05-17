@@ -352,6 +352,49 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .ft-snote{font:400 11px var(--sans);color:#888;line-height:1.4}
 .ft-sleader{font:500 12px var(--sans);color:#555;margin-bottom:2px}
 
+
+/* ── Previous Elections ── */
+.pe-results-table{width:100%;border-collapse:collapse;font:400 13px var(--sans)}
+.pe-results-table th{font:600 11px var(--sans);color:#888;text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:2px solid #E8E8E8;text-align:left;white-space:nowrap}
+.pe-results-table td{padding:10px 10px;border-bottom:1px solid #F0F0F0;vertical-align:middle}
+.pe-results-table tr:hover td{background:#FAFAFA}
+.pe-year-cell{font:700 15px var(--sans);color:#191919;white-space:nowrap}
+.pe-nick{font:400 11px var(--sans);color:#888;display:block;margin-top:2px}
+.pe-pres{font:400 13px var(--sans);color:#444;white-space:nowrap}
+.pe-party-r{color:#C04040;font-weight:700}
+.pe-party-d{color:#1A5EA8;font-weight:700}
+.pe-appr{font:700 14px var(--sans);text-align:center}
+.pe-change{font:700 14px var(--sans);text-align:center;white-space:nowrap}
+.pe-change-r{color:#C04040}
+.pe-change-d{color:#1A5EA8}
+.pe-change-n{color:#888}
+.pe-comp-bar{height:10px;border-radius:5px;overflow:hidden;display:flex;width:90px;min-width:70px}
+.pe-comp-d{background:#1A5EA8;height:100%}
+.pe-comp-r{background:#C04040;height:100%}
+.pe-comp-label{font:400 10px var(--sans);color:#888;margin-top:2px;text-align:center}
+.pe-wave{display:inline-block;font:600 10px var(--sans);padding:2px 7px;border-radius:10px;white-space:nowrap}
+.pe-wave-massive{background:#FEE2E2;color:#991B1B}
+.pe-wave-large-r{background:#FEE2E2;color:#991B1B}
+.pe-wave-large-d{background:#DBEAFE;color:#1E40AF}
+.pe-wave-moderate{background:#FEF3C7;color:#92400E}
+.pe-wave-modest{background:#F3F4F6;color:#555}
+.pe-wave-none{background:#D1FAE5;color:#065F46}
+.pe-wave-split{background:#F3F4F6;color:#555}
+.pe-spotlight-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:12px}
+.pe-spotlight-card{border:1px solid #E8E8E8;border-radius:10px;padding:18px;border-top:4px solid #C9A227}
+.pe-spotlight-year{font:700 28px var(--sans);color:#0d1b2e;line-height:1}
+.pe-spotlight-nick{font:600 14px var(--sans);color:#C9A227;margin-bottom:8px}
+.pe-spotlight-context{font:400 13px var(--sans);color:#444;line-height:1.55;margin-bottom:10px}
+.pe-factor-list{list-style:none;padding:0;margin:0}
+.pe-factor-list li{font:400 12px var(--sans);color:#555;padding:3px 0;border-bottom:1px solid #F5F5F5}
+.pe-factor-list li::before{content:"→ ";color:#C9A227;font-weight:700}
+.pe-stat-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font:600 12px var(--sans);margin:4px 4px 4px 0}
+.pe-badge-r{background:rgba(192,64,64,.1);color:#9B2226}
+.pe-badge-d{background:rgba(26,94,168,.1);color:#00509E}
+.pe-ballot-bar{height:18px;border-radius:4px;overflow:hidden;display:flex;margin:6px 0}
+.pe-ballot-d{background:#1A5EA8;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font:600 10px var(--sans)}
+.pe-ballot-r{background:#C04040;height:100%;display:flex;align-items:center;justify-content:center;color:#fff;font:600 10px var(--sans)}
+
 </style>
 </head>
 <body>
@@ -364,6 +407,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <button class="subtab-btn" onclick="goSub('ballot',this)">Generic Ballot</button>
       <button class="subtab-btn" onclick="goSub('favourability',this)">Party Favourability</button>
       <button class="subtab-btn" onclick="goSub('congress-approval',this)">Congress Approval</button>
+      <button class="subtab-btn" onclick="goSub('previous',this)">Previous Elections</button>
       <button class="subtab-btn" onclick="goSub('factions',this)">Faction Tracker</button>
       <button class="subtab-btn" onclick="goSub('redistricting',this)">Redistricting Watch</button>
     </div>
@@ -1301,6 +1345,62 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
 </div>
 </div>
+<div class="subpanel" id="subpanel-previous">
+<div class="panel-inner">
+
+  <div class="stat-strip">
+    <div class="stat-box"><div class="stat-num" id="pe-stat-cycles">8</div><div class="stat-label">Cycles Covered</div></div>
+    <div class="stat-box"><div class="stat-num" id="pe-stat-avg">-22</div><div class="stat-label">Avg House Seat Loss (Pres. Party)</div></div>
+    <div class="stat-box"><div class="stat-num" id="pe-stat-biggest">2010</div><div class="stat-label">Biggest Wave Year</div></div>
+    <div class="stat-box"><div class="stat-num" id="pe-stat-flipped">6</div><div class="stat-label">House Majority Flips</div></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Net House Seat Change per Midterm (1994&ndash;2022)</div>
+    <div class="card-sub">Positive = incumbent president&rsquo;s party gained seats. Negative = president&rsquo;s party lost seats. Red bars = Republican wave; blue = Democratic wave; grey = split or no wave.</div>
+    <div style="position:relative;height:220px"><canvas id="c-pe-house"></canvas></div>
+    <div class="chart-note">Source: Office of the Clerk, U.S. House of Representatives. Seat changes adjusted for vacancies at time of election.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Presidential Approval vs House Seat Change</div>
+    <div class="card-sub">Strong negative correlation (r ≈ −0.72). Presidents above ~55% approval tend to minimise losses or even gain; below 45% losses compound. The 2026 outlook (Trump ~44%) sits in the moderate-to-large loss zone historically.</div>
+    <div style="position:relative;height:260px"><canvas id="c-pe-scatter"></canvas></div>
+    <div class="chart-note">Note: Seat change shown from the president&rsquo;s party perspective (negative = president&rsquo;s party lost). Each point represents one midterm cycle.</div>
+  </div>
+
+  <h3 class="section-title" style="margin-top:24px">Full Results &mdash; 1994 to 2022</h3>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 10px">House and Senate results, composition bars, generic ballot, and economic indicators for each cycle.</p>
+  <div style="overflow-x:auto">
+    <table class="pe-results-table" id="pe-results-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>President</th>
+          <th>Approval</th>
+          <th>House &#916;</th>
+          <th>House Composition</th>
+          <th>Senate &#916;</th>
+          <th>Senate Composition</th>
+          <th>Generic Ballot</th>
+          <th>Unempl.</th>
+          <th>Wave</th>
+        </tr>
+      </thead>
+      <tbody id="pe-results-tbody"></tbody>
+    </table>
+  </div>
+
+  <h3 class="section-title" style="margin-top:28px">Wave Election Spotlights</h3>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 4px">The four major wave elections of the modern era &mdash; what drove them and what they changed.</p>
+  <div class="pe-spotlight-grid" id="pe-spotlight-cards"></div>
+
+  <div class="callout" style="margin-top:24px">
+    <strong>2026 Historical Context:</strong> With Trump&rsquo;s approval at ~44%, the historical regression suggests a loss of 20&ndash;35 House seats for Republicans — consistent with modest-to-large wave territory. However, several factors complicate the picture: the favourable Republican gerrymander reduces competitive seats; the Dobbs-era high Democratic enthusiasm may fade; and 2022 showed that candidate quality and abortion rights can outperform the macro model by 10&ndash;20 seats in either direction. The 2022 &ldquo;Dobbs dampener&rdquo; precedent looms largest — another structural issue (tariffs, healthcare) could similarly motivate the Democratic base beyond what generic polling suggests.
+  </div>
+
+</div>
+</div>
 <div class="subpanel" id="subpanel-factions">
 <div class="panel-inner">
 
@@ -1433,6 +1533,7 @@ function goSub(id, btn) {
   if (id === 'ballot') renderBallotCharts();
   if (id === 'favourability') renderFavourabilityCharts();
   if (id === 'congress-approval') renderCongressApprovalCharts();
+  if (id === 'previous') renderPreviousCharts();
   if (id === 'factions') renderFactionCharts();
   if (id === 'redistricting') {
     setTimeout(initRedistrictingMap, 50);
@@ -1466,6 +1567,7 @@ function renderAll() {
   renderBallotStats();
   renderFavourabilityStats();
   renderCongressApprovalStats();
+  renderPreviousStats();
   renderFactionStats();
   const r = DATA.retirements;
   const meta = DATA.meta;
@@ -3136,6 +3238,296 @@ function renderFactionCharts() {
         y: { min: 60, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false }, ticks: { font: { size: 11 }, callback: v => v + '%' } }
       }
     }
+  });
+}
+
+
+// ── PREVIOUS ELECTIONS ────────────────────────────────────────────────────────
+let peChartsReady = false;
+
+const WAVE_LABELS = {
+  massive: { label:'Massive R Wave', cls:'pe-wave-massive' },
+  'large-R': { label:'Large R Wave', cls:'pe-wave-large-r' },
+  'large-D': { label:'Large D Wave', cls:'pe-wave-large-d' },
+  large: { label:'Large Wave', cls:'pe-wave-large-r' },
+  moderate: { label:'Moderate R Wave', cls:'pe-wave-moderate' },
+  modest: { label:'Modest R Wave', cls:'pe-wave-modest' },
+  none: { label:'No Wave', cls:'pe-wave-none' },
+  split: { label:'Split Result', cls:'pe-wave-split' }
+};
+
+function peWaveInfo(m) {
+  if (m.wave === 'large') return m.wave_party === 'D' ? WAVE_LABELS['large-D'] : WAVE_LABELS['large-R'];
+  return WAVE_LABELS[m.wave] || { label: m.wave, cls: 'pe-wave-none' };
+}
+
+function compBar(d, r, total) {
+  const dpct = Math.round(d / total * 100);
+  const rpct = 100 - dpct;
+  return `<div class="pe-comp-bar">
+    <div class="pe-comp-d" style="width:${dpct}%"></div>
+    <div class="pe-comp-r" style="width:${rpct}%"></div>
+  </div>
+  <div class="pe-comp-label">${d}D &nbsp; ${r}R</div>`;
+}
+
+function ballotBar(d, r) {
+  const total = d + r;
+  const dpct = Math.round(d / total * 100);
+  const rpct = 100 - dpct;
+  return `<div class="pe-ballot-bar">
+    <div class="pe-ballot-d" style="width:${dpct}%">${d}%</div>
+    <div class="pe-ballot-r" style="width:${rpct}%">${r}%</div>
+  </div>`;
+}
+
+function changeCell(chg, party) {
+  // chg = from pres party perspective (negative = loss)
+  const sign = chg > 0 ? '+' : '';
+  const cls = chg > 0 ? 'pe-change-d' : chg < 0 ? 'pe-change-r' : 'pe-change-n';
+  return `<span class="${cls}">${sign}${chg}</span>`;
+}
+
+function renderPreviousStats() {
+  if (!DATA || !DATA.previous_elections) return;
+  const midterms = DATA.previous_elections.midterms;
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+
+  set('pe-stat-cycles', midterms.length);
+
+  // Avg House seat loss from pres party
+  const losses = midterms.filter(m => m.house.d_change < 0 || m.house.r_change < 0);
+  const presChanges = midterms.map(m => m.president_party === 'D' ? m.house.d_change : m.house.r_change);
+  const avg = Math.round(presChanges.reduce((s,v) => s+v, 0) / presChanges.length);
+  set('pe-stat-avg', avg > 0 ? '+'+avg : avg);
+
+  const biggest = midterms.reduce((b,m) => {
+    const absChg = Math.abs(m.president_party === 'D' ? m.house.d_change : m.house.r_change);
+    return absChg > b.val ? { year: m.year, val: absChg } : b;
+  }, { year: 0, val: 0 });
+  set('pe-stat-biggest', biggest.year);
+
+  const flipped = midterms.filter(m => m.house.flipped).length;
+  set('pe-stat-flipped', flipped);
+
+  // Build results table
+  const tbody = document.getElementById('pe-results-tbody');
+  if (tbody) {
+    tbody.innerHTML = midterms.map(m => {
+      const wi = peWaveInfo(m);
+      const presChange = m.president_party === 'D' ? m.house.d_change : m.house.r_change;
+      const senPresChange = m.president_party === 'D' ? m.senate.d_change : m.senate.r_change;
+      const approvalCls = m.president_approval >= 55 ? 'pe-change-d' : m.president_approval <= 45 ? 'pe-change-r' : '';
+      return `<tr>
+        <td class="pe-year-cell">${m.year}<span class="pe-nick">${m.nickname}</span></td>
+        <td class="pe-pres">${m.president}<br><span class="${m.president_party === 'D' ? 'pe-party-d' : 'pe-party-r'}">${m.president_party === 'D' ? 'Democrat' : 'Republican'}</span></td>
+        <td class="pe-appr"><span class="${approvalCls}">${m.president_approval}%</span></td>
+        <td class="pe-change">${changeCell(presChange, m.president_party)} <span style="font:400 10px var(--sans);color:#888">(pres. party)</span></td>
+        <td>${compBar(m.house.post_d, m.house.post_r, 435)}</td>
+        <td class="pe-change">${changeCell(senPresChange, m.president_party)}</td>
+        <td>${compBar(m.senate.post_d, m.senate.post_r, 100)}</td>
+        <td>${ballotBar(m.generic_ballot_d, m.generic_ballot_r)}</td>
+        <td style="text-align:center;font:500 12px var(--sans)">${m.unemployment}%</td>
+        <td><span class="pe-wave ${wi.cls}">${wi.label}</span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Wave spotlight cards — waves that are large or massive
+  const waves = midterms.filter(m => ['large','massive'].includes(m.wave));
+  const spotlight = document.getElementById('pe-spotlight-cards');
+  if (spotlight) {
+    spotlight.innerHTML = waves.map(m => {
+      const wi = peWaveInfo(m);
+      return `<div class="pe-spotlight-card">
+        <div class="pe-spotlight-year">${m.year}</div>
+        <div class="pe-spotlight-nick">${m.nickname} &mdash; <span class="pe-wave ${wi.cls}">${wi.label}</span></div>
+        <div class="pe-spotlight-context">${m.context}</div>
+        <ul class="pe-factor-list">${m.key_factors.map(f => `<li>${f}</li>`).join('')}</ul>
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:4px">
+          <span class="pe-stat-badge ${m.house.winner==='R'?'pe-badge-r':'pe-badge-d'}">
+            House: ${m.house.winner==='R'?'R':'D'} ${m.house.winner==='R'?'+'+m.house.r_change:'+'+m.house.d_change} seats
+          </span>
+          <span class="pe-stat-badge ${m.senate.winner==='R'?'pe-badge-r':'pe-badge-d'}">
+            Senate: ${m.senate.winner==='R'?'R':'D'} ${Math.abs(m.senate.d_change)>0?'flipped':'held'}
+          </span>
+          <span class="pe-stat-badge" style="background:#F5F5F5;color:#555">
+            Approval: ${m.president_approval}%
+          </span>
+        </div>
+      </div>`;
+    }).join('');
+  }
+}
+
+function renderPreviousCharts() {
+  if (peChartsReady || !DATA || !DATA.previous_elections) return;
+  peChartsReady = true;
+  const midterms = DATA.previous_elections.midterms;
+
+  // Pres-party seat change colors
+  const colors = midterms.map(m => {
+    if (m.wave === 'none') return '#6B6B6B';
+    if (m.wave_party === 'R' && m.president_party === 'D') return '#C04040'; // R wave = D loses = red bar (negative)
+    if (m.wave_party === 'R' && m.president_party === 'R') return '#3A8C5C'; // R wave = R gains = green
+    if (m.wave_party === 'D' && m.president_party === 'R') return '#1A5EA8'; // D wave = R loses = blue (negative)
+    if (m.wave_party === 'D' && m.president_party === 'D') return '#3A8C5C'; // D wave = D gains
+    return '#9B7BBE';
+  });
+
+  // Seat change from president's perspective
+  const presChanges = midterms.map(m => m.president_party === 'D' ? m.house.d_change : m.house.r_change);
+
+  // Bar colors: positive = green, negative = red
+  const barColors = presChanges.map(c => c >= 0 ? '#3A8C5C' : '#C04040');
+
+  new Chart(document.getElementById('c-pe-house'), {
+    type: 'bar',
+    data: {
+      labels: midterms.map(m => m.year),
+      datasets: [{
+        data: presChanges,
+        backgroundColor: barColors,
+        borderSkipped: false,
+        borderRadius: { topLeft: 4, topRight: 4, bottomLeft: 4, bottomRight: 4 }
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: ctx => `${midterms[ctx[0].dataIndex].year} — ${midterms[ctx[0].dataIndex].nickname}`,
+            label: ctx => {
+              const m = midterms[ctx.dataIndex];
+              const v = ctx.raw;
+              return ` President's party: ${v > 0 ? '+' : ''}${v} seats | ${m.president} (${m.president_party})`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: '#444' } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+          ticks: { font: { size: 11 }, callback: v => (v > 0 ? '+' : '') + v },
+          plugins: { afterDraw(chart) {} }
+        }
+      },
+      plugins: [{
+        id: 'zeroline',
+        afterDraw(chart) {
+          const { ctx, chartArea, scales } = chart;
+          const y = scales.y.getPixelForValue(0);
+          ctx.save();
+          ctx.strokeStyle = '#191919';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(chartArea.left, y);
+          ctx.lineTo(chartArea.right, y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }]
+    }
+  });
+
+  // Scatter: approval vs seat change (pres party)
+  const scatterData = midterms.map(m => ({
+    x: m.president_approval,
+    y: m.president_party === 'D' ? m.house.d_change : m.house.r_change,
+    label: `${m.year}\n${m.nickname}`,
+    party: m.president_party
+  }));
+
+  // Linear regression
+  const n = scatterData.length;
+  let sumX=0, sumY=0, sumXY=0, sumX2=0;
+  scatterData.forEach(p => { sumX+=p.x; sumY+=p.y; sumXY+=p.x*p.y; sumX2+=p.x*p.x; });
+  const slope = (n*sumXY - sumX*sumY)/(n*sumX2 - sumX*sumX);
+  const intercept = (sumY - slope*sumX)/n;
+  const xMin = 35, xMax = 70;
+  const regLine = [{ x:xMin, y:slope*xMin+intercept }, { x:xMax, y:slope*xMax+intercept }];
+
+  // 2026 projection
+  const trump2026Approval = DATA.approval && DATA.approval.trump ? DATA.approval.trump.approve : 44;
+  const proj2026 = slope * trump2026Approval + intercept;
+
+  new Chart(document.getElementById('c-pe-scatter'), {
+    type: 'scatter',
+    data: {
+      datasets: [
+        {
+          label: 'Midterm results',
+          data: scatterData,
+          backgroundColor: scatterData.map(p => p.party === 'D' ? '#1A5EA8' : '#C04040'),
+          pointRadius: 8,
+          pointHoverRadius: 10
+        },
+        {
+          label: 'Regression line',
+          type: 'line',
+          data: regLine,
+          borderColor: '#6B6B6B',
+          borderWidth: 1.5,
+          borderDash: [6,3],
+          pointRadius: 0,
+          fill: false
+        },
+        {
+          label: '2026 Projection',
+          data: [{ x: trump2026Approval, y: proj2026 }],
+          backgroundColor: '#C9A227',
+          pointRadius: 10,
+          pointStyle: 'triangle',
+          pointHoverRadius: 12
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 14, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              if (ctx.datasetIndex === 2) return ` 2026 Projection — Approval: ${ctx.raw.x}%, Projected Seat Change: ${Math.round(ctx.raw.y > 0 ? ctx.raw.y : ctx.raw.y)}`;
+              if (ctx.datasetIndex === 1) return null;
+              const m = midterms[ctx.dataIndex];
+              return ` ${m.year} ${m.nickname}: ${ctx.raw.x}% approval → ${ctx.raw.y > 0 ? '+' : ''}${ctx.raw.y} seats`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: 'Presidential Approval (%)', font: { size: 12 }, color: '#6B6B6B' },
+          min: 35, max: 72,
+          grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+          ticks: { font: { size: 11 }, callback: v => v + '%' }
+        },
+        y: {
+          title: { display: true, text: "President's Party Seat Change", font: { size: 12 }, color: '#6B6B6B' },
+          grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+          ticks: { font: { size: 11 }, callback: v => (v > 0 ? '+' : '') + v }
+        }
+      }
+    },
+    plugins: [{
+      id: 'pointLabels',
+      afterDatasetsDraw(chart) {
+        const ctx = chart.ctx;
+        const ds0 = chart.getDatasetMeta(0);
+        ctx.save();
+        ctx.font = '10px DM Sans, sans-serif';
+        ctx.fillStyle = '#555';
+        ds0.data.forEach((pt, i) => {
+          ctx.fillText(midterms[i].year, pt.x + 10, pt.y - 4);
+        });
+        ctx.restore();
+      }
+    }]
   });
 }
 

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-05-17T08:12:48.103Z",
+    "last_updated": "2026-05-17T09:05:57.889Z",
     "election_date": "2026-11-03",
     "forecaster_consensus": {
       "last_updated": "2026-05-17",
@@ -987,10 +987,10 @@
   },
   "approval": {
     "trump": {
-      "approve": 45,
-      "disapprove": 57,
+      "approve": 40,
+      "disapprove": 58.5,
       "unsure": 3,
-      "trend": 3,
+      "trend": -2,
       "history": [
         {
           "month": "Jan 2025",
@@ -1074,15 +1074,15 @@
         },
         {
           "month": "May 2026",
-          "approve": 45,
-          "disapprove": 57
+          "approve": 40,
+          "disapprove": 58.5
         }
       ]
     },
     "congress": {
-      "approve": 15.5,
+      "approve": 12,
       "disapprove": 86,
-      "trend": -0.5,
+      "trend": -4,
       "history": [
         {
           "month": "Jan 2025",
@@ -1116,7 +1116,7 @@
         },
         {
           "month": "May 2026",
-          "approve": 15.5,
+          "approve": 12,
           "disapprove": 86
         }
       ]
@@ -1131,9 +1131,9 @@
     }
   },
   "generic_ballot": {
-    "democrat": 56.5,
+    "democrat": 43,
     "republican": 47,
-    "trend_d": 0,
+    "trend_d": -13.5,
     "trend_r": 0,
     "undecided": 9,
     "history": [
@@ -1219,11 +1219,17 @@
       },
       {
         "month": "May 2026",
-        "democrat": 56.5,
+        "democrat": 43,
         "republican": 47
       }
     ],
     "pollsters": [
+      {
+        "name": "GNews:EmersonBallot / GNews:GenericBallot",
+        "democrat": 43,
+        "republican": 47,
+        "date": "May 2026"
+      },
       {
         "name": "GNews:GenericBallot / GNews:EmersonBallot",
         "democrat": 56.5,
@@ -1642,60 +1648,6 @@
   },
   "news": [
     {
-      "title": "Kansas U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNLXRTVkhNUnBRUTBFcnJxcVp1U2JGUE0wQmVlUWwxQ1hnajFRVXRWeDVwM1lYek5fUHAwenNBenpfUE93dlExakpyTGI0X2ZwUk9LRnZSRGJTNVI3aTF0aGx0Q1A4YUZiSGh6TkszUTRZMnFEZkZFOTNFWklIREladGNlcURhTmVCZUxF?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T06:02:03.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Kansas U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "'Be bold and courageous' - America's redistricting battle - RTE.ie",
-      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPaTJpbV9hOG9NZ1RHZWhqbjFDc1ZrNFpQdnVKb29vMnlZaGhTQ2JoWFgyazdqV2x2UkxNVFlNNG5jQVVsNXBIYzhFNzNjV3FmQl8xVUpqUjBYVmpHNjZweTNSdTZXOXptNHpnS01aZkExdlpYWVpPTlVKS1VwYmtVUHV0ejlsVGQtcEl2WndvM1c5YkU?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T06:00:02.000Z",
-      "tags": [
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "'Be bold and courageous' - America's redistricting battle  RTE.ie"
-    },
-    {
-      "title": "Louisiana Fifth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQck5HTllWYld0amp4QUVWZmprMlR3d2FENTE4WWozUXB2d21yT2R4M29PRnZGZlhnR1o0bGxmUlFYSkFVMXVLMTFwVndxR29hRWhKMmlsZngzN1B2bUlldjd4dVluZHFNdll3NzhGdVhQd3RwR054NTIwOWxXQ2JNM0VZU0M?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T05:01:05.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Louisiana Fifth Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Bill Cassidy’s fall is a warning sign for other Trump enemies",
-      "url": "https://www.politico.com/news/2026/05/17/trump-revenge-cassidy-louisiana-senate-00925408",
-      "source": "Politico Elections",
-      "date": "2026-05-17T04:29:19.000Z",
-      "tags": [
-        "Federal",
-        "Primary"
-      ],
-      "description": "Sen. Bill Cassidy’s (R-La.) primary loss is a massive warning sign for any Republicans who’ve provoked the president’s wrath — like Kentucky Rep. Thomas Massie."
-    },
-    {
-      "title": "Federal funding for Trump’s $400m ballroom in jeopardy after Senate ruling",
-      "url": "https://www.theguardian.com/us-news/2026/may/17/federal-funding-trump-ballroom-jeopardy-senate-ruling",
-      "source": "The Guardian",
-      "date": "2026-05-17T04:11:02.000Z",
-      "tags": [
-        "House",
-        "Senate",
-        "Federal"
-      ],
-      "description": "Proposal to fund $1bn in security additions for White House campus and  president’s new ballroom fails to meet procedural rulesA US Senate official on Saturday removed security funding that could be used for Donald Trump’s planned $400m White House ballroom from a massive spendin"
-    },
-    {
       "title": "Protests appear across the country as congressional map redistricting suppresses minority votes - thv11.com",
       "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxPM3JsNC1yMGNoZGhSaXJ6REJYaExad3c4UjJkOGZETnkzVWlLMlk5cWFNOGJZY01NRHd4V3V1cG9uUWhxaWZfRjJ0Z24xQVhGZjdSeFpRNlVVeS0yMWVET0hCUnJqU0FmZUo1dnhYMTVVb0tqRjFZODkwM2hFTTNLa0lCbjhQZnFlaG9fRDFTRXBWN2N0cTNWRjZkQWxVYkJFOFF4MWM5aFk3Zm12MkJjbFNLQmp3M2tmWXRPY05NdFRGcml2dC1WT1JxU1Fyb1pWdUtUTlVjRW1zREdEQjRpR1ctcEpGYlk?oc=5",
       "source": "Google News - Redistricting",
@@ -1706,16 +1658,6 @@
         "Redistricting"
       ],
       "description": "Protests appear across the country as congressional map redistricting suppresses minority votes  thv11.com"
-    },
-    {
-      "title": "Illinois Eighth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPZG04NV9oNXNfRTJvMXIweUNRb0FHSFE5eUZJUVc4djZ1MUhPeFFQR3RENTN5Q3NnTkVGdG1sSmwxb0xIZzhIM19TYTY2R2h1VkFhTzcwc2t4QjZab0N1b0NSUTlEdXFqT2w1cDNYWkdKeUg1OThkTE83d1ctbEpuQnI4QQ?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T03:24:54.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Illinois Eighth Congressional District 2026: Latest Polls  The New York Times"
     },
     {
       "title": "Louisiana Sen. Bill Cassidy loses in Republican primary, does not advance to runoff",
@@ -1820,17 +1762,6 @@
       "description": "Mississippi U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "Cassidy loses GOP primary in Louisiana as Trump-backed Letlow, Fleming make runoff",
-      "url": "https://rollcall.com/2026/05/16/bill-cassidy-loses-louisiana-primary-trump/",
-      "source": "Roll Call",
-      "date": "2026-05-16T23:49:39.000Z",
-      "tags": [
-        "Federal",
-        "Primary"
-      ],
-      "description": "Republican Sen. Bill Cassidy, who voted to convict Donald Trump at his 2021 impeachment trial, lost his bid for reelection Saturday after failing to make a primary runoff in Louisiana. Cassidy, a physician turned politician, was trailing in third place with about 25 percent of th"
-    },
-    {
       "title": "Haberman: Trump ‘has seemed far less attuned to voters’ concerns lately’",
       "url": "https://thehill.com/homenews/administration/5881694-trump-voter-disconnect-iran/",
       "source": "The Hill",
@@ -1840,26 +1771,6 @@
         "Federal"
       ],
       "description": "New York Times White House Correspondent Maggie Haberman on Friday pointed to a disconnect between voters and President Trump after he told reporters he does not think “even a little bit” about Americans’ financial situations when dealing with Iran. “He has seemed far less attune"
-    },
-    {
-      "title": "Idaho U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNSUVGSVZRYVd0Z2xBLU4ybzFwMllVaV9IbnZ2VWN6N0U0T3ozZER6Z2ZqaTM5bXZnc0VQUkEwMHRwWjVKRFRyaEVCYTRfTkI5ZWp3ZFlOaWF3OXVoTVkweV83Q3VXdWFzQldQa3N2dmc2YU43ODBlcE45a0l5ZjBlY2ZhbXVBWl9XaEE?oc=5",
-      "source": "Emerson (CO)",
-      "date": "2026-05-16T22:50:06.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Idaho U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Texas Ninth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5oemhfN3BUMEhWYTlaOHJ0M1NQS1dyQmUzRkZsR3praXJ6SWJUd0JWeDd5d29tS0VhT29qcGJSaVY0cGdXc2RNdVNuaHdad3J6T1dDeWwyRjgzQ1FpM05hWVF5ZDZBUjF6WUZGcGhoaUhTcXIyNWhTRHloU0x0QVk?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-16T22:39:33.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Texas Ninth Congressional District 2026: Latest Polls  The New York Times"
     },
     {
       "title": "Texas Second Congressional District 2026: Latest Polls - The New York Times",
@@ -2221,16 +2132,6 @@
       "description": "‘Good maps’: Paul Renner endorses latest Congressional reapportionment  Florida Politics"
     },
     {
-      "title": "Nebraska Governor Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOcWZIdExwTjJmNnhmdTRrcG1SRXBEMHNSSlJ3V1JoZ3h1RjJtSnpSSXdwalg2YUc1amlIbksyWG5GWTdiNlpWU1Z5SWhTMkR2bFNTS28yT3d5Z2lPenJVQmZMOHF3cFRrc2d1VXlsY3Z2VkdxNFdxcElBMW9XZ2gtU2o3ZjNhNXFpbzB1bA?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-16T15:45:29.000Z",
-      "tags": [
-        "Governorship"
-      ],
-      "description": "Nebraska Governor Election 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Virginia&#8217;s Spanberger fumes after Supreme Court declines to reinstate new map",
       "url": "https://thehill.com/homenews/state-watch/5881257-virginia-gov-blasts-supreme-court-redistricting/",
       "source": "The Hill",
@@ -2312,16 +2213,6 @@
         "Primary"
       ],
       "description": "Opposition websites, attack signs and mirroring allegations that their fellow Republican opponent is not as conservative as they claim are at the center of an increasingly antagonistic primary race for an open Clark County Commission seat."
-    },
-    {
-      "title": "California Third Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNS3JSQ0hwUVJqb3k1dEZyUHFLUEJNaDJiWThHSHN3TldBSTNTa2V0Rmp5b1RNSVFaMXcyLWZZdWNfenplQkJFMUFSUlh1Uk14ME9yNy1JQXpHMzFWRmtxTFVTYVNNcTBaYl9acm1ub3NLVXJCVkhKLW1Fa3lMVm4zUDVYdnJ0QQ?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-16T14:00:14.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "California Third Congressional District 2026: Latest Polls  The New York Times"
     },
     {
       "title": "Cassidy’s in the fight of his political life",
@@ -2510,18 +2401,6 @@
       "description": "South Dakota At-Large Congressional District 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "New Jersey Eighth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQZkMxRXZNVnBTdXNHSXZrcWk0WXItYVZIanJqYkdvZFk0czdocGJENGJoTF9EcGNZNTl1c1cxZmlBZ09tenRfd3hWXzBXamFpRk5KQktmVzVoOWNUSXh1VHZQcVNOcnN6b3AwMGJRVFJZQy1wTEVIZ3YyNHdVcHhlRFpOTXNfZw?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-16T10:59:22.000Z",
-      "tags": [
-        "Federal",
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "New Jersey Eighth Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Can a Republican defy Donald Trump and survive? Kentucky voters will decide",
       "url": "https://www.theguardian.com/us-news/2026/may/16/kentucky-republican-primary-election-massie-gallrein",
       "source": "The Guardian",
@@ -2697,6 +2576,132 @@
         "Major Update"
       ],
       "description": "Supreme Court rejects Virginia’s bid to restore congressional map favoring Democrats  AP News"
+    },
+    {
+      "title": "BernCo commission primary candidates make case for District 5 seat - Albuquerque Journal",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQbWdtUGRuWEdXWWlyb3FjZ2Z3R0EySHcxMVdoUmtTcnFKM1FJYy1OMTU2N25xZlRYeEVuWEVGcGJUYUY0cjE4UF8xUWdIOWFqQTZpVWdxbi04TGFIV2U0SmwwUFVNMG12VlJVUDBZb0RCYlNjVlQxTldrWXhvamkyeWx0VzdmUE1LVjRxeERJclhVWFExa29qVG8tNTF0bjFaX3Bad013SlRLQQ?oc=5",
+      "source": "Albuquerque Journal",
+      "date": "2026-05-16T02:28:00.000Z",
+      "tags": [
+        "Primary"
+      ],
+      "description": "BernCo commission primary candidates make case for District 5 seat  Albuquerque Journal"
+    },
+    {
+      "title": "BernCo commission primary candidates make a case for District 5 seat - Albuquerque Journal",
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPWjhSZkEzOXZnbzJzQ3VCeFRsZmZYcXFGYkJQZkJJX1VFbDZDYTFITTgzSEZpb3hwRlBDNmloVE9JcmlXTFYwV0NmMjB4MXoxbTlsZjN5Qm8wR3JycVZPaVk5OWNPdDNfS0s2MXJZNGVabUxJVjYxVW9sdHhUZnROeGpWRTF2ZXI4eGRnclhJc3ZQa2t5eUN3aUlidU4yZzVxX0FieUQwbjJ5Q29l?oc=5",
+      "source": "Albuquerque Journal",
+      "date": "2026-05-16T02:28:00.000Z",
+      "tags": [
+        "Primary"
+      ],
+      "description": "BernCo commission primary candidates make a case for District 5 seat  Albuquerque Journal"
+    },
+    {
+      "title": "Republicans revise ballroom security funding after parliamentarian meeting",
+      "url": "https://www.politico.com/live-updates/2026/05/15/congress/republicans-parliamentarian-ballroom-security-00925161",
+      "source": "Politico",
+      "date": "2026-05-16T02:16:07.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "“Technical adjustments” are necessary after conferring with the Senate rulekeeper, a GOP panel said."
+    },
+    {
+      "title": "Texas 18th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOa1o4TWZETjB0dHNPbFp2MU5iMXRxQk1xZl91ZmdmdXRWQjh4Zm9UTHNxQjZCbS1HMXBlS1c2Yk5SZm9yb1BVYkZRS214clNTWVFjckV5aFV6R3JHRVdsLVNfQ3lmSnBwLWY0N0hjTzBPZk5DU1RTN2dwQ3gwVk9oUQ?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T02:14:01.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Texas 18th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Nebraska Second Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOeWtCTl92RHlGbC03Z2RKNmUweTFnZnFUVUhRVlNfUF9zMHRrSTJmYlJVSEtsNGYyMldJSUNhNXFLVEZ2Q0FLZWtMVXRRam9TaXJpNk5tdHpFYnkxNk1CODlmNUg5ZzZ5QVk3WC13LURBb1BpTzlJY05VUFNLYzdlN0NDQQ?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T01:55:01.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Nebraska Second Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Texas 34th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPTzRnMkhKbGcwUmRNY0hvU3lEVGpCYWMxeGFNdkpkUzg2M1pvVm1BVUlyWFBrQjFGUHRuRGRlb1F0V0hZZlZrQVlyU3l3TFlZRkFfdmZFOGVoR3UwRmN3TV9nYUZ1dzRIbTc5V1FNd0tjRm5ZX3ZnaFVlZ04wb2xzcw?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T01:20:52.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Texas 34th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "New Mexico independents largely picking Democratic ballots in state's first semi-open primary - Albuquerque Journal",
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPalBULUM5dHZaa0Y3dFRNR29xSWtFdjNSVjEyNW9Ic0ZDMHVWQW9qbWVFNU5YNGxCVWxOdXoxcURoMVJCU3R6dGY1ZW11WWZoZ0xKOGl2OHdZWWc1QUxpaUJ4WGRlUlQxSElKY2xfVmUxT2dEQ0ZNajZTdGlvdTExcjg1ekZDRTFndXQyanhBVW9EX3RHMkx3d215Q1dHcnlFdl8zUG55Q090NXJHajdET0I4Q05Da2twWHA3YkQySFFEODB5azdBTGl1bVo?oc=5",
+      "source": "Albuquerque Journal",
+      "date": "2026-05-16T01:15:00.000Z",
+      "tags": [
+        "Primary"
+      ],
+      "description": "New Mexico independents largely picking Democratic ballots in state's first semi-open primary  Albuquerque Journal"
+    },
+    {
+      "title": "2026 Midterm Primary Election Calendar - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNZGNpVG94WTFTeEtVaGJwSEZEMEQ2UEpSS1pJd2p4R3FkRVBwVU9vOUFnSmxRMkNQRHd6eUxJeXFPZjZYdVlCc2tjS1ZsWTNRN2thOEZQWmxYN2VtUDFHZTNQaXlRTzFOZC1VV0JIVThnbk5PQlhZN0RNZG9URVpwY2E5cUJsQzRF?oc=5",
+      "source": "Quinnipiac (GA)",
+      "date": "2026-05-16T01:06:07.000Z",
+      "tags": [
+        "Primary"
+      ],
+      "description": "2026 Midterm Primary Election Calendar  The New York Times"
+    },
+    {
+      "title": "Tennessee’s sole congressional Democrat won’t run again after redistricting - The Washington Post",
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQd0J0Yk5pdG1LbFdSalJxMG9hUVRyQXhHakJPamRuTDhfMjNKRHAzR1ZnaVNDbnZqMmszRGNUaUJQY2RVTnBmdDNUUmJuY083ejU5QmFfSlpDRUFGN0lLeGdHakhKY1pVU2dlVUVZdjZGeHhBekJHSjU2eVhuUkg1ankwVUdiUVJVcWdFXy14VjQyQnRmYThCV0RxWTBhTWFEVDc0YjZtRXZXejZnY3lVWTR2aDYwbl9JaVo1akhtMWZoRTQ?oc=5",
+      "source": "Google News - Redistricting",
+      "date": "2026-05-16T00:40:46.000Z",
+      "tags": [
+        "Major Update",
+        "Federal",
+        "Redistricting"
+      ],
+      "description": "Tennessee’s sole congressional Democrat won’t run again after redistricting  The Washington Post"
+    },
+    {
+      "title": "North Carolina First Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPLWNJdjZRNGF4Z2pXRWJROUdlU0VwaC1KbXk2VjhUWW5WczB5N0dpeG01OVpEYkM2M0dTZ21GYmo1UXIyalVaX21WaWYxM2JMeTg0TEJWck5jYVNpOFZ5V1lQMXdNT2gzcENkOUFYUmRfX043dzI3Y01PaFlKS1R2clpZcUtsSWxzc09r?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T00:39:02.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "North Carolina First Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Millions of dollars later, Virginia's redistricting drama ends with a single, bland sentence from the U.S. Supreme Court - Cardinal News",
+      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxObEllYXU0VG1tQlRCVHQwSkR3SmNrTUNZcGhWbDI0TDdpZVJSUTM1SEVZdHFfWmtCOVM4N002dEZWYTlia2U3RnN5U3hZWkduNTR2R2MtYmhUcHNVdW9TXzNUUVJreDZqRlJMOGJrdU81UUJ2aE1MQTQyOTJfVEZONkt1XzQ3SG8zUVVfa3d2QUJUTHBqWUpsbmUzNUdTNnhJTXAwa0Qwb0xway1EbGxUQzB3d0QtRHFIdVhKQ1hmUTIzWUhTMko2M3FQUTdDSFJEUlF3SjhYcHRhUGtKUVkzOUVMQll4MndJ?oc=5",
+      "source": "Google News - Redistricting",
+      "date": "2026-05-16T00:37:28.000Z",
+      "tags": [
+        "Major Update",
+        "Senate",
+        "Redistricting"
+      ],
+      "description": "Millions of dollars later, Virginia's redistricting drama ends with a single, bland sentence from the U.S. Supreme Court  Cardinal News"
+    },
+    {
+      "title": "Redistricting map 2026: tracking the new congressional districts - The Times",
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNQTZmS0p3TUdKNzY3TFBVc0lGa01fQVA4R01zc2dTeUhNTEhtdUZGMGRDRzdrLU55SmZUSXRHRW10d1V6NV9nVm1LODhzSzg2UHlaelVWMTE0VHFpbTVQOHZJcVNtYUlYRUlYNGx5VENIZkpQbk9LRWpoNXZTOFpDUl92QWt0QUFrMzZZX0FSMGNqU1VBV3NRb0Zrb3JQWlBxY1NzOHBhbDN6cHlJUnc?oc=5",
+      "source": "Google News - Redistricting",
+      "date": "2026-05-15T23:58:00.000Z",
+      "tags": [
+        "Major Update",
+        "Federal",
+        "Redistricting"
+      ],
+      "description": "Redistricting map 2026: tracking the new congressional districts  The Times"
     }
   ],
   "analysis": [

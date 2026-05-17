@@ -71,22 +71,39 @@ function stripHtml(str) {
 }
 
 /**
- * Search for a number (with optional decimal) within ±windowChars of keyword.
- * Returns the first match, or null.
+ * Extract a percentage near `keyword` in text.  Tries three patterns in order:
+ *   P1 — explicit %:     "44%"  /  "44.5%"
+ *   P2 — word "percent": "52 percent"
+ *   P3 — bare number immediately after keyword (within 35 chars): "approve 44"
+ *         (restricted to 20–79 to rule out years, sentence counts, etc.)
+ * Returns the first match as a float, or null.
  */
-function extractPct(text, keyword, windowChars = 120) {
+function extractPct(text, keyword, windowChars = 150) {
   const lower = text.toLowerCase();
   const idx   = lower.indexOf(keyword.toLowerCase());
   if (idx === -1) return null;
-  const window = text.slice(Math.max(0, idx - windowChars), idx + windowChars);
-  const m = window.match(/(\d{1,3}(?:\.\d{1,2})?)\s*%/);
-  return m ? parseFloat(m[1]) : null;
+  const slice = text.slice(Math.max(0, idx - windowChars), idx + windowChars);
+
+  // P1: "NN%" — most reliable
+  let m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s*%/);
+  if (m) return parseFloat(m[1]);
+
+  // P2: "NN percent" or "NN.N percent"
+  m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s+percent\b/i);
+  if (m) return parseFloat(m[1]);
+
+  // P3: keyword then bare number within 35 chars — e.g. "approve 44", "approval at 44"
+  const afterKw = text.slice(idx + keyword.length, idx + keyword.length + 35);
+  m = afterKw.match(/\b([2-7]\d(?:\.\d{1,2})?)\b/);
+  if (m) return parseFloat(m[1]);
+
+  return null;
 }
 
 /**
- * Try multiple keyword variants and return the first non-null result.
+ * Try multiple keyword variants; return the first non-null result.
  */
-function extractAny(text, keywords, windowChars = 120) {
+function extractAny(text, keywords, windowChars = 150) {
   for (const kw of keywords) {
     const v = extractPct(text, kw, windowChars);
     if (v !== null) return v;
@@ -189,70 +206,117 @@ function makeAccum() {
   };
 }
 
+// ── SOURCE GROUPS ──────────────────────────────────────────────────────────────
+// Controls which fields each source is trusted to populate.
+
+const SRC_TRUMP_APPROVAL  = new Set(['Gallup', 'RealClearPolitics', 'YouGov']);
+const SRC_CONGRESS        = new Set(['Gallup', 'YouGov', 'Pew Research']);
+const SRC_GENERIC_BALLOT  = new Set(['RealClearPolitics', 'YouGov']);
+const SRC_PARTY_FAVOR     = new Set(['Pew Research', 'YouGov', 'Gallup']);
+
 // ── SIGNAL EXTRACTION ──────────────────────────────────────────────────────────
+// Returns an object of { fieldName: value } for every signal extracted from the
+// item.  Logs a single line per item that yields at least one signal.
 
 function extractSignals(item, accum) {
   const text  = `${item.title} ${item.description}`;
   const lower = text.toLowerCase();
+  const src   = item.source;
+  const hints = item.hints;
+  const found = {};   // field → value, for per-item logging
 
-  // ── Trump approval ──────────────────────────────────────────────────────────
-  const isTrumpApproval = (lower.includes('trump') && (lower.includes('approv') || lower.includes('disapprov')))
-    || item.hints.includes('trump_approval');
+  // ── Trump approve / disapprove ───────────────────────────────────────────────
+  // Trusted sources: Gallup, RCP, YouGov  +  any feed hinting 'trump_approval'
+  const doTrump = (SRC_TRUMP_APPROVAL.has(src) || hints.includes('trump_approval'))
+    && lower.includes('trump')
+    && (lower.includes('approv') || lower.includes('disapprov'));
 
-  if (isTrumpApproval) {
-    const approve    = extractAny(text, ['approve', 'approval']);
+  if (doTrump) {
+    const approve    = extractAny(text, ['approve', 'approval', 'job approval']);
     const disapprove = extractAny(text, ['disapprove', 'disapproval']);
 
-    if (approve    !== null && approve    > 25 && approve    < 75) accum.push('trump_approve',    approve,    item.source);
-    if (disapprove !== null && disapprove > 25 && disapprove < 75) accum.push('trump_disapprove', disapprove, item.source);
+    if (approve    !== null && approve    > 25 && approve    < 75) {
+      accum.push('trump_approve', approve, src);
+      found.trump_approve = approve;
+    }
+    if (disapprove !== null && disapprove > 25 && disapprove < 75) {
+      accum.push('trump_disapprove', disapprove, src);
+      found.trump_disapprove = disapprove;
+    }
   }
 
-  // ── Congress approval ───────────────────────────────────────────────────────
-  const isCongressApproval = ((lower.includes('congress') || lower.includes('congressional'))
-    && lower.includes('approv'))
-    || item.hints.includes('congress_approval');
+  // ── Congress approve / disapprove ───────────────────────────────────────────
+  // Trusted sources: Gallup, YouGov, Pew  +  congress_approval hint
+  const doCongress = (SRC_CONGRESS.has(src) || hints.includes('congress_approval'))
+    && (lower.includes('congress') || lower.includes('congressional'))
+    && lower.includes('approv');
 
-  if (isCongressApproval) {
-    const approve = extractAny(text, ['approve', 'approval']);
-    if (approve !== null && approve > 5 && approve < 55) accum.push('congress_approve', approve, item.source);
+  if (doCongress) {
+    const approve    = extractAny(text, ['congress approve', 'congressional approve', 'approve', 'approval']);
+    const disapprove = extractAny(text, ['congress disapprove', 'disapprove', 'disapproval']);
 
-    const disapprove = extractAny(text, ['disapprove', 'disapproval']);
-    if (disapprove !== null && disapprove > 30 && disapprove < 95) accum.push('congress_disapprove', disapprove, item.source);
+    if (approve    !== null && approve    >  5 && approve    < 55) {
+      accum.push('congress_approve', approve, src);
+      found.congress_approve = approve;
+    }
+    if (disapprove !== null && disapprove > 30 && disapprove < 95) {
+      accum.push('congress_disapprove', disapprove, src);
+      found.congress_disapprove = disapprove;
+    }
   }
 
-  // ── Generic ballot ──────────────────────────────────────────────────────────
-  const isGenericBallot = lower.includes('generic ballot')
-    || item.hints.includes('generic_ballot');
+  // ── Generic ballot D / R ────────────────────────────────────────────────────
+  // Trusted sources: RealClearPolitics, YouGov  +  generic_ballot hint
+  const doBallot = (SRC_GENERIC_BALLOT.has(src) || hints.includes('generic_ballot'))
+    && lower.includes('generic ballot');
 
-  if (isGenericBallot) {
+  if (doBallot) {
     const demPct = extractAny(text, ['democrat', 'democratic']);
     const repPct = extractAny(text, ['republican', 'gop']);
-    if (demPct !== null && demPct > 30 && demPct < 70) accum.push('ballot_dem', demPct, item.source);
-    if (repPct !== null && repPct > 30 && repPct < 70) accum.push('ballot_rep', repPct, item.source);
+
+    if (demPct !== null && demPct > 30 && demPct < 70) {
+      accum.push('ballot_dem', demPct, src);
+      found.ballot_dem = demPct;
+    }
+    if (repPct !== null && repPct > 30 && repPct < 70) {
+      accum.push('ballot_rep', repPct, src);
+      found.ballot_rep = repPct;
+    }
   }
 
   // ── Democrat party favourability ────────────────────────────────────────────
-  const isDemFavor = ((lower.includes('democrat') || lower.includes('democratic party'))
-    && (lower.includes('favor') || lower.includes('favour') || lower.includes('unfavor')))
-    || item.hints.includes('dem_favor');
+  // Trusted sources: Pew Research, YouGov, Gallup  +  dem_favor hint
+  const doDemFavor = (SRC_PARTY_FAVOR.has(src) || hints.includes('dem_favor'))
+    && (lower.includes('democrat') || lower.includes('democratic party'))
+    && (lower.includes('favor') || lower.includes('unfavor') || lower.includes('favour'));
 
-  if (isDemFavor) {
-    const fav = extractAny(text, ['favorable', 'favourably', 'approve', 'positive']);
-    if (fav !== null && fav > 15 && fav < 75) accum.push('dem_favor', fav, item.source);
-    const unfav = extractAny(text, ['unfavorable', 'unfavourably', 'disapprove', 'negative']);
-    if (unfav !== null && unfav > 15 && unfav < 85) accum.push('dem_unfavor', unfav, item.source);
+  if (doDemFavor) {
+    const fav   = extractAny(text, ['favorable', 'favourable', 'positive view']);
+    const unfav = extractAny(text, ['unfavorable', 'unfavourable', 'negative view']);
+
+    if (fav   !== null && fav   > 15 && fav   < 75) { accum.push('dem_favor',   fav,   src); found.dem_favor   = fav; }
+    if (unfav !== null && unfav > 15 && unfav < 85) { accum.push('dem_unfavor', unfav, src); found.dem_unfavor = unfav; }
   }
 
   // ── Republican party favourability ─────────────────────────────────────────
-  const isRepFavor = ((lower.includes('republican') || lower.includes('gop'))
-    && (lower.includes('favor') || lower.includes('favour') || lower.includes('unfavor')))
-    || item.hints.includes('rep_favor');
+  // Trusted sources: Pew Research, YouGov, Gallup  +  rep_favor hint
+  const doRepFavor = (SRC_PARTY_FAVOR.has(src) || hints.includes('rep_favor'))
+    && (lower.includes('republican') || lower.includes('gop'))
+    && (lower.includes('favor') || lower.includes('unfavor') || lower.includes('favour'));
 
-  if (isRepFavor) {
-    const fav = extractAny(text, ['favorable', 'favourably', 'approve', 'positive']);
-    if (fav !== null && fav > 15 && fav < 75) accum.push('rep_favor', fav, item.source);
-    const unfav = extractAny(text, ['unfavorable', 'unfavourably', 'disapprove', 'negative']);
-    if (unfav !== null && unfav > 15 && unfav < 85) accum.push('rep_unfavor', unfav, item.source);
+  if (doRepFavor) {
+    const fav   = extractAny(text, ['favorable', 'favourable', 'positive view']);
+    const unfav = extractAny(text, ['unfavorable', 'unfavourable', 'negative view']);
+
+    if (fav   !== null && fav   > 15 && fav   < 75) { accum.push('rep_favor',   fav,   src); found.rep_favor   = fav; }
+    if (unfav !== null && unfav > 15 && unfav < 85) { accum.push('rep_unfavor', unfav, src); found.rep_unfavor = unfav; }
+  }
+
+  // ── Per-item log ────────────────────────────────────────────────────────────
+  if (Object.keys(found).length > 0) {
+    const pairs  = Object.entries(found).map(([k, v]) => `${k}=${v}`).join(', ');
+    const title  = item.title.length > 72 ? item.title.slice(0, 69) + '…' : item.title;
+    console.log(`  [${src}] "${title}" → ${pairs}`);
   }
 }
 
@@ -283,19 +347,19 @@ async function main() {
   const allItems = results.flat();
   console.log(`[fetch-polls] Fetched ${allItems.length} items from ${POLL_FEEDS.length} feeds.`);
 
-  // Accumulate signals across all items
+  // Extract signals — per-item log lines emitted inside extractSignals()
   const accum = makeAccum();
   for (const item of allItems) {
     extractSignals(item, accum);
   }
 
-  // Log collected signal counts
-  for (const field of ['trump_approve', 'trump_disapprove', 'congress_approve', 'congress_disapprove',
-                        'ballot_dem', 'ballot_rep', 'dem_favor', 'dem_unfavor', 'rep_favor', 'rep_unfavor']) {
-    if (accum.count(field) > 0) {
-      console.log(`  [${field}] ${accum.count(field)} signal(s) from: ${accum.sources(field).join(', ')}`);
-    }
-  }
+  // Summary: how many signals collected per field
+  const ALL_FIELDS = ['trump_approve', 'trump_disapprove', 'congress_approve', 'congress_disapprove',
+                      'ballot_dem', 'ballot_rep', 'dem_favor', 'dem_unfavor', 'rep_favor', 'rep_unfavor'];
+  const summary = ALL_FIELDS.filter(f => accum.count(f) > 0)
+    .map(f => `${f}(${accum.count(f)})`).join(', ');
+  console.log(`[fetch-polls] Signals collected: ${summary || 'none'}`);
+  console.log('[fetch-polls] Applying medians…');
 
   const month = monthLabel();
   let updatesApplied = 0;

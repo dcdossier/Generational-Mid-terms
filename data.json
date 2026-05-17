@@ -1,7 +1,45 @@
 {
   "meta": {
     "last_updated": "2026-05-17T06:00:00Z",
-    "election_date": "2026-11-03"
+    "election_date": "2026-11-03",
+    "forecaster_consensus": {
+      "last_updated": "2026-05-17",
+      "house": {
+        "rating": "Lean R Hold",
+        "rating_class": "lean-r",
+        "sources": [
+          "Cook Political Report",
+          "Sabato's Crystal Ball",
+          "Inside Elections"
+        ],
+        "summary": "D need +5 net seats; 22 toss-ups are decisive",
+        "projected_r": "220\u2013230",
+        "projected_d": "205\u2013215"
+      },
+      "senate": {
+        "rating": "Likely R Hold",
+        "rating_class": "likely-r",
+        "sources": [
+          "Cook Political Report",
+          "Sabato's Crystal Ball",
+          "Inside Elections"
+        ],
+        "summary": "D need to flip 4 R seats on tough Class II map",
+        "projected_r": "51\u201354",
+        "projected_d": "46\u201349"
+      },
+      "governors": {
+        "rating": "4 Toss-ups",
+        "rating_class": "tossup",
+        "sources": [
+          "Cook Political Report",
+          "Sabato's Crystal Ball"
+        ],
+        "summary": "ME, MI, NV, WI all genuine toss-ups",
+        "projected_r": "25\u201328",
+        "projected_d": "22\u201325"
+      }
+    }
   },
   "retirements": {
     "total": 67,
@@ -2636,7 +2674,193 @@
       "description": "Lulgjuraj can stay on ballot in key GOP House race, state board says  The Detroit News"
     }
   ],
-  "analysis": [],
+  "analysis": [
+    {
+      "type": "Newsletter",
+      "title": "2026 Senate Ratings: Democrats' Narrow Path on a Brutal Map",
+      "source": "Cook Political Report",
+      "url": "https://cookpolitical.com",
+      "description": "Initial 2026 Senate ratings show Democrats defending two toss-up seats (GA, NH) while needing to flip four Lean Republican seats for a majority. Cook rates the overall Senate environment as 'Likely R Hold' \u2014 noting the Class II map heavily favours incumbents in red-leaning states.",
+      "date": "2026-03-15",
+      "added": "2026-03-15",
+      "tags": [
+        "Senate"
+      ]
+    },
+    {
+      "type": "Newsletter",
+      "title": "Crystal Ball Initial 2026 House Ratings: 22 Toss-ups, D Needs +5",
+      "source": "Sabato's Crystal Ball",
+      "url": "https://centerforpolitics.org/crystalball",
+      "description": "Kyle Kondik and J. Miles Coleman open with 22 Toss-up House seats. Democrats need a net 5-seat gain \u2014 achievable historically when presidential approval sits below 45%, but complicated by post-2020 gerrymander locking in safe seats on both sides.",
+      "date": "2026-02-28",
+      "added": "2026-02-28",
+      "tags": [
+        "House"
+      ]
+    },
+    {
+      "type": "Newsletter",
+      "title": "Inside Elections Governor Ratings: Four True Toss-ups",
+      "source": "Inside Elections",
+      "url": "https://insideelections.com",
+      "description": "Nathan Gonzales rates Maine, Michigan, Nevada, and Wisconsin as pure toss-ups in the gubernatorial cycle. Democratic wins in MI and WI would restore executive infrastructure critical for 2030 redistricting and 2028 presidential ground games.",
+      "date": "2026-04-10",
+      "added": "2026-04-10",
+      "tags": [
+        "Governorship"
+      ]
+    },
+    {
+      "type": "Research Paper",
+      "title": "Redistricting, Competition, and the 2026 Midterms",
+      "source": "Brookings Institution",
+      "url": "https://brookings.edu",
+      "description": "Brookings analysis of the post-2020 redistricting cycle finds that the number of genuinely competitive House districts has fallen to a modern low of ~35\u201340. The report argues that the GOP gerrymander advantage is offset by natural sorting of Democrats into urban districts, leaving toss-up territory smaller but more decisive.",
+      "date": "2026-01-20",
+      "added": "2026-01-20",
+      "tags": [
+        "House",
+        "Redistricting"
+      ]
+    },
+    {
+      "type": "Research Paper",
+      "title": "Political Polarization and Midterm Voter Turnout Patterns",
+      "source": "Pew Research Center",
+      "url": "https://pewresearch.org",
+      "description": "Pew survey data shows record partisan motivation heading into 2026 \u2014 74% of registered Democrats say the election is 'very important,' the highest pre-midterm Democratic intensity since 2018. Republican intensity lags at 61%, potentially reversing the enthusiasm gap that helped the party in 2022.",
+      "date": "2026-04-22",
+      "added": "2026-04-22",
+      "tags": [
+        "Federal"
+      ]
+    },
+    {
+      "type": "Research Paper",
+      "title": "Presidential Approval, the Economy, and Midterm Seat Loss: A 80-Year Review",
+      "source": "American Enterprise Institute",
+      "url": "https://aei.org",
+      "description": "AEI regression analysis of midterm outcomes 1946\u20132022 finds presidential approval and real disposable income growth are the two strongest predictors of seat change. The model projects Republican losses of 18\u201332 House seats based on current Trump approval (~44%) and tariff-dampened growth projections.",
+      "date": "2026-03-05",
+      "added": "2026-03-05",
+      "tags": [
+        "Federal"
+      ]
+    },
+    {
+      "type": "Op-Ed",
+      "title": "The Freedom Caucus Is the GOP's Biggest 2026 Liability",
+      "source": "Politico Magazine",
+      "url": "https://politico.com",
+      "description": "With Congress at 16% approval and three near-shutdowns in the 119th Congress, Politico argues that Freedom Caucus procedural brinksmanship \u2014 not Democratic messaging \u2014 is the dominant driver of anti-incumbent sentiment. The piece profiles six vulnerable R incumbents in suburban toss-up districts where Freedom Caucus association is now a liability.",
+      "date": "2026-04-18",
+      "added": "2026-04-18",
+      "tags": [
+        "House",
+        "Federal"
+      ]
+    },
+    {
+      "type": "Op-Ed",
+      "title": "The Dobbs Effect Is Still Alive. Don't Underestimate It.",
+      "source": "The Atlantic",
+      "url": "https://theatlantic.com",
+      "description": "Analysis of state-level ballot results since 2022 shows abortion rights measures have passed in 7 of 7 states where they've appeared, outperforming the generic Democratic ballot by 8\u201314 points. The piece argues 2026 will be the first federal midterm where Dobbs has a full two-cycle mobilisation effect on suburban women voters.",
+      "date": "2026-03-28",
+      "added": "2026-03-28",
+      "tags": [
+        "Federal"
+      ]
+    },
+    {
+      "type": "Op-Ed",
+      "title": "Redistricting Is Shaping the 2026 Map in Ways Polls Can't Capture",
+      "source": "Washington Post",
+      "url": "https://washingtonpost.com",
+      "description": "The Post's Dave Weigel examines how aggressive Republican gerrymanders in Ohio, Georgia, and Texas have packed Democratic voters so efficiently that even a D+8 national environment might only translate to D+4 seats gained. Conversely, court-ordered maps in North Carolina and Alabama may add 3\u20134 competitive seats Democrats would otherwise not contest.",
+      "date": "2026-02-14",
+      "added": "2026-02-14",
+      "tags": [
+        "House",
+        "Redistricting"
+      ]
+    },
+    {
+      "type": "Op-Ed",
+      "title": "Congressional Approval at 16%: Why the 'Throw the Bums Out' Electorate Rarely Does",
+      "source": "The New York Times",
+      "url": "https://nytimes.com",
+      "description": "Despite historically low congressional approval, gerrymandering ensures fewer than 50 House incumbents face real competition. The piece examines why structural factors \u2014 safe districts, incumbency advantage, name recognition \u2014 routinely insulate members even from wave elections, and what conditions might change that calculus in 2026.",
+      "date": "2026-05-02",
+      "added": "2026-05-02",
+      "tags": [
+        "Federal",
+        "House"
+      ]
+    },
+    {
+      "type": "Podcast",
+      "title": "2026 Midterms Early Preview: What the Generic Ballot Tells Us",
+      "source": "NPR Politics Podcast",
+      "url": "https://npr.org/podcasts/510310/npr-politics-podcast",
+      "description": "Mara Liasson, Asma Khalid, and Scott Detrow break down the latest generic ballot polling (D+5) and what it historically implies for House seat changes. The episode includes a segment on how tariff uncertainty is reshaping economic voting and whether Republicans can decouple congressional candidates from presidential unpopularity.",
+      "date": "2026-04-30",
+      "added": "2026-04-30",
+      "tags": [
+        "Federal",
+        "House"
+      ]
+    },
+    {
+      "type": "Podcast",
+      "title": "The Senate Map for 2026: Can Democrats Win Georgia and New Hampshire?",
+      "source": "FiveThirtyEight Politics",
+      "url": "https://abcnews.go.com/fivethirtyeight",
+      "description": "Nate Silver and Nathaniel Rakich examine whether Jon Ossoff in Georgia and the open NH seat are genuinely winnable for Democrats given state-level trends. The conversation covers candidate quality as the swing factor \u2014 noting the 2022 Georgia model (Warnock over Walker) as the key precedent.",
+      "date": "2026-05-07",
+      "added": "2026-05-07",
+      "tags": [
+        "Senate"
+      ]
+    },
+    {
+      "type": "Interview",
+      "title": "DCCC Chair on the 2026 House Map: 'We Can Win This'",
+      "source": "Politico",
+      "url": "https://politico.com",
+      "description": "Politico's interview with DCCC Chair Suzan DelBene outlines the committee's targeting strategy \u2014 focusing on 18 Republican-held seats in districts Biden won in 2020. DelBene flags NY-17, PA-07, CA-27, and MI-07 as the core of the Democratic path to 218, and discusses the committee's $90M fundraising head start.",
+      "date": "2026-04-03",
+      "added": "2026-04-03",
+      "tags": [
+        "House"
+      ]
+    },
+    {
+      "type": "Interview",
+      "title": "NRCC Chair Tom Emmer on Defending the Majority: 'The Map Is Our Friend'",
+      "source": "The Hill",
+      "url": "https://thehill.com",
+      "description": "NRCC Chair Tom Emmer makes the case that Republican gerrymanders in states like Ohio, Georgia, and North Carolina have structurally reduced the number of vulnerable R seats to fewer than 15 \u2014 below the threshold Democrats need to flip. Emmer acknowledges tariff headwinds but argues local candidate quality will dominate in toss-up districts.",
+      "date": "2026-04-15",
+      "added": "2026-04-15",
+      "tags": [
+        "House"
+      ]
+    },
+    {
+      "type": "Research Paper",
+      "title": "The Generic Ballot Translation Problem: From National Polling to Seat Gains",
+      "source": "Democracy Fund / UCLA Nationscape",
+      "url": "https://democracyfund.org",
+      "description": "New academic research quantifies the 'translation penalty' \u2014 in 2022, Democrats won the national House vote by 2.8% but only gained a net 0 seats due to geographic efficiency gaps. The paper models 2026 scenarios showing Democrats need a D+6 or higher national environment to reliably flip the House, due to incumbent R advantages in lean-R toss-up districts.",
+      "date": "2026-03-18",
+      "added": "2026-03-18",
+      "tags": [
+        "House"
+      ]
+    }
+  ],
   "races": {
     "senate": {
       "cycle": 2026,

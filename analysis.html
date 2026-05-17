@@ -304,6 +304,44 @@ body {
   padding: 10px 0 18px;
 }
 
+
+/* FORECASTER CONSENSUS */
+.forecaster-header {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a2f4a 100%);
+  padding: 20px 28px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.forecaster-meta { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.forecaster-label { font: 700 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
+.forecaster-as-of { font: 400 11px var(--sans); color: rgba(255,255,255,.45); }
+.forecaster-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+@media(max-width:600px){ .forecaster-grid { grid-template-columns: 1fr; } }
+.fc-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 14px 16px; }
+.fc-chamber { font: 700 10px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 6px; }
+.fc-rating { display: inline-block; font: 700 13px var(--sans); padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
+.fc-rating-likely-r { background: rgba(192,64,64,.25); color: #FF9090; }
+.fc-rating-lean-r   { background: rgba(224,128,112,.25); color: #FFBB99; }
+.fc-rating-tossup   { background: rgba(201,162,39,.25); color: #FFD97D; }
+.fc-rating-lean-d   { background: rgba(91,143,212,.25); color: #90C0FF; }
+.fc-rating-likely-d { background: rgba(26,94,168,.25); color: #80AAFF; }
+.fc-seats { font: 400 11px var(--sans); color: rgba(255,255,255,.7); margin-bottom: 4px; }
+.fc-summary { font: 400 11px var(--sans); color: rgba(255,255,255,.5); line-height: 1.45; }
+.fc-sources-label { font: 400 10px var(--sans); color: rgba(255,255,255,.35); margin-top: 8px; }
+.forecaster-disclaimer { font: 400 11px var(--sans); color: rgba(255,255,255,.3); margin-top: 12px; line-height: 1.5; }
+
+/* ANALYSIS CARD ENHANCEMENTS */
+.card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.card-tag { font: 700 9px var(--sans); letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
+
+/* READING PROGRESS */
+.analysis-header { padding: 16px 28px 0; display: flex; align-items: center; justify-content: space-between; }
+.analysis-count { font: 400 12px var(--sans); color: var(--text3); }
+
+/* NEWS ADDITIONS */
+.tag-redistricting { background: #ECFDF5; color: #065F46; }
+.tag-polling       { background: #F5F3FF; color: #4C1D95; }
+.tag-economy       { background: #FFF7ED; color: #9A3412; }
+
 /* HIDDEN */
 .hidden { display: none !important; }
 
@@ -359,7 +397,18 @@ body {
       <button class="chip" data-type="Post" onclick="setAnalysisFilter('Post')">Post</button>
     </div>
   </div>
+  <div id="forecaster-header" class="forecaster-header">
+    <div class="forecaster-meta">
+      <span class="forecaster-label">Forecaster Consensus</span>
+      <span class="forecaster-as-of" id="fc-as-of">as of May 2026</span>
+    </div>
+    <div class="forecaster-grid" id="fc-grid"></div>
+    <div class="forecaster-disclaimer" id="fc-disclaimer">Ratings aggregated from Cook Political Report, Sabato’s Crystal Ball, and Inside Elections. Updated when analysts publish rating changes. Not a model-based probabilistic forecast.</div>
+  </div>
   <div class="content">
+    <div class="analysis-header">
+      <div class="analysis-count" id="analysis-count-label"></div>
+    </div>
     <div id="analysis-results-bar" class="results-bar hidden"></div>
     <div id="analysis-cards" class="card-grid"></div>
     <div id="analysis-empty" class="empty-state hidden">
@@ -396,6 +445,8 @@ body {
       <button class="chip" data-tag="Federal" onclick="setNewsFilter('Federal')">Federal</button>
       <button class="chip" data-tag="Governorship" onclick="setNewsFilter('Governorship')">Governorship</button>
       <button class="chip" data-tag="Primary" onclick="setNewsFilter('Primary')">Primary</button>
+      <button class="chip" data-tag="Redistricting" onclick="setNewsFilter('Redistricting')">Redistricting</button>
+      <button class="chip" data-tag="Polling" onclick="setNewsFilter('Polling')">Polling</button>
     </div>
     <select class="sort-select" id="news-sort" onchange="filterNews()">
       <option value="newest">Newest first</option>
@@ -436,6 +487,9 @@ const TYPE_CLASS = {
   'Post':           'type-post',
 };
 const TAG_CLASS = {
+  'Redistricting': 'tag-redistricting',
+  'Polling':       'tag-polling',
+  'Economy':       'tag-economy',
   'Major Update': 'tag-major',
   'Senate':       'tag-senate',
   'House':        'tag-house',
@@ -466,6 +520,7 @@ async function loadData() {
       }
       renderAnalysis();
       renderNews();
+      renderForecasterConsensus(d);
       return;
     } catch(e) { /* try next */ }
   }
@@ -529,6 +584,13 @@ function renderAnalysis() {
     (q ? ' matching "' + q + '"' : '');
   bar.classList.remove('hidden');
 
+  // Update count label
+  const countLabel = document.getElementById('analysis-count-label');
+  if (countLabel) {
+    countLabel.textContent = items.length + ' source' + (items.length !== 1 ? 's' : '') +
+      (analysisFilter !== 'All' || q ? ' matching current filter' : ' in the reading list');
+  }
+
   items.forEach(item => {
     const typeClass = TYPE_CLASS[item.type] || 'type-post';
     const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '';
@@ -541,7 +603,10 @@ function renderAnalysis() {
       '</div>' +
       '<a class="card-title" href="' + esc(item.url || '#') + '" target="_blank" rel="noopener">' + esc(item.title || 'Untitled') + '</a>' +
       (item.description ? '<p class="card-desc">' + esc(item.description) + '</p>' : '') +
-      (item.source ? '<div class="card-source">' + esc(item.source) + '</div>' : '');
+      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:4px">' +
+        (item.source ? '<div class="card-source">' + esc(item.source) + '</div>' : '') +
+        (Array.isArray(item.tags) && item.tags.length ? '<div class="card-tags">' + item.tags.map(t => '<span class="card-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>').join('') + '</div>' : '') +
+      '</div>';
     grid.appendChild(card);
   });
 }
@@ -618,6 +683,39 @@ function renderNews() {
       (tagsHtml ? '<div class="news-tags">' + tagsHtml + '</div>' : '');
     listEl.appendChild(el);
   });
+}
+
+/* ---- FORECASTER CONSENSUS ---- */
+function renderForecasterConsensus(d) {
+  const fc = d && d.meta && d.meta.forecaster_consensus;
+  if (!fc) return;
+  const asOf = document.getElementById('fc-as-of');
+  if (asOf && fc.last_updated) {
+    const dt = new Date(fc.last_updated);
+    asOf.textContent = 'as of ' + dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+  const grid = document.getElementById('fc-grid');
+  if (!grid) return;
+  const chambers = [
+    { key: 'house',     label: 'U.S. House',   data: fc.house,      seatsLabel: 'Projected seats' },
+    { key: 'senate',    label: 'U.S. Senate',   data: fc.senate,     seatsLabel: 'Projected seats' },
+    { key: 'governors', label: 'Governors',      data: fc.governors,  seatsLabel: 'Projected held' },
+  ];
+  grid.innerHTML = chambers.map(ch => {
+    const d = ch.data || {};
+    const ratingKey = 'fc-rating-' + (d.rating_class || 'tossup').replace(/ /g, '-');
+    return `<div class="fc-card">
+      <div class="fc-chamber">${ch.label}</div>
+      <div class="fc-rating ${ratingKey}">${esc(d.rating || 'TBD')}</div>
+      <div class="fc-seats">
+        <span style="color:rgba(255,255,255,.85)">${esc(d.projected_r || '?')} R</span>
+        &nbsp;&middot;&nbsp;
+        <span style="color:rgba(255,255,255,.85)">${esc(d.projected_d || '?')} D</span>
+      </div>
+      <div class="fc-summary">${esc(d.summary || '')}</div>
+      <div class="fc-sources-label">${(d.sources || []).join(' · ')}</div>
+    </div>`;
+  }).join('');
 }
 
 /* ---- HELPERS ---- */

@@ -249,6 +249,56 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .fav-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .fav-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
 @media(max-width:640px){.fav-cards{grid-template-columns:1fr}.fav-context-grid{grid-template-columns:1fr}}
+
+/* ── CONGRESS APPROVAL ─────────────────────────────────────────────────── */
+.ca-big-row{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px}
+.ca-big-num{font-family:var(--serif);font-size:72px;font-weight:700;line-height:1;letter-spacing:-.04em;color:var(--orange);flex-shrink:0}
+.ca-big-ctx{flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px;padding-top:8px}
+.ca-big-ctx p{font-size:13px;color:var(--t2);line-height:1.65}
+.ca-zone-bar{height:12px;border-radius:6px;background:linear-gradient(to right,#9B2828 0%,#D4931A 30%,#3A8C5C 65%,#3A8C5C 100%);position:relative;margin:4px 0}
+.ca-zone-marker{position:absolute;top:-5px;width:4px;height:22px;background:var(--t1);border-radius:2px;transform:translateX(-50%);transition:left .5s ease}
+.ca-zone-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--t4)}
+.ca-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ca-bar-label{font-size:12px;font-weight:600;width:88px;flex-shrink:0}
+.ca-bar-track{flex:1;height:9px;background:var(--bg-h);border-radius:5px;overflow:hidden}
+.ca-bar-fill{height:100%;border-radius:5px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.ca-bar-val{font-size:12px;font-weight:600;color:var(--t2);width:36px;text-align:right;flex-shrink:0}
+.ca-chamber-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0}
+.ca-chamber-box{background:var(--bg-s);border:1px solid var(--br);border-radius:8px;padding:18px;text-align:center}
+.ca-chamber-name{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-bottom:6px}
+.ca-chamber-num{font-family:var(--serif);font-size:44px;font-weight:700;line-height:1;letter-spacing:-.03em;margin-bottom:4px}
+.ca-chamber-sub{font-size:12px;color:var(--t3)}
+.ca-chamber-bar{height:8px;border-radius:4px;background:var(--bg-h);overflow:hidden;margin-top:12px}
+.ca-chamber-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.ca-party-bar-group{display:flex;flex-direction:column;gap:14px;margin-top:4px}
+.ca-party-row{display:flex;align-items:center;gap:10px}
+.ca-party-label{font-size:12px;font-weight:600;width:96px;flex-shrink:0;color:var(--t2)}
+.ca-party-track{flex:1;height:11px;background:var(--bg-h);border-radius:6px;overflow:hidden}
+.ca-party-fill{height:100%;border-radius:6px;transition:width .6s ease}
+.ca-party-val{font-size:12px;font-weight:600;width:36px;text-align:right;flex-shrink:0}
+.ca-timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:24px}
+.ca-timeline::before{content:'';position:absolute;left:7px;top:8px;bottom:8px;width:2px;background:var(--br-md);border-radius:1px}
+.ca-tl-item{position:relative;padding:0 0 20px 20px}
+.ca-tl-item:last-child{padding-bottom:0}
+.ca-tl-dot{position:absolute;left:-17px;top:5px;width:12px;height:12px;border-radius:50%;border:2px solid #fff;flex-shrink:0}
+.ca-tl-dot.neg{background:#E24B4A}
+.ca-tl-dot.neu{background:#D4931A}
+.ca-tl-date{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--t3);margin-bottom:3px}
+.ca-tl-text{font-size:13px;color:var(--t2);line-height:1.55}
+.ca-hist-table{width:100%;border-collapse:collapse;font-size:13px}
+.ca-hist-table th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:8px 12px;border-bottom:2px solid var(--br);white-space:nowrap}
+.ca-hist-table td{padding:10px 12px;border-bottom:1px solid var(--br);vertical-align:middle}
+.ca-hist-table tr:last-child td{border-bottom:none}
+.ca-hist-table tr.ca-current td{background:var(--bg-s);font-weight:600;color:var(--t1)}
+.ca-hist-table tr.ca-current td:first-child{border-left:3px solid var(--orange);padding-left:9px}
+.ca-loss{color:var(--red)}.ca-gain{color:var(--green)}.ca-tbd{color:var(--t4);font-style:italic}
+.ca-appr-chip{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700}
+.ca-appr-hi{background:#EAF6EA;color:#155724}.ca-appr-lo{background:#F8D7DA;color:#721C24}.ca-appr-mid{background:#FFF3CD;color:#856404}
+.ca-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ca-context-box{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px}
+.ca-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.ca-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
+@media(max-width:640px){.ca-chamber-grid{grid-template-columns:1fr}.ca-context-grid{grid-template-columns:1fr}.ca-big-num{font-size:52px}}
 </style>
 </head>
 <body>
@@ -1026,7 +1076,178 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
 </div>
 </div>
-<div class="subpanel" id="subpanel-congress-approval"><div class="panel-inner"><div class="coming-soon">Congress Approval &#8212; Coming Soon</div></div></div>
+<div class="subpanel" id="subpanel-congress-approval">
+<div class="panel-inner">
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-box">
+      <div class="stat-n" style="color:var(--orange)" id="ca-s-approve">--</div>
+      <div class="stat-l">Congress approval &#8212; combined chambers, all adults</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" style="color:var(--red)" id="ca-s-disapprove">--</div>
+      <div class="stat-l">Congress disapproval &#8212; combined chambers, all adults</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" style="color:var(--t2)" id="ca-s-net">--</div>
+      <div class="stat-l">Net approval &#8212; approve minus disapprove</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" id="ca-s-trend" style="color:var(--t3)">--</div>
+      <div class="stat-l">Trend &#8212; month over month change</div>
+    </div>
+  </div>
+
+  <!-- COMBINED APPROVAL CARD -->
+  <div class="chart-card">
+    <div class="card-title">Congressional approval &#8212; 119th Congress, combined chambers</div>
+    <div class="card-sub">Gallup all-adults aggregate. The 119th Congress opened with one of the lowest approval ratings on record and has remained in historically low territory throughout its session.</div>
+    <div class="ca-big-row">
+      <div class="ca-big-num" id="ca-big-approve">--</div>
+      <div class="ca-big-ctx">
+        <p id="ca-context-sentence">Loading&#8230;</p>
+        <div class="ca-zone-bar">
+          <div class="ca-zone-marker" id="ca-zone-marker" style="left:20%"></div>
+        </div>
+        <div class="ca-zone-labels">
+          <span>10% Historic low</span>
+          <span>22% Modern avg</span>
+          <span>50%+</span>
+        </div>
+      </div>
+    </div>
+    <div class="ca-bar-row">
+      <span class="ca-bar-label" style="color:var(--green)">Approve</span>
+      <div class="ca-bar-track"><div class="ca-bar-fill" style="background:var(--green);width:0%" id="ca-fill-approve"></div></div>
+      <span class="ca-bar-val" id="ca-val-approve">--%</span>
+    </div>
+    <div class="ca-bar-row">
+      <span class="ca-bar-label" style="color:var(--red)">Disapprove</span>
+      <div class="ca-bar-track"><div class="ca-bar-fill" style="background:var(--red);width:0%" id="ca-fill-disapprove"></div></div>
+      <span class="ca-bar-val" id="ca-val-disapprove">--%</span>
+    </div>
+    <div class="chart-note">Source: Gallup congressional approval tracking, Pew Research. The modern post-2010 average is approximately 22%. The all-time low was 9% recorded in November 2013 during the federal government shutdown of that year.</div>
+  </div>
+
+  <!-- CHAMBER BREAKDOWN -->
+  <div class="chart-card">
+    <div class="card-title">Approval by chamber &#8212; Senate vs House</div>
+    <div class="card-sub">The Senate typically polls higher than the House due to its slower, more deliberative nature and longer member terms. The House's slim 3-seat majority and repeated near-shutdowns have dragged its approval to near-record lows.</div>
+    <div class="ca-chamber-grid">
+      <div class="ca-chamber-box">
+        <div class="ca-chamber-name">Senate</div>
+        <div class="ca-chamber-num" style="color:var(--orange)" id="ca-senate-num">--</div>
+        <div class="ca-chamber-sub" id="ca-senate-dis">Disapprove: --%</div>
+        <div class="ca-chamber-bar">
+          <div class="ca-chamber-bar-fill" style="background:var(--orange);width:0%" id="ca-senate-fill"></div>
+        </div>
+      </div>
+      <div class="ca-chamber-box">
+        <div class="ca-chamber-name">House of Representatives</div>
+        <div class="ca-chamber-num" style="color:var(--red)" id="ca-house-num">--</div>
+        <div class="ca-chamber-sub" id="ca-house-dis">Disapprove: --%</div>
+        <div class="ca-chamber-bar">
+          <div class="ca-chamber-bar-fill" style="background:var(--red);width:0%" id="ca-house-fill"></div>
+        </div>
+      </div>
+    </div>
+    <div class="chart-note">Source: Gallup Senate and House individual chamber approval surveys (quarterly). Chamber-specific approval is polled less frequently than combined approval; figures represent the most recent quarterly reading.</div>
+  </div>
+
+  <!-- PARTISAN VIEWS -->
+  <div class="chart-card">
+    <div class="card-title">Congressional approval by party identification</div>
+    <div class="card-sub">The governing party's own voters tend to rate Congress higher; the opposition gives near-zero approval. Independent voters &#8212; the swing group &#8212; sit between the two extremes and drive the aggregate figure.</div>
+    <div class="ca-party-bar-group" id="ca-party-bars">
+      <div style="color:var(--t4);font-style:italic;text-align:center;padding:16px">Loading&#8230;</div>
+    </div>
+    <div style="position:relative;height:220px;margin-top:20px"><canvas id="c-ca-party"></canvas></div>
+    <div class="chart-note">Source: Gallup party-breakout approval survey, May 2026. Republican-leaning voters give the GOP-controlled Congress a 28% approval rating &#8212; low even for in-party assessments, reflecting frustration with the slim-majority dysfunction and repeated shutdowns.</div>
+  </div>
+
+  <!-- HISTORY LINE CHART -->
+  <div class="chart-card">
+    <div class="card-title">Congressional approval trend &#8212; January 2025 to present</div>
+    <div class="card-sub">Monthly Gallup aggregate. The 119th Congress opened at 19% and has remained in the 14&#8211;19% band throughout, with the two major shutdowns visible as downward spikes.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--green)"></div>Approve</div>
+      <div class="li"><div class="lsq" style="background:var(--red)"></div>Disapprove</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Post-2010 avg (22%)</div>
+    </div>
+    <div style="position:relative;height:260px"><canvas id="c-ca-trend"></canvas></div>
+    <div class="chart-note">Source: Gallup congressional approval monthly tracking. Seeded from known polling ranges for the 119th Congress; live values updated by the daily fetch-polls workflow at 06:00 UTC.</div>
+  </div>
+
+  <!-- KEY EVENTS TIMELINE -->
+  <div class="chart-card">
+    <div class="card-title">Key events dragging approval down &#8212; 119th Congress</div>
+    <div class="card-sub">The 119th Congress has set records for dysfunction. Each event below contributed to the sustained low approval rating.</div>
+    <div class="ca-timeline" id="ca-timeline">
+      <div style="color:var(--t4);font-style:italic;padding:12px 0">Loading&#8230;</div>
+    </div>
+    <div class="chart-note">Source: Congressional Research Service records, GovTrack 119th Congress statistics, Reuters and AP reporting. The two shutdowns of the 119th Congress are the longest all-department and longest DHS-specific closures in US history respectively.</div>
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-label">The "throw the bums out" effect &#8212; congressional approval and incumbent losses</div>
+    When congressional approval falls below <strong>20%</strong>, the incumbent-party's members face significantly higher defeat rates regardless of presidential approval. In 2014, 16% approval preceded outsized losses for vulnerable Democrats. The 119th Congress at <strong>16%</strong> places every marginal Republican seat in structural danger &#8212; particularly the 22 rated Toss-up or Lean in the House.
+  </div>
+
+  <!-- HISTORICAL MIDTERM TABLE -->
+  <div class="chart-card">
+    <div class="card-title">Congressional approval at midterms &#8212; 1990 to 2026</div>
+    <div class="card-sub">Gallup approval in the month of each midterm election and the resulting House seat change for the majority party. Low approval is consistently associated with majority-party losses.</div>
+    <div style="overflow-x:auto">
+    <table class="ca-hist-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Congress approval</th>
+          <th>Majority party</th>
+          <th>House seat change</th>
+          <th>Context</th>
+        </tr>
+      </thead>
+      <tbody id="ca-hist-tbody">
+        <tr><td colspan="5" style="color:var(--t4);text-align:center;padding:18px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note">Source: Gallup historical congressional approval archive (1990&#8211;2026). Seat change is net gain/loss for the party holding the House majority at the time of the midterm. The 2002 exception reflects extraordinary post-9/11 conditions.</div>
+  </div>
+
+  <!-- LONG-RUN BAR CHART -->
+  <div class="chart-card">
+    <div class="card-title">Congressional approval at midterms &#8212; long-run bar chart</div>
+    <div class="card-sub">Visual comparison of Gallup approval readings at each midterm since 1990. The post-2010 collapse in congressional approval is structural, driven by partisan polarisation and institutional gridlock.</div>
+    <div style="position:relative;height:260px"><canvas id="c-ca-hist-bar"></canvas></div>
+    <div class="chart-note">Dashed line shows the post-2010 average of approximately 19%. Values above 40% reflect the pre-polarisation era when bipartisan legislation was more common and institutional trust remained higher.</div>
+  </div>
+
+  <!-- CONTEXT BOXES -->
+  <div class="ca-context-grid">
+    <div class="ca-context-box">
+      <h4>Why congressional approval matters</h4>
+      <p>Low congressional approval energises challengers and suppresses incumbent turnout. Voters in marginal districts who disapprove of Congress are more likely to vote against the majority party's candidates, even if they personally like their own member.</p>
+    </div>
+    <div class="ca-context-box">
+      <h4>The paradox of personal vs institutional approval</h4>
+      <p>Voters consistently rate their own representative much higher than Congress as a whole. This "my congressman is fine, but Congress is broken" paradox partially insulates incumbents but creates vulnerability for the majority brand in wave conditions.</p>
+    </div>
+    <div class="ca-context-box">
+      <h4>119th Congress: a record for dysfunction</h4>
+      <p>Two record-breaking government shutdowns, the fewest bills enacted since records began, a Speaker who survived three removal attempts, and a debt ceiling standoff that lasted 6 weeks -- the 119th Congress has generated more negative headlines than any session since the post-Watergate 94th Congress.</p>
+    </div>
+    <div class="ca-context-box">
+      <h4>Relationship to the generic ballot</h4>
+      <p>Congressional approval and the generic ballot are correlated but measure different things. Approval measures institutional sentiment; the generic ballot measures voting intent. In 2026 both indicators are pointing in the same direction: away from the Republican majority.</p>
+    </div>
+  </div>
+
+</div>
+</div>
 <div class="subpanel" id="subpanel-factions"><div class="panel-inner"><div class="coming-soon">Faction Tracker &#8212; Coming Soon</div></div></div>
 
 
@@ -1107,6 +1328,7 @@ function goSub(id, btn) {
   if (id === 'approval') renderApprovalCharts();
   if (id === 'ballot') renderBallotCharts();
   if (id === 'favourability') renderFavourabilityCharts();
+  if (id === 'congress-approval') renderCongressApprovalCharts();
   if (id === 'redistricting') {
     setTimeout(initRedistrictingMap, 50);
     rdUpdateScoreboard(parseInt(document.getElementById('rd-slider').value, 10));
@@ -1138,6 +1360,7 @@ function renderAll() {
   renderApprovalStats();
   renderBallotStats();
   renderFavourabilityStats();
+  renderCongressApprovalStats();
   const r = DATA.retirements;
   const meta = DATA.meta;
 
@@ -2409,6 +2632,285 @@ function renderFavourabilityCharts() {
           ctx.restore();
         }
       }]
+    });
+  }
+}
+
+
+// ── CONGRESS APPROVAL ─────────────────────────────────────────────────────────
+let caChartsReady = false;
+
+function renderCongressApprovalStats() {
+  if (!DATA || !DATA.congress_approval) return;
+  const ca = DATA.congress_approval;
+  const ap = ca.combined.approve, dp = ca.combined.disapprove, tn = ca.combined.trend || 0;
+  const net = ap - dp;
+
+  document.getElementById('ca-s-approve').textContent    = ap + '%';
+  document.getElementById('ca-s-disapprove').textContent = dp + '%';
+  document.getElementById('ca-big-approve').textContent  = ap + '%';
+  document.getElementById('ca-val-approve').textContent   = ap + '%';
+  document.getElementById('ca-val-disapprove').textContent = dp + '%';
+  document.getElementById('ca-fill-approve').style.width   = ap + '%';
+  document.getElementById('ca-fill-disapprove').style.width = dp + '%';
+
+  const netEl = document.getElementById('ca-s-net');
+  netEl.textContent = (net >= 0 ? '+' : '') + net + ' pts';
+  netEl.style.color = net > 0 ? 'var(--green)' : 'var(--red)';
+
+  const trendEl = document.getElementById('ca-s-trend');
+  trendEl.textContent = (tn >= 0 ? '+' : '') + tn + ' pt';
+  trendEl.style.color = tn > 0 ? 'var(--green)' : tn < 0 ? 'var(--red)' : 'var(--t3)';
+
+  // Zone marker: maps 10-50% range to 0-100% position
+  const pos = Math.min(100, Math.max(0, (ap - 10) / 40 * 100));
+  document.getElementById('ca-zone-marker').style.left = pos + '%';
+
+  // Context sentence
+  const desc = ap <= 14 ? 'near an all-time low' : ap <= 19 ? 'in historically low territory' : ap <= 25 ? 'below the modern average of 22%' : 'around the modern average';
+  document.getElementById('ca-context-sentence').textContent =
+    ap + '% approval is ' + desc + '. Disapproval stands at ' + dp + '%. ' +
+    'The net approval rating of ' + (net >= 0 ? '+' : '') + net + ' points reflects ' +
+    (net < -40 ? 'deep institutional distrust across the electorate.' : net < -20 ? 'broad dissatisfaction with the governing Congress.' : 'below-average institutional confidence.');
+
+  // Chamber breakdown
+  if (ca.senate) {
+    document.getElementById('ca-senate-num').textContent = ca.senate.approve + '%';
+    document.getElementById('ca-senate-dis').textContent = 'Disapprove: ' + ca.senate.disapprove + '%';
+    document.getElementById('ca-senate-fill').style.width = ca.senate.approve + '%';
+  }
+  if (ca.house) {
+    document.getElementById('ca-house-num').textContent = ca.house.approve + '%';
+    document.getElementById('ca-house-dis').textContent = 'Disapprove: ' + ca.house.disapprove + '%';
+    document.getElementById('ca-house-fill').style.width = ca.house.approve + '%';
+  }
+
+  // Party bars
+  if (ca.by_party) {
+    const COLORS = { republican: '#9B2828', democrat: '#378ADD', independent: '#D4931A' };
+    const parties = Object.entries(ca.by_party);
+    const barsEl = document.getElementById('ca-party-bars');
+    barsEl.innerHTML = parties.map(([key, p]) =>
+      '<div class="ca-party-row">'
+      + '<span class="ca-party-label">' + p.label + '</span>'
+      + '<div class="ca-party-track"><div class="ca-party-fill" style="background:' + COLORS[key] + ';width:' + p.approve + '%"></div></div>'
+      + '<span class="ca-party-val" style="color:' + COLORS[key] + '">' + p.approve + '%</span>'
+      + '</div>'
+    ).join('');
+  }
+
+  // Timeline
+  if (Array.isArray(ca.key_events)) {
+    const tlEl = document.getElementById('ca-timeline');
+    tlEl.innerHTML = ca.key_events.map(ev =>
+      '<div class="ca-tl-item">'
+      + '<div class="ca-tl-dot ' + (ev.impact === 'negative' ? 'neg' : 'neu') + '"></div>'
+      + '<div class="ca-tl-date">' + ev.date + '</div>'
+      + '<div class="ca-tl-text">' + ev.event + '</div>'
+      + '</div>'
+    ).join('');
+  }
+
+  // Historical table
+  if (Array.isArray(ca.historical_midterms)) {
+    const MAJ = {1990:'R',1994:'D',1998:'R',2002:'R',2006:'R',2010:'D',2014:'D',2018:'R',2022:'D',2026:'R'};
+    const tbody = document.getElementById('ca-hist-tbody');
+    tbody.innerHTML = ca.historical_midterms.map(h => {
+      const isCur = h.year === 2026;
+      const apCls = h.approve >= 40 ? 'ca-appr-hi' : h.approve >= 22 ? 'ca-appr-mid' : 'ca-appr-lo';
+      const sc = h.house_change;
+      const scStr = sc === null ? '<span class="ca-tbd">TBD</span>'
+                  : sc > 0 ? '<span class="ca-gain">+' + sc + '</span>'
+                  : '<span class="ca-loss">' + sc + '</span>';
+      const maj = MAJ[h.year] || '?';
+      return '<tr' + (isCur ? ' class="ca-current"' : '') + '>'
+        + '<td>' + h.year + (isCur ? ' &#9679;' : '') + '</td>'
+        + '<td><span class="ca-appr-chip ' + apCls + '">' + h.approve + '%</span></td>'
+        + '<td style="font-weight:600;color:' + (maj==='R'?'#9B2828':'var(--blue)') + '">' + (maj==='R'?'Republican':'Democrat') + '</td>'
+        + '<td>' + scStr + '</td>'
+        + '<td style="font-size:12px;color:var(--t3)">' + h.context + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+}
+
+function renderCongressApprovalCharts() {
+  if (caChartsReady || !DATA || !DATA.congress_approval) return;
+  caChartsReady = true;
+  const ca = DATA.congress_approval;
+
+  // Partisan approval grouped bar chart
+  if (ca.by_party) {
+    const parties = Object.entries(ca.by_party);
+    new Chart(document.getElementById('c-ca-party'), {
+      type: 'bar',
+      data: {
+        labels: parties.map(([, p]) => p.label),
+        datasets: [
+          {
+            label: 'Approve',
+            data: parties.map(([, p]) => p.approve),
+            backgroundColor: ['rgba(155,40,40,0.85)', 'rgba(55,138,221,0.85)', 'rgba(212,147,26,0.85)'],
+            borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false,
+          },
+          {
+            label: 'Disapprove',
+            data: parties.map(([, p]) => p.disapprove),
+            backgroundColor: ['rgba(155,40,40,0.25)', 'rgba(55,138,221,0.25)', 'rgba(212,147,26,0.25)'],
+            borderRadius: { topLeft: 4, topRight: 4 }, borderSkipped: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { size: 12 }, padding: 12, boxWidth: 12 } },
+          tooltip: { callbacks: { label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '%' } }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 13 } } },
+          y: {
+            max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 20 }
+          }
+        }
+      }
+    });
+  }
+
+  // Trend line chart
+  if (Array.isArray(ca.history) && ca.history.length) {
+    const labels = ca.history.map(h => h.month);
+    const appData = ca.history.map(h => h.approve);
+    const disData = ca.history.map(h => h.disapprove);
+    new Chart(document.getElementById('c-ca-trend'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Approve', data: appData,
+            borderColor: '#3A8C5C', backgroundColor: 'rgba(58,140,92,0.07)',
+            borderWidth: 2, tension: 0.35, fill: true,
+            pointBackgroundColor: labels.map((_, i) => i === labels.length-1 ? '#E24B4A' : '#3A8C5C'),
+            pointRadius: labels.map((_, i) => i === labels.length-1 ? 7 : 4),
+            pointBorderColor: '#fff', pointBorderWidth: 2,
+          },
+          {
+            label: 'Disapprove', data: disData,
+            borderColor: '#E24B4A', backgroundColor: 'transparent',
+            borderWidth: 2, tension: 0.35, fill: false,
+            pointBackgroundColor: labels.map((_, i) => i === labels.length-1 ? '#E24B4A' : '#E24B4A'),
+            pointRadius: labels.map((_, i) => i === labels.length-1 ? 7 : 4),
+            pointBorderColor: '#fff', pointBorderWidth: 2,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: i => i[0].label,
+              label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '%',
+              footer: i => {
+                const a = i.find(x => x.dataset.label === 'Approve');
+                const b = i.find(x => x.dataset.label === 'Disapprove');
+                if (a && b) return 'Net: ' + (a.raw - b.raw > 0 ? '+' : '') + (a.raw - b.raw) + ' pts';
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
+          y: {
+            min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 20 }
+          }
+        }
+      },
+      plugins: [{
+        id: 'avgLine',
+        afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(22);
+          ctx.save();
+          ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(149,149,149,.5)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = 'rgba(149,149,149,.7)'; ctx.font = '10px DM Sans,sans-serif';
+          ctx.fillText('post-2010 avg 22%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // Historical bar chart
+  if (Array.isArray(ca.historical_midterms) && ca.historical_midterms.length) {
+    const hist = ca.historical_midterms;
+    const labels = hist.map(h => String(h.year));
+    const vals = hist.map(h => h.approve);
+    new Chart(document.getElementById('c-ca-hist-bar'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          data: vals,
+          backgroundColor: labels.map(y => y === '2026' ? '#E24B4A' : vals[labels.indexOf(y)] >= 40 ? '#3A8C5C' : vals[labels.indexOf(y)] >= 22 ? '#D4931A' : '#E24B4A'),
+          borderSkipped: false,
+          borderRadius: { topLeft: 4, topRight: 4 },
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: i => i[0].label + ' midterm',
+              label: ctx => ' Approval: ' + ctx.raw + '%',
+              footer: i => { const h = hist[i[0].dataIndex]; return h.context; }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 } } },
+          y: {
+            min: 0, max: 65, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 10 }
+          }
+        }
+      },
+      plugins: [
+        {
+          id: 'avgLine',
+          afterDraw(c) {
+            const { ctx, chartArea: { left, right }, scales: { y } } = c;
+            const yp = y.getPixelForValue(22);
+            ctx.save();
+            ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(149,149,149,.5)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+            ctx.fillStyle = 'rgba(149,149,149,.7)'; ctx.font = '10px DM Sans,sans-serif';
+            ctx.fillText('post-2010 avg', right + 4, yp + 4);
+            ctx.restore();
+          }
+        },
+        {
+          id: 'valLabels',
+          afterDraw(c) {
+            const { ctx, scales: { x, y } } = c;
+            ctx.save(); ctx.font = '500 10px DM Sans,sans-serif'; ctx.textAlign = 'center';
+            vals.forEach((v, i) => {
+              ctx.fillStyle = v >= 40 ? '#155724' : v >= 22 ? '#856404' : '#721C24';
+              ctx.fillText(v + '%', x.getPixelForValue(i), y.getPixelForValue(v) - 6);
+            });
+            ctx.restore();
+          }
+        }
+      ]
     });
   }
 }

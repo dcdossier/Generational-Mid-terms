@@ -3315,5 +3315,193 @@
         "rep_fav": 36
       }
     ]
+  },
+  "congress_approval": {
+    "combined": {
+      "approve": 16,
+      "disapprove": 74,
+      "trend": -2
+    },
+    "senate": {
+      "approve": 18,
+      "disapprove": 70
+    },
+    "house": {
+      "approve": 13,
+      "disapprove": 77
+    },
+    "by_party": {
+      "republican": {
+        "approve": 28,
+        "disapprove": 62,
+        "label": "Republicans"
+      },
+      "democrat": {
+        "approve": 8,
+        "disapprove": 86,
+        "label": "Democrats"
+      },
+      "independent": {
+        "approve": 14,
+        "disapprove": 76,
+        "label": "Independents"
+      }
+    },
+    "history": [
+      {
+        "month": "Jan 2025",
+        "approve": 19,
+        "disapprove": 71
+      },
+      {
+        "month": "Mar 2025",
+        "approve": 17,
+        "disapprove": 73
+      },
+      {
+        "month": "Jun 2025",
+        "approve": 15,
+        "disapprove": 75
+      },
+      {
+        "month": "Sep 2025",
+        "approve": 14,
+        "disapprove": 76
+      },
+      {
+        "month": "Dec 2025",
+        "approve": 15,
+        "disapprove": 75
+      },
+      {
+        "month": "Mar 2026",
+        "approve": 16,
+        "disapprove": 74
+      },
+      {
+        "month": "May 2026",
+        "approve": 16,
+        "disapprove": 74
+      }
+    ],
+    "historical_midterms": [
+      {
+        "year": 1990,
+        "approve": 35,
+        "disapprove": 53,
+        "house_change": -8,
+        "context": "Pre-reform era, S&L crisis"
+      },
+      {
+        "year": 1994,
+        "approve": 25,
+        "disapprove": 63,
+        "house_change": -54,
+        "context": "Healthcare failure, Contract with America"
+      },
+      {
+        "year": 1998,
+        "approve": 52,
+        "disapprove": 36,
+        "house_change": 5,
+        "context": "Balanced budget, economic boom"
+      },
+      {
+        "year": 2002,
+        "approve": 50,
+        "disapprove": 38,
+        "house_change": 8,
+        "context": "Post-9/11 unity rally"
+      },
+      {
+        "year": 2006,
+        "approve": 25,
+        "disapprove": 65,
+        "house_change": -30,
+        "context": "Iraq War, Foley scandal"
+      },
+      {
+        "year": 2010,
+        "approve": 21,
+        "disapprove": 72,
+        "house_change": -63,
+        "context": "Healthcare law backlash, Tea Party"
+      },
+      {
+        "year": 2014,
+        "approve": 16,
+        "disapprove": 79,
+        "house_change": -13,
+        "context": "Government shutdown Oct 2013, gridlock"
+      },
+      {
+        "year": 2018,
+        "approve": 20,
+        "disapprove": 74,
+        "house_change": -41,
+        "context": "Tax cuts passed, immigration gridlock"
+      },
+      {
+        "year": 2022,
+        "approve": 22,
+        "disapprove": 71,
+        "house_change": -9,
+        "context": "Inflation, Dobbs fallout"
+      },
+      {
+        "year": 2026,
+        "approve": 16,
+        "disapprove": 74,
+        "house_change": null,
+        "context": "Record shutdowns, slim-majority dysfunction"
+      }
+    ],
+    "key_events": [
+      {
+        "date": "Jan 2025",
+        "event": "Speaker vote takes 3 rounds -- slim 3-seat majority exposed immediately",
+        "impact": "negative"
+      },
+      {
+        "date": "Feb 2025",
+        "event": "44-day government shutdown begins -- longest all-department shutdown in US history",
+        "impact": "negative"
+      },
+      {
+        "date": "Mar 2025",
+        "event": "Shutdown ends with continuing resolution; no major policy wins for either side",
+        "impact": "neutral"
+      },
+      {
+        "date": "Jun 2025",
+        "event": "Debt ceiling crisis -- Treasury uses extraordinary measures for 6 weeks before deal",
+        "impact": "negative"
+      },
+      {
+        "date": "Aug 2025",
+        "event": "76-day DHS and border agencies shutdown -- second record-breaking closure of the 119th Congress",
+        "impact": "negative"
+      },
+      {
+        "date": "Nov 2025",
+        "event": "Second shutdown ends; Freedom Caucus blocks omnibus; CR extended to March",
+        "impact": "neutral"
+      },
+      {
+        "date": "Jan 2026",
+        "event": "Speaker faces third motion to vacate threat; survives by 2 votes",
+        "impact": "negative"
+      },
+      {
+        "date": "Mar 2026",
+        "event": "Third near-shutdown averted by 1 vote at 11:45pm; CR extended through August",
+        "impact": "neutral"
+      },
+      {
+        "date": "Apr 2026",
+        "event": "119th Congress passes fewest bills of any Congress since records began per GovTrack",
+        "impact": "negative"
+      }
+    ]
   }
 }

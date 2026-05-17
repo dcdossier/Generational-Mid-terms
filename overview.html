@@ -1917,6 +1917,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="chart-note">Source: ProPublica Congress API, GovTrack.us party unity scores. Updated through May 2026. Unity score = share of votes cast with party majority.</div>
   </div>
 
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">House Caucus Composition</div>
+    <div class="card-sub" id="ft-comp-sub">Proportional breakdown of declared caucus memberships across both parties. Hover a segment for detail.</div>
+    <div style="position:relative;height:110px"><canvas id="c-ft-composition"></canvas></div>
+    <div class="chart-note">Membership figures from caucus rosters; members may hold dual affiliation. Primary affiliation used where overlap exists.</div>
+  </div>
+
   <h3 class="section-title" style="margin-top:24px">Swing Bloc Spotlight</h3>
   <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 12px">Bipartisan caucuses that negotiate cross-party compromise on high-stakes legislation. With a slim 4-seat House majority, these blocs often determine whether bills pass at all.</p>
   <div class="ft-swing-grid" id="ft-swing-cards"></div>
@@ -1933,8 +1940,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
   </div>
 
-  <div class="callout" style="margin-top:24px">
-    <strong>Slim Majority Dynamics:</strong> With Republicans holding only a 4&ndash;5 seat majority in the House, the Freedom Caucus (42 members) can single-handedly block any legislation, giving hardliners outsized leverage. Any 5+ Freedom Caucus defections sink a bill. This structural tension &mdash; between the governing majority&rsquo;s need to legislate and the hard-right&rsquo;s veto power &mdash; is a central driver of Congress&rsquo;s 16% approval rating and the &ldquo;throw the bums out&rdquo; sentiment heading into 2026.
+  <div class="callout" id="ft-callout" style="margin-top:24px">
+    <div class="callout-label" id="ft-callout-label">Slim Majority Dynamics</div>
+    <span id="ft-callout-body">Loading faction data&#8230;</span>
   </div>
 
 </div>
@@ -4812,10 +4820,10 @@ function renderFactionStats() {
   const houseR = fac.house.republican;
   const houseD = fac.house.democrat;
 
-  const totalFactions = houseR.length + houseD.length + fac.senate.republican.length + fac.senate.democrat.length + fac.swing_blocs.length;
+  const totalFactions = houseR.length + houseD.length + fac.senate.republican.length + fac.senate.democrat.length + (fac.swing_blocs || []).length;
   const gopMembers = houseR.reduce((s,f) => s+f.members, 0);
   const demMembers = houseD.reduce((s,f) => s+f.members, 0);
-  const swingTotal = fac.swing_blocs[0].total;
+  const swingTotal = fac.swing_blocs && fac.swing_blocs[0] ? fac.swing_blocs[0].total : 0;
 
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
   set('ft-stat-factions', totalFactions);
@@ -4843,12 +4851,99 @@ function renderFactionStats() {
   if (senR) senR.innerHTML = fac.senate.republican.map(buildRow).join('');
   const senD = document.getElementById('ft-senate-d');
   if (senD) senD.innerHTML = fac.senate.democrat.map(buildRow).join('');
+
+  // ── Dynamic callout ───────────────────────────────────────────────
+  const houseRaces = DATA.races && DATA.races.house && DATA.races.house.path_to_majority;
+  const gopSeats   = houseRaces ? (houseRaces.current_r || 222) : 222;
+  const demSeats   = houseRaces ? (houseRaces.current_d || 213) : 213;
+  const majorityThreshold = houseRaces ? (houseRaces.needed || 218) : 218;
+  const margin = gopSeats - majorityThreshold;
+  const fc = houseR.find(f => /freedom/i.test(f.name)) || houseR[0] || {};
+  const fcMembers = fc.members || 42;
+  const vetoN = margin + 1;
+
+  let clLabel, clBody;
+  if (margin <= 3) {
+    clLabel = 'Razor-Thin Majority — Maximum Faction Leverage';
+    clBody  = `Republicans hold a ${margin}-seat majority (${gopSeats} seats vs the ${majorityThreshold}-seat threshold). The Freedom Caucus (${fcMembers} members) can single-handedly block any legislation: just ${vetoN} defections sink a bill. Democrats (${demSeats} seats) need only ${majorityThreshold - demSeats} Republican crossovers to pass legislation with a discharge petition. This structural tension drives Congress's historically low approval rating heading into November 2026.`;
+  } else if (margin <= 8) {
+    clLabel = 'Slim Majority — Significant Faction Leverage';
+    clBody  = `Republicans hold a ${margin}-seat working majority (${gopSeats} seats). The Freedom Caucus (${fcMembers} members) retains blocking power: any ${vetoN}+ defections defeat legislation without Democratic support. Intra-party negotiations on spending, immigration, and social riders remain the key constraint on Republican governance through 2026.`;
+  } else {
+    clLabel = 'Workable Majority — Faction Leverage Moderated';
+    clBody  = `A ${margin}-seat majority gives Republican leadership more room to absorb defections. The Freedom Caucus (${fcMembers} members) can still exert significant pressure but cannot unilaterally block legislation without coalition-building across multiple factions. Focus shifts to primary threats rather than floor defections.`;
+  }
+  const ftcl = document.getElementById('ft-callout-label');
+  const ftcb = document.getElementById('ft-callout-body');
+  if (ftcl) ftcl.textContent = clLabel;
+  if (ftcb) ftcb.textContent = clBody;
 }
 
 function renderFactionCharts() {
   if (ftChartsReady || !DATA || !DATA.factions) return;
   ftChartsReady = true;
-  const uh = DATA.factions.unity_history;
+  const fac = DATA.factions;
+  const houseR = fac.house.republican;
+  const houseD = fac.house.democrat;
+  const uh = fac.unity_history;
+
+  // ── House Composition stacked bar ────────────────────────────────
+  const compEl = document.getElementById('c-ft-composition');
+  if (compEl) {
+    const gopTotal = houseR.reduce((s,f) => s+f.members, 0);
+    const demTotal = houseD.reduce((s,f) => s+f.members, 0);
+    const compSub = document.getElementById('ft-comp-sub');
+    if (compSub) compSub.textContent = `Republican factions: ${gopTotal} declared members across ${houseR.length} caucuses. Democratic factions: ${demTotal} declared members across ${houseD.length} caucuses. Hover any segment for detail.`;
+    // Build one dataset per faction (both sides combined on 2 rows)
+    const allFactions = [
+      ...houseR.map(f => ({ ...f, side:'R' })),
+      ...houseD.map(f => ({ ...f, side:'D' }))
+    ];
+    const datasets = allFactions.map(f => ({
+      label: f.name,
+      data: [ f.side === 'R' ? f.members : 0, f.side === 'D' ? f.members : 0 ],
+      backgroundColor: f.color,
+      stack: 's',
+      borderSkipped: false
+    }));
+    new Chart(compEl, {
+      type: 'bar',
+      data: {
+        labels: [`Republican (${gopTotal} members)`, `Democrat (${demTotal} members)`],
+        datasets
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                if (ctx.raw === 0) return null;
+                const f = allFactions[ctx.datasetIndex];
+                return ` ${f.name}: ${ctx.raw} members — unity ${f.unity_score}%`;
+              },
+              filter: item => item.raw > 0
+            }
+          }
+        },
+        scales: {
+          x: {
+            stacked: true,
+            grid: { display: false }, border: { display: false },
+            ticks: { font: { size: 11 }, color: '#6B6B6B' }
+          },
+          y: {
+            stacked: true,
+            grid: { display: false }, border: { display: false },
+            ticks: { font: { size: 12 }, color: '#333' }
+          }
+        }
+      }
+    });
+  }
+
   new Chart(document.getElementById('c-ft-unity'), {
     type: 'line',
     data: {

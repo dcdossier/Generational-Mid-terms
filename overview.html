@@ -289,7 +289,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .fav-pollster-table tr:last-child td{border-bottom:none}
 .fav-pollster-table tr:hover td{background:var(--bg-s)}
 .fav-d-val{color:var(--blue);font-weight:700}.fav-r-val{color:#9B2828;font-weight:700}
-.fav-hist-bar{display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.fav-hist-bar{display:inline-flex;align-items:center;gap:2px;vertical-align:middle;width:90px}
 .fav-hist-bar-seg{height:10px;border-radius:2px}
 .fav-hist-table{width:100%;border-collapse:collapse;font-size:13px}
 .fav-hist-table th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:7px 12px;border-bottom:2px solid var(--br)}
@@ -1188,6 +1188,10 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="stat-n" id="fav-s-unfav-rep" style="color:var(--t2)">--</div>
       <div class="stat-l">Republican unfavourability &#8212; current reading</div>
     </div>
+    <div class="stat-box">
+      <div class="stat-n" id="fav-s-gap">--</div>
+      <div class="stat-l">D-R favourability gap &#8212; relative advantage</div>
+    </div>
   </div>
 
   <!-- SIDE-BY-SIDE PARTY CARDS -->
@@ -1278,6 +1282,19 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="chart-note">Source: Gallup monthly party favourability tracking, Pew Research, NBC/WSJ polling. Historical data compiled from public polling aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
   </div>
 
+  <!-- D-R ADVANTAGE TREND CHART -->
+  <div class="chart-card" style="margin-top:18px">
+    <div class="card-title">D-R favourability advantage &#8212; January 2025 to present</div>
+    <div class="card-sub">Monthly difference between Democrat and Republican favourable ratings (D minus R). Positive bars = Democrat advantage; negative bars = Republican advantage. Shows whether the gap is widening or narrowing over time.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:#378ADD"></div>D advantage</div>
+      <div class="li"><div class="lsq" style="background:#9B2828"></div>R advantage</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Parity</div>
+    </div>
+    <div style="position:relative;height:220px"><canvas id="c-fav-dr-adv"></canvas></div>
+    <div class="chart-note">Computed from monthly aggregate polling for both parties. A sustained D advantage signals structural headwinds for Republicans heading into 2026; a narrowing gap would suggest Republican recovery.</div>
+  </div>
+
   <!-- POLLSTER TABLE -->
   <div class="chart-card">
     <div class="card-title">Poll-by-poll breakdown &#8212; recent surveys</div>
@@ -1304,9 +1321,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 
   <!-- CALLOUT -->
-  <div class="callout">
-    <div class="callout-label">Both parties below 40% &#8212; the double-negative dynamic</div>
-    Both parties have net-negative favourability ratings for the first time simultaneously since 2015&#8211;16. When both parties are deeply unpopular, elections tend to be driven by <strong>turnout intensity</strong> rather than persuasion, favouring whichever side has stronger negative motivation. The out-party typically benefits from this dynamic in midterms.
+  <div class="callout" id="fav-callout">
+    <div class="callout-label" id="fav-callout-label">Both parties below 40% &#8212; the double-negative dynamic</div>
+    <span id="fav-callout-body">Both parties have net-negative favourability ratings for the first time simultaneously since 2015&#8211;16. When both parties are deeply unpopular, elections tend to be driven by <strong>turnout intensity</strong> rather than persuasion, favouring whichever side has stronger negative motivation. The out-party typically benefits from this dynamic in midterms.</span>
   </div>
 
   <!-- HISTORICAL TABLE -->
@@ -3375,6 +3392,12 @@ function renderFavourabilityStats() {
   document.getElementById('fav-s-rep').textContent     = rep.favourable + '%';
   document.getElementById('fav-s-unfav-dem').textContent = dem.unfavourable + '%';
   document.getElementById('fav-s-unfav-rep').textContent = rep.unfavourable + '%';
+  const favGapEl = document.getElementById('fav-s-gap');
+  if (favGapEl) {
+    const g = dem.favourable - rep.favourable;
+    favGapEl.textContent = g > 0 ? 'D+' + g : g < 0 ? 'R+' + Math.abs(g) : 'Even';
+    favGapEl.style.color = g > 0 ? '#378ADD' : g < 0 ? '#9B2828' : 'var(--t3)';
+  }
 
   function setCard(prefix, data, color) {
     document.getElementById(prefix + '-big').textContent       = data.favourable + '%';
@@ -3393,6 +3416,27 @@ function renderFavourabilityStats() {
   }
   setCard('fav-dem', dem, 'var(--blue)');
   setCard('fav-rep', rep, '#9B2828');
+
+  // Dynamic callout
+  const gap = dem.favourable - rep.favourable;
+  const absGap = Math.abs(gap);
+  const calloutLabel = document.getElementById('fav-callout-label');
+  const calloutBody  = document.getElementById('fav-callout-body');
+  if (calloutLabel && calloutBody) {
+    if (dem.favourable < 40 && rep.favourable < 40) {
+      calloutLabel.textContent = 'Both parties below 40% \u2014 the double-negative dynamic';
+      calloutBody.innerHTML = 'Both parties have net-negative favourability ratings simultaneously. When both parties are deeply unpopular, elections tend to be driven by <strong>turnout intensity</strong> rather than persuasion, favouring whichever side has stronger negative motivation. Democrats hold a <strong>D+' + absGap + ' point</strong> relative advantage \u2014 the out-party typically benefits from this dynamic in midterms.';
+    } else if (gap > 0) {
+      calloutLabel.textContent = 'Democrat favourability advantage \u2014 D+' + absGap + ' pts';
+      calloutBody.innerHTML = 'Democrats lead Republicans in party favourability by <strong>' + absGap + ' percentage points</strong> (' + dem.favourable + '% vs ' + rep.favourable + '%). The party with higher relative favourability \u2014 even if both are below 50% \u2014 tends to perform better in midterm elections. Watch whether this gap widens or narrows heading into November 2026.';
+    } else if (gap < 0) {
+      calloutLabel.textContent = 'Republican favourability advantage \u2014 R+' + absGap + ' pts';
+      calloutBody.innerHTML = 'Republicans lead Democrats in party favourability by <strong>' + absGap + ' percentage points</strong> (' + rep.favourable + '% vs ' + dem.favourable + '%). The governing party holding a favourability edge is historically unusual in midterms and would be a positive signal for Republican candidates in 2026.';
+    } else {
+      calloutLabel.textContent = 'Both parties tied in favourability';
+      calloutBody.innerHTML = 'Democrats and Republicans are tied at <strong>' + dem.favourable + '% favourable</strong>. When parties are at parity, seat outcomes tend to be driven by structural factors \u2014 incumbent exposure, district-level composition, and turnout models.';
+    }
+  }
 
   // Pollster table
   const tbody = document.getElementById('fav-pollster-tbody');
@@ -3439,8 +3483,8 @@ function renderFavourabilityStats() {
         + '<td class="fav-r-val">' + h.rep_fav + '</td>'
         + '<td>' + advStr + '</td>'
         + '<td><div class="fav-hist-bar">'
-        +   '<div class="fav-hist-bar-seg" style="width:' + dW + 'px;background:var(--blue)"></div>'
-        +   '<div class="fav-hist-bar-seg" style="width:' + (80 - dW) + 'px;background:#9B2828"></div>'
+        +   '<div class="fav-hist-bar-seg" style="width:' + dW + '%;background:var(--blue)"></div>'
+        +   '<div class="fav-hist-bar-seg" style="width:' + (100 - dW) + '%;background:#9B2828"></div>'
         + '</div></td>'
         + '<td style="font-size:12px;color:var(--t3)">' + (WINNERS[h.year] || '') + '</td>'
         + '</tr>';
@@ -3550,6 +3594,63 @@ function renderFavourabilityCharts() {
           ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
           ctx.fillStyle = 'rgba(149,149,149,.6)'; ctx.font = '10px DM Sans,sans-serif';
           ctx.fillText('50%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // D-R monthly advantage chart
+  if (Array.isArray(dem.history) && Array.isArray(rep.history) && dem.history.length) {
+    const advLabels = dem.history.map(h => h.month);
+    const advData   = dem.history.map((h, i) => {
+      const rh = rep.history[i];
+      return rh ? +(h.favourable - rh.favourable).toFixed(1) : null;
+    });
+    new Chart(document.getElementById('c-fav-dr-adv'), {
+      type: 'bar',
+      data: {
+        labels: advLabels,
+        datasets: [{
+          label: 'D-R advantage',
+          data: advData,
+          backgroundColor: advData.map(v => v >= 0 ? 'rgba(55,138,221,.65)' : 'rgba(155,40,40,.65)'),
+          borderColor:     advData.map(v => v >= 0 ? '#378ADD' : '#9B2828'),
+          borderWidth: 1.5, borderSkipped: false, borderRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const v = ctx.raw;
+                return ' D-R gap: ' + (v >= 0 ? 'D+' : 'R+') + Math.abs(v) + ' pts';
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => (v >= 0 ? '+' : '') + v + ' pts' },
+            title: { display: true, text: 'D minus R favourable (pts)', font: { size: 11 }, color: '#959595' }
+          }
+        }
+      },
+      plugins: [{
+        id: 'favParityLine',
+        afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(0);
+          ctx.save();
+          ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,.35)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = 'rgba(100,100,100,.55)'; ctx.font = '10px DM Sans,sans-serif';
+          ctx.fillText('Parity', right + 4, yp + 4);
           ctx.restore();
         }
       }]

@@ -352,7 +352,15 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .ca-context-box{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px}
 .ca-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .ca-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
-@media(max-width:640px){.ca-chamber-grid{grid-template-columns:1fr}.ca-context-grid{grid-template-columns:1fr}.ca-big-num{font-size:52px}}
+@media(max-width:640px){.ca-chamber-grid{grid-template-columns:1fr}.ca-context-grid{grid-template-columns:1fr}.ca-big-num{font-size:52px}.ca-analog-grid{grid-template-columns:1fr}}
+.ca-analog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.ca-analog-item{background:var(--bg-s);border:1px solid var(--br);border-radius:8px;padding:16px;text-align:center;position:relative}
+.ca-analog-item.ca-analog-current{border-color:var(--orange);background:#fffaf2}
+.ca-analog-year{font-family:var(--serif);font-size:36px;font-weight:700;color:var(--t1);line-height:1}
+.ca-analog-appr{font-size:12px;color:var(--t3);margin:4px 0 10px;font-weight:500}
+.ca-analog-result{font-size:20px;font-weight:700;margin-bottom:4px}
+.ca-analog-ctx{font-size:11px;color:var(--t4);line-height:1.55}
+.ca-analog-badge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;background:var(--orange);color:#fff;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
 
 /* ── Faction Tracker ── */
 .ft-columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
@@ -1499,9 +1507,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 
   <!-- CALLOUT -->
-  <div class="callout">
-    <div class="callout-label">The "throw the bums out" effect &#8212; congressional approval and incumbent losses</div>
-    When congressional approval falls below <strong>20%</strong>, the incumbent-party's members face significantly higher defeat rates regardless of presidential approval. In 2014, 16% approval preceded outsized losses for vulnerable Democrats. The 119th Congress at <strong>16%</strong> places every marginal Republican seat in structural danger &#8212; particularly the 22 rated Toss-up or Lean in the House.
+  <div class="callout" id="ca-callout">
+    <div class="callout-label" id="ca-callout-label">The "throw the bums out" effect &#8212; congressional approval and incumbent losses</div>
+    <span id="ca-callout-body">When congressional approval falls below <strong>20%</strong>, the incumbent-party's members face significantly higher defeat rates regardless of presidential approval. In 2014, 16% approval preceded outsized losses for vulnerable Democrats. The 119th Congress at <strong>16%</strong> places every marginal Republican seat in structural danger &#8212; particularly the 22 rated Toss-up or Lean in the House.</span>
   </div>
 
   <!-- HISTORICAL MIDTERM TABLE -->
@@ -1533,6 +1541,24 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-sub">Visual comparison of Gallup approval readings at each midterm since 1990. The post-2010 collapse in congressional approval is structural, driven by partisan polarisation and institutional gridlock.</div>
     <div style="position:relative;height:260px"><canvas id="c-ca-hist-bar"></canvas></div>
     <div class="chart-note">Dashed line shows the post-2010 average of approximately 19%. Values above 40% reflect the pre-polarisation era when bipartisan legislation was more common and institutional trust remained higher.</div>
+  </div>
+
+  <!-- APPROVAL vs SEAT LOSS SCATTER -->
+  <div class="chart-card">
+    <div class="card-title">Approval vs seat change &#8212; historical regression (1990&#8211;2022)</div>
+    <div class="card-sub">Each dot is a midterm. Congressional approval (x-axis) vs majority-party House seat change (y-axis). The regression line shows the structural relationship: lower approval predicts larger losses. The 2026 reading is marked in red.</div>
+    <div style="position:relative;height:280px"><canvas id="c-ca-scatter"></canvas></div>
+    <div class="chart-note">OLS regression fitted to 1990&#8211;2022 midterms. 2002 included but flagged as post-9/11 outlier. 2026 seat change is TBD; the regression gives a structural baseline. Actual result depends on district map, candidate quality, and turnout.</div>
+  </div>
+
+  <!-- ANALOGOUS CONGRESSES -->
+  <div class="chart-card">
+    <div class="card-title">Analogous congresses &#8212; closest approval matches</div>
+    <div class="card-sub">Historical midterm cycles with congressional approval closest to the current 119th Congress reading. These comparison points bracket the likely range of Republican seat losses in November 2026.</div>
+    <div class="ca-analog-grid" id="ca-analog-grid">
+      <div style="color:var(--t4);font-style:italic;text-align:center;padding:18px;grid-column:1/-1">Loading&#8230;</div>
+    </div>
+    <div class="chart-note">Selected by smallest absolute difference in congressional approval vs current reading. Result = majority-party House seat change. 2026 is current cycle.</div>
   </div>
 
   <!-- CONTEXT BOXES -->
@@ -3796,6 +3822,23 @@ function renderCongressApprovalStats() {
     ).join('');
   }
 
+  // Dynamic callout
+  const caCalloutLabel = document.getElementById('ca-callout-label');
+  const caCalloutBody  = document.getElementById('ca-callout-body');
+  if (caCalloutLabel && caCalloutBody) {
+    const tier = ap <= 14 ? 'historic-low' : ap <= 19 ? 'sub-20' : ap <= 25 ? 'below-avg' : 'avg';
+    if (tier === 'historic-low') {
+      caCalloutLabel.textContent = 'Near all-time lows \u2014 structural danger for Republican incumbents';
+      caCalloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, congressional approval is approaching the 9% all-time low recorded in November 2013. Every marginal Republican seat faces structural headwinds. With <strong>' + dp + '% disapproval</strong>, the out-party enthusiasm advantage is near maximum.';
+    } else if (tier === 'sub-20') {
+      caCalloutLabel.textContent = 'The \u201cthrow the bums out\u201d effect \u2014 sub-20% approval and incumbent losses';
+      caCalloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, congressional approval is below the critical 20% threshold. Historically, sub-20% approval has preceded significant majority-party losses: 2014 (16% \u2192 \u221213 seats), 2018 (20% \u2192 \u221241). With <strong>' + dp + '% disapproval</strong>, every competitive Republican seat is at elevated risk.';
+    } else {
+      caCalloutLabel.textContent = 'Congressional approval below average \u2014 headwinds for the majority';
+      caCalloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, congressional approval sits below the post-2010 average of 22%. While not at crisis levels, the combination of sub-average approval and <strong>' + dp + '% disapproval</strong> creates structural headwinds for marginal Republican incumbents heading into November 2026.';
+    }
+  }
+
   // Historical table
   if (Array.isArray(ca.historical_midterms)) {
     const MAJ = {1990:'R',1994:'D',1998:'R',2002:'R',2006:'R',2010:'D',2014:'D',2018:'R',2022:'D',2026:'R'};
@@ -3815,6 +3858,33 @@ function renderCongressApprovalStats() {
         + '<td>' + scStr + '</td>'
         + '<td style="font-size:12px;color:var(--t3)">' + h.context + '</td>'
         + '</tr>';
+    }).join('');
+  }
+
+  // Analogous congresses grid
+  const analogGrid = document.getElementById('ca-analog-grid');
+  if (analogGrid && Array.isArray(ca.historical_midterms)) {
+    const past = ca.historical_midterms.filter(h => h.year !== 2026 && h.house_change !== null);
+    const sorted = past.slice().sort((a, b) => Math.abs(a.approve - ap) - Math.abs(b.approve - ap));
+    const top = sorted.slice(0, 3);
+    const cur2026 = ca.historical_midterms.find(h => h.year === 2026);
+    const items = [cur2026, ...top];
+    const MAJ2 = {1990:'R',1994:'D',1998:'R',2002:'R',2006:'R',2010:'D',2014:'D',2018:'R',2022:'D',2026:'R'};
+    analogGrid.innerHTML = items.map(h => {
+      const isCur = h.year === 2026;
+      const maj2 = MAJ2[h.year] || '?';
+      const sc = h.house_change;
+      const scStr2 = sc === null ? '<span style="color:var(--t4);font-style:italic">TBD</span>'
+                   : sc > 0 ? '<span style="color:var(--green)">+' + sc + ' seats</span>'
+                   : '<span style="color:var(--red)">' + sc + ' seats</span>';
+      return '<div class="ca-analog-item' + (isCur ? ' ca-analog-current' : '') + '">'
+        + (isCur ? '<div class="ca-analog-badge">2026</div>' : '')
+        + '<div class="ca-analog-year">' + h.year + '</div>'
+        + '<div class="ca-analog-appr">' + h.approve + '% approval &mdash; '
+          + '<span style="color:' + (maj2==='R'?'#9B2828':'var(--blue)') + ';font-weight:700">' + (maj2==='R'?'R majority':'D majority') + '</span></div>'
+        + '<div class="ca-analog-result">' + scStr2 + '</div>'
+        + '<div class="ca-analog-ctx">' + h.context + '</div>'
+        + '</div>';
     }).join('');
   }
 }
@@ -3912,8 +3982,10 @@ function renderCongressApprovalCharts() {
         scales: {
           x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
           y: {
-            min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
-            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 20 }
+            min: Math.max(0, Math.floor((Math.min(...appData, ...disData) - 5) / 10) * 10),
+            max: Math.min(100, Math.ceil((Math.max(...appData, ...disData) + 5) / 10) * 10),
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 10 }
           }
         }
       },
@@ -3997,6 +4069,124 @@ function renderCongressApprovalCharts() {
         }
       ]
     });
+  }
+
+  // Approval vs seat-loss scatter + regression
+  if (Array.isArray(ca.historical_midterms) && ca.historical_midterms.length) {
+    const hist = ca.historical_midterms;
+    const fitPts = hist.filter(h => h.house_change !== null && h.year !== 2026);
+    const n = fitPts.length;
+    const sx = fitPts.reduce((a, h) => a + h.approve, 0);
+    const sy = fitPts.reduce((a, h) => a + h.house_change, 0);
+    const sxy = fitPts.reduce((a, h) => a + h.approve * h.house_change, 0);
+    const sx2 = fitPts.reduce((a, h) => a + h.approve * h.approve, 0);
+    const slope = (n * sxy - sx * sy) / (n * sx2 - sx * sx);
+    const intercept = (sy - slope * sx) / n;
+    const cur2026 = hist.find(h => h.year === 2026);
+    const proj = cur2026 ? Math.round(slope * cur2026.approve + intercept) : null;
+
+    // Regression line points
+    const xMin = Math.min(...fitPts.map(h => h.approve)) - 3;
+    const xMax = Math.max(...fitPts.map(h => h.approve)) + 3;
+    const regLine = [{ x: xMin, y: slope * xMin + intercept }, { x: xMax, y: slope * xMax + intercept }];
+
+    // Scatter points: past midterms
+    const scatterPast = fitPts.map(h => ({
+      x: h.approve, y: h.house_change,
+      label: String(h.year),
+      outlier: h.year === 2002
+    }));
+
+    new Chart(document.getElementById('c-ca-scatter'), {
+      type: 'scatter',
+      data: {
+        datasets: [
+          {
+            label: 'Historical midterms',
+            data: scatterPast.map(p => ({ x: p.x, y: p.y })),
+            backgroundColor: scatterPast.map(p => p.outlier ? 'rgba(212,147,26,0.7)' : 'rgba(100,100,100,0.75)'),
+            pointRadius: 7, pointHoverRadius: 9,
+            pointBorderColor: '#fff', pointBorderWidth: 1.5,
+          },
+          {
+            label: 'Regression line',
+            data: regLine,
+            type: 'line',
+            borderColor: 'rgba(100,100,100,0.4)', borderWidth: 1.5,
+            borderDash: [5, 4], pointRadius: 0, fill: false, tension: 0,
+          },
+          ...(cur2026 ? [{
+            label: '2026 (current)',
+            data: [{ x: cur2026.approve, y: proj }],
+            backgroundColor: '#E24B4A', pointRadius: 10, pointHoverRadius: 12,
+            pointBorderColor: '#fff', pointBorderWidth: 2,
+          }] : [])
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            filter: item => item.datasetIndex !== 1,
+            callbacks: {
+              label: ctx => {
+                if (ctx.datasetIndex === 2) return ' 2026: ' + ctx.parsed.x + '% approval \u2192 proj. ' + (proj >= 0 ? '+' : '') + proj + ' seats';
+                const pt = scatterPast[ctx.dataIndex];
+                return ' ' + pt.label + ': ' + ctx.parsed.x + '% approval, ' + (ctx.parsed.y >= 0 ? '+' : '') + ctx.parsed.y + ' seats' + (pt.outlier ? ' (post-9/11 outlier)' : '');
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Congressional approval (%)', font: { size: 11 }, color: '#959595' },
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%' }
+          },
+          y: {
+            title: { display: true, text: 'Majority-party House seat change', font: { size: 11 }, color: '#959595' },
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => (v >= 0 ? '+' : '') + v }
+          }
+        }
+      },
+      plugins: [
+        {
+          id: 'yearLabels',
+          afterDraw(c) {
+            const { ctx, scales: { x, y } } = c;
+            ctx.save(); ctx.font = '600 10px DM Sans,sans-serif'; ctx.textAlign = 'center';
+            scatterPast.forEach((pt, i) => {
+              const px = x.getPixelForValue(pt.x), py = y.getPixelForValue(pt.y);
+              ctx.fillStyle = pt.outlier ? '#D4931A' : '#555';
+              ctx.fillText(pt.label, px, py - 11);
+            });
+            if (cur2026 && proj !== null) {
+              const px = x.getPixelForValue(cur2026.approve), py = y.getPixelForValue(proj);
+              ctx.fillStyle = '#E24B4A'; ctx.font = '700 11px DM Sans,sans-serif';
+              ctx.fillText('2026\u2605', px, py - 13);
+            }
+            ctx.restore();
+          }
+        },
+        {
+          id: 'zeroLine',
+          afterDraw(c) {
+            const { ctx, chartArea: { left, right }, scales: { y } } = c;
+            const yp = y.getPixelForValue(0);
+            ctx.save();
+            ctx.strokeStyle = 'rgba(100,100,100,.25)'; ctx.lineWidth = 1; ctx.setLineDash([]);
+            ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+            ctx.restore();
+          }
+        }
+      ]
+    });
+
+    // Update projected seat figure in context sentence if element exists
+    const projEl = document.getElementById('ca-proj-seats');
+    if (projEl && proj !== null) projEl.textContent = (proj >= 0 ? '+' : '') + proj;
   }
 }
 

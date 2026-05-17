@@ -126,6 +126,91 @@ body{
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-text{font-size:13px;color:var(--t-muted);font-family:var(--serif);font-style:italic}
 
+
+/* TICKER */
+.ticker-wrap{background:var(--navy-mid);border-bottom:1px solid var(--br);height:30px;overflow:hidden;display:flex;align-items:center;gap:0;flex-shrink:0}
+.ticker-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:0 14px;flex-shrink:0;border-right:1px solid var(--br);height:100%;display:flex;align-items:center;white-space:nowrap}
+.ticker-scroll{flex:1;overflow:hidden;position:relative}
+.ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:ticker-move 60s linear infinite;will-change:transform}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font:400 11px var(--sans);color:var(--t-muted)}
+.ticker-item a{color:var(--beige);text-decoration:none;transition:color .12s}
+.ticker-item a:hover{color:var(--gold)}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
+@keyframes ticker-move{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HOME PANEL */
+.panel-home{position:absolute;inset:0;overflow-y:auto;background:var(--navy);display:none;scrollbar-width:thin;scrollbar-color:var(--br) transparent}
+.panel-home.active{display:block}
+.home-body{max-width:1040px;margin:0 auto;padding:36px 32px 60px}
+
+/* HOME HERO */
+.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#0d2244 100%);border:1px solid var(--br);border-radius:12px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden}
+.home-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.06);pointer-events:none}
+.home-hero::after{content:'';position:absolute;right:40px;bottom:-80px;width:180px;height:180px;border-radius:50%;background:rgba(201,168,76,.04);pointer-events:none}
+.home-eyebrow{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:10px}
+.home-h1{font:700 28px var(--serif);color:var(--beige);line-height:1.25;margin-bottom:10px}
+.home-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.7;max-width:580px;margin-bottom:24px}
+.home-big-countdown{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.home-days{font:700 64px var(--serif);color:var(--gold);line-height:1;letter-spacing:-.02em}
+.home-days-label{font:400 16px var(--sans);color:var(--t-muted)}
+.home-election-date{font:500 12px var(--sans);color:var(--t-muted);letter-spacing:.04em}
+.home-hero-pills{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.home-pill{font:600 11px var(--sans);padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
+
+/* LIVE METRICS */
+.home-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:760px){.home-metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.home-metrics{grid-template-columns:1fr 1fr}}
+.metric-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
+.metric-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.metric-num{font:700 32px var(--serif);line-height:1;letter-spacing:-.02em}
+.metric-sub{font:400 11px var(--sans);color:var(--t-muted);margin-top:4px;line-height:1.4}
+.metric-trend{font:600 11px var(--sans);display:inline-block;padding:1px 6px;border-radius:8px;margin-top:6px}
+.mt-up{background:rgba(58,140,92,.2);color:#5EBD8A}
+.mt-dn{background:rgba(192,64,64,.2);color:#E08080}
+.mt-nt{background:rgba(201,168,76,.15);color:var(--gold)}
+
+/* FORECAST STRIP */
+.home-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:600px){.home-forecast{grid-template-columns:1fr}}
+.forecast-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
+.forecast-chamber{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.forecast-rating{font:700 14px var(--sans);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.fr-likely-r{background:rgba(192,64,64,.25);color:#FF9090}
+.fr-lean-r{background:rgba(224,128,112,.25);color:#FFBB99}
+.fr-tossup{background:rgba(201,168,76,.25);color:#FFD97D}
+.forecast-seats{font:400 12px var(--sans);color:rgba(240,232,214,.7);margin-bottom:4px}
+.forecast-sub{font:400 11px var(--sans);color:var(--t-muted);line-height:1.45}
+
+/* LATEST NEWS */
+.home-news-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
+.home-news-item{border-bottom:1px solid var(--br);padding:14px 0;display:flex;align-items:flex-start;gap:14px}
+.home-news-item:last-child{border-bottom:none}
+.home-news-source{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.07em;color:var(--gold);width:100px;flex-shrink:0;padding-top:2px}
+.home-news-body{flex:1}
+.home-news-title{font:500 13px var(--sans);color:var(--beige);line-height:1.45;text-decoration:none;display:block;transition:color .12s}
+.home-news-title:hover{color:var(--gold)}
+.home-news-age{font:400 10px var(--sans);color:var(--t-muted);margin-top:3px}
+.home-news-tag{display:inline-block;font:700 9px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
+
+/* SECTION CARDS */
+.home-sections{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:600px){.home-sections{grid-template-columns:1fr}}
+.home-section-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:20px 22px;cursor:pointer;transition:border-color .15s,background .15s;text-align:left;display:flex;flex-direction:column;gap:8px}
+.home-section-card:hover{border-color:var(--gold);background:var(--navy-light)}
+.hsc-icon{font-size:22px;line-height:1}
+.hsc-title{font:700 15px var(--serif);color:var(--gold)}
+.hsc-desc{font:400 12px var(--sans);color:var(--t-muted);line-height:1.55}
+.hsc-sub-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.hsc-tag{font:500 10px var(--sans);background:rgba(201,168,76,.1);color:var(--gold);padding:1px 7px;border-radius:8px;border:1px solid rgba(201,168,76,.2)}
+
+/* HOME FOOTER */
+.home-footer{text-align:center;font:400 11px var(--sans);color:var(--t-muted);padding-top:16px;border-top:1px solid var(--br)}
+.home-freshness{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid var(--br);border-radius:20px;padding:4px 12px;margin-bottom:8px}
+.freshness-dot{width:6px;height:6px;border-radius:50%;background:#5EBD8A;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+
 @media(max-width:600px){
   .header{padding:0 16px;height:54px}
   .header-title{font-size:14px}
@@ -151,54 +236,203 @@ body{
 </header>
 
 <nav class="nav-bar">
-  <button class="nav-tab active" onclick="switchTab('overview',this)">Field Overview</button>
+  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
+  <button class="nav-tab" onclick="switchTab('overview',this)">Field Overview</button>
   <button class="nav-tab" onclick="switchTab('map',this)">Race Review</button>
   <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
   <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
 </nav>
 
+
+<div class="ticker-wrap">
+  <div class="ticker-label">&#9642; Latest</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner" id="ticker-inner">
+      <div class="ticker-item"><span class="ticker-dot"></span><span>Loading headlines&#8230;</span></div>
+    </div>
+  </div>
+</div>
+
 <div class="frame-wrap">
+  <!-- HOME PANEL (native, not iframe) -->
+  <div class="panel-home active" id="panel-home">
+    <div class="home-body">
+
+      <!-- HERO -->
+      <div class="home-hero">
+        <div class="home-eyebrow">DC Dossier &mdash; US Congressional Midterm Tracker 2026</div>
+        <h1 class="home-h1">A Generational Midterm?</h1>
+        <p class="home-desc">Tracking the 2026 US House, Senate, and Governor elections &mdash; approval ratings, generic ballot, party favourability, redistricting, key races, and the candidates who may reshape the American political landscape for a generation.</p>
+        <div class="home-big-countdown">
+          <div class="home-days" id="home-days">&#8212;</div>
+          <div class="home-days-label">days until Election Day</div>
+        </div>
+        <div class="home-election-date">Tuesday, 3 November 2026</div>
+        <div class="home-hero-pills">
+          <span class="home-pill">435 House seats</span>
+          <span class="home-pill">33 Senate seats</span>
+          <span class="home-pill">17 Governor races</span>
+          <span class="home-pill">4.4M Indian-Americans</span>
+        </div>
+      </div>
+
+      <!-- LIVE METRICS -->
+      <div class="home-metrics">
+        <div class="metric-card">
+          <div class="metric-label">Generic Ballot Margin</div>
+          <div class="metric-num" id="hm-ballot" style="color:var(--gold)">&#8212;</div>
+          <div class="metric-sub" id="hm-ballot-sub">D vs R polling average</div>
+          <span class="metric-trend mt-nt" id="hm-ballot-trend"></span>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Trump Approval</div>
+          <div class="metric-num" id="hm-trump" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub" id="hm-trump-sub">Approve / Disapprove</div>
+          <span class="metric-trend" id="hm-trump-trend"></span>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Congress Approval</div>
+          <div class="metric-num" id="hm-congress" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub">Combined House + Senate</div>
+          <span class="metric-trend mt-dn">&#8595; Record Low</span>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">House Toss-ups</div>
+          <div class="metric-num" id="hm-tossups" style="color:var(--gold)">&#8212;</div>
+          <div class="metric-sub">Seats that decide control</div>
+          <span class="metric-trend mt-nt">435 seats total</span>
+        </div>
+      </div>
+
+      <!-- FORECASTER CONSENSUS -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:10px">Forecaster Consensus</h3>
+      <div class="home-forecast" id="home-forecast">
+        <div class="forecast-card">
+          <div class="forecast-chamber">U.S. House</div>
+          <div class="forecast-rating fr-lean-r">Lean R Hold</div>
+          <div class="forecast-seats">Proj. 220&ndash;230 R &middot; 205&ndash;215 D</div>
+          <div class="forecast-sub">D need +5 net seats; 22 toss-ups decisive</div>
+        </div>
+        <div class="forecast-card">
+          <div class="forecast-chamber">U.S. Senate</div>
+          <div class="forecast-rating fr-likely-r">Likely R Hold</div>
+          <div class="forecast-seats">Proj. 51&ndash;54 R &middot; 46&ndash;49 D</div>
+          <div class="forecast-sub">D need to flip 4 R seats on tough map</div>
+        </div>
+        <div class="forecast-card">
+          <div class="forecast-chamber">Governors</div>
+          <div class="forecast-rating fr-tossup">4 Toss-ups</div>
+          <div class="forecast-seats">Proj. 25&ndash;28 R &middot; 22&ndash;25 D</div>
+          <div class="forecast-sub">ME, MI, NV, WI genuine toss-ups</div>
+        </div>
+      </div>
+
+      <!-- LATEST NEWS -->
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
+        <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted)">Latest Headlines</h3>
+        <button onclick="switchTabByName('analysis')" style="font:500 11px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0">View all &rarr;</button>
+      </div>
+      <div class="home-news-list" id="home-news-list">
+        <div class="home-news-item"><div style="color:var(--t-muted);font:400 13px var(--sans)">Loading&#8230;</div></div>
+      </div>
+
+      <!-- SECTION CARDS -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:10px">Explore</h3>
+      <div class="home-sections">
+        <button class="home-section-card" onclick="switchTabByName('overview')">
+          <div class="hsc-icon">&#128202;</div>
+          <div class="hsc-title">Field Overview</div>
+          <div class="hsc-desc">Retirements tracker, approval ratings, generic ballot, party favourability, Congress approval, faction tracker, redistricting watch, previous elections, and key races — all in one place.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Retirements</span><span class="hsc-tag">Polling</span><span class="hsc-tag">Key Races</span><span class="hsc-tag">Redistricting</span></div>
+        </button>
+        <button class="home-section-card" onclick="switchTabByName('map')">
+          <div class="hsc-icon">&#128506;</div>
+          <div class="hsc-title">Race Review</div>
+          <div class="hsc-desc">Detailed race-by-race breakdowns for the Senate, House, and Governor contests. Rating strips, balance bars, and competitive seat analysis for all 33 Senate and 17 Governor races.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Senate</span><span class="hsc-tag">House</span><span class="hsc-tag">Governor</span></div>
+        </button>
+        <button class="home-section-card" onclick="switchTabByName('india')">
+          <div class="hsc-icon">&#127470;&#127475;</div>
+          <div class="hsc-title">India&rsquo;s Interest</div>
+          <div class="hsc-desc">How the 2026 midterms affect H-1B policy, trade, defence co-production, and the Quad. Indian-American electoral presence — including the historic Senate bids by Ro Khanna and Raja Krishnamoorthi.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">H-1B Tracker</span><span class="hsc-tag">Senate Watch</span><span class="hsc-tag">Community</span></div>
+        </button>
+        <button class="home-section-card" onclick="switchTabByName('analysis')">
+          <div class="hsc-icon">&#128221;</div>
+          <div class="hsc-title">Analysis &amp; Commentary</div>
+          <div class="hsc-desc">Curated analysis from Cook Political Report, Sabato&rsquo;s Crystal Ball, Brookings, Pew Research, and leading political commentators — plus a live RSS news feed from 150+ sources.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Forecaster Consensus</span><span class="hsc-tag">Research</span><span class="hsc-tag">Live News</span></div>
+        </button>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="home-footer">
+        <div class="home-freshness">
+          <div class="freshness-dot"></div>
+          <span id="home-freshness-label">Data current</span>
+        </div>
+        <div>Cook Political Report &middot; Sabato&rsquo;s Crystal Ball &middot; Inside Elections &middot; ProPublica Congress API &middot; GovTrack &middot; RealClearPolitics</div>
+      </div>
+
+    </div>
+  </div>
+  <!-- /HOME PANEL -->
+
   <div class="frame-loading" id="frame-loading">
     <div class="spinner"></div>
     <div class="loading-text">Loading&#8230;</div>
   </div>
-  <iframe class="tab-frame active" id="frame-overview" src="overview.html" title="Field Overview"></iframe>
+  <iframe class="tab-frame" id="frame-overview" src="overview.html" title="Field Overview"></iframe>
   <iframe class="tab-frame" id="frame-map" src="" data-src="map.html" title="Race Review"></iframe>
   <iframe class="tab-frame" id="frame-india" src="" data-src="india.html" title="India's Interest"></iframe>
   <iframe class="tab-frame" id="frame-analysis" src="" data-src="analysis.html" title="Analysis & Commentary"></iframe>
 </div>
 
 <script>
+'use strict';
 const ELECTION_DATE = new Date('2026-11-03T00:00:00');
 
+// ── COUNTDOWN ──────────────────────────────────────────────────────────────────
 function updateCountdown() {
   const now = new Date();
   const diff = ELECTION_DATE - now;
   if (diff <= 0) {
     document.getElementById('countdown-timer').textContent = 'Election Day';
+    const hd = document.getElementById('home-days');
+    if (hd) hd.textContent = '0';
     return;
   }
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  document.getElementById('countdown-timer').textContent =
-    `${days}d ${hours}h ${mins}m`;
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('countdown-timer').textContent = `${days}d ${hours}h ${mins}m`;
+  const hd = document.getElementById('home-days');
+  if (hd) hd.textContent = days;
 }
-
 updateCountdown();
 setInterval(updateCountdown, 30000);
 
+// ── TAB SWITCHING ──────────────────────────────────────────────────────────────
 function switchTab(name, btn) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
+  if (btn) btn.classList.add('active');
 
+  // Hide home panel and all iframes
+  document.getElementById('panel-home').classList.remove('active');
   document.querySelectorAll('.tab-frame').forEach(f => f.classList.remove('active'));
+
+  if (name === 'home') {
+    document.getElementById('panel-home').classList.add('active');
+    return;
+  }
+
   const frame = document.getElementById('frame-' + name);
+  if (!frame) return;
   frame.classList.add('active');
 
-  // Lazy-load iframe src on first visit
+  // Lazy-load on first visit
   if (!frame.src || frame.src === window.location.href) {
-    const lazySrc = frame.dataset.src;
+    const lazySrc = frame.getAttribute('data-src') || frame.dataset.src;
     if (lazySrc) {
       const loader = document.getElementById('frame-loading');
       loader.classList.add('visible');
@@ -207,6 +441,140 @@ function switchTab(name, btn) {
     }
   }
 }
+
+function switchTabByName(name) {
+  const btn = document.querySelector(`.nav-tab[onclick*="'${name}'"]`);
+  switchTab(name, btn);
+}
+
+// ── DATA FETCH ─────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function relAge(d) {
+  const diff = Date.now() - new Date(d).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 60) return m + 'm ago';
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h / 24) + 'd ago';
+}
+
+const TAG_COLORS = {
+  'Major Update':'#FEE2E2:#991B1B',
+  'Senate':'#DBEAFE:#1E3A8A',
+  'House':'#EDE9FE:#4C1D95',
+  'Redistricting':'#ECFDF5:#065F46',
+  'Federal':'#F1F5F9:#1E293B',
+  'Governorship':'#CCFBF1:#134E4A',
+  'Primary':'#FEF3C7:#92400E',
+};
+
+async function loadHomeData() {
+  let data = null;
+  for (const p of ['data.json','./data.json','../data.json']) {
+    try {
+      const r = await fetch(p + '?t=' + Date.now());
+      if (r.ok) { data = await r.json(); break; }
+    } catch(e) { /* try next */ }
+  }
+  if (!data) return;
+
+  // Live metrics
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+
+  const gb = data.generic_ballot || {};
+  const d = gb.democrat || 0, rep = gb.republican || 0;
+  const margin = d - rep;
+  set('hm-ballot', (margin > 0 ? 'D+' : 'R+') + Math.abs(margin).toFixed(1));
+  set('hm-ballot-sub', `D ${d}%  vs  R ${rep}%`);
+  const btrend = document.getElementById('hm-ballot-trend');
+  if (btrend) { btrend.textContent = margin > 0 ? '↑ Dem leading' : '↑ GOP leading'; btrend.className = 'metric-trend ' + (margin > 0 ? 'mt-up' : 'mt-dn'); }
+
+  const appr = data.approval || {};
+  const trump = appr.trump || {};
+  if (trump.approve) {
+    set('hm-trump', trump.approve + '%');
+    set('hm-trump-sub', `Approve ${trump.approve}% · Disapprove ${trump.disapprove || '—'}%`);
+    const ttrend = document.getElementById('hm-trump-trend');
+    if (ttrend) { ttrend.textContent = '↓ Below average'; ttrend.className = 'metric-trend mt-dn'; }
+  }
+
+  const ca = data.congress_approval || {};
+  if (ca.combined) set('hm-congress', (ca.combined.approve || '—') + '%');
+
+  const races = data.races || {};
+  const hs = races.house || {};
+  if (hs.ratings_summary) set('hm-tossups', hs.ratings_summary.toss_up || '—');
+
+  // Forecaster consensus from meta
+  const fc = data.meta && data.meta.forecaster_consensus;
+  if (fc) {
+    const ratingClass = { 'lean-r':'fr-lean-r', 'likely-r':'fr-likely-r', 'tossup':'fr-tossup', 'lean-d':'fr-lean-d', 'likely-d':'fr-likely-d' };
+    const chambers = [
+      { key:'house', label:'U.S. House', data:fc.house },
+      { key:'senate', label:'U.S. Senate', data:fc.senate },
+      { key:'governors', label:'Governors', data:fc.governors },
+    ];
+    const fg = document.getElementById('home-forecast');
+    if (fg) {
+      fg.innerHTML = chambers.map(ch => {
+        const fd = ch.data || {};
+        const rc = ratingClass[fd.rating_class] || 'fr-tossup';
+        return `<div class="forecast-card">
+          <div class="forecast-chamber">${ch.label}</div>
+          <div class="forecast-rating ${rc}">${esc(fd.rating||'TBD')}</div>
+          <div class="forecast-seats">Proj. ${esc(fd.projected_r||'?')} R &middot; ${esc(fd.projected_d||'?')} D</div>
+          <div class="forecast-sub">${esc(fd.summary||'')}</div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  // Freshness
+  if (data.meta && data.meta.last_updated) {
+    const dt = new Date(data.meta.last_updated);
+    const fl = document.getElementById('home-freshness-label');
+    if (fl) fl.textContent = 'Last updated ' + dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ' · ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' UTC';
+  }
+
+  // News
+  const news = Array.isArray(data.news) ? data.news : [];
+  const sorted = [...news].sort((a,b) => new Date(b.date||0) - new Date(a.date||0)).slice(0,7);
+  const nl = document.getElementById('home-news-list');
+  if (nl && sorted.length) {
+    nl.innerHTML = sorted.map(item => {
+      const tags = Array.isArray(item.tags) ? item.tags.slice(0,2) : [];
+      const tagsHtml = tags.map(t => {
+        const [bg,color] = (TAG_COLORS[t]||'#F1F5F9:#1E293B').split(':');
+        return `<span class="home-news-tag" style="background:${bg};color:${color}">${esc(t)}</span>`;
+      }).join('');
+      return `<div class="home-news-item">
+        <div class="home-news-source">${esc(item.source||'')}</div>
+        <div class="home-news-body">
+          <a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'')}</a>
+          <div class="home-news-age">${item.date ? relAge(item.date) : ''}${tagsHtml}</div>
+        </div>
+      </div>`;
+    }).join('');
+  }
+
+  // Ticker
+  if (news.length) {
+    const tickerItems = [...news].sort((a,b) => new Date(b.date||0)-new Date(a.date||0)).slice(0,20);
+    const ti = document.getElementById('ticker-inner');
+    if (ti) {
+      const itemsHtml = tickerItems.map(item =>
+        `<div class="ticker-item"><span class="ticker-dot"></span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px">${esc(item.title||'')}</a></div>`
+      ).join('');
+      // Duplicate for seamless loop
+      ti.innerHTML = itemsHtml + itemsHtml;
+    }
+  }
+}
+
+loadHomeData();
 </script>
 
 </body>

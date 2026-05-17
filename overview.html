@@ -238,6 +238,25 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .gb-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .gb-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
 @media(max-width:600px){.gb-context-grid{grid-template-columns:1fr}.gb-pollster-bar-wrap{width:70px}}
+/* Generic ballot margin chart thresholds legend */
+.gb-thresh-row{display:flex;gap:14px;flex-wrap:wrap;margin:10px 0 6px}
+.gb-thresh-chip{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--t3)}
+.gb-thresh-line{width:22px;height:0;border-top-width:2px;border-top-style:dashed;flex-shrink:0}
+/* Seat projection summary */
+.gb-proj-row{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;margin-bottom:14px}
+.gb-proj-big{flex-shrink:0}
+.gb-proj-num{font-family:var(--serif);font-size:52px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.gb-proj-pos{color:#1A5EA8}.gb-proj-neg{color:#9B2828}.gb-proj-flat{color:var(--t3)}
+.gb-proj-sub{font-size:12px;color:var(--t3);margin-top:4px}
+.gb-proj-ctx{flex:1;min-width:200px;font-size:13px;color:var(--t2);line-height:1.65}
+.gb-proj-ctx strong{color:var(--t1)}
+/* Threshold track (structural advantage bar) */
+.gb-thresh-track-wrap{margin:16px 0 4px;position:relative}
+.gb-thresh-track{height:14px;border-radius:7px;background:linear-gradient(to right,#8b1c2e 0%,#e05555 25%,#aaa 40%,#4c8de0 60%,#1a3d80 100%);position:relative}
+.gb-thresh-pin{position:absolute;top:-5px;width:4px;height:24px;border-radius:2px;background:var(--t1);transform:translateX(-50%)}
+.gb-thresh-pin-lbl{position:absolute;top:-20px;font-size:10px;font-weight:700;color:var(--t1);transform:translateX(-50%);white-space:nowrap}
+.gb-thresh-tick{position:absolute;top:14px;font-size:10px;color:var(--t4);transform:translateX(-50%);white-space:nowrap}
+.gb-thresh-axis{display:flex;justify-content:space-between;font-size:10px;color:var(--t4);margin-top:18px}
 
 /* ── PARTY FAVOURABILITY ───────────────────────────────────────────────── */
 .fav-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0}
@@ -1023,6 +1042,19 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="chart-note">Source: RealClearPolitics, YouGov/Economist, Quinnipiac, NBC/WSJ, Fox News polling averages. Monthly averages compiled from public aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
   </div>
 
+  <!-- D-R MARGIN TREND -->
+  <div class="chart-card">
+    <div class="card-title">Democratic margin trend &#8212; D&#x2212;R points, Jan 2025 to present</div>
+    <div class="card-sub">The gap between Democrat and Republican ballot shares each month. Positive means Democrats lead; the coloured bands mark the structural thresholds historically needed for House seat gains.</div>
+    <div class="gb-thresh-row">
+      <div class="gb-thresh-chip"><div class="gb-thresh-line" style="border-color:#3A8C5C"></div>+5 pt &#8212; D gains territory</div>
+      <div class="gb-thresh-chip"><div class="gb-thresh-line" style="border-color:#D4931A"></div>+3 pt &#8212; structural break-even</div>
+      <div class="gb-thresh-chip"><div class="gb-thresh-line" style="border-color:rgba(149,149,149,.5)"></div>Even split</div>
+    </div>
+    <div style="position:relative;height:220px"><canvas id="c-gb-margin"></canvas></div>
+    <div class="chart-note">Margin = Democrat % minus Republican % per month. Positive territory means Democrats lead; at +3 pts Democrats historically break even in seats. At +5 pts gains become likely. Current margin and 2026 projection point are highlighted.</div>
+  </div>
+
   <!-- POLLSTER BREAKDOWN -->
   <div class="chart-card">
     <div class="card-title">Poll-by-poll breakdown &#8212; recent surveys</div>
@@ -1083,6 +1115,34 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-sub">Each midterm plotted by Democratic ballot margin (x-axis) and resulting House seat change (y-axis). The 2026 projection is based on the current average and historical regression.</div>
     <div style="position:relative;height:300px"><canvas id="c-gb-scatter"></canvas></div>
     <div class="chart-note">Linear regression based on six completed midterm cycles (2006&#8211;2022). The relationship is directionally consistent but noisy: a +5D margin historically produces roughly +15 to +35 Democratic seats, depending on presidential approval and redistricting. 2026 projection is illustrative, not a forecast.</div>
+  </div>
+
+  <!-- SEAT PROJECTION SUMMARY -->
+  <div class="chart-card">
+    <div class="card-title">Seat projection from current ballot margin</div>
+    <div class="card-sub">Historical regression of ballot margin vs House seat change applied to the current average. Illustrative only &#8212; redistricting, candidate quality, and turnout modify the outcome.</div>
+    <div class="gb-proj-row">
+      <div class="gb-proj-big">
+        <div class="gb-proj-num gb-proj-pos" id="gb-proj-num">--</div>
+        <div class="gb-proj-sub" id="gb-proj-sub">D House seats (projected)</div>
+      </div>
+      <div class="gb-proj-ctx" id="gb-proj-ctx">Loading projection&#8230;</div>
+    </div>
+    <div class="gb-thresh-track-wrap">
+      <div class="gb-thresh-track" id="gb-thresh-track" style="position:relative">
+        <div class="gb-thresh-pin" id="gb-thresh-pin" style="left:50%">
+          <div class="gb-thresh-pin-lbl" id="gb-thresh-pin-lbl">--</div>
+        </div>
+        <!-- tick marks at key thresholds -->
+        <div class="gb-thresh-tick" style="left:40%">Even</div>
+        <div class="gb-thresh-tick" style="left:55%">+3 (break-even)</div>
+        <div class="gb-thresh-tick" style="left:67.5%">+5 (gains)</div>
+      </div>
+      <div class="gb-thresh-axis">
+        <span>R+10</span><span>R+5</span><span>Even</span><span>D+5</span><span>D+10</span>
+      </div>
+    </div>
+    <div class="chart-note">Regression based on 6 completed midterm cycles 2006&#8211;2022. One-standard-deviation range shown. The structural Republican geographic advantage means a D+3 lead is approximately equivalent to zero net seat change; a D+5 lead has historically produced +15 to +35 Democratic seats.</div>
   </div>
 
   <!-- CONTEXT BOXES -->
@@ -2805,46 +2865,146 @@ let ballotChartsReady = false;
 function renderBallotStats() {
   if (!DATA || !DATA.generic_ballot) return;
   const gb = DATA.generic_ballot;
-  const dem = gb.democrat || 0, rep = gb.republican || 0;
-  const und = gb.undecided || Math.max(0, 100 - dem - rep);
-  const margin = dem - rep;
-  const td = gb.trend_d || 0;
+  const dem    = gb.democrat    || 0;
+  const rep    = gb.republican  || 0;
+  const und    = gb.undecided   || Math.max(0, Math.round(100 - dem - rep));
+  const margin = parseFloat((dem - rep).toFixed(1));
+  const td     = gb.trend_d || 0;
 
+  // ── Stat strip ──────────────────────────────────────────────────────────────
   document.getElementById('gb-s-dem').textContent = dem + '%';
   document.getElementById('gb-s-rep').textContent = rep + '%';
 
   const marginEl = document.getElementById('gb-s-margin');
-  marginEl.textContent = (margin >= 0 ? '+' : '') + margin + ' pt';
-  marginEl.style.color = margin > 0 ? 'var(--blue)' : margin < 0 ? '#9B2828' : 'var(--t3)';
+  const marginStr = (margin > 0 ? 'D+' : margin < 0 ? 'R+' : '') + Math.abs(margin);
+  marginEl.textContent = (margin >= 0 ? '+' : '') + margin.toFixed(1) + ' pt';
+  marginEl.style.color = margin > 0 ? '#1A5EA8' : margin < 0 ? '#9B2828' : 'var(--t3)';
 
   const trendEl = document.getElementById('gb-s-trend');
-  trendEl.textContent = (td >= 0 ? '+' : '') + td + ' pt';
-  trendEl.style.color = td > 0 ? 'var(--blue)' : td < 0 ? '#9B2828' : 'var(--t3)';
+  trendEl.textContent = (td > 0 ? '+' : '') + td + ' pt D';
+  trendEl.style.color = td > 0 ? '#1A5EA8' : td < 0 ? '#9B2828' : 'var(--t3)';
 
-  // Balance bar
+  // ── Balance bar ─────────────────────────────────────────────────────────────
   document.getElementById('gb-dem-pct').textContent = dem + '%';
   document.getElementById('gb-rep-pct').textContent = rep + '%';
+  // Widths as fraction of the 100% track (undecided fills the gap via flex:1)
   document.getElementById('gb-bar-d').style.width = dem + '%';
   document.getElementById('gb-bar-r').style.width = rep + '%';
-  document.getElementById('gb-bar-d-lbl').textContent = dem >= 10 ? dem + '%' : '';
-  document.getElementById('gb-bar-r-lbl').textContent = rep >= 10 ? rep + '%' : '';
-  document.getElementById('gb-undecided-note').textContent = und > 0 ? und + '% undecided / other (not shown)' : '';
+  document.getElementById('gb-bar-d-lbl').textContent = dem >= 12 ? dem + '%' : '';
+  document.getElementById('gb-bar-r-lbl').textContent = rep >= 12 ? rep + '%' : '';
+  document.getElementById('gb-undecided-note').textContent =
+    und > 0 ? und + ' % undecided / other' : '';
 
   const tr_d = gb.trend_d || 0, tr_r = gb.trend_r || 0;
-  const demTrendEl = document.getElementById('gb-dem-trend');
-  demTrendEl.textContent = (tr_d >= 0 ? '+' : '') + tr_d + ' pt';
-  demTrendEl.className = 'gb-balance-trend ' + (tr_d > 0 ? 'gb-trend-up-d' : tr_d < 0 ? 'gb-trend-dn-d' : '');
-  const repTrendEl = document.getElementById('gb-rep-trend');
-  repTrendEl.textContent = (tr_r >= 0 ? '+' : '') + tr_r + ' pt';
-  repTrendEl.className = 'gb-balance-trend ' + (tr_r > 0 ? 'gb-trend-up-r' : tr_r < 0 ? 'gb-trend-dn-r' : '');
+  const demTrEl = document.getElementById('gb-dem-trend');
+  if (demTrEl) {
+    demTrEl.textContent = (tr_d >= 0 ? '+' : '') + tr_d + ' pt';
+    demTrEl.className = 'gb-balance-trend ' + (tr_d > 0 ? 'gb-trend-up-d' : tr_d < 0 ? 'gb-trend-dn-d' : '');
+  }
+  const repTrEl = document.getElementById('gb-rep-trend');
+  if (repTrEl) {
+    repTrEl.textContent = (tr_r >= 0 ? '+' : '') + tr_r + ' pt';
+    repTrEl.className = 'gb-balance-trend ' + (tr_r > 0 ? 'gb-trend-up-r' : tr_r < 0 ? 'gb-trend-dn-r' : '');
+  }
 
-  // Callout margin
+  // ── Callout (handles D or R lead) ──────────────────────────────────────────
   const cmEl = document.getElementById('gb-callout-margin');
-  if (cmEl) cmEl.textContent = Math.abs(margin);
+  if (cmEl) {
+    const calloutParent = cmEl.closest('.callout');
+    if (calloutParent) {
+      const absM = Math.abs(margin).toFixed(1);
+      if (margin > 0) {
+        calloutParent.innerHTML = '<div class="callout-label">Generic ballot translation rule — structural Republican advantage</div>'
+          + 'Due to geographic clustering of Democratic voters, Democrats typically need a <strong>+3 to +5 point</strong> lead to break even in House seats. '
+          + 'A +5 or larger lead translates to meaningful seat gains. '
+          + 'The current <strong>D+' + absM + '</strong> advantage '
+          + (margin >= 5 ? 'is in the range that has historically produced net House gains.'
+           : margin >= 3 ? 'is at the structural break-even threshold — small net gains or losses are equally likely.'
+           : 'is below the break-even threshold; Democrats would likely need a further shift to net seat gains.')
+          + ' Source: RCP average.';
+      } else if (margin < 0) {
+        calloutParent.innerHTML = '<div class="callout-label">Generic ballot translation rule — structural Republican advantage</div>'
+          + 'Republicans currently lead the generic ballot by <strong>R+' + absM + '</strong>. '
+          + 'Combined with structural geographic advantages, this margin would project to a significant Republican seat gain if sustained. '
+          + 'Democrats need to close a roughly 3–5 point gap just to return to break-even.';
+      } else {
+        calloutParent.innerHTML = '<div class="callout-label">Generic ballot translation rule — structural Republican advantage</div>'
+          + 'The ballot is currently <strong>even</strong>. Due to geographic clustering, an even national ballot still favours Republicans in House seat count. Democrats need a +3–5 lead to break even.';
+      }
+    }
+  }
 
-  // Pollster table
+  // ── Seat projection card ───────────────────────────────────────────────────
+  const hist = (gb.historical_midterms || []).filter(h => h.d_seat_change !== null);
+  if (hist.length >= 2) {
+    const pts = hist.map(h => ({ x: h.democrat - h.republican, y: h.d_seat_change }));
+    const n = pts.length;
+    const sx = pts.reduce((a, p) => a + p.x, 0);
+    const sy = pts.reduce((a, p) => a + p.y, 0);
+    const sxy = pts.reduce((a, p) => a + p.x * p.y, 0);
+    const sx2 = pts.reduce((a, p) => a + p.x * p.x, 0);
+    const slope = (n * sxy - sx * sy) / (n * sx2 - sx * sx);
+    const intercept = (sy - slope * sx) / n;
+    const projected = Math.round(slope * margin + intercept);
+    // Residual std dev
+    const residuals = pts.map(p => p.y - (slope * p.x + intercept));
+    const stdErr = Math.sqrt(residuals.reduce((a, r) => a + r * r, 0) / (n - 2));
+    const lo = Math.round(projected - stdErr), hi = Math.round(projected + stdErr);
+
+    const numEl = document.getElementById('gb-proj-num');
+    const subEl = document.getElementById('gb-proj-sub');
+    const ctxEl = document.getElementById('gb-proj-ctx');
+    const pinEl = document.getElementById('gb-thresh-pin');
+    const pinLbl = document.getElementById('gb-thresh-pin-lbl');
+
+    if (numEl) {
+      numEl.textContent = (projected >= 0 ? '+' : '') + projected;
+      numEl.className = 'gb-proj-num ' + (projected > 5 ? 'gb-proj-pos' : projected < -5 ? 'gb-proj-neg' : 'gb-proj-flat');
+    }
+    if (subEl) subEl.textContent = 'D seat change (1σ range: ' + (lo >= 0 ? '+' : '') + lo + ' to ' + (hi >= 0 ? '+' : '') + hi + ')';
+    if (ctxEl) {
+      const zone = projected > 20  ? 'a large Democratic wave scenario'
+                 : projected > 5   ? 'a modest Democratic net gain'
+                 : projected > -5  ? 'roughly a wash — small gains or losses in either direction'
+                 : projected > -20 ? 'a modest Republican net gain'
+                 :                   'a large Republican wave scenario';
+      ctxEl.innerHTML = '<p>At a current <strong>' + marginStr + ' margin</strong>, the historical regression projects <strong>'
+        + (projected >= 0 ? '+' : '') + projected + ' Democratic House seats</strong> '
+        + '(one-sigma range: ' + (lo >= 0 ? '+' : '') + lo + ' to ' + (hi >= 0 ? '+' : '') + hi + '). '
+        + 'This is <strong>' + zone + '</strong>.</p>'
+        + '<p>Note: the 2022 election fell outside the regression prediction due to candidate quality and issue salience. '
+        + 'The generic ballot is most predictive in the final 60 days before election day.</p>';
+    }
+    // Threshold bar: range R+10 to D+10 → 0% to 100%
+    if (pinEl && pinLbl) {
+      const pct = Math.min(100, Math.max(0, (margin + 10) / 20 * 100));
+      pinEl.style.left = pct + '%';
+      pinEl.querySelector('.gb-thresh-pin-lbl').textContent = marginStr;
+      pinLbl.textContent = marginStr;
+    }
+  }
+
+  // ── Pollster and historical tables ─────────────────────────────────────────
   renderPollsterTable(gb.pollsters || []);
   renderHistTable(gb.historical_midterms || []);
+
+  // ── Dynamic context box "Current trajectory" ───────────────────────────────
+  const trajEl = document.querySelector('#subpanel-ballot .gb-context-box:last-child p');
+  if (trajEl && margin !== null) {
+    const hist2 = gb.history || [];
+    const first = hist2[0], last = hist2[hist2.length - 1];
+    const startM = first ? (first.democrat - first.republican).toFixed(1) : '0';
+    const nowM   = margin.toFixed(1);
+    trajEl.textContent = 'Democrats began 2025 at approximately D' + (startM >= 0 ? '+' : '') + startM
+      + ' on the generic ballot. By ' + (last ? last.month : 'mid-2026')
+      + ' the margin had shifted to D' + (nowM >= 0 ? '+' : '') + nowM
+      + '. At the current trajectory, Democrats are in '
+      + (margin >= 5 ? 'territory that has historically produced 15–30 net House gains.'
+       : margin >= 3 ? 'break-even territory; small gains or losses are equally plausible.'
+       : margin >= 0 ? 'territory below the structural threshold. Further movement toward Democrats is needed for net gains.'
+       : 'negative territory; Republicans would be favoured to gain House seats on this margin alone.')
+      + ' (Source: RCP aggregate, live via fetch-polls workflow.)';
+  }
 }
 
 function renderPollsterTable(pollsters) {
@@ -2911,16 +3071,18 @@ function renderBallotCharts() {
           {
             label: 'Democrat',
             data: demData,
-            borderColor: 'var(--blue)', borderWidth: 2, tension: 0.35, fill: false,
-            pointBackgroundColor: labels.map((_, i) => i === labels.length - 1 ? '#E24B4A' : 'var(--blue)'),
+            borderColor: '#378ADD', borderWidth: 2.5, tension: 0.35, fill: false,
+            backgroundColor: 'rgba(55,138,221,0.06)',
+            pointBackgroundColor: labels.map((_, i) => i === labels.length - 1 ? '#378ADD' : '#378ADD'),
             pointRadius: labels.map((_, i) => i === labels.length - 1 ? 7 : 3),
             pointBorderColor: '#fff', pointBorderWidth: 2,
           },
           {
             label: 'Republican',
             data: repData,
-            borderColor: '#9B2828', borderWidth: 2, tension: 0.35, fill: false,
-            pointBackgroundColor: labels.map((_, i) => i === labels.length - 1 ? '#E24B4A' : '#9B2828'),
+            borderColor: '#9B2828', borderWidth: 2.5, tension: 0.35, fill: false,
+            backgroundColor: 'rgba(155,40,40,0.04)',
+            pointBackgroundColor: labels.map((_, i) => i === labels.length - 1 ? '#9B2828' : '#9B2828'),
             pointRadius: labels.map((_, i) => i === labels.length - 1 ? 7 : 3),
             pointBorderColor: '#fff', pointBorderWidth: 2,
           }
@@ -3109,8 +3271,97 @@ function renderBallotCharts() {
       }
     ]
   });
+
+  // Margin trend chart
+  renderBallotMarginChart(gb);
 }
 
+
+// ── D-R MARGIN TREND CHART ───────────────────────────────────────────────────
+function renderBallotMarginChart(gb) {
+  const hist = gb.history || [];
+  if (!hist.length) return;
+  const labels   = hist.map(h => h.month);
+  const margins  = hist.map(h => parseFloat((h.democrat - h.republican).toFixed(1)));
+  const lastIdx  = labels.length - 1;
+
+  new Chart(document.getElementById('c-gb-margin'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'D−R margin',
+        data: margins,
+        borderColor: '#378ADD',
+        backgroundColor: margins.map(m => m >= 0 ? 'rgba(55,138,221,0.10)' : 'rgba(155,40,40,0.08)'),
+        pointBackgroundColor: margins.map((m, i) => i === lastIdx ? '#D4931A' : m >= 0 ? '#378ADD' : '#9B2828'),
+        pointRadius: margins.map((_, i) => i === lastIdx ? 8 : 4),
+        pointBorderColor: '#fff',
+        pointBorderWidth: margins.map((_, i) => i === lastIdx ? 2 : 1),
+        borderWidth: 2.5,
+        tension: 0.4,
+        fill: true,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: i => i[0].label,
+            label: ctx => {
+              const m = ctx.raw;
+              return ' Margin: ' + (m >= 0 ? 'D+' : 'R+') + Math.abs(m) + ' pts';
+            },
+            afterLabel: ctx => {
+              const h = hist[ctx.dataIndex];
+              return '  D ' + h.democrat + '%  |  R ' + h.republican + '%';
+            }
+          }
+        }
+      },
+      scales: {
+        x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
+        y: {
+          grid: { color: c => c.tick.value === 0 ? 'rgba(0,0,0,0.15)' : 'rgba(0,0,0,0.04)' },
+          border: { display: false },
+          ticks: { font: { size: 11 }, callback: v => (v >= 0 ? 'D+' : 'R+') + Math.abs(v), stepSize: 2 },
+          title: { display: true, text: 'D − R pts', font: { size: 11 }, color: '#959595' }
+        }
+      }
+    },
+    plugins: [
+      {
+        id: 'threshLines',
+        afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const lines = [
+            { val: 0,  color: 'rgba(100,100,100,.35)', dash: [4, 3], label: 'Even' },
+            { val: 3,  color: '#D4931A',                dash: [6, 4], label: '+3 break-even' },
+            { val: 5,  color: '#3A8C5C',                dash: [6, 4], label: '+5 gains' },
+          ];
+          ctx.save();
+          lines.forEach(({ val, color, dash, label }) => {
+            const yp = y.getPixelForValue(val);
+            ctx.setLineDash(dash);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = val === 0 ? 1.5 : 1;
+            ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.fillStyle = color;
+            ctx.font = '500 10px DM Sans,sans-serif';
+            ctx.textAlign = 'right';
+            ctx.fillText(label, right - 2, yp - 3);
+          });
+          ctx.restore();
+        }
+      }
+    ]
+  });
+}
 
 // ── PARTY FAVOURABILITY ───────────────────────────────────────────────────────
 let favChartsReady = false;

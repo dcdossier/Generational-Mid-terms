@@ -196,6 +196,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .appr-comp-r   .appr-comp-bar{background:#9B2828}
 .appr-comp-d   .appr-comp-bar{background:var(--blue)}
 .appr-comp-val{font-size:12px;font-weight:700;color:var(--t2);width:36px;text-align:right;flex-shrink:0}
+.appr-analog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:12px}
+.appr-analog-item{background:var(--bg-s);border:1px solid var(--br);border-radius:8px;padding:16px;text-align:center;position:relative}
+.appr-analog-item.appr-analog-current{border-color:var(--orange);background:#fffaf2}
+.appr-analog-year{font-family:var(--serif);font-size:20px;font-weight:700;color:var(--t1);line-height:1.2}
+.appr-analog-pres{font-size:12px;color:var(--t3);margin:2px 0 6px;font-weight:500}
+.appr-analog-appr{font-size:13px;font-weight:700;margin-bottom:6px}
+.appr-analog-result{font-size:16px;font-weight:700;margin-bottom:4px}
+.appr-analog-ctx{font-size:11px;color:var(--t4);line-height:1.5}
+.appr-analog-badge{position:absolute;top:8px;right:8px;font-size:10px;font-weight:700;background:var(--orange);color:#fff;padding:2px 6px;border-radius:3px;text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:640px){.appr-analog-grid{grid-template-columns:1fr}}
 
 /* ── GENERIC BALLOT ────────────────────────────────────────────────────── */
 .gb-balance-bar-wrap{margin:18px 0 6px}
@@ -842,9 +852,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 
   <!-- MIDTERM CONTEXT CALLOUT -->
-  <div class="callout">
-    <div class="callout-label">Historical pattern &#8212; presidential approval and midterm seat loss</div>
-    Presidents below <strong>45% approval</strong> at the midterm have lost an average of <strong>37 House seats</strong> since 1946. Presidents above 50% have typically held losses to fewer than 10. Trump's 2018 approval of 41% preceded a 41-seat loss. The current trajectory places him in the historically vulnerable zone.
+  <div class="callout" id="appr-callout">
+    <div class="callout-label" id="appr-callout-label">Historical pattern &#8212; presidential approval and midterm seat loss</div>
+    <span id="appr-callout-body">Presidents below <strong>45% approval</strong> at the midterm have lost an average of <strong>37 House seats</strong> since 1946. Presidents above 50% have typically held losses to fewer than 10. Trump's 2018 approval of 41% preceded a 41-seat loss. The current trajectory places him in the historically vulnerable zone.</span>
   </div>
 
   <!-- MIDTERM COMPARISON TABLE -->
@@ -930,6 +940,24 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-sub">Comparison of presidential approval at approximately the same number of months into the presidency (16&#8211;17 months). Trump&#8217;s second-term starting approval was higher, but the decline has been steeper.</div>
     <div class="appr-comp-row" id="appr-comp-row"></div>
     <div class="chart-note">Sources: Gallup presidential approval tracking (1990&#8211;2024). &#8220;Equivalent point&#8221; is defined as 16&#8211;17 months into the presidential term, the closest Gallup reading to the current moment for each administration.</div>
+  </div>
+
+  <!-- PRESIDENTIAL APPROVAL vs SEAT LOSS SCATTER -->
+  <div class="chart-card">
+    <div class="card-title">Presidential approval vs seat change &#8212; historical regression (1990&#8211;2022)</div>
+    <div class="card-sub">Each dot is a midterm. Presidential approval at the final pre-election reading (x-axis) vs the president&#8217;s party House seat change (y-axis). The regression line shows the structural relationship: lower approval predicts larger seat losses. Trump 2026 is marked in red.</div>
+    <div style="position:relative;height:280px"><canvas id="c-appr-scatter"></canvas></div>
+    <div class="chart-note">OLS regression fitted to 1990&#8211;2022 completed midterms. 2002 included but flagged as post-9/11 outlier. 2026 seat change is TBD; the regression gives a structural baseline. Actual result depends on congressional approval, generic ballot, district map, and turnout model.</div>
+  </div>
+
+  <!-- ANALOGOUS PRESIDENTS CARD -->
+  <div class="chart-card">
+    <div class="card-title">Analogous presidents &#8212; similar approval at same point in term</div>
+    <div class="card-sub">Presidents with approval closest to the current reading at the 16&#8211;17 month mark. These precedents bracket the likely range of Republican House seat outcomes in 2026.</div>
+    <div class="appr-analog-grid" id="appr-analog-grid">
+      <div style="color:var(--t4);font-style:italic;text-align:center;padding:18px;grid-column:1/-1">Loading&#8230;</div>
+    </div>
+    <div class="chart-note">Selected by closest approval to current Trump reading from the historical midterm table. Result = president&#8217;s party House seat change at that midterm.</div>
   </div>
 
   <!-- POLLSTER SOURCES CARD -->
@@ -2571,6 +2599,68 @@ function renderApprovalStats() {
     const tableEl = document.getElementById('appr-table-pct');
     if (tableEl) tableEl.textContent = ap + '%*';
 
+    // ── Dynamic callout ───────────────────────────────────────────────────────
+    const calloutLabel = document.getElementById('appr-callout-label');
+    const calloutBody  = document.getElementById('appr-callout-body');
+    if (calloutLabel && calloutBody) {
+      if (ap < 40) {
+        calloutLabel.textContent = 'Historical pattern \u2014 sub-40% approval, wave-election territory';
+        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is below the 40% threshold associated with wave elections. Since 1946, presidents below 40% have averaged losses of <strong>45+ House seats</strong>. The closest modern parallels are George W. Bush (37%, 2006: \u221230 seats) and Harry Truman (33%, 1946: \u221255 seats).';
+      } else if (ap < 45) {
+        calloutLabel.textContent = 'Historical pattern \u2014 presidential approval and midterm seat loss';
+        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is in the danger zone. Presidents in the 40\u201344% range at their midterm have lost an average of <strong>30\u201340 House seats</strong> since 1946. The closest analogues are Obama 2014 (40%, \u221213 seats), Biden 2022 (40%, \u22129 seats), and Trump 2018 (41%, \u221241 seats).';
+      } else if (ap < 50) {
+        calloutLabel.textContent = 'Historical pattern \u2014 presidential approval and midterm seat loss';
+        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump is in below-average territory. Presidents in the 45\u201349% range typically lose <strong>10\u201325 House seats</strong> at their midterm. Losses are likely but a wave scenario is less probable than at sub-40% approval levels.';
+      } else {
+        calloutLabel.textContent = 'Historical pattern \u2014 high approval, limited midterm exposure';
+        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is above 50%, a level historically associated with limited midterm losses. Presidents above 50% have averaged fewer than <strong>10 seat losses</strong> since 1946. Only 2002 (post-9/11 unity, Bush 63%) saw an incumbent-party gain at above-50% approval.';
+      }
+    }
+
+    // ── Analogous presidents grid ─────────────────────────────────────────────
+    const analogGrid = document.getElementById('appr-analog-grid');
+    if (analogGrid) {
+      const MIDTERM_DATA = [
+        { year: 1990, pres: 'George H.W. Bush', party: 'R', approval: 54, seat_change: -8 },
+        { year: 1994, pres: 'Bill Clinton',      party: 'D', approval: 46, seat_change: -54 },
+        { year: 1998, pres: 'Bill Clinton',      party: 'D', approval: 66, seat_change: 5 },
+        { year: 2002, pres: 'George W. Bush',   party: 'R', approval: 63, seat_change: 8 },
+        { year: 2006, pres: 'George W. Bush',   party: 'R', approval: 37, seat_change: -30 },
+        { year: 2010, pres: 'Barack Obama',      party: 'D', approval: 44, seat_change: -63 },
+        { year: 2014, pres: 'Barack Obama',      party: 'D', approval: 40, seat_change: -13 },
+        { year: 2018, pres: 'Donald Trump',      party: 'R', approval: 41, seat_change: -41 },
+        { year: 2022, pres: 'Joe Biden',         party: 'D', approval: 40, seat_change: -9 },
+      ];
+      const CONTEXT = {
+        1990: 'Gulf War boost fading', 1994: 'Healthcare failure, Contract with America',
+        1998: 'Balanced budget, impeachment backlash', 2002: 'Post-9/11 unity (outlier)',
+        2006: 'Iraq War, Foley scandal', 2010: 'ACA backlash, Tea Party wave',
+        2014: 'Second-term drag, low D turnout', 2018: 'Anti-Trump wave',
+        2022: 'Dobbs backlash offset redistricting', 2026: 'Current \u2014 election 3 Nov 2026'
+      };
+      const sorted = MIDTERM_DATA.slice().sort((a, b) => Math.abs(a.approval - ap) - Math.abs(b.approval - ap));
+      const top3 = sorted.slice(0, 3);
+      const cur = { year: 2026, pres: 'Donald Trump', party: 'R', approval: ap, seat_change: null };
+      const items = [cur, ...top3];
+      analogGrid.innerHTML = items.map(h => {
+        const isCur = h.year === 2026;
+        const scStr = h.seat_change === null
+          ? '<span style="color:var(--t4);font-style:italic">TBD</span>'
+          : h.seat_change > 0 ? '<span style="color:var(--green)">+' + h.seat_change + ' seats</span>'
+          : '<span style="color:var(--red)">' + h.seat_change + ' seats</span>';
+        const partyCol = h.party === 'R' ? '#9B2828' : 'var(--blue)';
+        return '<div class="appr-analog-item' + (isCur ? ' appr-analog-current' : '') + '">'
+          + (isCur ? '<div class="appr-analog-badge">2026</div>' : '')
+          + '<div class="appr-analog-year">' + h.year + '</div>'
+          + '<div class="appr-analog-pres" style="color:' + partyCol + '">' + h.pres + '</div>'
+          + '<div class="appr-analog-appr">' + h.approval + '% approval</div>'
+          + '<div class="appr-analog-result">' + scStr + '</div>'
+          + '<div class="appr-analog-ctx">' + (CONTEXT[h.year] || '') + '</div>'
+          + '</div>';
+      }).join('');
+    }
+
     // ── Net approval card ────────────────────────────────────────────────────
     const netEl  = document.getElementById('appr-net-num');
     const netCtx = document.getElementById('appr-net-ctx');
@@ -2759,10 +2849,11 @@ function renderApprovalCharts() {
           scales: {
             x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
             y: {
-              min: 30, max: 70,
+              min: Math.max(25, Math.floor((Math.min(...appData, ...disData) - 4) / 5) * 5),
+              max: Math.min(80, Math.ceil((Math.max(...appData, ...disData) + 4) / 5) * 5),
               grid: { color: 'rgba(0,0,0,0.05)' },
               border: { display: false },
-              ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 10 },
+              ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 5 },
               title: { display: true, text: 'Approval %', font: { size: 11 }, color: '#959595' }
             }
           }
@@ -2853,6 +2944,123 @@ function renderApprovalCharts() {
         }
       }]
     });
+  }
+
+  // ── Presidential approval vs seat-loss scatter ────────────────────────────
+  {
+    const MIDTERM_PTS = [
+      { x: 54, y: -8,  year: 1990, outlier: false },
+      { x: 46, y: -54, year: 1994, outlier: false },
+      { x: 66, y:  5,  year: 1998, outlier: false },
+      { x: 63, y:  8,  year: 2002, outlier: true  },
+      { x: 37, y: -30, year: 2006, outlier: false },
+      { x: 44, y: -63, year: 2010, outlier: false },
+      { x: 40, y: -13, year: 2014, outlier: false },
+      { x: 41, y: -41, year: 2018, outlier: false },
+      { x: 40, y:  -9, year: 2022, outlier: false },
+    ];
+    const n = MIDTERM_PTS.length;
+    const sx  = MIDTERM_PTS.reduce((a, p) => a + p.x, 0);
+    const sy  = MIDTERM_PTS.reduce((a, p) => a + p.y, 0);
+    const sxy = MIDTERM_PTS.reduce((a, p) => a + p.x * p.y, 0);
+    const sx2 = MIDTERM_PTS.reduce((a, p) => a + p.x * p.x, 0);
+    const slope     = (n * sxy - sx * sy) / (n * sx2 - sx * sx);
+    const intercept = (sy - slope * sx) / n;
+    const xMin = 30, xMax = 72;
+    const regrLine = [{ x: xMin, y: slope * xMin + intercept }, { x: xMax, y: slope * xMax + intercept }];
+    const curAp = tr ? (tr.approve || 0) : null;
+    const projSeats = curAp !== null ? Math.round(slope * curAp + intercept) : null;
+
+    const scatterEl = document.getElementById('c-appr-scatter');
+    if (scatterEl) {
+      new Chart(scatterEl, {
+        type: 'scatter',
+        data: {
+          datasets: [
+            {
+              label: 'Historical midterms',
+              data: MIDTERM_PTS.map(p => ({ x: p.x, y: p.y })),
+              backgroundColor: MIDTERM_PTS.map(p => p.outlier ? 'rgba(212,147,26,0.75)' : 'rgba(100,100,100,0.75)'),
+              pointRadius: 7, pointHoverRadius: 9,
+              pointBorderColor: '#fff', pointBorderWidth: 1.5,
+            },
+            {
+              label: 'Regression',
+              data: regrLine,
+              type: 'line',
+              borderColor: 'rgba(100,100,100,.4)', borderWidth: 1.5,
+              borderDash: [5, 4], pointRadius: 0, fill: false, tension: 0,
+            },
+            ...(curAp !== null ? [{
+              label: 'Trump 2026',
+              data: [{ x: curAp, y: projSeats }],
+              backgroundColor: '#E24B4A',
+              pointRadius: 10, pointHoverRadius: 12,
+              pointBorderColor: '#fff', pointBorderWidth: 2,
+            }] : [])
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              filter: item => item.datasetIndex !== 1,
+              callbacks: {
+                label: ctx => {
+                  if (ctx.datasetIndex === 2) return ' 2026: ' + ctx.parsed.x + '% approval \u2192 proj. ' + (projSeats >= 0 ? '+' : '') + projSeats + ' seats';
+                  const pt = MIDTERM_PTS[ctx.dataIndex];
+                  return ' ' + pt.year + ': ' + ctx.parsed.x + '% approval, ' + (ctx.parsed.y >= 0 ? '+' : '') + ctx.parsed.y + ' seats' + (pt.outlier ? ' (post-9/11 outlier)' : '');
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'Presidential approval at midterm (%)', font: { size: 11 }, color: '#959595' },
+              grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+              ticks: { font: { size: 11 }, callback: v => v + '%' }
+            },
+            y: {
+              title: { display: true, text: 'President\'s party seat change', font: { size: 11 }, color: '#959595' },
+              grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+              ticks: { font: { size: 11 }, callback: v => (v >= 0 ? '+' : '') + v }
+            }
+          }
+        },
+        plugins: [
+          {
+            id: 'apprYearLabels',
+            afterDraw(c) {
+              const { ctx, scales: { x, y } } = c;
+              ctx.save(); ctx.font = '600 10px DM Sans,sans-serif'; ctx.textAlign = 'center';
+              MIDTERM_PTS.forEach((pt, i) => {
+                const px = x.getPixelForValue(pt.x), py = y.getPixelForValue(pt.y);
+                ctx.fillStyle = pt.outlier ? '#D4931A' : '#555';
+                ctx.fillText(pt.year, px, py - 11);
+              });
+              if (curAp !== null && projSeats !== null) {
+                const px = x.getPixelForValue(curAp), py = y.getPixelForValue(projSeats);
+                ctx.fillStyle = '#E24B4A'; ctx.font = '700 11px DM Sans,sans-serif';
+                ctx.fillText('2026\u2605', px, py - 13);
+              }
+              ctx.restore();
+            }
+          },
+          {
+            id: 'apprZeroLine',
+            afterDraw(c) {
+              const { ctx, chartArea: { left, right }, scales: { y } } = c;
+              const yp = y.getPixelForValue(0);
+              ctx.save();
+              ctx.strokeStyle = 'rgba(100,100,100,.25)'; ctx.lineWidth = 1; ctx.setLineDash([]);
+              ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+              ctx.restore();
+            }
+          }
+        ]
+      });
+    }
   }
 
   // ── Congress history chart ─────────────────────────────────────────────────

@@ -1796,8 +1796,22 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 
   <div class="card" style="margin-top:16px">
+    <div class="card-title">Net Senate Seat Change per Midterm (1994&ndash;2022)</div>
+    <div class="card-sub">Seat change from the president&rsquo;s party perspective. Senate is a partial map each cycle (1/3 of seats up), so swings are smaller than the House but still reflect the national environment.</div>
+    <div style="position:relative;height:180px"><canvas id="c-pe-senate"></canvas></div>
+    <div class="chart-note">Source: U.S. Senate Historical Office. Senate gains/losses adjusted for special elections and appointed senators.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="card-title">Generic Ballot: Democrat vs Republican (1994&ndash;2022)</div>
+    <div class="card-sub">Final pre-election generic congressional ballot average. The party leading the generic ballot by 3+ points almost always wins the House popular vote.</div>
+    <div style="position:relative;height:200px"><canvas id="c-pe-ballot"></canvas></div>
+    <div class="chart-note">Source: RealClearPolitics / FiveThirtyEight historical aggregates. 2026 point is live poll average.</div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
     <div class="card-title">Presidential Approval vs House Seat Change</div>
-    <div class="card-sub">Strong negative correlation (r ≈ −0.72). Presidents above ~55% approval tend to minimise losses or even gain; below 45% losses compound. The 2026 outlook (Trump ~44%) sits in the moderate-to-large loss zone historically.</div>
+    <div class="card-sub" id="pe-scatter-sub">Strong negative correlation. Presidents above ~55% approval tend to minimise losses or even gain; below 45% losses compound.</div>
     <div style="position:relative;height:260px"><canvas id="c-pe-scatter"></canvas></div>
     <div class="chart-note">Note: Seat change shown from the president&rsquo;s party perspective (negative = president&rsquo;s party lost). Each point represents one midterm cycle.</div>
   </div>
@@ -1828,8 +1842,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 4px">The four major wave elections of the modern era &mdash; what drove them and what they changed.</p>
   <div class="pe-spotlight-grid" id="pe-spotlight-cards"></div>
 
-  <div class="callout" style="margin-top:24px">
-    <strong>2026 Historical Context:</strong> With Trump&rsquo;s approval at ~44%, the historical regression suggests a loss of 20&ndash;35 House seats for Republicans — consistent with modest-to-large wave territory. However, several factors complicate the picture: the favourable Republican gerrymander reduces competitive seats; the Dobbs-era high Democratic enthusiasm may fade; and 2022 showed that candidate quality and abortion rights can outperform the macro model by 10&ndash;20 seats in either direction. The 2022 &ldquo;Dobbs dampener&rdquo; precedent looms largest — another structural issue (tariffs, healthcare) could similarly motivate the Democratic base beyond what generic polling suggests.
+  <div class="callout" id="pe-callout" style="margin-top:24px">
+    <div class="callout-label" id="pe-callout-label">2026 Historical Context</div>
+    <span id="pe-callout-body">Loading historical context&hellip;</span>
   </div>
 
 </div>
@@ -4683,6 +4698,46 @@ function renderPreviousStats() {
   const flipped = midterms.filter(m => m.house.flipped).length;
   set('pe-stat-flipped', flipped);
 
+  // Compute regression & r for scatter sub + callout
+  const scPts = midterms.map(m => ({
+    x: m.president_approval,
+    y: m.president_party === 'D' ? m.house.d_change : m.house.r_change
+  }));
+  const scN = scPts.length;
+  let scSX=0, scSY=0, scSXY=0, scSX2=0;
+  scPts.forEach(p => { scSX+=p.x; scSY+=p.y; scSXY+=p.x*p.y; scSX2+=p.x*p.x; });
+  const scSlope     = (scN*scSXY - scSX*scSY) / (scN*scSX2 - scSX*scSX);
+  const scIntercept = (scSY - scSlope*scSX) / scN;
+  const xBar = scSX/scN, yBar = scSY/scN;
+  let num=0, denX=0, denY=0;
+  scPts.forEach(p => { num+=(p.x-xBar)*(p.y-yBar); denX+=(p.x-xBar)**2; denY+=(p.y-yBar)**2; });
+  const pearsonR = (num/Math.sqrt(denX*denY)).toFixed(2);
+
+  const trumpAp = DATA.approval && DATA.approval.trump ? DATA.approval.trump.approve : 44;
+  const proj    = Math.round(scSlope * trumpAp + scIntercept);
+
+  // Update scatter card-sub dynamically
+  const subEl = document.getElementById('pe-scatter-sub');
+  if (subEl) subEl.textContent = `Strong negative correlation (r = ${pearsonR}). Presidents above ~55% approval tend to minimise losses or even gain seats; below 45% losses compound. At Trump\u2019s current ${trumpAp}% approval, the regression projects ${proj > 0 ? '+' : ''}${proj} seats for Republicans.`;
+
+  // Dynamic callout
+  let cLabel, cBody;
+  if (proj >= 5) {
+    cLabel = '2026 Historical Outlier Zone \u2014 Rare Presidential Gain';
+    cBody  = `At ${trumpAp}% approval, the regression projects +${proj} House seats for Republicans \u2014 a rare midterm gain. Only 1998 (Clinton, 66%) and 2002 (Bush, 63%) achieved this. Without extraordinary circumstances like 9/11-style national unity, this outcome would defy every modern precedent.`;
+  } else if (proj >= -10) {
+    cLabel = '2026 Context: Modest Republican Losses Projected';
+    cBody  = `At ${trumpAp}% approval, the regression projects ${proj} House seats for Republicans \u2014 historically modest territory. Comparable to 2022 (\u201cDobbs dampener\u201d, \u22129 seats). The Republican gerrymander provides a structural floor, but sustained anti-Trump enthusiasm \u2014 similar to 2022 abortion-rights energy \u2014 could push losses 10\u201320 seats beyond the model.`;
+  } else if (proj >= -30) {
+    cLabel = '2026 Context: Moderate-to-Large Republican Losses Projected';
+    cBody  = `At ${trumpAp}% approval, the regression projects ${proj} House seats for Republicans \u2014 comparable to 2014 (\u221213, second-term drag) or 2006 (\u221230, Iraq War backlash). A result in this range would likely flip the House to Democrats. Key wildcard: Republican gerrymander reduces competitive seats, potentially softening losses by 10\u201315 seats vs the raw model.`;
+  } else {
+    cLabel = '2026 Context: Large Wave Territory Projected';
+    cBody  = `At ${trumpAp}% approval, the regression projects ${proj} House seats for Republicans \u2014 wave territory comparable to 1994 (\u221254, Gingrich Revolution) or 2010 (\u221263, Tea Party wave). A result here would represent a decisive anti-MAGA mandate. Note: models built on small-N data carry wide confidence intervals; actual results could differ by \u00b115\u201320 seats.`;
+  }
+  set('pe-callout-label', cLabel);
+  set('pe-callout-body',  cBody);
+
   // Build results table
   const tbody = document.getElementById('pe-results-tbody');
   if (tbody) {
@@ -4902,6 +4957,150 @@ function renderPreviousCharts() {
       }
     }]
   });
+
+  // ── Senate seat change chart ─────────────────────────────────────
+  const senEl = document.getElementById('c-pe-senate');
+  if (senEl) {
+    const senChanges  = midterms.map(m => m.president_party === 'D' ? m.senate.d_change : m.senate.r_change);
+    const senColors   = senChanges.map(c => c >= 0 ? '#3A8C5C' : '#C04040');
+    new Chart(senEl, {
+      type: 'bar',
+      data: {
+        labels: midterms.map(m => m.year),
+        datasets: [{
+          data: senChanges,
+          backgroundColor: senColors,
+          borderSkipped: false,
+          borderRadius: { topLeft:4, topRight:4, bottomLeft:4, bottomRight:4 }
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: ctx => `${midterms[ctx[0].dataIndex].year} \u2014 ${midterms[ctx[0].dataIndex].nickname}`,
+              label: ctx => {
+                const m = midterms[ctx.dataIndex];
+                const v = ctx.raw;
+                return ` President\u2019s party Senate: ${v > 0 ? '+' : ''}${v} seats | ${m.president} (${m.president_party})`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: '#444' } },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => (v > 0 ? '+' : '') + v }
+          }
+        }
+      },
+      plugins: [{
+        id: 'senzeroline',
+        afterDraw(chart) {
+          const { ctx, chartArea, scales } = chart;
+          const y = scales.y.getPixelForValue(0);
+          ctx.save();
+          ctx.strokeStyle = '#191919';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.moveTo(chartArea.left, y);
+          ctx.lineTo(chartArea.right, y);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // ── Generic ballot line chart ────────────────────────────────────
+  const ballotEl = document.getElementById('c-pe-ballot');
+  if (ballotEl) {
+    const years  = midterms.map(m => m.year);
+    const dVals  = midterms.map(m => m.generic_ballot_d);
+    const rVals  = midterms.map(m => m.generic_ballot_r);
+
+    // Append live 2026 data if available
+    const gb = DATA.generic_ballot;
+    if (gb && gb.democrat != null && gb.republican != null) {
+      years.push(2026);
+      dVals.push(+(gb.democrat).toFixed(1));
+      rVals.push(+(gb.republican).toFixed(1));
+    }
+
+    const allVals = [...dVals, ...rVals].filter(v => v != null);
+    const yMin = Math.max(30, Math.floor((Math.min(...allVals) - 3) / 2) * 2);
+    const yMax = Math.min(65, Math.ceil((Math.max(...allVals) + 3) / 2) * 2);
+
+    new Chart(ballotEl, {
+      type: 'line',
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: 'Democrat',
+            data: dVals,
+            borderColor: '#1A5EA8',
+            backgroundColor: 'rgba(26,94,168,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            fill: false,
+            tension: 0.3
+          },
+          {
+            label: 'Republican',
+            data: rVals,
+            borderColor: '#C04040',
+            backgroundColor: 'rgba(192,64,64,0.08)',
+            borderWidth: 2.5,
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            fill: false,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 12, boxWidth: 12 } },
+          tooltip: {
+            callbacks: {
+              label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: '#444' } },
+          y: {
+            min: yMin, max: yMax,
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%' }
+          }
+        }
+      },
+      plugins: [{
+        id: 'parityline',
+        afterDraw(chart) {
+          const { ctx, chartArea, scales } = chart;
+          const y50 = scales.y.getPixelForValue(50);
+          ctx.save();
+          ctx.strokeStyle = '#999';
+          ctx.lineWidth = 1;
+          ctx.setLineDash([4, 4]);
+          ctx.beginPath();
+          ctx.moveTo(chartArea.left, y50);
+          ctx.lineTo(chartArea.right, y50);
+          ctx.stroke();
+          ctx.setLineDash([]);
+          ctx.restore();
+        }
+      }]
+    });
+  }
 }
 
 

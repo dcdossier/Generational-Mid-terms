@@ -3,22 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DC Dossier: Field Overview</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<title>US 2026 Mid-term Election Racebook</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 :root{
-  --bg:#FFFFFF;--bg-s:#F7F7F7;--bg-h:#F2F2F2;
-  --br:#E9E9E7;--br-md:#D4D4D0;
-  --t1:#191919;--t2:#292929;--t3:#6B6B6B;--t4:#959595;
-  --orange:#FF6719;--orange-p:#FFF0E9;
+  --bg:#FAFAF7;--bg-s:#FFFFFF;--bg-h:#F2F0EB;
+  --br:#E8E8E0;--br-md:#D4D4D0;
+  --t1:#1E2232;--t2:#1E2232;--t3:#6B6B6B;--t4:#959595;
+  --orange:#C9A227;--orange-p:#FFF9EC;
+  --gold:#C9A227;--navy:#0d1b2e;
   --red:#E24B4A;--blue:#378ADD;--green:#3A8C5C;--yellow:#D4931A;--purple:#9040A8;
-  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
-  --serif:'Source Serif 4',Georgia,serif;
+  --sans:Georgia,serif;
+  --serif:'Times New Roman',Georgia,serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased}
@@ -30,7 +28,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .subtab-left{display:flex}
 .subtab-btn{flex-shrink:0;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;padding:13px 16px;cursor:pointer;margin-bottom:-1px;transition:color .12s,border-color .12s;white-space:nowrap}
 .subtab-btn:hover{color:var(--t1)}
-.subtab-btn.active{color:var(--t1);border-bottom-color:var(--t1)}
+.subtab-btn.active{color:var(--navy);border-bottom-color:var(--gold)}
 .last-updated{font-size:11px;color:var(--t4);padding:0 4px;white-space:nowrap;flex-shrink:0}
 
 /* PANELS */
@@ -83,6 +81,19 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 /* COMING SOON PLACEHOLDER */
 .coming-soon{display:flex;align-items:center;justify-content:center;min-height:320px;color:var(--t4);font-family:var(--serif);font-size:20px;font-style:italic;letter-spacing:.01em}
 
+/* FORECAST BANNER */
+.forecast-banner{background:var(--bg-s);border:1px solid var(--gold);border-radius:8px;margin:14px 28px 0;padding:16px 24px}
+.fb-inner{display:flex;gap:32px;flex-wrap:wrap;justify-content:center;margin-bottom:10px}
+.fb-card{flex:1;min-width:220px;max-width:400px}
+.fb-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--navy);margin-bottom:8px}
+.fb-bar-wrap{display:flex;height:10px;border-radius:5px;overflow:hidden;margin-bottom:7px;background:#E8E8E0}
+.fb-bar-d{background:#4c8de0;height:100%}
+.fb-bar-r{background:#E05555;height:100%}
+.fb-text{font:400 13px var(--sans);color:var(--t1);margin-bottom:3px;line-height:1.45}
+.fb-note{font:400 11px var(--sans);color:var(--t4);font-style:italic}
+.fb-disclaimer{font:400 11px var(--sans);color:var(--t4);text-align:center;font-style:italic;border-top:1px solid var(--br);padding-top:8px;line-height:1.5}
+@media(max-width:600px){.fb-inner{flex-direction:column;gap:16px}.forecast-banner{margin:10px 12px 0;padding:14px 16px}}
+
 @media(max-width:600px){
   .stat-strip{grid-template-columns:1fr 1fr}
   .panel-inner{padding:24px 16px 60px}
@@ -91,12 +102,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 }
 
 /* ── REDISTRICTING WATCH ─────────────────────────────────────── */
-.rd-scoreboard{display:grid;grid-template-columns:repeat(4,1fr);background:#0d1b2e;border-radius:6px;overflow:hidden;margin-bottom:24px}
-.rd-sbox{padding:20px 18px;border-right:1px solid rgba(201,162,39,.15);display:flex;flex-direction:column;gap:6px}
+.rd-scoreboard{display:grid;grid-template-columns:repeat(4,1fr);background:#F2F0EB;border:1px solid var(--br);border-radius:6px;overflow:hidden;margin-bottom:24px}
+.rd-sbox{padding:20px 18px;border-right:1px solid rgba(0,0,0,.08);display:flex;flex-direction:column;gap:6px}
 .rd-sbox:last-child{border-right:none}
 .rd-sn{font-family:var(--serif);font-size:30px;font-weight:700;color:#C9A227;letter-spacing:-.02em;line-height:1}
 .rd-sl{font-size:12px;line-height:1.4}
-.rd-sl-r{color:#E8A0A0}.rd-sl-d{color:#8CB4E0}.rd-sl-g{color:rgba(255,255,255,.5)}
+.rd-sl-r{color:#9B2828}.rd-sl-d{color:#1A5EA8}.rd-sl-g{color:#6B6B6B}
 .rd-slider-wrap{margin-bottom:16px}
 .rd-slider-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--t3);margin-bottom:6px}
 .rd-slider{-webkit-appearance:none;width:100%;height:4px;border-radius:2px;background:#D4D4D0;outline:none;cursor:pointer;touch-action:pan-y}
@@ -562,6 +573,30 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
     <span class="last-updated" id="last-updated-ts">Updated: loading&#8230;</span>
   </div>
+</div>
+
+<div class="forecast-banner">
+  <div class="fb-inner">
+    <div class="fb-card">
+      <div class="fb-label">House Control Forecast</div>
+      <div class="fb-bar-wrap">
+        <div class="fb-bar-d" style="width:90%"></div>
+        <div class="fb-bar-r" style="width:10%"></div>
+      </div>
+      <div class="fb-text">Democrats 9/10 chance of flipping the House</div>
+      <div class="fb-note">Source: The Economist election model</div>
+    </div>
+    <div class="fb-card">
+      <div class="fb-label">Senate Control Forecast</div>
+      <div class="fb-bar-wrap">
+        <div class="fb-bar-r" style="width:55%"></div>
+        <div class="fb-bar-d" style="width:45%"></div>
+      </div>
+      <div class="fb-text">Senate race extremely competitive -- outcome uncertain</div>
+      <div class="fb-note">Source: The Economist election model. Update with exact probability.</div>
+    </div>
+  </div>
+  <div class="fb-disclaimer">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
 </div>
 
 <div class="ftt" id="ftt">
@@ -1996,17 +2031,37 @@ function goSub(id, btn) {
 let DATA = null;
 
 async function loadData() {
-  try {
-    const res = await fetch('../data.json');
-    DATA = await res.json();
-  } catch(e) {
+  const paths = ['./data.json', 'data.json', '../data.json'];
+  for (const p of paths) {
     try {
-      const res2 = await fetch('data.json');
-      DATA = await res2.json();
-    } catch(e2) {
-      console.warn('Could not fetch data.json, using fallback');
-      DATA = null;
-    }
+      const res = await fetch(p + '?t=' + Date.now());
+      if (!res.ok) continue;
+      DATA = await res.json();
+      break;
+    } catch(e) { /* try next */ }
+  }
+  if (!DATA) {
+    console.warn('data.json unavailable, using placeholder values');
+    DATA = {
+      approval: { trump: { approve: 44, disapprove: 52, unsure: 4, history: [] } },
+      generic_ballot: { democrat: 47, republican: 46, pollsters: [], history: [] },
+      congress_approval: { approve: 18, disapprove: 71, history: [], historical_midterms: [] },
+      party_favourability: {
+        democrat: { favourable: 38, unfavourable: 50, history: [] },
+        republican: { favourable: 40, unfavourable: 52, history: [] },
+        pollsters: []
+      },
+      retirements: { members: [] },
+      races: {
+        senate: { seats_up: 33, current_balance: { r: 53, d: 47 }, ratings_summary: { safe_r:11, likely_r:5, lean_r:4, toss_up:2, lean_d:2, likely_d:5, safe_d:4 }, races: [], path_to_majority: { r_seats_up: 20, d_seats_up: 13, d_needs_to_flip: 4 } },
+        house: { total_seats: 435, current_balance: { r: 220, d: 215 }, ratings_summary: { safe_r:183, likely_r:14, lean_r:11, toss_up:22, lean_d:9, likely_d:13, safe_d:183 }, competitive: [], path_to_majority: {} },
+        governor: { races: [] }
+      },
+      previous_elections: { midterms: [] },
+      factions: { house: { republican: [], democrat: [] }, senate: { republican: [], democrat: [] } },
+      redistricting: { states: [] },
+      meta: {}
+    };
   }
   renderAll();
 }
@@ -2060,6 +2115,15 @@ function renderAll() {
     </tr>`;
 
   renderCharts(r);
+
+  // Initialise all sub-tab charts upfront so they render when tabs become visible
+  renderApprovalCharts();
+  renderBallotCharts();
+  renderFavourabilityCharts();
+  renderCongressApprovalCharts();
+  renderKeyRacesCharts();
+  renderPreviousCharts();
+  renderFactionCharts();
 }
 
 let chartsReady = false;

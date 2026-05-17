@@ -348,6 +348,99 @@ body {
   margin-top: 2px;
 }
 
+
+/* SENATE WATCH */
+.sw-race-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media(max-width:640px){ .sw-race-grid { grid-template-columns: 1fr; } }
+.sw-race-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.sw-race-header { background: var(--navy); padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; }
+.sw-race-state { font: 700 13px var(--sans); color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: .06em; }
+.sw-rating { font: 700 11px var(--sans); padding: 3px 9px; border-radius: 10px; }
+.sw-rating-safe-d { background: rgba(26,94,168,.4); color: #90C0FF; }
+.sw-rating-likely-d { background: rgba(91,143,212,.3); color: #A8D0FF; }
+.sw-rating-lean-r { background: rgba(224,128,112,.3); color: #FFB090; }
+.sw-card-body { padding: 20px; }
+.sw-candidate-name { font: 700 22px var(--serif); color: var(--navy); margin-bottom: 2px; }
+.sw-candidate-meta { font: 400 12px var(--sans); color: var(--text3); margin-bottom: 14px; }
+.sw-race-label { font: 700 10px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--text3); margin: 12px 0 4px; }
+.sw-race-text { font: 400 13px var(--sans); color: var(--text2); line-height: 1.6; }
+.sw-stat-row { display: flex; gap: 20px; margin: 14px 0; flex-wrap: wrap; }
+.sw-stat { display: flex; flex-direction: column; gap: 2px; }
+.sw-stat-num { font: 700 20px var(--sans); color: var(--navy); }
+.sw-stat-label { font: 400 10px var(--sans); color: var(--text3); text-transform: uppercase; letter-spacing: .05em; }
+.sw-factor-list { list-style: none; padding: 0; margin: 0; }
+.sw-factor-list li { font: 400 12px var(--sans); color: var(--text2); padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+.sw-factor-list li::before { content: "→"; color: var(--saffron); font-weight: 700; flex-shrink: 0; }
+.sw-historic-box { background: linear-gradient(135deg, var(--saffron-lt) 0%, #fff7ed 100%); border: 1px solid var(--saffron); border-radius: 10px; padding: 24px 28px; margin-bottom: 28px; }
+.sw-historic-title { font: 700 16px var(--serif); color: var(--navy); margin-bottom: 8px; }
+.sw-historic-text { font: 400 13px var(--sans); color: var(--text2); line-height: 1.65; }
+.sw-timeline { display: flex; flex-direction: column; gap: 0; }
+.sw-tl-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.sw-tl-item:last-child { border-bottom: none; }
+.sw-tl-date { font: 600 11px var(--sans); color: var(--saffron); width: 80px; flex-shrink: 0; padding-top: 2px; }
+.sw-tl-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--saffron); flex-shrink: 0; margin-top: 5px; }
+.sw-tl-body { flex: 1; }
+.sw-tl-event { font: 600 13px var(--sans); color: var(--text); }
+.sw-tl-detail { font: 400 12px var(--sans); color: var(--text3); margin-top: 2px; line-height: 1.5; }
+.sw-implications-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+@media(max-width:600px){ .sw-implications-grid { grid-template-columns: 1fr; } }
+.sw-impl-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.sw-impl-icon { font-size: 22px; margin-bottom: 8px; }
+.sw-impl-title { font: 600 13px var(--sans); color: var(--text); margin-bottom: 4px; }
+.sw-impl-text { font: 400 12px var(--sans); color: var(--text2); line-height: 1.55; }
+.sw-ramaswamy-card { border: 1px solid var(--border); border-radius: 10px; padding: 20px; display: grid; grid-template-columns: 1fr 2fr; gap: 20px; }
+@media(max-width:600px){ .sw-ramaswamy-card { grid-template-columns: 1fr; } }
+
+/* POLICY TRACKER */
+.tracker-list { display: flex; flex-direction: column; gap: 10px; }
+.tracker-row { border: 1px solid var(--border); border-radius: 8px; padding: 14px 16px; display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; }
+.tracker-bill { font: 600 13px var(--sans); color: var(--navy); }
+.tracker-desc { font: 400 12px var(--sans); color: var(--text2); line-height: 1.5; margin-top: 3px; }
+.tracker-sponsor { font: 500 11px var(--sans); color: var(--text3); margin-top: 4px; }
+.tracker-status { font: 700 10px var(--sans); text-transform: uppercase; letter-spacing: .06em; padding: 4px 10px; border-radius: 4px; white-space: nowrap; align-self: flex-start; }
+.ts-passed      { background: var(--green-lt); color: var(--green-in); }
+.ts-active      { background: #E8F4FE; color: #1A5276; }
+.ts-stalled     { background: #FEF3C7; color: #92400E; }
+.ts-dead        { background: #F5F5F5; color: #888; }
+.ts-watch       { background: #F3EEFF; color: #5B21B6; }
+
+/* CURRENT POLICY */
+.cpolicy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+@media(max-width:600px){ .cpolicy-grid { grid-template-columns: 1fr; } }
+.cpolicy-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.cpolicy-label { font: 700 10px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--saffron); margin-bottom: 6px; }
+.cpolicy-title { font: 600 14px var(--sans); color: var(--navy); margin-bottom: 6px; }
+.cpolicy-text { font: 400 12px var(--sans); color: var(--text2); line-height: 1.55; }
+.cpolicy-status { display: inline-block; font: 700 10px var(--sans); padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+
+/* ALIGNMENT */
+.align-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px; }
+@media(max-width:600px){ .align-grid { grid-template-columns: 1fr; } }
+.align-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.align-pct { font: 700 36px var(--sans); line-height: 1; }
+.align-label { font: 400 12px var(--sans); color: var(--text3); margin: 2px 0 10px; }
+.align-bar { height: 10px; border-radius: 5px; margin-bottom: 6px; }
+.align-sub { font: 400 11px var(--sans); color: var(--text3); line-height: 1.5; }
+.align-trend { display: inline-block; font: 600 10px var(--sans); padding: 2px 7px; border-radius: 10px; margin-top: 6px; }
+.trend-up { background: #D1FAE5; color: #065F46; }
+.trend-down { background: #FEE2E2; color: #991B1B; }
+.trend-stable { background: #F3F4F6; color: #555; }
+.align-gen-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
+.align-gen-card { background: var(--bg2); border-radius: 8px; padding: 14px; text-align: center; }
+.align-gen-pct { font: 700 24px var(--sans); }
+.align-gen-label { font: 400 11px var(--sans); color: var(--text3); margin-top: 3px; }
+
+/* KEY VOTES */
+.vote-table { width: 100%; border-collapse: collapse; font: 400 13px var(--sans); }
+.vote-table th { font: 700 11px var(--sans); color: var(--text3); text-transform: uppercase; letter-spacing: .06em; padding: 8px 12px; border-bottom: 2px solid var(--border); background: var(--bg2); text-align: left; }
+.vote-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.vote-table tr:hover td { background: var(--bg2); }
+.vote-y { color: var(--green-in); font-weight: 700; }
+.vote-n { color: #991B1B; font-weight: 700; }
+.vote-abs { color: var(--text3); }
+.vote-bill { font: 600 13px var(--sans); color: var(--text); }
+.vote-desc { font: 400 11px var(--sans); color: var(--text3); margin-top: 2px; }
+
 @media (max-width: 600px) {
   .hero { padding: 24px 20px; }
   .hero h1 { font-size: 20px; }
@@ -365,6 +458,7 @@ body {
 <nav class="sub-nav">
   <button class="sub-tab active" data-tab="stakes" onclick="switchTab('stakes')">Policy &amp; Stakes</button>
   <button class="sub-tab" data-tab="presence" onclick="switchTab('presence')">Electoral Presence</button>
+  <button class="sub-tab" data-tab="senate-watch" onclick="switchTab('senate-watch')">&#9733; Senate Watch</button>
   <div class="nav-spacer"></div>
   <div class="flag-strip" title="India">
     <span style="background:#FF9933"></span>
@@ -555,6 +649,103 @@ body {
           <div class="committee-why">Oversee CHIPS Act implementation, semiconductor export controls, AI governance, and the science &amp; technology cooperation frameworks that underpin the iCET initiative.</div>
           <div class="committee-chamber">Senate + House</div>
         </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- H-1B LEGISLATIVE TRACKER -->
+  <div class="section">
+    <div class="section-header">
+      <h2>H-1B &amp; Immigration: Legislative Tracker</h2>
+      <span class="section-sub">Key bills in the 119th Congress affecting Indian nationals</span>
+    </div>
+    <div class="tracker-list">
+      <div class="tracker-row">
+        <div>
+          <div class="tracker-bill">H-1B and L-1 Visa Reform Act of 2025</div>
+          <div class="tracker-desc">Raises H-1B cap from 65,000 to 85,000; creates separate track for STEM graduates from US universities; tightens wage-level requirements to reduce undercutting. Key provision: spouse work authorisation (EAD) made permanent.</div>
+          <div class="tracker-sponsor">Lead sponsor: Rep. Zoe Lofgren (D-CA), co-sponsored by Rep. Ami Bera (D-CA)</div>
+        </div>
+        <span class="tracker-status ts-active">In Committee</span>
+      </div>
+      <div class="tracker-row">
+        <div>
+          <div class="tracker-bill">Equal Access to Green Cards for Legal Employment (EAGLE) Act</div>
+          <div class="tracker-desc">Eliminates the per-country cap on employment-based green cards, which causes Indian-born workers to wait 50–100 years for permanent residence under current law. Would immediately benefit the ~600,000 Indians in the EB backlog.</div>
+          <div class="tracker-sponsor">Introduced by Rep. Zoe Lofgren (D-CA) and Rep. John Curtis (R-UT)</div>
+        </div>
+        <span class="tracker-status ts-stalled">Stalled — Senate</span>
+      </div>
+      <div class="tracker-row">
+        <div>
+          <div class="tracker-bill">Immigration Innovation Act (I-Squared) 2025</div>
+          <div class="tracker-desc">Comprehensive high-skilled immigration reform; raises H-1B cap to 195,000; eliminates EB per-country caps; creates "V visa" for family members while awaiting green cards. Strong tech industry support.</div>
+          <div class="tracker-sponsor">Sen. Amy Klobuchar (D-MN), Sen. Marco Rubio (R-FL) — bipartisan</div>
+        </div>
+        <span class="tracker-status ts-active">Introduced — Bipartisan</span>
+      </div>
+      <div class="tracker-row">
+        <div>
+          <div class="tracker-bill">America First Workforce Act</div>
+          <div class="tracker-desc">Restrictionist counterproposal: freezes H-1B cap, mandates higher prevailing wage requirements, restricts outsourcing firms' access to H-1B slots. Backed by Freedom Caucus and immigration restriction groups.</div>
+          <div class="tracker-sponsor">Rep. Bob Good (R-VA), Rep. Matt Gaetz (R-FL)</div>
+        </div>
+        <span class="tracker-status ts-watch">Counter-bill — Watch</span>
+      </div>
+      <div class="tracker-row">
+        <div>
+          <div class="tracker-bill">Spouse Employment Protection Act</div>
+          <div class="tracker-desc">Permanently codifies the Obama-era rule allowing H-4 visa holders (dependants of H-1B workers awaiting green cards) to work. Currently under regulatory threat; legislative fix would protect ~100,000 workers, predominantly Indian women.</div>
+          <div class="tracker-sponsor">Rep. Pramila Jayapal (D-WA), Rep. Raja Krishnamoorthi (D-IL)</div>
+        </div>
+        <span class="tracker-status ts-stalled">Stalled — House</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENT POLICY LANDSCAPE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Current Policy Landscape (2025&ndash;26)</h2>
+      <span class="section-sub">Live developments in US-India relations shaping the 2026 calculus</span>
+    </div>
+    <div class="cpolicy-grid">
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Trade</div>
+        <div class="cpolicy-title">Reciprocal Tariff Standoff</div>
+        <div class="cpolicy-text">The Trump administration's 26% tariff on Indian goods (paused at 10% for 90 days) has complicated bilateral trade negotiations. India faces pressure to reduce its own tariffs in exchange for a US trade deal — a politically sensitive ask ahead of Indian state elections.</div>
+        <span class="cpolicy-status" style="background:#FEF3C7;color:#92400E">Active Negotiation</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Technology</div>
+        <div class="cpolicy-title">iCET 2.0: Initiative on Critical and Emerging Technology</div>
+        <div class="cpolicy-text">The US-India iCET framework expanded in 2025 to cover quantum computing, AI safety standards, and space cooperation. CHIPS Act-linked semiconductor cooperation agreement signed; India reciprocated with liberalised FDI rules in chip manufacturing.</div>
+        <span class="cpolicy-status" style="background:var(--green-lt);color:var(--green-in)">Active</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Defence</div>
+        <div class="cpolicy-title">INDUS-X &amp; GE Jet Engine Deal</div>
+        <div class="cpolicy-text">The GE F414 jet engine technology transfer for India's Tejas Mk2 fighter is proceeding through ITAR congressional notification. INDUS-X has spawned 11 joint defence startup partnerships. Armed Services Committees in both chambers are broadly supportive.</div>
+        <span class="cpolicy-status" style="background:#E8F4FE;color:#1A5276">Progressing</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Immigration</div>
+        <div class="cpolicy-title">H-1B &amp; EB Backlog: No Resolution in Sight</div>
+        <div class="cpolicy-text">The employment-based green card backlog for Indian nationals exceeds 600,000. At current processing rates, a new applicant from India would wait 50–100 years. EAGLE Act has passed the House three times but stalled in the Senate due to per-country cap politics.</div>
+        <span class="cpolicy-status" style="background:#FEE2E2;color:#991B1B">Critical</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Quad</div>
+        <div class="cpolicy-title">Quad Summit &amp; Indo-Pacific Framework</div>
+        <div class="cpolicy-text">The Quad (US, India, Japan, Australia) held its annual summit in 2025 with joint statements on semiconductor supply chains, maritime security, and clean energy. Congressional support is strong across both parties — one of few genuinely bipartisan foreign policy areas.</div>
+        <span class="cpolicy-status" style="background:var(--green-lt);color:var(--green-in)">Bipartisan</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Climate</div>
+        <div class="cpolicy-title">US Withdrawal Risk from Climate Commitments</div>
+        <div class="cpolicy-text">Republican control of Congress threatens IRA international clean energy provisions and US contributions to the Green Climate Fund, which India has leveraged for renewable energy financing. A Democratic House in 2027 would likely restore these mechanisms.</div>
+        <span class="cpolicy-status" style="background:#FEF3C7;color:#92400E">At Risk</span>
       </div>
     </div>
   </div>
@@ -779,8 +970,307 @@ body {
     </div>
   </div>
 
+
+  <!-- COMMUNITY POLITICAL ALIGNMENT -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Community Political Alignment</h2>
+      <span class="section-sub">How Indian-Americans vote and party trends heading into 2026</span>
+    </div>
+    <div class="callout">
+      Indian-Americans have historically been among the most Democratic-leaning immigrant communities, but a visible rightward shift among younger and higher-income segments is reshaping electoral dynamics. The community's vote is no longer monolithic.
+    </div>
+    <div class="align-grid">
+      <div class="align-card">
+        <div class="align-pct" style="color:#1A3F8A">~66%</div>
+        <div class="align-label">Identify as or lean Democrat</div>
+        <div class="align-bar" style="background:linear-gradient(90deg,#1A3F8A 66%,#E8E8E8 66%);border-radius:5px;height:10px"></div>
+        <div class="align-sub">Down from ~72% in 2020. Driven by younger voters and economic concerns. Still the highest Democratic-lean of any major immigrant group.</div>
+        <span class="align-trend trend-down">&#8595; Trending R among under-40s</span>
+      </div>
+      <div class="align-card">
+        <div class="align-pct" style="color:#9A1C1C">~26%</div>
+        <div class="align-label">Identify as or lean Republican</div>
+        <div class="align-bar" style="background:linear-gradient(90deg,#9A1C1C 26%,#E8E8E8 26%);border-radius:5px;height:10px"></div>
+        <div class="align-sub">Up from ~18% in 2016. Growth concentrated among business owners, Hindu nationalists, and those prioritising H-1B expansion (where some R members are more supportive).</div>
+        <span class="align-trend trend-up">&#8593; Growing 2&ndash;3 pts per cycle</span>
+      </div>
+    </div>
+    <p style="font:700 13px var(--sans);color:var(--text2);margin:20px 0 8px">By generation &amp; income:</p>
+    <div class="align-gen-grid">
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#1A3F8A">74%</div>
+        <div class="align-gen-label">1st-gen immigrants → Democrat</div>
+      </div>
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#555">58%</div>
+        <div class="align-gen-label">2nd-gen → Democrat (vs 36% R)</div>
+      </div>
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#555">62%</div>
+        <div class="align-gen-label">Income &gt;$150K → Democrat</div>
+      </div>
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:10px">Source: Carnegie Endowment for International Peace, AAPI Data, 2024 Asian American Voter Survey.</p>
+  </div>
+
+  <!-- KEY VOTES OF INDIAN-AMERICAN MEMBERS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Key Votes: Indian-American Members in the 119th Congress</h2>
+      <span class="section-sub">How IA members voted on legislation directly relevant to India and the community</span>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="vote-table">
+      <thead>
+        <tr>
+          <th>Bill / Vote</th>
+          <th>Bera</th>
+          <th>Khanna</th>
+          <th>Jayapal</th>
+          <th>Krishnamoorthi</th>
+          <th>Subramanyam</th>
+          <th>Thanedar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="vote-bill">EAGLE Act (EB backlog)</div>
+            <div class="vote-desc">Eliminate per-country employment-based green card caps</div>
+          </td>
+          <td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">CHIPS &amp; Science Act (iCET tech)</div>
+            <div class="vote-desc">$52B for domestic semiconductor manufacturing; includes US-India tech cooperation provisions</div>
+          </td>
+          <td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-abs">—</td><td class="vote-y">✓ Yea</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">National Defense Authorization Act FY2026</div>
+            <div class="vote-desc">Includes INDUS-X language and GE engine transfer notification provisions</div>
+          </td>
+          <td class="vote-y">✓ Yea</td><td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-n">✗ Nay</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">Continuing Resolution (FY2026 govt funding)</div>
+            <div class="vote-desc">Stop-gap funding bill with no immigration or trade provisions</div>
+          </td>
+          <td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td><td class="vote-n">✗ Nay</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">Reciprocal Tariff Disapproval Resolution</div>
+            <div class="vote-desc">Congressional attempt to block Trump's India/IEEPA tariffs under section 232</div>
+          </td>
+          <td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">H-4 EAD Codification Act</div>
+            <div class="vote-desc">Permanently codify work authorisation for H-1B dependant spouses; ~100K Indian beneficiaries</div>
+          </td>
+          <td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td><td class="vote-y">✓ Yea</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Nay votes on NDAA reflect concerns about defence spending levels, not opposition to US-India provisions specifically. All six members are strong advocates for the bilateral relationship.</p>
+  </div>
+
 </div><!-- /page-body -->
 </div><!-- /panel-presence -->
+
+
+<!-- PANEL: SENATE WATCH -->
+<div id="panel-senate-watch" class="panel">
+<div class="page-body">
+
+  <div class="sw-historic-box">
+    <div class="sw-historic-title">&#9733; A Historic Opportunity</div>
+    <div class="sw-historic-text">No Indian-American has ever served in the United States Senate. The 2026 midterm cycle could change that: Ro Khanna (CA-17) and Raja Krishnamoorthi (IL-08) are both running for open Senate seats rated Safe D and Likely D respectively. A win by either would be the most significant milestone for the Indian-American community in US political history — comparable to Kamala Harris's 2010 California Attorney General win as a precursor to her eventual Senate and vice-presidential ascent.</div>
+  </div>
+
+  <!-- THE TWO RACES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>The Two Senate Bids</h2>
+      <span class="section-sub">Both in safe-to-likely Democratic states with open seats</span>
+    </div>
+    <div class="sw-race-grid">
+
+      <div class="sw-race-card">
+        <div class="sw-race-header">
+          <div class="sw-race-state">California Senate</div>
+          <div class="sw-rating sw-rating-safe-d">Safe D</div>
+        </div>
+        <div class="sw-card-body">
+          <div class="sw-candidate-name">Ro Khanna</div>
+          <div class="sw-candidate-meta">Democrat &middot; CA-17 (Silicon Valley)</div>
+          <div class="sw-stat-row">
+            <div class="sw-stat"><div class="sw-stat-num">CA-17</div><div class="sw-stat-label">Current seat</div></div>
+            <div class="sw-stat"><div class="sw-stat-num">~D+18</div><div class="sw-stat-label">State PVI</div></div>
+            <div class="sw-stat"><div class="sw-stat-num">Open</div><div class="sw-stat-label">Laphonza Butler retiring</div></div>
+          </div>
+          <div class="sw-race-label">Race Context</div>
+          <div class="sw-race-text">Khanna is running in a top-two primary field that includes Rep. Adam Schiff and Lt. Gov. Eleni Kounalakis. California's jungle primary format means both top finishers — likely two Democrats — advance to the general. Khanna is the progressive candidate in a race where name recognition and fundraising are decisive. His Silicon Valley ties give him access to tech donor networks, but his progressive stances (against military aid conditionality, Medicare for All) create friction with the moderate wing of California Democrats.</div>
+          <div class="sw-race-label">Key Factors</div>
+          <ul class="sw-factor-list">
+            <li>Progressive vs moderate lane — competing with Schiff for donor dollars</li>
+            <li>Silicon Valley tech fundraising advantage; strong AAPI donor base</li>
+            <li>Jungle primary format — top-two advance regardless of party</li>
+            <li>India-American community mobilised; multiple diaspora PACs active</li>
+            <li>H-1B and immigration policy platform central to campaign</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sw-race-card">
+        <div class="sw-race-header">
+          <div class="sw-race-state">Illinois Senate</div>
+          <div class="sw-rating sw-rating-likely-d">Likely D</div>
+        </div>
+        <div class="sw-card-body">
+          <div class="sw-candidate-name">Raja Krishnamoorthi</div>
+          <div class="sw-candidate-meta">Democrat &middot; IL-08 (Chicago suburbs)</div>
+          <div class="sw-stat-row">
+            <div class="sw-stat"><div class="sw-stat-num">IL-08</div><div class="sw-stat-label">Current seat</div></div>
+            <div class="sw-stat"><div class="sw-stat-num">~D+7</div><div class="sw-stat-label">State PVI</div></div>
+            <div class="sw-stat"><div class="sw-stat-num">Open</div><div class="sw-stat-label">Durbin retiring (28 yrs)</div></div>
+          </div>
+          <div class="sw-race-label">Race Context</div>
+          <div class="sw-race-text">Krishnamoorthi is running in the Democratic primary to succeed Senate Majority Whip Dick Durbin, who is retiring after 28 years. Illinois is reliably Democratic in Senate races, making the primary effectively the election. His principal primary opponent is Rep. Lauren Underwood. Krishnamoorthi's national security credentials from the House Intelligence Committee and his anti-corruption focus give him a differentiated platform. The Chicago Indian-American community — one of the largest in the Midwest — is a strong base.</div>
+          <div class="sw-race-label">Key Factors</div>
+          <ul class="sw-factor-list">
+            <li>Open seat — no incumbent advantage for either candidate</li>
+            <li>Large Chicago suburban Indian-American donor and voter base</li>
+            <li>Intelligence Committee profile: national security credibility</li>
+            <li>General election is effectively a formality — primary is the race</li>
+            <li>Durbin endorsement could be decisive; labour and civic endorsements split</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- IF EITHER WINS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Policy Implications of an Indian-American Senator</h2>
+      <span class="section-sub">What changes if Khanna or Krishnamoorthi reach the Senate</span>
+    </div>
+    <div class="sw-implications-grid">
+      <div class="sw-impl-card">
+        <div class="sw-impl-icon">&#128084;</div>
+        <div class="sw-impl-title">Committee Positions on Immigration</div>
+        <div class="sw-impl-text">A senator can sit on the Judiciary Committee and directly shape H-1B reform legislation. With an Indian-American in the room, EAGLE Act and H-4 EAD bills would have a powerful inside advocate with personal stakes in the outcome.</div>
+      </div>
+      <div class="sw-impl-card">
+        <div class="sw-impl-icon">&#9878;&#65039;</div>
+        <div class="sw-impl-title">Foreign Relations Access</div>
+        <div class="sw-impl-text">Senate Foreign Relations Committee membership would give an Indian-American direct influence over bilateral agreements, ambassador confirmations, and India-specific hearings. No IA member has ever sat on this committee. Krishnamoorthi's HPSCI background makes him a likely Armed Services or Intelligence Committee pick.</div>
+      </div>
+      <div class="sw-impl-card">
+        <div class="sw-impl-icon">&#127775;</div>
+        <div class="sw-impl-title">Symbolic &amp; Soft Power</div>
+        <div class="sw-impl-text">A US Senator of Indian origin would be the most prominent Indian-American in US political history outside the Vice Presidency. It would significantly expand community fundraising capacity, mobilisation infrastructure, and political representation at the apex of the legislative branch.</div>
+      </div>
+      <div class="sw-impl-card">
+        <div class="sw-impl-icon">&#128200;</div>
+        <div class="sw-impl-title">Trade &amp; Technology Legislation</div>
+        <div class="sw-impl-text">Senate Finance Committee (trade) and Senate Commerce Committee (technology) membership would give an IA senator direct leverage over GSP renewal, tariff schedules, and CHIPS Act implementation — all central to the US-India economic relationship. Khanna's tech background makes Commerce the natural fit.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIVEK RAMASWAMY -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Vivek Ramaswamy: Ohio Governor Race</h2>
+      <span class="section-sub">The only Indian-American Republican in a major 2026 race</span>
+    </div>
+    <div class="sw-ramaswamy-card">
+      <div>
+        <div class="sw-candidate-name" style="font-size:18px">Vivek Ramaswamy</div>
+        <div class="sw-candidate-meta">Republican &middot; Ohio Governor</div>
+        <div class="sw-stat-row" style="flex-direction:column;gap:10px;margin-top:14px">
+          <div class="sw-stat"><div class="sw-stat-num">Likely R</div><div class="sw-stat-label">Race rating</div></div>
+          <div class="sw-stat"><div class="sw-stat-num">Ohio</div><div class="sw-stat-label">R+6 state lean</div></div>
+          <div class="sw-stat"><div class="sw-stat-num">Open</div><div class="sw-stat-label">DeWine term-limited</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="sw-race-label">Race Context</div>
+        <div class="sw-race-text" style="margin-bottom:12px">Ramaswamy, the biotech entrepreneur and 2024 Republican presidential candidate who served briefly as DOGE co-chair, entered the Ohio Governor's race as the Trump-endorsed candidate. Ohio has moved steadily toward Republicans — Trump won it by 11 points in 2024. DeWine is term-limited, leaving an open seat. If Ramaswamy wins, he would be the first Indian-American Republican governor in US history.</div>
+        <div class="sw-race-label">India Policy Angle</div>
+        <div class="sw-race-text">Ramaswamy's governorship would have limited direct bearing on US-India federal policy, but his national platform — built partly on anti-ESG and anti-DEI stances — has generated both enthusiasm and concern in parts of the Indian-American community. His Hinduism and opposition to certain immigration preferences (he has criticised H-1B dependency) make him an unusual figure in the diaspora political landscape.</div>
+        <ul class="sw-factor-list" style="margin-top:10px">
+          <li>Trump endorsement — dominant factor in Ohio Republican primary</li>
+          <li>Fundraising advantage from 2024 presidential campaign infrastructure</li>
+          <li>DOGE association: both asset (R base) and liability (independent voters)</li>
+          <li>India community views divided: pride vs policy concerns</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>2026 Race Timeline</h2>
+      <span class="section-sub">Key dates for the Senate Watch races</span>
+    </div>
+    <div class="sw-timeline">
+      <div class="sw-tl-item">
+        <div class="sw-tl-date">Jan 2026</div>
+        <div class="sw-tl-dot"></div>
+        <div class="sw-tl-body">
+          <div class="sw-tl-event">Illinois Democratic Primary filing deadline</div>
+          <div class="sw-tl-detail">Final candidate field set. Krishnamoorthi vs Underwood primary takes shape with endorsement battles in Chicago and suburbs.</div>
+        </div>
+      </div>
+      <div class="sw-tl-item">
+        <div class="sw-tl-date">Mar 2026</div>
+        <div class="sw-tl-dot"></div>
+        <div class="sw-tl-body">
+          <div class="sw-tl-event">Illinois Primary Election</div>
+          <div class="sw-tl-detail">Democratic primary effectively decides the seat. Krishnamoorthi vs Underwood — endorsements from major unions, Chicago political machine, and progressive groups are decisive.</div>
+        </div>
+      </div>
+      <div class="sw-tl-item">
+        <div class="sw-tl-date">Mar 2026</div>
+        <div class="sw-tl-dot"></div>
+        <div class="sw-tl-body">
+          <div class="sw-tl-event">California Jungle Primary</div>
+          <div class="sw-tl-detail">Top two advance regardless of party. Khanna, Schiff, and Kounalakis battle for the two general election spots. Indian-American diaspora mobilisation peaks.</div>
+        </div>
+      </div>
+      <div class="sw-tl-item">
+        <div class="sw-tl-date">May 2026</div>
+        <div class="sw-tl-dot"></div>
+        <div class="sw-tl-body">
+          <div class="sw-tl-event">Ohio Republican Primary</div>
+          <div class="sw-tl-detail">Ramaswamy expected to win comfortably with Trump endorsement. Sets up general election against Democratic candidate in R+6 Ohio.</div>
+        </div>
+      </div>
+      <div class="sw-tl-item">
+        <div class="sw-tl-date">Nov 4, 2026</div>
+        <div class="sw-tl-dot"></div>
+        <div class="sw-tl-body">
+          <div class="sw-tl-event">Election Day</div>
+          <div class="sw-tl-detail">Results in CA (likely Khanna or Schiff) and IL (likely Krishnamoorthi if primary won) determine whether history is made. Ohio result likely by midnight ET.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+</div><!-- /panel-senate-watch -->
 
 <script>
 function switchTab(name) {

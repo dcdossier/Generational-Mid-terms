@@ -530,6 +530,18 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .kr-chamber-header{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
 .kr-chamber-title{font:700 18px var(--sans);color:#191919}
 .kr-chamber-sub{font:400 13px var(--sans);color:#888}
+.kr-proj-card{background:var(--bg-s);border:1px solid var(--br);border-radius:8px;padding:18px;margin:14px 0}
+.kr-proj-title{font:600 13px var(--sans);color:var(--t1);margin-bottom:4px}
+.kr-proj-sub{font:400 12px var(--sans);color:var(--t3);margin-bottom:12px}
+.kr-proj-summary{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.kr-proj-item{display:flex;align-items:center;gap:5px;font:500 11px var(--sans);color:var(--t3)}
+.kr-proj-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.kr-proj-range{background:var(--bg-h);border-radius:6px;padding:10px 14px;margin-top:10px;display:flex;gap:20px;flex-wrap:wrap}
+.kr-proj-range-item{text-align:center}
+.kr-proj-range-label{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--t4);margin-bottom:2px}
+.kr-proj-range-val{font:700 18px var(--sans)}
+.kr-callout-senate{color:#9B2828}.kr-callout-house{color:#1A5EA8}
+@media(max-width:600px){.kr-proj-range{gap:10px}}
 
 </style>
 </head>
@@ -1650,11 +1662,26 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#0D3580"></div>Safe D</div>
   </div>
 
+  <!-- CALLOUT -->
+  <div class="callout" id="kr-callout" style="margin-top:18px">
+    <div class="callout-label" id="kr-callout-label">Current majority outlook</div>
+    <span id="kr-callout-body">Loading race ratings&#8230;</span>
+  </div>
+
   <!-- ── SENATE ─────────────────────────────────────────────────── -->
   <hr class="kr-section-divider">
   <div class="kr-chamber-header">
     <div class="kr-chamber-title">U.S. Senate</div>
-    <div class="kr-chamber-sub">Current: <span style="color:#C04040;font-weight:700">53R</span> / <span style="color:#1A5EA8;font-weight:700">47D</span> &mdash; 33 Class II seats up in 2026</div>
+    <div class="kr-chamber-sub" id="kr-sen-sub">Current: <span style="color:#C04040;font-weight:700">53R</span> / <span style="color:#1A5EA8;font-weight:700">47D</span> &mdash; 33 Class II seats up in 2026</div>
+  </div>
+
+  <!-- Senate seat projection chart -->
+  <div class="kr-proj-card">
+    <div class="kr-proj-title">Projected seat composition &#8212; all 100 seats</div>
+    <div class="kr-proj-sub">Includes the 67 seats not up in 2026 (safe) plus the 33 Class II seats rated by Cook/Sabato. Majority line at 51.</div>
+    <div style="position:relative;height:72px;margin:4px 0"><canvas id="c-kr-senate"></canvas></div>
+    <div class="kr-proj-range" id="kr-sen-range"></div>
+    <div class="kr-proj-summary" id="kr-sen-proj-summary"></div>
   </div>
 
   <div class="kr-balance-wrap">
@@ -1691,7 +1718,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <hr class="kr-section-divider">
   <div class="kr-chamber-header">
     <div class="kr-chamber-title">U.S. House</div>
-    <div class="kr-chamber-sub">Current: <span style="color:#C04040;font-weight:700">222R</span> / <span style="color:#1A5EA8;font-weight:700">213D</span> &mdash; All 435 seats up</div>
+    <div class="kr-chamber-sub" id="kr-hou-sub">Current: <span style="color:#C04040;font-weight:700">222R</span> / <span style="color:#1A5EA8;font-weight:700">213D</span> &mdash; All 435 seats up</div>
+  </div>
+
+  <!-- House seat projection chart -->
+  <div class="kr-proj-card">
+    <div class="kr-proj-title">Projected seat composition &#8212; all 435 seats</div>
+    <div class="kr-proj-sub">All 435 districts rated by Cook Political Report and Sabato&#8217;s Crystal Ball. Majority line at 218.</div>
+    <div style="position:relative;height:72px;margin:4px 0"><canvas id="c-kr-house"></canvas></div>
+    <div class="kr-proj-range" id="kr-hou-range"></div>
+    <div class="kr-proj-summary" id="kr-hou-proj-summary"></div>
   </div>
 
   <div class="kr-balance-wrap">
@@ -1720,7 +1756,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <div style="overflow-x:auto">
     <table class="kr-table" id="kr-house-table">
       <thead><tr>
-        <th>District</th><th>Incumbent</th><th>Party</th><th>PVI</th><th>Rating</th><th>Notes</th>
+        <th>District</th><th>Incumbent</th><th>Challenger</th><th>Party</th><th>PVI</th><th>Rating</th><th>Notes</th>
       </tr></thead>
       <tbody id="kr-house-tbody"></tbody>
     </table>
@@ -4923,8 +4959,56 @@ function renderKeyRacesStats() {
   set('kr-stat-flip', '+' + (senate.path_to_majority?.d_needs_to_flip || 4));
 
   // Senate balance bar
-  const { r, d } = senate.current_balance;
-  const total = r + d;
+  const { r: sr, d: sd } = senate.current_balance;
+  const sTotal = sr + sd;
+  const senBarR = document.getElementById('kr-sen-bar-r');
+  const senBarD = document.getElementById('kr-sen-bar-d');
+  if (senBarR) { senBarR.style.width = (sr / sTotal * 100).toFixed(1) + '%'; senBarR.textContent = sr; }
+  if (senBarD) { senBarD.style.width = (sd / sTotal * 100).toFixed(1) + '%'; senBarD.textContent = sd; }
+  set('kr-sen-r-label', 'R ' + sr);
+  set('kr-sen-d-label', 'D ' + sd);
+  const senSubEl = document.getElementById('kr-sen-sub');
+  if (senSubEl) senSubEl.innerHTML = `Current: <span style="color:#C04040;font-weight:700">${sr}R</span> / <span style="color:#1A5EA8;font-weight:700">${sd}D</span> \u2014 ${senate.seats_up} Class II seats up in 2026`;
+
+  // House balance bar
+  const { r: hr, d: hd } = house.current_balance;
+  const hTotal = hr + hd;
+  const houBarR = document.getElementById('kr-hou-bar-r');
+  const houBarD = document.getElementById('kr-hou-bar-d');
+  if (houBarR) { houBarR.style.width = (hr / hTotal * 100).toFixed(1) + '%'; houBarR.textContent = hr; }
+  if (houBarD) { houBarD.style.width = (hd / hTotal * 100).toFixed(1) + '%'; houBarD.textContent = hd; }
+  set('kr-hou-r-label', 'R ' + hr);
+  set('kr-hou-d-label', 'D ' + hd);
+  const houSubEl = document.getElementById('kr-hou-sub');
+  if (houSubEl) houSubEl.innerHTML = `Current: <span style="color:#C04040;font-weight:700">${hr}R</span> / <span style="color:#1A5EA8;font-weight:700">${hd}D</span> \u2014 All ${house.total_seats || 435} seats up`;
+
+  // Dynamic callout
+  const sRat = senate.ratings_summary;
+  const hRat = house.ratings_summary;
+  const ptmSen = senate.path_to_majority;
+  const senNotUpR = sr - (ptmSen?.r_seats_up || 20);
+  const senNotUpD = sd - (ptmSen?.d_seats_up || 13);
+  const senSolidR = senNotUpR + sRat.safe_r + sRat.likely_r;
+  const houSolidR = hRat.safe_r + hRat.likely_r;
+  const houSolidD = hRat.safe_d + hRat.likely_d;
+  const houLeanR   = houSolidR + hRat.lean_r;
+  const houLeanD   = houSolidD + hRat.lean_d;
+  let calloutLabel, calloutBody;
+  if (houLeanR >= 218 && senSolidR >= 51) {
+    calloutLabel = 'Republican Advantage in Both Chambers';
+    calloutBody  = `Republicans project ${houLeanR} solid/lean House seats (majority 218) and ${senSolidR} solid/likely Senate seats (majority 51). All ${hRat.toss_up} House and ${sRat.toss_up} Senate toss-ups affect the margin, not chamber control.`;
+  } else if (houLeanR >= 218) {
+    calloutLabel = 'House Leans Republican \u2014 Senate Contested';
+    calloutBody  = `Republicans project ${houLeanR} solid/lean House seats. The Senate is more competitive \u2014 Democrats need to hold their toss-ups and flip at least ${ptmSen?.d_needs_to_flip || 4} lean-R seats to reach 51.`;
+  } else if (houLeanD >= 218) {
+    calloutLabel = 'House Leans Democratic';
+    calloutBody  = `Democrats project ${houLeanD} solid/lean House seats, putting a majority in reach. The ${hRat.toss_up} toss-up districts are the decisive battleground.`;
+  } else {
+    calloutLabel = 'House Majority Decided by Toss-ups';
+    calloutBody  = `R-leaning: ${houLeanR} seats \u2014 D-leaning: ${houLeanD} seats. The ${hRat.toss_up} toss-up districts determine the majority (need 218). Senate: Republicans project ${senSolidR} solid/likely seats \u2014 Democrats must flip ${ptmSen?.d_needs_to_flip || 4}+ lean-R seats to reach 51.`;
+  }
+  set('kr-callout-label', calloutLabel);
+  set('kr-callout-body',  calloutBody);
 
   // Senate ratings strip
   const senStrip = document.getElementById('kr-sen-ratings-strip');
@@ -4970,6 +5054,7 @@ function renderKeyRacesStats() {
         <div class="kr-state">${r.district}${r.open ? '<span class="kr-open-badge">OPEN</span>' : ''}</div>
       </td>
       <td style="font:500 13px var(--sans);color:#444">${r.incumbent}</td>
+      <td style="font:400 12px var(--sans);color:#666">${r.challenger || ''}</td>
       <td>${partyCell(r.party)}</td>
       <td><span class="kr-pvp">${r.pvp || ''}</span></td>
       <td>${ratingChip(r.rating)}</td>
@@ -5009,7 +5094,144 @@ function renderKeyRacesStats() {
 function renderKeyRacesCharts() {
   if (krChartsReady || !DATA || !DATA.races) return;
   krChartsReady = true;
-  // No Chart.js charts needed — all visual via CSS
+  const { senate, house } = DATA.races;
+
+  const COLORS = {
+    safe_r:'#8B0000', likely_r:'#C04040', lean_r:'#E08070',
+    toss_up:'#C9A227',
+    lean_d:'#5B8FD4', likely_d:'#1A5EA8', safe_d:'#0D3580'
+  };
+  const LABELS = {
+    safe_r:'Safe R', likely_r:'Likely R', lean_r:'Lean R',
+    toss_up:'Toss-up',
+    lean_d:'Lean D', likely_d:'Likely D', safe_d:'Safe D'
+  };
+  const KEYS = ['safe_r','likely_r','lean_r','toss_up','lean_d','likely_d','safe_d'];
+
+  function buildDatasets(ratings) {
+    return KEYS.map(k => ({
+      label: LABELS[k],
+      data: [ratings[k] || 0],
+      backgroundColor: COLORS[k],
+      borderWidth: 0,
+      borderRadius: 0
+    }));
+  }
+
+  function majorityLinePlugin(majority) {
+    return {
+      id: 'majorityLine',
+      afterDraw(chart) {
+        const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+        const px = x.getPixelForValue(majority);
+        ctx.save();
+        ctx.beginPath();
+        ctx.moveTo(px, top - 6);
+        ctx.lineTo(px, bottom + 6);
+        ctx.strokeStyle = '#191919';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([4, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.restore();
+      }
+    };
+  }
+
+  function rangeHTML(ratings, solidR, solidD, label) {
+    const dMin = solidD;
+    const dTossHalf = Math.round((ratings.toss_up || 0) / 2);
+    const dExp = solidD + (ratings.lean_d || 0) + dTossHalf;
+    const dMax = solidD + (ratings.lean_d || 0) + (ratings.toss_up || 0) + (ratings.lean_r || 0);
+    const rMin = solidR;
+    const rExp = solidR + (ratings.lean_r || 0) + ((ratings.toss_up || 0) - dTossHalf);
+    const rMax = solidR + (ratings.lean_r || 0) + (ratings.toss_up || 0) + (ratings.lean_d || 0);
+    return `
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Floor</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dMin}</div></div>
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Expected</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dExp}</div></div>
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Ceiling</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dMax}</div></div>
+      <div style="width:1px;background:var(--br);flex-shrink:0"></div>
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Floor</div><div class="kr-proj-range-val" style="color:#C04040">${rMin}</div></div>
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Expected</div><div class="kr-proj-range-val" style="color:#C04040">${rExp}</div></div>
+      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Ceiling</div><div class="kr-proj-range-val" style="color:#C04040">${rMax}</div></div>`;
+  }
+
+  function summaryHTML(ratings) {
+    return KEYS.map(k => `
+      <div class="kr-proj-item">
+        <div class="kr-proj-swatch" style="background:${COLORS[k]}"></div>
+        <span>${LABELS[k]}: ${ratings[k] || 0}</span>
+      </div>`).join('');
+  }
+
+  // ── Senate chart ────────────────────────────────────────────────
+  const senEl = document.getElementById('c-kr-senate');
+  if (senEl) {
+    const ptm       = senate.path_to_majority;
+    const senNotUpR = senate.current_balance.r - (ptm?.r_seats_up || 20);
+    const senNotUpD = senate.current_balance.d - (ptm?.d_seats_up || 13);
+    const senRat    = { ...senate.ratings_summary };
+    senRat.safe_r   = senNotUpR + senRat.safe_r;
+    senRat.safe_d   = senNotUpD + senRat.safe_d;
+
+    new Chart(senEl, {
+      type: 'bar',
+      data: { labels: [''], datasets: buildDatasets(senRat) },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true, display: false, min: 0, max: 100 },
+          y: { stacked: true, display: false }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw} seat${ctx.raw !== 1 ? 's' : ''}` } }
+        }
+      },
+      plugins: [majorityLinePlugin(51)]
+    });
+
+    const solidR = senRat.safe_r + senRat.likely_r;
+    const solidD = senRat.safe_d + senRat.likely_d;
+    const rangeEl = document.getElementById('kr-sen-range');
+    if (rangeEl) rangeEl.innerHTML = rangeHTML(senRat, solidR, solidD);
+    const sumEl = document.getElementById('kr-sen-proj-summary');
+    if (sumEl) sumEl.innerHTML = summaryHTML(senRat);
+  }
+
+  // ── House chart ──────────────────────────────────────────────────
+  const houEl = document.getElementById('c-kr-house');
+  if (houEl) {
+    const houRat = house.ratings_summary;
+
+    new Chart(houEl, {
+      type: 'bar',
+      data: { labels: [''], datasets: buildDatasets(houRat) },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { stacked: true, display: false, min: 0, max: 435 },
+          y: { stacked: true, display: false }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw} seat${ctx.raw !== 1 ? 's' : ''}` } }
+        }
+      },
+      plugins: [majorityLinePlugin(218)]
+    });
+
+    const solidR = houRat.safe_r + houRat.likely_r;
+    const solidD = houRat.safe_d + houRat.likely_d;
+    const rangeEl = document.getElementById('kr-hou-range');
+    if (rangeEl) rangeEl.innerHTML = rangeHTML(houRat, solidR, solidD);
+    const sumEl = document.getElementById('kr-hou-proj-summary');
+    if (sumEl) sumEl.innerHTML = summaryHTML(houRat);
+  }
 }
 
 loadData();

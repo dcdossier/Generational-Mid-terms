@@ -149,6 +149,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .rd-card-link:hover{text-decoration:underline}
 @media(max-width:900px){.rd-cards{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.rd-scoreboard{grid-template-columns:repeat(2,1fr)}.rd-cards{grid-template-columns:1fr}}
+.rd-scenario-legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px}
+.rd-scenario-legend-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t3)}
+.rd-scenario-swatch{width:10px;height:10px;border-radius:2px;flex-shrink:0}
 
 /* ── APPROVAL RATINGS ──────────────────────────────────────────────────── */
 .appr-gauge-row{display:flex;gap:28px;align-items:flex-start;flex-wrap:wrap;margin-bottom:6px}
@@ -1962,6 +1965,25 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
   </div>
 
+  <!-- CALLOUT -->
+  <div class="callout" id="rd-callout" style="margin-bottom:18px">
+    <div class="callout-label" id="rd-callout-label">Redistricting Outlook</div>
+    <span id="rd-callout-body">Loading redistricting data&#8230;</span>
+  </div>
+
+  <!-- SCENARIO COMPARISON CHART -->
+  <div class="chart-card" style="margin-bottom:18px">
+    <div class="card-title">Redistricting Gains by Scenario</div>
+    <div class="card-sub">Projected party-seat gains from enacted and pending maps across the three slider scenarios. Contested seats counted separately.</div>
+    <div class="rd-scenario-legend">
+      <div class="rd-scenario-legend-item"><div class="rd-scenario-swatch" style="background:#C04040"></div>R Projected Gains</div>
+      <div class="rd-scenario-legend-item"><div class="rd-scenario-swatch" style="background:#1A5EA8"></div>D Projected Gains</div>
+      <div class="rd-scenario-legend-item"><div class="rd-scenario-swatch" style="background:#C9A227"></div>Contested / In Play</div>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="c-rd-scenarios"></canvas></div>
+    <div class="chart-note">Baseline = 119th Congress seat composition. Current = enacted 2026 maps. Pending = if all in-litigation and pending maps resolve favourably for leading party.</div>
+  </div>
+
   <!-- SECTION B: SLIDER + MAP -->
   <div class="chart-card">
     <div class="card-title">US Congressional District Map</div>
@@ -1993,6 +2015,14 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="rd-li"><div class="rd-sq" style="background:#e0e0e0;border-color:#fff"></div>119th baseline unchanged</div>
     </div>
     <div class="chart-note">District ratings from Cook Political Report, Inside Elections, and Sabato's Crystal Ball. Colour reflects the rating for the active slider position. Districts with no entry in data.json shown in neutral grey.</div>
+  </div>
+
+  <!-- STATE IMPACT BAR CHART -->
+  <div class="chart-card" style="margin-bottom:18px">
+    <div class="card-title">Projected Seat Impact by State</div>
+    <div class="card-sub">Net seat change per state from redistricting. Red bars favour Republicans; blue bars favour Democrats. States with contested maps shown in gold.</div>
+    <div style="position:relative;height:260px"><canvas id="c-rd-states"></canvas></div>
+    <div class="chart-note">Source: Cook Political Report, Ballotpedia. Contested and pending maps show maximum projected impact if resolved in the leading party&rsquo;s favour.</div>
   </div>
 
   <!-- SECTION C: STATE CARDS -->
@@ -2068,7 +2098,7 @@ async function loadData() {
 
 function renderAll() {
   if (!DATA) return;
-  rdData = DATA; renderStateCards(); rdUpdateScoreboard(1);
+  rdData = DATA; renderStateCards(); rdUpdateScoreboard(1); renderRedistrictingExtras();
   renderApprovalStats();
   renderBallotStats();
   renderFavourabilityStats();
@@ -2650,6 +2680,157 @@ function initRedistrictingMap() {
       console.warn('[rd-map] GeoJSON error:', err);
       if (loadingEl) loadingEl.textContent = 'Map unavailable. Check network connection.';
     });
+}
+
+let rdExtrasReady = false;
+
+function renderRedistrictingExtras() {
+  if (rdExtrasReady || !rdData || !rdData.redistricting) return;
+  rdExtrasReady = true;
+  const rd  = rdData.redistricting;
+  const sb  = rd.scoreboard || {};
+  const cur = sb.current  || { r_gains:0, d_gains:0, contested:0, net:0 };
+  const bas = sb.baseline || { r_gains:0, d_gains:0, contested:0, net:0 };
+  const pen = sb.pending  || { r_gains:0, d_gains:0, contested:0, net:0 };
+
+  // ── Dynamic callout ──────────────────────────────────────────────
+  const net = cur.net || 0;
+  const pendingShift = (pen.net || 0) - net;
+  let cLabel, cBody;
+  if (net >= 8) {
+    cLabel = 'Aggressive Redistricting Cycle \u2014 Heavy Republican Advantage';
+    cBody  = `Enacted maps project a net +${net}-seat Republican structural advantage \u2014 one of the most aggressive redistricting cycles in the modern era. ${cur.r_gains} states produced R-favourable maps vs ${cur.d_gains} D-favourable. ${cur.contested} maps remain contested in court and could shift the balance by up to ${Math.abs(pendingShift)} further seats.`;
+  } else if (net >= 4) {
+    cLabel = 'Republican Map Advantage';
+    cBody  = `Currently enacted maps project a net +${net}-seat Republican advantage. ${cur.r_gains} R-favourable maps vs ${cur.d_gains} D-favourable; ${cur.contested} seats still contested in litigation or pending final approval. If pending maps resolve in the leading party\u2019s favour, the net could reach +${pen.net}.`;
+  } else if (net >= 1) {
+    cLabel = 'Slight Republican Edge From Redistricting';
+    cBody  = `Enacted maps provide Republicans a marginal +${net}-seat structural advantage. ${cur.contested} contested maps in court could yet swing outcomes. Democratic gerrymanders in CA and other states partially offset Republican gains elsewhere.`;
+  } else if (net <= -4) {
+    cLabel = 'Democratic Map Advantage';
+    cBody  = `Enacted maps project a net ${net}-seat Democratic advantage. ${cur.d_gains} D-favourable maps vs ${cur.r_gains} R-favourable; ${cur.contested} maps remain in litigation.`;
+  } else {
+    cLabel = 'Redistricting Effect: Roughly Neutral';
+    cBody  = `Current maps produce a near-neutral redistricting effect (net ${net > 0 ? '+' : ''}${net} seats). Party-line gerrymanders largely cancel out. ${cur.contested} contested maps still in play.`;
+  }
+  const clEl = document.getElementById('rd-callout-label');
+  const cbEl = document.getElementById('rd-callout-body');
+  if (clEl) clEl.textContent = cLabel;
+  if (cbEl) cbEl.textContent = cBody;
+
+  // ── Scenario comparison grouped bar chart ────────────────────────
+  const scenEl = document.getElementById('c-rd-scenarios');
+  if (scenEl) {
+    new Chart(scenEl, {
+      type: 'bar',
+      data: {
+        labels: ['119th Baseline', 'Current Enacted', 'If All Pending Resolve'],
+        datasets: [
+          {
+            label: 'R Projected Gains',
+            data: [bas.r_gains, cur.r_gains, pen.r_gains],
+            backgroundColor: '#C04040',
+            borderRadius: 3, borderSkipped: false
+          },
+          {
+            label: 'D Projected Gains',
+            data: [bas.d_gains, cur.d_gains, pen.d_gains],
+            backgroundColor: '#1A5EA8',
+            borderRadius: 3, borderSkipped: false
+          },
+          {
+            label: 'Contested / In Play',
+            data: [bas.contested, cur.contested, pen.contested],
+            backgroundColor: '#C9A227',
+            borderRadius: 3, borderSkipped: false
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 14, boxWidth: 12 } },
+          tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw} seat${ctx.raw !== 1 ? 's' : ''}` } }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: '#444' } },
+          y: {
+            min: 0,
+            max: Math.ceil((Math.max(pen.r_gains, pen.d_gains, pen.contested) + 2) / 2) * 2,
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, stepSize: 2 }
+          }
+        }
+      }
+    });
+  }
+
+  // ── State impact horizontal bar chart ────────────────────────────
+  const stateEl = document.getElementById('c-rd-states');
+  if (stateEl && Array.isArray(rd.states) && rd.states.length) {
+    function parseImpact(str) {
+      const m = (str || '').match(/\+?(\d+)([RD])/);
+      if (!m) return 0;
+      return m[2] === 'R' ? parseInt(m[1]) : -parseInt(m[1]);
+    }
+    const sorted = rd.states.slice().sort((a, b) => parseImpact(b.impact) - parseImpact(a.impact));
+    const labels  = sorted.map(s => s.code);
+    const values  = sorted.map(s => parseImpact(s.impact));
+    const isContest = sorted.map(s => /[Cc]ontest/.test(s.impact) || s.status === 'In Litigation');
+    const barColors = values.map((v, i) =>
+      isContest[i] ? '#C9A227' : v > 0 ? '#C04040' : v < 0 ? '#1A5EA8' : '#999999'
+    );
+
+    new Chart(stateEl, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [{
+          data: values,
+          backgroundColor: barColors,
+          borderSkipped: false,
+          borderRadius: 3
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => {
+                const s = sorted[ctx.dataIndex];
+                return ` ${s.state}: ${s.impact}${s.status !== 'Enacted' ? ' (' + s.status + ')' : ''}`;
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => (v > 0 ? '+' : '') + v + (v !== 0 ? 'R' : '') }
+          },
+          y: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: '#444' } }
+        }
+      },
+      plugins: [{
+        id: 'rdzeroline',
+        afterDraw(chart) {
+          const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+          const px = x.getPixelForValue(0);
+          ctx.save();
+          ctx.strokeStyle = '#aaa';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(px, top);
+          ctx.lineTo(px, bottom);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }]
+    });
+  }
 }
 
 function renderStateCards() {

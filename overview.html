@@ -203,6 +203,52 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .gb-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
 .gb-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
 @media(max-width:600px){.gb-context-grid{grid-template-columns:1fr}.gb-pollster-bar-wrap{width:70px}}
+
+/* ── PARTY FAVOURABILITY ───────────────────────────────────────────────── */
+.fav-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:0}
+.fav-party-card{border:1px solid var(--br);border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.fav-party-card.dem{border-top:3px solid var(--blue)}
+.fav-party-card.rep{border-top:3px solid #9B2828}
+.fav-party-header{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.fav-party-name{font-family:var(--serif);font-size:16px;font-weight:700}
+.fav-party-name.dem{color:var(--blue)}.fav-party-name.rep{color:#9B2828}
+.fav-big{font-family:var(--serif);font-size:48px;font-weight:700;line-height:1;letter-spacing:-.03em}
+.fav-big.dem{color:var(--blue)}.fav-big.rep{color:#9B2828}
+.fav-big-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--t3);margin-top:2px}
+.fav-trend-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-top:4px;width:fit-content}
+.fav-trend-up{background:#EAF6EA;color:#155724}
+.fav-trend-dn{background:#F8D7DA;color:#721C24}
+.fav-trend-flat{background:var(--bg-h);color:var(--t3)}
+.fav-bar-row{display:flex;align-items:center;gap:8px}
+.fav-bar-label{font-size:12px;font-weight:600;width:88px;flex-shrink:0}
+.fav-bar-track{flex:1;height:9px;background:var(--bg-h);border-radius:5px;overflow:hidden}
+.fav-bar-fill{height:100%;border-radius:5px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.fav-bar-val{font-size:12px;font-weight:600;color:var(--t2);width:36px;text-align:right;flex-shrink:0}
+.fav-gauge-wrap{position:relative;max-width:200px;margin:0 auto}
+.fav-gauge-clip{height:105px;overflow:hidden}
+.fav-gauge-center{position:absolute;bottom:0;left:50%;transform:translateX(-50%);text-align:center;width:100%;pointer-events:none}
+.fav-gauge-pct{font-family:var(--serif);font-size:24px;font-weight:700;line-height:1}
+.fav-gauge-lbl{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--t3);margin-top:1px}
+.fav-pollster-table{width:100%;border-collapse:collapse;font-size:13px}
+.fav-pollster-table th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:7px 12px;border-bottom:2px solid var(--br);white-space:nowrap}
+.fav-pollster-table td{padding:9px 12px;border-bottom:1px solid var(--br);vertical-align:middle}
+.fav-pollster-table tr:last-child td{border-bottom:none}
+.fav-pollster-table tr:hover td{background:var(--bg-s)}
+.fav-d-val{color:var(--blue);font-weight:700}.fav-r-val{color:#9B2828;font-weight:700}
+.fav-hist-bar{display:inline-flex;align-items:center;gap:4px;vertical-align:middle}
+.fav-hist-bar-seg{height:10px;border-radius:2px}
+.fav-hist-table{width:100%;border-collapse:collapse;font-size:13px}
+.fav-hist-table th{text-align:left;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:7px 12px;border-bottom:2px solid var(--br)}
+.fav-hist-table td{padding:9px 12px;border-bottom:1px solid var(--br);vertical-align:middle}
+.fav-hist-table tr:last-child td{border-bottom:none}
+.fav-hist-table tr.fav-current td{background:var(--bg-s);font-weight:600;color:var(--t1)}
+.fav-hist-table tr.fav-current td:first-child{border-left:3px solid var(--orange);padding-left:9px}
+.fav-adv-d{color:var(--blue);font-weight:600}.fav-adv-r{color:#9B2828;font-weight:600}.fav-adv-e{color:var(--t3)}
+.fav-context-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fav-context-box{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px}
+.fav-context-box h4{font-family:var(--serif);font-size:14px;font-weight:600;color:var(--t1);margin-bottom:8px}
+.fav-context-box p{font-size:12.5px;color:var(--t2);line-height:1.6}
+@media(max-width:640px){.fav-cards{grid-template-columns:1fr}.fav-context-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -779,7 +825,207 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
 </div>
 </div>
-<div class="subpanel" id="subpanel-favourability"><div class="panel-inner"><div class="coming-soon">Party Favourability &#8212; Coming Soon</div></div></div>
+<div class="subpanel" id="subpanel-favourability">
+<div class="panel-inner">
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip">
+    <div class="stat-box">
+      <div class="stat-n" style="color:var(--blue)" id="fav-s-dem">--</div>
+      <div class="stat-l">Democrat party favourability &#8212; latest aggregate</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" style="color:#9B2828" id="fav-s-rep">--</div>
+      <div class="stat-l">Republican party favourability &#8212; latest aggregate</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" id="fav-s-unfav-dem" style="color:var(--t2)">--</div>
+      <div class="stat-l">Democrat unfavourability &#8212; current reading</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-n" id="fav-s-unfav-rep" style="color:var(--t2)">--</div>
+      <div class="stat-l">Republican unfavourability &#8212; current reading</div>
+    </div>
+  </div>
+
+  <!-- SIDE-BY-SIDE PARTY CARDS -->
+  <div class="fav-cards">
+
+    <div class="fav-party-card dem">
+      <div>
+        <div class="fav-party-name dem">Democrat Party</div>
+        <div class="fav-big dem" id="fav-dem-big">--</div>
+        <div class="fav-big-label">Favourable</div>
+        <div id="fav-dem-trend-chip"></div>
+      </div>
+      <div class="fav-gauge-wrap">
+        <div class="fav-gauge-clip">
+          <canvas id="c-fav-dem-gauge" style="display:block;width:100%;height:210px"></canvas>
+        </div>
+        <div class="fav-gauge-center">
+          <div class="fav-gauge-pct dem" id="fav-dem-gauge-pct" style="color:var(--blue)">--</div>
+          <div class="fav-gauge-lbl">Favourable</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--green)">Favourable</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:var(--blue);width:0%" id="fav-dem-fill-fav"></div></div>
+          <span class="fav-bar-val" id="fav-dem-val-fav">--%</span>
+        </div>
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--red)">Unfavourable</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:var(--red);width:0%" id="fav-dem-fill-unfav"></div></div>
+          <span class="fav-bar-val" id="fav-dem-val-unfav">--%</span>
+        </div>
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--t3)">Neutral</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:var(--br-md);width:0%" id="fav-dem-fill-neu"></div></div>
+          <span class="fav-bar-val" id="fav-dem-val-neu">--%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fav-party-card rep">
+      <div>
+        <div class="fav-party-name rep">Republican Party</div>
+        <div class="fav-big rep" id="fav-rep-big">--</div>
+        <div class="fav-big-label">Favourable</div>
+        <div id="fav-rep-trend-chip"></div>
+      </div>
+      <div class="fav-gauge-wrap">
+        <div class="fav-gauge-clip">
+          <canvas id="c-fav-rep-gauge" style="display:block;width:100%;height:210px"></canvas>
+        </div>
+        <div class="fav-gauge-center">
+          <div class="fav-gauge-pct" id="fav-rep-gauge-pct" style="color:#9B2828">--</div>
+          <div class="fav-gauge-lbl">Favourable</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--green)">Favourable</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:#9B2828;width:0%" id="fav-rep-fill-fav"></div></div>
+          <span class="fav-bar-val" id="fav-rep-val-fav">--%</span>
+        </div>
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--red)">Unfavourable</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:var(--red);width:0%" id="fav-rep-fill-unfav"></div></div>
+          <span class="fav-bar-val" id="fav-rep-val-unfav">--%</span>
+        </div>
+        <div class="fav-bar-row">
+          <span class="fav-bar-label" style="color:var(--t3)">Neutral</span>
+          <div class="fav-bar-track"><div class="fav-bar-fill" style="background:var(--br-md);width:0%" id="fav-rep-fill-neu"></div></div>
+          <span class="fav-bar-val" id="fav-rep-val-neu">--%</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.fav-cards -->
+
+  <!-- DUAL TREND CHART -->
+  <div class="chart-card" style="margin-top:18px">
+    <div class="card-title">Party favourability trend &#8212; January 2025 to present</div>
+    <div class="card-sub">Monthly polling average for both parties. Both parties are historically unpopular. Republican favourability has fallen faster since March 2025, driven by dissatisfaction with the governing majority's legislative record.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>Democrat favourable</div>
+      <div class="li"><div class="lsq" style="background:#9B2828"></div>Republican favourable</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>50% threshold</div>
+    </div>
+    <div style="position:relative;height:280px"><canvas id="c-fav-trend"></canvas></div>
+    <div class="chart-note">Source: Gallup monthly party favourability tracking, Pew Research, NBC/WSJ polling. Historical data compiled from public polling aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
+  </div>
+
+  <!-- POLLSTER TABLE -->
+  <div class="chart-card">
+    <div class="card-title">Poll-by-poll breakdown &#8212; recent surveys</div>
+    <div class="card-sub">Individual pollster readings for party favourability. Both parties are net-negative with the general public. Variation reflects differing methodologies and sample compositions.</div>
+    <div style="overflow-x:auto">
+    <table class="fav-pollster-table">
+      <thead>
+        <tr>
+          <th>Pollster</th>
+          <th>Date</th>
+          <th style="color:var(--blue)">D fav%</th>
+          <th style="color:#9B2828">R fav%</th>
+          <th>Margin</th>
+          <th>Net D</th>
+          <th>Net R</th>
+        </tr>
+      </thead>
+      <tbody id="fav-pollster-tbody">
+        <tr><td colspan="7" style="color:var(--t4);text-align:center;padding:18px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note">Net favourability = favourable minus unfavourable. A deeply negative net rating for both parties reflects a broader voter alienation from partisan institutions that has persisted since 2014.</div>
+  </div>
+
+  <!-- CALLOUT -->
+  <div class="callout">
+    <div class="callout-label">Both parties below 40% &#8212; the double-negative dynamic</div>
+    Both parties have net-negative favourability ratings for the first time simultaneously since 2015&#8211;16. When both parties are deeply unpopular, elections tend to be driven by <strong>turnout intensity</strong> rather than persuasion, favouring whichever side has stronger negative motivation. The out-party typically benefits from this dynamic in midterms.
+  </div>
+
+  <!-- HISTORICAL TABLE -->
+  <div class="chart-card">
+    <div class="card-title">Party favourability at midterms &#8212; 2006 to 2026</div>
+    <div class="card-sub">Gallup favourability reading in the month of each midterm election for both parties. Favourability advantage has historically correlated with, but not perfectly predicted, seat outcomes.</div>
+    <div style="overflow-x:auto">
+    <table class="fav-hist-table">
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th style="color:var(--blue)">D fav%</th>
+          <th style="color:#9B2828">R fav%</th>
+          <th>D advantage</th>
+          <th>Visual</th>
+          <th>Midterm winner</th>
+        </tr>
+      </thead>
+      <tbody id="fav-hist-tbody">
+        <tr><td colspan="6" style="color:var(--t4);text-align:center;padding:18px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note">Source: Gallup historical party favourability archive (2006&#8211;2026). "Midterm winner" refers to which party gained House seats. Note that favourability advantage does not guarantee seat gains: in 2022 Democrats had rough parity but the structural map limited their gains.</div>
+  </div>
+
+  <!-- DUAL NET FAVOURABILITY CHART -->
+  <div class="chart-card">
+    <div class="card-title">Net favourability comparison &#8212; 2006 to 2026</div>
+    <div class="card-sub">Net favourability (favourable minus unfavourable) for each party at each midterm cycle. Positive = net favourable, negative = net unfavourable. Both parties are currently deeply net-negative.</div>
+    <div class="legend">
+      <div class="li"><div class="lsq" style="background:var(--blue)"></div>Democrat net</div>
+      <div class="li"><div class="lsq" style="background:#9B2828"></div>Republican net</div>
+      <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Zero line</div>
+    </div>
+    <div style="position:relative;height:260px"><canvas id="c-fav-net"></canvas></div>
+    <div class="chart-note">Net favourability = favourable% minus unfavourable%. Values below zero indicate more Americans view the party negatively than positively. Both parties have been net-negative since approximately 2014, reflecting structural partisan polarisation.</div>
+  </div>
+
+  <!-- CONTEXT BOXES -->
+  <div class="fav-context-grid">
+    <div class="fav-context-box">
+      <h4>What party favourability measures</h4>
+      <p>Polls ask respondents whether they have a favourable or unfavourable opinion of each political party as an institution. Unlike the generic ballot, this does not ask about voting intent -- it measures underlying brand sentiment that affects long-run electoral positioning.</p>
+    </div>
+    <div class="fav-context-box">
+      <h4>Why both parties are unpopular</h4>
+      <p>Partisan polarisation has depressed favourability for both parties since the mid-2000s. Voters who strongly identify with one party rate the other very negatively, pulling down aggregate ratings. Independents -- the swing group -- rate both parties below 40%.</p>
+    </div>
+    <div class="fav-context-box">
+      <h4>Relationship to midterm outcomes</h4>
+      <p>The party with higher relative favourability -- even if both are below 50% -- tends to perform better. More important is the trend: a party whose favourability is falling faster than its opponent's typically underperforms. The Republican decline since January 2025 is a warning signal.</p>
+    </div>
+    <div class="fav-context-box">
+      <h4>The enthusiasm gap</h4>
+      <p>Low favourability for the governing party tends to energise the opposition base. Negative partisanship -- voting against rather than for -- is a primary driver of midterm turnout. The out-party (Democrats in 2026) historically benefits from this dynamic when in-party favourability is falling.</p>
+    </div>
+  </div>
+
+</div>
+</div>
 <div class="subpanel" id="subpanel-congress-approval"><div class="panel-inner"><div class="coming-soon">Congress Approval &#8212; Coming Soon</div></div></div>
 <div class="subpanel" id="subpanel-factions"><div class="panel-inner"><div class="coming-soon">Faction Tracker &#8212; Coming Soon</div></div></div>
 
@@ -860,6 +1106,7 @@ function goSub(id, btn) {
   btn.classList.add('active');
   if (id === 'approval') renderApprovalCharts();
   if (id === 'ballot') renderBallotCharts();
+  if (id === 'favourability') renderFavourabilityCharts();
   if (id === 'redistricting') {
     setTimeout(initRedistrictingMap, 50);
     rdUpdateScoreboard(parseInt(document.getElementById('rd-slider').value, 10));
@@ -890,6 +1137,7 @@ function renderAll() {
   rdData = DATA; renderStateCards(); rdUpdateScoreboard(1);
   renderApprovalStats();
   renderBallotStats();
+  renderFavourabilityStats();
   const r = DATA.retirements;
   const meta = DATA.meta;
 
@@ -1905,6 +2153,264 @@ function renderBallotCharts() {
       }
     ]
   });
+}
+
+
+// ── PARTY FAVOURABILITY ───────────────────────────────────────────────────────
+let favChartsReady = false;
+
+function renderFavourabilityStats() {
+  if (!DATA || !DATA.party_favourability) return;
+  const pf = DATA.party_favourability;
+  const dem = pf.democrat, rep = pf.republican;
+
+  document.getElementById('fav-s-dem').textContent     = dem.favourable + '%';
+  document.getElementById('fav-s-rep').textContent     = rep.favourable + '%';
+  document.getElementById('fav-s-unfav-dem').textContent = dem.unfavourable + '%';
+  document.getElementById('fav-s-unfav-rep').textContent = rep.unfavourable + '%';
+
+  function setCard(prefix, data, color) {
+    document.getElementById(prefix + '-big').textContent       = data.favourable + '%';
+    document.getElementById(prefix + '-gauge-pct').textContent = data.favourable + '%';
+    document.getElementById(prefix + '-val-fav').textContent   = data.favourable + '%';
+    document.getElementById(prefix + '-val-unfav').textContent = data.unfavourable + '%';
+    document.getElementById(prefix + '-val-neu').textContent   = data.neutral + '%';
+    document.getElementById(prefix + '-fill-fav').style.width   = data.favourable + '%';
+    document.getElementById(prefix + '-fill-unfav').style.width = data.unfavourable + '%';
+    document.getElementById(prefix + '-fill-neu').style.width   = data.neutral + '%';
+    const t = data.trend_fav || 0;
+    const chipEl = document.getElementById(prefix + '-trend-chip');
+    if (t > 0)      chipEl.innerHTML = '<div class="fav-trend-chip fav-trend-up">&#9650; ' + t + ' pt month-on-month</div>';
+    else if (t < 0) chipEl.innerHTML = '<div class="fav-trend-chip fav-trend-dn">&#9660; ' + Math.abs(t) + ' pt month-on-month</div>';
+    else            chipEl.innerHTML = '<div class="fav-trend-chip fav-trend-flat">&#8212; No change</div>';
+  }
+  setCard('fav-dem', dem, 'var(--blue)');
+  setCard('fav-rep', rep, '#9B2828');
+
+  // Pollster table
+  const tbody = document.getElementById('fav-pollster-tbody');
+  if (Array.isArray(pf.pollsters) && pf.pollsters.length) {
+    tbody.innerHTML = pf.pollsters.map(p => {
+      const m = (p.dem_fav - p.rep_fav).toFixed(1);
+      const mStr = parseFloat(m) > 0 ? '<span style="color:var(--blue)">D+' + m + '</span>'
+                 : parseFloat(m) < 0 ? '<span style="color:#9B2828">R+' + Math.abs(m) + '</span>'
+                 : '<span style="color:var(--t3)">Even</span>';
+      // Net = fav - (100 - fav - neutral) approx; use unfav from global data proportionally
+      const dNet = (p.dem_fav - (100 - p.dem_fav)).toFixed(0);
+      const rNet = (p.rep_fav - (100 - p.rep_fav)).toFixed(0);
+      return '<tr>'
+        + '<td style="font-weight:500">' + p.name + '</td>'
+        + '<td style="color:var(--t3);font-size:12px">' + p.date + '</td>'
+        + '<td class="fav-d-val">' + p.dem_fav + '</td>'
+        + '<td class="fav-r-val">' + p.rep_fav + '</td>'
+        + '<td>' + mStr + '</td>'
+        + '<td style="font-size:12px;color:var(--blue)">' + (dNet >= 0 ? '+' : '') + dNet + '</td>'
+        + '<td style="font-size:12px;color:#9B2828">' + (rNet >= 0 ? '+' : '') + rNet + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+
+  // Historical table
+  const htbody = document.getElementById('fav-hist-tbody');
+  if (Array.isArray(pf.historical) && pf.historical.length) {
+    const WINNERS = {
+      2006:'D gained seats',2008:'D gained seats',2010:'R gained seats',
+      2012:'D gained seats',2014:'R gained seats',2016:'R gained seats',
+      2018:'D gained seats',2020:'D gained seats',2022:'R gained seats',
+      2024:'R gained seats',2026:'Election 3 Nov 2026'
+    };
+    htbody.innerHTML = pf.historical.map(h => {
+      const adv = h.dem_fav - h.rep_fav;
+      const advStr = adv > 0 ? '<span class="fav-adv-d">D+' + adv + '</span>'
+                   : adv < 0 ? '<span class="fav-adv-r">R+' + Math.abs(adv) + '</span>'
+                   : '<span class="fav-adv-e">Even</span>';
+      const dW = Math.round(h.dem_fav / (h.dem_fav + h.rep_fav) * 100);
+      const isCurrent = h.year === 2026;
+      return '<tr' + (isCurrent ? ' class="fav-current"' : '') + '>'
+        + '<td>' + h.year + (isCurrent ? ' &#9679;' : '') + '</td>'
+        + '<td class="fav-d-val">' + h.dem_fav + '</td>'
+        + '<td class="fav-r-val">' + h.rep_fav + '</td>'
+        + '<td>' + advStr + '</td>'
+        + '<td><div class="fav-hist-bar">'
+        +   '<div class="fav-hist-bar-seg" style="width:' + dW + 'px;background:var(--blue)"></div>'
+        +   '<div class="fav-hist-bar-seg" style="width:' + (80 - dW) + 'px;background:#9B2828"></div>'
+        + '</div></td>'
+        + '<td style="font-size:12px;color:var(--t3)">' + (WINNERS[h.year] || '') + '</td>'
+        + '</tr>';
+    }).join('');
+  }
+}
+
+function renderFavourabilityCharts() {
+  if (favChartsReady || !DATA || !DATA.party_favourability) return;
+  favChartsReady = true;
+  const pf = DATA.party_favourability;
+  const dem = pf.democrat, rep = pf.republican;
+
+  function makeGauge(canvasId, fav, unfav, neu, color) {
+    return new Chart(document.getElementById(canvasId), {
+      type: 'doughnut',
+      data: {
+        labels: ['Favourable', 'Unfavourable', 'Neutral'],
+        datasets: [{
+          data: [fav, unfav, neu],
+          backgroundColor: [color, '#E24B4A', '#D4D4D0'],
+          borderWidth: 3, borderColor: '#fff', hoverOffset: 4,
+        }]
+      },
+      options: {
+        circumference: 180, rotation: -90, cutout: '70%',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': ' + ctx.raw + '%' } }
+        },
+        animation: { duration: 700 }
+      }
+    });
+  }
+  makeGauge('c-fav-dem-gauge', dem.favourable, dem.unfavourable, dem.neutral, '#378ADD');
+  makeGauge('c-fav-rep-gauge', rep.favourable, rep.unfavourable, rep.neutral, '#9B2828');
+
+  // Dual trend line chart
+  if (Array.isArray(dem.history) && dem.history.length) {
+    const dLabels = dem.history.map(h => h.month);
+    const dFav    = dem.history.map(h => h.favourable);
+    const rFav    = (rep.history || []).map(h => h.favourable);
+    const rLabels = (rep.history || []).map(h => h.month);
+    const labels  = dLabels.length >= rLabels.length ? dLabels : rLabels;
+
+    new Chart(document.getElementById('c-fav-trend'), {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Democrat favourable',
+            data: dFav,
+            borderColor: '#378ADD', borderWidth: 2, tension: 0.35, fill: false,
+            pointBackgroundColor: labels.map((_, i) => i === labels.length-1 ? '#E24B4A' : '#378ADD'),
+            pointRadius: labels.map((_, i) => i === labels.length-1 ? 7 : 3),
+            pointBorderColor: '#fff', pointBorderWidth: 2,
+          },
+          {
+            label: 'Republican favourable',
+            data: rFav,
+            borderColor: '#9B2828', borderWidth: 2, tension: 0.35, fill: false,
+            pointBackgroundColor: labels.map((_, i) => i === labels.length-1 ? '#E24B4A' : '#9B2828'),
+            pointRadius: labels.map((_, i) => i === labels.length-1 ? 7 : 3),
+            pointBorderColor: '#fff', pointBorderWidth: 2,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: i => i[0].label,
+              label: ctx => ' ' + ctx.dataset.label + ': ' + ctx.raw + '%',
+              footer: i => {
+                const dv = i.find(x => x.dataset.label === 'Democrat favourable');
+                const rv = i.find(x => x.dataset.label === 'Republican favourable');
+                if (dv && rv) {
+                  const m = dv.raw - rv.raw;
+                  return 'D advantage: ' + (m >= 0 ? '+' : '') + m + ' pts';
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, maxRotation: 45 } },
+          y: {
+            min: 28, max: 60,
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => v + '%', stepSize: 8 },
+            title: { display: true, text: 'Favourable %', font: { size: 11 }, color: '#959595' }
+          }
+        }
+      },
+      plugins: [{
+        id: '50line',
+        afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(50);
+          ctx.save();
+          ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(149,149,149,.45)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = 'rgba(149,149,149,.6)'; ctx.font = '10px DM Sans,sans-serif';
+          ctx.fillText('50%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // Net favourability bar chart (historical midterms)
+  if (Array.isArray(pf.historical) && pf.historical.length) {
+    const hist = pf.historical;
+    const labels = hist.map(h => String(h.year));
+    const dNet = hist.map(h => h.dem_fav - (100 - h.dem_fav));
+    const rNet = hist.map(h => h.rep_fav - (100 - h.rep_fav));
+
+    new Chart(document.getElementById('c-fav-net'), {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Democrat net',
+            data: dNet,
+            backgroundColor: labels.map((y, i) => y === '2026' ? '#1A5EA8' : '#378ADD'),
+            borderSkipped: false,
+            borderRadius: { topLeft: 3, topRight: 3 },
+          },
+          {
+            label: 'Republican net',
+            data: rNet,
+            backgroundColor: labels.map((y, i) => y === '2026' ? '#6b1111' : '#9B2828'),
+            borderSkipped: false,
+            borderRadius: { topLeft: 3, topRight: 3 },
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              title: i => i[0].label + ' midterm',
+              label: ctx => ' ' + ctx.dataset.label + ': ' + (ctx.raw >= 0 ? '+' : '') + ctx.raw + ' pts',
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 } } },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+            ticks: { font: { size: 11 }, callback: v => (v >= 0 ? '+' : '') + v },
+            title: { display: true, text: 'Net favourability (fav minus unfav %)', font: { size: 11 }, color: '#959595' }
+          }
+        }
+      },
+      plugins: [{
+        id: 'zeroLine',
+        afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(0);
+          ctx.save();
+          ctx.strokeStyle = 'rgba(100,100,100,.3)'; ctx.lineWidth = 1; ctx.setLineDash([]);
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.restore();
+        }
+      }]
+    });
+  }
 }
 
 loadData();

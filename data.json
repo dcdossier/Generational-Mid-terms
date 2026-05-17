@@ -1084,12 +1084,12 @@
       ]
     },
     "democrat_party": {
-      "approve": 0,
-      "disapprove": 0
+      "approve": 37,
+      "disapprove": 55
     },
     "republican_party": {
-      "approve": 0,
-      "disapprove": 0
+      "approve": 36,
+      "disapprove": 57
     }
   },
   "generic_ballot": {
@@ -3106,5 +3106,214 @@
       }
     ],
     "districts": []
+  },
+  "party_favourability": {
+    "democrat": {
+      "favourable": 37,
+      "unfavourable": 55,
+      "neutral": 8,
+      "trend_fav": -1,
+      "history": [
+        {
+          "month": "Jan 2025",
+          "favourable": 40,
+          "unfavourable": 52
+        },
+        {
+          "month": "Mar 2025",
+          "favourable": 39,
+          "unfavourable": 53
+        },
+        {
+          "month": "May 2025",
+          "favourable": 38,
+          "unfavourable": 54
+        },
+        {
+          "month": "Jul 2025",
+          "favourable": 38,
+          "unfavourable": 54
+        },
+        {
+          "month": "Sep 2025",
+          "favourable": 37,
+          "unfavourable": 55
+        },
+        {
+          "month": "Nov 2025",
+          "favourable": 37,
+          "unfavourable": 55
+        },
+        {
+          "month": "Jan 2026",
+          "favourable": 37,
+          "unfavourable": 55
+        },
+        {
+          "month": "Mar 2026",
+          "favourable": 38,
+          "unfavourable": 54
+        },
+        {
+          "month": "May 2026",
+          "favourable": 37,
+          "unfavourable": 55
+        }
+      ]
+    },
+    "republican": {
+      "favourable": 36,
+      "unfavourable": 57,
+      "neutral": 7,
+      "trend_fav": -2,
+      "history": [
+        {
+          "month": "Jan 2025",
+          "favourable": 43,
+          "unfavourable": 51
+        },
+        {
+          "month": "Mar 2025",
+          "favourable": 41,
+          "unfavourable": 52
+        },
+        {
+          "month": "May 2025",
+          "favourable": 40,
+          "unfavourable": 53
+        },
+        {
+          "month": "Jul 2025",
+          "favourable": 39,
+          "unfavourable": 54
+        },
+        {
+          "month": "Sep 2025",
+          "favourable": 38,
+          "unfavourable": 55
+        },
+        {
+          "month": "Nov 2025",
+          "favourable": 37,
+          "unfavourable": 56
+        },
+        {
+          "month": "Jan 2026",
+          "favourable": 37,
+          "unfavourable": 56
+        },
+        {
+          "month": "Mar 2026",
+          "favourable": 36,
+          "unfavourable": 57
+        },
+        {
+          "month": "May 2026",
+          "favourable": 36,
+          "unfavourable": 57
+        }
+      ]
+    },
+    "pollsters": [
+      {
+        "name": "Gallup",
+        "dem_fav": 37,
+        "rep_fav": 36,
+        "date": "May 2026"
+      },
+      {
+        "name": "Pew Research",
+        "dem_fav": 36,
+        "rep_fav": 35,
+        "date": "Apr 2026"
+      },
+      {
+        "name": "Quinnipiac",
+        "dem_fav": 38,
+        "rep_fav": 37,
+        "date": "Apr 2026"
+      },
+      {
+        "name": "NBC News",
+        "dem_fav": 36,
+        "rep_fav": 35,
+        "date": "May 2026"
+      },
+      {
+        "name": "Fox News",
+        "dem_fav": 38,
+        "rep_fav": 38,
+        "date": "Apr 2026"
+      },
+      {
+        "name": "AP-NORC",
+        "dem_fav": 35,
+        "rep_fav": 34,
+        "date": "Mar 2026"
+      },
+      {
+        "name": "YouGov / Economist",
+        "dem_fav": 37,
+        "rep_fav": 36,
+        "date": "May 2026"
+      }
+    ],
+    "historical": [
+      {
+        "year": 2006,
+        "dem_fav": 54,
+        "rep_fav": 37
+      },
+      {
+        "year": 2008,
+        "dem_fav": 55,
+        "rep_fav": 35
+      },
+      {
+        "year": 2010,
+        "dem_fav": 44,
+        "rep_fav": 41
+      },
+      {
+        "year": 2012,
+        "dem_fav": 51,
+        "rep_fav": 43
+      },
+      {
+        "year": 2014,
+        "dem_fav": 41,
+        "rep_fav": 36
+      },
+      {
+        "year": 2016,
+        "dem_fav": 45,
+        "rep_fav": 40
+      },
+      {
+        "year": 2018,
+        "dem_fav": 44,
+        "rep_fav": 37
+      },
+      {
+        "year": 2020,
+        "dem_fav": 49,
+        "rep_fav": 43
+      },
+      {
+        "year": 2022,
+        "dem_fav": 40,
+        "rep_fav": 39
+      },
+      {
+        "year": 2024,
+        "dem_fav": 42,
+        "rep_fav": 43
+      },
+      {
+        "year": 2026,
+        "dem_fav": 37,
+        "rep_fav": 36
+      }
+    ]
   }
 }

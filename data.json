@@ -2954,7 +2954,29 @@
           "rating": "Safe R",
           "note": "Lummis is safe in the most Republican state by margin."
         }
-      ]
+      ],
+      "path_to_majority": {
+        "current_r": 53,
+        "current_d": 47,
+        "needed": 51,
+        "d_seats_retained": 34,
+        "d_seats_up": 13,
+        "r_seats_up": 20,
+        "d_likely_wins": 13,
+        "d_projected_baseline": 47,
+        "d_needs_to_flip": 4,
+        "flip_targets": [
+          "Iowa (Lean R)",
+          "Maine (Lean R)",
+          "Montana (Lean R)",
+          "North Carolina (Lean R)"
+        ],
+        "tossups": [
+          "Georgia",
+          "New Hampshire"
+        ],
+        "summary": "Democrats need to hold all 13 of their seats up \u2014 including toss-ups in GA and NH \u2014 and then flip at least 4 of the 4 lean-R seats (IA, ME, MT, NC) to reach 51. A very narrow path."
+      }
     },
     "house": {
       "cycle": 2026,
@@ -2980,142 +3002,215 @@
           "incumbent": "John Duarte",
           "party": "R",
           "rating": "Toss-up",
-          "pvp": "R+0"
+          "pvp": "R+0",
+          "note": "Duarte won by <1 pt in 2022. Central Valley district. Top target for Dems.",
+          "open": false,
+          "challenger": "Adam Gray (D, rematch)"
         },
         {
           "district": "CA-27",
           "incumbent": "Mike Garcia",
           "party": "R",
           "rating": "Toss-up",
-          "pvp": "D+4"
+          "pvp": "D+4",
+          "note": "Garcia held through two cycles in D+4 district. Democrats see a must-win.",
+          "open": false,
+          "challenger": "TBD (D)"
         },
         {
           "district": "CO-08",
           "incumbent": "Yadira Caraveo",
           "party": "D",
           "rating": "Toss-up",
-          "pvp": "R+1"
+          "pvp": "R+1",
+          "note": "Caraveo flipped in 2022; new R+1 map. Hispanic-majority district.",
+          "open": false,
+          "challenger": "Jeff Crank (R)"
         },
         {
           "district": "ME-02",
           "incumbent": "Jared Golden",
           "party": "D",
           "rating": "Lean D",
-          "pvp": "R+6"
+          "pvp": "R+6",
+          "note": "Golden survived 2022 by crossover appeal. R+6 district \u2014 D defying geography.",
+          "open": false,
+          "challenger": "Austin Theriault (R)"
         },
         {
           "district": "MI-07",
           "incumbent": "Tom Barrett",
           "party": "R",
           "rating": "Toss-up",
-          "pvp": "D+1"
+          "pvp": "D+1",
+          "note": "Slotkin's old seat, new D+1 map. Open \u2014 Slotkin went to Senate.",
+          "open": true,
+          "challenger": "Tom Barrett (R) vs TBD (D)"
         },
         {
           "district": "MT-01",
           "incumbent": "Ryan Zinke",
           "party": "R",
           "rating": "Lean R",
-          "pvp": "R+8"
+          "pvp": "R+8",
+          "note": "Open seat (Zinke retired). R+8 but MT trending competitive at top.",
+          "open": true,
+          "challenger": "Monica Tranel (D) vs TBD (R)"
         },
         {
           "district": "NE-02",
           "incumbent": "Don Bacon",
           "party": "R",
           "rating": "Lean R",
-          "pvp": "D+2"
+          "pvp": "D+2",
+          "note": "Omaha-area district; D+2 but Bacon survived twice. High-profile open seat.",
+          "open": true,
+          "challenger": "Tony Vargas (D, 3rd try) vs TBD (R)"
         },
         {
           "district": "NH-01",
           "incumbent": "Chris Pappas",
           "party": "D",
           "rating": "Lean D",
-          "pvp": "R+1"
+          "pvp": "R+1",
+          "note": "Pappas flipped to Senate. Open D seat in R+1 district \u2014 tightest in NH.",
+          "open": true,
+          "challenger": "Russell Prescott (R) vs Maggie Goodlander (D)"
         },
         {
           "district": "NM-02",
           "incumbent": "Gabe Vasquez",
           "party": "D",
           "rating": "Toss-up",
-          "pvp": "R+5"
+          "pvp": "R+5",
+          "note": "Vasquez won in 2022 by 1,300 votes. R+5 district \u2014 top R flip target.",
+          "open": false,
+          "challenger": "Yvette Herrell (R, rematch)"
         },
         {
           "district": "NY-03",
           "incumbent": "Tom Suozzi",
           "party": "D",
           "rating": "Lean D",
-          "pvp": "R+4"
+          "pvp": "R+4",
+          "note": "Santos scandal seat. Suozzi won special election 2024. R+4 lean.",
+          "open": false,
+          "challenger": "TBD (R)"
         },
         {
           "district": "NY-04",
           "incumbent": "Anthony D'Esposito",
           "party": "R",
           "rating": "Lean D",
-          "pvp": "D+6"
+          "pvp": "D+6",
+          "note": "D+6 but D'Esposito wins by strong local brand. Democratic pickup target.",
+          "open": false,
+          "challenger": "Laura Gillen (D)"
         },
         {
           "district": "NY-17",
           "incumbent": "Mike Lawler",
           "party": "R",
           "rating": "Lean D",
-          "pvp": "D+10"
+          "pvp": "D+10",
+          "note": "D+10 but Lawler holds on brand. Dems' top NY target. Mike Lawler possibly Senate race.",
+          "open": false,
+          "challenger": "Mondaire Jones (D)"
         },
         {
           "district": "NY-22",
           "incumbent": "Marc Molinaro",
           "party": "R",
           "rating": "Toss-up",
-          "pvp": "D+4"
+          "pvp": "D+4",
+          "note": "Williams won 2022 in D+4 district. High R investment here.",
+          "open": false,
+          "challenger": "John Mannion (D) rematch"
         },
         {
           "district": "OH-09",
           "incumbent": "Open (Marcy Kaptur retired)",
           "party": "D",
           "rating": "Lean R",
-          "pvp": "R+5"
+          "pvp": "R+5",
+          "note": "Kaptur held 40+ years. R+5 map now \u2014 big vulnerability for longtime incumbent.",
+          "open": false,
+          "challenger": "Derek Merrin (R)"
         },
         {
           "district": "OR-05",
           "incumbent": "Lori Chavez-DeRemer",
           "party": "R",
           "rating": "Lean D",
-          "pvp": "D+1"
+          "pvp": "D+1",
+          "note": "Chavez-DeRemer flipped to Senate. Open D+1 seat \u2014 competitive both ways.",
+          "open": true,
+          "challenger": "Janelle Bynum (D) vs Lori Chavez-DeRemer (R, went Senate)"
         },
         {
           "district": "PA-07",
           "incumbent": "Susan Wild",
           "party": "D",
           "rating": "Toss-up",
-          "pvp": "R+1"
+          "pvp": "R+1",
+          "note": "Wild barely won 2022 in new R+1 district. Key suburban Philadelphia seat.",
+          "open": false,
+          "challenger": "Ryan Mackenzie (R)"
         },
         {
           "district": "PA-08",
           "incumbent": "Matt Cartwright",
           "party": "D",
           "rating": "Lean D",
-          "pvp": "R+8"
+          "pvp": "R+8",
+          "note": "Cartwright in R+8 district \u2014 extraordinary personal vote. Redistricting threat.",
+          "open": false,
+          "challenger": "Rob Bresnahan (R)"
         },
         {
           "district": "TX-34",
           "incumbent": "Vicente Gonzalez",
           "party": "D",
           "rating": "Lean D",
-          "pvp": "R+3"
+          "pvp": "R+3",
+          "note": "Gonzalez-Casar holds D seat in R+3 Rio Grande Valley district.",
+          "open": false,
+          "challenger": "Mayra Flores (R, rematch)"
         },
         {
           "district": "VA-02",
           "incumbent": "Jen Kiggans",
           "party": "R",
           "rating": "Lean R",
-          "pvp": "R+4"
+          "pvp": "R+4",
+          "note": "Kiggans flipped 2022. R+4 coastal district. Dems targeting.",
+          "open": false,
+          "challenger": "Missy Cotter Smasal (D)"
         },
         {
           "district": "WA-03",
           "incumbent": "Marie Perez",
           "party": "D",
           "rating": "Toss-up",
-          "pvp": "R+3"
+          "pvp": "R+3",
+          "note": "Perez flipped from Herrera Beutler in 2022. R+3 Southwest WA \u2014 lean toss-up.",
+          "open": false,
+          "challenger": "Joe Kent (R)"
         }
-      ]
+      ],
+      "path_to_majority": {
+        "current_r": 222,
+        "current_d": 213,
+        "needed": 218,
+        "d_safe_likely": 196,
+        "r_safe_likely": 197,
+        "tossups": 22,
+        "lean_d": 9,
+        "lean_r": 11,
+        "d_needs_from_tossups": 22,
+        "r_needs_from_tossups": 21,
+        "summary": "Neither party reaches 218 on safe+likely alone. Democrats (196) must sweep all 9 lean-D seats plus win \u226513 of 22 toss-ups. Republicans (197) need the 11 lean-R seats plus \u226510 toss-ups. The 22 toss-ups are the entire ballgame."
+      }
     },
     "governor": {
       "cycle": 2026,
@@ -3274,7 +3369,18 @@
           "rating": "Lean D",
           "note": "Polis is a strong incumbent. Colorado is competitive but leans D statewide."
         }
-      ]
+      ],
+      "path_to_majority": {
+        "current_r_govs": 27,
+        "current_d_govs": 23,
+        "tossups": [
+          "Maine",
+          "Michigan",
+          "Nevada",
+          "Wisconsin"
+        ],
+        "summary": "Democrats currently hold 23 governorships. With 4 governor toss-ups (ME, MI, NV, WI) and multiple lean seats, the gubernatorial map could shift the landscape for 2028 redistricting and presidential infrastructure."
+      }
     }
   },
   "redistricting": {

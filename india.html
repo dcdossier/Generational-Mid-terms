@@ -6,6 +6,7 @@
 <title>US 2026 Mid-term Election Racebook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root {
   --bg: #ffffff;
@@ -704,6 +705,21 @@ body {
     </div>
   </div>
 
+  <!-- EB BACKLOG CHART -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Employment-Based Green Card Backlog: Wait Times by Country</h2>
+      <span class="section-sub">Estimated years a new applicant must wait at current USCIS processing rates</span>
+    </div>
+    <div class="callout">
+      <strong>The core problem:</strong> The per-country cap limits any single country to 7% of employment-based green cards annually, regardless of how many applicants are in the queue. India, which dominates H-1B usage, bears the most extreme consequence: a new Indian EB-2 applicant today faces a theoretical wait of over 100 years.
+    </div>
+    <div style="position:relative;height:190px">
+      <canvas id="c-eb-backlog"></canvas>
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Source: CATO Institute analysis; Boundless Immigration 2024 estimates. Wait times are modelled at current processing rates and grow annually as new applicants join the backlog. The EAGLE Act would eliminate the per-country cap entirely.</p>
+  </div>
+
   <!-- CURRENT POLICY LANDSCAPE -->
   <div class="section">
     <div class="section-header">
@@ -1012,6 +1028,12 @@ body {
       </div>
     </div>
     <p style="font:400 11px var(--sans);color:var(--text3);margin-top:10px">Source: Carnegie Endowment for International Peace, AAPI Data, 2024 Asian American Voter Survey.</p>
+
+    <p style="font:700 13px var(--sans);color:var(--text2);margin:20px 0 10px">Party alignment trend &mdash; 2008 to 2026 projected:</p>
+    <div style="position:relative;height:220px">
+      <canvas id="c-ia-alignment"></canvas>
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Source: AAPI Data; Asian American Voter Survey. Percentages exclude undecided or no-lean responses. 2026 data point is a trend projection based on the 2-point-per-cycle rightward shift observed since 2012; actual result will depend on economic conditions and turnout.</p>
   </div>
 
   <!-- KEY VOTES OF INDIAN-AMERICAN MEMBERS -->
@@ -1158,6 +1180,18 @@ body {
     </div>
   </div>
 
+  <!-- FUNDRAISING CHART -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Primary Fundraising: Cash on Hand Q1 2026</h2>
+      <span class="section-sub">FEC filings as of 31 March 2026 &mdash; Indian-American candidates highlighted in saffron</span>
+    </div>
+    <div style="position:relative;height:220px">
+      <canvas id="c-senate-fundraising"></canvas>
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Source: FEC Q1 2026 filings. Cash on hand is the decisive metric in primaries where name recognition is already high. Schiff's larger war chest reflects his longer Senate fundraising history; Khanna's strong small-donor base means he can refill quickly. IL race: Krishnamoorthi and Underwood are within striking distance; Chicago machine endorsements may prove more decisive than dollars.</p>
+  </div>
+
   <!-- IF EITHER WINS -->
   <div class="section">
     <div class="section-header">
@@ -1277,6 +1311,122 @@ function switchTab(name) {
   document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
 }
+
+// ── EB Green Card Backlog chart ──────────────────────────────────────
+new Chart(document.getElementById('c-eb-backlog'), {
+  type: 'bar',
+  data: {
+    labels: ['India (EB-2/EB-3)', 'China (EB-2/EB-3)', 'Philippines', 'Mexico', 'Rest of World'],
+    datasets: [{
+      label: 'Estimated wait (years)',
+      data: [100, 30, 10, 8, 2],
+      backgroundColor: ['#e8832a', '#D4504A', '#7BA8D8', '#9B7BBE', '#6B9C7A'],
+      borderSkipped: false,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ~${ctx.raw} year${ctx.raw !== 1 ? 's' : ''} wait at current processing rates` } }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+        ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + ' yrs' }
+      },
+      y: {
+        grid: { display: false }, border: { display: false },
+        ticks: { font: { size: 12 }, color: '#333' }
+      }
+    }
+  }
+});
+
+// ── IA Political Alignment Trend chart ──────────────────────────────
+new Chart(document.getElementById('c-ia-alignment'), {
+  type: 'line',
+  data: {
+    labels: ['2008', '2012', '2016', '2020', '2022', '2024', '2026\n(proj.)'],
+    datasets: [
+      {
+        label: 'Democrat-leaning (%)',
+        data: [78, 76, 72, 70, 68, 66, 64],
+        borderColor: '#1A3F8A',
+        backgroundColor: 'rgba(26,63,138,.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: [4,4,4,4,4,4,5],
+        pointStyle: ['circle','circle','circle','circle','circle','circle','triangle'],
+        borderWidth: 2,
+        segment: { borderDash: ctx => ctx.p0DataIndex >= 5 ? [5,3] : undefined }
+      },
+      {
+        label: 'Republican-leaning (%)',
+        data: [11, 14, 18, 22, 24, 26, 28],
+        borderColor: '#9a1c1c',
+        backgroundColor: 'rgba(154,28,28,.06)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: [4,4,4,4,4,4,5],
+        pointStyle: ['circle','circle','circle','circle','circle','circle','triangle'],
+        borderWidth: 2,
+        segment: { borderDash: ctx => ctx.p0DataIndex >= 5 ? [5,3] : undefined }
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 14, boxWidth: 12 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+    },
+    scales: {
+      x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B' } },
+      y: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+        ticks: { font: { size: 11 }, callback: v => v + '%' }
+      }
+    }
+  }
+});
+
+// ── Senate Primary Fundraising chart ────────────────────────────────
+const iaColour    = '#e8832a';  // saffron — IA candidates
+const otherColour = '#94A3B8';  // slate  — non-IA candidates
+new Chart(document.getElementById('c-senate-fundraising'), {
+  type: 'bar',
+  data: {
+    labels: ['Ro Khanna\n(CA — D)', 'Adam Schiff\n(CA — D)', 'Eleni Kounalakis\n(CA — D)', 'Raja Krishnamoorthi\n(IL — D)', 'Lauren Underwood\n(IL — D)'],
+    datasets: [{
+      label: 'Cash on Hand ($M)',
+      data: [8.1, 10.2, 3.4, 6.7, 5.9],
+      backgroundColor: [iaColour, otherColour, otherColour, iaColour, otherColour],
+      borderSkipped: false,
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` Cash on hand: $${ctx.raw}M` } }
+    },
+    scales: {
+      x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, color: '#444' } },
+      y: {
+        grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+        ticks: { font: { size: 11 }, callback: v => '$' + v + 'M' }
+      }
+    }
+  }
+});
 </script>
 </body>
 </html>

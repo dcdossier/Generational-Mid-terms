@@ -817,8 +817,8 @@ async function loadHomeData() {
           tooltip: { callbacks: {
             title: ctx => ctx[0].label,
             label: ctx => {
-              const est = cpiEstimated[ctx[0].dataIndex];
-              return est ? ' CPI: ~' + ctx[0].raw + '% (estimated — no data, govt. shutdown)' : ' CPI: ' + ctx[0].raw + '%';
+              const est = cpiEstimated[ctx.dataIndex];
+              return est ? ' CPI: ~' + ctx.raw + '% (estimated \u2014 no data, govt. shutdown)' : ' CPI: ' + ctx.raw + '%';
             }
           }}
         },

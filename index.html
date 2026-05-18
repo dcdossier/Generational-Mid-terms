@@ -174,6 +174,16 @@ body{
 /* FORECAST STRIP */
 .home-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
 @media(max-width:600px){.home-forecast{grid-template-columns:1fr}}
+.hfb-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+@media(max-width:600px){.hfb-wrap{grid-template-columns:1fr}}
+.hfb-card{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:18px 20px}
+.hfb-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:10px}
+.hfb-bar-wrap{display:flex;height:10px;border-radius:5px;overflow:hidden;background:#E8E8E0;margin-bottom:8px}
+.hfb-bar-d{background:#4c8de0;height:100%}
+.hfb-bar-r{background:#E05555;height:100%}
+.hfb-leg{font:500 11px var(--sans);margin-bottom:8px}
+.hfb-text{font:400 13px var(--sans);color:#1E2232;margin-bottom:4px;line-height:1.45}
+.hfb-note{font:400 11px var(--sans);color:#888;font-style:italic}
 .forecast-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
 .forecast-chamber{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
 .forecast-rating{font:700 14px var(--sans);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px}
@@ -337,26 +347,35 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- FORECASTER CONSENSUS -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Forecaster Consensus</h3>
-      <div class="home-forecast" id="home-forecast">
-        <div class="forecast-card">
-          <div class="forecast-chamber">U.S. House</div>
-          <div class="forecast-rating fr-lean-r">Lean R Hold</div>
-          <div class="forecast-seats">Proj. 220&ndash;230 R &middot; 205&ndash;215 D</div>
-          <div class="forecast-sub">D need +5 net seats; 22 toss-ups decisive</div>
+      <div id="home-forecast-bars" class="hfb-wrap">
+        <div class="hfb-card">
+          <div class="hfb-label">House Control Forecast</div>
+          <div class="hfb-bar-wrap">
+            <div class="hfb-bar-d" style="width:90%"></div>
+            <div class="hfb-bar-r" style="width:10%"></div>
+          </div>
+          <div class="hfb-leg"><span style="color:#4c8de0">&#9646; D 90%</span>&ensp;<span style="color:#E05555">&#9646; R 10%</span></div>
+          <div class="hfb-text">Democrats 9/10 chance of flipping the House</div>
+          <div class="hfb-note">Source: The Economist election model</div>
         </div>
-        <div class="forecast-card">
-          <div class="forecast-chamber">U.S. Senate</div>
-          <div class="forecast-rating fr-likely-r">Likely R Hold</div>
-          <div class="forecast-seats">Proj. 51&ndash;54 R &middot; 46&ndash;49 D</div>
-          <div class="forecast-sub">D need to flip 4 R seats on tough map</div>
+        <div class="hfb-card">
+          <div class="hfb-label">Senate Control Forecast</div>
+          <div class="hfb-bar-wrap">
+            <div class="hfb-bar-r" style="width:55%"></div>
+            <div class="hfb-bar-d" style="width:45%"></div>
+          </div>
+          <div class="hfb-leg"><span style="color:#E05555">&#9646; R 55%</span>&ensp;<span style="color:#4c8de0">&#9646; D 45%</span></div>
+          <div class="hfb-text">Senate outcome extremely competitive &mdash; result uncertain</div>
+          <div class="hfb-note">Source: The Economist election model</div>
         </div>
-        <div class="forecast-card">
-          <div class="forecast-chamber">Governors</div>
-          <div class="forecast-rating fr-tossup">4 Toss-ups</div>
-          <div class="forecast-seats">Proj. 25&ndash;28 R &middot; 22&ndash;25 D</div>
-          <div class="forecast-sub">ME, MI, NV, WI genuine toss-ups</div>
+        <div class="hfb-card" id="home-forecast-gov">
+          <div class="hfb-label">Governors</div>
+          <div class="forecast-rating fr-tossup" style="margin-bottom:8px">4 Toss-ups</div>
+          <div class="hfb-text">Proj. 25&ndash;28 R &middot; 22&ndash;25 D held</div>
+          <div class="hfb-note">ME, MI, NV, WI genuine toss-ups</div>
         </div>
       </div>
+      <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-bottom:20px">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
 
       <!-- LATEST NEWS -->
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">

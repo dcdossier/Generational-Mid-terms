@@ -578,29 +578,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 </div>
 
-<div class="forecast-banner">
-  <div class="fb-inner">
-    <div class="fb-card">
-      <div class="fb-label">House Control Forecast</div>
-      <div class="fb-bar-wrap">
-        <div class="fb-bar-d" style="width:90%"></div>
-        <div class="fb-bar-r" style="width:10%"></div>
-      </div>
-      <div class="fb-text">Democrats 9/10 chance of flipping the House</div>
-      <div class="fb-note">Source: The Economist election model</div>
-    </div>
-    <div class="fb-card">
-      <div class="fb-label">Senate Control Forecast</div>
-      <div class="fb-bar-wrap">
-        <div class="fb-bar-r" style="width:55%"></div>
-        <div class="fb-bar-d" style="width:45%"></div>
-      </div>
-      <div class="fb-text">Senate race extremely competitive -- outcome uncertain</div>
-      <div class="fb-note">Source: The Economist election model. Update with exact probability.</div>
-    </div>
-  </div>
-  <div class="fb-disclaimer">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
-</div>
 
 <div class="ftt" id="ftt">
   <div class="ftt-name" id="ftt-name"></div>
@@ -2153,15 +2130,6 @@ function renderAll() {
     </tr>`;
 
   renderCharts(r);
-
-  // Initialise all sub-tab charts upfront so they render when tabs become visible
-  renderApprovalCharts();
-  renderBallotCharts();
-  renderFavourabilityCharts();
-  renderCongressApprovalCharts();
-  renderKeyRacesCharts();
-  renderPreviousCharts();
-  renderFactionCharts();
 }
 
 let chartsReady = false;

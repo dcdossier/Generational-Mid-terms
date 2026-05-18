@@ -352,6 +352,27 @@ body {
 
 /* CURRENT POLICY */
 .cpolicy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+
+/* MAP CONTROLS */
+.map-ctrl { display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap; }
+.map-ctrl-search {
+  font: 400 13px var(--sans); color: var(--text);
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 7px 12px;
+  width: 230px; outline: none;
+}
+.map-ctrl-search:focus { border-color: var(--accent); }
+.map-ctrl-count { font: 400 11px var(--sans); color: var(--text3); }
+.tier-chips { display:flex; gap:5px; flex-wrap:wrap; }
+.tier-chip {
+  font: 600 10px var(--sans); padding: 4px 10px; border-radius: 20px;
+  border: 1.5px solid var(--border); background: var(--bg2);
+  color: var(--text2); cursor: pointer; transition: opacity .12s, border-color .12s;
+}
+.tier-chip.active { border-color: transparent; opacity: 1; }
+.tier-chip:not(.active) { opacity: 0.45; }
+/* Presence map section */
+.presence-map-section { margin-bottom: 28px; }
 @media(max-width:600px){ .cpolicy-grid { grid-template-columns: 1fr; } }
 .cpolicy-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
 .cpolicy-label { font: 700 10px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--saffron); margin-bottom: 6px; }
@@ -896,6 +917,24 @@ body {
     <div class="callout">
       The 119th Congress seated six Indian-American members, the highest number in US history. All serve in the House. No Indian-American currently holds a Senate seat, making the 2026 cycle a potential watershed: multiple members are actively campaigning for Senate.
     </div>
+
+    <!-- PRESENCE DISTRICT MAP -->
+    <div class="presence-map-section">
+      <div class="section-header" style="margin-bottom:10px">
+        <h2>District Map</h2>
+        <span class="section-sub">House districts represented by Indian-American members &mdash; click a district to view member detail</span>
+      </div>
+      <div class="map-ctrl">
+        <input type="search" id="presence-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterPresenceMap(this.value)">
+        <span class="map-ctrl-count" id="presence-search-count"></span>
+      </div>
+      <div class="map-wrap" id="presence-map-wrap" style="min-height:320px">
+        <div class="map-loading" id="presence-map-loading">Loading district map&hellip;</div>
+        <svg id="presence-map-svg" viewBox="0 0 960 580"></svg>
+      </div>
+      <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Blue = Democrat district. All six Indian-American members are Democrats.</p>
+    </div>
+
     <div class="member-grid">
       <div class="member-card">
         <div class="member-name">Ami Bera</div>
@@ -1207,6 +1246,18 @@ body {
 
   <!-- HOUSE MAP -->
   <div id="inner-house-map" class="inner-panel active">
+    <div class="map-ctrl">
+      <input type="search" id="interest-house-search" class="map-ctrl-search" placeholder="Search by name, party, or seat&hellip;" oninput="filterInterestHouseMap(this.value)">
+      <span class="map-ctrl-count" id="interest-house-count"></span>
+      <div class="tier-chips" style="margin-left:auto">
+        <button class="tier-chip active" onclick="setInterestHouseTier('all',this)">All Tiers</button>
+        <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestHouseTier(1,this)">T1 Supportive</button>
+        <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestHouseTier(2,this)">T2 Moderate</button>
+        <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestHouseTier(3,this)">T3 Critical</button>
+        <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestHouseTier(4,this)">T4 Pak-Support</button>
+        <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestHouseTier(5,this)">T5 Pak-Oppose</button>
+      </div>
+    </div>
     <div class="map-wrap" style="min-height:360px">
       <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
       <svg id="house-map-svg" viewBox="0 0 960 580"></svg>
@@ -1215,6 +1266,18 @@ body {
 
   <!-- SENATE MAP -->
   <div id="inner-senate-map" class="inner-panel">
+    <div class="map-ctrl">
+      <input type="search" id="interest-senate-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterInterestSenateMap(this.value)">
+      <span class="map-ctrl-count" id="interest-senate-count"></span>
+      <div class="tier-chips" style="margin-left:auto">
+        <button class="tier-chip active" onclick="setInterestSenateTier('all',this)">All Tiers</button>
+        <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestSenateTier(1,this)">T1 Supportive</button>
+        <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestSenateTier(2,this)">T2 Moderate</button>
+        <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestSenateTier(3,this)">T3 Critical</button>
+        <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestSenateTier(4,this)">T4 Pak-Support</button>
+        <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestSenateTier(5,this)">T5 Pak-Oppose</button>
+      </div>
+    </div>
     <div class="map-wrap" style="min-height:360px">
       <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
       <svg id="senate-map-svg" viewBox="0 0 960 580"></svg>
@@ -1284,6 +1347,7 @@ function switchTab(name) {
   document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
   if (name === 'interest' && !houseMapLoaded) { loadHouseMap(); }
+  if (name === 'presence' && !presenceMapLoaded) { loadPresenceMap(); }
 }
 
 function switchInner(name) {
@@ -1399,6 +1463,28 @@ function closeSidePanel() {
 const tooltip = document.getElementById('map-tooltip');
 let houseMapLoaded = false;
 let senateMapLoaded = false;
+let presenceMapLoaded = false;
+
+// GeoJSON cache (shared between interest House map and presence map)
+let _cachedDistrictGeo = null;
+let _districtGeoFetching = false;
+const _districtGeoWaiters = [];
+
+function fetchDistrictGeo(cb) {
+  if (_cachedDistrictGeo) { cb(_cachedDistrictGeo); return; }
+  _districtGeoWaiters.push(cb);
+  if (_districtGeoFetching) return;
+  _districtGeoFetching = true;
+  fetch('assets/districts119.geojson')
+    .then(r => r.json())
+    .then(gj => { _cachedDistrictGeo = gj; _districtGeoWaiters.forEach(fn => fn(gj)); _districtGeoWaiters.length = 0; })
+    .catch(() => {
+      ['house-map-loading','presence-map-loading'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = 'Could not load district map.';
+      });
+    });
+}
 
 // Build lookup: state+district → member, state → senators
 const houseIdx = {};
@@ -1413,83 +1499,120 @@ MEMBERS.forEach(m => {
   }
 });
 
+// Indian-American members (panel-presence)
+const IA_MEMBERS = [
+  { name:'Ami Bera',              party:'D', state:'California', district:6  },
+  { name:'Ro Khanna',             party:'D', state:'California', district:17 },
+  { name:'Pramila Jayapal',       party:'D', state:'Washington', district:7  },
+  { name:'Raja Krishnamoorthi',   party:'D', state:'Illinois',   district:8  },
+  { name:'Suhas Subramanyam',     party:'D', state:'Virginia',   district:10 },
+  { name:'Shri Thanedar',         party:'D', state:'Michigan',   district:13 },
+];
+const iaIdx = {};
+IA_MEMBERS.forEach(m => { iaIdx[m.state + '_' + m.district] = m; });
+
 function getBestTier(members) {
-  // Tier 1 is most pro-India; prefer lowest tier number for India-interest colouring
-  // But Tier 4/5 should not override Tier 1/2 if both senators are present
   const tiers = members.map(m => m.tier);
   const proIndia = tiers.filter(t => t <= 2);
-  if (proIndia.length) return Math.min(...proIndia);
-  return Math.min(...tiers);
+  return proIndia.length ? Math.min(...proIndia) : Math.min(...tiers);
 }
+
+const TIER_COLOR_MAP = {1:'#166534',2:'#4a9a6a',3:'#9333ea',4:'#5b21b6',5:'#1d4ed8'};
+
+// ── INTEREST HOUSE MAP ──────────────────────────────────────────────────────
+let _interestHouseSel = null;
+let _interestHouseTier = 'all';
 
 function loadHouseMap() {
   if (houseMapLoaded) return;
   houseMapLoaded = true;
-
   const svg = d3.select('#house-map-svg');
-  const proj = d3.geoAlbers().scale(1280).translate([480, 300]);
+  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
   const pathGen = d3.geoPath().projection(proj);
 
-  fetch('assets/districts119.geojson')
-    .then(r => r.json())
-    .then(gj => {
-      document.getElementById('house-map-loading').style.display = 'none';
-      svg.selectAll('path')
-        .data(gj.features)
-        .join('path')
-        .attr('d', pathGen)
-        .attr('fill', d => {
-          const key = d.properties.state + '_' + d.properties.district;
-          const m = houseIdx[key];
-          return m ? TIER_COLORS[m.tier] : TIER_COLORS[0];
-        })
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 0.4)
-        .on('mousemove', function(event, d) {
-          const key = d.properties.state + '_' + d.properties.district;
-          const m = houseIdx[key];
-          tooltip.style.display = 'block';
-          tooltip.style.left = (event.clientX + 12) + 'px';
-          tooltip.style.top  = (event.clientY - 28) + 'px';
-          tooltip.innerHTML = m
-            ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'R':'D'}<br>${TIER_LABELS[m.tier]}`
-            : `<strong>${d.properties.state}</strong> ${d.properties.district === 0 ? '' : 'District ' + d.properties.district}<br><em>Not tracked</em>`;
-        })
-        .on('mouseleave', () => { tooltip.style.display = 'none'; })
-        .on('click', function(event, d) {
-          const key = d.properties.state + '_' + d.properties.district;
-          const m = houseIdx[key];
-          if (m) openSidePanel(m.id);
-        });
-    })
-    .catch(() => {
-      document.getElementById('house-map-loading').textContent = 'Could not load district map.';
-    });
+  fetchDistrictGeo(gj => {
+    document.getElementById('house-map-loading').style.display = 'none';
+    _interestHouseSel = svg.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('d', pathGen)
+      .attr('fill', d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = houseIdx[key];
+        return m ? (TIER_COLOR_MAP[m.tier] || '#d1d5db') : '#d1d5db';
+      })
+      .attr('stroke', '#fff').attr('stroke-width', 0.4)
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = houseIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        tooltip.innerHTML = m
+          ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'Republican':'Democrat'}<br>${TIER_LABELS[m.tier]}`
+          : `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ' At-Large'}</strong><br><em>Not tracked</em>`;
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = houseIdx[key];
+        if (m) openSidePanel(m.id);
+      });
+  });
 }
+
+function filterInterestHouseMap(q) {
+  if (!_interestHouseSel) return;
+  const ql = q.toLowerCase().trim();
+  const active = ql || _interestHouseTier !== 'all';
+  let ct = 0;
+  _interestHouseSel.each(function(d) {
+    const key = d.properties.state + '_' + d.properties.district;
+    const m = houseIdx[key];
+    let show = true;
+    if (ql) show = m && (m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      m.state.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
+      (m.party==='D'?'democrat':'republican').includes(ql));
+    if (_interestHouseTier !== 'all') show = show && m && m.tier === parseInt(_interestHouseTier);
+    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
+    if (show && m) ct++;
+  });
+  const el = document.getElementById('interest-house-count');
+  if (el) el.textContent = active ? ct + ' member' + (ct !== 1 ? 's' : '') : '';
+}
+
+function setInterestHouseTier(tier, btn) {
+  _interestHouseTier = tier;
+  document.querySelectorAll('#inner-house-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
+  filterInterestHouseMap(document.getElementById('interest-house-search')?.value || '');
+}
+
+// ── INTEREST SENATE MAP ─────────────────────────────────────────────────────
+let _interestSenateSel = null;
+let _interestSenateTier = 'all';
 
 function loadSenateMap() {
   if (senateMapLoaded) return;
   senateMapLoaded = true;
-
   const svg = d3.select('#senate-map-svg');
-  const proj = d3.geoAlbers().scale(1280).translate([480, 300]);
+  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
   const pathGen = d3.geoPath().projection(proj);
 
   fetch('assets/us-states.json')
     .then(r => r.json())
     .then(gj => {
       document.getElementById('senate-map-loading').style.display = 'none';
-      svg.selectAll('path')
+      _interestSenateSel = svg.selectAll('path')
         .data(gj.features)
         .join('path')
         .attr('d', pathGen)
         .attr('fill', d => {
           const members = senateIdx[d.properties.name];
-          if (!members || !members.length) return TIER_COLORS[0];
-          return TIER_COLORS[getBestTier(members)];
+          if (!members || !members.length) return '#d1d5db';
+          const tier = getBestTier(members);
+          return TIER_COLOR_MAP[tier] || '#d1d5db';
         })
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 0.8)
+        .attr('stroke', '#fff').attr('stroke-width', 0.8)
         .on('mousemove', function(event, d) {
           const members = senateIdx[d.properties.name];
           tooltip.style.display = 'block';
@@ -1497,7 +1620,7 @@ function loadSenateMap() {
           tooltip.style.top  = (event.clientY - 28) + 'px';
           if (members && members.length) {
             tooltip.innerHTML = `<strong>${d.properties.name}</strong><br>` +
-              members.map(m => `${m.name} (${m.party}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>');
+              members.map(m => `${m.name} (${m.party==='R'?'R':'D'}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>');
           } else {
             tooltip.innerHTML = `<strong>${d.properties.name}</strong><br><em>No tracked senators</em>`;
           }
@@ -1505,13 +1628,104 @@ function loadSenateMap() {
         .on('mouseleave', () => { tooltip.style.display = 'none'; })
         .on('click', function(event, d) {
           const members = senateIdx[d.properties.name];
-          if (members && members.length === 1) { openSidePanel(members[0].id); }
-          else if (members && members.length > 1) { openSidePanel(members[0].id); }
+          if (members && members.length) openSidePanel(members[0].id);
         });
     })
-    .catch(() => {
-      document.getElementById('senate-map-loading').textContent = 'Could not load Senate map.';
+    .catch(err => {
+      const el = document.getElementById('senate-map-loading');
+      if (el) el.textContent = 'Could not load Senate map.';
+      console.error('Senate map error:', err);
     });
+}
+
+function filterInterestSenateMap(q) {
+  if (!_interestSenateSel) return;
+  const ql = q.toLowerCase().trim();
+  const active = ql || _interestSenateTier !== 'all';
+  let ct = 0;
+  _interestSenateSel.each(function(d) {
+    const members = senateIdx[d.properties.name];
+    let show = true;
+    if (ql) show = members && members.some(m =>
+      m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      d.properties.name.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
+      (m.party==='D'?'democrat':'republican').includes(ql));
+    if (_interestSenateTier !== 'all') {
+      const t = parseInt(_interestSenateTier);
+      show = show && members && members.some(m => m.tier === t);
+    }
+    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
+    if (show && members && members.length) ct++;
+  });
+  const el = document.getElementById('interest-senate-count');
+  if (el) el.textContent = active ? ct + ' state' + (ct !== 1 ? 's' : '') : '';
+}
+
+function setInterestSenateTier(tier, btn) {
+  _interestSenateTier = tier;
+  document.querySelectorAll('#inner-senate-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
+  filterInterestSenateMap(document.getElementById('interest-senate-search')?.value || '');
+}
+
+// ── PRESENCE MAP (Indian-American members) ─────────────────────────────────
+let _presenceSel = null;
+
+function loadPresenceMap() {
+  if (presenceMapLoaded) return;
+  presenceMapLoaded = true;
+  const svg = d3.select('#presence-map-svg');
+  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+  const pathGen = d3.geoPath().projection(proj);
+
+  fetchDistrictGeo(gj => {
+    document.getElementById('presence-map-loading').style.display = 'none';
+    _presenceSel = svg.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('d', pathGen)
+      .attr('fill', d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        return iaIdx[key] ? '#378ADD' : '#d1d5db';
+      })
+      .attr('stroke', '#fff').attr('stroke-width', 0.4)
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        if (m) {
+          tooltip.innerHTML = `<strong>${m.name}</strong><br>${m.state} District ${m.district} &middot; Democrat`;
+        } else {
+          tooltip.innerHTML = `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ''}</strong><br><em>No Indian-American member</em>`;
+        }
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const ia = iaIdx[key];
+        if (!ia) return;
+        const member = MEMBERS.find(x => x.name === ia.name);
+        if (member) openSidePanel(member.id);
+      });
+  });
+}
+
+function filterPresenceMap(q) {
+  if (!_presenceSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _presenceSel.each(function(d) {
+    const key = d.properties.state + '_' + d.properties.district;
+    const m = iaIdx[key];
+    let show = true;
+    if (ql) show = m && (m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      m.state.toLowerCase().includes(ql) || (m.party==='D'?'democrat':'republican').includes(ql));
+    d3.select(this).attr('opacity', ql ? (show ? 1 : 0.1) : 1);
+    if (show && m) ct++;
+  });
+  const el = document.getElementById('presence-search-count');
+  if (el) el.textContent = ql ? ct + ' member' + (ct !== 1 ? 's' : '') : '';
 }
 
 // ── ALIGNMENT CHART ────────────────────────────────────────────────────────

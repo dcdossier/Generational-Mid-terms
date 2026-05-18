@@ -353,50 +353,53 @@ body {
   <button class="sub-tab" data-tab="news" onclick="switchTab('news')">Live News Feed</button>
   <div class="nav-spacer"></div>
   <span class="last-updated" id="lastUpdated"></span>
-  <a href="input.html" class="add-btn" target="_parent" title="Add an analysis source">
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-    Add Source
-  </a>
 </nav>
 
 <!-- ANALYSIS PANEL -->
 <div id="panel-analysis" class="panel active">
-  <div class="toolbar">
-    <input type="search" class="search-box" id="analysis-search" placeholder="Search titles and sources..." oninput="filterAnalysis()">
-    <div class="chips" id="analysis-chips">
-      <button class="chip active" data-type="All" onclick="setAnalysisFilter('All')">All</button>
-      <button class="chip" data-type="Newsletter" onclick="setAnalysisFilter('Newsletter')">Newsletter</button>
-      <button class="chip" data-type="Op-Ed" onclick="setAnalysisFilter('Op-Ed')">Op-Ed</button>
-      <button class="chip" data-type="Podcast" onclick="setAnalysisFilter('Podcast')">Podcast</button>
-      <button class="chip" data-type="Research Paper" onclick="setAnalysisFilter('Research Paper')">Research Paper</button>
-      <button class="chip" data-type="Interview" onclick="setAnalysisFilter('Interview')">Interview</button>
-      <button class="chip" data-type="Post" onclick="setAnalysisFilter('Post')">Post</button>
-    </div>
-  </div>
   <div class="content">
-    <div class="analysis-header">
-      <div class="analysis-count" id="analysis-count-label"></div>
-    </div>
-    <div id="analysis-results-bar" class="results-bar hidden"></div>
-    <div id="analysis-cards" class="card-grid"></div>
-    <div id="analysis-empty" class="empty-state hidden">
-      <div class="empty-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    <div class="card-grid" style="max-width:860px;margin:0 auto">
+
+      <!-- PODCAST -->
+      <div class="card">
+        <div class="card-meta">
+          <span class="type-badge type-podcast">Podcast</span>
+          <span class="card-date">1 Apr 2026</span>
+        </div>
+        <a class="card-title" href="https://open.spotify.com/episode/4wmWyfx1HxWvqTo6P5jNYG?si=96ad7bbb473b49e2" target="_blank" rel="noopener">
+          The Iran Brief: Why Is US Congress Failing To Stop Trump On Iran?
+        </a>
+        <p class="card-desc">
+          Congress has repeatedly failed to constrain President Trump's military actions against Iran despite multiple legislative attempts. The episode traces failed resolutions invoking the War Powers Resolution of 1973 — sponsored by Tim Kaine, Thomas Massie, Ro Khanna, and Chris Murphy — and examines how partisanship, electoral incentives, and ideological splits (cutting across party lines) have shaped outcomes. The hosts ultimately ask whether Congress genuinely seeks to reclaim war powers or whether these efforts are largely symbolic in an era of deepening polarisation.
+        </p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
+          <div class="card-source">All Things Policy</div>
+          <div style="font:400 11px var(--sans);color:var(--text3)">
+            Hosts: <strong style="color:var(--accent)">Abhishek Kadiyala</strong> &amp; <strong style="color:var(--accent)">Bhumika Sevkani</strong>
+          </div>
+        </div>
       </div>
-      <h3>Publications will appear here</h3>
-      <p>Use the input form to add content.</p>
-      <a href="input.html" class="empty-action" target="_parent">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-        Add your first source
-      </a>
-      <span class="empty-hint">Sources added via the editorial form appear here immediately.</span>
-    </div>
-    <div id="analysis-no-results" class="empty-state hidden">
-      <div class="empty-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+
+      <!-- NEWSLETTER -->
+      <div class="card">
+        <div class="card-meta">
+          <span class="type-badge type-newsletter">Newsletter</span>
+          <span class="card-date">10 May 2026</span>
+        </div>
+        <a class="card-title" href="https://dcdossier.substack.com/p/21-a-generational-mid-term" target="_blank" rel="noopener">
+          #21 &mdash; A Generational Mid-term?
+        </a>
+        <p class="card-desc">
+          At least one in eight members of Congress is departing ahead of the 2026 midterms — the highest retirement rate since 1992. The piece examines the three forces driving the exodus: institutional frustration with a gridlocked Congress, deepening partisan polarisation that makes legislating increasingly thankless, and a declining appeal of federal service relative to state-level or private-sector alternatives. Historical parallels to earlier retirement surges that preceded major congressional reforms add context to what could be a generationally significant election cycle.
+        </p>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+          <div class="card-source">DC Dossier &mdash; Substack</div>
+          <div style="font:400 11px var(--sans);color:var(--text3)">
+            By <strong style="color:var(--accent)">Abhishek Kadiyala</strong>
+          </div>
+        </div>
       </div>
-      <h3>No results found</h3>
-      <p>Try a different search term or clear the filter.</p>
+
     </div>
   </div>
 </div>
@@ -445,33 +448,22 @@ body {
 <script>
 'use strict';
 
-const TYPE_CLASS = {
-  'Newsletter':     'type-newsletter',
-  'Op-Ed':          'type-op-ed',
-  'Podcast':        'type-podcast',
-  'Research Paper': 'type-research',
-  'Interview':      'type-interview',
-  'Tweet':          'type-post',
-  'Post':           'type-post',
-};
 const TAG_CLASS = {
   'Redistricting': 'tag-redistricting',
   'Polling':       'tag-polling',
   'Economy':       'tag-economy',
-  'Major Update': 'tag-major',
-  'Senate':       'tag-senate',
-  'House':        'tag-house',
-  'Federal':      'tag-federal',
-  'Governorship': 'tag-gov',
-  'Primary':      'tag-primary',
+  'Major Update':  'tag-major',
+  'Senate':        'tag-senate',
+  'House':         'tag-house',
+  'Federal':       'tag-federal',
+  'Governorship':  'tag-gov',
+  'Primary':       'tag-primary',
 };
 
-let allAnalysis = [];
 let allNews = [];
-let analysisFilter = 'All';
 let newsFilter = 'All';
 
-/* ---- DATA ---- */
+/* ---- DATA (news only) ---- */
 async function loadData() {
   const paths = ['data.json', '../data.json', './data.json'];
   for (const p of paths) {
@@ -479,20 +471,16 @@ async function loadData() {
       const r = await fetch(p + '?t=' + Date.now());
       if (!r.ok) continue;
       const d = await r.json();
-      allAnalysis = Array.isArray(d.analysis) ? d.analysis : [];
       allNews = Array.isArray(d.news) ? d.news : [];
       if (d.meta && d.meta.last_updated) {
         const dt = new Date(d.meta.last_updated);
         document.getElementById('lastUpdated').textContent =
           'Updated ' + dt.toLocaleString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
       }
-      renderAnalysis();
       renderNews();
       return;
     } catch(e) { /* try next */ }
   }
-  // No data loaded — show empty states
-  renderAnalysis();
   renderNews();
 }
 
@@ -500,82 +488,6 @@ async function loadData() {
 function switchTab(name) {
   document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
-}
-
-/* ---- ANALYSIS ---- */
-function setAnalysisFilter(type) {
-  analysisFilter = type;
-  document.querySelectorAll('#analysis-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.type === type));
-  renderAnalysis();
-}
-
-function filterAnalysis() { renderAnalysis(); }
-
-function renderAnalysis() {
-  const q = (document.getElementById('analysis-search').value || '').toLowerCase();
-  let items = allAnalysis.filter(item => {
-    if (analysisFilter !== 'All' && item.type !== analysisFilter) return false;
-    if (q) {
-      const haystack = ((item.title || '') + ' ' + (item.source || '') + ' ' + (item.description || '')).toLowerCase();
-      if (!haystack.includes(q)) return false;
-    }
-    return true;
-  });
-  // Sort newest first
-  items.sort((a, b) => new Date(b.added || b.date || 0) - new Date(a.added || a.date || 0));
-
-  const grid = document.getElementById('analysis-cards');
-  const emptyEl = document.getElementById('analysis-empty');
-  const noResultsEl = document.getElementById('analysis-no-results');
-  const bar = document.getElementById('analysis-results-bar');
-
-  grid.innerHTML = '';
-
-  if (allAnalysis.length === 0) {
-    emptyEl.classList.remove('hidden');
-    noResultsEl.classList.add('hidden');
-    bar.classList.add('hidden');
-    return;
-  }
-  emptyEl.classList.add('hidden');
-
-  if (items.length === 0) {
-    noResultsEl.classList.remove('hidden');
-    bar.classList.add('hidden');
-    return;
-  }
-  noResultsEl.classList.add('hidden');
-
-  bar.textContent = items.length + ' source' + (items.length !== 1 ? 's' : '') +
-    (analysisFilter !== 'All' ? ' \u00b7 ' + analysisFilter : '') +
-    (q ? ' matching "' + q + '"' : '');
-  bar.classList.remove('hidden');
-
-  // Update count label
-  const countLabel = document.getElementById('analysis-count-label');
-  if (countLabel) {
-    countLabel.textContent = items.length + ' source' + (items.length !== 1 ? 's' : '') +
-      (analysisFilter !== 'All' || q ? ' matching current filter' : ' in the reading list');
-  }
-
-  items.forEach(item => {
-    const typeClass = TYPE_CLASS[item.type] || 'type-post';
-    const dateStr = item.date ? new Date(item.date).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' }) : '';
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML =
-      '<div class="card-meta">' +
-        '<span class="type-badge ' + typeClass + '">' + esc(item.type || 'Post') + '</span>' +
-        (dateStr ? '<span class="card-date">' + dateStr + '</span>' : '') +
-      '</div>' +
-      '<a class="card-title" href="' + esc(item.url || '#') + '" target="_blank" rel="noopener">' + esc(item.title || 'Untitled') + '</a>' +
-      (item.description ? '<p class="card-desc">' + esc(item.description) + '</p>' : '') +
-      '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-top:4px">' +
-        (item.source ? '<div class="card-source">' + esc(item.source) + '</div>' : '') +
-        (Array.isArray(item.tags) && item.tags.length ? '<div class="card-tags">' + item.tags.map(t => '<span class="card-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>').join('') + '</div>' : '') +
-      '</div>';
-    grid.appendChild(card);
-  });
 }
 
 /* ---- NEWS ---- */
@@ -607,27 +519,27 @@ function renderNews() {
     return sort === 'oldest' ? da - db : db - da;
   });
 
-  const listEl = document.getElementById('news-list');
-  const emptyEl = document.getElementById('news-empty');
-  const noResultsEl = document.getElementById('news-no-results');
-  const bar = document.getElementById('news-results-bar');
+  const listEl    = document.getElementById('news-list');
+  const emptyEl   = document.getElementById('news-empty');
+  const noResEl   = document.getElementById('news-no-results');
+  const bar       = document.getElementById('news-results-bar');
 
   listEl.innerHTML = '';
 
   if (allNews.length === 0) {
     emptyEl.classList.remove('hidden');
-    noResultsEl.classList.add('hidden');
+    noResEl.classList.add('hidden');
     bar.classList.add('hidden');
     return;
   }
   emptyEl.classList.add('hidden');
 
   if (items.length === 0) {
-    noResultsEl.classList.remove('hidden');
+    noResEl.classList.remove('hidden');
     bar.classList.add('hidden');
     return;
   }
-  noResultsEl.classList.add('hidden');
+  noResEl.classList.add('hidden');
 
   bar.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '') +
     (newsFilter !== 'All' ? ' \u00b7 ' + newsFilter : '') +
@@ -635,11 +547,13 @@ function renderNews() {
   bar.classList.remove('hidden');
 
   items.forEach(item => {
-    const tags = Array.isArray(item.tags) ? item.tags : [];
+    const tags    = Array.isArray(item.tags) ? item.tags : [];
     const dateStr = item.date ? relativeDate(new Date(item.date)) : '';
-    const el = document.createElement('div');
-    el.className = 'news-item';
-    const tagsHtml = tags.map(t => '<span class="news-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>').join('');
+    const el      = document.createElement('div');
+    el.className  = 'news-item';
+    const tagsHtml = tags.map(t =>
+      '<span class="news-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>'
+    ).join('');
     el.innerHTML =
       '<div class="news-top">' +
         '<span class="news-source">' + esc(item.source || '') + '</span>' +

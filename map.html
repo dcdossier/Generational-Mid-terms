@@ -233,7 +233,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <span class="map-srch-ct" id="sen-srch-ct"></span>
   </div>
   <div class="d3-map-wrap"><svg id="senate-svg" viewBox="0 0 960 580" style="max-height:500px"></svg></div>
-  <div class="map-tip" id="map-tip"></div>
 
   <!-- DETAIL CARD -->
   <div class="detail-card" id="detail-card">
@@ -433,6 +432,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 </div>
 </div>
 
+<div class="map-tip" id="map-tip"></div>
 <script>
 Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
 Chart.defaults.color = '#6B6B6B';
@@ -455,6 +455,21 @@ const RC = {
   'Lean D':   { bg: '#8CB4E0', tx: '#001a3d', border: '#5890c8', short: 'D+',  order: 4 },
   'Likely D': { bg: '#378ADD', tx: '#fff',    border: '#1a5aaa', short: 'LD',  order: 5 },
   'Safe D':   { bg: '#1A3F8A', tx: '#fff',    border: '#0d2460', short: 'SD',  order: 6 },
+};
+
+// ── STATE ABBREVIATION → FULL NAME ───────────────────────────────────────────
+const ABBR_TO_STATE = {
+  AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',
+  CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',
+  HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',
+  KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',
+  MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',
+  MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',
+  NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',
+  OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',
+  SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',
+  VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',
+  DC:'District of Columbia'
 };
 
 // ── STATE GRID POSITIONS (col 1-12, row 1-7) ──────────────────────────────────
@@ -625,14 +640,14 @@ function buildSenateMap(races) {
   races.forEach(r => { _senRaceByState[r.state] = r; });
 
   fetchStatesGeo(gj => {
-    const proj = d3.geoAlbersUsa().scale(1280).translate([480,300]);
+    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
     _senSel = d3.select('#senate-svg')
       .selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_senRaceByState[d.properties.name] ? ' clickable' : ''))
-      .attr('d', pathGen)
+      .attr('d', d => pathGen(d) || '')
       .attr('fill', d => {
         const r = _senRaceByState[d.properties.name];
         if (!r) return '#E9E9E7';
@@ -648,10 +663,10 @@ function buildSenateMap(races) {
       .on('click', function(event,d) {
         const r = _senRaceByState[d.properties.name];
         if (!r) return;
-        if (_selSenPath) d3.select(_selSenPath).attr('stroke','#fff').attr('stroke-width',0.5);
+        if (_selSenPath) d3.select(_selSenPath).style('stroke','').style('stroke-width','');
         if (_selSenPath === this) { _selSenPath=null; closeDetail(); return; }
         _selSenPath = this;
-        d3.select(this).attr('stroke','#191919').attr('stroke-width',2.5);
+        d3.select(this).style('stroke','#191919').style('stroke-width','2.5px');
         showDetail(r);
       });
   });
@@ -677,7 +692,7 @@ function showDetail(race) {
 
 function closeDetail() {
   document.getElementById('detail-card').classList.remove('visible');
-  if (_selSenPath) { d3.select(_selSenPath).attr('stroke','#fff').attr('stroke-width',0.5); _selSenPath=null; }
+  if (_selSenPath) { d3.select(_selSenPath).style('stroke','').style('stroke-width',''); _selSenPath=null; }
 }
 
 function searchSenMap(q) {
@@ -780,14 +795,14 @@ function buildHouseDistrictMap(competitive) {
   competitive.forEach(r => { const k = districtKey(r.district); if (k) _houseRaceByKey[k] = r; });
 
   fetchDistrictsGeo(gj => {
-    const proj = d3.geoAlbersUsa().scale(1280).translate([480,300]);
+    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
     _houseSel = d3.select('#house-svg')
       .selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('class', d => 'd-path' + (_houseRaceByKey[d.properties.state+'_'+d.properties.district] ? ' clickable' : ''))
-      .attr('d', pathGen)
+      .attr('d', d => pathGen(d) || '')
       .attr('fill', d => {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
@@ -851,14 +866,14 @@ function buildGovMap(races) {
   races.forEach(r => { _govRaceByState[r.state] = r; });
 
   fetchStatesGeo(gj => {
-    const proj = d3.geoAlbersUsa().scale(1280).translate([480,300]);
+    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
     d3.select('#gov-svg')
       .selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_govRaceByState[d.properties.name] ? ' clickable' : ''))
-      .attr('d', pathGen)
+      .attr('d', d => pathGen(d) || '')
       .attr('fill', d => {
         const r = _govRaceByState[d.properties.name];
         if (!r) return '#E9E9E7';

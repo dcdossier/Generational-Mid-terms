@@ -1527,7 +1527,7 @@ function loadHouseMap() {
   if (houseMapLoaded) return;
   houseMapLoaded = true;
   const svg = d3.select('#house-map-svg');
-  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetchDistrictGeo(gj => {
@@ -1535,7 +1535,7 @@ function loadHouseMap() {
     _interestHouseSel = svg.selectAll('path')
       .data(gj.features)
       .join('path')
-      .attr('d', pathGen)
+      .attr('d', d => pathGen(d) || '')
       .attr('fill', d => {
         const key = d.properties.state + '_' + d.properties.district;
         const m = houseIdx[key];
@@ -1595,7 +1595,7 @@ function loadSenateMap() {
   if (senateMapLoaded) return;
   senateMapLoaded = true;
   const svg = d3.select('#senate-map-svg');
-  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetch('assets/us-states.json')
@@ -1605,7 +1605,7 @@ function loadSenateMap() {
       _interestSenateSel = svg.selectAll('path')
         .data(gj.features)
         .join('path')
-        .attr('d', pathGen)
+        .attr('d', d => pathGen(d) || '')
         .attr('fill', d => {
           const members = senateIdx[d.properties.name];
           if (!members || !members.length) return '#d1d5db';
@@ -1632,8 +1632,9 @@ function loadSenateMap() {
         });
     })
     .catch(err => {
+      senateMapLoaded = false;
       const el = document.getElementById('senate-map-loading');
-      if (el) el.textContent = 'Could not load Senate map.';
+      if (el) el.textContent = 'Could not load map — click "Senate Map" to retry.';
       console.error('Senate map error:', err);
     });
 }
@@ -1674,7 +1675,7 @@ function loadPresenceMap() {
   if (presenceMapLoaded) return;
   presenceMapLoaded = true;
   const svg = d3.select('#presence-map-svg');
-  const proj = d3.geoAlbersUsa().scale(1280).translate([480, 300]);
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetchDistrictGeo(gj => {
@@ -1682,7 +1683,7 @@ function loadPresenceMap() {
     _presenceSel = svg.selectAll('path')
       .data(gj.features)
       .join('path')
-      .attr('d', pathGen)
+      .attr('d', d => pathGen(d) || '')
       .attr('fill', d => {
         const key = d.properties.state + '_' + d.properties.district;
         return iaIdx[key] ? '#378ADD' : '#d1d5db';

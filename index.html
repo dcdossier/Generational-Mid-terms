@@ -403,6 +403,18 @@ body{background:#F5F5DC;color:#1E2232}
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
       </div>
 
+      <!-- CONGRESS APPROVAL CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval has fallen to <strong style="color:#9B2828">16%</strong> as of May 2026 &mdash; matching a near-record low. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup Congress &amp; Public Approval</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div style="position:relative;height:220px"><canvas id="c-home-congress-approval"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
+      </div>
+
       <!-- RETIREMENTS CHART -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
       <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
@@ -415,6 +427,19 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
         <div style="position:relative;height:280px"><canvas id="c-home-retirements"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
+      </div>
+
+      <!-- INFLATION CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px;margin-top:24px">Consumer Price Index &mdash; Inflation Trend</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the Consumer Price Index (All Items) and Core CPI (less food &amp; energy), Jan 2023 &ndash; Apr 2025. Inflation peaked at 6.4% in Jan 2023 and has decelerated toward the Fed&rsquo;s 2% target, though renewed tariff pressures in 2025 have created upward risk. Inflation is consistently a top-three voter concern and a key determinant of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Core CPI (ex. food &amp; energy)</span>
+          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-home-cpi"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. Year-over-year % change, Jan 2023 &ndash; Apr 2025.</div>
       </div>
 
       <!-- LATEST NEWS -->
@@ -709,6 +734,88 @@ async function loadHomeData() {
           ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,0.3)'; ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
           ctx.fillStyle = '#aaa'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('50%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // Congressional approval chart (Gallup data via data.json)
+  const caHistory = ca.history || [];
+  const caCvs = document.getElementById('c-home-congress-approval');
+  if (caHistory.length && caCvs) {
+    const caMonths     = caHistory.map(row => row.month);
+    const caApproval   = caHistory.map(row => row.approve);
+    const caDisapproval = caHistory.map(row => row.disapprove);
+    new Chart(caCvs, {
+      type: 'line',
+      data: { labels: caMonths, datasets: [
+        { label: 'Approve',    data: caApproval,    borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+        { label: 'Disapprove', data: caDisapproval, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: {
+            title: ctx => ctx[0].label,
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
+          }}
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+          y: { min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 20 } }
+        }
+      },
+      plugins: [{
+        id: 'caRef', afterDraw(ch) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = ch;
+          const yp = y.getPixelForValue(50);
+          ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,0.3)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = '#aaa'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('50%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
+  }
+
+  // CPI inflation chart (BLS data via data.json)
+  const cpiData    = (data.cpi || {}).history || [];
+  const cpiCvs     = document.getElementById('c-home-cpi');
+  if (cpiData.length && cpiCvs) {
+    const cpiMonths = cpiData.map(row => row.month);
+    const cpiAll    = cpiData.map(row => row.all_items);
+    const cpiCore   = cpiData.map(row => row.core);
+    new Chart(cpiCvs, {
+      type: 'line',
+      data: { labels: cpiMonths, datasets: [
+        { label: 'All Items CPI',            data: cpiAll,  borderColor: '#581845', backgroundColor: 'rgba(88,24,69,0.07)', pointBackgroundColor: '#581845', pointRadius: 3, pointBorderColor: '#fff', pointBorderWidth: 1, borderWidth: 2, tension: 0.35, fill: true },
+        { label: 'Core CPI (ex food/energy)', data: cpiCore, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.05)', pointBackgroundColor: '#378ADD', pointRadius: 3, pointBorderColor: '#fff', pointBorderWidth: 1, borderWidth: 2, tension: 0.35, fill: false }
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: {
+            title: ctx => ctx[0].label,
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
+          }}
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45, autoSkip: true, maxTicksLimit: 14 } },
+          y: { min: 0, max: 8, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 2 } }
+        }
+      },
+      plugins: [{
+        id: 'cpiTarget', afterDraw(ch) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = ch;
+          const yp = y.getPixelForValue(2);
+          ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(88,24,69,0.35)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = '#581845'; ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillText('Fed target 2%', right + 4, yp + 4);
           ctx.restore();
         }
       }]

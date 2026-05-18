@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-05-17T18:58:14.727Z",
+    "last_updated": "2026-05-17T09:05:57.889Z",
     "election_date": "2026-11-03",
     "forecaster_consensus": {
       "last_updated": "2026-05-17",
@@ -13,8 +13,8 @@
           "Inside Elections"
         ],
         "summary": "D need +5 net seats; 22 toss-ups are decisive",
-        "projected_r": "220–230",
-        "projected_d": "205–215"
+        "projected_r": "220\u2013230",
+        "projected_d": "205\u2013215"
       },
       "senate": {
         "rating": "Likely R Hold",
@@ -25,8 +25,8 @@
           "Inside Elections"
         ],
         "summary": "D need to flip 4 R seats on tough Class II map",
-        "projected_r": "51–54",
-        "projected_d": "46–49"
+        "projected_r": "51\u201354",
+        "projected_d": "46\u201349"
       },
       "governors": {
         "rating": "4 Toss-ups",
@@ -36,8 +36,8 @@
           "Sabato's Crystal Ball"
         ],
         "summary": "ME, MI, NV, WI all genuine toss-ups",
-        "projected_r": "25–28",
-        "projected_d": "22–25"
+        "projected_r": "25\u201328",
+        "projected_d": "22\u201325"
       }
     }
   },
@@ -69,7 +69,7 @@
       ],
       "datasets": [
         {
-          "label": "Rep–retiring",
+          "label": "Rep\u2013retiring",
           "data": [
             19,
             0,
@@ -80,7 +80,7 @@
           "stack": "rep"
         },
         {
-          "label": "Rep–seeking",
+          "label": "Rep\u2013seeking",
           "data": [
             0,
             10,
@@ -91,7 +91,7 @@
           "stack": "rep"
         },
         {
-          "label": "Dem–retiring",
+          "label": "Dem\u2013retiring",
           "data": [
             14,
             0,
@@ -102,7 +102,7 @@
           "stack": "dem"
         },
         {
-          "label": "Dem–seeking",
+          "label": "Dem\u2013seeking",
           "data": [
             0,
             4,
@@ -141,8 +141,8 @@
         "color": "#1A5EA8",
         "party": "Democrat",
         "ideology": "Progressive Caucus / Squad-adjacent. Left-leaning on economy, climate, healthcare. Many are senior members passing torch to younger generation.",
-        "exit": "Retiring (7) · Senate (1) · Other (1)",
-        "members": "Pelosi, Schakowsky, Velázquez, Watson Coleman, Chuy García, Danny Davis, Dwight Evans, Crockett (Senate)",
+        "exit": "Retiring (7) \u00b7 Senate (1) \u00b7 Other (1)",
+        "members": "Pelosi, Schakowsky, Vel\u00e1zquez, Watson Coleman, Chuy Garc\u00eda, Danny Davis, Dwight Evans, Crockett (Senate)",
         "ret": 7,
         "gov": 0,
         "sen": 1,
@@ -154,7 +154,7 @@
         "color": "#5B8FD4",
         "party": "Democrat",
         "ideology": "Establishment centre-left / New Democrat Coalition / Blue Dogs. Centrist, pro-institution. Many leaving due to redistricting or declining appeal.",
-        "exit": "Retiring (8) · Senate (4) · Governor (1)",
+        "exit": "Retiring (8) \u00b7 Senate (4) \u00b7 Governor (1)",
         "members": "Steny Hoyer, Jared Golden, Julia Brownley, Marc Veasey, Lloyd Doggett; Moulton, Haley Stevens, Pappas, Angie Craig (Senate); Swalwell (Gov, withdrew)",
         "ret": 8,
         "gov": 1,
@@ -167,7 +167,7 @@
         "color": "#C04040",
         "party": "Republican",
         "ideology": "Trump loyalists / Freedom Caucus. Strong executive power, nationalism. Leaving partly due to frustration that Trump agenda is stalled in Congress.",
-        "exit": "Retiring (4) · Governor (4) · Senate (3) · AG (1)",
+        "exit": "Retiring (4) \u00b7 Governor (4) \u00b7 Senate (3) \u00b7 AG (1)",
         "members": "Barry Loudermilk, Sam Graves, Ryan Zinke, Neal Dunn (retiring); Andy Biggs (Gov-AZ), Barry Moore (Senate-AL), Nehls, Buddy Carter (Senate-GA)",
         "ret": 4,
         "gov": 4,
@@ -180,7 +180,7 @@
         "color": "#A03020",
         "party": "Republican",
         "ideology": "Pro-Trump but not Freedom Caucus. Support Trump agenda but outside hardline faction. Many seeking other offices to extend Trump-aligned agenda at state level.",
-        "exit": "Retiring (3) · Governor (4) · Senate (3)",
+        "exit": "Retiring (3) \u00b7 Governor (4) \u00b7 Senate (3)",
         "members": "Byron Donalds (Gov-FL), Nancy Mace (Gov-SC), Harriet Hageman (Senate-WY), Ashley Hinson (Senate-IA), Julia Letlow (Senate-LA), Kevin Hern (Senate-OK)",
         "ret": 3,
         "gov": 4,
@@ -193,7 +193,7 @@
         "color": "#9B2828",
         "party": "Republican",
         "ideology": "Traditional establishment Republicans. Supports institutions, free trade, NATO. Often at odds with MAGA wing. Many are committee chairs stepping back.",
-        "exit": "Retiring (9) · Governor (2) · Senate (3)",
+        "exit": "Retiring (9) \u00b7 Governor (2) \u00b7 Senate (3)",
         "members": "Elise Stefanik, Don Bacon, Darrell Issa, Buchanan, Mark Amodei, Daniel Webster, Burgess Owens, Jodey Arrington, McCaul, Newhouse",
         "ret": 9,
         "gov": 2,
@@ -1080,9 +1080,9 @@
       ]
     },
     "congress": {
-      "approve": 11,
+      "approve": 12,
       "disapprove": 86,
-      "trend": -5,
+      "trend": -4,
       "history": [
         {
           "month": "Jan 2025",
@@ -1116,7 +1116,7 @@
         },
         {
           "month": "May 2026",
-          "approve": 11,
+          "approve": 12,
           "disapprove": 86
         }
       ]
@@ -1133,7 +1133,7 @@
   "generic_ballot": {
     "democrat": 43,
     "republican": 47,
-    "trend_d": 0,
+    "trend_d": -13.5,
     "trend_r": 0,
     "undecided": 9,
     "history": [
@@ -1339,7 +1339,7 @@
           "retirement_exposure": 5,
           "seats_at_risk": 8,
           "midterm_outlook": "mixed",
-          "outlook_label": "Mixed — leverages slim majority; suburban exposure",
+          "outlook_label": "Mixed \u2014 leverages slim majority; suburban exposure",
           "key_issues": [
             "Immigration",
             "Spending cuts",
@@ -1353,7 +1353,7 @@
           "color": "#D4504A",
           "influence": "Very High",
           "leader": "Richard Hudson (NC)",
-          "ideology": "Broad conservative umbrella — largest House caucus. Pushes right-of-centre legislative agenda.",
+          "ideology": "Broad conservative umbrella \u2014 largest House caucus. Pushes right-of-centre legislative agenda.",
           "unity_score": 89,
           "retirement_exposure": 18,
           "seats_at_risk": 22,
@@ -1396,7 +1396,7 @@
           "retirement_exposure": 4,
           "seats_at_risk": 11,
           "midterm_outlook": "negative",
-          "outlook_label": "High exposure — most seats competitive (PVI R+0 to R+3)",
+          "outlook_label": "High exposure \u2014 most seats competitive (PVI R+0 to R+3)",
           "key_issues": [
             "Infrastructure",
             "Healthcare",
@@ -1436,7 +1436,7 @@
           "retirement_exposure": 14,
           "seats_at_risk": 18,
           "midterm_outlook": "mixed",
-          "outlook_label": "Key battleground — holds most swing-district D seats",
+          "outlook_label": "Key battleground \u2014 holds most swing-district D seats",
           "key_issues": [
             "Tech regulation",
             "Trade",
@@ -1455,7 +1455,7 @@
           "retirement_exposure": 3,
           "seats_at_risk": 5,
           "midterm_outlook": "negative",
-          "outlook_label": "Diminishing — caucus shrinking with each election cycle",
+          "outlook_label": "Diminishing \u2014 caucus shrinking with each election cycle",
           "key_issues": [
             "Deficit reduction",
             "Rural issues",
@@ -1474,7 +1474,7 @@
           "retirement_exposure": 5,
           "seats_at_risk": 9,
           "midterm_outlook": "positive",
-          "outlook_label": "Mixed — suburban districts trended blue in 2024",
+          "outlook_label": "Mixed \u2014 suburban districts trended blue in 2024",
           "key_issues": [
             "Infrastructure",
             "Healthcare",
@@ -1493,7 +1493,7 @@
           "retirement_exposure": 1,
           "seats_at_risk": 2,
           "midterm_outlook": "positive",
-          "outlook_label": "Safe — focus on expanding progressive wing nationally",
+          "outlook_label": "Safe \u2014 focus on expanding progressive wing nationally",
           "key_issues": [
             "Medicare for All",
             "Climate",
@@ -1523,7 +1523,7 @@
           "members": 3,
           "color": "#E08070",
           "leader": "Susan Collins (ME)",
-          "note": "Occasional swing votes — critical on judicial nominees and social riders"
+          "note": "Occasional swing votes \u2014 critical on judicial nominees and social riders"
         }
       ],
       "democrat": [
@@ -1648,273 +1648,7 @@
   },
   "news": [
     {
-      "title": "Budget conference: House, Senate disagree on earplugs earmark for police hearing protection",
-      "url": "https://floridapolitics.com/archives/796894-budget-conference-house-senate-disagree-on-earplugs-earmark-for-police-hearing-protection/",
-      "source": "Florida Politics",
-      "date": "2026-05-17T22:00:03.000Z",
-      "tags": [
-        "House",
-        "Senate"
-      ],
-      "description": "The Senate has so far declined to match the House’s proposed $2 million allocation for the equipment. \nThe post Budget conference: House, Senate disagree on earplugs earmark for police hearing protection appeared first on Florida Politics - Campaigns & Elections. Lobbying & Gover"
-    },
-    {
-      "title": "Tennesse Dem Steve Cohen tears up on air after redistricting destroys his reelection bid - nypost.com",
-      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOODRHX2VsRVJUc2hjSi1DZnV5YUtHWVliYUNTVFRicjhYYjVjMnBYUzdOQ2xJYU1DRjBOWUNOWjJMVXpLbnJvaWs3NnlkMWNFOEhFcEZMTWNiNUs2ZFZCUkJYd3JSTEV3TFFPUHJUTUIwLWZpdlpCQlBBNGV6aVVuUU5IVExSNGNzMlloWXlPMTZOY3VlZzBhRDdlaUZUWGJVZWNsb01OTjNyZXNuVmpMUW9Uc0d2N3lKVl9ZR2RwSmdtUGtxQnc?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T21:28:00.000Z",
-      "tags": [
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "Tennesse Dem Steve Cohen tears up on air after redistricting destroys his reelection bid  nypost.com"
-    },
-    {
-      "title": "Primary care is the front door to good health. It shouldn’t be the hardest door to open. &#124; Opinion",
-      "url": "https://www.pressherald.com/2026/05/17/primary-care-is-the-front-door-to-good-health-it-shouldnt-be-the-hardest-door-to-open-opinion/",
-      "source": "Portland Press Herald",
-      "date": "2026-05-17T21:15:00.000Z",
-      "tags": [
-        "Primary"
-      ],
-      "description": "Urgent care, never meant to serve as a replacement, can be part of the solution for Maine patients in need."
-    },
-    {
-      "title": "White House: China to buy at least $17B in US agricultural products per year",
-      "url": "https://thehill.com/business/5882365-china-us-trade-agreement/",
-      "source": "The Hill",
-      "date": "2026-05-17T21:07:44.000Z",
-      "tags": [
-        "House",
-        "Senate",
-        "Federal"
-      ],
-      "description": "The White House said Sunday that China is set to purchase at least $17 billion in agricultural products from the U.S. per year, a move that comes after President Trump’s recent China trip. In a fact sheet released Sunday, the White House said that Trump, while in China, “negotiat"
-    },
-    {
-      "title": "GOP lawmakers battle as conservatives press for third budget reconciliation bill",
-      "url": "https://thehill.com/homenews/house/5880546-gop-reconciliation-bill-pentagon-fraud/",
-      "source": "The Hill",
-      "date": "2026-05-17T21:00:00.000Z",
-      "tags": [
-        "House",
-        "Federal"
-      ],
-      "description": "Conservatives are calling on the House to pass a third GOP-only bill through the special reconciliation process to boost Pentagon funding and address alleged fraud in federal programs by the August recess — an extremely aggressive timeline that is sure to face headwinds in the sl"
-    },
-    {
-      "title": "All three branches of government should have a stock trading ban: House Republican",
-      "url": "https://thehill.com/homenews/house/5882338-congress-stock-trading-ban/",
-      "source": "The Hill",
-      "date": "2026-05-17T20:30:09.000Z",
-      "tags": [
-        "House",
-        "Federal"
-      ],
-      "description": "Rep. Marlin Stutzman (R-Ind.) on Sunday said that all three branches of government should be subject to a stock trading ban “sooner rather than later,” echoing some colleagues on the other side of the aisle. “One of the things that I think is important for members of Congress is "
-    },
-    {
-      "title": "Kentucky U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPckdfSE1VUG5vQjA1S0RkeExWUU5IU2xzMEsxcWNBNzRvYVdqMWlOODVvRno0Sk9pNW9tUHFFS3A4b0ZtSDZhaFhZbG9YQ0pEc2F2ZzFoZEo3VThlNW8zczM0QWFsaDlpSmRuU1lPRFM5YkF0RmlKLVJsVnZVTGcwY3Izc3J0UFFGQWk1a0JB?oc=5",
-      "source": "Emerson (AZ)",
-      "date": "2026-05-17T20:03:42.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Kentucky U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Thousands gather on National Mall in Washington DC for daylong prayer rally",
-      "url": "https://www.theguardian.com/us-news/2026/may/17/dc-national-mall-prayer-rally",
-      "source": "The Guardian",
-      "date": "2026-05-17T19:47:23.000Z",
-      "tags": [
-        "House",
-        "Federal"
-      ],
-      "description": "White House-backed event billed as ‘One Nation Under God’ criticized for blurring lines between church and stateThousands of people streamed on to the National Mall for a daylong prayer rally on Sunday billed as a “rededication of our country as One Nation Under God”.Against the "
-    },
-    {
-      "title": "Washington, D.C. Mayoral Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOM2NFdzdNZkJtaTQ3cHlhQ0t1TmlaOGtPWFRLVjVhQzdZR0FRM2R1cHhsd3lna25zdkFVdHQ3cDAzTTY2bHMySkdqcm9MYnc0Z2pId2xfM1p5d1FTNm5Pd3FDTl9BMmdrOHVRRWxuazJNdXduVGNkY2VEMkhNNm8yMWNlTVpYaXdISEU1MU1zUQ?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T19:21:05.000Z",
-      "tags": [],
-      "description": "Washington, D.C. Mayoral Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "One clinic tracks the heavy toll Trump&#039;s immigration crackdown takes on mental health",
-      "url": "https://www.gpb.org/news/2026/05/17/one-clinic-tracks-the-heavy-toll-trumps-immigration-crackdown-takes-on-mental",
-      "source": "GPB News",
-      "date": "2026-05-17T18:33:40.000Z",
-      "tags": [
-        "Senate",
-        "Primary"
-      ],
-      "description": "Zocalo Health, a primary care organization, screens all its patients for depression, anxiety and suicidal thoughts. It documented a marked increase in those conditions since ICE enforcement actions began."
-    },
-    {
-      "title": "New Jersey 12th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPQ1hEczR6dTJQTjNOTVdNNUtuQmNJeDhNMlFwZ1h4cnFaMzZ1VDdEUjZvTlYweEV1ME92cVBqZGI1Smxob09aRjBFMjNzMnhWNF9XRnNJMnA3TzJpWkNnU2RzcVdnMWJFSDNJWUlHTDJNeWxqZGh4OTFXeVRpWVFzdktBMGViYjQ?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T17:46:28.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "New Jersey 12th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Nebraska U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQai04b2VObzBCUm05bjZ0NHNWY1YxbXlPR0t6cktsdkRaeUpRaHVBbzVsc2xILU1fRTNQY0xvT01SalZNQU9LTDQ0bVBLbnF6aGg0VUxXa0hPSG1NdGd5UWZOWUVhUjhqRXdQU2tEWnhIcWNQYm4tNWR1eHotczVvQmFUejZJbTFpR3NCdUhR?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T17:35:01.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Nebraska U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Trump attacks Massie as Republican critic describes ‘desperate’ attempts to oust him from primary",
-      "url": "https://www.theguardian.com/us-news/2026/may/17/trump-thomas-massie-primary",
-      "source": "The Guardian",
-      "date": "2026-05-17T17:27:19.000Z",
-      "tags": [
-        "Federal",
-        "Primary"
-      ],
-      "description": "US president writes ‘vote the bum out’ as congressman faces close race against Trump-endorsed RepublicanWith two days to go before the next big test of Donald Trump’s iron grip over his party, the president went head-to-head on Sunday with his nemesis, Thomas Massie the Kentucky "
-    },
-    {
-      "title": "Texas 18th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOa1o4TWZETjB0dHNPbFp2MU5iMXRxQk1xZl91ZmdmdXRWQjh4Zm9UTHNxQjZCbS1HMXBlS1c2Yk5SZm9yb1BVYkZRS214clNTWVFjckV5aFV6R3JHRVdsLVNfQ3lmSnBwLWY0N0hjTzBPZk5DU1RTN2dwQ3gwVk9oUQ?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T16:29:28.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Texas 18th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Bus riders to Montgomery retrace old steps while fighting a new fight",
-      "url": "https://www.gpb.org/news/2026/05/17/bus-riders-montgomery-retrace-old-steps-while-fighting-new-fight",
-      "source": "GPB News",
-      "date": "2026-05-17T16:21:03.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Thousands of people rallied Saturday in Montgomery, Alabama, to push back against conservative states' efforts to dismantle congressional districts that helped secure Black political representation."
-    },
-    {
-      "title": "Johnson underscores concern about gas prices as midterms approach",
-      "url": "https://thehill.com/homenews/house/5882077-johnson-gas-prices-midterms/",
-      "source": "The Hill",
-      "date": "2026-05-17T16:05:19.000Z",
-      "tags": [
-        "House"
-      ],
-      "description": "House Speaker Mike Johnson (R-La.) on Sunday reiterated his concerns about high gas prices as the GOP looks to hang on to its slim majority in the lower chamber this November. Since the war in Iran began in late February, gas prices have skyrocketed, with Tehran effectively closi"
-    },
-    {
-      "title": "California Third Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNS3JSQ0hwUVJqb3k1dEZyUHFLUEJNaDJiWThHSHN3TldBSTNTa2V0Rmp5b1RNSVFaMXcyLWZZdWNfenplQkJFMUFSUlh1Uk14ME9yNy1JQXpHMzFWRmtxTFVTYVNNcTBaYl9acm1ub3NLVXJCVkhKLW1Fa3lMVm4zUDVYdnJ0QQ?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T16:00:17.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "California Third Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Trump, GOP make midterm appeal to farmers with China deal, farm bill",
-      "url": "https://thehill.com/homenews/state-watch/5880642-farmers-trade-deal-trump-china/",
-      "source": "The Hill",
-      "date": "2026-05-17T16:00:00.000Z",
-      "tags": [
-        "House",
-        "Senate",
-        "Federal"
-      ],
-      "description": "The Trump administration and GOP lawmakers are seeking to win over U.S. farmers, a core constituency for the president during his 2016 and 2024 White House wins that has been aggravated by rising prices caused by his trade policies and the Iran war. Ahead of a midterm election se"
-    },
-    {
-      "title": "Do midterm redistricting efforts favor Republicans? - The Center Square",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQa0I4NEs4VFZwaVpVSXJGQ0lhYVFCNEgxNmdISHpTU1I5a1BvenZDeE9hM1NWMFAxRklfV2FnTVhrSDhpRThPX3FyQ25qWHVIRVlXclRHU25EQUl4SkhzRE1nYi0wRnhxLUI1bGNMX0NldWNvNndGX25mQmxRTVZ5V05udUNqWWI2Z0Z1OGdVVWhFVVF60gGaAUFVX3lxTFBYVkR0UWlQdlBFUGNBMVdjRksya2hPUXhCajczREtzUFRUQ3RaamFRclkybmR4RjFrMlRuNGJMY2FZRmhCWWFQbGx5Qm5nM19IVkFQOW9WZjRsNlBOcmpHYXhTUDFyRFJTRzNrVFp4ZThtRm9HdG5UZV9fOE1UN2RmYnVjN0dhRHVNMi1vODZxRVJWR0xMT3FRQ2c?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T15:55:00.000Z",
-      "tags": [
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "Do midterm redistricting efforts favor Republicans?  The Center Square"
-    },
-    {
-      "title": "Texas 15th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOM1pBV3hQd0RyNElpT1I3X3lfN3ZudExnYThDMzR3a0dzcThpQ095azdpTnZTb0R3Z2YwT25TRjF5M0xyT25PRkNWVzM2NGprMUtHRG5xcHZoS0ZkZVdxMkJxTmRzZTFLampOV0NpcWZVNVdncFpqcnp6dk5PdkMyVg?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T15:50:31.000Z",
-      "tags": [
-        "Federal",
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "Texas 15th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Florida U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxORGtrZEJCdkhXejNsdlFyVUJxcTRjcTQtQWlMUGQxQVc5UnhFWEpYR19GN0VyaE5YNEtzQzd5Tmh4V1RhUjlXVmw2dk9pTG5FQ3JLWk15VFVteGYxNkFQUnpaWWN4RVlILTNna1BDLXhpYzNQSVktbUZpeUNPb0Q3MXI0RGxad3ZMTUtVYw?oc=5",
-      "source": "Stetson Poll (FL)",
-      "date": "2026-05-17T15:43:31.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Florida U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Senate parliamentarian deals blow to $1 billion security proposal for White House",
-      "url": "https://www.post-gazette.com/news/politics-nation/2026/05/17/white-house-ballroom-funding-senate-parliamentarian/stories/202605170097",
-      "source": "Pittsburgh Post-Gazette",
-      "date": "2026-05-17T15:37:40.000Z",
-      "tags": [
-        "House",
-        "Senate",
-        "Federal"
-      ],
-      "description": ""
-    },
-    {
-      "title": "Illinois Ninth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNT3hVTzJOWk9kejA3RURvWjE3M2lWbWVkN09fS0V2SG9mbVhxVllhUzhKdWNVOUVGVjdXYjJIRTBqYndBUzJFcVMxOWJhMUNLREJrSU91N21VRklrdWpUOExPRUxrczA4cTVGdmF6U3pHNUtBajJaNU0wQzR0Z0Y4N2xEaw?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T15:35:07.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Illinois Ninth Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Sen. Cassidy knocked out of Louisiana Republican primary as Trump-backed Letlow, Fleming make runoff - AP News",
-      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPczlUZS1fZTYwUFQyM05PV29KNGJYYzItdFVzRWxuZExHeV9lTXVrdHBqdEFsUVBBOWNLaHlYMUFad1FlUU5YZGNpNVI0U1ptUkhCUVJtQVNVSlFJQThMMi1rcHRudlB3WVhJYmVnNzlIeF83b2F1ZVlJMENfdXdMLUV3cFZ5bVVucGFmT05ycmlISlZwMHFrZnFKcWFMVTB4SVg3cmRWSEwtTnN2T1FzYTVnOFdFQQ?oc=5",
-      "source": "AP News",
-      "date": "2026-05-17T14:50:00.000Z",
-      "tags": [
-        "Primary"
-      ],
-      "description": "Sen. Cassidy knocked out of Louisiana Republican primary as Trump-backed Letlow, Fleming make runoff  AP News"
-    },
-    {
-      "title": "Iowa Down Ballot: U.S. Senate Ds debate, GOP governors&#8217; preview",
-      "url": "https://iowacapitaldispatch.com/2026/05/17/iowa-down-ballot-u-s-senate-ds-debate-gop-governors-preview/",
-      "source": "Iowa Capital Dispatch",
-      "date": "2026-05-17T13:55:59.000Z",
-      "tags": [
-        "Senate",
-        "Governorship",
-        "Primary"
-      ],
-      "description": "Iowa Down Ballot with Dave Price 5/16/26 by Iowa Writers Collaborative Laura Belin of Bleeding Heartland and Kathie Obradovich of Iowa Capital Dispatch are back to help recap the Democratic Senate primary debate and preview the GOP Gubernatorial debate. Read on Substack The Democ"
-    },
-    {
-      "title": "Senate parliamentarian rules against Trump’s White House ballroom funding in budget bill",
+      "title": "Senate parliamentarian rules against Trump\u2019s White House ballroom funding in budget bill",
       "url": "https://thehill.com/homenews/senate/5882011-senate-parliamentarian-rejects-trump-white-house-ballroom-funding/",
       "source": "The Hill (Senate)",
       "date": "2026-05-17T13:31:59.000Z",
@@ -1923,37 +1657,7 @@
         "Senate",
         "Federal"
       ],
-      "description": "The Senate parliamentarian late Saturday ruled against the $1 billion provision intended to fund President Trump’s White House ballroom in the budget reconciliation package. The guidance, according to Sen. Jeff Merkley (D-Ore.) who serves as the ranking member of the Senate Budge"
-    },
-    {
-      "title": "2026 Midterm Primary Election Calendar - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNZGNpVG94WTFTeEtVaGJwSEZEMEQ2UEpSS1pJd2p4R3FkRVBwVU9vOUFnSmxRMkNQRHd6eUxJeXFPZjZYdVlCc2tjS1ZsWTNRN2thOEZQWmxYN2VtUDFHZTNQaXlRTzFOZC1VV0JIVThnbk5PQlhZN0RNZG9URVpwY2E5cUJsQzRF?oc=5",
-      "source": "Quinnipiac (GA)",
-      "date": "2026-05-17T12:35:07.000Z",
-      "tags": [
-        "Primary"
-      ],
-      "description": "2026 Midterm Primary Election Calendar  The New York Times"
-    },
-    {
-      "title": "New Mexico U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPRjZ4N2RGYUZ3Tm1hU3dUdzVNQm00S29wT2lNMWlIVGNTbGVpQXZNckhwMGllLXBjMXNSel9hSUpEb24tRjhVYmJqTzhlSExNS2NXVS1XX2MtQWFsb1BoYTk0UktvaklzYjl5c0tLd2g4a1A2LTNBeFAtZUJSTy1kX2wxYy1wUTBldS1xVHB3X3E?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T12:25:14.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "New Mexico U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Texas Governor Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVVRSQVJ4aDZHaktLVThoTXRuTnBIZEZEeFR5c0NkZnNycjNHM2VBbUt4UHRfZW8xQ3pkVnVMTmI1LVB5c1U2X1NqdEE0dzVKT3l4Rk1Tbk1YZ0lfR1ZEaF9jbHlLZXJqNkhqbGd0X2Y5SXJHRHY4TnlmQUxLa0FaSWtjV1VoQmtr?oc=5",
-      "source": "UT Texas Politics Poll",
-      "date": "2026-05-17T12:23:09.000Z",
-      "tags": [
-        "Governorship"
-      ],
-      "description": "Texas Governor Election 2026: Latest Polls  The New York Times"
+      "description": "The Senate parliamentarian late Saturday ruled against the $1 billion provision intended to fund President Trump\u2019s White House ballroom in the budget reconciliation package. The guidance, according to Sen. Jeff Merkley (D-Ore.) who serves as the ranking member of the Senate Budge"
     },
     {
       "title": "Donald Trump administration promotes program to check voter eligibility. Critics fear a midterm purge",
@@ -1975,42 +1679,10 @@
         "Federal",
         "Primary"
       ],
-      "description": "President Trump has turned his eye toward Rep. Thomas Massie (R-Ky.) ahead of the lawmaker&#8217;s Tuesday primary after leading efforts to eject Sen. Bill Cassidy (R-La.) from his seat. “Tom Massie of Kentucky, the worst and most unreliable Republican Congressman in the history "
+      "description": "President Trump has turned his eye toward Rep. Thomas Massie (R-Ky.) ahead of the lawmaker&#8217;s Tuesday primary after leading efforts to eject Sen. Bill Cassidy (R-La.) from his seat. \u201cTom Massie of Kentucky, the worst and most unreliable Republican Congressman in the history "
     },
     {
-      "title": "California 40th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOamdYcWpUeENlcU81V1EzMHJjQ0xqWG8yaUpPWjZxdTlVN3d6aFhLalFXSHZ4LWNJX1JpMV8tcmhBRmg3QVIwM2dqUTJtaS1sM3FTWm5rLTVVazNmeWdOdWE1R19saE5HNEdiTGJzLW55Q0R0MzlBbXlBdUlaVDh5V3JSRENQelE?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T12:15:05.000Z",
-      "tags": [
-        "Federal",
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "California 40th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "New Jersey 11th Congressional District Special Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPakFIT2I4RGw1cTdhTlF4WVM1bnBySmhxRkdickJyUFlhN01aVG1jOXRmLWhIeEhJcEpXYWY5bGE5SU93YXkzYWNPSlZNalFBMVd0WFg5UVRJUEZsVmhxcWJUb2llbUwwdTdoTmVPX2V2UXZYanpFNFpRSXJKWXRWOVRFcDNiSnk0dW8yUlRhQWhydw?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T12:05:02.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "New Jersey 11th Congressional District Special Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Arkansas U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSVp4aWJvcE1sOWl3c01ldUVoUmJJUmRNZFRDTmNpQWt2dmRZVHJ5YUlscUo4eWtfM2JOeEcwX3R2WDJQNF8yNjZFNWJxcFc3NS1lMmp1WmFwVVhHWlh2OVJ2LV9JeGFFblZhTlVTaWVzLTBjYW53cXJSdzNZOTZSTnVLbUpBOUxkck5Nampn?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T12:04:52.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Arkansas U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "‘Jim Crow 2.0’: South Carolina’s Republicans move to oust state’s only Black congressman since 1897",
+      "title": "\u2018Jim Crow 2.0\u2019: South Carolina\u2019s Republicans move to oust state\u2019s only Black congressman since 1897",
       "url": "https://www.theguardian.com/us-news/2026/may/17/james-clyburn-south-carolina-redistricting",
       "source": "The Guardian",
       "date": "2026-05-17T12:00:38.000Z",
@@ -2018,7 +1690,7 @@
         "House",
         "Federal"
       ],
-      "description": "James Clyburn could now find his district dismantled after supreme court effectively gutted Voting Rights ActSouth Carolina has had exactly one Black representative in Congress since 1897: James Clyburn. A proposal to redraw the state’s political map would dismantle the district "
+      "description": "James Clyburn could now find his district dismantled after supreme court effectively gutted Voting Rights ActSouth Carolina has had exactly one Black representative in Congress since 1897: James Clyburn. A proposal to redraw the state\u2019s political map would dismantle the district "
     },
     {
       "title": "Editorial cartoons for May 17, 2026: Trump in China, Iran war effects, redistricting moves",
@@ -2030,16 +1702,6 @@
         "Redistricting"
       ],
       "description": "The week in visual commentary."
-    },
-    {
-      "title": "Illinois U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNV1pqd1ktWHFTVnJLSHRrX0Z0cC05T3lfTGJtS21SbVNjQk00TDVjcHc5blBUeWRMTmNkV2Z1ZDhxXy0yMDllaDYyNXZFVFhIX0owaFRrdXRpd0pLa0puSjFPcV9OSDhSSGpORUc0R3JmZWpQeTNOQkIxRXBLaXMxV2w4dk9meWRqcGMzaHd3?oc=5",
-      "source": "Emerson (CO)",
-      "date": "2026-05-17T11:53:18.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Illinois U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
       "title": "2028 Republican Presidential Primary: Latest Polls - The New York Times",
@@ -2062,17 +1724,6 @@
       "description": "Trump administration promote program to check voter eligibility. Critics fear a midterm purge  AP News"
     },
     {
-      "title": "Shaikin: Hey, young athletes: Would you trust this former Dodgers pitcher to manage your money?",
-      "url": "https://www.latimes.com/sports/dodgers/story/2026-05-17/dodgers-ross-stripling-manage-your-money",
-      "source": "Los Angeles Times",
-      "date": "2026-05-17T11:00:00.000Z",
-      "tags": [
-        "Major Update",
-        "Senate"
-      ],
-      "description": "Five years ago, former Dodgers pitcher Ross Stripling co-founded a financial services company. Nearly two years into retirement, Stripling is eager to help young players."
-    },
-    {
       "title": "At convention, Wisconsin Republicans say midterms could turn state into Minnesota",
       "url": "https://wisconsinexaminer.com/2026/05/17/at-convention-wisconsin-republicans-say-midterms-could-turn-state-into-minnesota/",
       "source": "Wisconsin Examiner",
@@ -2080,7 +1731,7 @@
       "tags": [
         "Governorship"
       ],
-      "description": "At the Wisconsin Republican Party convention at Kalahari in Wisconsin Dells Saturday, elected officials, party leaders and former governors repeatedly warned that if Democrats do well in this year’s midterm elections they will turn the state into its more liberal neighbor of Minn"
+      "description": "At the Wisconsin Republican Party convention at Kalahari in Wisconsin Dells Saturday, elected officials, party leaders and former governors repeatedly warned that if Democrats do well in this year\u2019s midterm elections they will turn the state into its more liberal neighbor of Minn"
     },
     {
       "title": "Trump&#8217;s grip on GOP lawmakers shows signs of slipping amid election year",
@@ -2090,7 +1741,7 @@
       "tags": [
         "Federal"
       ],
-      "description": "President Trump’s ironclad grip on Congress is beginning to show signs of strain, as Republicans increasingly break from him in major legislative fights and seek to push their own priorities instead. While Trump still commands significant influence within the party, a growing num"
+      "description": "President Trump\u2019s ironclad grip on Congress is beginning to show signs of strain, as Republicans increasingly break from him in major legislative fights and seek to push their own priorities instead. While Trump still commands significant influence within the party, a growing num"
     },
     {
       "title": "Black Democrats accuse Republicans of using redistricting to create &#8216;Jim Crow 2.0&#8217;",
@@ -2106,17 +1757,7 @@
       "description": "Black Democrats on Capitol Hill are up in arms over the GOP effort to purge Congress of minority districts, accusing Republicans of silencing Black voters and, in the process, undermining decades of civil rights advancements. Many are framing the debate in existential terms, warn"
     },
     {
-      "title": "What to watch for in Kentucky’s 2026 primary elections - Washington Examiner",
-      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPdm5zeTRLT3ZBaWlJMVVKUHpGUXllR3poUUU2UDl4Y1prT25pbDFNZEdRNEE2Wk1RUE9tS2x2ODZUYks4SnVfd3VSXzFWSlFUWTVDcHNiYmdOR1B5OFRxUE1wcml4dlpKa2kzcFhMREV0b3ZrVjN6b2RXZVh3NE52MTFiLVFVdTVJUXZ1alJUdkMzSDBvV3k5SDY0NHA0UHRDNTZCWDRHM0N1WFNpZ2tZRngxNEtjTDFNakE?oc=5",
-      "source": "Emerson (WA)",
-      "date": "2026-05-17T10:00:00.000Z",
-      "tags": [
-        "Primary"
-      ],
-      "description": "What to watch for in Kentucky’s 2026 primary elections  Washington Examiner"
-    },
-    {
-      "title": "Court ruling didn’t harm minority voting rights: Ted Diadiun",
+      "title": "Court ruling didn\u2019t harm minority voting rights: Ted Diadiun",
       "url": "https://www.cleveland.com/opinion/2026/05/court-ruling-didnt-harm-minority-voting-rights-ted-diadiun.html",
       "source": "Cleveland Plain Dealer",
       "date": "2026-05-17T09:49:00.000Z",
@@ -2124,7 +1765,7 @@
         "Major Update",
         "Federal"
       ],
-      "description": "Isn’t it time to trust that voters of all races will not automatically put race at the top of their decisions on whom to send to Congress, writes Ted Diadiun in his column today."
+      "description": "Isn\u2019t it time to trust that voters of all races will not automatically put race at the top of their decisions on whom to send to Congress, writes Ted Diadiun in his column today."
     },
     {
       "title": "Louisiana senator who voted to convict Trump loses Republican primary",
@@ -2160,7 +1801,7 @@
       "description": "The redistricting battle nobody in South Carolina is thinking about, yet  Post and Courier"
     },
     {
-      "title": "Collins’ tremor disclosure highlights the value of transparency &#124; Jim Fossel",
+      "title": "Collins\u2019 tremor disclosure highlights the value of transparency &#124; Jim Fossel",
       "url": "https://www.pressherald.com/2026/05/17/collins-disclosure-a-reminder-of-the-need-for-candidate-transparency-jim-fossel/",
       "source": "Portland Press Herald",
       "date": "2026-05-17T08:52:00.000Z",
@@ -2194,16 +1835,6 @@
       "description": "I am a proud native of Aroostook County. In Maine local government for over 30 years, I had to be nonpartisan, saw many governors and had conversations with most of them. I know a good governor when I see one.&#160; Now in my retirement from being a city manager and county manage"
     },
     {
-      "title": "South Dakota At-Large Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxORE9DRENfbUdJZTVIMUc1cTBiU3pnc2VCdG42Ql94SmNuWDEyZGhva1VZV1NCRzZLQUVQVjZBTnBRdDhCcjN6aWVoaWI2RzNpZkphTXFkY0VUbDdPTTVLVXRhWVdwZnVfX080WU41OThtZl9qanZwM1djVEhaQk1Vc09iXzJ1Y1E5aWxfZDhpZmhRdw?oc=5",
-      "source": "Emerson (CO)",
-      "date": "2026-05-17T08:10:52.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "South Dakota At-Large Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Pennsylvania First Congressional District 2026: Latest Polls - The New York Times",
       "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQdnRTVU9YOU9ROGFHYWRLN0FUb2lvcmZqU1g5SjRHQS1uTF9RU3pyZnQwcW5sdF9RTnpMUzRWRGltd2thNHRvTDZlVmlQOWRVVy1qakhfLTZyQWhkbzBxazF3YjFyY3BQa3R3MzY2VXZrY1k0S1JxUTNEWllmOWpYVjRRVGJlM1Zl?oc=5",
       "source": "Google News - Redistricting",
@@ -2226,16 +1857,6 @@
       "description": ""
     },
     {
-      "title": "Illinois Seventh Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNdk4tQ2hXU25VUlp5N3d5cGtqVmhqLWFlcTFUb2JyVFNUSlM4WnFFbVR0bGF2aDAtZjUxQlgyNFRWQzhWRjFEZEZTTmVGc0lVTEdzcXBpTEZIcW9fc2J0YXhQQ0xsaWt6UGZsaTREQm5hNXVSWHhtcmJpSFVnaW5aWE1wZw?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T06:33:28.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Illinois Seventh Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Kansas U.S. Senate Election 2026: Latest Polls - The New York Times",
       "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNLXRTVkhNUnBRUTBFcnJxcVp1U2JGUE0wQmVlUWwxQ1hnajFRVXRWeDVwM1lYek5fUHAwenNBenpfUE93dlExakpyTGI0X2ZwUk9LRnZSRGJTNVI3aTF0aGx0Q1A4YUZiSGh6TkszUTRZMnFEZkZFOTNFWklIREladGNlcURhTmVCZUxF?oc=5",
       "source": "Siena/NYT (NE)",
@@ -2244,36 +1865,6 @@
         "Senate"
       ],
       "description": "Kansas U.S. Senate Election 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "California 14th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTTJpTkZJSUxaZGFRZjllbHprVnlvci1Vc2ZEQTVRWktqS3g2cWRoeVZaWGVPZDdWTU1zNVI0c1VuM0dwMUhiZlphY2ItTXJtVFpmOFJmbE5YNF9UemU1b0JONmY1Z25uWGpqTVJEMDVpVVBNaHJES0dBb3BpdmZRZ010NU9rYzg?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T05:41:58.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "California 14th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "California Sixth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPLUgtMVo5a0lQUGpLbVRoTmFNZlFRNVZ4dEd1czlYdUdLQWI1Y3FZMWQzU0djMmZTbm9hekVIOWR1Q1hGTHl0NkFYbFhLcGtTbDVub2hYT0NUcUdHV2RGWkU4OWtHcFlZbGhuUHZvWWJLMjFwellYek5OR2o4N2lvX2pvYy1Bdw?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T05:03:39.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "California Sixth Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Montana U.S. Senate Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOdkJha2xvY1JodndZRHhqZ2t4SGphOGVzZ1M4WGtFZFJPczNoRWx1X040UHRpVk5vVFVlZkRfZkIxaENBZFRwWGdTbjEtY2VhNVJhWVJ2Z0taNXZIeVpKTXRaTkxiRzg3RHJqanA0OGE1dEM1MkptUlZUM0dpWExhYmo3Q0NHNk9uRHVuaw?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T05:01:48.000Z",
-      "tags": [
-        "Senate"
-      ],
-      "description": "Montana U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
       "title": "Louisiana Fifth Congressional District 2026: Latest Polls - The New York Times",
@@ -2286,27 +1877,7 @@
       "description": "Louisiana Fifth Congressional District 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "California 22nd Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxONU9iSUZJQmFONXgzLTRiX2dOenFncVZXdW5ZRzNwWHNpcHBwdW52Y29vemtfNV9mXzR3VF9CWkRqN2FPRnBuZXpBZjduRXVvTlVJcllESm9vTVkxTFZkWGhETlVnQno3WnQwTWhNWklsaUs3WWtnalJmZHNWdW02cENXQ0xnTWc?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T04:57:37.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "California 22nd Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Ohio Ninth Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1Eb0JRVFU0TzlhUTdqeDd1RTJCXzduaDZSR2NVbEZBNE5mX3Z0UjRIMWV0YVExWl96ZkV6dXE1QTBpQ2VHbGxVdU1oblFrVjJPS2lxSmRJNEpnTWN3VzhCcHY1U3YtUG4xOWw2RFI3dEJUVkh0cVZRaGJUY0l6QQ?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T04:41:53.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Ohio Ninth Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Bill Cassidy’s fall is a warning sign for other Trump enemies",
+      "title": "Bill Cassidy\u2019s fall is a warning sign for other Trump enemies",
       "url": "https://www.politico.com/news/2026/05/17/trump-revenge-cassidy-louisiana-senate-00925408",
       "source": "Politico Elections",
       "date": "2026-05-17T04:29:19.000Z",
@@ -2314,10 +1885,10 @@
         "Federal",
         "Primary"
       ],
-      "description": "Sen. Bill Cassidy’s (R-La.) primary loss is a massive warning sign for any Republicans who’ve provoked the president’s wrath — like Kentucky Rep. Thomas Massie."
+      "description": "Sen. Bill Cassidy\u2019s (R-La.) primary loss is a massive warning sign for any Republicans who\u2019ve provoked the president\u2019s wrath \u2014 like Kentucky Rep. Thomas Massie."
     },
     {
-      "title": "Federal funding for Trump’s $400m ballroom in jeopardy after Senate ruling",
+      "title": "Federal funding for Trump\u2019s $400m ballroom in jeopardy after Senate ruling",
       "url": "https://www.theguardian.com/us-news/2026/may/17/federal-funding-trump-ballroom-jeopardy-senate-ruling",
       "source": "The Guardian",
       "date": "2026-05-17T04:11:02.000Z",
@@ -2326,7 +1897,7 @@
         "Senate",
         "Federal"
       ],
-      "description": "Proposal to fund $1bn in security additions for White House campus and  president’s new ballroom fails to meet procedural rulesA US Senate official on Saturday removed security funding that could be used for Donald Trump’s planned $400m White House ballroom from a massive spendin"
+      "description": "Proposal to fund $1bn in security additions for White House campus and  president\u2019s new ballroom fails to meet procedural rulesA US Senate official on Saturday removed security funding that could be used for Donald Trump\u2019s planned $400m White House ballroom from a massive spendin"
     },
     {
       "title": "Protests appear across the country as congressional map redistricting suppresses minority votes - thv11.com",
@@ -2353,28 +1924,6 @@
       "description": "Sen. Bill Cassidy is one of few remaining Republican senators who voted for President Trump's impeachment after the Jan. 6 attack on the Capitol. Trump endorsed his opponent, Rep. Julia Letlow."
     },
     {
-      "title": "Senate parliamentarian deals blow to $1 billion security proposal for White House - AP News",
-      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYlBzV2tKcHNUQXJCYUVXSGZBWnFzRDNkZE5UeHM3dF94NHljZnkyWUVwNXlPTHZvYjVCLTFZaElkZWlVT0dLR2dDSXBUaFFMRnVaczhqQTNXRUsxS1AwWm5ZZ1loTGhfdkhJZlJnUVJXRnNrMTlFeVJ1RkVVdTdCeE4wT05aTEFXdHRSclRxcVo0eE5DLXk1c01LdTJDUkhObjUzNzcyRmF1MzJFX0xWT2NFa0lOVzE2ZFdKLW1HNXM?oc=5",
-      "source": "AP News",
-      "date": "2026-05-17T03:15:00.000Z",
-      "tags": [
-        "House",
-        "Senate",
-        "Federal"
-      ],
-      "description": "Senate parliamentarian deals blow to $1 billion security proposal for White House  AP News"
-    },
-    {
-      "title": "Arizona Governor Election 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQNndaVm5rbS1IWjJmQzNuakNydlVPVVQ1OHFaTHZHei1iU05xaGhYdjZsbFNlODludF9UUUw1Z0JVeUo1MUNEYVFRbC0tSUY3STNqSE00NlNrUUE5YVBiMzRfUHNEaTlZU08tWVliY3dyR1dmRWJ2dTlLeGJPX2RuQXJDV3g3ek9WMFkw?oc=5",
-      "source": "Emerson (AZ)",
-      "date": "2026-05-17T03:14:13.000Z",
-      "tags": [
-        "Governorship"
-      ],
-      "description": "Arizona Governor Election 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Trump-backed Letlow advances to Louisiana Senate runoff as Cassidy faces political reckoning",
       "url": "https://www.post-gazette.com/news/politics-nation/2026/05/16/trump-backed-letlow-louisiana-senate-runoff-cassidy/stories/202605160050",
       "source": "Pittsburgh Post-Gazette",
@@ -2395,7 +1944,7 @@
         "Federal",
         "Primary"
       ],
-      "description": "Cassidy’s bid to win nomination for third term was imperiled by his vote to convict Trump after January 6 insurrectionThe Republican senator Bill Cassidy lost his primary on Saturday, as voters in Louisiana opted instead to advance two challengers to a runoff election after an ex"
+      "description": "Cassidy\u2019s bid to win nomination for third term was imperiled by his vote to convict Trump after January 6 insurrectionThe Republican senator Bill Cassidy lost his primary on Saturday, as voters in Louisiana opted instead to advance two challengers to a runoff election after an ex"
     },
     {
       "title": "Bill Cassidy loses Senate primary in another major win for Trump",
@@ -2407,7 +1956,7 @@
         "Federal",
         "Primary"
       ],
-      "description": "Louisiana Rep. Julia Letlow, the president’s favored candidate, and MAGA-aligned state Treasurer John Fleming advanced to a runoff for the GOP nomination."
+      "description": "Louisiana Rep. Julia Letlow, the president\u2019s favored candidate, and MAGA-aligned state Treasurer John Fleming advanced to a runoff for the GOP nomination."
     },
     {
       "title": "Federal funding for Trump's ballroom in jeopardy after Senate ruling - Reuters",
@@ -2431,26 +1980,6 @@
       "description": "Massachusetts U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "Texas 34th Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPTzRnMkhKbGcwUmRNY0hvU3lEVGpCYWMxeGFNdkpkUzg2M1pvVm1BVUlyWFBrQjFGUHRuRGRlb1F0V0hZZlZrQVlyU3l3TFlZRkFfdmZFOGVoR3UwRmN3TV9nYUZ1dzRIbTc5V1FNd0tjRm5ZX3ZnaFVlZ04wb2xzcw?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-17T02:19:33.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Texas 34th Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Texas 33rd Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQT2htS0xFclVzUFRMYVFLSTBDQ1FNYm5pRjBtSUdHZW9RVmxKZ0tXUTFDMk1US05pTEJreVZ0aWM2VFdEUWhrRmpFSjR1Sy1GNmJVTDNyTWZmcG0xajJXeEhOd25BQ2FaaThSODJORzlnMmx1eXAzaURYUmo0SFY2WA?oc=5",
-      "source": "Siena College (NY)",
-      "date": "2026-05-17T02:05:31.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Texas 33rd Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "Cassidy loses Louisiana Senate GOP primary as Trump-backed challenger advances to runoff",
       "url": "https://thehill.com/homenews/campaign/5876242-cassidy-fails-louisiana-gop-primary-letlow-fleming/",
       "source": "The Hill",
@@ -2460,7 +1989,7 @@
         "Federal",
         "Primary"
       ],
-      "description": "Sen. Bill Cassidy (R-La.) was projected to fail to advance to the runoff in Louisiana’s GOP Senate primary Saturday, according to Decision Desk HQ, ending the incumbent senator’s reelection bid after years of political fallout from his vote to convict President Trump following th"
+      "description": "Sen. Bill Cassidy (R-La.) was projected to fail to advance to the runoff in Louisiana\u2019s GOP Senate primary Saturday, according to Decision Desk HQ, ending the incumbent senator\u2019s reelection bid after years of political fallout from his vote to convict President Trump following th"
     },
     {
       "title": "Ballroom security money nixed by Senate parliamentarian",
@@ -2485,17 +2014,6 @@
       "description": "Mississippi U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "Watch Rep. Clarke on Impact of Supreme Court's Redistricting Decision - Bloomberg.com",
-      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPMmlqaTQxQWJkdWhzZXA2SjgyQmc3Um9McTRpM2otWDJCTURsa2hJOTlXR3VTSldnUlhidmtQdUlZMWFQS1pJSjdXSjIzYXp1YVhhZHZHbUdVX3dVc18tY1RPNGFtVzQwenBDeFY0UG1ZSXBRMUdOcERRWFFVS2huN1ZGbEVOdzgwcUlQbGc3QURtQUFrWEl0ajV4OHZIUThIOVZ1Z2pHb1pFcUd6ckE?oc=5",
-      "source": "Google News - Redistricting",
-      "date": "2026-05-17T00:00:00.000Z",
-      "tags": [
-        "Major Update",
-        "Redistricting"
-      ],
-      "description": "Watch Rep. Clarke on Impact of Supreme Court's Redistricting Decision  Bloomberg.com"
-    },
-    {
       "title": "Cassidy loses GOP primary in Louisiana as Trump-backed Letlow, Fleming make runoff",
       "url": "https://rollcall.com/2026/05/16/bill-cassidy-loses-louisiana-primary-trump/",
       "source": "Roll Call",
@@ -2507,7 +2025,7 @@
       "description": "Republican Sen. Bill Cassidy, who voted to convict Donald Trump at his 2021 impeachment trial, lost his bid for reelection Saturday after failing to make a primary runoff in Louisiana. Cassidy, a physician turned politician, was trailing in third place with about 25 percent of th"
     },
     {
-      "title": "Haberman: Trump ‘has seemed far less attuned to voters’ concerns lately’",
+      "title": "Haberman: Trump \u2018has seemed far less attuned to voters\u2019 concerns lately\u2019",
       "url": "https://thehill.com/homenews/administration/5881694-trump-voter-disconnect-iran/",
       "source": "The Hill",
       "date": "2026-05-16T23:07:17.000Z",
@@ -2515,7 +2033,7 @@
         "House",
         "Federal"
       ],
-      "description": "New York Times White House Correspondent Maggie Haberman on Friday pointed to a disconnect between voters and President Trump after he told reporters he does not think “even a little bit” about Americans’ financial situations when dealing with Iran. “He has seemed far less attune"
+      "description": "New York Times White House Correspondent Maggie Haberman on Friday pointed to a disconnect between voters and President Trump after he told reporters he does not think \u201ceven a little bit\u201d about Americans\u2019 financial situations when dealing with Iran. \u201cHe has seemed far less attune"
     },
     {
       "title": "Idaho U.S. Senate Election 2026: Latest Polls - The New York Times",
@@ -2548,26 +2066,6 @@
       "description": "Texas Second Congressional District 2026: Latest Polls  The New York Times"
     },
     {
-      "title": "North Carolina First Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPLWNJdjZRNGF4Z2pXRWJROUdlU0VwaC1KbXk2VjhUWW5WczB5N0dpeG01OVpEYkM2M0dTZ21GYmo1UXIyalVaX21WaWYxM2JMeTg0TEJWck5jYVNpOFZ5V1lQMXdNT2gzcENkOUFYUmRfX043dzI3Y01PaFlKS1R2clpZcUtsSWxzc09r?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-16T22:29:01.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "North Carolina First Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
-      "title": "Nebraska Second Congressional District 2026: Latest Polls - The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOeWtCTl92RHlGbC03Z2RKNmUweTFnZnFUVUhRVlNfUF9zMHRrSTJmYlJVSEtsNGYyMldJSUNhNXFLVEZ2Q0FLZWtMVXRRam9TaXJpNk5tdHpFYnkxNk1CODlmNUg5ZzZ5QVk3WC13LURBb1BpTzlJY05VUFNLYzdlN0NDQQ?oc=5",
-      "source": "Siena/NYT (NE)",
-      "date": "2026-05-16T22:00:14.000Z",
-      "tags": [
-        "Federal"
-      ],
-      "description": "Nebraska Second Congressional District 2026: Latest Polls  The New York Times"
-    },
-    {
       "title": "New York Seventh Congressional District 2026: Latest Polls - The New York Times",
       "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNemZ3cFYxWllsVzFyZnVzaWRLRzV2c3gwbTRKbFZCdWJ3SDlDVlNnaXRhV2JmYTB6emZPTkJhLUt3VFR4VXpIR18xeXJMN3pMeHdVS01va1JRUkxicmNwYTdmT0hpclpjcnRXRF93VFRINEpGTzF3akdIelBTWDVvWW5DZw?oc=5",
       "source": "Siena/NYT (NE)",
@@ -2595,7 +2093,7 @@
       "tags": [
         "Major Update"
       ],
-      "description": "“We are not going down without a fight. We are not going down to Jim Crow maps,” said Shalela Dowdy, a plaintiff in the Alabama redistricting case."
+      "description": "\u201cWe are not going down without a fight. We are not going down to Jim Crow maps,\u201d said Shalela Dowdy, a plaintiff in the Alabama redistricting case."
     },
     {
       "title": "Kentucky Fourth Congressional District 2026: Latest Polls - The New York Times",
@@ -2631,7 +2129,7 @@
       "description": "Demonstrators rally against redistricting after Supreme Court ruling  Spectrum News"
     },
     {
-      "title": "Cassidy’s do-or-die Louisiana primary battle: What to know",
+      "title": "Cassidy\u2019s do-or-die Louisiana primary battle: What to know",
       "url": "https://thehill.com/homenews/campaign/5881605-trump-backed-letlow-challenges-cassidy/",
       "source": "The Hill",
       "date": "2026-05-16T20:45:41.000Z",
@@ -2713,195 +2211,510 @@
         "Senate"
       ],
       "description": "Texas U.S. Senate Election 2026: Latest Polls  The New York Times"
-    }
-  ],
-  "analysis": [
+    },
     {
-      "type": "Newsletter",
-      "title": "2026 Senate Ratings: Democrats' Narrow Path on a Brutal Map",
-      "source": "Cook Political Report",
-      "url": "https://cookpolitical.com",
-      "description": "Initial 2026 Senate ratings show Democrats defending two toss-up seats (GA, NH) while needing to flip four Lean Republican seats for a majority. Cook rates the overall Senate environment as 'Likely R Hold' — noting the Class II map heavily favours incumbents in red-leaning states.",
-      "date": "2026-03-15",
-      "added": "2026-03-15",
+      "title": "Cohen Spurs Young Middlesex Voters on the Ground",
+      "url": "https://www.insidernj.com/cohen-spurs-young-middlesex-voters-on-ground/",
+      "source": "Insider NJ",
+      "date": "2026-05-16T18:47:33.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "MILLTOWN &#8211; With time ticking down until June 2nd, East Brunswick Mayor Brad Cohen stays focused on the crisis, namely Donald Trump&#8217;s shredding of America&#8217;s constitutional democracy. Throw in lack of healthcare access and the failure of Congress to take the reins"
+    },
+    {
+      "title": "New York 12th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPeTRjVkttMVhkMjk3b0NJMU9fdHQ0anZGM21GVzAya2JHbVdob3AzTkZDTzBKbWRSdTJNV25DbmtfcDdXQzRBbkxkSHV4UlRkRFQ4RU14dGZDbmx6U0p3UEh2NzI0UXNyeFFJXzk4Y1EwT1hCbENYemRwS1Y0bjJ3TzZ3OG0?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T18:45:41.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "New York 12th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Louisiana U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNRVVFb2tnMUp0UHlUTVpoV0dGU0FLMGxUaWxVTjJsYmJHS2VlX1hha1J4bzEzSUZLRXVLd25BV0Q0ZXNSUTVtWkNESi1Bc25KTF8zVE5IdTIzeHg4UUNfNU9Vd2xnRlZOcnJLdjVTOXhpczlWRXNQMXdiVzlGSWphdndqcGFfd2VBRUlFa256bw?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T18:43:29.000Z",
       "tags": [
         "Senate"
-      ]
+      ],
+      "description": "Louisiana U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Newsletter",
-      "title": "Crystal Ball Initial 2026 House Ratings: 22 Toss-ups, D Needs +5",
-      "source": "Sabato's Crystal Ball",
-      "url": "https://centerforpolitics.org/crystalball",
-      "description": "Kyle Kondik and J. Miles Coleman open with 22 Toss-up House seats. Democrats need a net 5-seat gain — achievable historically when presidential approval sits below 45%, but complicated by post-2020 gerrymander locking in safe seats on both sides.",
-      "date": "2026-02-28",
-      "added": "2026-02-28",
+      "title": "The Race for Congress: Latest 2026 Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5EdUZXTXBzRFFLOGZJR2hWaHlFUUw0em5XbTZQYTRNbnNmdkVOaXBRcEtuUDhQWnhxNUVsckIwTERBUUplcWtOSWtzY09Yb3FDVzBJY05kU04wb0dZc1d5LXlLbm1jZi1wckVUcjFoSTI1WDQ3R2FxRHZ3?oc=5",
+      "source": "Quinnipiac (AZ)",
+      "date": "2026-05-16T18:40:05.000Z",
       "tags": [
-        "House"
-      ]
+        "Federal"
+      ],
+      "description": "The Race for Congress: Latest 2026 Polls  The New York Times"
     },
     {
-      "type": "Newsletter",
-      "title": "Inside Elections Governor Ratings: Four True Toss-ups",
-      "source": "Inside Elections",
-      "url": "https://insideelections.com",
-      "description": "Nathan Gonzales rates Maine, Michigan, Nevada, and Wisconsin as pure toss-ups in the gubernatorial cycle. Democratic wins in MI and WI would restore executive infrastructure critical for 2030 redistricting and 2028 presidential ground games.",
-      "date": "2026-04-10",
-      "added": "2026-04-10",
+      "title": "&#8216;Good maps&#8217;: Paul Renner endorses latest Congressional reapportionment",
+      "url": "https://floridapolitics.com/archives/796883-good-maps-renner/",
+      "source": "Florida Politics",
+      "date": "2026-05-16T18:25:18.000Z",
+      "tags": [
+        "Senate",
+        "Federal",
+        "Governorship"
+      ],
+      "description": "The GOP gubernatorial hopeful is a fan of change in this context. \nThe post &#8216;Good maps&#8217;: Paul Renner endorses latest Congressional reapportionment appeared first on Florida Politics - Campaigns & Elections. Lobbying & Government.."
+    },
+    {
+      "title": "Iowa U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQcWRaVmktUlNsOGxybjRtcGNqcXRUclFwMm94QThGWm9sRW9zaVNRU1FYa3NNNS1hQ09NNnJ5RmwyQTFhUnkwUENZN2RzUjZvcjdLNTlqT0otNmZ6ZUxEU3lNbUFKZ0xZNGFRSU54MmNWaXNsdS1FbGdCRmVHUkUtVVN5cnBkTk1G?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T18:18:38.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Iowa U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Stanton, Ansari and Grijalva demand ICE answer for pepper-spraying 47 overcrowded detainees",
+      "url": "https://azmirror.com/briefs/stanton-ansari-and-grijalva-demand-ice-answer-for-pepper-spraying-47-overcrowded-detainees/",
+      "source": "Arizona Mirror",
+      "date": "2026-05-16T18:15:44.000Z",
+      "tags": [
+        "Senate",
+        "Federal"
+      ],
+      "description": "Three Democratic members of Congress are demanding that U.S. Immigration and Customs Enforcement answer questions about the use of pepper spray on 47 detainees at a Mesa holding facility earlier this year, according to a letter exclusively obtained by the Arizona Mirror.\u00a0 \u201cAs Mem"
+    },
+    {
+      "title": "Michigan U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNZXg4R2RiNm5LQjloa25FZEFhY2tCX2k3U0ExVEJnNzVWeW1Ba21fbkRxYlFFX3M2TDdLeGlQUnViWGNfbFZWdlBiVHhNNUFqZE5ISjhsdlB5dGRPZ3ZaRVlpd24ybWMyX0dXUFFIWUFhbnM0c05DX1JLVmVYT0NFT1pFcHBGYU9hLXAyOXRR?oc=5",
+      "source": "Emerson (AZ)",
+      "date": "2026-05-16T17:57:12.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Michigan U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Alaska U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQcEJLeDV1U0FWYjhHM2tyaWJmeTM2TWpqMWROWnVGMnZkazJMODlHQi1ub212SEZYWmdLc2hRT0tPbkhlMGxsNEItNTlIQlVsdUhjTXlwWllNczZ4M3U5dTIycmtSZzJpMFFrTlVQOTRZaDBobFNxeF9PczJCcUFvMHpzVXdvM3Y2RzlZ?oc=5",
+      "source": "Quinnipiac (AZ)",
+      "date": "2026-05-16T17:48:17.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Alaska U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "New Jersey 12th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPQ1hEczR6dTJQTjNOTVdNNUtuQmNJeDhNMlFwZ1h4cnFaMzZ1VDdEUjZvTlYweEV1ME92cVBqZGI1Smxob09aRjBFMjNzMnhWNF9XRnNJMnA3TzJpWkNnU2RzcVdnMWJFSDNJWUlHTDJNeWxqZGh4OTFXeVRpWVFzdktBMGViYjQ?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T17:46:30.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "New Jersey 12th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Texas 33rd Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQT2htS0xFclVzUFRMYVFLSTBDQ1FNYm5pRjBtSUdHZW9RVmxKZ0tXUTFDMk1US05pTEJreVZ0aWM2VFdEUWhrRmpFSjR1Sy1GNmJVTDNyTWZmcG0xajJXeEhOd25BQ2FaaThSODJORzlnMmx1eXAzaURYUmo0SFY2WA?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T17:05:25.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Texas 33rd Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "California 11th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOUVdId0lYV2pKTUR0TUJ2ZDh5Qm9zSnhwVmpOZ1ZVdUhuYXZ5TkVrVnU2V19DTEQ2bzlLTlZTbXU4UnFQRHUtQWo4SXN4YVRaR1dfVS1lQ1dES2FOaDA3b2JZZVVrNnJFOXN4N3JCcGNJTVdQVU9xOUtoVHlfOEV3bFhOQmZHQWc?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T16:51:00.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "California 11th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Kentucky U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPckdfSE1VUG5vQjA1S0RkeExWUU5IU2xzMEsxcWNBNzRvYVdqMWlOODVvRno0Sk9pNW9tUHFFS3A4b0ZtSDZhaFhZbG9YQ0pEc2F2ZzFoZEo3VThlNW8zczM0QWFsaDlpSmRuU1lPRFM5YkF0RmlKLVJsVnZVTGcwY3Izc3J0UFFGQWk1a0JB?oc=5",
+      "source": "Emerson (AZ)",
+      "date": "2026-05-16T16:49:37.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Kentucky U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Trump pushes to attach his SAVE act to must-pass bipartisan bills",
+      "url": "https://www.politico.com/news/2026/05/16/trump-save-act-fisa-housing-bills-00925332",
+      "source": "Politico",
+      "date": "2026-05-16T16:22:53.000Z",
+      "tags": [
+        "Senate",
+        "Federal"
+      ],
+      "description": "The gambit would likely jeopardize two other key congressional priorities on housing and government surveillance powers."
+    },
+    {
+      "title": "Trump rips Cassidy as &#8216;disloyal disaster&#8217; ahead of high stakes primary",
+      "url": "https://thehill.com/homenews/senate/5881361-donald-trump-bill-cassidy-louisiana-primary-election/",
+      "source": "The Hill",
+      "date": "2026-05-16T16:19:49.000Z",
+      "tags": [
+        "Federal",
+        "Primary"
+      ],
+      "description": "President Trump took another swing at Sen. Bill Cassidy (R-La.) on Saturday, calling the incumbent a \u201cdisloyal disaster\u201d ahead of Louisiana\u2019s high stakes primary election. \u201cBill Cassidy is a sleazebag, a terrible guy, who is BAD FOR LOUISIANA,\u201d Trump wrote in a post on Truth Soci"
+    },
+    {
+      "title": "Lawmakers spend impromptu budget break on campaigns, constituents",
+      "url": "https://azcapitoltimes.com/news/2026/05/16/lawmakers-spend-impromptu-budget-break-on-campaigns-constituents/",
+      "source": "Arizona Capitol Times",
+      "date": "2026-05-16T16:00:35.000Z",
+      "tags": [
+        "House",
+        "Senate",
+        "Federal"
+      ],
+      "description": "Key Points: Arizona lawmakers stall bill activity due to budget negotiations House and Senate members still come to the Capitol despite no floor sessions Lawmakers are using the break to [&#8230;]\nThe post Lawmakers spend impromptu budget break on campaigns, constituents first ap"
+    },
+    {
+      "title": "Without the working class, Democrats will tank the midterms \u2014 and 2028",
+      "url": "https://thehill.com/opinion/campaign/5880268-democrats-midterms-working-class/",
+      "source": "The Hill",
+      "date": "2026-05-16T16:00:00.000Z",
+      "tags": [
+        "Senate",
+        "Federal"
+      ],
+      "description": "Working-class voters want to hear much less about \u201chating Trump\u201d and much more about tackling \u201cbread and butter\u201d issues."
+    },
+    {
+      "title": "Massie primary tests Trump&#8217;s grip on GOP",
+      "url": "https://thehill.com/homenews/campaign/5880962-massie-trump-kentucky-primary/",
+      "source": "The Hill",
+      "date": "2026-05-16T16:00:00.000Z",
+      "tags": [
+        "House",
+        "Federal",
+        "Primary"
+      ],
+      "description": "President Trump\u2019s quest to unseat Rep. Thomas Massie (R-Ky.) will come to a head Tuesday, as primary voters weigh whether there is room in the Republican Party for a lawmaker willing to openly defy the president.\u00a0 The race has become the most expensive House primary battle in U.S"
+    },
+    {
+      "title": "\u2018Good maps\u2019: Paul Renner endorses latest Congressional reapportionment - Florida Politics",
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFAxaGVLWkFJNUh5Mkg3LUN0SG5BVnZxcEZTU2ZGUk9wbElfZHdQaTEtdzZsaHB0djVLSUNDa1hFZVIzeHRRUHhBN2FtNXNvcTRybnV6eVhIMmFsU1Y1OE5SajNEY0J5UzBkUDJTb0xR?oc=5",
+      "source": "Google News - Redistricting",
+      "date": "2026-05-16T15:54:11.000Z",
+      "tags": [
+        "Federal",
+        "Major Update",
+        "Redistricting"
+      ],
+      "description": "\u2018Good maps\u2019: Paul Renner endorses latest Congressional reapportionment  Florida Politics"
+    },
+    {
+      "title": "Nebraska Governor Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOcWZIdExwTjJmNnhmdTRrcG1SRXBEMHNSSlJ3V1JoZ3h1RjJtSnpSSXdwalg2YUc1amlIbksyWG5GWTdiNlpWU1Z5SWhTMkR2bFNTS28yT3d5Z2lPenJVQmZMOHF3cFRrc2d1VXlsY3Z2VkdxNFdxcElBMW9XZ2gtU2o3ZjNhNXFpbzB1bA?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T15:45:29.000Z",
       "tags": [
         "Governorship"
-      ]
+      ],
+      "description": "Nebraska Governor Election 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Research Paper",
-      "title": "Redistricting, Competition, and the 2026 Midterms",
-      "source": "Brookings Institution",
-      "url": "https://brookings.edu",
-      "description": "Brookings analysis of the post-2020 redistricting cycle finds that the number of genuinely competitive House districts has fallen to a modern low of ~35–40. The report argues that the GOP gerrymander advantage is offset by natural sorting of Democrats into urban districts, leaving toss-up territory smaller but more decisive.",
-      "date": "2026-01-20",
-      "added": "2026-01-20",
+      "title": "Virginia&#8217;s Spanberger fumes after Supreme Court declines to reinstate new map",
+      "url": "https://thehill.com/homenews/state-watch/5881257-virginia-gov-blasts-supreme-court-redistricting/",
+      "source": "The Hill",
+      "date": "2026-05-16T15:14:43.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Virginia Gov. Abigail Spanberger (D) on Friday blasted the Supreme Court for declining to reinstate Virginia&#8217;s new congressional map approved by voters after the state&#8217;s high court struck down the measure. &#8220;The Supreme Court of the United States has now joined t"
+    },
+    {
+      "title": "California First Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPVk0wME90Z205cGlVYUdKdlhkSzBFekFwS0d2MWRtWWd2NkdFVWdGYnF3eXhxVklSbzV4ZGdpZjFBNzhXckJMd3BnLTZmM0V5OTlhUXBzQ1h1ZnNFUkxUZ0QxbEVDelFLazFlSndIWi1BVWN1d3B4RGRsa3FBem1Da1NscWxQUQ?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T15:00:56.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "California First Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Cohen gets candid on retirement after redistricting loss: \u2018I\u2019ve got a great district\u2019",
+      "url": "https://thehill.com/homenews/house/5881314-steve-cohen-emotional-tribute-district/",
+      "source": "The Hill",
+      "date": "2026-05-16T14:56:26.000Z",
+      "tags": [
+        "Major Update",
+        "Federal"
+      ],
+      "description": "Tennessee Rep. Steve Cohen (D) gave an emotional tribute to his district after he announced his retirement from Congress on Friday.&#160; The 76-year-old lawmaker teared up during an interview with The Hill\u2019s broadcast partner, NewsNation, when speaking about his decision to step"
+    },
+    {
+      "title": "California 48th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOUkZla1QwbXF3VjZUbWFCYWxwV3l4Q3RVR2Jyd2sxcXNDUDk0THZKd2tiUWV3ajJPSU9QY00wajFORFA2eVBkeTNhTVZDVGVMLTh5RVdEY19ON04tMExrdmotRlZETlRUX2ZKWUI2YU1FRk9uLUVhT0lNbFFCWUg0Y1hJS05ZM1E?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T14:31:49.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "California 48th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "\u2018No\u2019 vote to extend parks tax would be \u2018catastrophic,\u2019 Henderson mayor says",
+      "url": "https://www.reviewjournal.com/news/politics-and-government/no-vote-to-extend-parks-tax-would-be-catastrophic-henderson-mayor-says-3825121/",
+      "source": "Las Vegas Review-Journal",
+      "date": "2026-05-16T14:30:09.000Z",
+      "tags": [
+        "Senate",
+        "Federal"
+      ],
+      "description": "City officials have been trying to get the word out about a ballot question that will ask residents if they support the renewal of a tax that has helped fund the city&#8217;s parks."
+    },
+    {
+      "title": "House Republican requests UFO talk from private contractor",
+      "url": "https://thehill.com/homenews/house/5880943-house-gop-ufo-programs-pentagon-private-contractors/",
+      "source": "The Hill",
+      "date": "2026-05-16T14:27:18.000Z",
       "tags": [
         "House",
-        "Redistricting"
-      ]
+        "Senate"
+      ],
+      "description": "Lawmakers have said they believe the Pentagon is using private contractors to conceal UFO-related programs."
     },
     {
-      "type": "Research Paper",
-      "title": "Political Polarization and Midterm Voter Turnout Patterns",
-      "source": "Pew Research Center",
-      "url": "https://pewresearch.org",
-      "description": "Pew survey data shows record partisan motivation heading into 2026 — 74% of registered Democrats say the election is 'very important,' the highest pre-midterm Democratic intensity since 2018. Republican intensity lags at 61%, potentially reversing the enthusiasm gap that helped the party in 2022.",
-      "date": "2026-04-22",
-      "added": "2026-04-22",
+      "title": "California Sixth Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPLUgtMVo5a0lQUGpLbVRoTmFNZlFRNVZ4dEd1czlYdUdLQWI1Y3FZMWQzU0djMmZTbm9hekVIOWR1Q1hGTHl0NkFYbFhLcGtTbDVub2hYT0NUcUdHV2RGWkU4OWtHcFlZbGhuUHZvWWJLMjFwellYek5OR2o4N2lvX2pvYy1Bdw?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T14:00:19.000Z",
       "tags": [
         "Federal"
-      ]
+      ],
+      "description": "California Sixth Congressional District 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Research Paper",
-      "title": "Presidential Approval, the Economy, and Midterm Seat Loss: A 80-Year Review",
-      "source": "American Enterprise Institute",
-      "url": "https://aei.org",
-      "description": "AEI regression analysis of midterm outcomes 1946–2022 finds presidential approval and real disposable income growth are the two strongest predictors of seat change. The model projects Republican losses of 18–32 House seats based on current Trump approval (~44%) and tariff-dampened growth projections.",
-      "date": "2026-03-05",
-      "added": "2026-03-05",
+      "title": "Kasama v Mack running in primary to replace County Commissioner Justin Jones",
+      "url": "https://www.reviewjournal.com/news/politics-and-government/clark-county/kasama-v-mack-running-in-primary-to-replace-county-commissioner-justin-jones-3825110/",
+      "source": "Las Vegas Review-Journal",
+      "date": "2026-05-16T14:00:16.000Z",
+      "tags": [
+        "Primary"
+      ],
+      "description": "Opposition websites, attack signs and mirroring allegations that their fellow Republican opponent is not as conservative as they claim are at the center of an increasingly antagonistic primary race for an open Clark County Commission seat."
+    },
+    {
+      "title": "California Third Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNS3JSQ0hwUVJqb3k1dEZyUHFLUEJNaDJiWThHSHN3TldBSTNTa2V0Rmp5b1RNSVFaMXcyLWZZdWNfenplQkJFMUFSUlh1Uk14ME9yNy1JQXpHMzFWRmtxTFVTYVNNcTBaYl9acm1ub3NLVXJCVkhKLW1Fa3lMVm4zUDVYdnJ0QQ?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T14:00:14.000Z",
       "tags": [
         "Federal"
-      ]
+      ],
+      "description": "California Third Congressional District 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Op-Ed",
-      "title": "The Freedom Caucus Is the GOP's Biggest 2026 Liability",
-      "source": "Politico Magazine",
-      "url": "https://politico.com",
-      "description": "With Congress at 16% approval and three near-shutdowns in the 119th Congress, Politico argues that Freedom Caucus procedural brinksmanship — not Democratic messaging — is the dominant driver of anti-incumbent sentiment. The piece profiles six vulnerable R incumbents in suburban toss-up districts where Freedom Caucus association is now a liability.",
-      "date": "2026-04-18",
-      "added": "2026-04-18",
+      "title": "Cassidy\u2019s in the fight of his political life",
+      "url": "https://www.politico.com/news/2026/05/16/cassidy-louisiana-senate-race-trump-00924872",
+      "source": "Politico Elections",
+      "date": "2026-05-16T14:00:00.000Z",
       "tags": [
-        "House",
-        "Federal"
-      ]
+        "Senate",
+        "Primary"
+      ],
+      "description": "The two-term incumbent is polling in third place in the GOP primary for his Louisiana Senate seat, as he faces a Trump-backed challenger."
     },
     {
-      "type": "Op-Ed",
-      "title": "The Dobbs Effect Is Still Alive. Don't Underestimate It.",
-      "source": "The Atlantic",
-      "url": "https://theatlantic.com",
-      "description": "Analysis of state-level ballot results since 2022 shows abortion rights measures have passed in 7 of 7 states where they've appeared, outperforming the generic Democratic ballot by 8–14 points. The piece argues 2026 will be the first federal midterm where Dobbs has a full two-cycle mobilisation effect on suburban women voters.",
-      "date": "2026-03-28",
-      "added": "2026-03-28",
-      "tags": [
-        "Federal"
-      ]
-    },
-    {
-      "type": "Op-Ed",
-      "title": "Redistricting Is Shaping the 2026 Map in Ways Polls Can't Capture",
-      "source": "Washington Post",
-      "url": "https://washingtonpost.com",
-      "description": "The Post's Dave Weigel examines how aggressive Republican gerrymanders in Ohio, Georgia, and Texas have packed Democratic voters so efficiently that even a D+8 national environment might only translate to D+4 seats gained. Conversely, court-ordered maps in North Carolina and Alabama may add 3–4 competitive seats Democrats would otherwise not contest.",
-      "date": "2026-02-14",
-      "added": "2026-02-14",
-      "tags": [
-        "House",
-        "Redistricting"
-      ]
-    },
-    {
-      "type": "Op-Ed",
-      "title": "Congressional Approval at 16%: Why the 'Throw the Bums Out' Electorate Rarely Does",
-      "source": "The New York Times",
-      "url": "https://nytimes.com",
-      "description": "Despite historically low congressional approval, gerrymandering ensures fewer than 50 House incumbents face real competition. The piece examines why structural factors — safe districts, incumbency advantage, name recognition — routinely insulate members even from wave elections, and what conditions might change that calculus in 2026.",
-      "date": "2026-05-02",
-      "added": "2026-05-02",
-      "tags": [
-        "Federal",
-        "House"
-      ]
-    },
-    {
-      "type": "Podcast",
-      "title": "2026 Midterms Early Preview: What the Generic Ballot Tells Us",
-      "source": "NPR Politics Podcast",
-      "url": "https://npr.org/podcasts/510310/npr-politics-podcast",
-      "description": "Mara Liasson, Asma Khalid, and Scott Detrow break down the latest generic ballot polling (D+5) and what it historically implies for House seat changes. The episode includes a segment on how tariff uncertainty is reshaping economic voting and whether Republicans can decouple congressional candidates from presidential unpopularity.",
-      "date": "2026-04-30",
-      "added": "2026-04-30",
-      "tags": [
-        "Federal",
-        "House"
-      ]
-    },
-    {
-      "type": "Podcast",
-      "title": "The Senate Map for 2026: Can Democrats Win Georgia and New Hampshire?",
-      "source": "FiveThirtyEight Politics",
-      "url": "https://abcnews.go.com/fivethirtyeight",
-      "description": "Nate Silver and Nathaniel Rakich examine whether Jon Ossoff in Georgia and the open NH seat are genuinely winnable for Democrats given state-level trends. The conversation covers candidate quality as the swing factor — noting the 2022 Georgia model (Warnock over Walker) as the key precedent.",
-      "date": "2026-05-07",
-      "added": "2026-05-07",
+      "title": "New Mexico U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPRjZ4N2RGYUZ3Tm1hU3dUdzVNQm00S29wT2lNMWlIVGNTbGVpQXZNckhwMGllLXBjMXNSel9hSUpEb24tRjhVYmJqTzhlSExNS2NXVS1XX2MtQWFsb1BoYTk0UktvaklzYjl5c0tLd2g4a1A2LTNBeFAtZUJSTy1kX2wxYy1wUTBldS1xVHB3X3E?oc=5",
+      "source": "Siena College (NY)",
+      "date": "2026-05-16T13:31:40.000Z",
       "tags": [
         "Senate"
-      ]
+      ],
+      "description": "New Mexico U.S. Senate Election 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Interview",
-      "title": "DCCC Chair on the 2026 House Map: 'We Can Win This'",
-      "source": "Politico",
-      "url": "https://politico.com",
-      "description": "Politico's interview with DCCC Chair Suzan DelBene outlines the committee's targeting strategy — focusing on 18 Republican-held seats in districts Biden won in 2020. DelBene flags NY-17, PA-07, CA-27, and MI-07 as the core of the Democratic path to 218, and discusses the committee's $90M fundraising head start.",
-      "date": "2026-04-03",
-      "added": "2026-04-03",
+      "title": "Texas Governor Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPVVRSQVJ4aDZHaktLVThoTXRuTnBIZEZEeFR5c0NkZnNycjNHM2VBbUt4UHRfZW8xQ3pkVnVMTmI1LVB5c1U2X1NqdEE0dzVKT3l4Rk1Tbk1YZ0lfR1ZEaF9jbHlLZXJqNkhqbGd0X2Y5SXJHRHY4TnlmQUxLa0FaSWtjV1VoQmtr?oc=5",
+      "source": "UT Texas Politics Poll",
+      "date": "2026-05-16T13:19:12.000Z",
       "tags": [
-        "House"
-      ]
+        "Governorship"
+      ],
+      "description": "Texas Governor Election 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Interview",
-      "title": "NRCC Chair Tom Emmer on Defending the Majority: 'The Map Is Our Friend'",
-      "source": "The Hill",
-      "url": "https://thehill.com",
-      "description": "NRCC Chair Tom Emmer makes the case that Republican gerrymanders in states like Ohio, Georgia, and North Carolina have structurally reduced the number of vulnerable R seats to fewer than 15 — below the threshold Democrats need to flip. Emmer acknowledges tariff headwinds but argues local candidate quality will dominate in toss-up districts.",
-      "date": "2026-04-15",
-      "added": "2026-04-15",
-      "tags": [
-        "House"
-      ]
+      "title": "Washington, D.C. Mayoral Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOM2NFdzdNZkJtaTQ3cHlhQ0t1TmlaOGtPWFRLVjVhQzdZR0FRM2R1cHhsd3lna25zdkFVdHQ3cDAzTTY2bHMySkdqcm9MYnc0Z2pId2xfM1p5d1FTNm5Pd3FDTl9BMmdrOHVRRWxuazJNdXduVGNkY2VEMkhNNm8yMWNlTVpYaXdISEU1MU1zUQ?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T13:16:14.000Z",
+      "tags": [],
+      "description": "Washington, D.C. Mayoral Election 2026: Latest Polls  The New York Times"
     },
     {
-      "type": "Research Paper",
-      "title": "The Generic Ballot Translation Problem: From National Polling to Seat Gains",
-      "source": "Democracy Fund / UCLA Nationscape",
-      "url": "https://democracyfund.org",
-      "description": "New academic research quantifies the 'translation penalty' — in 2022, Democrats won the national House vote by 2.8% but only gained a net 0 seats due to geographic efficiency gaps. The paper models 2026 scenarios showing Democrats need a D+6 or higher national environment to reliably flip the House, due to incumbent R advantages in lean-R toss-up districts.",
-      "date": "2026-03-18",
-      "added": "2026-03-18",
+      "title": "Illinois Ninth Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNT3hVTzJOWk9kejA3RURvWjE3M2lWbWVkN09fS0V2SG9mbVhxVllhUzhKdWNVOUVGVjdXYjJIRTBqYndBUzJFcVMxOWJhMUNLREJrSU91N21VRklrdWpUOExPRUxrczA4cTVGdmF6U3pHNUtBajJaNU0wQzR0Z0Y4N2xEaw?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T13:15:59.000Z",
       "tags": [
-        "House"
-      ]
+        "Federal"
+      ],
+      "description": "Illinois Ninth Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Arizona Governor Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQNndaVm5rbS1IWjJmQzNuakNydlVPVVQ1OHFaTHZHei1iU05xaGhYdjZsbFNlODludF9UUUw1Z0JVeUo1MUNEYVFRbC0tSUY3STNqSE00NlNrUUE5YVBiMzRfUHNEaTlZU08tWVliY3dyR1dmRWJ2dTlLeGJPX2RuQXJDV3g3ek9WMFkw?oc=5",
+      "source": "Emerson (AZ)",
+      "date": "2026-05-16T13:04:17.000Z",
+      "tags": [
+        "Governorship"
+      ],
+      "description": "Arizona Governor Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Lauren Boebert suggests Trump withheld funds to Colorado over prosecution of election denier",
+      "url": "https://www.theguardian.com/us-news/2026/may/16/lauren-boebert-trump-funds-colorado-drink-water-funds-tina-peters",
+      "source": "The Guardian",
+      "date": "2026-05-16T13:02:18.000Z",
+      "tags": [
+        "Federal",
+        "Governorship"
+      ],
+      "description": "Republican said she hoped recent commutation of Tina Peters by governor would free up federal funding for clean drinking waterRepublican congresswoman Lauren Boebert suggested that Donald Trump blocked funds for a clean drinking water project in her state over the prosecution of "
+    },
+    {
+      "title": "Every Ohio public school had to overhaul reading instruction \u2014 even the state's top-ranked district. These 8 religious schools get a pass?",
+      "url": "https://www.cleveland.com/news/2026/05/the-science-of-reading-is-non-negotiable-in-ohio-why-do-some-religious-schools-get-a-pass.html",
+      "source": "Cleveland Plain Dealer",
+      "date": "2026-05-16T13:00:00.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Ohio's Science of Reading mandate was sold as an all-or-nothing overhaul. A new Senate carve-out for eight private classical academies is blowing a hole in that promise."
+    },
+    {
+      "title": "California 40th Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOamdYcWpUeENlcU81V1EzMHJjQ0xqWG8yaUpPWjZxdTlVN3d6aFhLalFXSHZ4LWNJX1JpMV8tcmhBRmg3QVIwM2dqUTJtaS1sM3FTWm5rLTVVazNmeWdOdWE1R19saE5HNEdiTGJzLW55Q0R0MzlBbXlBdUlaVDh5V3JSRENQelE?oc=5",
+      "source": "Google News - Redistricting",
+      "date": "2026-05-16T12:41:01.000Z",
+      "tags": [
+        "Federal",
+        "Major Update",
+        "Redistricting"
+      ],
+      "description": "California 40th Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Illinois Seventh Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNdk4tQ2hXU25VUlp5N3d5cGtqVmhqLWFlcTFUb2JyVFNUSlM4WnFFbVR0bGF2aDAtZjUxQlgyNFRWQzhWRjFEZEZTTmVGc0lVTEdzcXBpTEZIcW9fc2J0YXhQQ0xsaWt6UGZsaTREQm5hNXVSWHhtcmJpSFVnaW5aWE1wZw?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T12:39:54.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Illinois Seventh Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Florida U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxORGtrZEJCdkhXejNsdlFyVUJxcTRjcTQtQWlMUGQxQVc5UnhFWEpYR19GN0VyaE5YNEtzQzd5Tmh4V1RhUjlXVmw2dk9pTG5FQ3JLWk15VFVteGYxNkFQUnpaWWN4RVlILTNna1BDLXhpYzNQSVktbUZpeUNPb0Q3MXI0RGxad3ZMTUtVYw?oc=5",
+      "source": "Stetson Poll (FL)",
+      "date": "2026-05-16T12:38:19.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Florida U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Arkansas U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNSVp4aWJvcE1sOWl3c01ldUVoUmJJUmRNZFRDTmNpQWt2dmRZVHJ5YUlscUo4eWtfM2JOeEcwX3R2WDJQNF8yNjZFNWJxcFc3NS1lMmp1WmFwVVhHWlh2OVJ2LV9JeGFFblZhTlVTaWVzLTBjYW53cXJSdzNZOTZSTnVLbUpBOUxkck5Nampn?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T12:00:15.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Arkansas U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Nebraska U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQai04b2VObzBCUm05bjZ0NHNWY1YxbXlPR0t6cktsdkRaeUpRaHVBbzVsc2xILU1fRTNQY0xvT01SalZNQU9LTDQ0bVBLbnF6aGg0VUxXa0hPSG1NdGd5UWZOWUVhUjhqRXdQU2tEWnhIcWNQYm4tNWR1eHotczVvQmFUejZJbTFpR3NCdUhR?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T11:29:40.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Nebraska U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Montana U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOdkJha2xvY1JodndZRHhqZ2t4SGphOGVzZ1M4WGtFZFJPczNoRWx1X040UHRpVk5vVFVlZkRfZkIxaENBZFRwWGdTbjEtY2VhNVJhWVJ2Z0taNXZIeVpKTXRaTkxiRzg3RHJqanA0OGE1dEM1MkptUlZUM0dpWExhYmo3Q0NHNk9uRHVuaw?oc=5",
+      "source": "Siena/NYT (NE)",
+      "date": "2026-05-16T11:29:40.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Montana U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Illinois U.S. Senate Election 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNV1pqd1ktWHFTVnJLSHRrX0Z0cC05T3lfTGJtS21SbVNjQk00TDVjcHc5blBUeWRMTmNkV2Z1ZDhxXy0yMDllaDYyNXZFVFhIX0owaFRrdXRpd0pLa0puSjFPcV9OSDhSSGpORUc0R3JmZWpQeTNOQkIxRXBLaXMxV2w4dk9meWRqcGMzaHd3?oc=5",
+      "source": "Emerson (CO)",
+      "date": "2026-05-16T11:28:27.000Z",
+      "tags": [
+        "Senate"
+      ],
+      "description": "Illinois U.S. Senate Election 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Republican Louisiana senator in tough primary after Trump backs opponent",
+      "url": "https://www.theguardian.com/us-news/2026/may/16/trump-bill-cassidy-louisiana-senate-race",
+      "source": "The Guardian",
+      "date": "2026-05-16T11:00:09.000Z",
+      "tags": [
+        "Senate",
+        "Federal",
+        "Primary"
+      ],
+      "description": "Bill Cassidy raised ire of US president for voting to impeach after January 6 \u2013 so Trump is backing Julia LetlowThe power of Donald Trump\u2019s endorsement will be put to its latest test on Saturday, when Louisiana holds primary elections in which the US senator Bill Cassidy, who vot"
+    },
+    {
+      "title": "State legislator seeks to criminalize display of sexually explicit material to children &#124; A LOOK BACK",
+      "url": "https://www.coloradopolitics.com/2026/05/16/state-legislator-seeks-to-criminalize-display-of-sexually-explicit-material-to-children-a-look-back/",
+      "source": "Colorado Politics",
+      "date": "2026-05-16T11:00:00.000Z",
+      "tags": [
+        "House",
+        "Senate",
+        "Federal"
+      ],
+      "description": "by Rachael Wright Forty-Five Years Ago This Week: Legislation sponsored by Rep. Bev Scherling, R-Aurora, sought to prohibit sexually explicit material from being distributed to minors. Scherling\u2019s House Bill 81-1310 stated that the \u201csale, loan, or display to persons under the age"
+    },
+    {
+      "title": "South Dakota At-Large Congressional District 2026: Latest Polls - The New York Times",
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxORE9DRENfbUdJZTVIMUc1cTBiU3pnc2VCdG42Ql94SmNuWDEyZGhva1VZV1NCRzZLQUVQVjZBTnBRdDhCcjN6aWVoaWI2RzNpZkphTXFkY0VUbDdPTTVLVXRhWVdwZnVfX080WU41OThtZl9qanZwM1djVEhaQk1Vc09iXzJ1Y1E5aWxfZDhpZmhRdw?oc=5",
+      "source": "Emerson (CO)",
+      "date": "2026-05-16T10:59:27.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "South Dakota At-Large Congressional District 2026: Latest Polls  The New York Times"
+    },
+    {
+      "title": "Can a Republican defy Donald Trump and survive? Kentucky voters will decide",
+      "url": "https://www.theguardian.com/us-news/2026/may/16/kentucky-republican-primary-election-massie-gallrein",
+      "source": "The Guardian",
+      "date": "2026-05-16T10:00:07.000Z",
+      "tags": [
+        "Federal"
+      ],
+      "description": "Congressman Thomas Massie, chastized by the US president as a \u2018lowlife\u2019, will soon face the ballot box \u2013 setting up a crucial test of Trump\u2019s political strengthAt Pee Wee\u2019s Place, a bar and restaurant in Crescent Springs, northern Kentucky, biscuits and gravy go for $6 and liver "
     }
   ],
+  "analysis": [],
   "races": {
     "senate": {
       "cycle": 2026,
@@ -2911,7 +2724,7 @@
         "r": 53,
         "d": 47
       },
-      "source": "Preliminary analyst estimates — Cook Political Report / Inside Elections / Sabato's Crystal Ball",
+      "source": "Preliminary analyst estimates \u2014 Cook Political Report / Inside Elections / Sabato's Crystal Ball",
       "ratings_summary": {
         "safe_r": 11,
         "likely_r": 5,
@@ -2983,7 +2796,7 @@
           "party": "R",
           "open": true,
           "rating": "Safe R",
-          "note": "Risch not seeking re-election. Idaho is safe Republican — open-seat primary underway."
+          "note": "Risch not seeking re-election. Idaho is safe Republican \u2014 open-seat primary underway."
         },
         {
           "state": "Illinois",
@@ -3055,7 +2868,7 @@
           "party": "D",
           "open": false,
           "rating": "Lean D",
-          "note": "Peters won by 1.5 pts in 2020. Michigan is a key battleground — Republicans recruiting hard."
+          "note": "Peters won by 1.5 pts in 2020. Michigan is a key battleground \u2014 Republicans recruiting hard."
         },
         {
           "state": "Minnesota",
@@ -3100,7 +2913,7 @@
           "party": "D",
           "open": true,
           "rating": "Toss-up",
-          "note": "Shaheen retiring after three terms. New Hampshire is the ultimate swing state — this will be the most expensive race of the cycle."
+          "note": "Shaheen retiring after three terms. New Hampshire is the ultimate swing state \u2014 this will be the most expensive race of the cycle."
         },
         {
           "state": "New Jersey",
@@ -3127,7 +2940,7 @@
           "party": "R",
           "open": false,
           "rating": "Lean R",
-          "note": "Tillis survived 2020 by under 1.8 pts — NC is a perennial battleground. Democrats are competitive."
+          "note": "Tillis survived 2020 by under 1.8 pts \u2014 NC is a perennial battleground. Democrats are competitive."
         },
         {
           "state": "Oklahoma",
@@ -3240,7 +3053,7 @@
           "Georgia",
           "New Hampshire"
         ],
-        "summary": "Democrats need to hold all 13 of their seats up — including toss-ups in GA and NH — and then flip at least 4 of the 4 lean-R seats (IA, ME, MT, NC) to reach 51. A very narrow path."
+        "summary": "Democrats need to hold all 13 of their seats up \u2014 including toss-ups in GA and NH \u2014 and then flip at least 4 of the 4 lean-R seats (IA, ME, MT, NC) to reach 51. A very narrow path."
       }
     },
     "house": {
@@ -3251,7 +3064,7 @@
         "d": 215
       },
       "needed_majority": 218,
-      "source": "Preliminary analyst estimates — Cook Political Report / Inside Elections",
+      "source": "Preliminary analyst estimates \u2014 Cook Political Report / Inside Elections",
       "ratings_summary": {
         "safe_r": 183,
         "likely_r": 14,
@@ -3298,7 +3111,7 @@
           "party": "D",
           "rating": "Lean D",
           "pvp": "R+6",
-          "note": "Golden survived 2022 by crossover appeal. R+6 district — D defying geography.",
+          "note": "Golden survived 2022 by crossover appeal. R+6 district \u2014 D defying geography.",
           "open": false,
           "challenger": "Austin Theriault (R)"
         },
@@ -3308,7 +3121,7 @@
           "party": "R",
           "rating": "Toss-up",
           "pvp": "D+1",
-          "note": "Slotkin's old seat, new D+1 map. Open — Slotkin went to Senate.",
+          "note": "Slotkin's old seat, new D+1 map. Open \u2014 Slotkin went to Senate.",
           "open": true,
           "challenger": "Tom Barrett (R) vs TBD (D)"
         },
@@ -3338,7 +3151,7 @@
           "party": "D",
           "rating": "Lean D",
           "pvp": "R+1",
-          "note": "Pappas flipped to Senate. Open D seat in R+1 district — tightest in NH.",
+          "note": "Pappas flipped to Senate. Open D seat in R+1 district \u2014 tightest in NH.",
           "open": true,
           "challenger": "Russell Prescott (R) vs Maggie Goodlander (D)"
         },
@@ -3348,7 +3161,7 @@
           "party": "D",
           "rating": "Toss-up",
           "pvp": "R+5",
-          "note": "Vasquez won in 2022 by 1,300 votes. R+5 district — top R flip target.",
+          "note": "Vasquez won in 2022 by 1,300 votes. R+5 district \u2014 top R flip target.",
           "open": false,
           "challenger": "Yvette Herrell (R, rematch)"
         },
@@ -3398,7 +3211,7 @@
           "party": "D",
           "rating": "Lean R",
           "pvp": "R+5",
-          "note": "Kaptur held 40+ years. R+5 map now — big vulnerability for longtime incumbent.",
+          "note": "Kaptur held 40+ years. R+5 map now \u2014 big vulnerability for longtime incumbent.",
           "open": false,
           "challenger": "Derek Merrin (R)"
         },
@@ -3408,7 +3221,7 @@
           "party": "R",
           "rating": "Lean D",
           "pvp": "D+1",
-          "note": "Chavez-DeRemer flipped to Senate. Open D+1 seat — competitive both ways.",
+          "note": "Chavez-DeRemer flipped to Senate. Open D+1 seat \u2014 competitive both ways.",
           "open": true,
           "challenger": "Janelle Bynum (D) vs Lori Chavez-DeRemer (R, went Senate)"
         },
@@ -3428,7 +3241,7 @@
           "party": "D",
           "rating": "Lean D",
           "pvp": "R+8",
-          "note": "Cartwright in R+8 district — extraordinary personal vote. Redistricting threat.",
+          "note": "Cartwright in R+8 district \u2014 extraordinary personal vote. Redistricting threat.",
           "open": false,
           "challenger": "Rob Bresnahan (R)"
         },
@@ -3458,7 +3271,7 @@
           "party": "D",
           "rating": "Toss-up",
           "pvp": "R+3",
-          "note": "Perez flipped from Herrera Beutler in 2022. R+3 Southwest WA — lean toss-up.",
+          "note": "Perez flipped from Herrera Beutler in 2022. R+3 Southwest WA \u2014 lean toss-up.",
           "open": false,
           "challenger": "Joe Kent (R)"
         }
@@ -3474,12 +3287,12 @@
         "lean_r": 11,
         "d_needs_from_tossups": 22,
         "r_needs_from_tossups": 21,
-        "summary": "Neither party reaches 218 on safe+likely alone. Democrats (196) must sweep all 9 lean-D seats plus win ≥13 of 22 toss-ups. Republicans (197) need the 11 lean-R seats plus ≥10 toss-ups. The 22 toss-ups are the entire ballgame."
+        "summary": "Neither party reaches 218 on safe+likely alone. Democrats (196) must sweep all 9 lean-D seats plus win \u226513 of 22 toss-ups. Republicans (197) need the 11 lean-R seats plus \u226510 toss-ups. The 22 toss-ups are the entire ballgame."
       }
     },
     "governor": {
       "cycle": 2026,
-      "source": "Preliminary analyst estimates — Ballotpedia / Cook Political Report",
+      "source": "Preliminary analyst estimates \u2014 Ballotpedia / Cook Political Report",
       "races": [
         {
           "state": "California",
@@ -4201,7 +4014,7 @@
         "wave": "large",
         "wave_party": "R",
         "nickname": "Gingrich Revolution",
-        "context": "First-term Clinton backlash. Republicans ran a unified Contract with America platform. Healthcare reform failure energised conservatives. Democrats lost 54 seats — largest loss since 1946.",
+        "context": "First-term Clinton backlash. Republicans ran a unified Contract with America platform. Healthcare reform failure energised conservatives. Democrats lost 54 seats \u2014 largest loss since 1946.",
         "key_factors": [
           "Healthcare reform collapse",
           "Contract with America",
@@ -4281,7 +4094,7 @@
         "wave": "none",
         "wave_party": "R",
         "nickname": "Post-9/11 Rally",
-        "context": "Rare midterm gain for the president's party. 9/11 national unity and Bush's 63% approval — highest any president heading into midterms — propelled Republicans to gains in both chambers. Democrats struggled to oppose the Iraq War.",
+        "context": "Rare midterm gain for the president's party. 9/11 national unity and Bush's 63% approval \u2014 highest any president heading into midterms \u2014 propelled Republicans to gains in both chambers. Democrats struggled to oppose the Iraq War.",
         "key_factors": [
           "9/11 national unity rally",
           "Highest pre-midterm presidential approval in modern history",
@@ -4444,7 +4257,7 @@
         "wave": "large",
         "wave_party": "D",
         "nickname": "Resistance Wave",
-        "context": "Democrats flipped 41 House seats driven by suburban college-educated women voters. The economy was strong but anti-Trump sentiment dominated. Republicans held and expanded Senate majority in a very favourable map — only 9 R seats vs 26 D seats up for election.",
+        "context": "Democrats flipped 41 House seats driven by suburban college-educated women voters. The economy was strong but anti-Trump sentiment dominated. Republicans held and expanded Senate majority in a very favourable map \u2014 only 9 R seats vs 26 D seats up for election.",
         "key_factors": [
           "Anti-Trump suburban backlash",
           "Kavanaugh confirmation hearings",

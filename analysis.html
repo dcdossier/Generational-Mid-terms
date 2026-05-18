@@ -305,30 +305,6 @@ body {
 }
 
 
-/* FORECASTER CONSENSUS */
-.forecaster-header {
-  background: linear-gradient(135deg, var(--navy) 0%, #1a2f4a 100%);
-  padding: 20px 28px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-}
-.forecaster-meta { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
-.forecaster-label { font: 700 11px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--gold); }
-.forecaster-as-of { font: 400 11px var(--sans); color: rgba(255,255,255,.45); }
-.forecaster-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-@media(max-width:600px){ .forecaster-grid { grid-template-columns: 1fr; } }
-.fc-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 14px 16px; }
-.fc-chamber { font: 700 10px var(--sans); letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 6px; }
-.fc-rating { display: inline-block; font: 700 13px var(--sans); padding: 4px 10px; border-radius: 6px; margin-bottom: 8px; }
-.fc-rating-likely-r { background: rgba(192,64,64,.25); color: #FF9090; }
-.fc-rating-lean-r   { background: rgba(224,128,112,.25); color: #FFBB99; }
-.fc-rating-tossup   { background: rgba(201,162,39,.25); color: #FFD97D; }
-.fc-rating-lean-d   { background: rgba(91,143,212,.25); color: #90C0FF; }
-.fc-rating-likely-d { background: rgba(26,94,168,.25); color: #80AAFF; }
-.fc-seats { font: 400 11px var(--sans); color: rgba(255,255,255,.7); margin-bottom: 4px; }
-.fc-summary { font: 400 11px var(--sans); color: rgba(255,255,255,.5); line-height: 1.45; }
-.fc-sources-label { font: 400 10px var(--sans); color: rgba(255,255,255,.35); margin-top: 8px; }
-.forecaster-disclaimer { font: 400 11px var(--sans); color: rgba(255,255,255,.3); margin-top: 12px; line-height: 1.5; }
-
 /* ANALYSIS CARD ENHANCEMENTS */
 .card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .card-tag { font: 700 9px var(--sans); letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
@@ -396,14 +372,6 @@ body {
       <button class="chip" data-type="Interview" onclick="setAnalysisFilter('Interview')">Interview</button>
       <button class="chip" data-type="Post" onclick="setAnalysisFilter('Post')">Post</button>
     </div>
-  </div>
-  <div id="forecaster-header" class="forecaster-header">
-    <div class="forecaster-meta">
-      <span class="forecaster-label">Forecaster Consensus</span>
-      <span class="forecaster-as-of" id="fc-as-of">as of May 2026</span>
-    </div>
-    <div class="forecaster-grid" id="fc-grid"></div>
-    <div class="forecaster-disclaimer" id="fc-disclaimer">Ratings aggregated from Cook Political Report, Sabato’s Crystal Ball, and Inside Elections. Updated when analysts publish rating changes. Not a model-based probabilistic forecast.</div>
   </div>
   <div class="content">
     <div class="analysis-header">
@@ -520,7 +488,6 @@ async function loadData() {
       }
       renderAnalysis();
       renderNews();
-      renderForecasterConsensus(d);
       return;
     } catch(e) { /* try next */ }
   }
@@ -683,39 +650,6 @@ function renderNews() {
       (tagsHtml ? '<div class="news-tags">' + tagsHtml + '</div>' : '');
     listEl.appendChild(el);
   });
-}
-
-/* ---- FORECASTER CONSENSUS ---- */
-function renderForecasterConsensus(d) {
-  const fc = d && d.meta && d.meta.forecaster_consensus;
-  if (!fc) return;
-  const asOf = document.getElementById('fc-as-of');
-  if (asOf && fc.last_updated) {
-    const dt = new Date(fc.last_updated);
-    asOf.textContent = 'as of ' + dt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  }
-  const grid = document.getElementById('fc-grid');
-  if (!grid) return;
-  const chambers = [
-    { key: 'house',     label: 'U.S. House',   data: fc.house,      seatsLabel: 'Projected seats' },
-    { key: 'senate',    label: 'U.S. Senate',   data: fc.senate,     seatsLabel: 'Projected seats' },
-    { key: 'governors', label: 'Governors',      data: fc.governors,  seatsLabel: 'Projected held' },
-  ];
-  grid.innerHTML = chambers.map(ch => {
-    const d = ch.data || {};
-    const ratingKey = 'fc-rating-' + (d.rating_class || 'tossup').replace(/ /g, '-');
-    return `<div class="fc-card">
-      <div class="fc-chamber">${ch.label}</div>
-      <div class="fc-rating ${ratingKey}">${esc(d.rating || 'TBD')}</div>
-      <div class="fc-seats">
-        <span style="color:rgba(255,255,255,.85)">${esc(d.projected_r || '?')} R</span>
-        &nbsp;&middot;&nbsp;
-        <span style="color:rgba(255,255,255,.85)">${esc(d.projected_d || '?')} D</span>
-      </div>
-      <div class="fc-summary">${esc(d.summary || '')}</div>
-      <div class="fc-sources-label">${(d.sources || []).join(' · ')}</div>
-    </div>`;
-  }).join('');
 }
 
 /* ---- HELPERS ---- */

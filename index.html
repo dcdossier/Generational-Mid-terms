@@ -391,6 +391,18 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
       <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-bottom:24px">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
 
+      <!-- TRUMP APPROVAL CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div style="position:relative;height:240px"><canvas id="c-home-trump-approval"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
+      </div>
+
       <!-- RETIREMENTS CHART -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
       <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
@@ -653,6 +665,55 @@ async function loadHomeData() {
       // Duplicate for seamless loop
       ti.innerHTML = itemsHtml + itemsHtml;
     }
+  }
+
+  // Trump approval chart
+  const trump = (data.approval || {}).trump || {};
+  const trumpHist = trump.history || [];
+  const trumpCvs = document.getElementById('c-home-trump-approval');
+  if (trumpHist.length && trumpCvs) {
+    Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+    Chart.defaults.color = '#6B6B6B';
+    const tLabels = trumpHist.map(d => d.month);
+    const tApprove = trumpHist.map(d => d.approve);
+    const tDisapprove = trumpHist.map(d => d.disapprove);
+    // Update inline text from live data
+    const apTxt = document.getElementById('home-trump-approve-txt');
+    const disTxt = document.getElementById('home-trump-disapprove-txt');
+    if (apTxt && trump.approve) apTxt.textContent = trump.approve + '%';
+    if (disTxt && trump.disapprove) disTxt.textContent = trump.disapprove + '%';
+    new Chart(trumpCvs, {
+      type: 'line',
+      data: { labels: tLabels, datasets: [
+        { label: 'Approve', data: tApprove, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+        { label: 'Disapprove', data: tDisapprove, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: {
+            title: i => i[0].label,
+            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
+          }}
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+          y: { min: 30, max: 70, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%' } }
+        }
+      },
+      plugins: [{
+        id: 'gap50', afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(50);
+          ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,0.3)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = '#aaa'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('50%', right + 4, yp + 4);
+          ctx.restore();
+        }
+      }]
+    });
   }
 
   // Congressional retirements history chart

@@ -7,6 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --navy:#0d1b2e;
@@ -159,7 +160,7 @@ body{
 .home-pill{font:600 11px var(--sans);padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
 
 /* LIVE METRICS */
-.home-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.home-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
 @media(max-width:760px){.home-metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.home-metrics{grid-template-columns:1fr 1fr}}
 .metric-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
@@ -278,7 +279,6 @@ body{background:#F5F5DC;color:#1E2232}
 
 <nav class="nav-bar">
   <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
-  <button class="nav-tab" onclick="switchTab('overview',this)">Field Overview</button>
   <button class="nav-tab" onclick="switchTab('map',this)">Race Review</button>
   <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
   <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
@@ -343,6 +343,18 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-sub">Seats that decide control</div>
           <span class="metric-trend mt-nt">435 seats total</span>
         </div>
+        <div class="metric-card">
+          <div class="metric-label">Senate Toss-ups</div>
+          <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)">2</div>
+          <div class="metric-sub">Seats in genuine contention</div>
+          <span class="metric-trend mt-nt">33 seats up in 2026</span>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Members Not Returning</div>
+          <div class="metric-num" id="hm-retiring" style="color:#9B2828">12.5%</div>
+          <div class="metric-sub" id="hm-retiring-sub">67 of 535 members departing</div>
+          <span class="metric-trend mt-dn">&#8599; 2nd highest since 1992</span>
+        </div>
       </div>
 
       <!-- FORECASTER CONSENSUS -->
@@ -375,7 +387,21 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="hfb-note">ME, MI, NV, WI genuine toss-ups</div>
         </div>
       </div>
-      <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-bottom:20px">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
+      <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-bottom:24px">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
+
+      <!-- RETIREMENTS CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. The 2026 total of <strong style="color:#9B2828">67 departures</strong> represents <strong style="color:#9B2828">12.5% of all seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#378ADD"></span>House</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#E24B4A"></span>2026</span>
+          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
+        </div>
+        <div style="position:relative;height:280px"><canvas id="c-home-retirements"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: Brookings Institution Vital Statistics on Congress (1946&ndash;2024); Ballotpedia / NPR tracker (2026).</div>
+      </div>
 
       <!-- LATEST NEWS -->
       <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
@@ -389,12 +415,6 @@ body{background:#F5F5DC;color:#1E2232}
       <!-- SECTION CARDS -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
       <div class="home-sections">
-        <button class="home-section-card" onclick="switchTabByName('overview')">
-          <div class="hsc-icon">&#128202;</div>
-          <div class="hsc-title">Field Overview</div>
-          <div class="hsc-desc">Retirements tracker, approval ratings, generic ballot, party favourability, Congress approval, faction tracker, redistricting watch, previous elections, and key races — all in one place.</div>
-          <div class="hsc-sub-tabs"><span class="hsc-tag">Retirements</span><span class="hsc-tag">Polling</span><span class="hsc-tag">Key Races</span><span class="hsc-tag">Redistricting</span></div>
-        </button>
         <button class="home-section-card" onclick="switchTabByName('map')">
           <div class="hsc-icon">&#128506;</div>
           <div class="hsc-title">Race Review</div>
@@ -437,7 +457,7 @@ body{background:#F5F5DC;color:#1E2232}
     <div class="spinner"></div>
     <div class="loading-text">Loading&#8230;</div>
   </div>
-  <iframe class="tab-frame" id="frame-overview" src="overview.html" title="Field Overview"></iframe>
+  <iframe class="tab-frame" id="frame-overview" src="" data-src="overview.html" title="Field Overview"></iframe>
   <iframe class="tab-frame" id="frame-map" src="" data-src="map.html" title="Race Review"></iframe>
   <iframe class="tab-frame" id="frame-india" src="" data-src="india.html" title="India's Interest"></iframe>
   <iframe class="tab-frame" id="frame-analysis" src="" data-src="analysis.html" title="Analysis & Commentary"></iframe>
@@ -563,6 +583,15 @@ async function loadHomeData() {
   const hs = races.house || {};
   if (hs.ratings_summary) set('hm-tossups', hs.ratings_summary.toss_up || '—');
 
+  const ss = races.senate || {};
+  if (ss.ratings_summary) set('hm-senate-tossups', ss.ratings_summary.toss_up ?? 2);
+
+  const ret = data.retirements || {};
+  const retTotal = ret.total || 67;
+  const retPct = Math.round(retTotal / 535 * 10) / 10;
+  set('hm-retiring', retPct + '%');
+  set('hm-retiring-sub', retTotal + ' of 535 members departing');
+
   // Forecaster consensus from meta
   const fc = data.meta && data.meta.forecaster_consensus;
   if (fc) {
@@ -626,6 +655,59 @@ async function loadHomeData() {
       // Duplicate for seamless loop
       ti.innerHTML = itemsHtml + itemsHtml;
     }
+  }
+
+  // Congressional retirements history chart
+  const hcData = (data.retirements || {}).historical_chart || [];
+  const cvs = document.getElementById('c-home-retirements');
+  if (hcData.length && cvs) {
+    Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+    Chart.defaults.color = '#6B6B6B';
+    const hYrs = hcData.map(d => d.year);
+    const hH   = hcData.map(d => d.house);
+    const hS   = hcData.map(d => d.senate);
+    const hT   = hcData.map(d => d.house + d.senate);
+    const hAvg = 40;
+    new Chart(cvs, {
+      type: 'bar',
+      data: { labels: hYrs, datasets: [
+        { label: 'House',  data: hH, backgroundColor: hYrs.map(y => y === '2026' ? '#E24B4A' : '#378ADD'), stack: 's', borderSkipped: false, borderRadius: { topLeft: 1, topRight: 1 } },
+        { label: 'Senate', data: hS, backgroundColor: hYrs.map(y => y === '2026' ? '#F9A89D' : '#B5D4F4'), stack: 's', borderSkipped: false },
+      ]},
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: {
+            title: i => `${i[0].label} election`,
+            afterBody: i => [`Total: ${hT[i[0].dataIndex]}  ·  Post-WWII avg: ${hAvg}`]
+          }}
+        },
+        scales: {
+          x: { stacked: true, grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45, autoSkip: false, callback: (_, i) => i % 2 === 0 ? hYrs[i] : '' } },
+          y: { stacked: true, max: 88, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', stepSize: 20 } }
+        }
+      },
+      plugins: [
+        { id: 'avg', afterDraw(c) {
+          const { ctx, chartArea: { left, right }, scales: { y } } = c;
+          const yp = y.getPixelForValue(hAvg);
+          ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(100,100,100,.35)'; ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+          ctx.fillStyle = '#999'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('avg 40', right + 4, yp + 4);
+          ctx.restore();
+        }},
+        { id: 'lbl', afterDraw(c) {
+          const { ctx, scales: { x, y } } = c;
+          [['1992','Record 72','#7a1c1c'],['2026','2nd highest ↑','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
+            const i = hYrs.indexOf(yr); if (i < 0) return;
+            const xp = x.getPixelForValue(i); const yp = y.getPixelForValue(hT[i]) - 8;
+            ctx.save(); ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
+          });
+        }}
+      ]
+    });
   }
 }
 

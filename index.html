@@ -217,6 +217,16 @@ body{
 .hsc-sub-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
 .hsc-tag{font:500 10px var(--sans);background:rgba(201,168,76,.1);color:var(--gold);padding:1px 7px;border-radius:8px;border:1px solid rgba(201,168,76,.2)}
 
+/* CHART WRAPPERS */
+.chart-wrap{position:relative;height:240px}
+.chart-wrap-lg{position:relative;height:280px}
+.chart-wrap-sm{position:relative;height:220px}
+@media(max-width:600px){
+  .chart-wrap{height:180px}
+  .chart-wrap-lg{height:200px}
+  .chart-wrap-sm{height:160px}
+}
+
 /* HOME FOOTER */
 .home-footer{text-align:center;font:400 11px var(--sans);color:var(--t-muted);padding-top:16px;border-top:1px solid var(--br)}
 .home-freshness{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.08);border:1px solid var(--br);border-radius:20px;padding:4px 12px;margin-bottom:8px}
@@ -224,9 +234,36 @@ body{
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 
 @media(max-width:600px){
-  .header{padding:0 16px;height:54px}
-  .header-title{font-size:14px}
-  .nav-tab{padding:12px 14px;font-size:12px}
+  .header{padding:0 12px;height:50px}
+  .header-logo{height:38px}
+  .header-title{font-size:13px}
+  .header-sub{display:none}
+  .countdown-label{font-size:9px}
+  .countdown-timer{font-size:13px}
+  .countdown-sub{display:none}
+  .nav-tab{padding:11px 12px;font-size:12px}
+  .ticker-wrap{height:26px}
+  .ticker-label{font-size:8px;padding:0 10px}
+  .ticker-item{font-size:10px;padding:0 20px}
+  .home-body{padding:20px 14px 40px}
+  .home-hero{padding:22px 20px;margin-bottom:20px}
+  .home-h1{font-size:19px}
+  .home-desc{font-size:13px;margin-bottom:16px}
+  .home-days{font-size:40px}
+  .home-days-label{font-size:13px}
+  .home-hero-pills{gap:6px;margin-top:14px}
+  .home-pill{font-size:10px;padding:3px 9px}
+  .home-metrics{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+  .metric-card{padding:14px 14px}
+  .metric-num{font-size:24px}
+  .home-forecast{margin-bottom:20px}
+  .hfb-card{padding:14px 14px}
+  .home-news-source{width:70px;font-size:8px}
+  .home-news-item{gap:10px;padding:12px 0}
+  .home-news-title{font-size:12px}
+  .home-sections{gap:10px;margin-bottom:20px}
+  .home-section-card{padding:16px 16px}
+  .hsc-title{font-size:14px}
 }
 
 /* ── Colour overrides ── */
@@ -400,7 +437,7 @@ body{background:#F5F5DC;color:#1E2232}
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
         </div>
-        <div style="position:relative;height:240px"><canvas id="c-home-trump-approval"></canvas></div>
+        <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
       </div>
 
@@ -412,7 +449,7 @@ body{background:#F5F5DC;color:#1E2232}
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
         </div>
-        <div style="position:relative;height:220px"><canvas id="c-home-congress-approval"></canvas></div>
+        <div class="chart-wrap-sm"><canvas id="c-home-congress-approval"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
       </div>
 
@@ -426,7 +463,7 @@ body{background:#F5F5DC;color:#1E2232}
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#E24B4A"></span>2026</span>
           <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
         </div>
-        <div style="position:relative;height:280px"><canvas id="c-home-retirements"></canvas></div>
+        <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
       </div>
 
@@ -438,7 +475,7 @@ body{background:#F5F5DC;color:#1E2232}
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
           <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
         </div>
-        <div style="position:relative;height:240px"><canvas id="c-home-cpi"></canvas></div>
+        <div class="chart-wrap"><canvas id="c-home-cpi"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. Year-over-year % change, Jan 2025 &ndash; Apr 2026.</div>
       </div>
 

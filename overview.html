@@ -5450,7 +5450,7 @@ function ratingsStrip(summary, total) {
 function pathBox(el, info) {
   if (!el || !info) return;
   const tags = (info.flip_targets || info.tossups || []).map(t => `<span class="kr-path-tag">${t}</span>`).join('');
-  el.innerHTML = `<div class="kr-path-title">&#128204; Path to Majority</div>
+  el.innerHTML = `<div class="kr-path-title">&#9654; Path to Majority</div>
     <div class="kr-path-text">${info.summary}</div>
     ${tags ? `<div class="kr-path-targets">${tags}</div>` : ''}`;
 }

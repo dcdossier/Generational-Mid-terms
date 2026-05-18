@@ -351,9 +351,10 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
         <div class="metric-card">
           <div class="metric-label">Members Not Returning</div>
-          <div class="metric-num" id="hm-retiring" style="color:#9B2828">12.5%</div>
-          <div class="metric-sub" id="hm-retiring-sub">67 of 535 members departing</div>
-          <span class="metric-trend mt-dn">&#8599; 2nd highest since 1992</span>
+          <div class="metric-num" style="color:#9B2828;font-size:20px;line-height:1.3;padding-top:4px">1 in 8 members<br>retiring from Congress</div>
+          <div class="metric-sub" style="margin-top:6px">69 departures &mdash; 2nd highest in history</div>
+          <span class="metric-trend mt-dn" style="margin-top:6px">45% running for higher office</span>
+          <div class="metric-sub" style="margin-top:4px">Governorships &amp; state legislatures &mdash; among the highest in history</div>
         </div>
       </div>
 
@@ -391,7 +392,7 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- RETIREMENTS CHART -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. The 2026 total of <strong style="color:#9B2828">67 departures</strong> represents <strong style="color:#9B2828">12.5% of all seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades.</p>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. The 2026 total of <strong style="color:#9B2828">69 departures</strong> represents roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades.</p>
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#378ADD"></span>House</span>
@@ -586,11 +587,7 @@ async function loadHomeData() {
   const ss = races.senate || {};
   if (ss.ratings_summary) set('hm-senate-tossups', ss.ratings_summary.toss_up ?? 2);
 
-  const ret = data.retirements || {};
-  const retTotal = ret.total || 67;
-  const retPct = Math.round(retTotal / 535 * 10) / 10;
-  set('hm-retiring', retPct + '%');
-  set('hm-retiring-sub', retTotal + ' of 535 members departing');
+  // retiring card is static text; no dynamic overwrite needed
 
   // Forecaster consensus from meta
   const fc = data.meta && data.meta.forecaster_consensus;

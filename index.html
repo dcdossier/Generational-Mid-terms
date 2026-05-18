@@ -435,7 +435,7 @@ body{background:#F5F5DC;color:#1E2232}
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
-          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 data gap</span>
+          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
         </div>
         <div style="position:relative;height:240px"><canvas id="c-home-cpi"></canvas></div>
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. Year-over-year % change, Jan 2025 &ndash; Apr 2026.</div>
@@ -784,8 +784,10 @@ async function loadHomeData() {
   const cpiData = (data.cpi || {}).history || [];
   const cpiCvs  = document.getElementById('c-home-cpi');
   if (cpiData.length && cpiCvs) {
-    const cpiMonths = cpiData.map(row => row.month);
-    const cpiAll    = cpiData.map(row => row.all_items !== null ? row.all_items : null);
+    const cpiMonths    = cpiData.map(row => row.month);
+    const cpiAll       = cpiData.map(row => row.all_items);
+    const cpiEstimated = cpiData.map(row => row.estimated || false);
+    const octIdx       = cpiMonths.indexOf('Oct 2025');
     new Chart(cpiCvs, {
       type: 'line',
       data: { labels: cpiMonths, datasets: [{
@@ -793,14 +795,19 @@ async function loadHomeData() {
         data: cpiAll,
         borderColor: '#581845',
         backgroundColor: 'rgba(88,24,69,0.08)',
-        pointBackgroundColor: cpiAll.map(v => v === null ? 'transparent' : '#581845'),
-        pointRadius: cpiAll.map(v => v === null ? 0 : 4),
-        pointBorderColor: '#fff',
-        pointBorderWidth: 1.5,
+        pointBackgroundColor: cpiEstimated.map(e => e ? '#fff' : '#581845'),
+        pointBorderColor:     cpiEstimated.map(e => e ? '#581845' : '#fff'),
+        pointBorderWidth:     cpiEstimated.map(e => e ? 2 : 1.5),
+        pointRadius:          cpiEstimated.map(e => e ? 5 : 4),
+        pointStyle:           cpiEstimated.map(e => e ? 'circle' : 'circle'),
         borderWidth: 2.5,
         tension: 0.3,
         fill: true,
-        spanGaps: false
+        spanGaps: true,
+        segment: {
+          borderDash:  ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? [6, 4] : undefined,
+          borderColor: ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? 'rgba(88,24,69,0.45)' : '#581845'
+        }
       }]},
       options: {
         responsive: true, maintainAspectRatio: false,
@@ -809,7 +816,10 @@ async function loadHomeData() {
           legend: { display: false },
           tooltip: { callbacks: {
             title: ctx => ctx[0].label,
-            label: ctx => ctx.raw !== null ? ` CPI: ${ctx.raw}%` : ' Data not available'
+            label: ctx => {
+              const est = cpiEstimated[ctx[0].dataIndex];
+              return est ? ' CPI: ~' + ctx[0].raw + '% (estimated — no data, govt. shutdown)' : ' CPI: ' + ctx[0].raw + '%';
+            }
           }}
         },
         scales: {
@@ -817,16 +827,38 @@ async function loadHomeData() {
           y: { min: 1, max: 5, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 1 } }
         }
       },
-      plugins: [{
-        id: 'cpiTarget', afterDraw(ch) {
-          const { ctx, chartArea: { left, right }, scales: { y } } = ch;
-          const yp = y.getPixelForValue(2);
-          ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(88,24,69,0.4)'; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
-          ctx.fillStyle = '#581845'; ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillText('Fed target 2%', right + 4, yp + 4);
-          ctx.restore();
-        }
-      }]
+      plugins: [
+        { id: 'cpiTarget', afterDraw(ch) {
+            const { ctx, chartArea: { left, right }, scales: { y } } = ch;
+            const yp = y.getPixelForValue(2);
+            ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(88,24,69,0.4)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
+            ctx.fillStyle = '#581845'; ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillText('Fed target 2%', right + 4, yp + 4);
+            ctx.restore();
+        }},
+        { id: 'cpiShutdown', afterDraw(ch) {
+            if (octIdx < 0) return;
+            const { ctx, chartArea: { top, bottom }, scales: { x, y } } = ch;
+            const xp = x.getPixelForValue(octIdx);
+            const yp = y.getPixelForValue(cpiAll[octIdx]);
+            // vertical dashed marker
+            ctx.save();
+            ctx.setLineDash([3, 3]); ctx.strokeStyle = 'rgba(88,24,69,0.25)'; ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
+            // label box
+            const txt = 'No-data: Govt. Shutdown';
+            ctx.font = '500 9px DM Sans,sans-serif';
+            const tw = ctx.measureText(txt).width;
+            const bx = Math.min(xp - tw / 2 - 4, ch.width - tw - 12);
+            const by = top + 6;
+            ctx.fillStyle = 'rgba(255,255,255,0.88)';
+            ctx.fillRect(bx, by, tw + 8, 14);
+            ctx.fillStyle = '#581845';
+            ctx.textAlign = 'left';
+            ctx.fillText(txt, bx + 4, by + 10);
+            ctx.restore();
+        }}
+      ]
     });
   }
 

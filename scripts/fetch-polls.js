@@ -430,7 +430,7 @@ ${text}`
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function fetchRetirements(data) {
-  console.log('[5/6] Retirements (Groq + Ballotpedia)…');
+  console.log('[5/6] Retirements (Ballotpedia — regex + Groq)…');
   const BP_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
 
   let html;
@@ -444,37 +444,66 @@ async function fetchRetirements(data) {
     return false;
   }
 
-  const text = stripHtml(html).slice(0, 16000);
-  const result = await groqExtract(
-    'You are a precise data extraction assistant. Count congressional members from page text. Return valid JSON with integers.',
-    `From this Ballotpedia page tracking US Congress members who are NOT seeking re-election in 2026, count:
-- Total members not seeking re-election (all chambers combined)
-- Republicans not seeking re-election
-- Democrats not seeking re-election
-- House members not seeking re-election
-- Senate members not seeking re-election
+  // Strip HTML and find the summary paragraph (it appears after the page JS noise)
+  const fullText = stripHtml(html);
 
-Look for summary statistics, table counts, or totals. Return JSON:
-{"total": INTEGER, "republican": INTEGER, "democrat": INTEGER, "house": INTEGER, "senate": INTEGER}
-
-Page text:
-${text}`
+  // ── Regex-first: Ballotpedia always has a sentence like:
+  // "As of [date], 68 voting members of the U.S. Congress — 11 members of the U.S. Senate
+  //  and 57 members of the U.S. House of Representatives — are not seeking re-election"
+  const summaryMatch = fullText.match(
+    /(\d+)\s+voting members of the U\.S\. Congress[^.]*?(\d+)\s+members of the U\.S\. Senate[^.]*?(\d+)\s+members of the U\.S\. House/i
   );
 
-  if (result?.total > 20 && result?.total < 250) {
-    const prev = data.retirements.total;
-    data.retirements.total = result.total;
-    if (result.republican > 0 && result.republican < 200) data.retirements.republican = result.republican;
-    if (result.democrat   > 0 && result.democrat   < 200) data.retirements.democrat   = result.democrat;
-    if (result.house      > 0 && result.house      < 200) data.retirements.house      = result.house;
-    if (result.senate     > 0 && result.senate     < 100) data.retirements.senate     = result.senate;
+  let total = null, senate = null, house = null;
+  if (summaryMatch) {
+    total  = parseInt(summaryMatch[1], 10);
+    senate = parseInt(summaryMatch[2], 10);
+    house  = parseInt(summaryMatch[3], 10);
+    console.log(`  [Regex] total=${total} senate=${senate} house=${house}`);
+  }
 
-    const changed = prev !== result.total ? ` (was ${prev})` : '';
-    console.log(`  Retirements: ${result.total} total${changed} (R=${result.republican} D=${result.democrat} House=${result.house} Senate=${result.senate})`);
+  // ── Groq: extract R/D breakdown and verify/supplement totals
+  // Send the key summary paragraphs (skip the first 5k of JS boilerplate)
+  const summaryStart = fullText.indexOf('voting members of the U.S. Congress');
+  const relevantText = summaryStart > 0
+    ? fullText.slice(Math.max(0, summaryStart - 200), summaryStart + 4000)
+    : fullText.slice(0, 8000);
+
+  const result = await groqExtract(
+    'You are a precise data extraction assistant. Extract congressional retirement counts from Ballotpedia. Return valid JSON with integers only.',
+    `From this Ballotpedia summary about US Congress members NOT seeking re-election in 2026, extract the counts.
+The text contains sentences like "X Democrats and Y Republicans" for Senate and House separately.
+Sum them across all categories (retiring + running for other office) to get total R and total D.
+
+Return JSON: {"total": INTEGER, "republican": INTEGER, "democrat": INTEGER, "house": INTEGER, "senate": INTEGER}
+
+Text:
+${relevantText}`
+  );
+
+  // Merge regex (more reliable for totals) with Groq (better for R/D split)
+  const merged = {
+    total:      total  ?? result?.total,
+    senate:     senate ?? result?.senate,
+    house:      house  ?? result?.house,
+    republican: result?.republican || null,
+    democrat:   result?.democrat   || null,
+  };
+
+  if (merged.total > 20 && merged.total < 250) {
+    const prev = data.retirements.total;
+    data.retirements.total  = merged.total;
+    if (merged.senate > 0 && merged.senate < 100) data.retirements.senate = merged.senate;
+    if (merged.house  > 0 && merged.house  < 200) data.retirements.house  = merged.house;
+    if (merged.republican > 0 && merged.republican < 200) data.retirements.republican = merged.republican;
+    if (merged.democrat   > 0 && merged.democrat   < 200) data.retirements.democrat   = merged.democrat;
+
+    const changed = prev !== merged.total ? ` (was ${prev})` : '';
+    console.log(`  Retirements: ${merged.total} total${changed} (R=${merged.republican ?? '?'} D=${merged.democrat ?? '?'} House=${merged.house} Senate=${merged.senate})`);
     return true;
   }
 
-  console.warn(`  [Retirements] Extraction result out of range or failed: ${JSON.stringify(result)}`);
+  console.warn(`  [Retirements] Could not extract valid counts: ${JSON.stringify(merged)}`);
   return false;
 }
 

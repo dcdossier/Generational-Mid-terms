@@ -408,7 +408,7 @@ body {
 .vote-bill { font: 600 13px var(--sans); color: var(--text); }
 .vote-desc { font: 400 11px var(--sans); color: var(--text3); margin-top: 2px; }
 
-/* ── MEMBERS OF INDIA'S INTEREST PANEL ── */
+/* ── INDIA-RELEVANT RACES PANEL ── */
 /* Inner sub-nav */
 .inner-subnav {
   display: flex;
@@ -651,6 +651,49 @@ body {
   .tier-dot { font-size: 10px; }
   .sub-nav { overflow-x: auto; padding: 0 12px; }
   .sub-tab { padding: 12px 14px; font-size: 12px; }
+  .news-grid { grid-template-columns: 1fr; }
+}
+/* ── MEMBER NEWS FEED ── */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+  margin-top: 4px;
+}
+.news-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.news-card-source {
+  font: 500 10px var(--sans);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.news-card-member {
+  display: inline-block;
+  font: 600 10px var(--sans);
+  color: #fff;
+  background: var(--navy);
+  border-radius: 3px;
+  padding: 1px 6px;
+}
+.news-card-title {
+  font: 600 13px var(--serif);
+  color: var(--text);
+  line-height: 1.4;
+  text-decoration: none;
+}
+.news-card-title:hover { color: var(--accent); }
+.news-card-date {
+  font: 400 10px var(--sans);
+  color: var(--text3);
+  margin-top: auto;
 }
 </style>
 </head>
@@ -659,8 +702,8 @@ body {
 <!-- SUB-NAV -->
 <nav class="sub-nav">
   <button class="sub-tab active" data-tab="stakes" onclick="switchTab('stakes')">Policy &amp; Stakes</button>
-  <button class="sub-tab" data-tab="presence" onclick="switchTab('presence')">Members of Indian origin</button>
-  <button class="sub-tab" data-tab="interest" onclick="switchTab('interest')">Members of India's interest</button>
+  <button class="sub-tab" data-tab="presence" onclick="switchTab('presence')">Indian Diaspora</button>
+  <button class="sub-tab" data-tab="interest" onclick="switchTab('interest')">India-Relevant Races</button>
   <div class="nav-spacer"></div>
   <div class="flag-strip" title="India">
     <span style="background:#FF9933"></span>
@@ -904,7 +947,7 @@ body {
 </div><!-- /page-body -->
 </div><!-- /panel-stakes -->
 
-<!-- PANEL: MEMBERS OF INDIAN ORIGIN -->
+<!-- PANEL: INDIAN DIASPORA -->
 <div id="panel-presence" class="panel">
 <div class="page-body">
 
@@ -1221,13 +1264,13 @@ body {
 </div><!-- /panel-presence -->
 
 
-<!-- PANEL: MEMBERS OF INDIA'S INTEREST -->
+<!-- PANEL: INDIA-RELEVANT RACES -->
 <div id="panel-interest" class="panel">
 <div class="page-body">
 
   <div class="hero" style="margin-bottom:28px">
     <div class="hero-eyebrow">119th Congress &mdash; India-Active Member Roster</div>
-    <h1>Members of India's Interest</h1>
+    <h1>India-Relevant Races</h1>
     <p>29 members of Congress tracked for their bearing on US-India relations: committee leadership, legislative sponsorship, and publicly stated positions on India policy. Sources: <a href="https://huizenga.house.gov/news/" style="color:var(--gold)">member office newsrooms</a> and internal research roster (India -interest.xlsx).</p>
     <div class="hero-stats">
       <div class="hstat"><span class="hstat-num">5</span><span class="hstat-label">Tier 1 Largely Supportive</span></div>
@@ -1323,6 +1366,25 @@ body {
       </tbody>
     </table>
     </div>
+  </div>
+
+  <!-- MEMBER NEWS FEED -->
+  <div class="section" id="interest-news-section" style="margin-top:32px">
+    <div class="section-header">
+      <h2>Member News Feed</h2>
+      <span class="section-sub">Live news mentioning tracked India-Relevant members &mdash; filtered from state &amp; political RSS sources</span>
+    </div>
+    <div class="callout">
+      Articles below are drawn from the same state-level and political news RSS feeds linked to each member. Only articles that mention a tracked member by name are shown.
+    </div>
+    <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+      <input type="search" id="news-member-search" class="map-ctrl-search" style="max-width:260px" placeholder="Filter by member name&hellip;" oninput="filterMemberNews(this.value)">
+      <span id="news-count" style="font:400 11px var(--sans);color:var(--text3)"></span>
+      <button onclick="loadMemberNews(true)" style="margin-left:auto;font:500 11px var(--sans);color:var(--navy);background:none;border:1px solid var(--border);border-radius:4px;padding:4px 10px;cursor:pointer">&#8635; Refresh</button>
+    </div>
+    <div id="news-loading" style="font:400 13px var(--sans);color:var(--text3);padding:16px 0">Loading member news&hellip;</div>
+    <div id="news-grid" class="news-grid" style="display:none"></div>
+    <p style="font:400 10px var(--sans);color:var(--text3);margin-top:12px">Sources: state political news RSS feeds associated with each tracked member. Articles refreshed on page load. CORS proxy used for cross-origin feeds.</p>
   </div>
 
 </div><!-- /page-body -->
@@ -1781,6 +1843,138 @@ new Chart(document.getElementById('c-ia-alignment'), {
 
 // ── INIT ───────────────────────────────────────────────────────────────────
 buildRoster();
+
+// ── MEMBER NEWS FEED ────────────────────────────────────────────────────────
+// Collect all unique RSS URLs from MEMBERS array
+const _memberNewsFeeds = [...new Set(MEMBERS.filter(m => m.news).map(m => m.news))];
+
+// Normalize text: strip diacritics, lowercase (handles André → andre)
+function _norm(s) {
+  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+// Build a map: keyword → member name for fast matching
+const _memberKeywords = MEMBERS.map(m => ({
+  name: m.name,
+  keywords: _norm(m.name).split(/\s+/)
+}));
+
+function _articleMentionsMember(text) {
+  const lower = _norm(text);
+  for (const mk of _memberKeywords) {
+    const lastName = mk.keywords[mk.keywords.length - 1];
+    const fullName = mk.keywords.join(' ');
+    if (lower.includes(fullName) || (lastName.length > 3 && lower.includes(lastName) && lower.includes(mk.keywords[0]))) {
+      return mk.name;
+    }
+  }
+  return null;
+}
+
+let _allNewsItems = [];
+let _newsSearchQuery = '';
+
+function filterMemberNews(query) {
+  _newsSearchQuery = query.trim().toLowerCase();
+  _renderNews();
+}
+
+function _renderNews() {
+  const grid = document.getElementById('news-grid');
+  const countEl = document.getElementById('news-count');
+  if (!grid) return;
+  const items = _newsSearchQuery
+    ? _allNewsItems.filter(i => i.member.toLowerCase().includes(_newsSearchQuery) || i.title.toLowerCase().includes(_newsSearchQuery))
+    : _allNewsItems;
+  if (items.length === 0) {
+    grid.innerHTML = '<p style="font:400 13px var(--sans);color:var(--text3);grid-column:1/-1">No matching articles found.</p>';
+  } else {
+    grid.innerHTML = items.map(item => `
+      <div class="news-card">
+        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+          <span class="news-card-source">${item.source}</span>
+          <span class="news-card-member">${item.member}</span>
+        </div>
+        <a href="${item.link}" target="_blank" rel="noopener" class="news-card-title">${item.title}</a>
+        <div class="news-card-date">${item.date}</div>
+      </div>
+    `).join('');
+  }
+  grid.style.display = 'grid';
+  countEl.textContent = `${items.length} article${items.length !== 1 ? 's' : ''}`;
+}
+
+async function _fetchFeedViaProxy(url) {
+  // Use rss2json API as a CORS proxy
+  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=&count=20`;
+  try {
+    const r = await fetch(api);
+    if (!r.ok) return [];
+    const j = await r.json();
+    if (j.status !== 'ok' || !Array.isArray(j.items)) return [];
+    return j.items.map(item => ({
+      title: (item.title || '').replace(/<[^>]*>/g, '').trim(),
+      link: item.link || item.url || '',
+      description: (item.description || item.content || '').replace(/<[^>]*>/g, '').slice(0, 300),
+      pubDate: item.pubDate || ''
+    }));
+  } catch { return []; }
+}
+
+async function loadMemberNews(force) {
+  if (!force && _allNewsItems.length > 0) return;
+  const loadEl = document.getElementById('news-loading');
+  const grid = document.getElementById('news-grid');
+  if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Loading member news\u2026'; }
+  if (grid) grid.style.display = 'none';
+  _allNewsItems = [];
+
+  // Fetch all feeds in parallel (cap at 15 to avoid rate limits)
+  const feeds = _memberNewsFeeds.slice(0, 15);
+  const results = await Promise.allSettled(feeds.map(url => _fetchFeedViaProxy(url)));
+
+  results.forEach((res, i) => {
+    if (res.status !== 'fulfilled') return;
+    const feedUrl = feeds[i];
+    res.value.forEach(item => {
+      const searchText = item.title + ' ' + item.description;
+      const member = _articleMentionsMember(searchText);
+      if (!member) return;
+      // Parse source label from URL
+      let source = feedUrl.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
+      // Format date
+      let date = '';
+      if (item.pubDate) {
+        try { date = new Date(item.pubDate).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
+        catch { date = item.pubDate.slice(0, 10); }
+      }
+      const ts = item.pubDate ? (new Date(item.pubDate).getTime() || 0) : 0;
+      _allNewsItems.push({ title: item.title, link: item.link, source, member, date, _ts: ts });
+    });
+  });
+
+  // Sort by date descending, deduplicate by link
+  const seen = new Set();
+  _allNewsItems = _allNewsItems
+    .sort((a, b) => b._ts - a._ts)
+    .filter(i => { if (seen.has(i.link)) return false; seen.add(i.link); return true; });
+
+  if (loadEl) loadEl.style.display = 'none';
+  if (_allNewsItems.length === 0) {
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No member-relevant articles found in current feeds.'; }
+    return;
+  }
+  _renderNews();
+}
+
+// Load news when interest tab becomes active — intercept tab switch
+(function() {
+  const _orig = switchTab;
+  window.switchTab = function(name) {
+    _orig(name);
+    if (name === 'interest') loadMemberNews(false);
+  };
+})();
 </script>
 </body>
 </html>

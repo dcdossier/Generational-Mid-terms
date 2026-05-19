@@ -142,8 +142,48 @@ body{
 @keyframes ticker-move{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* HOME PANEL */
-.panel-home{position:absolute;inset:0;overflow-y:auto;background:var(--navy);display:none;scrollbar-width:thin;scrollbar-color:var(--br) transparent}
-.panel-home.active{display:block}
+.panel-home{position:absolute;inset:0;overflow:hidden;background:var(--navy);display:none;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--br) transparent}
+.panel-home.active{display:flex}
+/* HOME SUB-NAV */
+.home-subnav{display:flex;align-items:center;border-bottom:1px solid var(--br);padding:0 20px;background:var(--navy-mid);flex-shrink:0}
+.home-sub-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:12px 16px;cursor:pointer;transition:color .12s,border-color .12s;white-space:nowrap}
+.home-sub-tab:hover{color:var(--beige)}
+.home-sub-tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:600}
+.home-subnav-upd{font:400 10px var(--sans);color:var(--t-muted);margin-left:auto}
+.home-subpanel{display:none;flex:1;overflow-y:auto}
+.home-subpanel.active{display:block}
+/* FULL NEWS PANEL (light theme) */
+.hn-panel-wrap{background:#f8f7f2;min-height:100%}
+.hn-full-toolbar{background:#f0ede6;border-bottom:1px solid #dedad0;padding:14px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
+.hn-full-search{font:400 13px var(--sans);color:#1a1a1a;background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 12px 7px 34px;width:240px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;transition:border-color .12s}
+.hn-full-search:focus{border-color:#8a6a00}
+.hn-full-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hn-full-chip{font:500 12px var(--sans);padding:5px 12px;border-radius:20px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-full-chip:hover{border-color:#8a6a00;color:#222}
+.hn-full-chip.active{background:#1A2B45;color:#fff;border-color:#1A2B45}
+.hn-full-sort{margin-left:auto;font:400 12px var(--sans);color:#444;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 10px;cursor:pointer;outline:none}
+.hn-full-content{padding:20px 28px}
+.hn-results-bar{font:400 12px var(--sans);color:#6b6b6b;padding:4px 0 16px}
+.hn-news-list{display:flex;flex-direction:column;gap:0}
+.hn-news-item{padding:20px 0;border-bottom:1px solid #e0ddd6;display:flex;flex-direction:column;gap:8px}
+.hn-news-item:last-child{border-bottom:none}
+.hn-news-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hn-news-source{font:700 11px var(--sans);color:#6b6b6b;text-transform:uppercase;letter-spacing:.06em}
+.hn-news-date{font:400 11px var(--sans);color:#9b9b9b;margin-left:auto}
+.hn-news-title{font:600 16px Georgia,'Source Serif 4',serif;color:#1a1a1a;line-height:1.4;text-decoration:none}
+.hn-news-title:hover{color:#8a6a00}
+.hn-news-desc{font:400 13px var(--sans);color:#4a4a4a;line-height:1.6}
+.hn-news-tags{display:flex;gap:6px;flex-wrap:wrap}
+.hn-tag{font:700 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.hn-tag-major{background:#FEE2E2;color:#991B1B}
+.hn-tag-senate{background:#DBEAFE;color:#1E3A8A}
+.hn-tag-house{background:#EDE9FE;color:#4C1D95}
+.hn-tag-federal{background:#F1F5F9;color:#1E293B}
+.hn-tag-gov{background:#CCFBF1;color:#134E4A}
+.hn-tag-primary{background:#FEF3C7;color:#92400E}
+.hn-tag-redistricting{background:#ECFDF5;color:#065F46}
+.hn-tag-polling{background:#F5F3FF;color:#4C1D95}
+.hn-tag-economy{background:#FFF7ED;color:#9A3412}
 .home-body{max-width:1040px;margin:0 auto;padding:36px 32px 60px}
 
 /* HOME HERO */
@@ -343,6 +383,16 @@ body{background:#F5F5DC;color:#1E2232}
 <div class="frame-wrap">
   <!-- HOME PANEL (native, not iframe) -->
   <div class="panel-home active" id="panel-home">
+
+    <!-- HOME SUB-NAV -->
+    <nav class="home-subnav">
+      <button class="home-sub-tab active" data-subtab="overview" onclick="switchHomeTab('overview',this)">Overview</button>
+      <button class="home-sub-tab" data-subtab="news" onclick="switchHomeTab('news',this)">Live News Feed</button>
+      <span class="home-subnav-upd" id="home-subnav-updated"></span>
+    </nav>
+
+    <!-- OVERVIEW SUB-PANEL -->
+    <div class="home-subpanel active" id="home-subpanel-overview">
     <div class="home-body">
 
       <!-- HERO -->
@@ -492,29 +542,6 @@ body{background:#F5F5DC;color:#1E2232}
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
       </div>
 
-      <!-- LIVE NEWS FEED -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:10px">Live News Feed</h3>
-      <div class="hn-toolbar">
-        <input type="search" class="hn-search" id="home-news-search" placeholder="Search headlines&hellip;" oninput="renderHomeNews()">
-        <div class="hn-chips">
-          <button class="hn-chip active" data-tag="All" onclick="setHomeNewsFilter('All',this)">All</button>
-          <button class="hn-chip" data-tag="Major Update" onclick="setHomeNewsFilter('Major Update',this)">Major Update</button>
-          <button class="hn-chip" data-tag="Senate" onclick="setHomeNewsFilter('Senate',this)">Senate</button>
-          <button class="hn-chip" data-tag="House" onclick="setHomeNewsFilter('House',this)">House</button>
-          <button class="hn-chip" data-tag="Governorship" onclick="setHomeNewsFilter('Governorship',this)">Gov</button>
-          <button class="hn-chip" data-tag="Primary" onclick="setHomeNewsFilter('Primary',this)">Primary</button>
-          <button class="hn-chip" data-tag="Polling" onclick="setHomeNewsFilter('Polling',this)">Polling</button>
-        </div>
-        <select class="hn-sort" id="home-news-sort" onchange="renderHomeNews()">
-          <option value="newest">Newest first</option>
-          <option value="oldest">Oldest first</option>
-        </select>
-      </div>
-      <div id="home-news-bar" style="font:400 11px var(--sans);color:var(--t-muted);padding:2px 0 10px;display:none"></div>
-      <div class="home-news-list" id="home-news-list">
-        <div class="home-news-item"><div style="color:#888;font:400 13px var(--sans)">Loading&hellip;</div></div>
-      </div>
-
       <!-- SECTION CARDS -->
       <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
       <div class="home-sections">
@@ -552,7 +579,45 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
       </div>
 
-    </div>
+    </div><!-- /home-body -->
+    </div><!-- /home-subpanel-overview -->
+
+    <!-- NEWS SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-news">
+      <div class="hn-panel-wrap">
+        <div class="hn-full-toolbar">
+          <input type="search" class="hn-full-search" id="home-news-search" placeholder="Search headlines..." oninput="renderHomeNews()">
+          <div class="hn-full-chips" id="home-news-chips">
+            <button class="hn-full-chip active" data-tag="All" onclick="setHomeNewsFilter('All',this)">All</button>
+            <button class="hn-full-chip" data-tag="Major Update" onclick="setHomeNewsFilter('Major Update',this)">Major Update</button>
+            <button class="hn-full-chip" data-tag="Senate" onclick="setHomeNewsFilter('Senate',this)">Senate</button>
+            <button class="hn-full-chip" data-tag="House" onclick="setHomeNewsFilter('House',this)">House</button>
+            <button class="hn-full-chip" data-tag="Federal" onclick="setHomeNewsFilter('Federal',this)">Federal</button>
+            <button class="hn-full-chip" data-tag="Governorship" onclick="setHomeNewsFilter('Governorship',this)">Governorship</button>
+            <button class="hn-full-chip" data-tag="Primary" onclick="setHomeNewsFilter('Primary',this)">Primary</button>
+            <button class="hn-full-chip" data-tag="Redistricting" onclick="setHomeNewsFilter('Redistricting',this)">Redistricting</button>
+            <button class="hn-full-chip" data-tag="Polling" onclick="setHomeNewsFilter('Polling',this)">Polling</button>
+          </div>
+          <select class="hn-full-sort" id="home-news-sort" onchange="renderHomeNews()">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+          </select>
+        </div>
+        <div class="hn-full-content">
+          <div id="home-news-bar" class="hn-results-bar" style="display:none"></div>
+          <div class="hn-news-list" id="home-news-list">
+            <div style="color:#6b6b6b;font:400 13px var(--sans);padding:40px 0 0;text-align:center">Loading&hellip;</div>
+          </div>
+          <div id="home-news-empty" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 14px var(--sans)">
+            No news items yet &mdash; the live feed fetches from 150+ RSS sources every hour via GitHub Actions.
+          </div>
+          <div id="home-news-no-results" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 14px var(--sans)">
+            No results &mdash; try a different search term or clear the filter.
+          </div>
+        </div>
+      </div>
+    </div><!-- /home-subpanel-news -->
+
   </div>
   <!-- /HOME PANEL -->
 
@@ -1049,13 +1114,25 @@ async function loadNYTGenericBallot() {
   }
 }
 
+// ── HOME SUB-TAB SWITCHING ───────────────────────────────────────────────────
+function switchHomeTab(name, btn) {
+  document.querySelectorAll('.home-sub-tab').forEach(b => b.classList.toggle('active', b.dataset.subtab === name));
+  document.querySelectorAll('.home-subpanel').forEach(p => p.classList.toggle('active', p.id === 'home-subpanel-' + name));
+}
+
 // ── LIVE NEWS FEED ──────────────────────────────────────────────────────────
+const HN_TAG_CLASS = {
+  'Major Update':'hn-tag-major', 'Senate':'hn-tag-senate', 'House':'hn-tag-house',
+  'Federal':'hn-tag-federal', 'Governorship':'hn-tag-gov', 'Primary':'hn-tag-primary',
+  'Redistricting':'hn-tag-redistricting', 'Polling':'hn-tag-polling', 'Economy':'hn-tag-economy',
+};
+
 let _allHomeNews = [];
 let _homeNewsFilter = 'All';
 
 function setHomeNewsFilter(tag, btn) {
   _homeNewsFilter = tag;
-  document.querySelectorAll('.hn-chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
+  document.querySelectorAll('.hn-full-chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
   renderHomeNews();
 }
 
@@ -1064,6 +1141,8 @@ function renderHomeNews() {
   const sort = document.getElementById('home-news-sort')?.value || 'newest';
   const bar = document.getElementById('home-news-bar');
   const nl = document.getElementById('home-news-list');
+  const emptyEl = document.getElementById('home-news-empty');
+  const noResEl = document.getElementById('home-news-no-results');
   if (!nl) return;
 
   let items = _allHomeNews.filter(item => {
@@ -1083,24 +1162,30 @@ function renderHomeNews() {
     return sort === 'oldest' ? da - db : db - da;
   });
 
-  if (!items.length) {
-    nl.innerHTML = `<div class="home-news-item"><div style="color:var(--t-muted);font:400 13px var(--sans)">${_allHomeNews.length ? 'No results — try clearing the filter.' : 'No news items yet.'}</div></div>`;
+  // Empty states
+  if (emptyEl) emptyEl.style.display = _allHomeNews.length === 0 ? 'block' : 'none';
+  if (noResEl) noResEl.style.display = (_allHomeNews.length > 0 && items.length === 0) ? 'block' : 'none';
+
+  if (items.length === 0) {
+    nl.innerHTML = '';
     if (bar) bar.style.display = 'none';
     return;
   }
 
   nl.innerHTML = items.map(item => {
-    const tags = Array.isArray(item.tags) ? item.tags.slice(0,2) : [];
-    const tagsHtml = tags.map(t => {
-      const [bg, color] = (TAG_COLORS[t]||'#F1F5F9:#1E293B').split(':');
-      return `<span class="home-news-tag" style="background:${bg};color:${color}">${esc(t)}</span>`;
-    }).join('');
-    return `<div class="home-news-item">
-      <div class="home-news-source">${esc(item.source||'')}</div>
-      <div class="home-news-body">
-        <a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'')}</a>
-        <div class="home-news-age">${item.date ? relAge(item.date) : ''}${tagsHtml}</div>
+    const tags = Array.isArray(item.tags) ? item.tags : [];
+    const tagsHtml = tags.map(t =>
+      `<span class="hn-tag ${HN_TAG_CLASS[t] || 'hn-tag-federal'}">${esc(t)}</span>`
+    ).join('');
+    const dateStr = item.date ? relAge(item.date) : '';
+    return `<div class="hn-news-item">
+      <div class="hn-news-top">
+        <span class="hn-news-source">${esc(item.source||'')}</span>
+        ${dateStr ? `<span class="hn-news-date">${dateStr}</span>` : ''}
       </div>
+      <a class="hn-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Untitled')}</a>
+      ${item.description ? `<p class="hn-news-desc">${esc(item.description)}</p>` : ''}
+      ${tagsHtml ? `<div class="hn-news-tags">${tagsHtml}</div>` : ''}
     </div>`;
   }).join('');
 

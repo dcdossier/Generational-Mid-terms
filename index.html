@@ -635,13 +635,17 @@ async function loadHomeData() {
   // Live metrics
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
 
+  // Generic ballot is loaded live from NYT — loadNYTGenericBallot() runs independently
+  // Fallback: populate from data.json if NYT fetch hasn't resolved yet
   const gb = data.generic_ballot || {};
   const d = gb.democrat || 0, rep = gb.republican || 0;
-  const margin = d - rep;
-  set('hm-ballot', (margin > 0 ? 'D+' : 'R+') + Math.abs(margin).toFixed(1));
-  set('hm-ballot-sub', `D ${d}%  vs  R ${rep}%`);
-  const btrend = document.getElementById('hm-ballot-trend');
-  if (btrend) { btrend.textContent = margin > 0 ? '↑ Dem leading' : '↑ GOP leading'; btrend.className = 'metric-trend ' + (margin > 0 ? 'mt-up' : 'mt-dn'); }
+  if (d || rep) {
+    const margin = d - rep;
+    set('hm-ballot', (margin > 0 ? 'D+' : 'R+') + Math.abs(margin).toFixed(1));
+    set('hm-ballot-sub', `D ${d}%  vs  R ${rep}%`);
+    const btrend = document.getElementById('hm-ballot-trend');
+    if (btrend) { btrend.textContent = margin > 0 ? '↑ Dem leading' : '↑ GOP leading'; btrend.className = 'metric-trend ' + (margin > 0 ? 'mt-up' : 'mt-dn'); }
+  }
 
   const appr = data.approval || {};
   const trump = appr.trump || {};
@@ -954,7 +958,75 @@ async function loadHomeData() {
   }
 }
 
+async function loadNYTGenericBallot() {
+  const NYT_CSV = 'https://www.nytimes.com/newsgraphics/polls/house.csv';
+  try {
+    const res = await fetch(NYT_CSV);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const text = await res.text();
+
+    // Quoted-field CSV parser
+    function parseRow(line) {
+      const fields = []; let inQ = false, cur = '';
+      for (let i = 0; i < line.length; i++) {
+        const c = line[i];
+        if (c === '"') { inQ = !inQ; }
+        else if (c === ',' && !inQ) { fields.push(cur); cur = ''; }
+        else cur += c;
+      }
+      fields.push(cur);
+      return fields;
+    }
+
+    const lines = text.split('\n').filter(l => l.trim());
+    const headers = parseRow(lines[0]);
+    const idx = {};
+    headers.forEach((h, i) => { idx[h.replace(/"/g, '').trim()] = i; });
+
+    const polls = {};
+    const cutoff = Date.now() - 60 * 24 * 60 * 60 * 1000;
+
+    for (let i = 1; i < lines.length; i++) {
+      const fields = parseRow(lines[i]);
+      const get = key => (fields[idx[key]] || '').replace(/"/g, '').trim();
+      if (get('state') !== 'US' || get('stage') !== 'general') continue;
+      if (get('seat_number') !== '') continue;
+      if (!['rv','lv','v'].includes(get('population'))) continue;
+      if (!['DEM','REP'].includes(get('party'))) continue;
+      if (get('partisan') !== '') continue;
+      const endDate = get('end_date'); // mm/dd/yy
+      const parts = endDate.split('/');
+      if (parts.length !== 3) continue;
+      const [m, dd, yy] = parts;
+      const date = new Date(2000 + parseInt(yy, 10), parseInt(m, 10) - 1, parseInt(dd, 10));
+      if (isNaN(date.getTime()) || date.getTime() < cutoff) continue;
+      const key = get('poll_id') + '_' + get('question_id');
+      if (!polls[key]) polls[key] = { n: parseInt(get('sample_size'), 10) || 1000, DEM: null, REP: null };
+      polls[key][get('party')] = parseFloat(get('pct'));
+    }
+
+    const complete = Object.values(polls).filter(p => p.DEM !== null && p.REP !== null);
+    if (complete.length < 3) { console.warn('NYT ballot: too few polls (' + complete.length + ')'); return; }
+
+    let tw = 0, wd = 0, wr = 0;
+    complete.forEach(p => { const w = Math.min(p.n, 3000); tw += w; wd += p.DEM * w; wr += p.REP * w; });
+    const avgD = wd / tw, avgR = wr / tw, margin = avgD - avgR;
+
+    const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    set('hm-ballot', (margin > 0 ? 'D+' : 'R+') + Math.abs(margin).toFixed(1));
+    set('hm-ballot-sub', `D ${avgD.toFixed(1)}%  vs  R ${avgR.toFixed(1)}%`);
+    const bt = document.getElementById('hm-ballot-trend');
+    if (bt) {
+      bt.textContent = (margin > 0 ? '↑ Dem leading' : '↑ GOP leading') + ' · ' + complete.length + ' polls · NYT';
+      bt.className = 'metric-trend ' + (margin > 0 ? 'mt-up' : 'mt-dn');
+    }
+  } catch(e) {
+    console.warn('NYT generic ballot fetch failed:', e);
+  }
+}
+
 loadHomeData();
+loadNYTGenericBallot();
 </script>
 
 </body>

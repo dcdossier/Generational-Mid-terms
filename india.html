@@ -653,6 +653,33 @@ body {
   .sub-tab { padding: 12px 14px; font-size: 12px; }
   .news-grid { grid-template-columns: 1fr; }
 }
+/* ── MAP ZOOM CONTROLS ── */
+.map-zoom-ctrl {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 10;
+}
+.map-zoom-btn {
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,.95);
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font: 600 15px sans-serif;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.map-zoom-btn:hover { background: #f3f4f6; }
+.map-zoom-btn.reset { font-size: 12px; }
 /* ── MEMBER NEWS FEED ── */
 .news-grid {
   display: grid;
@@ -973,7 +1000,12 @@ body {
       </div>
       <div class="map-wrap" id="presence-map-wrap" style="min-height:320px">
         <div class="map-loading" id="presence-map-loading">Loading district map&hellip;</div>
-        <svg id="presence-map-svg" viewBox="0 0 960 580"></svg>
+        <svg id="presence-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="presenceZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="presenceZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="presenceZoomReset()">&#8859;</button>
+        </div>
       </div>
       <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Blue = Democrat district. All six Indian-American members are Democrats.</p>
     </div>
@@ -1303,7 +1335,12 @@ body {
     </div>
     <div class="map-wrap" style="min-height:360px">
       <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
-      <svg id="house-map-svg" viewBox="0 0 960 580"></svg>
+      <svg id="house-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="houseInterestZoomBy(1.5)">+</button>
+        <button class="map-zoom-btn" onclick="houseInterestZoomBy(1/1.5)">&minus;</button>
+        <button class="map-zoom-btn reset" onclick="houseInterestZoomReset()">&#8859;</button>
+      </div>
     </div>
   </div>
 
@@ -1323,7 +1360,12 @@ body {
     </div>
     <div class="map-wrap" style="min-height:360px">
       <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
-      <svg id="senate-map-svg" viewBox="0 0 960 580"></svg>
+      <svg id="senate-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="senateInterestZoomBy(1.5)">+</button>
+        <button class="map-zoom-btn" onclick="senateInterestZoomBy(1/1.5)">&minus;</button>
+        <button class="map-zoom-btn reset" onclick="senateInterestZoomReset()">&#8859;</button>
+      </div>
     </div>
   </div>
 
@@ -1581,6 +1623,26 @@ function getBestTier(members) {
 
 const TIER_COLOR_MAP = {1:'#166534',2:'#4a9a6a',3:'#9333ea',4:'#5b21b6',5:'#1d4ed8'};
 
+// ── ZOOM HELPER ─────────────────────────────────────────────────────────────
+function makeZoom(svgSel, onZoom) {
+  const z = d3.zoom().scaleExtent([1, 12]).on('zoom', e => {
+    onZoom(e.transform);
+    svgSel.style('cursor', e.transform.k > 1 ? 'grabbing' : 'grab');
+  });
+  svgSel.call(z).on('dblclick.zoom', null);
+  return {
+    zoomBy: f => svgSel.transition().duration(350).call(z.scaleBy, f),
+    reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
+  };
+}
+let _houseInterestZoom = null, _senateInterestZoom = null, _presenceZoom = null;
+function houseInterestZoomBy(f)    { _houseInterestZoom?.zoomBy(f); }
+function houseInterestZoomReset()  { _houseInterestZoom?.reset(); }
+function senateInterestZoomBy(f)   { _senateInterestZoom?.zoomBy(f); }
+function senateInterestZoomReset() { _senateInterestZoom?.reset(); }
+function presenceZoomBy(f)         { _presenceZoom?.zoomBy(f); }
+function presenceZoomReset()       { _presenceZoom?.reset(); }
+
 // ── INTEREST HOUSE MAP ──────────────────────────────────────────────────────
 let _interestHouseSel = null;
 let _interestHouseTier = 'all';
@@ -1588,22 +1650,24 @@ let _interestHouseTier = 'all';
 function loadHouseMap() {
   if (houseMapLoaded) return;
   houseMapLoaded = true;
-  const svg = d3.select('#house-map-svg');
+  const svgEl = d3.select('#house-map-svg');
+  const g = svgEl.append('g');
+  _houseInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
   const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetchDistrictGeo(gj => {
     document.getElementById('house-map-loading').style.display = 'none';
-    _interestHouseSel = svg.selectAll('path')
+    _interestHouseSel = g.selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('d', d => pathGen(d) || '')
-      .attr('fill', d => {
+      .style('fill', d => {
         const key = d.properties.state + '_' + d.properties.district;
         const m = houseIdx[key];
         return m ? (TIER_COLOR_MAP[m.tier] || '#d1d5db') : '#d1d5db';
       })
-      .attr('stroke', '#fff').attr('stroke-width', 0.4)
+      .style('stroke', '#fff').style('stroke-width', '0.4px')
       .on('mousemove', function(event, d) {
         const key = d.properties.state + '_' + d.properties.district;
         const m = houseIdx[key];
@@ -1656,7 +1720,9 @@ let _interestSenateTier = 'all';
 function loadSenateMap() {
   if (senateMapLoaded) return;
   senateMapLoaded = true;
-  const svg = d3.select('#senate-map-svg');
+  const svgEl = d3.select('#senate-map-svg');
+  const g = svgEl.append('g');
+  _senateInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
   const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
@@ -1664,17 +1730,17 @@ function loadSenateMap() {
     .then(r => r.json())
     .then(gj => {
       document.getElementById('senate-map-loading').style.display = 'none';
-      _interestSenateSel = svg.selectAll('path')
+      _interestSenateSel = g.selectAll('path')
         .data(gj.features)
         .join('path')
         .attr('d', d => pathGen(d) || '')
-        .attr('fill', d => {
+        .style('fill', d => {
           const members = senateIdx[d.properties.NAME];
           if (!members || !members.length) return '#d1d5db';
           const tier = getBestTier(members);
           return TIER_COLOR_MAP[tier] || '#d1d5db';
         })
-        .attr('stroke', '#fff').attr('stroke-width', 0.8)
+        .style('stroke', '#fff').style('stroke-width', '0.8px')
         .on('mousemove', function(event, d) {
           const members = senateIdx[d.properties.NAME];
           tooltip.style.display = 'block';
@@ -1736,21 +1802,23 @@ let _presenceSel = null;
 function loadPresenceMap() {
   if (presenceMapLoaded) return;
   presenceMapLoaded = true;
-  const svg = d3.select('#presence-map-svg');
+  const svgEl = d3.select('#presence-map-svg');
+  const g = svgEl.append('g');
+  _presenceZoom = makeZoom(svgEl, t => g.attr('transform', t));
   const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetchDistrictGeo(gj => {
     document.getElementById('presence-map-loading').style.display = 'none';
-    _presenceSel = svg.selectAll('path')
+    _presenceSel = g.selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('d', d => pathGen(d) || '')
-      .attr('fill', d => {
+      .style('fill', d => {
         const key = d.properties.state + '_' + d.properties.district;
         return iaIdx[key] ? '#378ADD' : '#d1d5db';
       })
-      .attr('stroke', '#fff').attr('stroke-width', 0.4)
+      .style('stroke', '#fff').style('stroke-width', '0.4px')
       .on('mousemove', function(event, d) {
         const key = d.properties.state + '_' + d.properties.district;
         const m = iaIdx[key];

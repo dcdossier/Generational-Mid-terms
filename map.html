@@ -643,6 +643,17 @@ function fetchStatesGeo(cb) {
   }).catch(()=>{ console.error('Failed to load us-states.json'); });
 }
 
+let _senateGeo=null, _senateGeoWaiters=[], _senateGeoFetching=false;
+function fetchSenateGeo(cb) {
+  if (_senateGeo) { cb(_senateGeo); return; }
+  _senateGeoWaiters.push(cb);
+  if (_senateGeoFetching) return;
+  _senateGeoFetching = true;
+  fetch('assets/senate.json').then(r=>r.json()).then(gj=>{
+    _senateGeo=gj; _senateGeoWaiters.forEach(fn=>fn(gj)); _senateGeoWaiters=[];
+  }).catch(()=>{ console.error('Failed to load senate.json'); });
+}
+
 function fetchDistrictsGeo(cb) {
   if (_districtsGeo) { cb(_districtsGeo); return; }
   _districtsWaiters.push(cb);
@@ -690,7 +701,7 @@ let _senG = null;
 function highlightMapByRating(rating) {
   if (!_senSel) return;
   _senSel.each(function(d) {
-    const r = _senRaceByState[d.properties.name];
+    const r = _senRaceByState[d.properties.NAME];
     d3.select(this).attr('opacity', !rating || (r && r.rating === rating) ? 1 : 0.2);
   });
 }
@@ -705,29 +716,29 @@ function buildSenateMap(races) {
 
   _senZoom = makeZoom(svgEl, t => _senG.attr('transform', t));
 
-  fetchStatesGeo(gj => {
+  fetchSenateGeo(gj => {
     const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
 
     _senSel = _senG.selectAll('path')
       .data(gj.features)
       .join('path')
-      .attr('class', d => 's-path' + (_senRaceByState[d.properties.name] ? ' clickable' : ''))
+      .attr('class', d => 's-path' + (_senRaceByState[d.properties.NAME] ? ' clickable' : ''))
       .attr('d', d => pathGen(d) || '')
       .style('fill', d => {
-        const r = _senRaceByState[d.properties.name];
+        const r = _senRaceByState[d.properties.NAME];
         return r ? (RC[r.rating] || {bg:'#D8D8D4'}).bg : '#D8D8D4';
       })
       .style('stroke', '#fff')
       .style('stroke-width', '0.5px')
       .on('mousemove', function(event, d) {
-        const r = _senRaceByState[d.properties.name];
+        const r = _senRaceByState[d.properties.NAME];
         if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
-        else   showTip(event, `<strong>${d.properties.name}</strong><br><span style="opacity:.7">No Senate race in 2026</span>`);
+        else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No Senate race in 2026</span>`);
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {
-        const r = _senRaceByState[d.properties.name];
+        const r = _senRaceByState[d.properties.NAME];
         if (!r) return;
         if (_selSenPath) d3.select(_selSenPath).style('stroke', '#fff').style('stroke-width', '0.5px');
         if (_selSenPath === this) { _selSenPath = null; closeDetail(); return; }
@@ -738,20 +749,20 @@ function buildSenateMap(races) {
 
     // State abbreviation labels for races only
     _senG.selectAll('text')
-      .data(gj.features.filter(d => _senRaceByState[d.properties.name]))
+      .data(gj.features.filter(d => _senRaceByState[d.properties.NAME]))
       .join('text')
       .attr('text-anchor', 'middle')
       .attr('dy', '0.35em')
       .attr('pointer-events', 'none')
       .style('font', '600 9px "DM Sans",sans-serif')
       .style('fill', d => {
-        const r = _senRaceByState[d.properties.name];
+        const r = _senRaceByState[d.properties.NAME];
         return (RC[r.rating] || {tx:'#fff'}).tx;
       })
       .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
       .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
       .text(d => {
-        const abbr = Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.name);
+        const abbr = Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.NAME);
         return abbr || '';
       });
 
@@ -789,9 +800,9 @@ function searchSenMap(q) {
   const ql = q.toLowerCase().trim();
   let ct = 0;
   _senSel.each(function(d) {
-    const r = _senRaceByState[d.properties.name];
+    const r = _senRaceByState[d.properties.NAME];
     let match = !ql;
-    if (ql) match = d.properties.name.toLowerCase().includes(ql) ||
+    if (ql) match = d.properties.NAME.toLowerCase().includes(ql) ||
       (r && (r.incumbent.toLowerCase().includes(ql) || r.party.toLowerCase().includes(ql) ||
              (r.party==='R'?'republican':'democrat').includes(ql)));
     d3.select(this).attr('opacity', match ? 1 : ql ? 0.15 : 1);

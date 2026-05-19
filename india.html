@@ -1660,7 +1660,7 @@ function loadSenateMap() {
   const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
-  fetch('assets/us-states.json')
+  fetch('assets/senate.json')
     .then(r => r.json())
     .then(gj => {
       document.getElementById('senate-map-loading').style.display = 'none';
@@ -1669,27 +1669,27 @@ function loadSenateMap() {
         .join('path')
         .attr('d', d => pathGen(d) || '')
         .attr('fill', d => {
-          const members = senateIdx[d.properties.name];
+          const members = senateIdx[d.properties.NAME];
           if (!members || !members.length) return '#d1d5db';
           const tier = getBestTier(members);
           return TIER_COLOR_MAP[tier] || '#d1d5db';
         })
         .attr('stroke', '#fff').attr('stroke-width', 0.8)
         .on('mousemove', function(event, d) {
-          const members = senateIdx[d.properties.name];
+          const members = senateIdx[d.properties.NAME];
           tooltip.style.display = 'block';
           tooltip.style.left = (event.clientX + 12) + 'px';
           tooltip.style.top  = (event.clientY - 28) + 'px';
           if (members && members.length) {
-            tooltip.innerHTML = `<strong>${d.properties.name}</strong><br>` +
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br>` +
               members.map(m => `${m.name} (${m.party==='R'?'R':'D'}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>');
           } else {
-            tooltip.innerHTML = `<strong>${d.properties.name}</strong><br><em>No tracked senators</em>`;
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br><em>No tracked senators</em>`;
           }
         })
         .on('mouseleave', () => { tooltip.style.display = 'none'; })
         .on('click', function(event, d) {
-          const members = senateIdx[d.properties.name];
+          const members = senateIdx[d.properties.NAME];
           if (members && members.length) openSidePanel(members[0].id);
         });
     })
@@ -1707,11 +1707,11 @@ function filterInterestSenateMap(q) {
   const active = ql || _interestSenateTier !== 'all';
   let ct = 0;
   _interestSenateSel.each(function(d) {
-    const members = senateIdx[d.properties.name];
+    const members = senateIdx[d.properties.NAME];
     let show = true;
     if (ql) show = members && members.some(m =>
       m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
-      d.properties.name.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
+      d.properties.NAME.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
       (m.party==='D'?'democrat':'republican').includes(ql));
     if (_interestSenateTier !== 'all') {
       const t = parseInt(_interestSenateTier);

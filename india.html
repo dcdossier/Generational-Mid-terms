@@ -2052,8 +2052,12 @@ function _articleMentionsMember(text) {
   for (const mk of _memberKeywords) {
     const lastName = mk.keywords[mk.keywords.length - 1];
     const fullName = mk.keywords.join(' ');
-    if (lower.includes(fullName) || (lastName.length > 3 && lower.includes(lastName) && lower.includes(mk.keywords[0]))) {
-      return mk.name;
+    // Match: full name, first+last appearing anywhere, or title+lastname
+    if (lower.includes(fullName)) return mk.name;
+    if (lastName.length > 3 && lower.includes(lastName) && lower.includes(mk.keywords[0])) return mk.name;
+    if (lastName.length > 3) {
+      const titles = ['sen. ', 'rep. ', 'senator ', 'representative '];
+      if (titles.some(t => lower.includes(t + lastName))) return mk.name;
     }
   }
   return null;
@@ -2088,6 +2092,8 @@ function filterMemberNewsPanel(query) {
 }
 
 function _renderMemberNews() {
+  const loadEl  = document.getElementById('mn-loading');
+  if (loadEl) loadEl.style.display = 'none';
   const listEl  = document.getElementById('mn-list');
   const countEl = document.getElementById('mn-count');
   if (!listEl) return;

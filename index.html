@@ -822,229 +822,203 @@ async function loadHomeData() {
     }
   }
 
+  // ── Helper: safe afterDraw line at a given Y value ───────────────────────
+  function drawRefLine(c, yVal, color, dash, label, labelColor) {
+    try {
+      const ca = c.chartArea; if (!ca) return;
+      const { ctx } = c; const yp = c.scales.y.getPixelForValue(yVal);
+      ctx.save(); ctx.setLineDash(dash || [4,3]); ctx.strokeStyle = color; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(ca.left, yp); ctx.lineTo(ca.right, yp); ctx.stroke();
+      if (label) { ctx.fillStyle = labelColor || color; ctx.font = '10px DM Sans,sans-serif'; ctx.setLineDash([]); ctx.fillText(label, ca.right + 4, yp + 4); }
+      ctx.restore();
+    } catch(e) { /* skip decorative element */ }
+  }
+
   // Trump approval chart
-  const trumpHist = trump.history || [];
-  const trumpCvs = document.getElementById('c-home-trump-approval');
-  if (trumpHist.length && trumpCvs) {
-    Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
-    Chart.defaults.color = '#6B6B6B';
-    const tLabels = trumpHist.map(d => d.month);
-    const tApprove = trumpHist.map(d => d.approve);
-    const tDisapprove = trumpHist.map(d => d.disapprove);
-    // Update inline text from live data
-    const apTxt = document.getElementById('home-trump-approve-txt');
-    const disTxt = document.getElementById('home-trump-disapprove-txt');
-    if (apTxt && trump.approve) apTxt.textContent = trump.approve + '%';
-    if (disTxt && trump.disapprove) disTxt.textContent = trump.disapprove + '%';
-    new Chart(trumpCvs, {
-      type: 'line',
-      data: { labels: tLabels, datasets: [
-        { label: 'Approve', data: tApprove, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
-        { label: 'Disapprove', data: tDisapprove, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
-      ]},
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: {
-            title: i => i[0].label,
-            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
-          }}
+  try {
+    const trumpHist = trump.history || [];
+    const trumpCvs = document.getElementById('c-home-trump-approval');
+    if (trumpHist.length && trumpCvs) {
+      Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+      Chart.defaults.color = '#6B6B6B';
+      const tLabels = trumpHist.map(d => d.month);
+      const tApprove = trumpHist.map(d => d.approve);
+      const tDisapprove = trumpHist.map(d => d.disapprove);
+      const apTxt = document.getElementById('home-trump-approve-txt');
+      const disTxt = document.getElementById('home-trump-disapprove-txt');
+      if (apTxt && trump.approve) apTxt.textContent = trump.approve + '%';
+      if (disTxt && trump.disapprove) disTxt.textContent = trump.disapprove + '%';
+      new Chart(trumpCvs, {
+        type: 'line',
+        data: { labels: tLabels, datasets: [
+          { label: 'Approve', data: tApprove, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+          { label: 'Disapprove', data: tDisapprove, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: i => i[0].label, label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 30, max: 70, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%' } }
+          }
         },
-        scales: {
-          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
-          y: { min: 30, max: 70, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%' } }
-        }
-      },
-      plugins: [{
-        id: 'gap50', afterDraw(c) {
-          const { ctx, chartArea: { left, right }, scales: { y } } = c;
-          const yp = y.getPixelForValue(50);
-          ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,0.3)'; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
-          ctx.fillStyle = '#aaa'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('50%', right + 4, yp + 4);
-          ctx.restore();
-        }
-      }]
-    });
-  }
+        plugins: [{ id: 'gap50', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
+      });
+    }
+  } catch(e) { console.error('Trump chart error:', e); }
 
-  // Congressional approval chart (Gallup data via data.json)
-  const caHistory = ca.history || [];
-  const caCvs = document.getElementById('c-home-congress-approval');
-  if (caHistory.length && caCvs) {
-    const caMonths     = caHistory.map(row => row.month);
-    const caApproval   = caHistory.map(row => row.approve);
-    const caDisapproval = caHistory.map(row => row.disapprove);
-    new Chart(caCvs, {
-      type: 'line',
-      data: { labels: caMonths, datasets: [
-        { label: 'Approve',    data: caApproval,    borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
-        { label: 'Disapprove', data: caDisapproval, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
-      ]},
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: {
-            title: ctx => ctx[0].label,
-            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%`
-          }}
+  // Congressional approval chart
+  try {
+    const caHistory = ca.history || [];
+    const caCvs = document.getElementById('c-home-congress-approval');
+    if (caHistory.length && caCvs) {
+      const caMonths      = caHistory.map(row => row.month);
+      const caApproval    = caHistory.map(row => row.approve);
+      const caDisapproval = caHistory.map(row => row.disapprove);
+      new Chart(caCvs, {
+        type: 'line',
+        data: { labels: caMonths, datasets: [
+          { label: 'Approve',    data: caApproval,    borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+          { label: 'Disapprove', data: caDisapproval, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: ctx => ctx[0].label, label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 20 } }
+          }
         },
-        scales: {
-          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
-          y: { min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 20 } }
-        }
-      },
-      plugins: [{
-        id: 'caRef', afterDraw(ch) {
-          const { ctx, chartArea: { left, right }, scales: { y } } = ch;
-          const yp = y.getPixelForValue(50);
-          ctx.save(); ctx.setLineDash([4, 3]); ctx.strokeStyle = 'rgba(100,100,100,0.3)'; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
-          ctx.fillStyle = '#aaa'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('50%', right + 4, yp + 4);
-          ctx.restore();
-        }
-      }]
-    });
-  }
+        plugins: [{ id: 'caRef', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
+      });
+    }
+  } catch(e) { console.error('Congress approval chart error:', e); }
 
-  // CPI inflation chart (BLS data via data.json — Jan 2025 to Apr 2026)
-  const cpiData = (data.cpi || {}).history || [];
-  const cpiCvs  = document.getElementById('c-home-cpi');
-  if (cpiData.length && cpiCvs) {
-    const cpiMonths    = cpiData.map(row => row.month);
-    const cpiAll       = cpiData.map(row => row.all_items);
-    const cpiEstimated = cpiData.map(row => row.estimated || false);
-    const octIdx       = cpiMonths.indexOf('Oct 2025');
-    new Chart(cpiCvs, {
-      type: 'line',
-      data: { labels: cpiMonths, datasets: [{
-        label: 'All Items CPI (YoY %)',
-        data: cpiAll,
-        borderColor: '#581845',
-        backgroundColor: 'rgba(88,24,69,0.08)',
-        pointBackgroundColor: cpiEstimated.map(e => e ? '#fff' : '#581845'),
-        pointBorderColor:     cpiEstimated.map(e => e ? '#581845' : '#fff'),
-        pointBorderWidth:     cpiEstimated.map(e => e ? 2 : 1.5),
-        pointRadius:          cpiEstimated.map(e => e ? 5 : 4),
-        pointStyle:           cpiEstimated.map(e => e ? 'circle' : 'circle'),
-        borderWidth: 2.5,
-        tension: 0.3,
-        fill: true,
-        spanGaps: true,
-        segment: {
-          borderDash:  ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? [6, 4] : undefined,
-          borderColor: ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? 'rgba(88,24,69,0.45)' : '#581845'
-        }
-      }]},
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: {
-            title: ctx => ctx[0].label,
-            label: ctx => {
-              const est = cpiEstimated[ctx.dataIndex];
-              return est ? ' CPI: ~' + ctx.raw + '% (estimated \u2014 no data, govt. shutdown)' : ' CPI: ' + ctx.raw + '%';
-            }
-          }}
+  // CPI inflation chart
+  try {
+    const cpiData = (data.cpi || {}).history || [];
+    const cpiCvs  = document.getElementById('c-home-cpi');
+    if (cpiData.length && cpiCvs) {
+      const cpiMonths    = cpiData.map(row => row.month);
+      const cpiAll       = cpiData.map(row => row.all_items);
+      const cpiEstimated = cpiData.map(row => row.estimated || false);
+      const octIdx       = cpiMonths.indexOf('Oct 2025');
+      new Chart(cpiCvs, {
+        type: 'line',
+        data: { labels: cpiMonths, datasets: [{
+          label: 'All Items CPI (YoY %)',
+          data: cpiAll,
+          borderColor: '#581845',
+          backgroundColor: 'rgba(88,24,69,0.08)',
+          pointBackgroundColor: cpiEstimated.map(e => e ? '#fff' : '#581845'),
+          pointBorderColor:     cpiEstimated.map(e => e ? '#581845' : '#fff'),
+          pointBorderWidth:     cpiEstimated.map(e => e ? 2 : 1.5),
+          pointRadius:          cpiEstimated.map(e => e ? 5 : 4),
+          borderWidth: 2.5, tension: 0.3, fill: true, spanGaps: true,
+          segment: {
+            borderDash:  ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? [6, 4] : undefined,
+            borderColor: ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? 'rgba(88,24,69,0.45)' : '#581845'
+          }
+        }]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              title: ctx => ctx[0].label,
+              label: ctx => cpiEstimated[ctx.dataIndex] ? ' CPI: ~' + ctx.raw + '% (estimated \u2014 govt. shutdown)' : ' CPI: ' + ctx.raw + '%'
+            }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 1, max: 5, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 1 } }
+          }
         },
-        scales: {
-          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
-          y: { min: 1, max: 5, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 1 } }
-        }
-      },
-      plugins: [
-        { id: 'cpiTarget', afterDraw(ch) {
-            const { ctx, chartArea: { left, right }, scales: { y } } = ch;
-            const yp = y.getPixelForValue(2);
-            ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(88,24,69,0.4)'; ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
-            ctx.fillStyle = '#581845'; ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillText('Fed target 2%', right + 4, yp + 4);
-            ctx.restore();
-        }},
-        { id: 'cpiShutdown', afterDraw(ch) {
-            if (octIdx < 0) return;
-            const { ctx, chartArea: { top, bottom }, scales: { x, y } } = ch;
-            const xp = x.getPixelForValue(octIdx);
-            const yp = y.getPixelForValue(cpiAll[octIdx]);
-            // vertical dashed marker
-            ctx.save();
-            ctx.setLineDash([3, 3]); ctx.strokeStyle = 'rgba(88,24,69,0.25)'; ctx.lineWidth = 1;
-            ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
-            // label box
-            const txt = 'No-data: Govt. Shutdown';
-            ctx.font = '500 9px DM Sans,sans-serif';
-            const tw = ctx.measureText(txt).width;
-            const bx = Math.min(xp - tw / 2 - 4, ch.width - tw - 12);
-            const by = top + 6;
-            ctx.fillStyle = 'rgba(255,255,255,0.88)';
-            ctx.fillRect(bx, by, tw + 8, 14);
-            ctx.fillStyle = '#581845';
-            ctx.textAlign = 'left';
-            ctx.fillText(txt, bx + 4, by + 10);
-            ctx.restore();
-        }}
-      ]
-    });
-  }
+        plugins: [
+          { id: 'cpiTarget', afterDraw(ch) { drawRefLine(ch, 2, 'rgba(88,24,69,0.4)', [5,4], 'Fed target 2%', '#581845'); } },
+          { id: 'cpiShutdown', afterDraw(ch) {
+              try {
+                if (octIdx < 0 || !ch.chartArea) return;
+                const { ctx, chartArea: { top, bottom } } = ch;
+                const xp = ch.scales.x.getPixelForValue(octIdx);
+                const yp = ch.scales.y.getPixelForValue(cpiAll[octIdx]);
+                ctx.save();
+                ctx.setLineDash([3,3]); ctx.strokeStyle = 'rgba(88,24,69,0.25)'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
+                const txt = 'No-data: Govt. Shutdown';
+                ctx.font = '500 9px DM Sans,sans-serif'; ctx.setLineDash([]);
+                const tw = ctx.measureText(txt).width;
+                const bx = Math.min(xp - tw / 2 - 4, ch.width - tw - 12);
+                const by = top + 6;
+                ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect(bx, by, tw + 8, 14);
+                ctx.fillStyle = '#581845'; ctx.textAlign = 'left'; ctx.fillText(txt, bx + 4, by + 10);
+                ctx.restore();
+              } catch(e) { /* skip decorative */ }
+          }}
+        ]
+      });
+    }
+  } catch(e) { console.error('CPI chart error:', e); }
 
-  // Congressional retirements history chart
-  const hcData = (data.retirements || {}).historical_chart || [];
-  const cvs = document.getElementById('c-home-retirements');
-  if (hcData.length && cvs) {
-    Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
-    Chart.defaults.color = '#6B6B6B';
-    const hYrs = hcData.map(d => d.year);
-    const hH   = hcData.map(d => d.house);
-    const hS   = hcData.map(d => d.senate);
-    const hT   = hcData.map(d => d.house + d.senate);
-    const hAvg = 40;
-    new Chart(cvs, {
-      type: 'bar',
-      data: { labels: hYrs, datasets: [
-        { label: 'House',  data: hH, backgroundColor: hYrs.map(y => y === '2026' ? '#E24B4A' : '#378ADD'), stack: 's', borderSkipped: false, borderRadius: { topLeft: 1, topRight: 1 } },
-        { label: 'Senate', data: hS, backgroundColor: hYrs.map(y => y === '2026' ? '#F9A89D' : '#B5D4F4'), stack: 's', borderSkipped: false },
-      ]},
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: { callbacks: {
-            title: i => `${i[0].label} election`,
-            afterBody: i => [`Total: ${hT[i[0].dataIndex]}  ·  Post-WWII avg: ${hAvg}`]
-          }}
+  // Congressional retirements chart
+  try {
+    const hcData = (data.retirements || {}).historical_chart || [];
+    const cvs = document.getElementById('c-home-retirements');
+    if (hcData.length && cvs) {
+      Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+      Chart.defaults.color = '#6B6B6B';
+      const hYrs = hcData.map(d => d.year);
+      const hH   = hcData.map(d => d.house);
+      const hS   = hcData.map(d => d.senate);
+      const hT   = hcData.map(d => d.house + d.senate);
+      const hAvg = 40;
+      new Chart(cvs, {
+        type: 'bar',
+        data: { labels: hYrs, datasets: [
+          { label: 'House',  data: hH, backgroundColor: hYrs.map(y => y === '2026' ? '#E24B4A' : '#378ADD'), stack: 's', borderSkipped: false, borderRadius: { topLeft: 1, topRight: 1 } },
+          { label: 'Senate', data: hS, backgroundColor: hYrs.map(y => y === '2026' ? '#F9A89D' : '#B5D4F4'), stack: 's', borderSkipped: false },
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              title: i => `${i[0].label} election`,
+              afterBody: i => [`Total: ${hT[i[0].dataIndex]}  ·  Post-WWII avg: ${hAvg}`]
+            }}
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45, autoSkip: false, callback: (_, i) => i % 2 === 0 ? hYrs[i] : '' } },
+            y: { stacked: true, max: 88, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', stepSize: 20 } }
+          }
         },
-        scales: {
-          x: { stacked: true, grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45, autoSkip: false, callback: (_, i) => i % 2 === 0 ? hYrs[i] : '' } },
-          y: { stacked: true, max: 88, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', stepSize: 20 } }
-        }
-      },
-      plugins: [
-        { id: 'avg', afterDraw(c) {
-          const { ctx, chartArea: { left, right }, scales: { y } } = c;
-          const yp = y.getPixelForValue(hAvg);
-          ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = 'rgba(100,100,100,.35)'; ctx.lineWidth = 1;
-          ctx.beginPath(); ctx.moveTo(left, yp); ctx.lineTo(right, yp); ctx.stroke();
-          ctx.fillStyle = '#999'; ctx.font = '10px DM Sans,sans-serif'; ctx.fillText('avg 40', right + 4, yp + 4);
-          ctx.restore();
-        }},
-        { id: 'lbl', afterDraw(c) {
-          const { ctx, scales: { x, y } } = c;
-          [['1992','Record 72','#7a1c1c'],['2026','2nd highest ↑','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
-            const i = hYrs.indexOf(yr); if (i < 0) return;
-            const xp = x.getPixelForValue(i); const yp = y.getPixelForValue(hT[i]) - 8;
-            ctx.save(); ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
-          });
-        }}
-      ]
-    });
-  }
+        plugins: [
+          { id: 'avg', afterDraw(c) { drawRefLine(c, hAvg, 'rgba(100,100,100,.35)', [5,4], 'avg 40', '#999'); } },
+          { id: 'lbl', afterDraw(c) {
+            try {
+              const { ctx } = c;
+              [['1992','Record 72','#7a1c1c'],['2026','2nd highest ↑','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
+                const i = hYrs.indexOf(yr); if (i < 0) return;
+                const xp = c.scales.x.getPixelForValue(i);
+                const yp = c.scales.y.getPixelForValue(hT[i]) - 8;
+                ctx.save(); ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
+              });
+            } catch(e) { /* skip decorative labels */ }
+          }}
+        ]
+      });
+    }
+  } catch(e) { console.error('Retirements chart error:', e); }
 }
 
 async function loadNYTGenericBallot() {

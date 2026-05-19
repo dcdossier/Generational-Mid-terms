@@ -680,48 +680,137 @@ body {
 }
 .map-zoom-btn:hover { background: #f3f4f6; }
 .map-zoom-btn.reset { font-size: 12px; }
-/* ── MEMBER NEWS FEED ── */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
-  margin-top: 4px;
-}
-.news-card {
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 14px 16px;
-  background: var(--surface);
+/* ── INTEREST PANEL SUB-NAV ── */
+.interest-subnav {
   display: flex;
-  flex-direction: column;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 24px;
+}
+.interest-subtab {
+  font: 500 12px var(--sans);
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  display: inline-flex;
+  align-items: center;
   gap: 6px;
 }
-.news-card-source {
+.interest-subtab:hover { color: var(--text); }
+.interest-subtab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.interest-subpanel { display: none; }
+.interest-subpanel.active { display: block; }
+.interest-news-badge {
+  font: 700 10px var(--sans);
+  background: var(--saffron);
+  color: #fff;
+  border-radius: 10px;
+  padding: 1px 7px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── MEMBER NEWS PANEL ── */
+.mn-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.mn-search {
+  font: 400 12px var(--sans);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 10px;
+  width: 220px;
+  color: var(--text);
+  background: var(--bg);
+}
+.mn-search:focus { outline: none; border-color: var(--accent); }
+.mn-tier-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.mn-chip {
+  font: 500 10px var(--sans);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 3px 10px;
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--text3);
+  transition: all .12s;
+}
+.mn-chip:hover { background: var(--bg2); }
+.mn-chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.mn-count { font: 400 11px var(--sans); color: var(--text3); margin-left: auto; white-space: nowrap; }
+.mn-refresh {
+  font: 500 11px var(--sans);
+  color: var(--navy);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.mn-refresh:hover { background: var(--bg2); }
+.mn-list { display: flex; flex-direction: column; }
+.mn-article {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mn-article:first-child { border-top: 1px solid var(--border); }
+.mn-article-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.mn-article-source {
   font: 500 10px var(--sans);
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .04em;
 }
-.news-card-member {
-  display: inline-block;
+.mn-article-member {
   font: 600 10px var(--sans);
   color: #fff;
-  background: var(--navy);
   border-radius: 3px;
-  padding: 1px 6px;
+  padding: 2px 7px;
 }
-.news-card-title {
-  font: 600 13px var(--serif);
+.mn-article-title {
+  font: 600 13.5px var(--serif);
   color: var(--text);
-  line-height: 1.4;
   text-decoration: none;
+  line-height: 1.4;
 }
-.news-card-title:hover { color: var(--accent); }
-.news-card-date {
-  font: 400 10px var(--sans);
+.mn-article-title:hover { color: var(--accent); }
+.mn-article-date { font: 400 10px var(--sans); color: var(--text3); }
+.mn-empty { font: 400 13px var(--sans); color: var(--text3); padding: 24px 0; text-align: center; }
+
+/* ── SIDE PANEL NEWS ── */
+.sp-news-list { display: flex; flex-direction: column; margin-top: 4px; }
+.sp-news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.sp-news-item:first-child { border-top: 1px solid var(--border); }
+.sp-news-source {
+  font: 500 9px var(--sans);
   color: var(--text3);
-  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: 3px;
 }
+.sp-news-title {
+  display: block;
+  font: 600 12px var(--serif);
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+  margin-bottom: 3px;
+}
+.sp-news-title:hover { color: var(--accent); }
+.sp-news-date { font: 400 10px var(--sans); color: var(--text3); }
+.sp-news-empty { font: 400 12px var(--sans); color: var(--text3); padding: 10px 0; }
 </style>
 </head>
 <body>
@@ -1313,121 +1402,136 @@ body {
     </div>
   </div>
 
-  <!-- Inner sub-nav -->
-  <div class="inner-subnav">
-    <button class="inner-tab active" onclick="switchInner('house-map')">House Map</button>
-    <button class="inner-tab" onclick="switchInner('senate-map')">Senate Map</button>
-  </div>
+  <!-- Interest top-level sub-nav -->
+  <nav class="interest-subnav">
+    <button class="interest-subtab active" onclick="switchInterestTab('roster',this)">Maps &amp; Roster</button>
+    <button class="interest-subtab" onclick="switchInterestTab('news',this)">Member News <span id="interest-news-badge" class="interest-news-badge" style="display:none"></span></button>
+  </nav>
 
-  <!-- HOUSE MAP -->
-  <div id="inner-house-map" class="inner-panel active">
-    <div class="map-ctrl">
-      <input type="search" id="interest-house-search" class="map-ctrl-search" placeholder="Search by name, party, or seat&hellip;" oninput="filterInterestHouseMap(this.value)">
-      <span class="map-ctrl-count" id="interest-house-count"></span>
-      <div class="tier-chips" style="margin-left:auto">
-        <button class="tier-chip active" onclick="setInterestHouseTier('all',this)">All Tiers</button>
-        <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestHouseTier(1,this)">T1 Supportive</button>
-        <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestHouseTier(2,this)">T2 Moderate</button>
-        <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestHouseTier(3,this)">T3 Critical</button>
-        <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestHouseTier(4,this)">T4 Pak-Support</button>
-        <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestHouseTier(5,this)">T5 Pak-Oppose</button>
+  <!-- MAPS & ROSTER sub-panel -->
+  <div id="interest-subpanel-roster" class="interest-subpanel active">
+
+    <!-- Inner sub-nav -->
+    <div class="inner-subnav">
+      <button class="inner-tab active" onclick="switchInner('house-map')">House Map</button>
+      <button class="inner-tab" onclick="switchInner('senate-map')">Senate Map</button>
+    </div>
+
+    <!-- HOUSE MAP -->
+    <div id="inner-house-map" class="inner-panel active">
+      <div class="map-ctrl">
+        <input type="search" id="interest-house-search" class="map-ctrl-search" placeholder="Search by name, party, or seat&hellip;" oninput="filterInterestHouseMap(this.value)">
+        <span class="map-ctrl-count" id="interest-house-count"></span>
+        <div class="tier-chips" style="margin-left:auto">
+          <button class="tier-chip active" onclick="setInterestHouseTier('all',this)">All Tiers</button>
+          <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestHouseTier(1,this)">T1 Supportive</button>
+          <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestHouseTier(2,this)">T2 Moderate</button>
+          <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestHouseTier(3,this)">T3 Critical</button>
+          <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestHouseTier(4,this)">T4 Pak-Support</button>
+          <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestHouseTier(5,this)">T5 Pak-Oppose</button>
+        </div>
+      </div>
+      <div class="map-wrap" style="min-height:360px">
+        <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
+        <svg id="house-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="houseInterestZoomReset()">&#8859;</button>
+        </div>
       </div>
     </div>
-    <div class="map-wrap" style="min-height:360px">
-      <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
-      <svg id="house-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
-      <div class="map-zoom-ctrl">
-        <button class="map-zoom-btn" onclick="houseInterestZoomBy(1.5)">+</button>
-        <button class="map-zoom-btn" onclick="houseInterestZoomBy(1/1.5)">&minus;</button>
-        <button class="map-zoom-btn reset" onclick="houseInterestZoomReset()">&#8859;</button>
+
+    <!-- SENATE MAP -->
+    <div id="inner-senate-map" class="inner-panel">
+      <div class="map-ctrl">
+        <input type="search" id="interest-senate-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterInterestSenateMap(this.value)">
+        <span class="map-ctrl-count" id="interest-senate-count"></span>
+        <div class="tier-chips" style="margin-left:auto">
+          <button class="tier-chip active" onclick="setInterestSenateTier('all',this)">All Tiers</button>
+          <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestSenateTier(1,this)">T1 Supportive</button>
+          <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestSenateTier(2,this)">T2 Moderate</button>
+          <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestSenateTier(3,this)">T3 Critical</button>
+          <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestSenateTier(4,this)">T4 Pak-Support</button>
+          <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestSenateTier(5,this)">T5 Pak-Oppose</button>
+        </div>
+      </div>
+      <div class="map-wrap" style="min-height:360px">
+        <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
+        <svg id="senate-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="senateInterestZoomReset()">&#8859;</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- SENATE MAP -->
-  <div id="inner-senate-map" class="inner-panel">
-    <div class="map-ctrl">
-      <input type="search" id="interest-senate-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterInterestSenateMap(this.value)">
-      <span class="map-ctrl-count" id="interest-senate-count"></span>
-      <div class="tier-chips" style="margin-left:auto">
-        <button class="tier-chip active" onclick="setInterestSenateTier('all',this)">All Tiers</button>
-        <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestSenateTier(1,this)">T1 Supportive</button>
-        <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestSenateTier(2,this)">T2 Moderate</button>
-        <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestSenateTier(3,this)">T3 Critical</button>
-        <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestSenateTier(4,this)">T4 Pak-Support</button>
-        <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestSenateTier(5,this)">T5 Pak-Oppose</button>
+    <!-- Legend -->
+    <div class="tier-legend">
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#166534"></div> Tier 1 &mdash; Largely Supportive</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#4a9a6a"></div> Tier 2 &mdash; Moderate</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#9333ea"></div> Tier 3 &mdash; Critical</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#5b21b6"></div> Tier 4 &mdash; Active Pakistan Support</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#1d4ed8"></div> Tier 5 &mdash; Active Pakistan Opposition</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#d1d5db"></div> Untracked</div>
+    </div>
+
+    <!-- MEMBER ROSTER TABLE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Full Member Roster</h2>
+        <span class="section-sub">Tiered by India stance &middot; ranked within tier by institutional weight &middot; 119th Congress</span>
+      </div>
+      <div class="callout">
+        <strong>Source:</strong> All positions sourced from member office newsrooms, official statements, and committee records compiled in the India -interest.xlsx research roster. Click any member row to view detailed stance breakdown.
+      </div>
+      <div class="roster-wrap">
+      <table class="roster-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Member</th>
+            <th>Party</th>
+            <th>Chamber</th>
+            <th>State / Seat</th>
+            <th>Tier</th>
+            <th>Role</th>
+            <th>Up 2026?</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="roster-tbody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
       </div>
     </div>
-    <div class="map-wrap" style="min-height:360px">
-      <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
-      <svg id="senate-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
-      <div class="map-zoom-ctrl">
-        <button class="map-zoom-btn" onclick="senateInterestZoomBy(1.5)">+</button>
-        <button class="map-zoom-btn" onclick="senateInterestZoomBy(1/1.5)">&minus;</button>
-        <button class="map-zoom-btn reset" onclick="senateInterestZoomReset()">&#8859;</button>
+
+  </div><!-- /interest-subpanel-roster -->
+
+  <!-- MEMBER NEWS sub-panel -->
+  <div id="interest-subpanel-news" class="interest-subpanel">
+    <div class="callout" style="margin-bottom:16px">
+      Live news filtered for the 29 tracked India-Relevant members, drawn from the same sources as the Live News Feed (<em>data.json</em>) plus member-office RSS feeds. Click any member row in the roster to see their news in their profile.
+    </div>
+    <div class="mn-toolbar">
+      <input type="search" class="mn-search" id="mn-search" placeholder="Search member or keyword&hellip;" oninput="filterMemberNewsPanel(this.value)">
+      <div class="mn-tier-chips">
+        <button class="mn-chip active" onclick="setMnTierFilter('all',this)">All Tiers</button>
+        <button class="mn-chip" style="border-color:#166534;color:#166534" onclick="setMnTierFilter(1,this)">T1 Supportive</button>
+        <button class="mn-chip" style="border-color:#4a9a6a;color:#4a9a6a" onclick="setMnTierFilter(2,this)">T2 Moderate</button>
+        <button class="mn-chip" style="border-color:#9333ea;color:#9333ea" onclick="setMnTierFilter(3,this)">T3 Critical</button>
+        <button class="mn-chip" style="border-color:#5b21b6;color:#5b21b6" onclick="setMnTierFilter(4,this)">T4 Pak-Support</button>
+        <button class="mn-chip" style="border-color:#1d4ed8;color:#1d4ed8" onclick="setMnTierFilter(5,this)">T5 Pak-Oppose</button>
       </div>
+      <span class="mn-count" id="mn-count"></span>
+      <button class="mn-refresh" onclick="loadMemberNews(true)">&#8635; Refresh</button>
     </div>
-  </div>
-
-  <!-- Legend -->
-  <div class="tier-legend">
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#166534"></div> Tier 1 &mdash; Largely Supportive</div>
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#4a9a6a"></div> Tier 2 &mdash; Moderate</div>
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#9333ea"></div> Tier 3 &mdash; Critical</div>
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#5b21b6"></div> Tier 4 &mdash; Active Pakistan Support</div>
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#1d4ed8"></div> Tier 5 &mdash; Active Pakistan Opposition</div>
-    <div class="tier-dot"><div class="tier-dot-swatch" style="background:#d1d5db"></div> Untracked</div>
-  </div>
-
-  <!-- MEMBER ROSTER TABLE -->
-  <div class="section">
-    <div class="section-header">
-      <h2>Full Member Roster</h2>
-      <span class="section-sub">Tiered by India stance &middot; ranked within tier by institutional weight &middot; 119th Congress</span>
-    </div>
-    <div class="callout">
-      <strong>Source:</strong> All positions sourced from member office newsrooms, official statements, and committee records compiled in the India -interest.xlsx research roster. Click any member row to view detailed stance breakdown.
-    </div>
-    <div class="roster-wrap">
-    <table class="roster-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Member</th>
-          <th>Party</th>
-          <th>Chamber</th>
-          <th>State / Seat</th>
-          <th>Tier</th>
-          <th>Role</th>
-          <th>Up 2026?</th>
-          <th>Source</th>
-        </tr>
-      </thead>
-      <tbody id="roster-tbody">
-        <!-- Populated by JS -->
-      </tbody>
-    </table>
-    </div>
-  </div>
-
-  <!-- MEMBER NEWS FEED -->
-  <div class="section" id="interest-news-section" style="margin-top:32px">
-    <div class="section-header">
-      <h2>Member News Feed</h2>
-      <span class="section-sub">Live news mentioning tracked India-Relevant members &mdash; filtered from state &amp; political RSS sources</span>
-    </div>
-    <div class="callout">
-      Articles below are drawn from the same state-level and political news RSS feeds linked to each member. Only articles that mention a tracked member by name are shown.
-    </div>
-    <div style="margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <input type="search" id="news-member-search" class="map-ctrl-search" style="max-width:260px" placeholder="Filter by member name&hellip;" oninput="filterMemberNews(this.value)">
-      <span id="news-count" style="font:400 11px var(--sans);color:var(--text3)"></span>
-      <button onclick="loadMemberNews(true)" style="margin-left:auto;font:500 11px var(--sans);color:var(--navy);background:none;border:1px solid var(--border);border-radius:4px;padding:4px 10px;cursor:pointer">&#8635; Refresh</button>
-    </div>
-    <div id="news-loading" style="font:400 13px var(--sans);color:var(--text3);padding:16px 0">Loading member news&hellip;</div>
-    <div id="news-grid" class="news-grid" style="display:none"></div>
-    <p style="font:400 10px var(--sans);color:var(--text3);margin-top:12px">Sources: state political news RSS feeds associated with each tracked member. Articles refreshed on page load. CORS proxy used for cross-origin feeds.</p>
-  </div>
+    <div id="mn-loading" style="font:400 13px var(--sans);color:var(--text3);padding:24px 0">Loading member news&hellip;</div>
+    <div id="mn-list" class="mn-list" style="display:none"></div>
+    <p style="font:400 10px var(--sans);color:var(--text3);margin-top:16px">Sources: <em>data.json</em> Live News feed (same as Overview tab) plus state political RSS feeds linked to each tracked member. Articles refreshed on page load via CORS proxy.</p>
+  </div><!-- /interest-subpanel-news -->
 
 </div><!-- /page-body -->
 </div><!-- /panel-interest -->
@@ -1553,9 +1657,15 @@ function openSidePanel(memberId) {
       ${m.polling ? `<a href="${m.polling}" target="_blank" class="sp-link">&#9656; State Polling</a>` : ''}
     </div>
     <p style="font:400 10px var(--sans);color:var(--text3);margin-top:16px">Position data sourced from member office newsrooms and India -interest.xlsx research roster (119th Congress). All positions verified against official statements and committee records.</p>
+
+    <div class="sp-section-label" style="margin-top:20px">Latest News</div>
+    <div id="sp-news-list" class="sp-news-list">
+      <div id="sp-news-loading" style="font:400 12px var(--sans);color:var(--text3);padding:10px 0">Loading news\u2026</div>
+    </div>
   `;
   document.getElementById('india-sidepanel').classList.add('open');
   document.getElementById('india-overlay').classList.add('open');
+  _loadAndRenderSidepanelNews(m.name);
 }
 
 function closeSidePanel() {
@@ -1913,15 +2023,25 @@ new Chart(document.getElementById('c-ia-alignment'), {
 buildRoster();
 
 // ── MEMBER NEWS FEED ────────────────────────────────────────────────────────
-// Collect all unique RSS URLs from MEMBERS array
+
+// Unique RSS feeds from MEMBERS array
 const _memberNewsFeeds = [...new Set(MEMBERS.filter(m => m.news).map(m => m.news))];
 
-// Normalize text: strip diacritics, lowercase (handles André → andre)
+// Member → tier lookup for colour-coding
+const _memberTierMap = {};
+MEMBERS.forEach(m => { _memberTierMap[m.name] = m.tier; });
+
+// Normalize: strip diacritics, lowercase (handles André → andre)
 function _norm(s) {
   return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 }
 
-// Build a map: keyword → member name for fast matching
+// HTML escape helper
+function _esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// Keyword map for member name matching
 const _memberKeywords = MEMBERS.map(m => ({
   name: m.name,
   keywords: _norm(m.name).split(/\s+/)
@@ -1939,41 +2059,101 @@ function _articleMentionsMember(text) {
   return null;
 }
 
-let _allNewsItems = [];
-let _newsSearchQuery = '';
+let _allNewsItems   = [];
+let _newsLoading    = false;   // guard against concurrent fetches
+let _newsLoadedOnce = false;
+let _mnTierFilter   = 'all';
+let _mnSearchQuery  = '';
 
-function filterMemberNews(query) {
-  _newsSearchQuery = query.trim().toLowerCase();
-  _renderNews();
+// ── Interest sub-tab switch ─────────────────────────────────────────────────
+function switchInterestTab(name, btn) {
+  document.querySelectorAll('.interest-subtab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.interest-subpanel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('interest-subpanel-' + name).classList.add('active');
+  if (name === 'news') loadMemberNews(false);
 }
 
-function _renderNews() {
-  const grid = document.getElementById('news-grid');
-  const countEl = document.getElementById('news-count');
-  if (!grid) return;
-  const items = _newsSearchQuery
-    ? _allNewsItems.filter(i => i.member.toLowerCase().includes(_newsSearchQuery) || i.title.toLowerCase().includes(_newsSearchQuery))
-    : _allNewsItems;
-  if (items.length === 0) {
-    grid.innerHTML = '<p style="font:400 13px var(--sans);color:var(--text3);grid-column:1/-1">No matching articles found.</p>';
-  } else {
-    grid.innerHTML = items.map(item => `
-      <div class="news-card">
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-          <span class="news-card-source">${item.source}</span>
-          <span class="news-card-member">${item.member}</span>
-        </div>
-        <a href="${item.link}" target="_blank" rel="noopener" class="news-card-title">${item.title}</a>
-        <div class="news-card-date">${item.date}</div>
-      </div>
-    `).join('');
+// ── Tier & search filters for Member News sub-panel ─────────────────────────
+function setMnTierFilter(tier, btn) {
+  _mnTierFilter = tier;
+  document.querySelectorAll('.mn-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _renderMemberNews();
+}
+
+function filterMemberNewsPanel(query) {
+  _mnSearchQuery = query.trim().toLowerCase();
+  _renderMemberNews();
+}
+
+function _renderMemberNews() {
+  const listEl  = document.getElementById('mn-list');
+  const countEl = document.getElementById('mn-count');
+  if (!listEl) return;
+
+  let items = _allNewsItems;
+  if (_mnTierFilter !== 'all') {
+    items = items.filter(i => _memberTierMap[i.member] === _mnTierFilter);
   }
-  grid.style.display = 'grid';
-  countEl.textContent = `${items.length} article${items.length !== 1 ? 's' : ''}`;
+  if (_mnSearchQuery) {
+    items = items.filter(i =>
+      i.member.toLowerCase().includes(_mnSearchQuery) ||
+      i.title.toLowerCase().includes(_mnSearchQuery)
+    );
+  }
+
+  if (countEl) countEl.textContent = items.length + ' article' + (items.length !== 1 ? 's' : '');
+
+  if (items.length === 0) {
+    listEl.innerHTML = '<div class="mn-empty">No matching articles found.</div>';
+  } else {
+    listEl.innerHTML = items.map(item => {
+      const color = TIER_COLOR_MAP[_memberTierMap[item.member]] || '#6b7280';
+      return `<div class="mn-article">
+        <div class="mn-article-meta">
+          <span class="mn-article-source">${_esc(item.source)}</span>
+          <span class="mn-article-member" style="background:${color}">${_esc(item.member)}</span>
+        </div>
+        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_esc(item.title)}</a>
+        <div class="mn-article-date">${_esc(item.date)}</div>
+      </div>`;
+    }).join('');
+  }
+  listEl.style.display = 'flex';
 }
 
+// ── Side panel: render per-member news ──────────────────────────────────────
+async function _loadAndRenderSidepanelNews(memberName) {
+  // If a fetch is already in flight, wait for it to finish
+  if (_newsLoading) {
+    await new Promise(resolve => {
+      const poll = setInterval(() => { if (!_newsLoading) { clearInterval(poll); resolve(); } }, 200);
+    });
+  } else {
+    await loadMemberNews(false);
+  }
+  const listEl = document.getElementById('sp-news-list');
+  const loadEl = document.getElementById('sp-news-loading');
+  if (!listEl) return;
+  if (loadEl) loadEl.remove();
+
+  const items = _allNewsItems.filter(i => i.member === memberName).slice(0, 8);
+  if (items.length === 0) {
+    listEl.innerHTML = '<p class="sp-news-empty">No recent news found for this member.</p>';
+    return;
+  }
+  listEl.innerHTML = items.map(item => `
+    <div class="sp-news-item">
+      <div class="sp-news-source">${_esc(item.source)}</div>
+      <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="sp-news-title">${_esc(item.title)}</a>
+      <div class="sp-news-date">${_esc(item.date)}</div>
+    </div>
+  `).join('');
+}
+
+// ── RSS CORS proxy ───────────────────────────────────────────────────────────
 async function _fetchFeedViaProxy(url) {
-  // Use rss2json API as a CORS proxy
   const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=&count=20`;
   try {
     const r = await fetch(api);
@@ -1982,25 +2162,52 @@ async function _fetchFeedViaProxy(url) {
     if (j.status !== 'ok' || !Array.isArray(j.items)) return [];
     return j.items.map(item => ({
       title: (item.title || '').replace(/<[^>]*>/g, '').trim(),
-      link: item.link || item.url || '',
+      link:  item.link || item.url || '',
       description: (item.description || item.content || '').replace(/<[^>]*>/g, '').slice(0, 300),
       pubDate: item.pubDate || ''
     }));
   } catch { return []; }
 }
 
+// ── Main news loader ─────────────────────────────────────────────────────────
 async function loadMemberNews(force) {
-  if (!force && _allNewsItems.length > 0) return;
-  const loadEl = document.getElementById('news-loading');
-  const grid = document.getElementById('news-grid');
+  if (!force && _newsLoadedOnce) {
+    _renderMemberNews();
+    return;
+  }
+  if (_newsLoading) return;   // already fetching — caller will get results when done
+  _newsLoading = true;
+
+  const loadEl = document.getElementById('mn-loading');
+  const listEl = document.getElementById('mn-list');
   if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Loading member news\u2026'; }
-  if (grid) grid.style.display = 'none';
+  if (listEl) listEl.style.display = 'none';
   _allNewsItems = [];
 
-  // Fetch all feeds in parallel (cap at 15 to avoid rate limits)
+  try {
+  // Source 1: data.json — same feed as the Live News Feed in the Overview tab
+  try {
+    const r = await fetch('data.json?t=' + Date.now());
+    if (r.ok) {
+      const data = await r.json();
+      (Array.isArray(data.news) ? data.news : []).forEach(item => {
+        const searchText = (item.title || '') + ' ' + (item.description || '');
+        const member = _articleMentionsMember(searchText);
+        if (!member) return;
+        let date = '';
+        if (item.date) {
+          try { date = new Date(item.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
+          catch { date = (item.date || '').slice(0, 10); }
+        }
+        const ts = item.date ? (new Date(item.date).getTime() || 0) : 0;
+        _allNewsItems.push({ title: item.title || '', link: item.url || '', source: item.source || 'Live News', member, date, _ts: ts });
+      });
+    }
+  } catch(e) { /* continue to RSS feeds */ }
+
+  // Source 2: member-office RSS feeds (via rss2json CORS proxy)
   const feeds = _memberNewsFeeds.slice(0, 15);
   const results = await Promise.allSettled(feeds.map(url => _fetchFeedViaProxy(url)));
-
   results.forEach((res, i) => {
     if (res.status !== 'fulfilled') return;
     const feedUrl = feeds[i];
@@ -2008,34 +2215,45 @@ async function loadMemberNews(force) {
       const searchText = item.title + ' ' + item.description;
       const member = _articleMentionsMember(searchText);
       if (!member) return;
-      // Parse source label from URL
-      let source = feedUrl.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
-      // Format date
+      const source = feedUrl.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
       let date = '';
       if (item.pubDate) {
         try { date = new Date(item.pubDate).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
-        catch { date = item.pubDate.slice(0, 10); }
+        catch { date = (item.pubDate || '').slice(0, 10); }
       }
       const ts = item.pubDate ? (new Date(item.pubDate).getTime() || 0) : 0;
       _allNewsItems.push({ title: item.title, link: item.link, source, member, date, _ts: ts });
     });
   });
 
-  // Sort by date descending, deduplicate by link
+  // Sort by date desc, deduplicate by URL
   const seen = new Set();
   _allNewsItems = _allNewsItems
     .sort((a, b) => b._ts - a._ts)
-    .filter(i => { if (seen.has(i.link)) return false; seen.add(i.link); return true; });
+    .filter(i => { if (!i.link || seen.has(i.link)) return false; seen.add(i.link); return true; });
 
   if (loadEl) loadEl.style.display = 'none';
+
+  // Update article count badge on the "Member News" tab button
+  const badge = document.getElementById('interest-news-badge');
+  if (badge) {
+    badge.textContent = _allNewsItems.length;
+    badge.style.display = _allNewsItems.length > 0 ? 'inline-block' : 'none';
+  }
+
+  } finally {
+    _newsLoading    = false;
+    _newsLoadedOnce = true;
+  }
+
   if (_allNewsItems.length === 0) {
-    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No member-relevant articles found in current feeds.'; }
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No member-relevant articles found.'; }
     return;
   }
-  _renderNews();
+  _renderMemberNews();
 }
 
-// Load news when interest tab becomes active — intercept tab switch
+// Preload in background when interest tab is opened (so side panel news is ready immediately)
 (function() {
   const _orig = switchTab;
   window.switchTab = function(name) {

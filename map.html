@@ -162,6 +162,18 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .map-srch{font:400 13px var(--sans);color:var(--t1);background:var(--bg-s);border:1px solid var(--br-md);border-radius:4px;padding:7px 12px;width:280px;outline:none;transition:border-color .1s}
 .map-srch:focus{border-color:#444}
 .map-srch-ct{font:400 11px var(--sans);color:var(--t4)}
+
+/* ── ZOOM CONTROLS ── */
+.d3-map-wrap{position:relative}
+.map-zoom-ctrl{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:3px;z-index:10}
+.map-zoom-btn{width:30px;height:30px;background:rgba(255,255,255,.95);border:1px solid var(--br-md);border-radius:5px;cursor:pointer;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--t2);box-shadow:0 1px 4px rgba(0,0,0,.13);transition:box-shadow .1s,background .1s;line-height:1;padding:0;user-select:none}
+.map-zoom-btn:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.map-zoom-btn.reset{font-size:13px}
+.map-hint{font:400 11px var(--sans);color:var(--t4);margin-bottom:6px}
+
+/* ── MAP LOADING ── */
+.map-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 13px var(--sans);color:var(--t4);background:#f0f4f8;border-radius:6px;pointer-events:none;transition:opacity .3s}
+.map-loading.done{opacity:0;pointer-events:none}
 @media(max-width:700px){
   .stat-strip{grid-template-columns:1fr 1fr}
   .panel-inner{padding:20px 14px 60px}
@@ -232,7 +244,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <input type="search" id="sen-map-srch" class="map-srch" placeholder="Search by state, incumbent, or party&hellip;" oninput="searchSenMap(this.value)">
     <span class="map-srch-ct" id="sen-srch-ct"></span>
   </div>
-  <div class="d3-map-wrap"><svg id="senate-svg" viewBox="0 0 960 580" style="max-height:500px"></svg></div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a state for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap">
+    <svg id="senate-svg" viewBox="0 0 960 580" style="max-height:500px;cursor:grab"></svg>
+    <div class="map-loading" id="senate-loading">Loading map&hellip;</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="senZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="senZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="senZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
 
   <!-- DETAIL CARD -->
   <div class="detail-card" id="detail-card">
@@ -325,7 +346,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <input type="search" id="house-map-srch" class="map-srch" placeholder="Search by district, incumbent, or party&hellip;" oninput="searchHouseMap(this.value)">
     <span class="map-srch-ct" id="house-srch-ct"></span>
   </div>
-  <div class="d3-map-wrap" style="margin-bottom:20px"><svg id="house-svg" viewBox="0 0 960 580" style="max-height:500px"></svg></div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a highlighted district for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap" style="margin-bottom:20px">
+    <svg id="house-svg" viewBox="0 0 960 580" style="max-height:500px;cursor:grab"></svg>
+    <div class="map-loading" id="house-loading">Loading district map (10 MB&hellip;)</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="houseZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="houseZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="houseZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
   <div class="detail-card" id="house-detail-card">
     <div class="detail-top">
       <div>
@@ -398,7 +428,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="section-sub">Tracked governor races coloured by rating. Grey = no tracked race.</div>
     </div>
   </div>
-  <div class="d3-map-wrap" style="margin-bottom:20px"><svg id="gov-svg" viewBox="0 0 960 580" style="max-height:460px"></svg></div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap" style="margin-bottom:20px">
+    <svg id="gov-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+    <div class="map-loading" id="gov-loading">Loading map&hellip;</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="govZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="govZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="govZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
 
   <div class="callout">
     <div class="callout-label">Governor context &#8212; 2026</div>
@@ -620,10 +659,33 @@ function showTip(e,html){ mapTip.innerHTML=html; mapTip.style.display='block'; m
 function moveTip(e){ mapTip.style.left=(e.clientX+14)+'px'; mapTip.style.top=(e.clientY-36)+'px'; }
 function hideTip(){ mapTip.style.display='none'; }
 
+// ── ZOOM CONTROLLERS ─────────────────────────────────────────────────────────
+let _senZoom = null, _houseZoom = null, _govZoom = null;
+
+function makeZoom(svgSel, onZoom) {
+  const z = d3.zoom().scaleExtent([1, 12]).on('zoom', e => {
+    onZoom(e.transform);
+    svgSel.style('cursor', e.transform.k > 1 ? 'grabbing' : 'grab');
+  });
+  svgSel.call(z).on('dblclick.zoom', null);
+  return {
+    zoomBy: f => svgSel.transition().duration(350).call(z.scaleBy, f),
+    reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
+  };
+}
+
+function senZoomBy(f)  { _senZoom?.zoomBy(f); }
+function senZoomReset(){ _senZoom?.reset(); }
+function houseZoomBy(f)  { _houseZoom?.zoomBy(f); }
+function houseZoomReset(){ _houseZoom?.reset(); }
+function govZoomBy(f)  { _govZoom?.zoomBy(f); }
+function govZoomReset(){ _govZoom?.reset(); }
+
 // ── SENATE CHOROPLETH ────────────────────────────────────────────────────────
 let _senSel = null;
 let _senRaceByState = {};
 let _selSenPath = null;
+let _senG = null;
 
 function highlightMapByRating(rating) {
   if (!_senSel) return;
@@ -637,36 +699,65 @@ function buildSenateMap(races) {
   _senRaceByState = {};
   races.forEach(r => { _senRaceByState[r.state] = r; });
 
+  const svgEl = d3.select('#senate-svg');
+  svgEl.selectAll('*').remove();
+  _senG = svgEl.append('g');
+
+  _senZoom = makeZoom(svgEl, t => _senG.attr('transform', t));
+
   fetchStatesGeo(gj => {
-    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
-    _senSel = d3.select('#senate-svg')
-      .selectAll('path')
+
+    _senSel = _senG.selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_senRaceByState[d.properties.name] ? ' clickable' : ''))
       .attr('d', d => pathGen(d) || '')
-      .attr('fill', d => {
+      .style('fill', d => {
         const r = _senRaceByState[d.properties.name];
-        if (!r) return '#E9E9E7';
-        return (RC[r.rating]||{bg:'#E9E9E7'}).bg;
+        return r ? (RC[r.rating] || {bg:'#D8D8D4'}).bg : '#D8D8D4';
       })
-      .attr('stroke','#fff').attr('stroke-width',0.5)
-      .on('mousemove', function(event,d) {
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.5px')
+      .on('mousemove', function(event, d) {
         const r = _senRaceByState[d.properties.name];
-        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open?' &middot; Open seat':''}<br>${r.incumbent}`);
-        else showTip(event, `<strong>${d.properties.name}</strong><br><em>No Senate race in 2026</em>`);
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        else   showTip(event, `<strong>${d.properties.name}</strong><br><span style="opacity:.7">No Senate race in 2026</span>`);
       })
       .on('mouseleave', hideTip)
-      .on('click', function(event,d) {
+      .on('click', function(event, d) {
         const r = _senRaceByState[d.properties.name];
         if (!r) return;
-        if (_selSenPath) d3.select(_selSenPath).style('stroke','').style('stroke-width','');
-        if (_selSenPath === this) { _selSenPath=null; closeDetail(); return; }
+        if (_selSenPath) d3.select(_selSenPath).style('stroke', '#fff').style('stroke-width', '0.5px');
+        if (_selSenPath === this) { _selSenPath = null; closeDetail(); return; }
         _selSenPath = this;
-        d3.select(this).style('stroke','#191919').style('stroke-width','2.5px');
+        d3.select(this).style('stroke', '#111').style('stroke-width', '2.5px');
         showDetail(r);
       });
+
+    // State abbreviation labels for races only
+    _senG.selectAll('text')
+      .data(gj.features.filter(d => _senRaceByState[d.properties.name]))
+      .join('text')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('pointer-events', 'none')
+      .style('font', '600 9px "DM Sans",sans-serif')
+      .style('fill', d => {
+        const r = _senRaceByState[d.properties.name];
+        return (RC[r.rating] || {tx:'#fff'}).tx;
+      })
+      .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
+      .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
+      .text(d => {
+        const abbr = Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.name);
+        return abbr || '';
+      });
+
+    // Hide loading overlay
+    const ld = document.getElementById('senate-loading');
+    if (ld) ld.classList.add('done');
   });
 }
 
@@ -690,7 +781,7 @@ function showDetail(race) {
 
 function closeDetail() {
   document.getElementById('detail-card').classList.remove('visible');
-  if (_selSenPath) { d3.select(_selSenPath).style('stroke','').style('stroke-width',''); _selSenPath=null; }
+  if (_selSenPath) { d3.select(_selSenPath).style('stroke','#fff').style('stroke-width','0.5px'); _selSenPath=null; }
 }
 
 function searchSenMap(q) {
@@ -792,35 +883,46 @@ function buildHouseDistrictMap(competitive) {
   _houseRaceByKey = {};
   competitive.forEach(r => { const k = districtKey(r.district); if (k) _houseRaceByKey[k] = r; });
 
+  const svgEl = d3.select('#house-svg');
+  svgEl.selectAll('*').remove();
+  const g = svgEl.append('g');
+
+  _houseZoom = makeZoom(svgEl, t => g.attr('transform', t));
+
   fetchDistrictsGeo(gj => {
-    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
-    _houseSel = d3.select('#house-svg')
-      .selectAll('path')
+
+    _houseSel = g.selectAll('path')
       .data(gj.features)
       .join('path')
-      .attr('class', d => 'd-path' + (_houseRaceByKey[d.properties.state+'_'+d.properties.district] ? ' clickable' : ''))
-      .attr('d', d => pathGen(d) || '')
-      .attr('fill', d => {
+      .attr('class', d => {
         const k = d.properties.state + '_' + d.properties.district;
-        const r = _houseRaceByKey[k];
-        if (!r) return '#e0e0e0';
-        return (RC[r.rating]||{bg:'#e0e0e0'}).bg;
+        return 'd-path' + (_houseRaceByKey[k] ? ' clickable' : '');
       })
-      .attr('stroke','#fff').attr('stroke-width',0.3)
-      .on('mousemove', function(event,d) {
+      .attr('d', d => pathGen(d) || '')
+      .style('fill', d => {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
-        if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br>${r.incumbent} (${r.party})<br>PVP: ${r.pvp}`);
-        else showTip(event, `<strong>${d.properties.state}${d.properties.district>0?' '+d.properties.district:' AL'}</strong><br><em>Not in competitive tracker</em>`);
+        return r ? (RC[r.rating] || {bg:'#D0D0CE'}).bg : '#D0D0CE';
+      })
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.3px')
+      .on('mousemove', function(event, d) {
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span><br>PVP: ${r.pvp}`);
+        else   showTip(event, `<strong>${d.properties.state} ${d.properties.district > 0 ? d.properties.district : 'AL'}</strong><br><span style="opacity:.7">Not in competitive tracker</span>`);
       })
       .on('mouseleave', hideTip)
-      .on('click', function(event,d) {
+      .on('click', function(event, d) {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
-        if (!r) return;
-        showHouseDetail(r);
+        if (r) showHouseDetail(r);
       });
+
+    const ld = document.getElementById('house-loading');
+    if (ld) ld.classList.add('done');
   });
 }
 
@@ -863,27 +965,48 @@ function buildGovMap(races) {
   _govRaceByState = {};
   races.forEach(r => { _govRaceByState[r.state] = r; });
 
+  const svgEl = d3.select('#gov-svg');
+  svgEl.selectAll('*').remove();
+  const g = svgEl.append('g');
+
+  _govZoom = makeZoom(svgEl, t => g.attr('transform', t));
+
   fetchStatesGeo(gj => {
-    const proj = d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
-    d3.select('#gov-svg')
-      .selectAll('path')
+
+    g.selectAll('path')
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_govRaceByState[d.properties.name] ? ' clickable' : ''))
       .attr('d', d => pathGen(d) || '')
-      .attr('fill', d => {
+      .style('fill', d => {
         const r = _govRaceByState[d.properties.name];
-        if (!r) return '#E9E9E7';
-        return (RC[r.rating]||{bg:'#E9E9E7'}).bg;
+        return r ? (RC[r.rating] || {bg:'#D8D8D4'}).bg : '#D8D8D4';
       })
-      .attr('stroke','#fff').attr('stroke-width',0.5)
-      .on('mousemove', function(event,d) {
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.5px')
+      .on('mousemove', function(event, d) {
         const r = _govRaceByState[d.properties.name];
-        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open?' &middot; Open seat':''}<br>${r.incumbent}`);
-        else showTip(event, `<strong>${d.properties.name}</strong><br><em>No tracked governor race</em>`);
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        else   showTip(event, `<strong>${d.properties.name}</strong><br><span style="opacity:.7">No tracked governor race</span>`);
       })
       .on('mouseleave', hideTip);
+
+    // Labels for tracked races
+    g.selectAll('text')
+      .data(gj.features.filter(d => _govRaceByState[d.properties.name]))
+      .join('text')
+      .attr('text-anchor', 'middle').attr('dy', '0.35em')
+      .attr('pointer-events', 'none')
+      .style('font', '600 9px "DM Sans",sans-serif')
+      .style('fill', d => (RC[_govRaceByState[d.properties.name].rating] || {tx:'#fff'}).tx)
+      .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
+      .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
+      .text(d => Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.name) || '');
+
+    const ld = document.getElementById('gov-loading');
+    if (ld) ld.classList.add('done');
   });
 }
 

@@ -351,7 +351,6 @@ body {
 <!-- SUB-NAV -->
 <nav class="sub-nav">
   <button class="sub-tab active" data-tab="analysis" onclick="switchTab('analysis')">Analysis &amp; Commentary</button>
-  <button class="sub-tab" data-tab="news" onclick="switchTab('news')">Live News Feed</button>
   <div class="nav-spacer"></div>
   <span class="last-updated" id="lastUpdated"></span>
 </nav>
@@ -425,66 +424,11 @@ body {
   </div>
 </div>
 
-<!-- NEWS PANEL -->
-<div id="panel-news" class="panel">
-  <div class="toolbar">
-    <input type="search" class="search-box" id="news-search" placeholder="Search headlines..." oninput="filterNews()">
-    <div class="chips" id="news-chips">
-      <button class="chip active" data-tag="All" onclick="setNewsFilter('All')">All</button>
-      <button class="chip" data-tag="Major Update" onclick="setNewsFilter('Major Update')">Major Update</button>
-      <button class="chip" data-tag="Senate" onclick="setNewsFilter('Senate')">Senate</button>
-      <button class="chip" data-tag="House" onclick="setNewsFilter('House')">House</button>
-      <button class="chip" data-tag="Federal" onclick="setNewsFilter('Federal')">Federal</button>
-      <button class="chip" data-tag="Governorship" onclick="setNewsFilter('Governorship')">Governorship</button>
-      <button class="chip" data-tag="Primary" onclick="setNewsFilter('Primary')">Primary</button>
-      <button class="chip" data-tag="Redistricting" onclick="setNewsFilter('Redistricting')">Redistricting</button>
-      <button class="chip" data-tag="Polling" onclick="setNewsFilter('Polling')">Polling</button>
-    </div>
-    <select class="sort-select" id="news-sort" onchange="filterNews()">
-      <option value="newest">Newest first</option>
-      <option value="oldest">Oldest first</option>
-    </select>
-  </div>
-  <div class="content">
-    <div id="news-results-bar" class="results-bar hidden"></div>
-    <div id="news-list" class="news-list"></div>
-    <div id="news-empty" class="empty-state hidden">
-      <div class="empty-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <h3>No news items yet</h3>
-      <p>The live feed fetches from 150+ national and state political RSS sources every hour via GitHub Actions.</p>
-      <span class="empty-hint">Items will appear automatically after the first scheduled fetch.</span>
-    </div>
-    <div id="news-no-results" class="empty-state hidden">
-      <div class="empty-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6b6b6b" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </div>
-      <h3>No results found</h3>
-      <p>Try a different search term or clear the filter.</p>
-    </div>
-  </div>
-</div>
 
 <script>
 'use strict';
 
-const TAG_CLASS = {
-  'Redistricting': 'tag-redistricting',
-  'Polling':       'tag-polling',
-  'Economy':       'tag-economy',
-  'Major Update':  'tag-major',
-  'Senate':        'tag-senate',
-  'House':         'tag-house',
-  'Federal':       'tag-federal',
-  'Governorship':  'tag-gov',
-  'Primary':       'tag-primary',
-};
-
-let allNews = [];
-let newsFilter = 'All';
-
-/* ---- DATA (news only) ---- */
+/* ---- DATA ---- */
 async function loadData() {
   const paths = ['data.json', '../data.json', './data.json'];
   for (const p of paths) {
@@ -492,17 +436,14 @@ async function loadData() {
       const r = await fetch(p + '?t=' + Date.now());
       if (!r.ok) continue;
       const d = await r.json();
-      allNews = Array.isArray(d.news) ? d.news : [];
       if (d.meta && d.meta.last_updated) {
         const dt = new Date(d.meta.last_updated);
         document.getElementById('lastUpdated').textContent =
           'Updated ' + dt.toLocaleString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
       }
-      renderNews();
       return;
     } catch(e) { /* try next */ }
   }
-  renderNews();
 }
 
 /* ---- TAB SWITCHING ---- */
@@ -511,101 +452,7 @@ function switchTab(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
 }
 
-/* ---- NEWS ---- */
-function setNewsFilter(tag) {
-  newsFilter = tag;
-  document.querySelectorAll('#news-chips .chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
-  renderNews();
-}
-
-function filterNews() { renderNews(); }
-
-function renderNews() {
-  const q = (document.getElementById('news-search').value || '').toLowerCase();
-  const sort = document.getElementById('news-sort').value;
-  let items = allNews.filter(item => {
-    if (newsFilter !== 'All') {
-      const tags = Array.isArray(item.tags) ? item.tags : [];
-      if (!tags.includes(newsFilter)) return false;
-    }
-    if (q) {
-      const haystack = ((item.title || '') + ' ' + (item.source || '') + ' ' + (item.description || '')).toLowerCase();
-      if (!haystack.includes(q)) return false;
-    }
-    return true;
-  });
-
-  items.sort((a, b) => {
-    const da = new Date(a.date || 0), db = new Date(b.date || 0);
-    return sort === 'oldest' ? da - db : db - da;
-  });
-
-  const listEl    = document.getElementById('news-list');
-  const emptyEl   = document.getElementById('news-empty');
-  const noResEl   = document.getElementById('news-no-results');
-  const bar       = document.getElementById('news-results-bar');
-
-  listEl.innerHTML = '';
-
-  if (allNews.length === 0) {
-    emptyEl.classList.remove('hidden');
-    noResEl.classList.add('hidden');
-    bar.classList.add('hidden');
-    return;
-  }
-  emptyEl.classList.add('hidden');
-
-  if (items.length === 0) {
-    noResEl.classList.remove('hidden');
-    bar.classList.add('hidden');
-    return;
-  }
-  noResEl.classList.add('hidden');
-
-  bar.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '') +
-    (newsFilter !== 'All' ? ' \u00b7 ' + newsFilter : '') +
-    (q ? ' matching "' + q + '"' : '');
-  bar.classList.remove('hidden');
-
-  items.forEach(item => {
-    const tags    = Array.isArray(item.tags) ? item.tags : [];
-    const dateStr = item.date ? relativeDate(new Date(item.date)) : '';
-    const el      = document.createElement('div');
-    el.className  = 'news-item';
-    const tagsHtml = tags.map(t =>
-      '<span class="news-tag ' + (TAG_CLASS[t] || 'tag-federal') + '">' + esc(t) + '</span>'
-    ).join('');
-    el.innerHTML =
-      '<div class="news-top">' +
-        '<span class="news-source">' + esc(item.source || '') + '</span>' +
-        (dateStr ? '<span class="news-date">' + dateStr + '</span>' : '') +
-      '</div>' +
-      '<a class="news-title" href="' + esc(item.url || '#') + '" target="_blank" rel="noopener">' + esc(item.title || 'Untitled') + '</a>' +
-      (item.description ? '<p class="news-desc">' + esc(item.description) + '</p>' : '') +
-      (tagsHtml ? '<div class="news-tags">' + tagsHtml + '</div>' : '');
-    listEl.appendChild(el);
-  });
-}
-
-/* ---- HELPERS ---- */
-function esc(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
-function relativeDate(d) {
-  const diff = Date.now() - d.getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 60) return mins + 'm ago';
-  const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return hrs + 'h ago';
-  const days = Math.floor(hrs / 24);
-  if (days < 7) return days + 'd ago';
-  return d.toLocaleDateString('en-GB', { day:'numeric', month:'short' });
-}
+/* ---- TAB SWITCHING ---- */
 
 loadData();
 </script>

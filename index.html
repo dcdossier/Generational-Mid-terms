@@ -195,7 +195,15 @@ body{
 .forecast-seats{font:400 12px var(--sans);color:rgba(240,232,214,.7);margin-bottom:4px}
 .forecast-sub{font:400 11px var(--sans);color:var(--t-muted);line-height:1.45}
 
-/* LATEST NEWS */
+/* LIVE NEWS FEED */
+.hn-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.hn-search{font:400 12px var(--sans);color:var(--beige);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:6px 10px 6px 30px;width:200px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='none' stroke='%239a9a8a' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:9px center}
+.hn-search:focus{border-color:var(--gold)}
+.hn-chips{display:flex;flex-wrap:wrap;gap:5px}
+.hn-chip{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:20px;border:1px solid var(--br);background:transparent;color:var(--t-muted);cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-chip:hover{border-color:var(--gold);color:var(--beige)}
+.hn-chip.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.hn-sort{font:400 11px var(--sans);color:var(--t-muted);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:5px 8px;cursor:pointer;outline:none;margin-left:auto}
 .home-news-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
 .home-news-item{border-bottom:1px solid var(--br);padding:14px 0;display:flex;align-items:flex-start;gap:14px}
 .home-news-item:last-child{border-bottom:none}
@@ -484,13 +492,27 @@ body{background:#F5F5DC;color:#1E2232}
         <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
       </div>
 
-      <!-- LATEST NEWS -->
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
-        <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555">Latest Headlines</h3>
-        <button onclick="switchTabByName('analysis')" style="font:500 11px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0">View all &rarr;</button>
+      <!-- LIVE NEWS FEED -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:10px">Live News Feed</h3>
+      <div class="hn-toolbar">
+        <input type="search" class="hn-search" id="home-news-search" placeholder="Search headlines&hellip;" oninput="renderHomeNews()">
+        <div class="hn-chips">
+          <button class="hn-chip active" data-tag="All" onclick="setHomeNewsFilter('All',this)">All</button>
+          <button class="hn-chip" data-tag="Major Update" onclick="setHomeNewsFilter('Major Update',this)">Major Update</button>
+          <button class="hn-chip" data-tag="Senate" onclick="setHomeNewsFilter('Senate',this)">Senate</button>
+          <button class="hn-chip" data-tag="House" onclick="setHomeNewsFilter('House',this)">House</button>
+          <button class="hn-chip" data-tag="Governorship" onclick="setHomeNewsFilter('Governorship',this)">Gov</button>
+          <button class="hn-chip" data-tag="Primary" onclick="setHomeNewsFilter('Primary',this)">Primary</button>
+          <button class="hn-chip" data-tag="Polling" onclick="setHomeNewsFilter('Polling',this)">Polling</button>
+        </div>
+        <select class="hn-sort" id="home-news-sort" onchange="renderHomeNews()">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+        </select>
       </div>
+      <div id="home-news-bar" style="font:400 11px var(--sans);color:var(--t-muted);padding:2px 0 10px;display:none"></div>
       <div class="home-news-list" id="home-news-list">
-        <div class="home-news-item"><div style="color:#888;font:400 13px var(--sans)">Loading&#8230;</div></div>
+        <div class="home-news-item"><div style="color:#888;font:400 13px var(--sans)">Loading&hellip;</div></div>
       </div>
 
       <!-- SECTION CARDS -->
@@ -511,8 +533,8 @@ body{background:#F5F5DC;color:#1E2232}
         <button class="home-section-card" onclick="switchTabByName('analysis')">
           <div class="hsc-icon"><img src="assets/mag.jpeg" alt="Analysis" style="height:22px;width:auto;vertical-align:middle;object-fit:contain"></div>
           <div class="hsc-title">Analysis &amp; Commentary</div>
-          <div class="hsc-desc">Curated analysis from Cook Political Report, Sabato&rsquo;s Crystal Ball, Brookings, Pew Research, and leading political commentators — plus a live RSS news feed from 150+ sources.</div>
-          <div class="hsc-sub-tabs"><span class="hsc-tag">Forecaster Consensus</span><span class="hsc-tag">Research</span><span class="hsc-tag">Live News</span></div>
+          <div class="hsc-desc">Curated analysis from Cook Political Report, Sabato&rsquo;s Crystal Ball, Brookings, Pew Research, and leading political commentators.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Forecaster Consensus</span><span class="hsc-tag">Research</span><span class="hsc-tag">Commentary</span></div>
         </button>
       </div>
 
@@ -718,26 +740,9 @@ async function loadHomeData() {
     if (fl) fl.textContent = 'Last updated ' + dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ' · ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' UTC';
   }
 
-  // News
-  const news = Array.isArray(data.news) ? data.news : [];
-  const sorted = [...news].sort((a,b) => new Date(b.date||0) - new Date(a.date||0)).slice(0,7);
-  const nl = document.getElementById('home-news-list');
-  if (nl && sorted.length) {
-    nl.innerHTML = sorted.map(item => {
-      const tags = Array.isArray(item.tags) ? item.tags.slice(0,2) : [];
-      const tagsHtml = tags.map(t => {
-        const [bg,color] = (TAG_COLORS[t]||'#F1F5F9:#1E293B').split(':');
-        return `<span class="home-news-tag" style="background:${bg};color:${color}">${esc(t)}</span>`;
-      }).join('');
-      return `<div class="home-news-item">
-        <div class="home-news-source">${esc(item.source||'')}</div>
-        <div class="home-news-body">
-          <a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'')}</a>
-          <div class="home-news-age">${item.date ? relAge(item.date) : ''}${tagsHtml}</div>
-        </div>
-      </div>`;
-    }).join('');
-  }
+  // News — store full array, render with filters
+  _allHomeNews = Array.isArray(data.news) ? data.news : [];
+  renderHomeNews();
 
   // Ticker
   if (news.length) {
@@ -1041,6 +1046,69 @@ async function loadNYTGenericBallot() {
     }
   } catch(e) {
     console.warn('NYT generic ballot fetch failed:', e);
+  }
+}
+
+// ── LIVE NEWS FEED ──────────────────────────────────────────────────────────
+let _allHomeNews = [];
+let _homeNewsFilter = 'All';
+
+function setHomeNewsFilter(tag, btn) {
+  _homeNewsFilter = tag;
+  document.querySelectorAll('.hn-chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
+  renderHomeNews();
+}
+
+function renderHomeNews() {
+  const q = (document.getElementById('home-news-search')?.value || '').toLowerCase();
+  const sort = document.getElementById('home-news-sort')?.value || 'newest';
+  const bar = document.getElementById('home-news-bar');
+  const nl = document.getElementById('home-news-list');
+  if (!nl) return;
+
+  let items = _allHomeNews.filter(item => {
+    if (_homeNewsFilter !== 'All') {
+      const tags = Array.isArray(item.tags) ? item.tags : [];
+      if (!tags.includes(_homeNewsFilter)) return false;
+    }
+    if (q) {
+      const hay = ((item.title||'') + ' ' + (item.source||'') + ' ' + (item.description||'')).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  items.sort((a, b) => {
+    const da = new Date(a.date||0), db = new Date(b.date||0);
+    return sort === 'oldest' ? da - db : db - da;
+  });
+
+  if (!items.length) {
+    nl.innerHTML = `<div class="home-news-item"><div style="color:var(--t-muted);font:400 13px var(--sans)">${_allHomeNews.length ? 'No results — try clearing the filter.' : 'No news items yet.'}</div></div>`;
+    if (bar) bar.style.display = 'none';
+    return;
+  }
+
+  nl.innerHTML = items.map(item => {
+    const tags = Array.isArray(item.tags) ? item.tags.slice(0,2) : [];
+    const tagsHtml = tags.map(t => {
+      const [bg, color] = (TAG_COLORS[t]||'#F1F5F9:#1E293B').split(':');
+      return `<span class="home-news-tag" style="background:${bg};color:${color}">${esc(t)}</span>`;
+    }).join('');
+    return `<div class="home-news-item">
+      <div class="home-news-source">${esc(item.source||'')}</div>
+      <div class="home-news-body">
+        <a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'')}</a>
+        <div class="home-news-age">${item.date ? relAge(item.date) : ''}${tagsHtml}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  if (bar) {
+    bar.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '') +
+      (_homeNewsFilter !== 'All' ? ' · ' + _homeNewsFilter : '') +
+      (q ? ' matching "' + q + '"' : '');
+    bar.style.display = 'block';
   }
 }
 

@@ -454,7 +454,7 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-label">Members Not Returning</div>
           <div class="metric-num" style="color:#9B2828;font-size:20px;line-height:1.3;padding-top:4px">1 in 8 members<br>retiring from Congress</div>
           <div class="metric-sub" style="margin-top:6px" id="hm-retire-count">68 departures &mdash; 2nd highest in history</div>
-          <span class="metric-trend mt-dn" style="margin-top:6px" id="hm-retire-pct">45% running for higher office</span>
+          <span class="metric-trend mt-dn" style="margin-top:6px" id="hm-retire-pct">45% running for other offices</span>
           <div class="metric-sub" style="margin-top:4px" id="hm-retire-split">R: 36 &nbsp;&middot;&nbsp; D: 22 &nbsp;&middot;&nbsp; House: 57 &nbsp;&middot;&nbsp; Senate: 11</div>
           <div class="metric-sub" style="margin-top:6px">Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></div>
         </div>
@@ -762,7 +762,7 @@ async function loadHomeData() {
   const ret = data.retirements || {};
   if (ret.total) {
     set('hm-retire-count', `${ret.total} departures — 2nd highest in history`);
-    if (ret.seeking_office_pct) set('hm-retire-pct', `${ret.seeking_office_pct}% running for higher office`);
+    if (ret.seeking_office_pct) set('hm-retire-pct', `${ret.seeking_office_pct}% running for other offices`);
     const sp = document.getElementById('hm-retire-split');
     if (sp) sp.textContent = `R: ${ret.republican ?? '—'} · D: ${ret.democrat ?? '—'} · House: ${ret.house ?? '—'} · Senate: ${ret.senate ?? '—'}`;
   }

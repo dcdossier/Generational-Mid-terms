@@ -2,482 +2,644 @@
 'use strict';
 
 /**
- * fetch-polls.js
- * Fetches polling data from RSS feeds and Google News targeted searches.
- * Updates approval ratings, generic ballot, party favourability, and
- * related history arrays / trend fields in data.json.
+ * fetch-polls.js — comprehensive live data updater
+ *
+ * Sources (in priority order):
+ *  1. NYT polling CSVs       → generic_ballot, state_polls   (structured CSV)
+ *  2. BLS public API         → cpi.history                   (structured JSON)
+ *  3. Groq + Gallup          → approval.trump                (AI-extracted HTML)
+ *  4. Groq + Gallup          → congress_approval             (AI-extracted HTML)
+ *  5. Groq + Ballotpedia     → retirements totals/split      (AI-extracted HTML)
+ *  6. RSS feed fallbacks     → supplemental signals for all  (regex extraction)
+ *
+ * Env vars:
+ *  GROQ_API_KEY  — Groq API key (required for sources 3-5)
  */
 
-const fs   = require('fs');
-const path = require('path');
+const fs    = require('fs');
+const path  = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 
-const DATA_PATH = path.resolve(__dirname, '../data.json');
+const DATA_PATH  = path.resolve(__dirname, '../data.json');
+const GROQ_KEY   = process.env.GROQ_API_KEY || '';
+const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
-// ── SOURCES ────────────────────────────────────────────────────────────────────
-// Each feed may carry an optional `hints` array of signal types to look for.
-const POLL_FEEDS = [
-  // Polling organisations
-  { url: 'https://news.gallup.com/rss/gallup_politics_rss.xml',
-    source: 'Gallup' },
-  { url: 'https://www.pewresearch.org/feed/',
-    source: 'Pew Research' },
-  { url: 'https://yougov.com/en-us/rss',
-    source: 'YouGov' },
-  { url: 'https://www.realclearpolitics.com/xml/rss.xml',
-    source: 'RealClearPolitics' },
-
-  // Forecasters / election sites
-  { url: 'https://centerforpolitics.org/crystalball/feed/',
-    source: "Sabato's Crystal Ball" },
-  { url: 'https://www.cookpolitical.com/feed',
-    source: 'Cook Political Report' },
-  { url: 'https://insideelections.com/feed/',
-    source: 'Inside Elections' },
-  { url: 'https://www.brookings.edu/feed/',
-    source: 'Brookings' },
-
-  // Google News targeted searches — cast a wide net
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Trump+approval+rating+poll+percent+2026',
-    source: 'GNews:TrumpApproval',   hints: ['trump_approval'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=generic+ballot+2026+Democrats+Republicans+percent',
-    source: 'GNews:GenericBallot',   hints: ['generic_ballot'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=congressional+approval+rating+Congress+poll+percent',
-    source: 'GNews:CongressApproval', hints: ['congress_approval'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Republican+party+favorability+unfavorable+poll',
-    source: 'GNews:RepFavor',         hints: ['rep_favor'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Democratic+party+favorability+unfavorable+poll',
-    source: 'GNews:DemFavor',         hints: ['dem_favor'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Gallup+Trump+approval+disapproval',
-    source: 'GNews:GallupTrump',      hints: ['trump_approval'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Trump+approve+disapprove',
-    source: 'GNews:QuinnTrump',       hints: ['trump_approval'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+generic+ballot+2026',
-    source: 'GNews:EmersonBallot',    hints: ['generic_ballot'] },
-  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=FiveThirtyEight+polling+average+2026',
-    source: 'GNews:538',              hints: ['trump_approval', 'generic_ballot'] },
-];
-
-// ── HELPERS ────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// SHARED HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
 
 function stripHtml(str) {
   return String(str || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[\s\S]*?<\/style>/gi, '')
+    .replace(/<svg[\s\S]*?<\/svg>/gi, '')
     .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1')
-    .replace(/<[^>]+>/g, '')
+    .replace(/<[^>]+>/g, ' ')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
-    .trim();
+    .replace(/\s{3,}/g, '\n').trim();
 }
 
-/**
- * Extract a percentage near `keyword` in text.  Tries three patterns in order:
- *   P1 — explicit %:     "44%"  /  "44.5%"
- *   P2 — word "percent": "52 percent"
- *   P3 — bare number immediately after keyword (within 35 chars): "approve 44"
- *         (restricted to 20–79 to rule out years, sentence counts, etc.)
- * Returns the first match as a float, or null.
- */
-function extractPct(text, keyword, windowChars = 150) {
-  const lower = text.toLowerCase();
-  const idx   = lower.indexOf(keyword.toLowerCase());
-  if (idx === -1) return null;
-  const slice = text.slice(Math.max(0, idx - windowChars), idx + windowChars);
-
-  // P1: "NN%" — most reliable
-  let m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s*%/);
-  if (m) return parseFloat(m[1]);
-
-  // P2: "NN percent" or "NN.N percent"
-  m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s+percent\b/i);
-  if (m) return parseFloat(m[1]);
-
-  // P3: keyword then bare number within 35 chars — e.g. "approve 44", "approval at 44"
-  const afterKw = text.slice(idx + keyword.length, idx + keyword.length + 35);
-  m = afterKw.match(/\b([2-7]\d(?:\.\d{1,2})?)\b/);
-  if (m) return parseFloat(m[1]);
-
-  return null;
-}
-
-/**
- * Try multiple keyword variants; return the first non-null result.
- */
-function extractAny(text, keywords, windowChars = 150) {
-  for (const kw of keywords) {
-    const v = extractPct(text, kw, windowChars);
-    if (v !== null) return v;
-  }
-  return null;
-}
-
-async function fetchFeed(feed) {
-  try {
-    const res = await fetch(feed.url, {
-      headers: { 'User-Agent': 'DCDossier/1.0 (+https://github.com/dcdossier/Generational-Mid-terms)' },
-      timeout: 15000,
-    });
-    if (!res.ok) {
-      console.warn(`[SKIP] ${feed.source}: HTTP ${res.status}`);
-      return [];
-    }
-    const xml    = await res.text();
-    const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
-    const parsed = parser.parse(xml);
-
-    const channel  = parsed?.rss?.channel || parsed?.feed || {};
-    const rawItems = channel.item || channel.entry || [];
-    const items    = Array.isArray(rawItems) ? rawItems : [rawItems];
-
-    return items.map(item => ({
-      title:       stripHtml(item.title || ''),
-      description: stripHtml(item.description || item.summary || item.content || '').slice(0, 600),
-      link:        String(item.link || item['@_href'] || '').trim(),
-      source:      feed.source,
-      hints:       feed.hints || [],
-    }));
-  } catch (err) {
-    console.warn(`[ERROR] ${feed.source}: ${err.message}`);
-    return [];
-  }
-}
-
-// ── MONTH HELPERS ──────────────────────────────────────────────────────────────
-
-/** Returns "Mon YYYY" string for a Date, e.g. "May 2026" */
 function monthLabel(date = new Date()) {
   return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
-/**
- * Upsert a history array entry for the current month.
- * If the current month already exists, update specified fields.
- * Otherwise append a new object with defaults merged with updates.
- */
-function upsertHistory(historyArr, monthStr, updates, defaults = {}) {
-  const existing = historyArr.find(h => h.month === monthStr);
-  if (existing) {
-    Object.assign(existing, updates);
-  } else {
-    historyArr.push({ month: monthStr, ...defaults, ...updates });
-  }
+function upsertHistory(arr, monthStr, updates, defaults = {}) {
+  const existing = arr.find(h => h.month === monthStr);
+  if (existing) Object.assign(existing, updates);
+  else arr.push({ month: monthStr, ...defaults, ...updates });
 }
 
-/**
- * Calculate trend vs. the previous entry in a history array.
- * Returns the delta (positive = up, negative = down) for a given field.
- */
-function calcTrend(historyArr, field) {
-  if (historyArr.length < 2) return 0;
-  const last = historyArr[historyArr.length - 1];
-  const prev = historyArr[historyArr.length - 2];
+function calcTrend(arr, field) {
+  if (arr.length < 2) return 0;
+  const last = arr[arr.length - 1];
+  const prev = arr[arr.length - 2];
   if (last?.[field] == null || prev?.[field] == null) return 0;
   return parseFloat((last[field] - prev[field]).toFixed(1));
 }
 
-// ── SIGNAL ACCUMULATORS ────────────────────────────────────────────────────────
-// We collect values across all articles then average per field to reduce noise.
-
-function makeAccum() {
-  const buckets = {};
-  return {
-    push(field, value, source) {
-      if (!buckets[field]) buckets[field] = [];
-      buckets[field].push({ value, source });
-    },
-    /**
-     * Return the median (or simple average) of collected values for a field,
-     * clamped to [min, max].  Returns null if no values collected.
-     */
-    avg(field, min = 0, max = 100) {
-      const vals = (buckets[field] || []).map(x => x.value).filter(v => v >= min && v <= max);
-      if (!vals.length) return null;
-      vals.sort((a, b) => a - b);
-      const mid = Math.floor(vals.length / 2);
-      const median = vals.length % 2 === 0 ? (vals[mid - 1] + vals[mid]) / 2 : vals[mid];
-      return parseFloat(median.toFixed(1));
-    },
-    sources(field) {
-      return [...new Set((buckets[field] || []).map(x => x.source))];
-    },
-    count(field) {
-      return (buckets[field] || []).length;
-    },
-  };
+// Quoted-field CSV parser
+function parseCSVRow(line) {
+  const fields = []; let inQ = false, cur = '';
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { fields.push(cur); cur = ''; }
+    else cur += c;
+  }
+  fields.push(cur);
+  return fields;
 }
 
-// ── SOURCE GROUPS ──────────────────────────────────────────────────────────────
-// Controls which fields each source is trusted to populate.
+function parseCSV(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  const headers = parseCSVRow(lines[0]).map(h => h.replace(/"/g, '').trim());
+  const idx = {};
+  headers.forEach((h, i) => { idx[h] = i; });
+  return { idx, rows: lines.slice(1) };
+}
 
-const SRC_TRUMP_APPROVAL  = new Set(['Gallup', 'RealClearPolitics', 'YouGov']);
-const SRC_CONGRESS        = new Set(['Gallup', 'YouGov', 'Pew Research']);
-const SRC_GENERIC_BALLOT  = new Set(['RealClearPolitics', 'YouGov']);
-const SRC_PARTY_FAVOR     = new Set(['Pew Research', 'YouGov', 'Gallup']);
+async function safeFetch(url, opts = {}) {
+  const res = await fetch(url, {
+    headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' },
+    timeout: 25000,
+    ...opts,
+  });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res;
+}
 
-// ── SIGNAL EXTRACTION ──────────────────────────────────────────────────────────
-// Returns an object of { fieldName: value } for every signal extracted from the
-// item.  Logs a single line per item that yields at least one signal.
+// ─────────────────────────────────────────────────────────────────────────────
+// GROQ AI EXTRACTION
+// ─────────────────────────────────────────────────────────────────────────────
 
-function extractSignals(item, accum) {
-  const text  = `${item.title} ${item.description}`;
+async function groqExtract(systemPrompt, userContent) {
+  if (!GROQ_KEY) {
+    console.warn('  [Groq] No GROQ_API_KEY set — skipping AI extraction');
+    return null;
+  }
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${GROQ_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: GROQ_MODEL,
+          temperature: 0,
+          max_tokens: 512,
+          response_format: { type: 'json_object' },
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user',   content: userContent.slice(0, 14000) },
+          ],
+        }),
+        timeout: 30000,
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        console.warn(`  [Groq] HTTP ${res.status} on attempt ${attempt}: ${body.slice(0, 120)}`);
+        if (res.status === 401) return null; // bad key, don't retry
+        continue;
+      }
+      const json = await res.json();
+      const content = json.choices?.[0]?.message?.content || '';
+      const match = content.match(/\{[\s\S]*\}/);
+      if (match) return JSON.parse(match[0]);
+    } catch (err) {
+      console.warn(`  [Groq] Error attempt ${attempt}: ${err.message}`);
+    }
+  }
+  return null;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 1. NYT POLLING CSV → generic_ballot + state_polls
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function fetchNYTPolls(data) {
+  console.log('[1/6] NYT Polling CSVs…');
+  const polls = {};
+  const CSVS = [
+    'https://www.nytimes.com/newsgraphics/polls/house.csv',
+    'https://www.nytimes.com/newsgraphics/polls/senate.csv',
+  ];
+
+  for (const csvUrl of CSVS) {
+    let text;
+    try {
+      const res = await safeFetch(csvUrl);
+      text = await res.text();
+    } catch (err) {
+      console.warn(`  [NYT] ${csvUrl.split('/').pop()} fetch failed: ${err.message}`);
+      continue;
+    }
+
+    const { idx, rows } = parseCSV(text);
+    const cutoff = Date.now() - 60 * 24 * 60 * 60 * 1000; // 60 days
+
+    for (const line of rows) {
+      const f = parseCSVRow(line);
+      const get = k => (f[idx[k]] || '').replace(/"/g, '').trim();
+
+      if (get('stage') !== 'general') continue;
+      if (!['rv', 'lv', 'v'].includes(get('population'))) continue;
+      if (!['DEM', 'REP'].includes(get('party'))) continue;
+
+      const parts = get('end_date').split('/');
+      if (parts.length !== 3) continue;
+      const date = new Date(2000 + parseInt(parts[2], 10), parseInt(parts[0], 10) - 1, parseInt(parts[1], 10));
+      if (isNaN(date.getTime()) || date.getTime() < cutoff) continue;
+
+      const key = get('poll_id') + '_' + get('question_id');
+      if (!polls[key]) {
+        polls[key] = {
+          state:   get('state'),
+          seatNum: get('seat_number'),
+          partisan:get('partisan'),
+          n:       parseInt(get('sample_size'), 10) || 1000,
+          date,
+          DEM: null, REP: null,
+        };
+      }
+      polls[key][get('party')] = parseFloat(get('pct'));
+    }
+  }
+
+  const complete = Object.values(polls).filter(p => p.DEM !== null && p.REP !== null);
+  if (!complete.length) { console.warn('  [NYT] No complete polls found'); return false; }
+
+  // ── National generic ballot ───────────────────────────────────────────────
+  const national = complete.filter(p => p.state === 'US' && p.seatNum === '' && !p.partisan);
+  if (national.length >= 3) {
+    let tw = 0, wd = 0, wr = 0;
+    national.forEach(p => { const w = Math.min(p.n, 3000); tw += w; wd += p.DEM * w; wr += p.REP * w; });
+    const avgD = parseFloat((wd / tw).toFixed(1));
+    const avgR = parseFloat((wr / tw).toFixed(1));
+    const month = monthLabel();
+
+    const prevD = data.generic_ballot.democrat;
+    const prevR = data.generic_ballot.republican;
+    data.generic_ballot.democrat   = avgD;
+    data.generic_ballot.republican = avgR;
+    data.generic_ballot.undecided  = parseFloat((100 - avgD - avgR).toFixed(1));
+    if (prevD != null) data.generic_ballot.trend_d = parseFloat((avgD - prevD).toFixed(1));
+    if (prevR != null) data.generic_ballot.trend_r = parseFloat((avgR - prevR).toFixed(1));
+
+    upsertHistory(data.generic_ballot.history, month,
+      { democrat: avgD, republican: avgR },
+      { democrat: avgD, republican: avgR });
+
+    console.log(`  Generic ballot: D=${avgD}% R=${avgR}% (${national.length} polls, 60-day weighted avg)`);
+  }
+
+  // ── State-level polls ─────────────────────────────────────────────────────
+  const byState = {};
+  for (const p of complete.filter(p => p.state !== 'US' && /^[A-Z]{2}$/.test(p.state))) {
+    if (!byState[p.state]) byState[p.state] = [];
+    byState[p.state].push(p);
+  }
+
+  data.state_polls = data.state_polls || {};
+  let stateCount = 0;
+  for (const [st, stPolls] of Object.entries(byState)) {
+    if (!stPolls.length) continue;
+    let tw = 0, wd = 0, wr = 0;
+    stPolls.forEach(p => { const w = Math.min(p.n, 3000); tw += w; wd += p.DEM * w; wr += p.REP * w; });
+    const avgD = parseFloat((wd / tw).toFixed(1));
+    const avgR = parseFloat((wr / tw).toFixed(1));
+    data.state_polls[st] = {
+      DEM:     avgD,
+      REP:     avgR,
+      margin:  parseFloat((avgD - avgR).toFixed(1)),
+      n_polls: stPolls.length,
+      updated: new Date().toISOString().slice(0, 10),
+    };
+    stateCount++;
+  }
+  if (stateCount) console.log(`  State polls updated: ${stateCount} states`);
+
+  return true;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 2. BLS API → cpi.history
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function fetchCPI(data) {
+  console.log('[2/6] BLS CPI API…');
+  try {
+    // Series CUUR0000SA0 = CPI-U All Items, not seasonally adjusted
+    const res = await safeFetch(
+      'https://api.bls.gov/publicAPI/v1/timeseries/data/CUUR0000SA0?startyear=2023&endyear=2026'
+    );
+    const json = await res.json();
+
+    if (json.status !== 'REQUEST_SUCCEEDED') throw new Error(json.message?.[0] || 'BLS API error');
+    const series = json.Results?.series?.[0]?.data || [];
+    if (!series.length) throw new Error('Empty BLS response');
+
+    // Build index lookup: "YYYY-M" → value
+    const byPeriod = {};
+    for (const d of series) {
+      byPeriod[`${d.year}-${parseInt(d.period.slice(1), 10)}`] = parseFloat(d.value);
+    }
+
+    const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    // Compute YoY % change for months where we have both current + prior year
+    const history = [];
+    const sorted = [...series].sort((a, b) => {
+      const aVal = parseInt(a.year) * 100 + parseInt(a.period.slice(1));
+      const bVal = parseInt(b.year) * 100 + parseInt(b.period.slice(1));
+      return aVal - bVal;
+    });
+
+    for (const d of sorted) {
+      const yr = parseInt(d.year, 10);
+      const mo = parseInt(d.period.slice(1), 10);
+      if (yr < 2025) continue; // only show 2025+
+      const curr = parseFloat(d.value);
+      const priorKey = `${yr - 1}-${mo}`;
+      const prior = byPeriod[priorKey];
+      if (!prior) continue;
+      const yoy = parseFloat(((curr - prior) / prior * 100).toFixed(1));
+      history.push({ month: `${MONTHS[mo - 1]} ${yr}`, all_items: yoy, estimated: false });
+    }
+
+    if (!history.length) throw new Error('Could not compute YoY CPI');
+
+    // Merge: keep manual entries for months BLS hasn't released yet, replace real months
+    const blsMonths = new Set(history.map(h => h.month));
+    const preserved = (data.cpi.history || []).filter(h => !blsMonths.has(h.month));
+    const merged = [...history, ...preserved].sort((a, b) => {
+      const toMs = s => { const [mo, yr] = s.split(' '); return new Date(`${mo} 1 ${yr}`).getTime(); };
+      return toMs(a.month) - toMs(b.month);
+    });
+
+    const latest = merged[merged.length - 1];
+    data.cpi.history  = merged;
+    data.cpi.current  = latest?.all_items ?? null;
+    data.cpi.month    = latest?.month ?? null;
+    data.cpi.updated  = new Date().toISOString().slice(0, 10);
+
+    console.log(`  CPI: ${latest?.all_items}% YoY (${latest?.month}), ${merged.length} months history`);
+    return true;
+  } catch (err) {
+    console.warn(`  [BLS] CPI fetch failed: ${err.message}`);
+    return false;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 3. TRUMP APPROVAL — Groq + Gallup
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function fetchTrumpApproval(data) {
+  console.log('[3/6] Trump approval (Groq + Gallup)…');
+
+  // Try Gallup Trump tracking page (server-rendered, parseable)
+  const urls = [
+    'https://news.gallup.com/poll/203198/presidential-approval-ratings-donald-trump.aspx',
+    'https://news.gallup.com/poll/1723/presidential-job-approval.aspx',
+  ];
+
+  for (const url of urls) {
+    let html;
+    try {
+      const res = await safeFetch(url, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+      });
+      html = await res.text();
+    } catch (err) {
+      console.warn(`  [Gallup] Fetch failed (${url.split('/').pop()}): ${err.message}`);
+      continue;
+    }
+
+    const text = stripHtml(html).slice(0, 14000);
+    const result = await groqExtract(
+      'You are a precise data extraction assistant. Extract approval rating numbers only. Return valid JSON.',
+      `From this Gallup page about Trump presidential approval ratings, find the most recent approve and disapprove percentages.
+Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER}
+Only return numbers between 20 and 80. If uncertain, still provide your best estimate from the data shown.
+
+Page text:
+${text}`
+    );
+
+    if (result?.approve > 20 && result?.approve < 80 && result?.disapprove > 20 && result?.disapprove < 80) {
+      const approve    = parseFloat(Number(result.approve).toFixed(1));
+      const disapprove = parseFloat(Number(result.disapprove).toFixed(1));
+      const month = monthLabel();
+
+      data.approval.trump.approve    = approve;
+      data.approval.trump.disapprove = disapprove;
+      upsertHistory(data.approval.trump.history, month,
+        { approve, disapprove }, { approve, disapprove });
+      data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
+
+      console.log(`  Trump approval: ${approve}% approve / ${disapprove}% disapprove`);
+      return true;
+    }
+  }
+
+  console.warn('  [Trump] Could not extract approval — keeping existing values');
+  return false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 4. CONGRESS APPROVAL — Groq + Gallup
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function fetchCongressApproval(data) {
+  console.log('[4/6] Congress approval (Groq + Gallup)…');
+
+  let html;
+  try {
+    const res = await safeFetch('https://news.gallup.com/poll/1600/congress-public.aspx', {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+    });
+    html = await res.text();
+  } catch (err) {
+    console.warn(`  [Gallup] Congress page fetch failed: ${err.message}`);
+    return false;
+  }
+
+  const text = stripHtml(html).slice(0, 14000);
+  const result = await groqExtract(
+    'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
+    `From this Gallup page tracking Congressional approval ratings, extract the most recent approve and disapprove percentages.
+Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER}
+Numbers should be between 5 and 55 for approve, and 40 and 95 for disapprove.
+
+Page text:
+${text}`
+  );
+
+  if (result?.approve > 5 && result?.approve < 55 && result?.disapprove > 30 && result?.disapprove < 95) {
+    const approve    = parseFloat(Number(result.approve).toFixed(1));
+    const disapprove = parseFloat(Number(result.disapprove).toFixed(1));
+    const month = monthLabel();
+
+    // Update both congress_approval and approval.congress
+    data.congress_approval.combined.approve    = approve;
+    data.congress_approval.combined.disapprove = disapprove;
+    data.congress_approval.combined.trend      = calcTrend(
+      (data.approval.congress?.history || []).concat([{ approve }]), 'approve'
+    );
+
+    data.approval.congress.approve    = approve;
+    data.approval.congress.disapprove = disapprove;
+    upsertHistory(data.approval.congress.history, month,
+      { approve, disapprove }, { approve, disapprove });
+    data.approval.congress.trend = calcTrend(data.approval.congress.history, 'approve');
+
+    console.log(`  Congress approval: ${approve}% approve / ${disapprove}% disapprove`);
+    return true;
+  }
+
+  console.warn('  [Congress] Could not extract approval — keeping existing values');
+  return false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5. RETIREMENTS — Groq + Ballotpedia
+// ─────────────────────────────────────────────────────────────────────────────
+
+async function fetchRetirements(data) {
+  console.log('[5/6] Retirements (Groq + Ballotpedia)…');
+  const BP_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
+
+  let html;
+  try {
+    const res = await safeFetch(BP_URL, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+    });
+    html = await res.text();
+  } catch (err) {
+    console.warn(`  [Ballotpedia] Fetch failed: ${err.message}`);
+    return false;
+  }
+
+  const text = stripHtml(html).slice(0, 16000);
+  const result = await groqExtract(
+    'You are a precise data extraction assistant. Count congressional members from page text. Return valid JSON with integers.',
+    `From this Ballotpedia page tracking US Congress members who are NOT seeking re-election in 2026, count:
+- Total members not seeking re-election (all chambers combined)
+- Republicans not seeking re-election
+- Democrats not seeking re-election
+- House members not seeking re-election
+- Senate members not seeking re-election
+
+Look for summary statistics, table counts, or totals. Return JSON:
+{"total": INTEGER, "republican": INTEGER, "democrat": INTEGER, "house": INTEGER, "senate": INTEGER}
+
+Page text:
+${text}`
+  );
+
+  if (result?.total > 20 && result?.total < 250) {
+    const prev = data.retirements.total;
+    data.retirements.total = result.total;
+    if (result.republican > 0 && result.republican < 200) data.retirements.republican = result.republican;
+    if (result.democrat   > 0 && result.democrat   < 200) data.retirements.democrat   = result.democrat;
+    if (result.house      > 0 && result.house      < 200) data.retirements.house      = result.house;
+    if (result.senate     > 0 && result.senate     < 100) data.retirements.senate     = result.senate;
+
+    const changed = prev !== result.total ? ` (was ${prev})` : '';
+    console.log(`  Retirements: ${result.total} total${changed} (R=${result.republican} D=${result.democrat} House=${result.house} Senate=${result.senate})`);
+    return true;
+  }
+
+  console.warn(`  [Retirements] Extraction result out of range or failed: ${JSON.stringify(result)}`);
+  return false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 6. RSS FALLBACK — supplemental signals for any fields not yet updated
+// ─────────────────────────────────────────────────────────────────────────────
+
+const RSS_FEEDS = [
+  { url: 'https://news.gallup.com/rss/gallup_politics_rss.xml',                                               source: 'Gallup' },
+  { url: 'https://www.pewresearch.org/feed/',                                                                   source: 'Pew Research' },
+  { url: 'https://yougov.com/en-us/rss',                                                                       source: 'YouGov' },
+  { url: 'https://www.realclearpolitics.com/xml/rss.xml',                                                      source: 'RealClearPolitics' },
+  { url: 'https://centerforpolitics.org/crystalball/feed/',                                                     source: "Sabato's Crystal Ball" },
+  { url: 'https://www.cookpolitical.com/feed',                                                                  source: 'Cook Political Report' },
+  { url: 'https://insideelections.com/feed/',                                                                   source: 'Inside Elections' },
+  { url: 'https://news.google.com/rss/search?q=Trump+approval+rating+poll+2026&hl=en-US&gl=US&ceid=US:en',     source: 'GNews:Trump',    hints: ['trump'] },
+  { url: 'https://news.google.com/rss/search?q=congressional+approval+rating+Gallup+2026&hl=en-US&gl=US&ceid=US:en', source: 'GNews:Congress', hints: ['congress'] },
+  { url: 'https://news.google.com/rss/search?q=generic+ballot+2026+Democrats+Republicans&hl=en-US&gl=US&ceid=US:en', source: 'GNews:Ballot',   hints: ['ballot'] },
+];
+
+function extractPct(text, keyword, windowChars = 150) {
   const lower = text.toLowerCase();
-  const src   = item.source;
-  const hints = item.hints;
-  const found = {};   // field → value, for per-item logging
+  const idx = lower.indexOf(keyword.toLowerCase());
+  if (idx === -1) return null;
+  const slice = text.slice(Math.max(0, idx - windowChars), idx + windowChars);
+  let m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s*%/);
+  if (m) return parseFloat(m[1]);
+  m = slice.match(/(\d{1,3}(?:\.\d{1,2})?)\s+percent\b/i);
+  if (m) return parseFloat(m[1]);
+  const after = text.slice(idx + keyword.length, idx + keyword.length + 35);
+  m = after.match(/\b([2-7]\d(?:\.\d{1,2})?)\b/);
+  if (m) return parseFloat(m[1]);
+  return null;
+}
 
-  // ── Trump approve / disapprove ───────────────────────────────────────────────
-  // Trusted sources: Gallup, RCP, YouGov  +  any feed hinting 'trump_approval'
-  const doTrump = (SRC_TRUMP_APPROVAL.has(src) || hints.includes('trump_approval'))
-    && lower.includes('trump')
-    && (lower.includes('approv') || lower.includes('disapprov'));
+async function fetchRSSFallback(data, needsTrump, needsCongress) {
+  if (!needsTrump && !needsCongress) {
+    console.log('[6/6] RSS fallback skipped (all primary sources succeeded)');
+    return;
+  }
+  console.log('[6/6] RSS fallback (supplemental signals)…');
 
-  if (doTrump) {
-    const approve    = extractAny(text, ['approve', 'approval', 'job approval']);
-    const disapprove = extractAny(text, ['disapprove', 'disapproval']);
+  const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+  const accum = { trump: [], congress: [] };
 
-    if (approve    !== null && approve    > 25 && approve    < 75) {
-      accum.push('trump_approve', approve, src);
-      found.trump_approve = approve;
-    }
-    if (disapprove !== null && disapprove > 25 && disapprove < 75) {
-      accum.push('trump_disapprove', disapprove, src);
-      found.trump_disapprove = disapprove;
+  for (const feed of RSS_FEEDS) {
+    let items = [];
+    try {
+      const res = await fetch(feed.url, { headers: { 'User-Agent': 'DCDossier/2.0' }, timeout: 12000 });
+      if (!res.ok) continue;
+      const xml = await res.text();
+      const parsed = parser.parse(xml);
+      const channel = parsed?.rss?.channel || parsed?.feed || {};
+      const rawItems = channel.item || channel.entry || [];
+      items = (Array.isArray(rawItems) ? rawItems : [rawItems]).map(item => ({
+        title: String(item.title || '').replace(/<[^>]+>/g, ''),
+        description: String(item.description || item.summary || '').replace(/<[^>]+>/g, '').slice(0, 600),
+        hints: feed.hints || [],
+        source: feed.source,
+      }));
+    } catch { continue; }
+
+    for (const item of items) {
+      const text  = `${item.title} ${item.description}`;
+      const lower = text.toLowerCase();
+      const hints = item.hints;
+
+      // Trump approval
+      if (needsTrump && (feed.source === 'Gallup' || hints.includes('trump'))
+          && lower.includes('trump') && (lower.includes('approv') || lower.includes('disapprov'))) {
+        const approve    = extractPct(text, 'approve');
+        const disapprove = extractPct(text, 'disapprove');
+        if (approve > 25 && approve < 75) accum.trump.push({ approve, disapprove });
+      }
+
+      // Congress approval
+      if (needsCongress && (feed.source === 'Gallup' || hints.includes('congress'))
+          && lower.includes('congress') && lower.includes('approv')) {
+        const approve    = extractPct(text, 'approve');
+        const disapprove = extractPct(text, 'disapprove');
+        if (approve > 5 && approve < 55) accum.congress.push({ approve, disapprove });
+      }
     }
   }
 
-  // ── Congress approve / disapprove ───────────────────────────────────────────
-  // Trusted sources: Gallup, YouGov, Pew  +  congress_approval hint
-  const doCongress = (SRC_CONGRESS.has(src) || hints.includes('congress_approval'))
-    && (lower.includes('congress') || lower.includes('congressional'))
-    && lower.includes('approv');
+  const month = monthLabel();
 
-  if (doCongress) {
-    const approve    = extractAny(text, ['congress approve', 'congressional approve', 'approve', 'approval']);
-    const disapprove = extractAny(text, ['congress disapprove', 'disapprove', 'disapproval']);
-
-    if (approve    !== null && approve    >  5 && approve    < 55) {
-      accum.push('congress_approve', approve, src);
-      found.congress_approve = approve;
-    }
-    if (disapprove !== null && disapprove > 30 && disapprove < 95) {
-      accum.push('congress_disapprove', disapprove, src);
-      found.congress_disapprove = disapprove;
-    }
+  if (needsTrump && accum.trump.length >= 2) {
+    const vals = accum.trump.map(x => x.approve).sort((a, b) => a - b);
+    const med  = vals[Math.floor(vals.length / 2)];
+    const disVals = accum.trump.map(x => x.disapprove).filter(x => x > 25 && x < 75).sort((a, b) => a - b);
+    const dismed  = disVals.length ? disVals[Math.floor(disVals.length / 2)] : null;
+    data.approval.trump.approve    = med;
+    if (dismed) data.approval.trump.disapprove = dismed;
+    upsertHistory(data.approval.trump.history, month,
+      { approve: med, disapprove: dismed || data.approval.trump.disapprove },
+      { approve: med, disapprove: data.approval.trump.disapprove });
+    data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
+    console.log(`  [RSS] Trump approval fallback: ${med}% (${accum.trump.length} signals)`);
   }
 
-  // ── Generic ballot D / R ────────────────────────────────────────────────────
-  // Trusted sources: RealClearPolitics, YouGov  +  generic_ballot hint
-  const doBallot = (SRC_GENERIC_BALLOT.has(src) || hints.includes('generic_ballot'))
-    && lower.includes('generic ballot');
-
-  if (doBallot) {
-    const demPct = extractAny(text, ['democrat', 'democratic']);
-    const repPct = extractAny(text, ['republican', 'gop']);
-
-    if (demPct !== null && demPct > 30 && demPct < 70) {
-      accum.push('ballot_dem', demPct, src);
-      found.ballot_dem = demPct;
-    }
-    if (repPct !== null && repPct > 30 && repPct < 70) {
-      accum.push('ballot_rep', repPct, src);
-      found.ballot_rep = repPct;
-    }
-  }
-
-  // ── Democrat party favourability ────────────────────────────────────────────
-  // Trusted sources: Pew Research, YouGov, Gallup  +  dem_favor hint
-  const doDemFavor = (SRC_PARTY_FAVOR.has(src) || hints.includes('dem_favor'))
-    && (lower.includes('democrat') || lower.includes('democratic party'))
-    && (lower.includes('favor') || lower.includes('unfavor') || lower.includes('favour'));
-
-  if (doDemFavor) {
-    const fav   = extractAny(text, ['favorable', 'favourable', 'positive view']);
-    const unfav = extractAny(text, ['unfavorable', 'unfavourable', 'negative view']);
-
-    if (fav   !== null && fav   > 15 && fav   < 75) { accum.push('dem_favor',   fav,   src); found.dem_favor   = fav; }
-    if (unfav !== null && unfav > 15 && unfav < 85) { accum.push('dem_unfavor', unfav, src); found.dem_unfavor = unfav; }
-  }
-
-  // ── Republican party favourability ─────────────────────────────────────────
-  // Trusted sources: Pew Research, YouGov, Gallup  +  rep_favor hint
-  const doRepFavor = (SRC_PARTY_FAVOR.has(src) || hints.includes('rep_favor'))
-    && (lower.includes('republican') || lower.includes('gop'))
-    && (lower.includes('favor') || lower.includes('unfavor') || lower.includes('favour'));
-
-  if (doRepFavor) {
-    const fav   = extractAny(text, ['favorable', 'favourable', 'positive view']);
-    const unfav = extractAny(text, ['unfavorable', 'unfavourable', 'negative view']);
-
-    if (fav   !== null && fav   > 15 && fav   < 75) { accum.push('rep_favor',   fav,   src); found.rep_favor   = fav; }
-    if (unfav !== null && unfav > 15 && unfav < 85) { accum.push('rep_unfavor', unfav, src); found.rep_unfavor = unfav; }
-  }
-
-  // ── Per-item log ────────────────────────────────────────────────────────────
-  if (Object.keys(found).length > 0) {
-    const pairs  = Object.entries(found).map(([k, v]) => `${k}=${v}`).join(', ');
-    const title  = item.title.length > 72 ? item.title.slice(0, 69) + '…' : item.title;
-    console.log(`  [${src}] "${title}" → ${pairs}`);
+  if (needsCongress && accum.congress.length >= 2) {
+    const vals = accum.congress.map(x => x.approve).sort((a, b) => a - b);
+    const med  = vals[Math.floor(vals.length / 2)];
+    data.congress_approval.combined.approve = med;
+    data.approval.congress.approve = med;
+    upsertHistory(data.approval.congress.history, month,
+      { approve: med }, { approve: med, disapprove: data.approval.congress.disapprove });
+    data.approval.congress.trend = calcTrend(data.approval.congress.history, 'approve');
+    console.log(`  [RSS] Congress approval fallback: ${med}% (${accum.congress.length} signals)`);
   }
 }
 
-// ── MAIN ───────────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
+// MAIN
+// ─────────────────────────────────────────────────────────────────────────────
 
 async function main() {
-  console.log('[fetch-polls] Starting…');
+  const start = Date.now();
+  console.log('════════════════════════════════════════');
+  console.log(' fetch-polls.js — live data update');
+  console.log(`  Groq key: ${GROQ_KEY ? '✓ set' : '✗ missing (Groq sources will be skipped)'}`);
+  console.log('════════════════════════════════════════');
 
-  // Load existing data
+  // Load data.json
   let data;
   try {
     data = JSON.parse(fs.readFileSync(DATA_PATH, 'utf8'));
   } catch (err) {
-    console.error('[fetch-polls] Could not read data.json:', err.message);
+    console.error('Fatal: could not read data.json:', err.message);
     process.exit(1);
   }
 
   // Ensure required sub-trees exist
-  data.approval         = data.approval         || {};
-  data.approval.trump   = data.approval.trump   || { approve: null, disapprove: null, trend: 0, history: [] };
-  data.approval.congress = data.approval.congress || { approve: null, disapprove: null, trend: 0, history: [] };
-  data.approval.democrat_party   = data.approval.democrat_party   || { approve: null, disapprove: null };
-  data.approval.republican_party = data.approval.republican_party || { approve: null, disapprove: null };
-  data.generic_ballot   = data.generic_ballot   || { democrat: null, republican: null, trend_d: 0, trend_r: 0, history: [], pollsters: [] };
+  data.approval               = data.approval               || {};
+  data.approval.trump         = data.approval.trump         || { approve: null, disapprove: null, trend: 0, history: [] };
+  data.approval.congress      = data.approval.congress      || { approve: null, disapprove: null, trend: 0, history: [] };
+  data.generic_ballot         = data.generic_ballot         || { democrat: null, republican: null, trend_d: 0, trend_r: 0, history: [], pollsters: [] };
+  data.congress_approval      = data.congress_approval      || {};
+  data.congress_approval.combined = data.congress_approval.combined || { approve: null, disapprove: null, trend: 0 };
+  data.cpi                    = data.cpi                    || { history: [] };
+  data.state_polls            = data.state_polls            || {};
 
-  // Fetch all feeds concurrently
-  const results  = await Promise.all(POLL_FEEDS.map(fetchFeed));
-  const allItems = results.flat();
-  console.log(`[fetch-polls] Fetched ${allItems.length} items from ${POLL_FEEDS.length} feeds.`);
+  // Run all fetchers
+  const nytOk     = await fetchNYTPolls(data);
+  const cpiOk     = await fetchCPI(data);
+  const trumpOk   = await fetchTrumpApproval(data);
+  const congressOk= await fetchCongressApproval(data);
+  const retireOk  = await fetchRetirements(data);
 
-  // Extract signals — per-item log lines emitted inside extractSignals()
-  const accum = makeAccum();
-  for (const item of allItems) {
-    extractSignals(item, accum);
-  }
+  // RSS fallback for any primary sources that failed
+  await fetchRSSFallback(data, !trumpOk, !congressOk);
 
-  // Summary: how many signals collected per field
-  const ALL_FIELDS = ['trump_approve', 'trump_disapprove', 'congress_approve', 'congress_disapprove',
-                      'ballot_dem', 'ballot_rep', 'dem_favor', 'dem_unfavor', 'rep_favor', 'rep_unfavor'];
-  const summary = ALL_FIELDS.filter(f => accum.count(f) > 0)
-    .map(f => `${f}(${accum.count(f)})`).join(', ');
-  console.log(`[fetch-polls] Signals collected: ${summary || 'none'}`);
-  console.log('[fetch-polls] Applying medians…');
-
-  const month = monthLabel();
-  let updatesApplied = 0;
-
-  // ── Apply Trump approval ────────────────────────────────────────────────────
-  const trumpApprove    = accum.avg('trump_approve',    30, 70);
-  const trumpDisapprove = accum.avg('trump_disapprove', 30, 70);
-
-  if (trumpApprove !== null) {
-    data.approval.trump.approve = trumpApprove;
-    upsertHistory(data.approval.trump.history, month,
-      { approve: trumpApprove, disapprove: data.approval.trump.disapprove },
-      { approve: trumpApprove, disapprove: 0 });
-    updatesApplied++;
-    console.log(`  → trump.approve = ${trumpApprove}%`);
-  }
-  if (trumpDisapprove !== null) {
-    data.approval.trump.disapprove = trumpDisapprove;
-    // Also update the history entry we may have just inserted
-    const entry = data.approval.trump.history.find(h => h.month === month);
-    if (entry) entry.disapprove = trumpDisapprove;
-    updatesApplied++;
-    console.log(`  → trump.disapprove = ${trumpDisapprove}%`);
-  }
-  if (trumpApprove !== null || trumpDisapprove !== null) {
-    data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
-  }
-
-  // ── Apply Congress approval ─────────────────────────────────────────────────
-  const congressApprove    = accum.avg('congress_approve',    5, 50);
-  const congressDisapprove = accum.avg('congress_disapprove', 30, 95);
-
-  if (congressApprove !== null) {
-    data.approval.congress.approve = congressApprove;
-    upsertHistory(data.approval.congress.history, month,
-      { approve: congressApprove, disapprove: data.approval.congress.disapprove },
-      { approve: congressApprove, disapprove: 0 });
-    updatesApplied++;
-    console.log(`  → congress.approve = ${congressApprove}%`);
-  }
-  if (congressDisapprove !== null) {
-    data.approval.congress.disapprove = congressDisapprove;
-    const entry = data.approval.congress.history.find(h => h.month === month);
-    if (entry) entry.disapprove = congressDisapprove;
-    updatesApplied++;
-    console.log(`  → congress.disapprove = ${congressDisapprove}%`);
-  }
-  if (congressApprove !== null || congressDisapprove !== null) {
-    data.approval.congress.trend = calcTrend(data.approval.congress.history, 'approve');
-  }
-
-  // ── Apply Generic ballot ────────────────────────────────────────────────────
-  const ballotDem = accum.avg('ballot_dem', 33, 65);
-  const ballotRep = accum.avg('ballot_rep', 33, 65);
-
-  if (ballotDem !== null) {
-    const prevDem = data.generic_ballot.democrat;
-    data.generic_ballot.democrat = ballotDem;
-    upsertHistory(data.generic_ballot.history, month,
-      { democrat: ballotDem, republican: data.generic_ballot.republican || ballotRep },
-      { democrat: ballotDem, republican: ballotRep || 0 });
-    if (prevDem !== null) data.generic_ballot.trend_d = parseFloat((ballotDem - prevDem).toFixed(1));
-    updatesApplied++;
-    console.log(`  → generic_ballot.democrat = ${ballotDem}%`);
-
-    // Add to pollsters list (de-dup by month)
-    const pollsterSources = accum.sources('ballot_dem').concat(accum.sources('ballot_rep'));
-    const label = [...new Set(pollsterSources)].join(' / ');
-    const pollsterEntry = data.generic_ballot.pollsters.find(p =>
-      p.date === month && p.name === label);
-    if (!pollsterEntry && label) {
-      data.generic_ballot.pollsters.unshift({ name: label, democrat: ballotDem, republican: ballotRep, date: month });
-      // Keep list to 10 entries
-      data.generic_ballot.pollsters = data.generic_ballot.pollsters.slice(0, 10);
-    }
-  }
-  if (ballotRep !== null) {
-    const prevRep = data.generic_ballot.republican;
-    data.generic_ballot.republican = ballotRep;
-    const entry = data.generic_ballot.history.find(h => h.month === month);
-    if (entry) entry.republican = ballotRep;
-    if (prevRep !== null) data.generic_ballot.trend_r = parseFloat((ballotRep - prevRep).toFixed(1));
-    updatesApplied++;
-    console.log(`  → generic_ballot.republican = ${ballotRep}%`);
-  }
-
-  // ── Apply party favourability ───────────────────────────────────────────────
-  const demFavor   = accum.avg('dem_favor',   20, 75);
-  const demUnfavor = accum.avg('dem_unfavor', 20, 80);
-  const repFavor   = accum.avg('rep_favor',   20, 75);
-  const repUnfavor = accum.avg('rep_unfavor', 20, 80);
-
-  if (demFavor !== null) {
-    data.approval.democrat_party.approve = demFavor;
-    updatesApplied++;
-    console.log(`  → democrat_party.approve = ${demFavor}%`);
-  }
-  if (demUnfavor !== null) {
-    data.approval.democrat_party.disapprove = demUnfavor;
-    updatesApplied++;
-    console.log(`  → democrat_party.disapprove = ${demUnfavor}%`);
-  }
-  if (repFavor !== null) {
-    data.approval.republican_party.approve = repFavor;
-    updatesApplied++;
-    console.log(`  → republican_party.approve = ${repFavor}%`);
-  }
-  if (repUnfavor !== null) {
-    data.approval.republican_party.disapprove = repUnfavor;
-    updatesApplied++;
-    console.log(`  → republican_party.disapprove = ${repUnfavor}%`);
-  }
-
-  // ── Always stamp last_updated ───────────────────────────────────────────────
+  // Stamp last_updated
+  data.meta = data.meta || {};
   data.meta.last_updated = new Date().toISOString();
 
+  // Write
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
-  console.log(`[fetch-polls] Done. ${updatesApplied} field(s) updated. last_updated = ${data.meta.last_updated}`);
+
+  const elapsed = ((Date.now() - start) / 1000).toFixed(1);
+  console.log('════════════════════════════════════════');
+  console.log(`  Results: NYT=${nytOk?'✓':'✗'}  CPI=${cpiOk?'✓':'✗'}  Trump=${trumpOk?'✓':'✗'}  Congress=${congressOk?'✓':'✗'}  Retirements=${retireOk?'✓':'✗'}`);
+  console.log(`  data.json written. Elapsed: ${elapsed}s`);
+  console.log('════════════════════════════════════════');
 }
 
 main().catch(err => {

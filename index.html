@@ -783,7 +783,7 @@ async function loadHomeData() {
       { key:'senate', label:'U.S. Senate', data:fc.senate },
       { key:'governors', label:'Governors', data:fc.governors },
     ];
-    const fg = document.getElementById('home-forecast');
+    const fg = document.getElementById('home-forecast-bars');
     if (fg) {
       fg.innerHTML = chambers.map(ch => {
         const fd = ch.data || {};
@@ -810,8 +810,8 @@ async function loadHomeData() {
   renderHomeNews();
 
   // Ticker
-  if (news.length) {
-    const tickerItems = [...news].sort((a,b) => new Date(b.date||0)-new Date(a.date||0)).slice(0,20);
+  if (_allHomeNews.length) {
+    const tickerItems = [..._allHomeNews].sort((a,b) => new Date(b.date||0)-new Date(a.date||0)).slice(0,20);
     const ti = document.getElementById('ticker-inner');
     if (ti) {
       const itemsHtml = tickerItems.map(item =>

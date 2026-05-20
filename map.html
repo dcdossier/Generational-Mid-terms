@@ -235,8 +235,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- STATE MAP -->
   <div class="section-hdr">
     <div>
-      <div class="section-title">Senate race map &#8212; Class 2 seats, 2026</div>
-      <div class="section-sub">Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
+      <div class="section-title">Senate race map &#8212; all 33 Class 2 seats, 2026</div>
+      <div class="section-sub">All 33 races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
     </div>
   </div>
 
@@ -335,11 +335,19 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>2-seat working majority</strong>. Historical pattern: the president&#8217;s party loses an average of 26 House seats at the first midterm.</div>
   </div>
 
+  <!-- SEAT DISTRIBUTION CHART -->
+  <div class="chart-card">
+    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) are highlighted on the map below.</div>
+    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
+    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
+  </div>
+
   <!-- HOUSE DISTRICT MAP -->
   <div class="section-hdr" style="margin-bottom:10px">
     <div>
-      <div class="section-title">House district map &mdash; competitive races 2026</div>
-      <div class="section-sub">Rated competitive districts highlighted by colour. Grey = untracked. Click a district for detail.</div>
+      <div class="section-title">House district map &#8212; all competitive districts 2026</div>
+      <div class="section-sub">All 20 competitive districts shown: Lean R, Toss-up, and Lean D &#8212; coloured by rating. Grey districts are Safe R or Safe D seats not individually rated. Click any highlighted district for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -371,23 +379,15 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="detail-note" id="hdc-pvp">&hellip;</div>
   </div>
 
-  <!-- SEAT DISTRIBUTION CHART -->
-  <div class="chart-card">
-    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Preliminary analyst ratings. The 22 Toss-up seats will determine majority control.</div>
-    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
-    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
-  </div>
-
   <!-- COMPETITIVE RACES -->
   <div class="callout">
     <div class="callout-label">Path to the majority</div>
-    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). There are <strong>22 Toss-up districts</strong>, almost all held by Republicans in districts that Biden or Harris carried. Historical first-midterm headwinds and high presidential disapproval typically accelerate Democratic gains.
+    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). There are <strong>40 competitive districts</strong> across all ratings &#8212; 11 Lean R, 22 Toss-up, and 9 Lean D &#8212; most held by Republicans in districts that Biden or Harris carried. Historical first-midterm headwinds and high presidential disapproval typically accelerate Democratic gains.
   </div>
 
   <div class="chart-card">
-    <div class="card-title">Top 20 competitive districts</div>
-    <div class="card-sub">Districts rated Toss-up, Lean R, or Lean D. PVP = Presidential Vote Performance (2024 presidential margin in the district).</div>
+    <div class="card-title">20 individually-tracked competitive districts</div>
+    <div class="card-sub">Districts rated Lean R, Toss-up, or Lean D &#8212; all competitive categories, not just Toss-ups. PVP = Presidential Vote Performance (2024 presidential margin in the district).</div>
     <table class="race-table" id="comp-table">
       <thead>
         <tr>
@@ -923,7 +923,7 @@ function buildHouseDistrictMap(competitive) {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
         if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span><br>PVP: ${r.pvp}`);
-        else   showTip(event, `<strong>${d.properties.state} ${d.properties.district > 0 ? d.properties.district : 'AL'}</strong><br><span style="opacity:.7">Not in competitive tracker</span>`);
+        else   showTip(event, `<strong>${d.properties.state} ${d.properties.district > 0 ? d.properties.district : 'AL'}</strong><br><span style="opacity:.7">Safe or non-competitive seat (not individually rated)</span>`);
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {

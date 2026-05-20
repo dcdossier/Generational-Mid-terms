@@ -715,6 +715,7 @@ const TAG_COLORS = {
 };
 
 async function loadHomeData() {
+  try {
   let data = null;
   for (const p of ['data.json','./data.json','../data.json']) {
     try {
@@ -722,7 +723,7 @@ async function loadHomeData() {
       if (r.ok) { data = await r.json(); break; }
     } catch(e) { /* try next */ }
   }
-  if (!data) return;
+  if (!data) { console.warn('loadHomeData: data.json unavailable'); return; }
 
   // Live metrics
   const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
@@ -1019,6 +1020,8 @@ async function loadHomeData() {
       });
     }
   } catch(e) { console.error('Retirements chart error:', e); }
+
+  } catch(e) { console.error('loadHomeData critical error:', e); }
 }
 
 async function loadNYTGenericBallot() {

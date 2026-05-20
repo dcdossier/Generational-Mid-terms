@@ -3340,172 +3340,304 @@
     },
     "governor": {
       "cycle": 2026,
-      "source": "Preliminary analyst estimates — Ballotpedia / Cook Political Report",
+      "total": 36,
+      "current_balance": {
+        "r": 27,
+        "d": 23
+      },
+      "source": "Ballotpedia / Cook Political Report / Sabato's Crystal Ball",
       "races": [
         {
-          "state": "California",
-          "code": "CA",
-          "incumbent": "Open (Newsom TL)",
-          "party": "D",
+          "state": "Alabama",
+          "incumbent": "Open (Kay Ivey — TL)",
+          "party": "R",
           "open": true,
-          "rating": "Likely D",
-          "note": "Newsom term-limited. California is reliably D but an open seat in a headwind environment draws attention."
+          "rating": "Safe R",
+          "note": "Ivey is term-limited. Alabama is a deep Republican state with no competitive race expected."
         },
         {
-          "state": "Florida",
-          "code": "FL",
-          "incumbent": "Open (DeSantis TL)",
+          "state": "Alaska",
+          "incumbent": "Open (Mike Dunleavy — TL)",
           "party": "R",
           "open": true,
           "rating": "Likely R",
-          "note": "DeSantis term-limited. Florida has shifted R; open seat primary is crowded on both sides."
+          "note": "Dunleavy is term-limited after two terms. Alaska leans R but uses ranked-choice voting, introducing uncertainty."
+        },
+        {
+          "state": "Arizona",
+          "incumbent": "Katie Hobbs",
+          "party": "D",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Hobbs won by only 0.6% in 2022. Arizona is a premier presidential battleground making this a top toss-up."
+        },
+        {
+          "state": "Arkansas",
+          "incumbent": "Sarah Huckabee Sanders",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Sanders won by 65 points in 2022. Arkansas is a deep Republican state."
+        },
+        {
+          "state": "California",
+          "incumbent": "Open (Gavin Newsom — TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Safe D",
+          "note": "Newsom is term-limited. California is solidly Democratic; the Democratic nominee is heavily favored."
+        },
+        {
+          "state": "Colorado",
+          "incumbent": "Open (Jared Polis — TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Safe D",
+          "note": "Polis is term-limited. Colorado has trended solidly Democratic in recent cycles."
+        },
+        {
+          "state": "Connecticut",
+          "incumbent": "Ned Lamont",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Lamont re-elected in 2022. Connecticut is a reliably Democratic state."
+        },
+        {
+          "state": "Florida",
+          "incumbent": "Open (Ron DeSantis — TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Likely R",
+          "note": "DeSantis is term-limited. Florida has shifted rightward but an open seat adds some uncertainty."
         },
         {
           "state": "Georgia",
-          "code": "GA",
-          "incumbent": "Open (Kemp TL)",
+          "incumbent": "Open (Brian Kemp — TL)",
           "party": "R",
           "open": true,
           "rating": "Lean R",
-          "note": "Kemp term-limited. Georgia remains competitive. Stacey Abrams seen as likely Democratic nominee."
+          "note": "Kemp is term-limited. Georgia is a top battleground; the open seat makes this a competitive race."
+        },
+        {
+          "state": "Hawaii",
+          "incumbent": "Josh Green",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Hawaii is one of the most Democratic states in the country. Green won easily in 2022."
+        },
+        {
+          "state": "Idaho",
+          "incumbent": "Brad Little",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Idaho is a deep Republican state. Little won re-election comfortably in 2022."
         },
         {
           "state": "Illinois",
-          "code": "IL",
           "incumbent": "JB Pritzker",
           "party": "D",
           "open": false,
           "rating": "Likely D",
-          "note": "Pritzker running for re-election. Illinois leans D in statewide races."
+          "note": "Pritzker is eligible for a third term. Illinois is solidly Democratic at the statewide level."
+        },
+        {
+          "state": "Iowa",
+          "incumbent": "Open (Kim Reynolds — retiring)",
+          "party": "R",
+          "open": true,
+          "rating": "Likely R",
+          "note": "Reynolds announced she will not seek a third term. Iowa has shifted strongly Republican in recent cycles."
+        },
+        {
+          "state": "Kansas",
+          "incumbent": "Open (Laura Kelly — TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Likely R",
+          "note": "Kelly is term-limited. Kansas is a reliably Republican state and is expected to flip back to the GOP."
         },
         {
           "state": "Maine",
-          "code": "ME",
-          "incumbent": "Open (Mills TL)",
-          "party": "D",
-          "open": true,
-          "rating": "Toss-up",
-          "note": "Mills term-limited. Maine is a true toss-up. Republicans see opportunity in an open-seat year."
-        },
-        {
-          "state": "Michigan",
-          "code": "MI",
-          "incumbent": "Gretchen Whitmer",
-          "party": "D",
-          "open": false,
-          "rating": "Toss-up",
-          "note": "Whitmer is a top Democratic target. Republicans see Michigan governor as winnable in a midterm environment."
-        },
-        {
-          "state": "Minnesota",
-          "code": "MN",
-          "incumbent": "Open (Walz VP)",
+          "incumbent": "Open (Janet Mills — TL)",
           "party": "D",
           "open": true,
           "rating": "Lean D",
-          "note": "Walz left to run for VP; Lt. Gov. Flanagan became governor and is expected to run."
+          "note": "Mills is term-limited. Maine is competitive and uses ranked-choice voting; leans Democratic."
+        },
+        {
+          "state": "Maryland",
+          "incumbent": "Wes Moore",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Moore won by 33 points in 2022. Maryland is a deep blue state."
+        },
+        {
+          "state": "Massachusetts",
+          "incumbent": "Maura Healey",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Healey won by 29 points in 2022. Massachusetts is one of the most Democratic states."
+        },
+        {
+          "state": "Michigan",
+          "incumbent": "Open (Gretchen Whitmer — TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Whitmer is term-limited. Michigan is the premier governor battleground of 2026 — a genuine toss-up open seat."
+        },
+        {
+          "state": "Minnesota",
+          "incumbent": "Open (Tim Walz — not running)",
+          "party": "D",
+          "open": true,
+          "rating": "Lean D",
+          "note": "Walz will not seek re-election after his 2024 VP run. Minnesota leans Democratic in statewide races."
+        },
+        {
+          "state": "Nebraska",
+          "incumbent": "Jim Pillen",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Nebraska is a deep Republican state. Pillen won easily in 2022."
         },
         {
           "state": "Nevada",
-          "code": "NV",
           "incumbent": "Joe Lombardo",
           "party": "R",
           "open": false,
           "rating": "Toss-up",
-          "note": "Lombardo won in 2022 by under 1 pt. Nevada is the ultimate toss-up state."
+          "note": "Lombardo is a Republican incumbent in a purple state that has voted Democratic in presidential races. Key toss-up."
         },
         {
           "state": "New Hampshire",
-          "code": "NH",
           "incumbent": "Kelly Ayotte",
           "party": "R",
           "open": false,
           "rating": "Lean R",
-          "note": "Ayotte won in 2024. NH has 2-year governor terms; both parties competitive here."
+          "note": "Ayotte won the 2024 race (2-year term). NH is competitive but Ayotte has strong crossover appeal."
+        },
+        {
+          "state": "New Mexico",
+          "incumbent": "Open (MLG — TL)",
+          "party": "D",
+          "open": true,
+          "rating": "Likely D",
+          "note": "Michelle Lujan Grisham is term-limited. New Mexico has trended Democratic and the nominee is favored."
+        },
+        {
+          "state": "New York",
+          "incumbent": "Kathy Hochul",
+          "party": "D",
+          "open": false,
+          "rating": "Likely D",
+          "note": "Hochul survived a competitive 2022 race. New York leans heavily Democratic in statewide races."
         },
         {
           "state": "Ohio",
-          "code": "OH",
-          "incumbent": "Mike DeWine",
+          "incumbent": "Open (Mike DeWine — TL)",
           "party": "R",
-          "open": false,
+          "open": true,
           "rating": "Likely R",
-          "note": "DeWine is running again. Ohio has shifted R in recent cycles."
+          "note": "DeWine is term-limited. Ohio has shifted Republican but the open seat could draw strong Democratic challengers."
+        },
+        {
+          "state": "Oklahoma",
+          "incumbent": "Open (Kevin Stitt — TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Stitt is term-limited. Oklahoma is a deep Republican state with no competitive race expected."
         },
         {
           "state": "Oregon",
-          "code": "OR",
           "incumbent": "Tina Kotek",
           "party": "D",
           "open": false,
           "rating": "Likely D",
-          "note": "Kotek won in 2022. Oregon leans D in statewide races."
+          "note": "Kotek won narrowly in a 3-way 2022 race. Oregon trends Democratic, especially in a two-party contest."
         },
         {
           "state": "Pennsylvania",
-          "code": "PA",
           "incumbent": "Josh Shapiro",
           "party": "D",
           "open": false,
           "rating": "Likely D",
-          "note": "Shapiro is a strong incumbent. Pennsylvania remains competitive but he has wide approval."
+          "note": "Shapiro won by 15 points in 2022. Pennsylvania is a key swing state with a strong Democratic incumbent."
+        },
+        {
+          "state": "Rhode Island",
+          "incumbent": "Dan McKee",
+          "party": "D",
+          "open": false,
+          "rating": "Safe D",
+          "note": "Rhode Island is a deep blue state. Republicans have not won the governorship since 2010."
+        },
+        {
+          "state": "South Carolina",
+          "incumbent": "Henry McMaster",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "McMaster re-elected by 12 points in 2022. South Carolina is a reliably Republican state."
+        },
+        {
+          "state": "South Dakota",
+          "incumbent": "Open (Kristi Noem — TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Noem is term-limited. South Dakota is a deep Republican state with no competitive race expected."
+        },
+        {
+          "state": "Tennessee",
+          "incumbent": "Open (Bill Lee — TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Lee is term-limited. Tennessee is a deep Republican state with no competitive race expected."
         },
         {
           "state": "Texas",
-          "code": "TX",
           "incumbent": "Greg Abbott",
           "party": "R",
           "open": false,
-          "rating": "Likely R",
-          "note": "Abbott running again. Texas is reliably R at the governor level despite Senate competitiveness."
+          "rating": "Safe R",
+          "note": "Abbott won by 11 points in 2022. Texas is reliably Republican at the statewide level."
         },
         {
           "state": "Vermont",
-          "code": "VT",
           "incumbent": "Phil Scott",
           "party": "R",
           "open": false,
-          "rating": "Likely R",
-          "note": "Scott is one of the most popular governors in the country. Vermont has 2-year terms."
+          "rating": "Safe R",
+          "note": "Scott wins by 40+ points in a deep blue state — uniquely popular. Vermont holds 2-year governor terms."
         },
         {
           "state": "Wisconsin",
-          "code": "WI",
           "incumbent": "Tony Evers",
           "party": "D",
           "open": false,
           "rating": "Toss-up",
-          "note": "Evers won in 2022 by 3.4 pts. Wisconsin is the definitive swing state. This will be closely watched."
+          "note": "Wisconsin is the ultimate national battleground. Evers narrowly won in both 2018 and 2022."
         },
         {
-          "state": "Arizona",
-          "code": "AZ",
-          "incumbent": "Katie Hobbs",
-          "party": "D",
-          "open": false,
-          "rating": "Lean D",
-          "note": "Hobbs won in 2022 by 0.5 pts. Arizona leans slightly D at the governor level now."
-        },
-        {
-          "state": "Colorado",
-          "code": "CO",
-          "incumbent": "Jared Polis",
-          "party": "D",
-          "open": false,
-          "rating": "Lean D",
-          "note": "Polis is a strong incumbent. Colorado is competitive but leans D statewide."
+          "state": "Wyoming",
+          "incumbent": "Open (Mark Gordon — TL)",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Gordon is term-limited. Wyoming is one of the most Republican states in the nation."
         }
       ],
       "path_to_majority": {
-        "current_r_govs": 27,
-        "current_d_govs": 23,
-        "tossups": [
-          "Maine",
-          "Michigan",
-          "Nevada",
-          "Wisconsin"
-        ],
-        "summary": "Democrats currently hold 23 governorships. With 4 governor toss-ups (ME, MI, NV, WI) and multiple lean seats, the gubernatorial map could shift the landscape for 2028 redistricting and presidential infrastructure."
+        "summary": "Republicans currently hold 27 governorships vs. Democrats 23. Of the 36 races in 2026, 18 lean Republican, 14 lean Democratic, and 4 are toss-ups. The key open seats in Michigan, Georgia, and Kansas, plus incumbent battles in Arizona and Wisconsin, will define the 2026 governor map."
       }
     }
   },

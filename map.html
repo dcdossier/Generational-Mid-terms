@@ -414,22 +414,44 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 <div class="subpanel" id="subpanel-governor">
 <div class="panel-inner">
 
-  <div class="stat-strip">
-    <div class="stat-box"><div class="stat-n" id="gov-total">17</div><div class="stat-l">Key governor races tracked</div></div>
+  <div class="stat-strip" id="gov-stat-strip">
+    <div class="stat-box"><div class="stat-n" id="gov-total">36</div><div class="stat-l">Governor races in 2026</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#C04040" id="gov-r-lean">&#8230;</div><div class="stat-l">Leaning or safe Republican</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="gov-d-lean">&#8230;</div><div class="stat-l">Leaning or safe Democrat</div></div>
-    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="gov-tu">&#8230;</div><div class="stat-l">Toss-up races</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="gov-tu">&#8230;</div><div class="stat-l">Toss&#8209;up races &#8212; outcome uncertain</div></div>
   </div>
 
-  <!-- GOVERNOR MAP -->
-  <div class="section-hdr" style="margin-bottom:10px">
+  <!-- CURRENT BALANCE -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label">27 Republican</span>
+      <span style="color:var(--t4);font-size:11px">Current governor balance &#8212; all 50 states</span>
+      <span class="balance-d-label">Democrat 23</span>
+    </div>
+    <div class="balance-bar">
+      <div class="balance-r" style="width:54%">27R</div>
+      <div class="balance-d" style="width:46%">23D</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>4-governor advantage</strong>. Of the 36 races in 2026, 18 lean R, 14 lean D, and 4 are genuine toss-ups.</div>
+  </div>
+
+  <!-- RATING LEGEND -->
+  <div class="rating-legend" id="gov-rating-legend"></div>
+
+  <!-- STATE MAP -->
+  <div class="section-hdr">
     <div>
-      <div class="section-title">Governor races map &mdash; 2026</div>
-      <div class="section-sub">Tracked governor races coloured by rating. Grey = no tracked race.</div>
+      <div class="section-title">Governor race map &#8212; all 36 states, 2026</div>
+      <div class="section-sub">All 36 states with governor races coloured by rating. Grey states have no governor race in 2026. &#9688; = open seat. Click any coloured state for detail.</div>
     </div>
   </div>
-  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Drag to pan</div>
-  <div class="d3-map-wrap" style="margin-bottom:20px">
+  <div class="map-srch-wrap">
+    <input type="search" id="gov-map-srch" class="map-srch" placeholder="Search by state, incumbent, or party&hellip;" oninput="searchGovMap(this.value)">
+    <span class="map-srch-ct" id="gov-srch-ct"></span>
+  </div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a state for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap">
     <svg id="gov-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
     <div class="map-loading" id="gov-loading">Loading map&hellip;</div>
     <div class="map-zoom-ctrl">
@@ -439,34 +461,60 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
   </div>
 
+  <!-- DETAIL CARD -->
+  <div class="detail-card" id="gov-detail-card">
+    <div class="detail-top">
+      <div>
+        <div class="detail-state" id="gdc-state">&#8230;</div>
+        <div class="detail-incumbent" id="gdc-incumbent">&#8230;</div>
+      </div>
+      <div class="detail-right">
+        <button class="detail-close" onclick="closeGovDetail()" title="Close">&#x2715;</button>
+        <div class="detail-rating-badge" id="gdc-badge">&#8230;</div>
+        <div class="detail-badges">
+          <span class="badge-party" id="gdc-party">&#8230;</span>
+          <span class="badge-open" id="gdc-open-badge" style="display:none">Open seat</span>
+        </div>
+      </div>
+    </div>
+    <div class="detail-note" id="gdc-note">&#8230;</div>
+  </div>
+
+  <!-- CONTEXT -->
   <div class="callout">
     <div class="callout-label">Governor context &#8212; 2026</div>
-    Governors elected in 2022 are up for re&#8209;election in 2026. Several key states &#8212; Michigan, Wisconsin, Nevada, Maine &#8212; feature genuinely competitive races. Three states have term&#8209;limited incumbents (California, Florida, Georgia), creating open&#8209;seat dynamics. New Hampshire and Vermont hold 2&#8209;year governor terms and vote every cycle.
+    36 states hold gubernatorial elections in 2026. <strong>12 are open seats</strong> due to term limits or retirements, including Michigan, California, Florida, Georgia, and Kansas. The 4 toss-up races &#8212; Arizona, Michigan, Nevada, and Wisconsin &#8212; will define the governor map. Historical first-midterm patterns typically cost the president&#8217;s party 3&#8211;5 governorships.
   </div>
 
-  <div class="section-title" style="margin-bottom:14px">Key governor races by rating</div>
-
-  <!-- Toss-up / Lean races -->
-  <div id="gov-tossup-section">
-    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Toss-up &amp; Competitive</div>
-    <div class="gov-grid" id="gov-competitive-grid"></div>
+  <!-- FILTER + TABLE -->
+  <div class="chart-card">
+    <div class="card-title">All 36 governor races &#8212; 2026</div>
+    <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
+    <div class="filter-row">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn gov-filter active" onclick="filterGovTable('all',this)">All races</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Toss-up',this)">Toss-up</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Lean',this)">Lean R / Lean D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Likely',this)">Likely R / Likely D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Safe',this)">Safe R / Safe D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('open',this)">Open seats</button>
+    </div>
+    <table class="race-table" id="gov-race-table">
+      <thead>
+        <tr>
+          <th onclick="sortGovTable(0)">State</th>
+          <th onclick="sortGovTable(1)">Incumbent / Open</th>
+          <th onclick="sortGovTable(2)">Party</th>
+          <th onclick="sortGovTable(3)">Rating</th>
+          <th onclick="sortGovTable(4)">Open?</th>
+        </tr>
+      </thead>
+      <tbody id="gov-race-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    <div class="chart-note" id="gov-source-note">Source: Ballotpedia / Cook Political Report / Sabato&#8217;s Crystal Ball</div>
   </div>
-
-  <hr class="section-rule">
-
-  <div id="gov-lean-section">
-    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Lean R / Lean D</div>
-    <div class="gov-grid" id="gov-lean-grid"></div>
-  </div>
-
-  <hr class="section-rule">
-
-  <div id="gov-likely-section">
-    <div class="section-sub" style="margin-bottom:10px;font-weight:600;color:var(--t3);text-transform:uppercase;font-size:11px;letter-spacing:.06em">Likely R / Likely D</div>
-    <div class="gov-grid" id="gov-likely-grid"></div>
-  </div>
-
-  <div class="chart-note" id="gov-source-note" style="margin-top:8px">Source: Preliminary analyst estimates</div>
 
 </div>
 </div>
@@ -841,7 +889,7 @@ function buildSenateTable(races) {
 function filterTable(filter, btn) {
   activeFilter = filter;
   if (btn) {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#subpanel-senate .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
   }
   renderTable(DATA.races.senate.races, filter, sortCol, sortDir);
@@ -1004,39 +1052,48 @@ function buildGovMap(races) {
 
   _govZoom = makeZoom(svgEl, t => g.attr('transform', t));
 
-  fetchStatesGeo(gj => {
+  fetchSenateGeo(gj => {
     const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
     const pathGen = d3.geoPath().projection(proj);
 
-    g.selectAll('path')
+    _govSel = g.selectAll('path')
       .data(gj.features)
       .join('path')
-      .attr('class', d => 's-path' + (_govRaceByState[d.properties.name] ? ' clickable' : ''))
+      .attr('class', d => 's-path' + (_govRaceByState[d.properties.NAME] ? ' clickable' : ''))
       .attr('d', d => pathGen(d) || '')
       .style('fill', d => {
-        const r = _govRaceByState[d.properties.name];
-        return r ? (RC[r.rating] || {bg:'#D8D8D4'}).bg : '#D8D8D4';
+        const r = _govRaceByState[d.properties.NAME];
+        return r ? (RC[r.rating] || { bg: '#D8D8D4' }).bg : '#D8D8D4';
       })
       .style('stroke', '#fff')
       .style('stroke-width', '0.5px')
       .on('mousemove', function(event, d) {
-        const r = _govRaceByState[d.properties.name];
+        const r = _govRaceByState[d.properties.NAME];
         if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
-        else   showTip(event, `<strong>${d.properties.name}</strong><br><span style="opacity:.7">No tracked governor race</span>`);
+        else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No governor race in 2026</span>`);
       })
-      .on('mouseleave', hideTip);
+      .on('mouseleave', hideTip)
+      .on('click', function(event, d) {
+        const r = _govRaceByState[d.properties.NAME];
+        if (!r) return;
+        if (_selGovPath) d3.select(_selGovPath).style('stroke', '#fff').style('stroke-width', '0.5px');
+        if (_selGovPath === this) { _selGovPath = null; closeGovDetail(); return; }
+        _selGovPath = this;
+        d3.select(this).style('stroke', '#111').style('stroke-width', '2.5px');
+        showGovDetail(r);
+      });
 
-    // Labels for tracked races
+    // State abbreviation labels for race states
     g.selectAll('text')
-      .data(gj.features.filter(d => _govRaceByState[d.properties.name]))
+      .data(gj.features.filter(d => _govRaceByState[d.properties.NAME]))
       .join('text')
       .attr('text-anchor', 'middle').attr('dy', '0.35em')
       .attr('pointer-events', 'none')
       .style('font', '600 9px "DM Sans",sans-serif')
-      .style('fill', d => (RC[_govRaceByState[d.properties.name].rating] || {tx:'#fff'}).tx)
+      .style('fill', d => (RC[_govRaceByState[d.properties.NAME].rating] || { tx: '#fff' }).tx)
       .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
       .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
-      .text(d => Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.name) || '');
+      .text(d => Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.NAME) || '');
 
     const ld = document.getElementById('gov-loading');
     if (ld) ld.classList.add('done');
@@ -1115,47 +1172,119 @@ function renderCompTable(races) {
 // ─────────────────────────────────────────────────────────────────────────────
 // GOVERNOR
 // ─────────────────────────────────────────────────────────────────────────────
+let _govSel = null;
+let _selGovPath = null;
+let govSortCol = 3, govSortDir = 1;
+let govActiveFilter = 'all';
+
 function renderGovernor(gov) {
   document.getElementById('gov-source-note').textContent = 'Source: ' + gov.source;
-
   const races = gov.races;
   buildGovMap(races);
+
+  // Rating legend (reuse senate legend element style)
+  const leg = document.getElementById('gov-rating-legend');
+  if (leg) {
+    leg.innerHTML = Object.entries(RC).map(([label, cfg]) =>
+      `<div class="legend-item"><span class="legend-dot" style="background:${cfg.bg}"></span>${label}</div>`
+    ).join('');
+  }
+
+  // Stats
   let rLean = 0, dLean = 0, tu = 0;
   races.forEach(r => {
-    if (r.rating.includes('R')) rLean++;
+    if (r.rating === 'Toss-up') tu++;
+    else if (r.rating.includes('R')) rLean++;
     else if (r.rating.includes('D')) dLean++;
-    else tu++;
   });
-  document.getElementById('gov-r-lean').textContent = rLean;
-  document.getElementById('gov-d-lean').textContent = dLean;
-  document.getElementById('gov-tu').textContent = tu;
-  document.getElementById('gov-total').textContent = races.length;
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('gov-total',  races.length);
+  set('gov-r-lean', rLean);
+  set('gov-d-lean', dLean);
+  set('gov-tu',     tu);
 
-  const competitive = races.filter(r => r.rating === 'Toss-up');
-  const lean        = races.filter(r => r.rating.startsWith('Lean'));
-  const likely      = races.filter(r => r.rating.startsWith('Likely'));
-
-  document.getElementById('gov-competitive-grid').innerHTML = govCards(competitive);
-  document.getElementById('gov-lean-grid').innerHTML        = govCards(lean);
-  document.getElementById('gov-likely-grid').innerHTML      = govCards(likely);
+  renderGovTable(races, govActiveFilter, govSortCol, govSortDir);
 }
 
-function govCards(races) {
-  if (!races.length) return '<p style="color:var(--t4);font-size:13px">None in this category.</p>';
-  return races.map(r => {
+function renderGovTable(races, filter, col, dir) {
+  const filtered = races.filter(r => {
+    if (filter === 'all')    return true;
+    if (filter === 'open')   return r.open;
+    return r.rating.startsWith(filter);
+  });
+  const keys = ['state', 'incumbent', 'party', 'rating', 'open'];
+  const sorted = [...filtered].sort((a, b) => {
+    let av = a[keys[col]], bv = b[keys[col]];
+    if (col === 3) { av = RC[av]?.order ?? 99; bv = RC[bv]?.order ?? 99; }
+    if (col === 4) { av = a.open ? 0 : 1;      bv = b.open ? 0 : 1; }
+    if (av < bv) return -dir; if (av > bv) return dir; return 0;
+  });
+  const tbody = document.getElementById('gov-race-tbody');
+  tbody.innerHTML = sorted.map(r => {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
-    return `<div class="gov-card">
-      <div class="gov-card-top">
-        <div>
-          <div class="gov-state">${r.state}</div>
-          <div class="gov-incumbent">${r.incumbent}</div>
-          ${r.open ? '<span class="gov-open-badge">Open seat</span>' : ''}
-        </div>
-        <span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx};font-size:11px">${r.rating}</span>
-      </div>
-      <div class="gov-note">${r.note}</div>
-    </div>`;
+    return `<tr>
+      <td style="font-weight:600">${r.state}</td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
+      <td>${r.open ? '<span class="badge-open" style="font-size:10px;padding:2px 7px">Open</span>' : '&#8212;'}</td>
+    </tr>`;
   }).join('');
+}
+
+function sortGovTable(col) {
+  if (govSortCol === col) govSortDir = -govSortDir;
+  else { govSortCol = col; govSortDir = 1; }
+  renderGovTable(DATA.races.governor.races, govActiveFilter, govSortCol, govSortDir);
+}
+
+function filterGovTable(filter, btn) {
+  govActiveFilter = filter;
+  if (btn) {
+    document.querySelectorAll('.gov-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderGovTable(DATA.races.governor.races, govActiveFilter, govSortCol, govSortDir);
+}
+
+function showGovDetail(race) {
+  const cfg = RC[race.rating] || { bg: '#ccc', tx: '#fff' };
+  document.getElementById('gdc-state').textContent = race.state;
+  document.getElementById('gdc-incumbent').textContent = race.open
+    ? `Open seat \u2014 ${race.incumbent}`
+    : `${race.incumbent} (incumbent)`;
+  const badge = document.getElementById('gdc-badge');
+  badge.textContent = race.rating; badge.style.background = cfg.bg; badge.style.color = cfg.tx;
+  const pb = document.getElementById('gdc-party');
+  pb.textContent = race.party === 'R' ? 'Republican' : 'Democrat';
+  pb.className = 'badge-party ' + race.party;
+  document.getElementById('gdc-open-badge').style.display = race.open ? 'inline-block' : 'none';
+  document.getElementById('gdc-note').textContent = race.note;
+  const card = document.getElementById('gov-detail-card');
+  card.classList.add('visible');
+  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function closeGovDetail() {
+  document.getElementById('gov-detail-card').classList.remove('visible');
+  if (_selGovPath) { d3.select(_selGovPath).style('stroke', '#fff').style('stroke-width', '0.5px'); _selGovPath = null; }
+}
+
+function searchGovMap(q) {
+  if (!_govSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _govSel.each(function(d) {
+    const r = _govRaceByState[d.properties.NAME];
+    let match = !ql;
+    if (ql) match = d.properties.NAME.toLowerCase().includes(ql) ||
+      (r && (r.incumbent.toLowerCase().includes(ql) ||
+             r.rating.toLowerCase().includes(ql) ||
+             (r.party === 'R' ? 'republican' : 'democrat').includes(ql)));
+    d3.select(this).attr('opacity', match ? 1 : ql ? 0.15 : 1);
+    if (match && r) ct++;
+  });
+  document.getElementById('gov-srch-ct').textContent = ql ? ct + ' match' + (ct !== 1 ? 'es' : '') : '';
 }
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────

@@ -810,9 +810,12 @@ async function loadHomeData() {
   _allHomeNews = Array.isArray(data.news) ? data.news : [];
   renderHomeNews();
 
-  // Ticker — all 24h accumulated news, newest first, no repeats
+  // Ticker — cap at 80 newest items to stay within GPU texture limits (full list in news panel)
   if (_allHomeNews.length) {
-    const tickerItems = [..._allHomeNews].sort((a,b) => new Date(b.date||0)-new Date(a.date||0));
+    const TICKER_MAX = 80;
+    const tickerItems = [..._allHomeNews]
+      .sort((a,b) => new Date(b.date||0)-new Date(a.date||0))
+      .slice(0, TICKER_MAX);
     const ti = document.getElementById('ticker-inner');
     if (ti) {
       const itemsHtml = tickerItems.map(item =>
@@ -820,8 +823,8 @@ async function loadHomeData() {
       ).join('');
       // Duplicate for seamless infinite loop
       ti.innerHTML = itemsHtml + itemsHtml;
-      // Scale animation speed to content: ~3s per headline, min 60s
-      ti.style.animationDuration = Math.max(60, tickerItems.length * 3) + 's';
+      // ~2.5s per headline, min 60s; 80 items ≈ 200s
+      ti.style.animationDuration = Math.max(60, tickerItems.length * 2.5) + 's';
     }
   }
 

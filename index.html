@@ -810,16 +810,18 @@ async function loadHomeData() {
   _allHomeNews = Array.isArray(data.news) ? data.news : [];
   renderHomeNews();
 
-  // Ticker
+  // Ticker — all 24h accumulated news, newest first, no repeats
   if (_allHomeNews.length) {
-    const tickerItems = [..._allHomeNews].sort((a,b) => new Date(b.date||0)-new Date(a.date||0)).slice(0,20);
+    const tickerItems = [..._allHomeNews].sort((a,b) => new Date(b.date||0)-new Date(a.date||0));
     const ti = document.getElementById('ticker-inner');
     if (ti) {
       const itemsHtml = tickerItems.map(item =>
         `<div class="ticker-item"><span class="ticker-dot"></span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px">${esc(item.title||'')}</a></div>`
       ).join('');
-      // Duplicate for seamless loop
+      // Duplicate for seamless infinite loop
       ti.innerHTML = itemsHtml + itemsHtml;
+      // Scale animation speed to content: ~3s per headline, min 60s
+      ti.style.animationDuration = Math.max(60, tickerItems.length * 3) + 's';
     }
   }
 

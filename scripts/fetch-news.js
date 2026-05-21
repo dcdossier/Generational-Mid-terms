@@ -243,7 +243,8 @@ const TAG_RULES = [
   { tag: 'Redistricting',  keywords: ['redistrict', 'gerrymander', 'congressional map', 'district map', 'remap'] },
 ];
 
-const MAX_NEWS_ITEMS = 100;
+const NEWS_EXPIRY_MS  = 24 * 60 * 60 * 1000; // articles live for 24 hours
+const NEWS_EMERGENCY_CAP = 300;              // hard ceiling to prevent runaway growth
 
 // ── HELPERS ────────────────────────────────────────────────────────────────────
 
@@ -330,7 +331,21 @@ async function main() {
     process.exit(1);
   }
 
-  const existingUrls = new Set((data.news || []).map(n => n.url));
+  // ── 24-HOUR REPOSITORY ──────────────────────────────────────────────────────
+  // Backfill fetched_at on any existing articles that predate this field
+  const now = Date.now();
+  data.news = (data.news || []).map(n =>
+    n.fetched_at ? n : { ...n, fetched_at: new Date().toISOString() }
+  );
+
+  // Expire articles older than 24 hours
+  const beforeExpiry = data.news.length;
+  data.news = data.news.filter(n => now - new Date(n.fetched_at).getTime() < NEWS_EXPIRY_MS);
+  if (data.news.length < beforeExpiry)
+    console.log(`[fetch-news] Expired ${beforeExpiry - data.news.length} articles older than 24h.`);
+
+  // Build dedup set from the surviving 24h window
+  const existingUrls = new Set(data.news.map(n => n.url));
 
   // Fetch all feeds concurrently
   const results = await Promise.all(FEEDS.map(fetchFeed));
@@ -356,6 +371,7 @@ async function main() {
       url: item.url,
       source: item.source,
       date: item.date,
+      fetched_at: new Date().toISOString(), // timestamp when first added — drives 24h expiry
       tags,
       description: item.description,
     });
@@ -364,13 +380,16 @@ async function main() {
     newCount++;
   }
 
-  // Sort by date descending and trim to max
+  // Sort by date descending; apply emergency cap
   data.news.sort((a, b) => new Date(b.date) - new Date(a.date));
-  data.news = data.news.slice(0, MAX_NEWS_ITEMS);
+  if (data.news.length > NEWS_EMERGENCY_CAP) {
+    data.news = data.news.slice(0, NEWS_EMERGENCY_CAP);
+    console.log(`[fetch-news] Emergency cap hit — trimmed to ${NEWS_EMERGENCY_CAP}.`);
+  }
 
   // Write back
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
-  console.log(`[fetch-news] Done. Added ${newCount} new items. Total: ${data.news.length}.`);
+  console.log(`[fetch-news] Done. Added ${newCount} new items. Repository total: ${data.news.length} articles (24h window).`);
 }
 
 main().catch(err => {

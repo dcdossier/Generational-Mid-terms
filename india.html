@@ -1778,12 +1778,12 @@ MEMBERS.forEach(m => {
 
 // Indian-American members (panel-presence)
 const IA_MEMBERS = [
-  { name:'Ami Bera',              party:'D', state:'California', district:6  },
-  { name:'Ro Khanna',             party:'D', state:'California', district:17 },
-  { name:'Pramila Jayapal',       party:'D', state:'Washington', district:7  },
-  { name:'Raja Krishnamoorthi',   party:'D', state:'Illinois',   district:8  },
-  { name:'Suhas Subramanyam',     party:'D', state:'Virginia',   district:10 },
-  { name:'Shri Thanedar',         party:'D', state:'Michigan',   district:13 },
+  { name:'Ami Bera',              short:'Bera',       party:'D', state:'California', district:6  },
+  { name:'Ro Khanna',             short:'Khanna',     party:'D', state:'California', district:17 },
+  { name:'Pramila Jayapal',       short:'Jayapal',    party:'D', state:'Washington', district:7  },
+  { name:'Raja Krishnamoorthi',   short:'Raja K.',    party:'D', state:'Illinois',   district:8  },
+  { name:'Suhas Subramanyam',     short:'Suhas S.',   party:'D', state:'Virginia',   district:10 },
+  { name:'Shri Thanedar',         short:'Thanedar',   party:'D', state:'Michigan',   district:13 },
 ];
 const iaIdx = {};
 IA_MEMBERS.forEach(m => { iaIdx[m.state + '_' + m.district] = m; });
@@ -2137,19 +2137,33 @@ function setInterestSenateTier(tier, btn) {
 }
 
 // ── PRESENCE MAP (Indian-American members) ─────────────────────────────────
-let _presenceSel = null;
+let _presenceSel = null, _presencePulse = null, _presenceDots = null, _presenceLabels = null;
 
 function loadPresenceMap() {
   if (presenceMapLoaded) return;
   presenceMapLoaded = true;
   const svgEl = d3.select('#presence-map-svg');
   const g = svgEl.append('g');
-  _presenceZoom = makeZoom(svgEl, t => g.attr('transform', t));
+  const BASE_DOT = 8, BASE_RING = 16;
+
+  _presenceZoom = makeZoom(svgEl, t => {
+    g.attr('transform', t);
+    const k = t.k;
+    if (_presencePulse)  _presencePulse.attr('r', BASE_RING / k);
+    if (_presenceDots)   _presenceDots.attr('r', BASE_DOT / k);
+    if (_presenceLabels) _presenceLabels
+      .attr('dy', -(BASE_DOT + 4) / k)
+      .style('font-size', Math.max(5, 9 / k) + 'px')
+      .style('stroke-width', 2.5 / k + 'px');
+  });
+
   const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
   const pathGen = d3.geoPath().projection(proj);
 
   fetchDistrictGeo(gj => {
     document.getElementById('presence-map-loading').style.display = 'none';
+
+    // ── Layer 1: district choropleth ──────────────────────────────────────
     _presenceSel = g.selectAll('path')
       .data(gj.features)
       .join('path')
@@ -2178,6 +2192,65 @@ function loadPresenceMap() {
         if (!ia) return;
         const member = MEMBERS.find(x => x.name === ia.name);
         if (member) openSidePanel(member.id);
+      });
+
+    // ── Layer 2: pin markers at IA district centroids ─────────────────────
+    const iaDists = gj.features.filter(d => {
+      const key = d.properties.state + '_' + d.properties.district;
+      return !!iaIdx[key];
+    });
+    const cx = d => { const c = pathGen.centroid(d); return isFinite(c[0]) ? c[0] : 0; };
+    const cy = d => { const c = pathGen.centroid(d); return isFinite(c[1]) ? c[1] : 0; };
+
+    // Outer ring (glow)
+    _presencePulse = g.selectAll('circle.pmap-ring')
+      .data(iaDists).join('circle')
+      .attr('class', 'pmap-ring')
+      .attr('cx', cx).attr('cy', cy).attr('r', BASE_RING)
+      .style('fill', 'rgba(55,138,221,0.18)')
+      .style('stroke', '#378ADD').style('stroke-width', '1.5px')
+      .style('pointer-events', 'none');
+
+    // Solid inner dot (clickable)
+    _presenceDots = g.selectAll('circle.pmap-dot')
+      .data(iaDists).join('circle')
+      .attr('class', 'pmap-dot')
+      .attr('cx', cx).attr('cy', cy).attr('r', BASE_DOT)
+      .style('fill', '#1A3F8A').style('stroke', '#fff').style('stroke-width', '2px')
+      .style('cursor', 'pointer')
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        tooltip.innerHTML = `<strong>${m.name}</strong><br>${m.state} District ${m.district} &middot; Democrat`;
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const ia = iaIdx[key];
+        if (!ia) return;
+        const member = MEMBERS.find(x => x.name === ia.name);
+        if (member) openSidePanel(member.id);
+      });
+
+    // Name labels (white-outlined for legibility)
+    _presenceLabels = g.selectAll('text.pmap-label')
+      .data(iaDists).join('text')
+      .attr('class', 'pmap-label')
+      .attr('x', cx).attr('y', cy)
+      .attr('dy', -(BASE_DOT + 4))
+      .attr('text-anchor', 'middle')
+      .style('font', '700 9px var(--sans)')
+      .style('fill', '#1A3F8A')
+      .style('paint-order', 'stroke')
+      .style('stroke', '#fff').style('stroke-width', '2.5px')
+      .style('pointer-events', 'none')
+      .text(d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        return m ? m.short : '';
       });
   });
 }

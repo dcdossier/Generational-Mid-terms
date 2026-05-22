@@ -30,11 +30,14 @@ jobs:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: node scripts/fetch-polls.js
 
+      - name: Fetch analysis & commentary
+        run: node scripts/fetch-analysis.js
+
       - name: Commit and push if data changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json analysis.json
           if git diff --cached --quiet; then
             echo "No data changes — nothing to commit."
           else

@@ -65,36 +65,7 @@ body {
 .sub-tab:hover { color: var(--text); }
 .sub-tab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
 .nav-spacer { flex: 1; }
-.last-updated {
-  font-size: 11px;
-  color: var(--text3);
-  padding-left: 12px;
-  white-space: nowrap;
-}
-.add-btn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--navy);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 7px 14px;
-  cursor: pointer;
-  text-decoration: none;
-  margin-left: 16px;
-  transition: background .12s;
-  flex-shrink: 0;
-}
-.add-btn:hover { background: #132640; }
-.add-btn svg { flex-shrink: 0; }
-
-/* PANELS */
-.panel { display: none; flex: 1; flex-direction: column; }
-.panel.active { display: flex; }
+.last-updated { font-size: 11px; color: var(--text3); padding-left: 12px; white-space: nowrap; }
 
 /* TOOLBAR */
 .toolbar {
@@ -105,6 +76,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 .search-box {
   font-family: var(--sans);
@@ -137,8 +109,8 @@ body {
 }
 .chip:hover { border-color: #aaa; color: var(--text); }
 .chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.toolbar-right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 .sort-select {
-  margin-left: auto;
   font-family: var(--sans);
   font-size: 12px;
   color: var(--text2);
@@ -149,16 +121,17 @@ body {
   cursor: pointer;
   outline: none;
 }
+.results-bar { font-size: 12px; color: var(--text3); padding: 10px 0 0; width: 100%; }
+
+/* PANELS */
+.panel { display: none; flex: 1; flex-direction: column; overflow: hidden; }
+.panel.active { display: flex; }
 
 /* CONTENT AREA */
 .content { flex: 1; overflow-y: auto; padding: 28px; }
 
-/* ANALYSIS CARDS */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 20px;
-}
+/* CARD GRID */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; max-width: 1100px; }
 .card {
   background: var(--bg);
   border: 1px solid var(--border);
@@ -187,9 +160,11 @@ body {
   color: var(--text);
   line-height: 1.4;
   text-decoration: none;
+  display: block;
 }
 .card-title:hover { color: var(--accent); }
 .card-desc { font-size: 13px; color: var(--text2); line-height: 1.6; flex: 1; }
+.card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
 .card-source {
   font-size: 11px;
   color: var(--text3);
@@ -205,48 +180,37 @@ body {
   border-radius: 50%;
   background: var(--gold);
 }
-
-/* NEWS LIST */
-.news-list { display: flex; flex-direction: column; gap: 0; }
-.news-item {
-  padding: 20px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.news-item:last-child { border-bottom: none; }
-.news-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.news-source {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .06em;
-}
-.news-date { font-size: 11px; color: var(--text3); margin-left: auto; }
-.news-title {
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
-  text-decoration: none;
-}
-.news-title:hover { color: var(--accent); }
-.news-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
-.news-tags { display: flex; gap: 6px; flex-wrap: wrap; }
-.news-tag {
-  font-size: 10px;
-  font-weight: 700;
+.card-author { font-size: 11px; color: var(--text3); }
+.card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+.card-tag {
+  font: 700 9px var(--sans);
   letter-spacing: .05em;
   text-transform: uppercase;
-  padding: 2px 8px;
+  padding: 2px 7px;
   border-radius: 3px;
+  background: var(--bg3);
+  color: var(--text3);
 }
 
-/* EMPTY STATE */
-.empty-state {
+/* TYPE COLOURS */
+.type-newsletter { background: #FFF0E9; color: #C4470E; }
+.type-podcast    { background: #E0F7FA; color: #006064; }
+.type-research   { background: #E8F0FE; color: #1A47A0; }
+.type-op-ed      { background: #F3EEFF; color: #5B21B6; }
+.type-interview  { background: #E8F8F1; color: #065F46; }
+
+/* TAG COLOURS */
+.tag-congress    { background: #DBEAFE; color: #1E3A8A; }
+.tag-midterms    { background: #FEF3C7; color: #92400E; }
+.tag-senate      { background: #EDE9FE; color: #4C1D95; }
+.tag-house       { background: #CCFBF1; color: #134E4A; }
+.tag-iran        { background: #FEE2E2; color: #991B1B; }
+.tag-india       { background: #FFF0E9; color: #C4470E; }
+.tag-foreignpolicy { background: #F1F5F9; color: #1E293B; }
+.tag-trump       { background: #FEE2E2; color: #7f1d1d; }
+
+/* LOADING / EMPTY STATES */
+.loading-state, .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -257,86 +221,13 @@ body {
   color: var(--text3);
   flex: 1;
 }
-.empty-icon {
-  width: 56px; height: 56px;
-  border-radius: 12px;
-  background: var(--bg3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.empty-state h3 {
-  font-family: var(--serif);
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--text2);
-}
-.empty-state p {
-  font-size: 13px;
-  line-height: 1.6;
-  max-width: 380px;
-  color: var(--text3);
-}
-.empty-action {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-top: 8px;
-  background: var(--navy);
-  color: #fff;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: var(--radius);
-  transition: background .12s;
-}
-.empty-action:hover { background: #132640; }
-.empty-hint {
-  font-size: 11px;
-  color: var(--text3);
-  margin-top: 4px;
-}
-
-/* RESULTS COUNT */
-.results-bar {
-  font-size: 12px;
-  color: var(--text3);
-  padding: 10px 0 18px;
-}
-
-
-/* ANALYSIS CARD ENHANCEMENTS */
-.card-tags { display: flex; gap: 4px; flex-wrap: wrap; }
-.card-tag { font: 700 9px var(--sans); letter-spacing: .05em; text-transform: uppercase; padding: 2px 7px; border-radius: 3px; }
-
-/* READING PROGRESS */
-.analysis-header { padding: 16px 28px 0; display: flex; align-items: center; justify-content: space-between; }
-.analysis-count { font: 400 12px var(--sans); color: var(--text3); }
-
-/* NEWS ADDITIONS */
-.tag-redistricting { background: #ECFDF5; color: #065F46; }
-.tag-polling       { background: #F5F3FF; color: #4C1D95; }
-.tag-economy       { background: #FFF7ED; color: #9A3412; }
+.loading-state { font: 400 14px var(--sans); }
+.empty-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--bg3); display: flex; align-items: center; justify-content: center; }
+.empty-state h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--text2); }
+.empty-state p { font-size: 13px; line-height: 1.6; max-width: 360px; }
 
 /* HIDDEN */
 .hidden { display: none !important; }
-
-/* TYPE COLOURS */
-.type-newsletter    { background: #FFF0E9; color: #C4470E; }
-.type-op-ed         { background: #F3EEFF; color: #5B21B6; }
-.type-podcast       { background: #E0F7FA; color: #006064; }
-.type-research      { background: #E8F0FE; color: #1A47A0; }
-.type-interview     { background: #E8F8F1; color: #065F46; }
-.type-post          { background: #F1F5F9; color: #334155; }
-
-/* TAG COLOURS */
-.tag-major  { background: #FEE2E2; color: #991B1B; }
-.tag-senate { background: #DBEAFE; color: #1E3A8A; }
-.tag-house  { background: #EDE9FE; color: #4C1D95; }
-.tag-federal{ background: #F1F5F9; color: #1E293B; }
-.tag-gov    { background: #CCFBF1; color: #134E4A; }
-.tag-primary{ background: #FEF3C7; color: #92400E; }
 
 @media (max-width: 600px) {
   .toolbar { padding: 12px 16px; }
@@ -350,109 +241,167 @@ body {
 
 <!-- SUB-NAV -->
 <nav class="sub-nav">
-  <button class="sub-tab active" data-tab="analysis" onclick="switchTab('analysis')">Analysis &amp; Commentary</button>
+  <button class="sub-tab active" data-tab="analysis">Analysis &amp; Commentary</button>
   <div class="nav-spacer"></div>
   <span class="last-updated" id="lastUpdated"></span>
 </nav>
 
 <!-- ANALYSIS PANEL -->
 <div id="panel-analysis" class="panel active">
-  <div class="content">
-    <div class="card-grid" style="max-width:860px;margin:0 auto">
 
-      <!-- PODCAST 2 -->
-      <div class="card">
-        <div class="card-meta">
-          <span class="type-badge type-podcast">Podcast</span>
-          <span class="card-date">29 Apr 2026</span>
-        </div>
-        <a class="card-title" href="https://open.spotify.com/episode/1VFAsloVxSyHCH3Uw4XUZb" target="_blank" rel="noopener">
-          The Iran Brief: US Congress and Trump
-        </a>
-        <p class="card-desc">
-          With the 60-day War Powers Resolution clock ticking, this episode examines why Congress has again failed to constrain Trump's military operations against Iran. The panel unpacks the structural weaknesses of the War Powers Resolution and how successive administrations have exploited legal grey areas — including the Trump administration filing only classified reports. The core argument: the real obstacle is political will, not legal ambiguity.
-        </p>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <div class="card-source">All Things Policy</div>
-          <div style="font:400 11px var(--sans);color:var(--text3)">
-            Hosts: <strong style="color:var(--accent)">Abhishek Kadiyala</strong> &amp; <strong style="color:var(--accent)">Brigadier Anil Raman</strong> &middot; Guest: <strong style="color:var(--accent)">Soren Dayton</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- PODCAST 1 -->
-      <div class="card">
-        <div class="card-meta">
-          <span class="type-badge type-podcast">Podcast</span>
-          <span class="card-date">1 Apr 2026</span>
-        </div>
-        <a class="card-title" href="https://open.spotify.com/episode/4wmWyfx1HxWvqTo6P5jNYG?si=96ad7bbb473b49e2" target="_blank" rel="noopener">
-          The Iran Brief: Why Is US Congress Failing To Stop Trump On Iran?
-        </a>
-        <p class="card-desc">
-          Congress has repeatedly failed to constrain President Trump's military actions against Iran despite multiple legislative attempts. The episode traces failed resolutions invoking the War Powers Resolution of 1973 — sponsored by Tim Kaine, Thomas Massie, Ro Khanna, and Chris Murphy — and examines how partisanship, electoral incentives, and ideological splits (cutting across party lines) have shaped outcomes. The hosts ultimately ask whether Congress genuinely seeks to reclaim war powers or whether these efforts are largely symbolic in an era of deepening polarisation.
-        </p>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap">
-          <div class="card-source">All Things Policy</div>
-          <div style="font:400 11px var(--sans);color:var(--text3)">
-            Hosts: <strong style="color:var(--accent)">Abhishek Kadiyala</strong> &amp; <strong style="color:var(--accent)">Bhumika Sevkani</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- NEWSLETTER -->
-      <div class="card">
-        <div class="card-meta">
-          <span class="type-badge type-newsletter">Newsletter</span>
-          <span class="card-date">10 May 2026</span>
-        </div>
-        <a class="card-title" href="https://dcdossier.substack.com/p/21-a-generational-mid-term" target="_blank" rel="noopener">
-          #21 &mdash; A Generational Mid-term?
-        </a>
-        <p class="card-desc">
-          At least one in eight members of Congress is departing ahead of the 2026 midterms — the highest retirement rate since 1992. The piece examines the three forces driving the exodus: institutional frustration with a gridlocked Congress, deepening partisan polarisation that makes legislating increasingly thankless, and a declining appeal of federal service relative to state-level or private-sector alternatives. Historical parallels to earlier retirement surges that preceded major congressional reforms add context to what could be a generationally significant election cycle.
-        </p>
-        <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
-          <div class="card-source">DC Dossier &mdash; Substack</div>
-          <div style="font:400 11px var(--sans);color:var(--text3)">
-            By <strong style="color:var(--accent)">Abhishek Kadiyala</strong>
-          </div>
-        </div>
-      </div>
-
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <input type="search" class="search-box" id="analysis-search" placeholder="Search posts…" oninput="renderPosts()">
+    <div class="chips" id="type-chips">
+      <button class="chip active" data-type="all"        onclick="setType('all',this)">All</button>
+      <button class="chip"        data-type="newsletter" onclick="setType('newsletter',this)">Newsletter</button>
+      <button class="chip"        data-type="podcast"    onclick="setType('podcast',this)">Podcast</button>
+      <button class="chip"        data-type="research"   onclick="setType('research',this)">Research</button>
     </div>
+    <div class="toolbar-right">
+      <select class="sort-select" id="sort-select" onchange="renderPosts()">
+        <option value="date-desc">Newest first</option>
+        <option value="date-asc">Oldest first</option>
+      </select>
+    </div>
+    <div class="results-bar" id="results-bar"></div>
   </div>
-</div>
 
+  <div class="content">
+    <div id="loading-state" class="loading-state">Loading analysis &amp; commentary…</div>
+    <div id="empty-state"   class="empty-state hidden">
+      <div class="empty-icon">
+        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </div>
+      <h3>No results</h3>
+      <p>Try a different search term or filter.</p>
+    </div>
+    <div class="card-grid" id="card-grid" style="display:none"></div>
+  </div>
+
+</div>
 
 <script>
 'use strict';
 
-/* ---- DATA ---- */
+let _allPosts = [];
+let _activeType = 'all';
+
+// ── LOAD DATA ────────────────────────────────────────────────────────────────
 async function loadData() {
-  const paths = ['data.json', '../data.json', './data.json'];
+  const paths = ['analysis.json', './analysis.json', '../analysis.json'];
+  let data = null;
   for (const p of paths) {
     try {
       const r = await fetch(p + '?t=' + Date.now());
-      if (!r.ok) continue;
-      const d = await r.json();
-      if (d.meta && d.meta.last_updated) {
-        const dt = new Date(d.meta.last_updated);
-        document.getElementById('lastUpdated').textContent =
-          'Updated ' + dt.toLocaleString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' });
-      }
-      return;
-    } catch(e) { /* try next */ }
+      if (r.ok) { data = await r.json(); break; }
+    } catch (e) { /* try next */ }
   }
+
+  if (data && data.meta && data.meta.last_updated) {
+    const dt = new Date(data.meta.last_updated);
+    document.getElementById('lastUpdated').textContent =
+      'Updated ' + dt.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
+  }
+
+  _allPosts = (data && Array.isArray(data.posts)) ? data.posts : [];
+
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('card-grid').style.display = '';
+  renderPosts();
 }
 
-/* ---- TAB SWITCHING ---- */
-function switchTab(name) {
-  document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
-  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+// ── FILTER / SORT ────────────────────────────────────────────────────────────
+function setType(type, btn) {
+  _activeType = type;
+  document.querySelectorAll('#type-chips .chip').forEach(b => b.classList.toggle('active', b === btn));
+  renderPosts();
 }
 
-/* ---- TAB SWITCHING ---- */
+function renderPosts() {
+  const q     = (document.getElementById('analysis-search').value || '').toLowerCase().trim();
+  const sort  = document.getElementById('sort-select').value;
+
+  let posts = _allPosts.filter(p => {
+    if (_activeType !== 'all' && p.type !== _activeType) return false;
+    if (q) {
+      const hay = ((p.title || '') + ' ' + (p.description || '') + ' ' + (p.source || '') + ' ' + (p.author || '')).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  if (sort === 'date-asc') {
+    posts = posts.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+  } else {
+    posts = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+  }
+
+  const bar = document.getElementById('results-bar');
+  bar.textContent = posts.length === _allPosts.length
+    ? `${_allPosts.length} post${_allPosts.length !== 1 ? 's' : ''}`
+    : `${posts.length} of ${_allPosts.length} posts`;
+
+  const grid  = document.getElementById('card-grid');
+  const empty = document.getElementById('empty-state');
+
+  if (!posts.length) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+  grid.innerHTML = posts.map(renderCard).join('');
+}
+
+// ── CARD RENDERER ────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function fmtDate(iso) {
+  try {
+    const d = new Date(iso);
+    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  } catch (e) { return ''; }
+}
+
+function tagClass(tag) {
+  const map = {
+    'Congress': 'tag-congress', 'Midterms': 'tag-midterms', 'Senate': 'tag-senate',
+    'House': 'tag-house', 'Iran': 'tag-iran', 'India': 'tag-india',
+    'Foreign Policy': 'tag-foreignpolicy', 'Trump': 'tag-trump',
+  };
+  return map[tag] || '';
+}
+
+function typeLabel(type) {
+  const map = { newsletter: 'Newsletter', podcast: 'Podcast', research: 'Research', 'op-ed': 'Op-Ed', interview: 'Interview' };
+  return map[type] || 'Analysis';
+}
+
+function renderCard(p) {
+  const tags = (Array.isArray(p.tags) ? p.tags : []).slice(0, 4)
+    .map(t => `<span class="card-tag ${tagClass(t)}">${esc(t)}</span>`).join('');
+
+  const authorLine = p.author
+    ? `<div class="card-author">By <strong style="color:var(--accent)">${esc(p.author)}</strong></div>`
+    : '';
+
+  return `<div class="card">
+    <div class="card-meta">
+      <span class="type-badge type-${esc(p.type)}">${esc(typeLabel(p.type))}</span>
+      <span class="card-date">${esc(fmtDate(p.date))}</span>
+    </div>
+    <a class="card-title" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
+    ${p.description ? `<p class="card-desc">${esc(p.description)}</p>` : ''}
+    ${tags ? `<div class="card-tags">${tags}</div>` : ''}
+    <div class="card-footer">
+      <div class="card-source">${esc(p.source)}</div>
+      ${authorLine}
+    </div>
+  </div>`;
+}
 
 loadData();
 </script>

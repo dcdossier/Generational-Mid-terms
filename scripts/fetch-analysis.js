@@ -180,14 +180,22 @@ async function scrapeAuthorPage(pageUrl, author, sourceName) {
       if (/^['"].*['"]$/.test(rawText) || /^(home|about|contact|login|sign in|subscribe|menu|close)$/i.test(rawText)) continue;
       seen.add(href);
 
-      // Only follow content on known domains
-      const isDomain = /takshashila\.org|open\.spotify\.com|substack\.com/.test(href);
-      if (!isDomain && !href.startsWith('/')) continue;
+      // For absolute URLs, only follow known content domains
+      const isAbsolute = /^https?:\/\//i.test(href);
+      if (isAbsolute) {
+        const isDomain = /takshashila\.org|open\.spotify\.com|substack\.com/.test(href);
+        if (!isDomain) continue;
+      }
       if (!matchesKw(rawText, '')) continue;
 
-      const fullUrl  = href.startsWith('http') ? href : 'https://takshashila.org.in' + href;
+      // Resolve relative URLs (handles ../../content/... style paths)
+      let fullUrl;
+      try { fullUrl = new URL(href, pageUrl).href; }
+      catch { continue; }
+
       const isSpotify  = /open\.spotify/.test(fullUrl);
       const isSubstack = /substack\.com/.test(fullUrl);
+      const isPublication = /takshashila\.org.*\/content\/publications\//.test(fullUrl);
       const postType   = isSpotify ? 'podcast' : isSubstack ? 'newsletter' : 'research';
 
       const id = 'page-' + Buffer.from(fullUrl).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
@@ -234,6 +242,17 @@ const SEED_POSTS = [
     date: '2026-04-01T00:00:00.000Z',
     tags: ['Congress', 'Foreign Policy', 'War Powers'],
     author: 'Abhishek Kadiyala & Bhumika Sevkani',
+  },
+  {
+    id: 'seed-taksh-pub-congress-iran-war-2026',
+    type: 'research',
+    title: 'Analysing US Congressional Oversight on the Iran War',
+    description: "This policy brief examines congressional responses to President Trump's military action against Iran, which began February 28, 2026. The analysis explores two institutional mechanisms through which Congress can exercise oversight: the War Powers Resolution (WPR) and budgetary appropriations authority. The brief identifies deep partisan and intra-party divisions, tracks multiple failed legislative attempts, and concludes that budgetary restraint represents Congress's most viable constraint mechanism.",
+    url: 'https://takshashila.org.in/content/publications/Congress-Iran-War-20052026.html',
+    source: 'Takshashila Institution',
+    date: '2026-05-20T00:00:00.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
+    author: 'Abhishek Kadiyala',
   },
   {
     id: 'seed-dcd-21-generational-midterm',
@@ -331,6 +350,7 @@ async function fetchYouTubeChannel(handle) {
 const AUTHOR_PAGES = [
   { url: 'https://takshashila.org.in/content/team/anil-raman.html',       author: 'Brigadier Anil Raman',  source: 'Takshashila Institution' },
   { url: 'https://takshashila.org.in/content/team/abhishek-kadiyala.html', author: 'Abhishek Kadiyala',     source: 'Takshashila Institution' },
+  { url: 'https://takshashila.org.in/pages/publications/',                  author: 'Abhishek Kadiyala',     source: 'Takshashila Institution' },
 ];
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
@@ -390,7 +410,7 @@ async function main() {
     meta: {
       last_updated: new Date().toISOString(),
       count: capped.length,
-      sources: ['DC Dossier (Substack)', 'All Things Policy (Takshashila)', 'Takshashila Author Pages'],
+      sources: ['DC Dossier (Substack)', 'All Things Policy (Takshashila)', 'Takshashila Author Pages', 'Takshashila Institution Publications'],
     },
     posts: capped,
   };

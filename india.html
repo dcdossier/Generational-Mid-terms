@@ -313,6 +313,29 @@ body {
 .comp-safe-d   { background: #1A3F8A; color: #fff; }
 .comp-safe-r   { background: #7a1c1c; color: #fff; }
 
+/* INFLUENCE MAP VIEW TOGGLE */
+.influence-view-bar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.itog {
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font: 600 11px var(--sans);
+  cursor: pointer;
+  background: var(--bg2);
+  color: var(--text2);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.itog.active, .itog:hover { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+.influence-map-wrap { position: relative; background: var(--bg2); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+#influence-legend {
+  position: absolute; bottom: 12px; left: 12px;
+  background: rgba(255,255,255,.93); border-radius: 6px; padding: 8px 12px;
+  font: 400 10px var(--sans); color: var(--text2); line-height: 1.9;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.ileg-row { display: flex; align-items: center; gap: 6px; }
+.ileg-swatch { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+
 /* CALLOUT BOX */
 .callout {
   background: var(--saffron-lt);
@@ -1166,7 +1189,34 @@ body {
     <div class="callout">
       Indian-Americans vote at <strong>higher-than-average rates</strong> and are concentrated in suburban districts that have become the most competitive battlegrounds in modern US elections. In several swing states, the community exceeds the margin of victory in recent Senate and presidential races.
     </div>
-    <div style="overflow-x:auto">
+
+    <!-- View toggle -->
+    <div class="influence-view-bar">
+      <button class="itog active" onclick="setInfluenceView('combined',this)">Combined</button>
+      <button class="itog" onclick="setInfluenceView('bubble',this)">Bubble Only</button>
+      <button class="itog" onclick="setInfluenceView('table',this)">Table</button>
+    </div>
+
+    <!-- Two-layer map -->
+    <div class="influence-map-wrap map-wrap" id="influence-map-wrap" style="min-height:340px">
+      <div class="map-loading" id="influence-map-loading">Loading influence map&hellip;</div>
+      <svg id="influence-map-svg" viewBox="0 0 960 580" style="cursor:grab;width:100%"></svg>
+      <div id="influence-legend">
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#FFF3E8;border:1px solid #ddd"></span> &lt;0.5% IA share</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#F7B96A"></span> 0.5&ndash;1.5%</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#E8832A"></span> 1.5&ndash;2.5%</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#B85900"></span> &gt;2.5%</div>
+        <div class="ileg-row" style="margin-top:4px"><span class="ileg-swatch" style="background:rgba(232,131,42,.4);border:1px solid #E8832A"></span> Circle = IA pop. size</div>
+      </div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="influenceZoomBy(1.5)">+</button>
+        <button class="map-zoom-btn" onclick="influenceZoomBy(1/1.5)">&minus;</button>
+        <button class="map-zoom-btn reset" onclick="influenceZoomReset()">&#8859;</button>
+      </div>
+    </div>
+
+    <!-- Table (hidden by default, shown via toggle) -->
+    <div id="influence-table-wrap" style="display:none;overflow-x:auto;margin-top:16px">
     <table class="influence-table">
       <thead>
         <tr>
@@ -1261,7 +1311,7 @@ body {
         </tr>
       </tbody>
     </table>
-    </div>
+    </div><!-- /influence-table-wrap -->
   </div>
 
   <!-- COMMUNITY POLITICAL ALIGNMENT -->
@@ -1556,6 +1606,7 @@ function switchTab(name) {
   document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
   if (name === 'interest' && !houseMapLoaded) { loadHouseMap(); }
   if (name === 'presence' && !presenceMapLoaded) { loadPresenceMap(); }
+  if (name === 'presence' && !influenceMapLoaded) { loadInfluenceMap(); }
 }
 
 function switchInner(name) {
@@ -1689,6 +1740,7 @@ const tooltip = document.getElementById('map-tooltip');
 let houseMapLoaded = false;
 let senateMapLoaded = false;
 let presenceMapLoaded = false;
+let influenceMapLoaded = false;
 
 // GeoJSON cache (shared between interest House map and presence map)
 let _cachedDistrictGeo = null;
@@ -1756,13 +1808,180 @@ function makeZoom(svgSel, onZoom) {
     reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
   };
 }
-let _houseInterestZoom = null, _senateInterestZoom = null, _presenceZoom = null;
+let _houseInterestZoom = null, _senateInterestZoom = null, _presenceZoom = null, _influenceZoom = null;
+let _influenceChoro = null, _influenceBubbles = null, _influenceColorScale = null;
 function houseInterestZoomBy(f)    { _houseInterestZoom?.zoomBy(f); }
 function houseInterestZoomReset()  { _houseInterestZoom?.reset(); }
 function senateInterestZoomBy(f)   { _senateInterestZoom?.zoomBy(f); }
 function senateInterestZoomReset() { _senateInterestZoom?.reset(); }
 function presenceZoomBy(f)         { _presenceZoom?.zoomBy(f); }
 function presenceZoomReset()       { _presenceZoom?.reset(); }
+function influenceZoomBy(f)        { _influenceZoom?.zoomBy(f); }
+function influenceZoomReset()      { _influenceZoom?.reset(); }
+
+// ── INFLUENCE MAP DATA ───────────────────────────────────────────────────────
+const IA_STATE_DATA = {
+  'California':     { pop:620000, pct:1.6,  comp:'safe-d',  outlook:'Safe D — Senate (Khanna bid); multiple competitive House seats' },
+  'Texas':          { pop:430000, pct:1.5,  comp:'lean-r',  outlook:'Lean R — suburban Houston/Dallas House seats rated Toss-up' },
+  'New Jersey':     { pop:390000, pct:4.4,  comp:'swing',   outlook:'Swing — NJ-07 and NJ-11 rated Toss-up; Senate rated Lean D' },
+  'New York':       { pop:340000, pct:1.7,  comp:'lean-d',  outlook:'Lean D — multiple Long Island & suburban NY competitive House races' },
+  'Illinois':       { pop:215000, pct:1.7,  comp:'lean-d',  outlook:'Lean D — Senate race (Krishnamoorthi bid); IL-06 competitive' },
+  'Virginia':       { pop:155000, pct:1.8,  comp:'lean-d',  outlook:'Lean D — VA-10 (Subramanyam incumbent); VA-07 competitive' },
+  'Georgia':        { pop:115000, pct:1.1,  comp:'swing',   outlook:'Swing — Senate rated Toss-up; Ossoff most vulnerable incumbent' },
+  'Florida':        { pop:100000, pct:0.47, comp:'lean-r',  outlook:'Lean R — several competitive suburban House seats' },
+  'Michigan':       { pop:95000,  pct:0.9,  comp:'swing',   outlook:'Swing — open Senate seat rated Toss-up; MI-13 (Thanedar incumbent)' },
+  'Pennsylvania':   { pop:90000,  pct:0.7,  comp:'swing',   outlook:'Swing — Senate Lean R; suburban Philly House seats competitive' },
+  'Maryland':       { pop:90000,  pct:1.5,  comp:'safe-d',  outlook:'Safe D — no competitive statewide races' },
+  'Washington':     { pop:90000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — Jayapal incumbent WA-07' },
+  'Massachusetts':  { pop:80000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — no competitive races expected' },
+  'North Carolina': { pop:75000,  pct:0.72, comp:'swing',   outlook:'Swing — Senate competitive; NC-13/14 rated Toss-up' },
+  'Ohio':           { pop:65000,  pct:0.56, comp:'lean-r',  outlook:'Lean R — competitive House seats in Columbus/Cleveland suburbs' },
+  'Arizona':        { pop:60000,  pct:0.83, comp:'swing',   outlook:'Swing — AZ-01, AZ-06 competitive House races' },
+  'Connecticut':    { pop:55000,  pct:1.55, comp:'lean-d',  outlook:'Lean D — Murphy Senate seat; CT-05 potentially competitive' },
+  'Colorado':       { pop:55000,  pct:0.96, comp:'lean-d',  outlook:'Lean D — Bennet Senate seat; no competitive statewide races' },
+  'Minnesota':      { pop:50000,  pct:0.9,  comp:'lean-d',  outlook:'Lean D — Klobuchar Senate seat; MN-03 potentially competitive' },
+  'Indiana':        { pop:45000,  pct:0.66, comp:'safe-r',  outlook:'Safe R — Jim Banks Senate bid; strong Republican state' },
+  'Nevada':         { pop:40000,  pct:1.3,  comp:'swing',   outlook:'Swing — Rosen Senate seat rated Toss-up; IA community in Las Vegas suburbs' },
+  'Wisconsin':      { pop:40000,  pct:0.7,  comp:'swing',   outlook:'Swing — Senate rated Toss-up; community in Madison/Milwaukee suburbs' },
+  'Oregon':         { pop:40000,  pct:0.95, comp:'lean-d',  outlook:'Lean D — Merkley Senate seat; OR-05 potentially competitive' },
+  'Missouri':       { pop:40000,  pct:0.65, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'Tennessee':      { pop:35000,  pct:0.51, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'Delaware':       { pop:25000,  pct:2.57, comp:'safe-d',  outlook:'Safe D — no competitive races' },
+  'Kansas':         { pop:25000,  pct:0.86, comp:'lean-r',  outlook:'Lean R — no competitive statewide races' },
+  'Oklahoma':       { pop:25000,  pct:0.63, comp:'safe-r',  outlook:'Safe R — Lankford Senate seat' },
+  'South Carolina': { pop:25000,  pct:0.49, comp:'lean-r',  outlook:'Lean R — Joe Wilson (SC-02) incumbent' },
+  'Utah':           { pop:20000,  pct:0.63, comp:'lean-r',  outlook:'Lean R — Lee Senate seat; no competitive races' },
+  'Kentucky':       { pop:20000,  pct:0.45, comp:'safe-r',  outlook:'Safe R — Paul Senate seat' },
+  'Hawaii':         { pop:20000,  pct:1.41, comp:'safe-d',  outlook:'Safe D — Tokuda HI-02 incumbent' },
+  'Louisiana':      { pop:15000,  pct:0.32, comp:'lean-r',  outlook:'Lean R — Cassidy Senate seat up 2026' },
+  'Iowa':           { pop:15000,  pct:0.48, comp:'lean-r',  outlook:'Lean R — Grassley Senate seat; IA community in Des Moines suburbs' },
+  'Nebraska':       { pop:15000,  pct:0.77, comp:'safe-r',  outlook:'Safe R — Fischer Senate seat' },
+  'Rhode Island':   { pop:15000,  pct:1.42, comp:'safe-d',  outlook:'Safe D — no competitive races' },
+  'New Hampshire':  { pop:12000,  pct:0.89, comp:'swing',   outlook:'Swing — Senate seat rated Toss-up; NH-01 competitive' },
+  'Idaho':          { pop:8000,   pct:0.45, comp:'lean-r',  outlook:'Lean R — Risch Senate seat up 2026 (May primary)' },
+  'Mississippi':    { pop:8000,   pct:0.27, comp:'safe-r',  outlook:'Safe R — no competitive federal races' },
+  'New Mexico':     { pop:10000,  pct:0.48, comp:'lean-d',  outlook:'Lean D — Heinrich Senate seat' },
+  'Arkansas':       { pop:10000,  pct:0.33, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'West Virginia':  { pop:6000,   pct:0.33, comp:'safe-r',  outlook:'Safe R — Capito Senate seat' },
+  'Maine':          { pop:6000,   pct:0.44, comp:'lean-d',  outlook:'Lean D — King Senate seat; ME-02 competitive House race' },
+  'Vermont':        { pop:5000,   pct:0.80, comp:'safe-d',  outlook:'Safe D — Sanders Senate seat' },
+  'North Dakota':   { pop:5000,   pct:0.65, comp:'safe-r',  outlook:'Safe R — Cramer Senate seat' },
+  'South Dakota':   { pop:5000,   pct:0.56, comp:'safe-r',  outlook:'Safe R — Rounds Senate seat' },
+  'Alaska':         { pop:5000,   pct:0.68, comp:'lean-r',  outlook:'Lean R — Sullivan Senate seat (not up 2026)' },
+  'Montana':        { pop:3000,   pct:0.28, comp:'lean-r',  outlook:'Lean R — Daines Senate seat (not up 2026)' },
+  'Wyoming':        { pop:2000,   pct:0.35, comp:'safe-r',  outlook:'Safe R — Barrasso Senate seat' },
+  'Alabama':        { pop:15000,  pct:0.30, comp:'safe-r',  outlook:'Safe R — no competitive federal races' },
+};
+
+// ── INFLUENCE MAP ────────────────────────────────────────────────────────────
+function loadInfluenceMap() {
+  if (influenceMapLoaded) return;
+  influenceMapLoaded = true;
+
+  const svgEl = d3.select('#influence-map-svg');
+  const g = svgEl.append('g');
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+  const pathGen = d3.geoPath().projection(proj);
+
+  const maxPop = d3.max(Object.values(IA_STATE_DATA), d => d.pop);
+  const radiusScale = d3.scaleSqrt().domain([0, maxPop]).range([0, 34]);
+  _influenceColorScale = d3.scaleThreshold()
+    .domain([0.5, 1.5, 2.5])
+    .range(['#FFF3E8', '#F7B96A', '#E8832A', '#B85900']);
+
+  _influenceZoom = makeZoom(svgEl, t => {
+    g.attr('transform', t);
+    if (_influenceBubbles) {
+      const k = t.k;
+      _influenceBubbles.attr('r', d => {
+        const ia = IA_STATE_DATA[d.properties.NAME];
+        return ia ? radiusScale(ia.pop) / k : 0;
+      });
+    }
+  });
+
+  fetch('assets/senate.json')
+    .then(r => r.json())
+    .then(gj => {
+      document.getElementById('influence-map-loading').style.display = 'none';
+
+      // Choropleth layer
+      _influenceChoro = g.selectAll('path.influence-state')
+        .data(gj.features)
+        .join('path')
+        .attr('class', 'influence-state')
+        .attr('d', d => pathGen(d) || '')
+        .style('fill', d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia ? _influenceColorScale(ia.pct) : '#e5e7eb';
+        })
+        .style('stroke', '#fff')
+        .style('stroke-width', '0.8px')
+        .on('mousemove', function(event, d) {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          tooltip.style.display = 'block';
+          tooltip.style.left = (event.clientX + 12) + 'px';
+          tooltip.style.top  = (event.clientY - 28) + 'px';
+          if (ia) {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br>` +
+              `~${ia.pop >= 1000 ? (ia.pop/1000).toFixed(0)+'k' : ia.pop} Indian-Americans &mdash; ${ia.pct}% of state<br>` +
+              `<em style="color:var(--text3)">${ia.outlook}</em>`;
+          } else {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br><em>No data</em>`;
+          }
+        })
+        .on('mouseleave', () => { tooltip.style.display = 'none'; });
+
+      // Bubble layer (only states with meaningful IA population)
+      _influenceBubbles = g.selectAll('circle.influence-bubble')
+        .data(gj.features.filter(d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia && ia.pop >= 5000;
+        }))
+        .join('circle')
+        .attr('class', 'influence-bubble')
+        .attr('cx', d => { const c = pathGen.centroid(d); return isFinite(c[0]) ? c[0] : 0; })
+        .attr('cy', d => { const c = pathGen.centroid(d); return isFinite(c[1]) ? c[1] : 0; })
+        .attr('r', d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia ? radiusScale(ia.pop) : 0;
+        })
+        .style('fill', 'rgba(232,131,42,0.40)')
+        .style('stroke', '#E8832A')
+        .style('stroke-width', '1px')
+        .style('pointer-events', 'none');
+    })
+    .catch(err => {
+      influenceMapLoaded = false;
+      const el = document.getElementById('influence-map-loading');
+      if (el) el.textContent = 'Could not load map — switch tabs to retry.';
+      console.error('Influence map error:', err);
+    });
+}
+
+function setInfluenceView(view, btn) {
+  document.querySelectorAll('.itog').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const mapWrap = document.getElementById('influence-map-wrap');
+  const tableWrap = document.getElementById('influence-table-wrap');
+  if (view === 'table') {
+    mapWrap.style.display = 'none';
+    tableWrap.style.display = 'block';
+  } else {
+    mapWrap.style.display = 'block';
+    tableWrap.style.display = 'none';
+    if (view === 'bubble' && _influenceChoro) {
+      _influenceChoro.style('fill', '#e5e7eb');
+      document.getElementById('influence-legend').style.display = 'none';
+    } else if (view === 'combined' && _influenceChoro) {
+      _influenceChoro.style('fill', d => {
+        const ia = IA_STATE_DATA[d.properties.NAME];
+        return ia ? _influenceColorScale(ia.pct) : '#e5e7eb';
+      });
+      document.getElementById('influence-legend').style.display = 'block';
+    }
+  }
+}
 
 // ── INTEREST HOUSE MAP ──────────────────────────────────────────────────────
 let _interestHouseSel = null;

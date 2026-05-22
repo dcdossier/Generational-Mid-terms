@@ -23,40 +23,50 @@ const FETCH_TIMEOUT = 14000;
 const MAX_POSTS    = 150;
 
 // ── KEYWORD FILTER ──────────────────────────────────────────────────────────
+// Only include posts that DIRECTLY discuss Congress or US midterm elections.
+// Broad policy topics (Iran, India, trade, foreign policy) are excluded unless
+// they explicitly reference Congress or the midterms in the same breath.
 const KW_RE = new RegExp([
-  'congress(?:ional)?', 'mid-?term', 'midterm', 'election', 'electoral',
-  'senate', '\\bhouse\\b', 'capitol', 'legislat', 'filibuster', 'caucus',
-  'bipartisan', 'partisan', 'committee', 'subcommittee', 'hearing',
-  'war\\s+powers', 'trump', 'republican', 'democrat', '\\bgop\\b',
-  '2026', 'primary', 'ballot', 'campaign', 'incumbent',
+  // Congress as an institution
+  'us\\s+congress', 'u\\.s\\.\\s+congress', 'congress(?:ional)?\\s+(action|vote|bill|hearing|response|debate|race|seat|fail|pass|block|approv)',
+  '\\bcongress\\b.*\\b(fail|pass|vote|debate|block|approv|respond|constrain|legislat)',
+  '\\b(fail|pass|vote|debate|block|approv|respond|constrain|legislat)\\b.*\\bcongress\\b',
+  'house\\s+of\\s+representatives', 'us\\s+senate', 'u\\.s\\.\\s+senate',
+  'capitol\\s+hill', 'war\\s+powers\\s+resolution', 'war\\s+powers\\s+act',
+  'filibuster', 'government\\s+shutdown', 'debt\\s+ceiling',
+  'continuing\\s+resolution', 'appropriations\\s+bill',
   'speaker\\s+of\\s+the\\s+house', 'majority\\s+leader', 'minority\\s+leader',
-  'appropriations', 'debt\\s+ceiling', 'continuing\\s+resolution',
-  'tariff', 'sanction', 'iran', 'india', '\\bh-1b\\b', 'immigration',
-  'geopolit', 'south\\s+asia', 'foreign\\s+policy', 'national\\s+security',
-  'takshashila', 'dc\\s+dossier', 'all\\s+things\\s+policy',
-  'abhishek\\s+kadiyala', 'anil\\s+raman', 'bhumika', 'soren\\s+dayton',
+  'senate\\s+(race|seat|hearing|vote|bill|election|runoff)',
+  'house\\s+(race|seat|hearing|vote|bill|election|district)',
+  '119th\\s+congress', '120th\\s+congress',
+  // Midterms directly
+  'mid-?term', 'midterm',
+  '2026\\s+(election|race|midterm|senate|house|primary|ballot)',
+  '(election|race|primary|ballot).*2026',
+  'election\\s+cycle', 'senate\\s+majority', 'house\\s+majority',
+  // Congressional role / war powers in context
+  'war\\s+powers', 'congress.*iran', 'iran.*congress',
+  'congress.*trump', 'trump.*congress',
+  // DC Dossier issues that are explicitly about Congress or midterms
+  'congressional\\s+perspective', 'house.*consensus', 'senate.*hearing',
 ].join('|'), 'i');
 
 function matchesKw(title, desc) {
-  return KW_RE.test((title || '') + ' ' + (desc || ''));
+  const text = (title || '') + ' ' + (desc || '');
+  return KW_RE.test(text);
 }
 
 // ── TAG EXTRACTION ──────────────────────────────────────────────────────────
 function extractTags(text) {
   const t = (text || '').toLowerCase();
   const tags = [];
-  if (/congress(?:ional)?|capitol|legislat|filibuster|committee|hearing|bill/.test(t)) tags.push('Congress');
-  if (/mid-?term|2026|election|primary|ballot|electoral/.test(t)) tags.push('Midterms');
-  if (/senate|senator/.test(t)) tags.push('Senate');
-  if (/\bhouse\b|representative/.test(t)) tags.push('House');
-  if (/iran|war\s+powers/.test(t)) tags.push('Iran');
-  if (/india|south\s+asia/.test(t)) tags.push('India');
-  if (/trump/.test(t)) tags.push('Trump');
-  if (/h-1b|immigration|visa/.test(t)) tags.push('Immigration');
-  if (/tariff|trade/.test(t)) tags.push('Trade');
-  if (/foreign\s+policy|geopolit|national\s+security/.test(t)) tags.push('Foreign Policy');
-  if (/sanction/.test(t)) tags.push('Sanctions');
-  return tags.length ? tags : ['Analysis'];
+  if (/congress(?:ional)?|capitol|legislat|filibuster|committee|hearing|shutdown|debt\s+ceiling|appropriations/.test(t)) tags.push('Congress');
+  if (/mid-?term|2026.*(election|race|primary)|election.*2026|senate\s+majority|house\s+majority/.test(t)) tags.push('Midterms');
+  if (/senate\s+(race|seat|vote|hearing|bill)|us\s+senate/.test(t)) tags.push('Senate');
+  if (/house\s+(race|seat|vote|hearing|bill)|house\s+of\s+rep/.test(t)) tags.push('House');
+  if (/war\s+powers|iran.*congress|congress.*iran/.test(t)) tags.push('War Powers');
+  if (/trump.*congress|congress.*trump/.test(t)) tags.push('Trump');
+  return tags.length ? tags : ['Congress'];
 }
 
 // ── XML / HTML HELPERS ──────────────────────────────────────────────────────
@@ -233,12 +243,11 @@ const SEED_POSTS = [
 
 // ── RSS SOURCES ──────────────────────────────────────────────────────────────
 const RSS_SOURCES = [
-  // DC Dossier Substack — all posts relevant by definition
+  // DC Dossier Substack — filtered by Congress/midterm keywords
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
     type: 'newsletter',
-    forceInclude: true,
   },
   // Takshashila Institution YouTube channel (@TakshashilaInst → UC5AVrL4ryKhR1Vi0HxdgP2Q)
   { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC5AVrL4ryKhR1Vi0HxdgP2Q', source: 'Takshashila Institution (YouTube)', type: 'podcast' },

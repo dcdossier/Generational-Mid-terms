@@ -224,6 +224,56 @@ const FEEDS = [
   // REDISTRICTING (force-tagged)
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=redistricting+2026+congress', source: 'Google News - Redistricting', forceTags: ['Major Update', 'Redistricting'] },
 
+  // CONNECTICUT (Chris Murphy; new state feeds per India-interest-sources.xlsx)
+  { url: 'https://ctmirror.org/feed/',                                                                                                source: 'CT Mirror' },
+  { url: 'https://www.courant.com/news/politics/?widgetName=rssfeed&widgetContentId=755799&getXmlFeed=true',                          source: 'Hartford Courant – Politics' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Connecticut+2026',                          source: 'Quinnipiac (CT)' },
+
+  // ILLINOIS (Krishnamoorthi, Davis; new state feeds)
+  { url: 'https://illinoispolicy.org/feed/',                                                                                          source: 'Illinois Policy Institute' },
+  { url: 'https://capitolnewsillinois.com/feed/',                                                                                     source: 'Capitol News Illinois' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Paul+Simon+Institute+poll+Illinois+2026',                   source: 'Paul Simon Institute (IL)' },
+
+  // INDIANA (André Carson; new state feeds)
+  { url: 'https://indianacapitalchronicle.com/feed/',                                                                                 source: 'Indiana Capital Chronicle' },
+  { url: 'https://www.indystar.com/rss/news/politics/',                                                                               source: 'IndyStar – Politics' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Ball+State+CBER+poll+Indiana+2026',                         source: 'Ball State CBER Poll (IN)' },
+
+  // MARYLAND (Van Hollen; new state feeds)
+  { url: 'https://www.marylandmatters.org/feed/',                                                                                     source: 'Maryland Matters' },
+  { url: 'https://www.wbaltv.com/news/politics/rss.xml',                                                                              source: 'WBAL-TV Politics' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Goucher+poll+Maryland+2026',                                source: 'Goucher College Poll (MD)' },
+
+  // MASSACHUSETTS (Lynch, Markey; new state feeds)
+  { url: 'https://www.masslive.com/arc/outboundfeeds/rss/section/politics/',                                                          source: 'MassLive – Politics' },
+  { url: 'https://commonwealthbeacon.org/feed/',                                                                                      source: 'CommonWealth Beacon' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=MassINC+poll+Massachusetts+2026',                           source: 'MassINC Polling Group (MA)' },
+
+  // MINNESOTA (Omar; new state feeds)
+  { url: 'https://www.minnpost.com/rss.xml',                                                                                          source: 'MinnPost' },
+  { url: 'https://www.startribune.com/local/politics/?format=rss',                                                                    source: 'Star Tribune – Politics' },
+  { url: 'https://minnesotareformer.com/feed/',                                                                                        source: 'Minnesota Reformer' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Star+Tribune+Minnesota+poll+2026',                          source: 'Star Tribune/MN Poll' },
+
+  // SOUTH CAROLINA (Wilson, Graham; new state feeds)
+  { url: 'https://scdailygazette.com/feed/',                                                                                          source: 'SC Daily Gazette' },
+  { url: 'https://www.postandcourier.com/politics/feed/',                                                                             source: 'Post and Courier – Politics' },
+  { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Winthrop+poll+South+Carolina+2026',                         source: 'Winthrop University Poll (SC)' },
+
+  // NEW YORK (supplemental — Meeks, Latimer)
+  { url: 'https://www.nysfocus.com/feed/',                                                                                             source: 'New York Focus' },
+  { url: 'https://maristpoll.marist.edu/feed/',                                                                                        source: 'Marist Poll (NY)' },
+
+  // VIRGINIA (supplemental — Warner, Connolly)
+  { url: 'https://cardinalnews.org/feed/',                                                                                             source: 'Cardinal News' },
+
+  // NEW JERSEY (supplemental — Kim, Booker)
+  { url: 'https://www.nj.com/arc/outboundfeeds/rss/section/politics/',                                                                source: 'NJ.com – Politics' },
+  { url: 'https://www.monmouth.edu/polling-institute/feed/',                                                                           source: 'Monmouth Poll (NJ)' },
+
+  // IDAHO (supplemental — Crapo, Risch)
+  { url: 'https://www.idahopress.com/search/?f=rss&t=article&c=news/politics&l=50&s=start_time&sd=desc',                              source: 'Idaho Press – Politics' },
+
 ];
 
 // ── KEYWORD FILTERS ────────────────────────────────────────────────────────────

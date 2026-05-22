@@ -51,8 +51,26 @@ const KW_RE = new RegExp([
   'congressional\\s+perspective', 'house.*consensus', 'senate.*hearing',
 ].join('|'), 'i');
 
+// Posts that should always be excluded even if they match KW_RE.
+// Learning: Senate/House hearings that are primarily about bilateral
+// diplomatic relations or ambassador nominations are OFF-TOPIC — Congress
+// is just the venue, not the subject. Only include hearings where the
+// central focus is congressional behaviour, partisanship, legislation,
+// oversight, war powers, or the election cycle itself.
+function isOffTopic(text) {
+  const t = text.toLowerCase();
+  const isHearing = /senate\s+hearing|house\s+hearing|confirmation\s+hearing/i.test(t);
+  const isBilateral = /ambassador|bilateral|india.?us\s+relations|us.?india\s+relations|what\s+it\s+reveals\s+about|nomination\s+hearing/i.test(t);
+  const isCongress  = /partisan|oversight|legislation|war\s+powers|midterm|accountability|filibuster|shutdown/i.test(t);
+  // A hearing that is about bilateral/diplomatic topics but NOT about
+  // congressional mechanics or accountability → off-topic
+  if (isHearing && isBilateral && !isCongress) return true;
+  return false;
+}
+
 function matchesKw(title, desc) {
   const text = (title || '') + ' ' + (desc || '');
+  if (isOffTopic(text)) return false;
   return KW_RE.test(text);
 }
 
@@ -236,7 +254,18 @@ const SEED_POSTS = [
     url: 'https://open.spotify.com/episode/5TA2xUQOIRtPurxcZ5k9uk',
     source: 'All Things Policy — Takshashila Institution',
     date: '2026-03-15T00:00:00.000Z',
-    tags: ['Congress', 'Foreign Policy', 'War Powers'],
+    tags: ['Congress', 'War Powers'],
+    author: 'Abhishek Kadiyala & Brigadier Anil Raman',
+  },
+  {
+    id: 'seed-yt-2HZsdyLKkvQ',
+    type: 'podcast',
+    title: 'All Things Policy | The Iran Brief: War and MAGA Fissures',
+    description: "Takshashila Institution's All Things Policy examines the fissures within the MAGA coalition in Congress over the Iran strikes, and what the split reveals about Congress's capacity — and willingness — to constrain the executive on war powers.",
+    url: 'https://www.youtube.com/watch?v=2HZsdyLKkvQ',
+    source: 'All Things Policy — Takshashila Institution (YouTube)',
+    date: '2026-03-23T19:00:02.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
     author: 'Abhishek Kadiyala & Brigadier Anil Raman',
   },
 ];

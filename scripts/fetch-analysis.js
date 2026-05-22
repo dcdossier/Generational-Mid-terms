@@ -240,12 +240,8 @@ const RSS_SOURCES = [
     type: 'newsletter',
     forceInclude: true,
   },
-  // All Things Policy podcast — try several known hosting endpoints
-  { url: 'https://feeds.acast.com/public/shows/all-things-policy',                   source: 'All Things Policy',           type: 'podcast' },
-  { url: 'https://anchor.fm/all-things-policy/podcast/rss',                          source: 'All Things Policy',           type: 'podcast' },
-  { url: 'https://anchor.fm/s/takshashila/podcast/rss',                             source: 'All Things Policy',           type: 'podcast' },
-  { url: 'https://takshashila.org.in/all-things-policy.xml',                        source: 'All Things Policy',           type: 'podcast' },
-  { url: 'https://takshashila.org.in/feed/podcast',                                  source: 'Takshashila Podcasts',        type: 'podcast' },
+  // Takshashila Institution YouTube channel (@TakshashilaInst → UC5AVrL4ryKhR1Vi0HxdgP2Q)
+  { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC5AVrL4ryKhR1Vi0HxdgP2Q', source: 'Takshashila Institution (YouTube)', type: 'podcast' },
   // Google News RSS — author and show searches
   { url: 'https://news.google.com/rss/search?q=%22Abhishek+Kadiyala%22+Congress&hl=en-US&gl=US&ceid=US%3Aen',                     source: 'Abhishek Kadiyala (Google News)', type: 'research' },
   { url: 'https://news.google.com/rss/search?q=%22Anil+Raman%22+Takshashila+Congress&hl=en-US&gl=US&ceid=US%3Aen',               source: 'Takshashila (Google News)',       type: 'research' },
@@ -253,6 +249,45 @@ const RSS_SOURCES = [
   { url: 'https://news.google.com/rss/search?q=%22DC+Dossier%22+Congress+midterm&hl=en-US&gl=US&ceid=US%3Aen',                   source: 'DC Dossier (Google News)',        type: 'newsletter'},
   { url: 'https://news.google.com/rss/search?q=%22DC+Dossier%22+%22Abhishek+Kadiyala%22&hl=en-US&gl=US&ceid=US%3Aen',           source: 'DC Dossier (Google News)',        type: 'newsletter'},
 ];
+
+// ── YOUTUBE CHANNEL HELPER ───────────────────────────────────────────────────
+// Fetches a YouTube @handle page, extracts the canonical channel_id, then
+// returns the RSS feed items filtered by keyword.
+async function fetchYouTubeChannel(handle) {
+  const channelUrl = `https://www.youtube.com/@${handle}/videos`;
+  try {
+    const res = await fetch(channelUrl, {
+      timeout: FETCH_TIMEOUT,
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
+    });
+    if (!res.ok) return [];
+    const html = await res.text();
+
+    // YouTube embeds the channel_id in several places; try each
+    const patterns = [
+      /"channelId":"(UC[A-Za-z0-9_-]{22})"/,
+      /\/channel\/(UC[A-Za-z0-9_-]{22})/,
+      /"externalId":"(UC[A-Za-z0-9_-]{22})"/,
+    ];
+    let channelId = null;
+    for (const pat of patterns) {
+      const m = html.match(pat);
+      if (m) { channelId = m[1]; break; }
+    }
+
+    if (!channelId) {
+      console.warn(`[fetch-analysis] Could not extract channel_id for @${handle}`);
+      return [];
+    }
+    console.log(`[fetch-analysis] @${handle} → channel_id: ${channelId}`);
+
+    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+    return fetchRss(rssUrl, 'Takshashila Institution (YouTube)', 'podcast', false);
+  } catch (e) {
+    console.warn(`[fetch-analysis] YouTube channel fetch failed for @${handle}:`, e.message);
+    return [];
+  }
+}
 
 // ── AUTHOR PAGES ─────────────────────────────────────────────────────────────
 const AUTHOR_PAGES = [
@@ -286,6 +321,15 @@ async function main() {
       const prev = existingByUrl.get(post.url);
       allPosts.push(prev ? Object.assign({}, post, { author: prev.author || post.author, description: prev.description || post.description }) : post);
     }
+  }
+
+  // Fetch Takshashila YouTube channel
+  const ytPosts = await fetchYouTubeChannel('TakshashilaInst');
+  console.log(`[fetch-analysis] Takshashila YouTube: ${ytPosts.length} matching items`);
+  for (const post of ytPosts) {
+    if (seenUrls.has(post.url)) continue;
+    seenUrls.add(post.url);
+    allPosts.push(post);
   }
 
   // Scrape author pages

@@ -49,6 +49,11 @@ const KW_RE = new RegExp([
   'congress.*trump', 'trump.*congress',
   // DC Dossier issues that are explicitly about Congress or midterms
   'congressional\\s+perspective', 'house.*consensus', 'senate.*hearing',
+  // Redistricting / gerrymandering — core midterm structural topics
+  'gerrymander', 'redistrict', 'electoral\\s+map', 'district\\s+lines',
+  'supreme\\s+court.*district', 'voting\\s+rights',
+  // Purges / oversight with midterm context
+  'hegseth', 'purge.*midterm|midterm.*purge',
 ].join('|'), 'i');
 
 // Posts that should always be excluded even if they match KW_RE.
@@ -87,6 +92,7 @@ function extractTags(text) {
   if (/house\s+(race|seat|vote|hearing|bill)|house\s+of\s+rep/.test(t)) tags.push('House');
   if (/war\s+powers|iran.*congress|congress.*iran/.test(t)) tags.push('War Powers');
   if (/trump.*congress|congress.*trump/.test(t)) tags.push('Trump');
+  if (/gerrymander|redistrict|electoral\s+map|district\s+lines/.test(t)) tags.push('Redistricting');
   return tags.length ? tags : ['Congress'];
 }
 
@@ -113,13 +119,51 @@ function safeUrl(raw) {
 function parseRssItem(raw) {
   const title = stripHtml(raw.title || raw['itunes:title'] || '');
   const link   = safeUrl(raw.link || raw['feedburner:origLink'] || raw.guid);
+  // YouTube RSS stores descriptions in media:group/media:description
+  const mediaDesc = raw['media:group']?.['media:description'] || '';
   const desc   = stripHtml(
     raw.description || raw['itunes:summary'] || raw.summary ||
-    raw['content:encoded'] || raw.content || ''
-  ).slice(0, 700);
+    raw['content:encoded'] || raw.content || mediaDesc || ''
+  ).slice(0, 800);
   const pub = raw.pubDate || raw.published || raw['dc:date'] || raw.updated || '';
   const date = pub ? new Date(pub) : new Date();
   return { title, link, desc, date: isNaN(date) ? new Date() : date };
+}
+
+// ── GROQ: EXTRACT NAMES FROM PODCAST DESCRIPTION ────────────────────────────
+// Uses the GROQ LLM API to identify all hosts and guests mentioned in a
+// YouTube video description. Returns a comma-separated name string.
+async function extractNamesWithGroq(title, description) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey || !description) return '';
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      timeout: 10000,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [{
+          role: 'user',
+          content: `From this podcast title and description, list ALL hosts and guests by full name. Return ONLY a comma-separated list of names (e.g. "Jane Smith, John Doe"). If no names are mentioned, return an empty string. No explanation, no labels.\n\nTitle: ${title}\nDescription: ${description.slice(0, 800)}`,
+        }],
+        max_tokens: 80,
+        temperature: 0,
+      }),
+    });
+    if (!res.ok) return '';
+    const data = await res.json();
+    const names = (data.choices?.[0]?.message?.content || '').trim();
+    // Reject if it looks like a sentence rather than a name list
+    if (names.split(' ').length > 12 && !names.includes(',')) return '';
+    return names;
+  } catch (e) {
+    console.warn('[fetch-analysis] GROQ name extraction failed:', e.message);
+    return '';
+  }
 }
 
 // ── FETCH RSS ───────────────────────────────────────────────────────────────
@@ -240,6 +284,28 @@ const SEED_POSTS = [
   },
   // ── DC Dossier newsletters ────────────────────────────────────────────────
   {
+    id: 'seed-dcd-23-gerrymandering',
+    type: 'newsletter',
+    title: '#23 Gerrymandering and the New Rules of US Politics',
+    description: "The Supreme Court\u2019s Louisiana v. Callais decision weakens protections against electoral maps that dilute minority voting power, making it harder to challenge districts through intent-based rather than outcome-based standards. The piece analyses how both parties increasingly treat redistricting as a partisan tool, drawing comparisons to India\u2019s independent delimitation system.",
+    url: 'https://dcdossier.substack.com/p/23-gerrymandering-and-the-new-rules',
+    source: 'DC Dossier \u2014 Substack',
+    date: '2026-05-23T12:25:54.000Z',
+    tags: ['Congress', 'Midterms', 'Redistricting'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
+    id: 'seed-dcd-22-hegseths-purges',
+    type: 'newsletter',
+    title: '#22 Why are Hegseth\u2019s purges different?',
+    description: "Secretary of Defense Pete Hegseth\u2019s removal of 21 senior military officials reflects personal power consolidation rather than ideological realignment. The author argues these actions undermine institutional military independence \u2014 and with midterm elections approaching, the gap between the stated rationale and actual logic may prove a political liability.",
+    url: 'https://dcdossier.substack.com/p/why-are-hegseths-purges-different',
+    source: 'DC Dossier \u2014 Substack',
+    date: '2026-05-15T05:31:25.000Z',
+    tags: ['Congress', 'Midterms'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
     id: 'seed-dcd-21-generational-midterm',
     type: 'newsletter',
     title: '#21 — A Generational Mid-term?',
@@ -348,7 +414,7 @@ const SEED_POSTS = [
     source: 'All Things Policy — Takshashila Institution',
     date: '2026-04-29T00:00:00.000Z',
     tags: ['Congress', 'Foreign Policy', 'Iran'],
-    author: 'Abhishek Kadiyala & Brigadier Anil Raman',
+    author: 'Abhishek Kadiyala, Brigadier Anil Raman & Soren Dayton',
   },
   {
     id: 'seed-atp-4wmWyfx1HxWvqTo6P5jNYG',
@@ -393,8 +459,7 @@ const RSS_SOURCES = [
     source: 'DC Dossier — Substack',
     type: 'newsletter',
   },
-  // Takshashila Institution YouTube channel (@TakshashilaInst → UC5AVrL4ryKhR1Vi0HxdgP2Q)
-  { url: 'https://www.youtube.com/feeds/videos.xml?channel_id=UC5AVrL4ryKhR1Vi0HxdgP2Q', source: 'Takshashila Institution (YouTube)', type: 'podcast' },
+  // YouTube is handled separately via fetchYouTubePodcasts() with GROQ name extraction
   // Google News RSS — author and show searches
   { url: 'https://news.google.com/rss/search?q=%22Abhishek+Kadiyala%22+Congress&hl=en-US&gl=US&ceid=US%3Aen',                     source: 'Abhishek Kadiyala (Google News)', type: 'research' },
   { url: 'https://news.google.com/rss/search?q=%22Anil+Raman%22+Takshashila+Congress&hl=en-US&gl=US&ceid=US%3Aen',               source: 'Takshashila (Google News)',       type: 'research' },
@@ -403,41 +468,50 @@ const RSS_SOURCES = [
   { url: 'https://news.google.com/rss/search?q=%22DC+Dossier%22+%22Abhishek+Kadiyala%22&hl=en-US&gl=US&ceid=US%3Aen',           source: 'DC Dossier (Google News)',        type: 'newsletter'},
 ];
 
-// ── YOUTUBE CHANNEL HELPER ───────────────────────────────────────────────────
-// Fetches a YouTube @handle page, extracts the canonical channel_id, then
-// returns the RSS feed items filtered by keyword.
-async function fetchYouTubeChannel(handle) {
-  const channelUrl = `https://www.youtube.com/@${handle}/videos`;
+// ── YOUTUBE PODCAST FETCHER ──────────────────────────────────────────────────
+// Primary and sole source for All Things Policy podcast episodes.
+// Fetches the @TakshashilaInst YouTube channel RSS, filters by midterm/Congress
+// keywords, then uses GROQ to accurately extract host and guest names from each
+// video description. This is the authoritative pipeline for podcast attribution.
+async function fetchYouTubePodcasts(channelId) {
+  const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
   try {
-    const res = await fetch(channelUrl, {
+    const res = await fetch(rssUrl, {
       timeout: FETCH_TIMEOUT,
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
     });
     if (!res.ok) return [];
-    const html = await res.text();
+    const xml = await res.text();
+    const feed = xmlParser.parse(xml);
+    const entries = feed?.feed?.entry || [];
+    const items = Array.isArray(entries) ? entries : (entries ? [entries] : []);
 
-    // YouTube embeds the channel_id in several places; try each
-    const patterns = [
-      /"channelId":"(UC[A-Za-z0-9_-]{22})"/,
-      /\/channel\/(UC[A-Za-z0-9_-]{22})/,
-      /"externalId":"(UC[A-Za-z0-9_-]{22})"/,
-    ];
-    let channelId = null;
-    for (const pat of patterns) {
-      const m = html.match(pat);
-      if (m) { channelId = m[1]; break; }
+    const posts = [];
+    for (const raw of items) {
+      const { title, link, desc, date } = parseRssItem(raw);
+      if (!title || !link) continue;
+      if (!matchesKw(title, desc)) continue;
+
+      // Use GROQ to extract accurate host/guest names from the description
+      const names = await extractNamesWithGroq(title, desc);
+
+      const id = 'yt-' + Buffer.from(link).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
+      posts.push({
+        id,
+        type: 'podcast',
+        title,
+        description: desc,
+        url: link,
+        source: 'All Things Policy — Takshashila Institution (YouTube)',
+        date: date.toISOString(),
+        tags: extractTags(title + ' ' + desc),
+        author: names,
+      });
     }
-
-    if (!channelId) {
-      console.warn(`[fetch-analysis] Could not extract channel_id for @${handle}`);
-      return [];
-    }
-    console.log(`[fetch-analysis] @${handle} → channel_id: ${channelId}`);
-
-    const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-    return fetchRss(rssUrl, 'Takshashila Institution (YouTube)', 'podcast', false);
+    console.log(`[fetch-analysis] YouTube (Takshashila): ${posts.length} matching podcast(s)`);
+    return posts;
   } catch (e) {
-    console.warn(`[fetch-analysis] YouTube channel fetch failed for @${handle}:`, e.message);
+    console.warn('[fetch-analysis] YouTube podcast fetch failed:', e.message);
     return [];
   }
 }
@@ -477,9 +551,9 @@ async function main() {
     }
   }
 
-  // Fetch Takshashila YouTube channel
-  const ytPosts = await fetchYouTubeChannel('TakshashilaInst');
-  console.log(`[fetch-analysis] Takshashila YouTube: ${ytPosts.length} matching items`);
+  // Fetch Takshashila YouTube channel — primary podcast source with GROQ name extraction
+  const YT_CHANNEL_ID = 'UC5AVrL4ryKhR1Vi0HxdgP2Q'; // @TakshashilaInst
+  const ytPosts = await fetchYouTubePodcasts(YT_CHANNEL_ID);
   for (const post of ytPosts) {
     if (seenUrls.has(post.url)) continue;
     seenUrls.add(post.url);

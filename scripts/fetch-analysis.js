@@ -127,7 +127,9 @@ function parseRssItem(raw) {
   ).slice(0, 800);
   const pub = raw.pubDate || raw.published || raw['dc:date'] || raw.updated || '';
   const date = pub ? new Date(pub) : new Date();
-  return { title, link, desc, date: isNaN(date) ? new Date() : date };
+  // dc:creator is standard for Substack/WordPress RSS feeds
+  const creator = stripHtml(raw['dc:creator'] || raw.author?.name || raw.author || '');
+  return { title, link, desc, date: isNaN(date) ? new Date() : date, creator };
 }
 
 // ── GROQ: EXTRACT NAMES FROM PODCAST DESCRIPTION ────────────────────────────
@@ -167,7 +169,7 @@ async function extractNamesWithGroq(title, description) {
 }
 
 // ── FETCH RSS ───────────────────────────────────────────────────────────────
-async function fetchRss(url, source, type, forceInclude) {
+async function fetchRss(url, source, type, forceInclude, defaultAuthor) {
   try {
     const res = await fetch(url, {
       timeout: FETCH_TIMEOUT,
@@ -181,11 +183,13 @@ async function fetchRss(url, source, type, forceInclude) {
     if (!Array.isArray(items)) items = items ? [items] : [];
 
     return items.flatMap(raw => {
-      const { title, link, desc, date } = parseRssItem(raw);
+      const { title, link, desc, date, creator } = parseRssItem(raw);
       if (!title || !link) return [];
       if (!forceInclude && !matchesKw(title, desc)) return [];
       // Use full URL hash for unique id (avoid base64 prefix collisions)
       const id = 'rss-' + Buffer.from(link).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
+      // Use dc:creator from RSS if available, otherwise fall back to defaultAuthor
+      const author = creator || defaultAuthor || '';
       return [{
         id,
         type,
@@ -195,7 +199,7 @@ async function fetchRss(url, source, type, forceInclude) {
         source,
         date: date.toISOString(),
         tags: extractTags(title + ' ' + desc),
-        author: '',
+        author,
       }];
     });
   } catch (e) {
@@ -282,6 +286,95 @@ const SEED_POSTS = [
     tags: ['Congress', 'War Powers', 'Iran'],
     author: 'Abhishek Kadiyala',
   },
+  // ── Op-Eds (Takshashila researchers in external publications) ─────────────
+  {
+    id: 'seed-oped-toi-blockade-trump',
+    type: 'op-ed',
+    title: "Why The Blockade Is Trump's Best Card",
+    description: "Abhishek Kadiyala argues that a naval blockade of Iran is the Trump administration's strategically optimal move — it avoids triggering the 60-day War Powers Resolution clock while maintaining pressure, keeping congressional hawks satisfied and doves outmanoeuvred.",
+    url: 'https://timesofindia.indiatimes.com/toi-plus/international/why-the-blockade-is-trumps-best-card/articleshow/130446110.cms',
+    source: 'Times of India',
+    date: '2026-05-22T00:00:00.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
+    id: 'seed-oped-ndtv-35-lawmakers',
+    type: 'op-ed',
+    title: "35 US Lawmakers Just Moved A Bill That Could Upend Indian Techies' Careers",
+    description: "Brigadier Anil Raman examines a bipartisan congressional bill, co-sponsored by 35 House members, that would tighten H-1B visa rules and add domestic hiring requirements — legislation that directly affects Indian technology professionals and reflects the populist electoral pressures shaping Congress ahead of the 2026 midterms.",
+    url: 'https://www.ndtv.com/opinion/now-a-new-bill-by-35-american-lawmakers-could-upend-indian-students-careers-11435410',
+    source: 'NDTV',
+    date: '2026-05-01T00:00:00.000Z',
+    tags: ['Congress', 'Midterms'],
+    author: 'Brigadier Anil Raman',
+  },
+  {
+    id: 'seed-oped-ndtv-three-things-ceasefire',
+    type: 'op-ed',
+    title: 'Three Things May Happen At The End Of The 14-Day Ceasefire (Or Earlier)',
+    description: "Kadiyala maps three possible trajectories as the US-brokered Iran ceasefire nears its deadline: a negotiated settlement, a return to hostilities requiring fresh congressional authorisation, or an ambiguous freeze that leaves war powers questions unresolved.",
+    url: 'https://www.ndtv.com/opinion/us-israel-iran-war-3-things-could-happen-at-the-end-of-the-2-week-ceasefire-11338900',
+    source: 'NDTV',
+    date: '2026-04-10T00:00:00.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
+    id: 'seed-oped-toi-troops-iran',
+    type: 'op-ed',
+    title: 'If Trump Puts Troops In Iran',
+    description: "Kadiyala examines the constitutional and political consequences of deploying US ground forces to Iran, including how the War Powers Resolution would be triggered, what bipartisan opposition in Congress looks like, and why the 60-day clock becomes Trump's most immediate legislative constraint.",
+    url: 'https://www.timesofindia.indiatimes.com/toi-plus/international/if-trump-puts-troops-in-iran/articleshow/129734562.cms',
+    source: 'Times of India',
+    date: '2026-03-23T00:00:00.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
+    id: 'seed-oped-hindu-system-bends',
+    type: 'op-ed',
+    title: "The system bends, it rarely breaks, says U.S. Congressional expert Matthew Glassman",
+    description: "Brigadier Anil Raman interviews Matthew Glassman, a leading expert on US Congressional procedure, who argues that despite Trump-era stress tests, American democratic institutions — particularly Congressional checks on executive power — are resilient by design, though not invulnerable.",
+    url: 'https://www.thehindu.com/opinion/the-system-bends-it-rarely-breaks-says-us-congressional-expert-matthew-glassman/article70685780.ece',
+    source: 'The Hindu',
+    date: '2026-02-28T00:00:00.000Z',
+    tags: ['Congress', 'Trump'],
+    author: 'Brigadier Anil Raman',
+  },
+  {
+    id: 'seed-oped-ndtv-trump-iran-attacks',
+    type: 'op-ed',
+    title: 'There Are Two Big Problems Trump May Run Into If He Actually Attacks Iran',
+    description: "Kadiyala identifies two structural obstacles to Trump striking Iran: the War Powers Resolution's 60-day constraint and the fractured Republican coalition in Congress, where fiscal hawks and libertarian-leaning members resist open-ended military commitments without explicit authorisation.",
+    url: 'https://www.ndtv.com/opinion/two-big-problems-us-president-donald-trump-may-run-into-if-he-actually-attacks-iran-10957254',
+    source: 'NDTV',
+    date: '2026-02-06T00:00:00.000Z',
+    tags: ['Congress', 'War Powers', 'Iran'],
+    author: 'Abhishek Kadiyala',
+  },
+  {
+    id: 'seed-oped-firstpost-congress-pentagon',
+    type: 'op-ed',
+    title: 'How Congress, Pentagon contain POTUS overreach and how India should leverage it',
+    description: "Brigadier Anil Raman analyses the constitutional and institutional mechanisms — Congressional appropriations authority, the War Powers Resolution, and senior military leadership — that constrain presidential overreach, and argues India should deepen ties with both Congress and the Pentagon rather than treat the White House as the sole interlocutor.",
+    url: 'https://www.firstpost.com/opinion/india-adaptive-strategies-us-china-13965337.html',
+    source: 'Firstpost',
+    date: '2026-01-04T00:00:00.000Z',
+    tags: ['Congress', 'War Powers'],
+    author: 'Brigadier Anil Raman',
+  },
+  {
+    id: 'seed-oped-toi-house-lessons',
+    type: 'op-ed',
+    title: 'House lessons for Trump',
+    description: "Kadiyala draws on the institutional history of the House of Representatives to argue that Trump's legislative strategy underestimates the chamber's capacity for obstruction — and that the thin Republican majority and fractious Freedom Caucus will prove a recurring constraint on the administration's domestic agenda heading into 2026.",
+    url: 'https://timesofindia.indiatimes.com/toi-plus/international/house-lesson-for-trump/articleshow/124195886.cms',
+    source: 'Times of India',
+    date: '2025-09-29T00:00:00.000Z',
+    tags: ['Congress', 'House', 'Midterms'],
+    author: 'Abhishek Kadiyala',
+  },
   // ── DC Dossier newsletters ────────────────────────────────────────────────
   {
     id: 'seed-dcd-23-gerrymandering',
@@ -292,7 +385,7 @@ const SEED_POSTS = [
     source: 'DC Dossier \u2014 Substack',
     date: '2026-05-23T12:25:54.000Z',
     tags: ['Congress', 'Midterms', 'Redistricting'],
-    author: 'Abhishek Kadiyala',
+    author: 'Brigadier Anil Raman',
   },
   {
     id: 'seed-dcd-22-hegseths-purges',
@@ -454,10 +547,13 @@ const SEED_POSTS = [
 // ── RSS SOURCES ──────────────────────────────────────────────────────────────
 const RSS_SOURCES = [
   // DC Dossier Substack — filtered by Congress/midterm keywords
+  // defaultAuthor covers the typical case (Abhishek Kadiyala); guest posts will
+  // be caught via dc:creator in the RSS item once Substack includes it.
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
     type: 'newsletter',
+    defaultAuthor: 'Abhishek Kadiyala',
   },
   // YouTube is handled separately via fetchYouTubePodcasts() with GROQ name extraction
   // Google News RSS — author and show searches
@@ -523,6 +619,115 @@ const AUTHOR_PAGES = [
   { url: 'https://takshashila.org.in/pages/publications/',                  author: 'Abhishek Kadiyala',     source: 'Takshashila Institution' },
 ];
 
+// ── GROQ: CHECK CONGRESS/MIDTERM RELEVANCE ───────────────────────────────────
+// Returns true if the title/description clearly concern US Congress, midterms,
+// war powers, or congressional oversight — used to filter Takshashila op-eds.
+async function checkCongressRelevanceWithGroq(title, author) {
+  const apiKey = process.env.GROQ_API_KEY;
+  // Fast local check first — avoids GROQ call for obvious matches
+  if (matchesKw(title, '')) return true;
+  if (!apiKey) return false;
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      timeout: 10000,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [{
+          role: 'user',
+          content: `Does this op-ed focus on US Congress, US midterm elections, war powers, or congressional oversight of the executive? Answer only "yes" or "no".\n\nTitle: ${title}\nAuthor: ${author}`,
+        }],
+        max_tokens: 5,
+        temperature: 0,
+      }),
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return (data.choices?.[0]?.message?.content || '').trim().toLowerCase().startsWith('yes');
+  } catch (e) {
+    console.warn('[fetch-analysis] GROQ relevance check failed:', e.message);
+    return false;
+  }
+}
+
+// ── SCRAPE TAKSHASHILA OP-EDS ────────────────────────────────────────────────
+// Fetches https://takshashila.org.in/pages/news/, filters articles tagged
+// "United States", then uses GROQ to keep only those about Congress/midterms.
+// Runs after SEED_POSTS are loaded so duplicates are safely skipped.
+async function scrapeTakshashilaOpEds(existingSeedUrls) {
+  const pageUrl = 'https://takshashila.org.in/pages/news/';
+  try {
+    const res = await fetch(pageUrl, {
+      timeout: FETCH_TIMEOUT,
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
+    });
+    if (!res.ok) return [];
+    const html = await res.text();
+
+    const posts = [];
+    // Split on quarto-post div boundaries; index 0 is preamble, 1+ are post chunks
+    const chunks = html.split(/<div[^>]+class="[^"]*\bquarto-post\b[^"]*"/);
+
+    for (let i = 1; i < chunks.length; i++) {
+      const chunk = chunks[i];
+
+      // Filter by "United States" category (base64-encoded URL-encoded categories)
+      const catMatch = chunk.match(/data-categories="([^"]*)"/);
+      if (!catMatch) continue;
+      let categories = '';
+      try { categories = decodeURIComponent(Buffer.from(catMatch[1], 'base64').toString('utf8')); }
+      catch { continue; }
+      if (!categories.toLowerCase().includes('united states')) continue;
+
+      // Extract article URL from the listing-title link
+      const titleMatch = chunk.match(/listing-title[^>]*>[\s\S]*?<a\s[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/i);
+      if (!titleMatch) continue;
+      let rawUrl = titleMatch[1].trim();
+      // Fix Quarto's https://(www. URL artifact
+      rawUrl = rawUrl.replace(/^https?:\/\/\(/, 'https://');
+      const title = stripHtml(titleMatch[2]).trim();
+      if (!title || !rawUrl || existingSeedUrls.has(rawUrl)) continue;
+
+      // Extract metadata fields
+      const dateMatch  = chunk.match(/class="[^"]*listing-date[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+      const authorMatch = chunk.match(/class="[^"]*listing-authors[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+      const sourceMatch = chunk.match(/class="[^"]*listing-source[^"]*"[^>]*>([\s\S]*?)<\/div>/i);
+
+      const dateStr  = dateMatch  ? stripHtml(dateMatch[1]).trim()  : '';
+      const author   = authorMatch ? stripHtml(authorMatch[1]).trim() : '';
+      const srcLabel = sourceMatch ? stripHtml(sourceMatch[1]).trim() : '';
+
+      // GROQ relevance gate
+      const relevant = await checkCongressRelevanceWithGroq(title, author);
+      if (!relevant) continue;
+
+      const date = dateStr ? new Date(dateStr) : new Date();
+      const id = 'oped-' + Buffer.from(rawUrl).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
+      posts.push({
+        id,
+        type: 'op-ed',
+        title,
+        description: '',
+        url: rawUrl,
+        source: srcLabel || 'Takshashila Institution',
+        date: (isNaN(date) ? new Date() : date).toISOString(),
+        tags: extractTags(title),
+        author,
+      });
+    }
+
+    console.log(`[fetch-analysis] Takshashila op-eds: ${posts.length} Congress/midterms-relevant item(s)`);
+    return posts;
+  } catch (e) {
+    console.warn('[fetch-analysis] Takshashila op-ed scrape failed:', e.message);
+    return [];
+  }
+}
+
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
   // Load existing file for deduplication and metadata preservation
@@ -540,7 +745,7 @@ async function main() {
 
   // Fetch RSS sources
   for (const src of RSS_SOURCES) {
-    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false);
+    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '');
     console.log(`[fetch-analysis] ${src.source}: ${posts.length} matching items`);
     for (const post of posts) {
       if (seenUrls.has(post.url)) continue;
@@ -555,6 +760,14 @@ async function main() {
   const YT_CHANNEL_ID = 'UC5AVrL4ryKhR1Vi0HxdgP2Q'; // @TakshashilaInst
   const ytPosts = await fetchYouTubePodcasts(YT_CHANNEL_ID);
   for (const post of ytPosts) {
+    if (seenUrls.has(post.url)) continue;
+    seenUrls.add(post.url);
+    allPosts.push(post);
+  }
+
+  // Scrape Takshashila op-eds (United States tagged, GROQ-filtered for Congress relevance)
+  const opedPosts = await scrapeTakshashilaOpEds(seenUrls);
+  for (const post of opedPosts) {
     if (seenUrls.has(post.url)) continue;
     seenUrls.add(post.url);
     allPosts.push(post);
@@ -580,7 +793,7 @@ async function main() {
     meta: {
       last_updated: new Date().toISOString(),
       count: capped.length,
-      sources: ['DC Dossier (Substack)', 'All Things Policy (Takshashila)', 'Takshashila Author Pages', 'Takshashila Institution Publications'],
+      sources: ['DC Dossier (Substack)', 'All Things Policy (Takshashila)', 'Takshashila Institution Publications', 'Takshashila Op-Eds (NDTV, The Hindu, Times of India, Firstpost)'],
     },
     posts: capped,
   };

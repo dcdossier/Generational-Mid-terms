@@ -65,6 +65,9 @@ function isOffTopic(text) {
   // A hearing that is about bilateral/diplomatic topics but NOT about
   // congressional mechanics or accountability → off-topic
   if (isHearing && isBilateral && !isCongress) return true;
+  // Historical/survey pieces on "Congressional perspectives towards India" — India-US
+  // relations is the subject; Congress is the analytical lens, not an active actor
+  if (/congressional\s+perspectives?\s+(towards?|on)\s+india/i.test(t)) return true;
   return false;
 }
 
@@ -274,17 +277,6 @@ const SEED_POSTS = [
     source: 'All Things Policy — Takshashila Institution',
     date: '2026-03-15T00:00:00.000Z',
     tags: ['Congress', 'War Powers'],
-    author: 'Abhishek Kadiyala & Brigadier Anil Raman',
-  },
-  {
-    id: 'seed-yt-2HZsdyLKkvQ',
-    type: 'podcast',
-    title: 'All Things Policy | The Iran Brief: War and MAGA Fissures',
-    description: "Takshashila Institution's All Things Policy examines the fissures within the MAGA coalition in Congress over the Iran strikes, and what the split reveals about Congress's capacity — and willingness — to constrain the executive on war powers.",
-    url: 'https://www.youtube.com/watch?v=2HZsdyLKkvQ',
-    source: 'All Things Policy — Takshashila Institution (YouTube)',
-    date: '2026-03-23T19:00:02.000Z',
-    tags: ['Congress', 'War Powers', 'Iran'],
     author: 'Abhishek Kadiyala & Brigadier Anil Raman',
   },
 ];

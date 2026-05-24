@@ -152,6 +152,20 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .section-rule{border:none;border-top:1px solid var(--br);margin:28px 0 18px}
 
 
+/* ── CHAMBER OVERVIEW BANNER ── */
+.chamber-overview{display:flex;align-items:center;flex-wrap:wrap;gap:10px 20px;background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:14px 20px;margin-bottom:20px}
+.ch-label{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--t4);flex-shrink:0;width:100%}
+.ch-pills{display:flex;gap:7px;align-items:center;flex-shrink:0}
+.ch-r{background:#FBEAEA;color:#7a1c1c;font:700 12px var(--sans);padding:4px 13px;border-radius:20px}
+.ch-d{background:#EEF4FB;color:#1A3F8A;font:700 12px var(--sans);padding:4px 13px;border-radius:20px}
+.ch-divider{width:1px;height:24px;background:var(--br-md);flex-shrink:0}
+.ch-bg-block{display:flex;align-items:baseline;gap:5px}
+.ch-bg-n{font:700 22px var(--serif);color:#581845;line-height:1}
+.ch-bg-text{font:400 12px var(--sans);color:var(--t3)}
+.ch-src{font:400 11px var(--sans);color:var(--t4);margin-left:auto}
+.ch-src a{color:#581845;text-decoration:underline}
+@media(max-width:700px){.ch-src{margin-left:0}.ch-divider{display:none}}
+
 /* ── D3 CHOROPLETH MAPS ── */
 .d3-map-wrap{background:#f0f4f8;border:1px solid var(--br);border-radius:6px;overflow:hidden;margin-bottom:16px;position:relative}
 .d3-map-wrap svg{display:block;width:100%;height:auto}
@@ -189,8 +203,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 <div class="subtab-bar">
   <div class="subtab-inner">
     <div class="subtab-left">
-      <button class="subtab-btn active" onclick="goSub('senate',this)">Senate</button>
-      <button class="subtab-btn" onclick="goSub('house',this)">House</button>
+      <button class="subtab-btn active" onclick="goSub('house',this)">House</button>
+      <button class="subtab-btn" onclick="goSub('senate',this)">Senate</button>
       <button class="subtab-btn" onclick="goSub('governor',this)">Governor</button>
     </div>
     <span class="source-note" id="source-note">Loading&#8230;</span>
@@ -200,8 +214,22 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 <!-- ══════════════════════════════════════════════
      SENATE PANEL
 ══════════════════════════════════════════════ -->
-<div class="subpanel active" id="subpanel-senate">
+<div class="subpanel" id="subpanel-senate">
 <div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">&#127981; Senate &nbsp;&mdash;&nbsp; Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
+    <div class="ch-pills">
+      <span class="ch-r">R&nbsp;53</span>
+      <span class="ch-d">D+I&nbsp;47</span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n">11</span>
+      <span class="ch-bg-text">battleground seats of 33 up &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
 
   <div class="stat-strip" id="sen-stat-strip">
     <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (Class 2)</div></div>
@@ -310,8 +338,22 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 <!-- ══════════════════════════════════════════════
      HOUSE PANEL
 ══════════════════════════════════════════════ -->
-<div class="subpanel" id="subpanel-house">
+<div class="subpanel active" id="subpanel-house">
 <div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">&#127979; House of Representatives &nbsp;&mdash;&nbsp; Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
+    <div class="ch-pills">
+      <span class="ch-r">R&nbsp;217</span>
+      <span class="ch-d">D&nbsp;212</span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n">43</span>
+      <span class="ch-bg-text">battleground seats of 435 &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
 
   <div class="stat-strip" id="house-stat-strip">
     <div class="stat-box"><div class="stat-n">435</div><div class="stat-l">Total House seats</div></div>
@@ -413,6 +455,20 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 ══════════════════════════════════════════════ -->
 <div class="subpanel" id="subpanel-governor">
 <div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">&#127963; Governorships &nbsp;&mdash;&nbsp; Term: 4 or 2 years (state-dependent)</div>
+    <div class="ch-pills">
+      <span class="ch-r">R&nbsp;26</span>
+      <span class="ch-d">D&nbsp;24</span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n">7</span>
+      <span class="ch-bg-text">battleground races of 36 &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
 
   <div class="stat-strip" id="gov-stat-strip">
     <div class="stat-box"><div class="stat-n" id="gov-total">36</div><div class="stat-l">Governor races in 2026</div></div>

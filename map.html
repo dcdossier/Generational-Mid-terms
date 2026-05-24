@@ -419,6 +419,14 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). There are <strong>40 competitive districts</strong> across all ratings &#8212; 11 Lean R, 22 Toss-up, and 9 Lean D &#8212; most held by Republicans in districts that Biden or Harris carried. Historical first-midterm headwinds and high presidential disapproval typically accelerate Democratic gains.
   </div>
 
+  <!-- SEAT DISTRIBUTION CHART -->
+  <div class="chart-card">
+    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder.</div>
+    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
+    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
+  </div>
+
   <div class="chart-card">
     <div class="card-title">20 individually-tracked competitive districts</div>
     <div class="card-sub">Districts rated Lean R, Toss-up, or Lean D &#8212; all competitive categories, not just Toss-ups. PVP = Presidential Vote Performance (2024 presidential margin in the district).</div>
@@ -437,14 +445,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </tbody>
     </table>
     <div class="chart-note">Source: Cook Political Report, Inside Elections. PVP = 2024 presidential vote performance in district. Positive R = district voted more Republican than national average.</div>
-  </div>
-
-  <!-- SEAT DISTRIBUTION CHART -->
-  <div class="chart-card">
-    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder.</div>
-    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
-    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
   </div>
 
 </div>

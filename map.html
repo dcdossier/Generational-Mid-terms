@@ -196,6 +196,11 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   .gov-grid{grid-template-columns:1fr}
   .source-note{display:none}
 }
+/* ── INFO TOOLTIP ── */
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#d8d4cc;color:#555;font:700 9px var(--sans);cursor:pointer;vertical-align:middle;margin-left:4px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
+.info-btn:hover{background:#581845;color:#fff}
+.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 12px var(--sans);line-height:1.65;padding:11px 14px;border-radius:8px;max-width:310px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
+.info-tooltip.visible{display:block}
 </style>
 </head>
 <body>
@@ -227,12 +232,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="ch-divider"></div>
     <div class="ch-bg-block">
       <span class="ch-bg-n">9</span>
-      <span class="ch-bg-text">battleground seats of 35 up &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+      <span class="ch-bg-text">battleground seats of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
     </div>
   </div>
 
   <div class="stat-strip" id="sen-stat-strip">
-    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (Class 2 + 2 specials)</div></div>
+    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (33+2) <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div></div>
     <div class="stat-box"><div class="stat-n" style="color:#C04040" id="ss-r-held">&#8230;</div><div class="stat-l">Currently Republican&#8209;held seats at stake</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="ss-d-held">&#8230;</div><div class="stat-l">Currently Democrat&#8209;held seats at stake</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="ss-tossups">&#8230;</div><div class="stat-l">Toss&#8209;up seats &#8212; election outcome uncertain</div></div>
@@ -263,8 +268,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- STATE MAP -->
   <div class="section-hdr">
     <div>
-      <div class="section-title">Senate race map &#8212; all 33 Class 2 seats + 2 special elections, 2026</div>
-      <div class="section-sub">All 35 races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
+      <div class="section-title">Senate race map &#8212; all 33+2 seats, 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
+      <div class="section-sub">All 33+2 races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
     </div>
   </div>
 
@@ -304,7 +309,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <!-- FILTER ROW -->
   <div class="chart-card">
-    <div class="card-title">All 35 Senate races &#8212; 2026 (33 Class 2 + 2 specials)</div>
+    <div class="card-title">All 33+2 Senate races &#8212; 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
     <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
     <div class="filter-row">
       <span class="filter-label">Filter:</span>
@@ -1392,6 +1397,30 @@ function searchGovMap(q) {
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
 loadData();
+
+// ── INFO TOOLTIP HANDLER ─────────────────────────────────────────────────────
+(function(){
+  const tip = document.createElement('div');
+  tip.className = 'info-tooltip';
+  document.body.appendChild(tip);
+  let active = null;
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.info-btn');
+    if (btn) {
+      e.stopPropagation();
+      if (active === btn && tip.classList.contains('visible')) { tip.classList.remove('visible'); active = null; return; }
+      active = btn;
+      tip.textContent = btn.dataset.tip;
+      tip.classList.add('visible');
+      const r = btn.getBoundingClientRect();
+      const w = 310;
+      let left = Math.min(r.left, window.innerWidth - w - 10);
+      if (left < 10) left = 10;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.bottom + 7) + 'px';
+    } else { tip.classList.remove('visible'); active = null; }
+  });
+})();
 </script>
 </body>
 </html>

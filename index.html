@@ -345,6 +345,11 @@ body{background:#F5F5DC;color:#1E2232}
 .mt-dn{background:rgba(192,64,64,.15);color:#9B2020}
 .hsc-title{color:#581845}
 .metric-num{color:#1E2232}
+/* INFO ICON + TOOLTIP */
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#d8d4cc;color:#555;font:700 9px var(--sans);cursor:pointer;vertical-align:middle;margin-left:5px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
+.info-btn:hover{background:#581845;color:#fff}
+.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 12px var(--sans);line-height:1.65;padding:11px 14px;border-radius:8px;max-width:270px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
+.info-tooltip.visible{display:block}
 </style>
 </head>
 <body>
@@ -419,7 +424,7 @@ body{background:#F5F5DC;color:#1E2232}
       <!-- LIVE METRICS -->
       <div class="home-metrics">
         <div class="metric-card">
-          <div class="metric-label">Generic Ballot Margin</div>
+          <div class="metric-label">Generic Ballot Margin <button class="info-btn" data-tip="The generic ballot measures the overall party preference of voters rather than support for a specific candidate in their respective seat.">i</button></div>
           <div class="metric-num" id="hm-ballot" style="color:var(--gold)">&#8212;</div>
           <div class="metric-sub" id="hm-ballot-sub">D vs R polling average</div>
           <span class="metric-trend mt-nt" id="hm-ballot-trend"></span>
@@ -440,14 +445,14 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup</a></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">House Toss-ups</div>
+          <div class="metric-label">House Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div class="metric-num" id="hm-tossups" style="color:var(--gold)">&#8212;</div>
           <div class="metric-sub">Seats that decide control</div>
           <span class="metric-trend mt-nt">435 seats total</span>
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Cook Political</a></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Senate Toss-ups</div>
+          <div class="metric-label">Senate Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)">2</div>
           <div class="metric-sub">Seats in genuine contention</div>
           <span class="metric-trend mt-nt">33 seats up in 2026</span>
@@ -466,7 +471,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;217</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;212</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026</div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">43 <span style="font:400 13px var(--sans);color:#777">of 435</span></div>
           <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -479,7 +484,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;53</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D+I&nbsp;47</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026</div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">11 <span style="font:400 13px var(--sans);color:#777">of 33 up</span></div>
           <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -492,7 +497,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;26</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;24</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground races 2026</div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">7 <span style="font:400 13px var(--sans);color:#777">of 36 races</span></div>
           <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -1269,6 +1274,36 @@ function renderHomeNews() {
 
 loadHomeData();
 loadNYTGenericBallot();
+
+// ── INFO TOOLTIP ─────────────────────────────────────────────────────────────
+(function(){
+  const tip = document.createElement('div');
+  tip.className = 'info-tooltip';
+  tip.id = 'info-tooltip';
+  document.body.appendChild(tip);
+  let active = null;
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.info-btn');
+    if (btn) {
+      e.stopPropagation();
+      if (active === btn && tip.classList.contains('visible')) {
+        tip.classList.remove('visible'); active = null; return;
+      }
+      active = btn;
+      tip.textContent = btn.dataset.tip;
+      tip.classList.add('visible');
+      const r = btn.getBoundingClientRect();
+      const w = 270;
+      let left = Math.min(r.left, window.innerWidth - w - 10);
+      if (left < 10) left = 10;
+      tip.style.left = left + 'px';
+      tip.style.top  = (r.bottom + 7) + 'px';
+    } else {
+      tip.classList.remove('visible'); active = null;
+    }
+  });
+})();
 </script>
 
 </body>

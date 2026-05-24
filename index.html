@@ -365,7 +365,7 @@ body{background:#F5F5DC;color:#1E2232}
 </header>
 
 <nav class="nav-bar">
-  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Overview</button>
+  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
   <button class="nav-tab" onclick="switchTab('map',this)">Election Trends</button>
   <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
   <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
@@ -388,8 +388,9 @@ body{background:#F5F5DC;color:#1E2232}
 
     <!-- HOME SUB-NAV -->
     <nav class="home-subnav">
-      <button class="home-sub-tab active" data-subtab="overview" onclick="switchHomeTab('overview',this)">Key Indicators</button>
-      <button class="home-sub-tab" data-subtab="news" onclick="switchHomeTab('news',this)">Live News Feed</button>
+      <button class="home-sub-tab active" data-subtab="overview" onclick="switchHomeTab('overview',this)">Overview</button>
+      <button class="home-sub-tab" data-subtab="news" onclick="switchHomeTab('news',this)">Latest Updates</button>
+      <button class="home-sub-tab" data-subtab="data" onclick="switchHomeTab('data',this)">Data Indicators</button>
       <span class="home-subnav-upd" id="home-subnav-updated"></span>
     </nav>
 
@@ -410,8 +411,8 @@ body{background:#F5F5DC;color:#1E2232}
         <div class="home-hero-pills">
           <span class="home-pill">435 House seats</span>
           <span class="home-pill">33 Senate seats</span>
-          <span class="home-pill">17 Governor races</span>
-          <span class="home-pill">4.4M Indian-Americans</span>
+          <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">36 Governor races &#8599;</a></span>
+          <span class="home-pill"><a href="https://data.census.gov/table?q=DP05&amp;y=2024" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">5.09M Indian-Americans (2024) &#8599;</a></span>
         </div>
       </div>
 
@@ -452,96 +453,87 @@ body{background:#F5F5DC;color:#1E2232}
           <span class="metric-trend mt-nt">33 seats up in 2026</span>
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.cookpolitical.com/ratings/senate-race-ratings" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Cook Political</a></div>
         </div>
+      </div>
+
+      <!-- CHAMBER BREAKDOWN GRID -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
+
+        <!-- House -->
         <div class="metric-card">
-          <div class="metric-label">Members Not Returning</div>
-          <div class="metric-num" style="color:#9B2828;font-size:20px;line-height:1.3;padding-top:4px">1 in 8 members<br>retiring from Congress</div>
-          <div class="metric-sub" style="margin-top:6px" id="hm-retire-count">68 departures &mdash; 2nd highest in history</div>
-          <span class="metric-trend mt-dn" style="margin-top:6px" id="hm-retire-pct">45% running for other offices</span>
-          <div class="metric-sub" style="margin-top:4px" id="hm-retire-split">R: 36 &nbsp;&middot;&nbsp; D: 22 &nbsp;&middot;&nbsp; House: 57 &nbsp;&middot;&nbsp; Senate: 11</div>
-          <div class="metric-sub" style="margin-top:6px">Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></div>
-        </div>
-      </div>
-
-      <!-- FORECASTER CONSENSUS -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Forecaster Consensus</h3>
-      <div id="home-forecast-bars" class="hfb-wrap">
-        <div class="hfb-card">
-          <div class="hfb-label">House Control Forecast</div>
-          <div class="hfb-bar-wrap">
-            <div class="hfb-bar-d" style="width:90%"></div>
-            <div class="hfb-bar-r" style="width:10%"></div>
+          <div class="metric-label" style="color:#1E3A8A;font-size:10px;letter-spacing:.08em">&#127979; House of Representatives</div>
+          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
+          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;217</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;212</span>
           </div>
-          <div class="hfb-leg"><span style="color:#4c8de0">&#9646; D 90%</span>&ensp;<span style="color:#E05555">&#9646; R 10%</span></div>
-          <div class="hfb-text">Democrats 9/10 chance of flipping the House</div>
-          <div class="hfb-note">Source: The Economist election model</div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026</div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">43 <span style="font:400 13px var(--sans);color:#777">of 435</span></div>
+          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
-        <div class="hfb-card">
-          <div class="hfb-label">Senate Control Forecast</div>
-          <div class="hfb-bar-wrap">
-            <div class="hfb-bar-r" style="width:55%"></div>
-            <div class="hfb-bar-d" style="width:45%"></div>
+
+        <!-- Senate -->
+        <div class="metric-card">
+          <div class="metric-label" style="color:#4C1D95;font-size:10px;letter-spacing:.08em">&#127981; Senate</div>
+          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
+          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;53</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D+I&nbsp;47</span>
           </div>
-          <div class="hfb-leg"><span style="color:#E05555">&#9646; R 55%</span>&ensp;<span style="color:#4c8de0">&#9646; D 45%</span></div>
-          <div class="hfb-text">Senate outcome extremely competitive &mdash; result uncertain</div>
-          <div class="hfb-note">Source: The Economist election model</div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026</div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">11 <span style="font:400 13px var(--sans);color:#777">of 33 up</span></div>
+          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
-        <div class="hfb-card" id="home-forecast-gov">
-          <div class="hfb-label">Governors</div>
-          <div class="forecast-rating fr-tossup" style="margin-bottom:8px">4 Toss-ups</div>
-          <div class="hfb-text">Proj. 25&ndash;28 R &middot; 22&ndash;25 D held</div>
-          <div class="hfb-note">ME, MI, NV, WI genuine toss-ups</div>
-        </div>
-      </div>
-      <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-bottom:24px">Forecasts are third-party models and do not represent Takshashila Institution analysis.</div>
 
-      <!-- TRUMP APPROVAL CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        <!-- Governor -->
+        <div class="metric-card">
+          <div class="metric-label" style="color:#134E4A;font-size:10px;letter-spacing:.08em">&#127963; Governorships</div>
+          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
+          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;26</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;24</span>
+          </div>
+          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground races 2026</div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">7 <span style="font:400 13px var(--sans);color:#777">of 36 races</span></div>
+          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
-        <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
+
       </div>
 
-      <!-- CONGRESS APPROVAL CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval has fallen to <strong style="color:#9B2828">16%</strong> as of May 2026 &mdash; matching a near-record low. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup Congress &amp; Public Approval</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
-        </div>
-        <div class="chart-wrap-sm"><canvas id="c-home-congress-approval"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
-      </div>
+      <!-- TELL ME WHY ACCORDION -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
+      <div style="margin-bottom:28px;display:flex;flex-direction:column;gap:8px">
 
-      <!-- RETIREMENTS CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px">
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#378ADD"></span>House</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#E24B4A"></span>2026</span>
-          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
-        </div>
-        <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
-      </div>
+        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            US Political Process <span style="font-size:16px;color:#581845">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+            <p>The United States has a three branched, bicameral, federal system of governance. This means that at the National level, there is the Federal government consisting of the Presidency, with a 4-year term, acting as the executive branch. Then there is the Judicial branch consisting of the Supreme Court with indefinite terms. There is the bicameral legislature consisting of the House of Representatives with 435 members with 2-year terms and the Senate with 100 members of 6 year terms. While the House of Representatives represents districts within each state, the Senate elects 2 members representing the whole state.</p>
+            <p style="margin-top:12px">The federal form of government in the US means that the States have a strong set of rights and responsibilities in the United States governing process that can also override the authority of the Federal government at times. This is what makes Governorships and State legislature election results an important development in the US political canvas.</p>
+            <p style="margin-top:12px">This federal spirit is also visible in elections which is run in a decentralised way, with no single national body in charge. Each state sets its own election laws through its legislature, and a statewide official (usually the Secretary of State) oversees the process. The hands-on work, like setting up polling booths, printing ballots, and counting votes, is handled by county and local election officials across roughly 10,000 jurisdictions nationwide consisting of officials, and volunteers. District maps are drawn by state legislatures (or independent commissions in some states) based on Census data, and winners are certified first by local officials, then by the state, and in presidential races, finally by the governor. At the federal level, two bodies play limited but distinct roles. The Election Assistance Commission sets voluntary standards for running elections and distributes funding to states. The Federal Election Commission enforces campaign finance laws, regulating how money is raised and spent by candidates and political parties. Midterm elections, held two years into a presidential term, follow the exact same process, just without a presidential race on the ballot.</p>
+          </div>
+        </details>
 
-      <!-- INFLATION CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px;margin-top:24px">Consumer Price Index &mdash; Inflation Trend</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; Apr 2026. After falling to 2.3% in Apr 2025, inflation has risen sharply to <strong style="color:#9B2828">3.8%</strong> by Apr 2026, driven by renewed tariff pressures. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:24px">
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
-          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
-        </div>
-        <div class="chart-wrap"><canvas id="c-home-cpi"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
+        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Why do the mid-terms matter? <span style="font-size:16px;color:#581845">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+            <p>Since the election of Donald Trump in 2024 for his second term, American citizens have been experiencing extreme changes in their day to day lives. Issues of inflation, immigration, foreign wars, tariffs, healthcare, state rights, and widening socio-economic divisions have emerged as a key issue as a result of these changes. The outcome of these elections would decide the direction the US will take on these issues in the coming years and the remaining period of President Trump&rsquo;s tenure. This direction would impact not only the US but also countries around the world, including India.</p>
+            <p style="margin-top:12px">The US is among India&rsquo;s most important strategic, technological and economic partners in the 21st Century. Any changes in their foreign policy would gravely impact India as seen in the case of tariffs, Iran war, and US engagement with Pakistan and China. Similarly, the issue of immigration is also an important issue for the future of Indian Americans and Indian immigration to the US. Issues of healthcare, state rights and political polarisation among others are also issues that might not directly impact India, but have the potential to create lasting political changes in the US that in turn could redefine India-US ties.</p>
+          </div>
+        </details>
+
+        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Why is 2026 significant? <span style="font-size:16px;color:#581845">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+            <p>The lead-up to the 2026 mid-terms has been a tumultuous path for US citizens. It began with the liberation day tariffs that disrupted vital supply chain networks of small scale businesses and led to inflation across sectors. This was followed by the DOGE cuts that led to removal of 300,000 federal employees across 27 departments. DOGE also led to the closure of several government programs that impacted the daily lives of US citizens. Following this came the Epstein files scandal that worsened an already declining public trust in the government and institutions. This also came in the period that saw two continuous government shutdowns in late 2025 and early 2026 that were the longest shutdowns in recorded history. This was in the context of the Trump administration&rsquo;s massive cuts to the government healthcare programs. Following this came the issues of immigration and ICE raids that further weakened public trust in federal use of force, and led to massive popular backlash and demonstrations against the agency. The last major development came with the US military interventions in Venezuela and Iran that worsened the overall inflation rates amidst spikes in energy prices.</p>
+            <p style="margin-top:12px">Each of these developments has weakened the President politically, but his current hold over the 119th Congress ensures that his actions do not face any legislative guardrails and that his official appointments are processed comfortably. However, the results of this mid-term could severely impact his political standing. In case of a defeat his best case scenario would be the one where he would emerge as the &ldquo;lame-duck&rdquo; president who will not be able to bring major policy changes for the rest of his term. His worst case would be getting impeached and potentially investigated for allegations of corruption. Thereby, 2026 could prove to be a critical year for President Trump&rsquo;s political survival.</p>
+          </div>
+        </details>
+
       </div>
 
       <!-- SECTION CARDS -->
@@ -625,6 +617,63 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
     </div><!-- /home-subpanel-news -->
 
+    <!-- DATA INDICATORS SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-data">
+    <div class="home-body">
+
+      <!-- TRUMP APPROVAL CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
+      </div>
+
+      <!-- CONGRESS APPROVAL CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval has fallen to <strong style="color:#9B2828">16%</strong> as of May 2026 &mdash; matching a near-record low. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup Congress &amp; Public Approval</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div class="chart-wrap-sm"><canvas id="c-home-congress-approval"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
+      </div>
+
+      <!-- RETIREMENTS CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#378ADD"></span>House</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#E24B4A"></span>2026</span>
+          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
+        </div>
+        <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
+      </div>
+
+      <!-- INFLATION CHART -->
+      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Consumer Price Index &mdash; Inflation Trend</h3>
+      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; Apr 2026. After falling to 2.3% in Apr 2025, inflation has risen sharply to <strong style="color:#9B2828">3.8%</strong> by Apr 2026, driven by renewed tariff pressures. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
+          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
+        </div>
+        <div class="chart-wrap"><canvas id="c-home-cpi"></canvas></div>
+        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
+      </div>
+
+    </div><!-- /home-body data -->
+    </div><!-- /home-subpanel-data -->
+
   </div>
   <!-- /HOME PANEL -->
 
@@ -642,6 +691,7 @@ body{background:#F5F5DC;color:#1E2232}
 <script>
 'use strict';
 const ELECTION_DATE = new Date('2026-11-03T00:00:00');
+window._dataCharts = [];
 
 // ── COUNTDOWN ──────────────────────────────────────────────────────────────────
 function updateCountdown() {
@@ -847,7 +897,7 @@ async function loadHomeData() {
       const disTxt = document.getElementById('home-trump-disapprove-txt');
       if (apTxt && trump.approve) apTxt.textContent = trump.approve + '%';
       if (disTxt && trump.disapprove) disTxt.textContent = trump.disapprove + '%';
-      new Chart(trumpCvs, {
+      window._dataCharts.push(new Chart(trumpCvs, {
         type: 'line',
         data: { labels: tLabels, datasets: [
           { label: 'Approve', data: tApprove, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
@@ -866,7 +916,7 @@ async function loadHomeData() {
           }
         },
         plugins: [{ id: 'gap50', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
-      });
+      }));
     }
   } catch(e) { console.error('Trump chart error:', e); }
 
@@ -878,7 +928,7 @@ async function loadHomeData() {
       const caMonths      = caHistory.map(row => row.month);
       const caApproval    = caHistory.map(row => row.approve);
       const caDisapproval = caHistory.map(row => row.disapprove);
-      new Chart(caCvs, {
+      window._dataCharts.push(new Chart(caCvs, {
         type: 'line',
         data: { labels: caMonths, datasets: [
           { label: 'Approve',    data: caApproval,    borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
@@ -897,7 +947,7 @@ async function loadHomeData() {
           }
         },
         plugins: [{ id: 'caRef', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
-      });
+      }));
     }
   } catch(e) { console.error('Congress approval chart error:', e); }
 
@@ -910,7 +960,7 @@ async function loadHomeData() {
       const cpiAll       = cpiData.map(row => row.all_items);
       const cpiEstimated = cpiData.map(row => row.estimated || false);
       const octIdx       = cpiMonths.indexOf('Oct 2025');
-      new Chart(cpiCvs, {
+      window._dataCharts.push(new Chart(cpiCvs, {
         type: 'line',
         data: { labels: cpiMonths, datasets: [{
           label: 'All Items CPI (YoY %)',
@@ -964,7 +1014,7 @@ async function loadHomeData() {
               } catch(e) { /* skip decorative */ }
           }}
         ]
-      });
+      }));
     }
   } catch(e) { console.error('CPI chart error:', e); }
 
@@ -980,7 +1030,7 @@ async function loadHomeData() {
       const hS   = hcData.map(d => d.senate);
       const hT   = hcData.map(d => d.house + d.senate);
       const hAvg = 40;
-      new Chart(cvs, {
+      window._dataCharts.push(new Chart(cvs, {
         type: 'bar',
         data: { labels: hYrs, datasets: [
           { label: 'House',  data: hH, backgroundColor: hYrs.map(y => y === '2026' ? '#E24B4A' : '#378ADD'), stack: 's', borderSkipped: false, borderRadius: { topLeft: 1, topRight: 1 } },
@@ -1015,7 +1065,7 @@ async function loadHomeData() {
             } catch(e) { /* skip decorative labels */ }
           }}
         ]
-      });
+      }));
     }
   } catch(e) { console.error('Retirements chart error:', e); }
 
@@ -1134,6 +1184,10 @@ async function loadNYTGenericBallot() {
 function switchHomeTab(name, btn) {
   document.querySelectorAll('.home-sub-tab').forEach(b => b.classList.toggle('active', b.dataset.subtab === name));
   document.querySelectorAll('.home-subpanel').forEach(p => p.classList.toggle('active', p.id === 'home-subpanel-' + name));
+  // Resize data charts after the panel becomes visible so Chart.js can recalculate dimensions
+  if (name === 'data' && window._dataCharts && window._dataCharts.length) {
+    requestAnimationFrame(() => window._dataCharts.forEach(c => { try { c && c.resize(); } catch(e) {} }));
+  }
 }
 
 // ── LIVE NEWS FEED ──────────────────────────────────────────────────────────

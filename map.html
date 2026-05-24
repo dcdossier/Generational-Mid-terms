@@ -338,7 +338,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- SEAT DISTRIBUTION CHART -->
   <div class="chart-card">
     <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) are highlighted on the map below.</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder.</div>
     <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
     <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
   </div>
@@ -346,8 +346,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- HOUSE DISTRICT MAP -->
   <div class="section-hdr" style="margin-bottom:10px">
     <div>
-      <div class="section-title">House district map &#8212; all competitive districts 2026</div>
-      <div class="section-sub">All 20 competitive districts shown: Lean R, Toss-up, and Lean D &#8212; coloured by rating. Grey districts are Safe R or Safe D seats not individually rated. Click any highlighted district for detail.</div>
+      <div class="section-title">House district map &#8212; all 435 districts, 2026</div>
+      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 20 individually-tracked competitive districts. Click any competitive district for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -542,6 +542,46 @@ const RC = {
   'Lean D':   { bg: '#8CB4E0', tx: '#001a3d', border: '#5890c8', short: 'D+',  order: 4 },
   'Likely D': { bg: '#378ADD', tx: '#fff',    border: '#1a5aaa', short: 'LD',  order: 5 },
   'Safe D':   { bg: '#1A3F8A', tx: '#fff',    border: '#0d2460', short: 'SD',  order: 6 },
+};
+
+// ── DEMOCRAT-HELD HOUSE DISTRICTS (119th Congress) ───────────────────────────
+// Keys = full state name (matches GeoJSON), values = array of D-held district numbers
+// At-large states use district 0. Competitive districts are overridden by _houseRaceByKey.
+const D_DISTRICTS = {
+  'Delaware': [0], 'Vermont': [0],
+  'Connecticut': [1,2,3,4,5],
+  'Hawaii': [1,2],
+  'Massachusetts': [1,2,3,4,5,6,7,8,9],
+  'Rhode Island': [1,2],
+  'Alabama': [2,7],
+  'Arizona': [3,4,7],
+  'California': [2,4,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,24,25,26,28,29,30,31,32,33,34,35,36,37,38,39,42,43,44,46,47,49,50,51,52],
+  'Colorado': [1,2,6,7,8],
+  'Florida': [9,10,14,20,22,23,25],
+  'Georgia': [4,5,13],
+  'Illinois': [1,2,3,4,5,6,7,8,9,10,11,13,14,17],
+  'Indiana': [1,7],
+  'Louisiana': [2,6],
+  'Maine': [1,2],
+  'Maryland': [2,3,4,5,6,7,8],
+  'Michigan': [3,6,8,11,12,13],
+  'Minnesota': [2,3,4,5],
+  'Missouri': [1,5],
+  'Nevada': [1,3,4],
+  'New Hampshire': [1,2],
+  'New Jersey': [1,3,5,6,8,9,10,11,12],
+  'New Mexico': [1,2,3],
+  'New York': [3,5,6,7,8,9,10,12,13,14,15,16,18,19,20,25,26],
+  'North Carolina': [1,4,12],
+  'Ohio': [3,9,11,13],
+  'Oregon': [1,3,4,6],
+  'Pennsylvania': [2,3,4,5,6,7,8,12,17],
+  'South Carolina': [6],
+  'Tennessee': [9],
+  'Texas': [7,9,16,18,20,28,29,30,32,33,34,35,37],
+  'Virginia': [3,4,7,8,10,11],
+  'Washington': [1,2,3,6,7,8,9,10],
+  'Wisconsin': [2,4],
 };
 
 // ── STATE ABBREVIATION → FULL NAME ───────────────────────────────────────────
@@ -985,7 +1025,9 @@ function buildHouseDistrictMap(competitive) {
       .style('fill', d => {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
-        return r ? (RC[r.rating] || {bg:'#D0D0CE'}).bg : '#D0D0CE';
+        if (r) return (RC[r.rating] || {bg:'#D0D0CE'}).bg;
+        const dDists = D_DISTRICTS[d.properties.state] || [];
+        return dDists.includes(d.properties.district) ? '#1A3F8A' : '#7a1c1c';
       })
       .style('stroke', '#fff')
       .style('stroke-width', '0.3px')
@@ -993,7 +1035,12 @@ function buildHouseDistrictMap(competitive) {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
         if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span><br>PVP: ${r.pvp}`);
-        else   showTip(event, `<strong>${d.properties.state} ${d.properties.district > 0 ? d.properties.district : 'AL'}</strong><br><span style="opacity:.7">Safe or non-competitive seat (not individually rated)</span>`);
+        else {
+          const dDists = D_DISTRICTS[d.properties.state] || [];
+          const isD = dDists.includes(d.properties.district);
+          const distLabel = d.properties.district > 0 ? d.properties.district : 'AL';
+          showTip(event, `<strong>${d.properties.state}-${distLabel}</strong><br><span style="opacity:.7">${isD ? 'Safe D' : 'Safe R'} \u2014 not individually rated</span>`);
+        }
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {

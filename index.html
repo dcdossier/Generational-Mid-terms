@@ -350,6 +350,28 @@ body{background:#F5F5DC;color:#1E2232}
 .info-btn:hover{background:#581845;color:#fff}
 .info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 12px var(--sans);line-height:1.65;padding:11px 14px;border-radius:8px;max-width:270px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
 .info-tooltip.visible{display:block}
+
+/* ── HAMBURGER MENU ─────────────────────────────────────────── */
+.nav-burger{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:none;background:none;cursor:pointer;flex-shrink:0;border-radius:6px;transition:background .12s;padding:0;margin-right:4px}
+.nav-burger:hover{background:rgba(201,168,76,.12)}
+.nav-burger svg{display:block}
+.nd-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1200;opacity:0;pointer-events:none;transition:opacity .22s}
+.nd-overlay.open{opacity:1;pointer-events:all}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#1E2232;z-index:1201;transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;box-shadow:4px 0 24px rgba(0,0,0,.25)}
+.nav-drawer.open{transform:translateX(0)}
+.nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,.18);flex-shrink:0}
+.nd-header-title{font:700 13px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
+.nd-close{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#9a9a8a;border-radius:4px;transition:background .12s,color .12s;font-size:18px;line-height:1}
+.nd-close:hover{background:rgba(255,255,255,.08);color:#f5f0e8}
+.nd-scroll{flex:1;overflow-y:auto;padding:10px 0 20px}
+.nd-item{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;cursor:pointer;text-align:left;padding:11px 22px;font-family:var(--sans);transition:background .12s;position:relative}
+.nd-item.nd-main{font:600 13px var(--sans);color:#f5f0e8;border-left:3px solid transparent}
+.nd-item.nd-main:hover,.nd-item.nd-main.active{background:rgba(201,168,76,.1);border-left-color:var(--gold);color:var(--gold)}
+.nd-item.nd-sub{font:400 12px var(--sans);color:rgba(245,240,232,.65);padding-left:38px;border-left:3px solid transparent}
+.nd-item.nd-sub:hover{background:rgba(255,255,255,.04);color:#f5f0e8}
+.nd-divider{height:1px;background:rgba(201,168,76,.12);margin:8px 20px}
+.nd-tip-popup{position:fixed;background:#111827;color:#f5f0e8;font:400 12px var(--sans);line-height:1.6;padding:10px 14px;border-radius:8px;max-width:260px;z-index:1300;box-shadow:0 4px 20px rgba(0,0,0,.4);pointer-events:none;display:none}
+.nd-tip-popup.visible{display:block}
 </style>
 </head>
 <body>
@@ -370,12 +392,83 @@ body{background:#F5F5DC;color:#1E2232}
 </header>
 
 <nav class="nav-bar">
+  <button class="nav-burger" onclick="toggleNavDrawer()" aria-label="Open navigation menu">
+    <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="0" width="18" height="2" rx="1" fill="#c9a84c"/>
+      <rect y="6" width="18" height="2" rx="1" fill="#c9a84c"/>
+      <rect y="12" width="18" height="2" rx="1" fill="#c9a84c"/>
+    </svg>
+  </button>
   <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
   <button class="nav-tab" onclick="switchTab('map',this)">Election Trends</button>
   <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
   <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
   <button class="nav-tab" onclick="switchTab('about',this)">About Us</button>
 </nav>
+
+<!-- ── Navigation Drawer ── -->
+<div class="nd-overlay" id="nd-overlay" onclick="closeNavDrawer()"></div>
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nd-header">
+    <span class="nd-header-title">Navigate</span>
+    <button class="nd-close" onclick="closeNavDrawer()" aria-label="Close menu">&#215;</button>
+  </div>
+  <div class="nd-scroll">
+
+    <!-- Home -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'Through this section you will get an understanding of the importance of the mid-terms and foundational information on the current 2026 mid-term elections.')" onmouseleave="ndHideTip()" onclick="ndGo('home')">
+      &#8962; Home
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section explains the US electoral process in the context of 2026 mid-terms')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','overview')">
+      Overview
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Curated from a select list of local and national news outlets, this section tracks the latest developments in the lead up to the 2026 mid-term elections')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','news')">
+      Latest Developments
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section tells the data story of these elections with charts, graphs and math.')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','data')">
+      Data Indicators
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- Election Trends -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section tracks key battleground and toss-up races, maps the competitive landscape across House, Senate, and Governor contests, and aggregates approval ratings, the generic ballot, and forecasting models.')" onmouseleave="ndHideTip()" onclick="ndGo('map')">
+      Election Trends
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- India's Interest -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section explains what aspects of the 2026 mid-terms can impact India — from legislative priorities and trade policy to the role of the Indian diaspora and legislators shaping the US-India relationship.')" onmouseleave="ndHideTip()" onclick="ndGo('india')">
+      India's Interest
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Key issues of India\'s interest being debated in the US Congress and how their outcome can shape India-US relations.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','stakes')">
+      Policy &amp; Stakes
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Explains how Indian diaspora impacts US politics and the political profile of Indian-Americans in and around Congress.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','presence')">
+      Indian Diaspora
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This records the developments in ~40 races that we have identified as India-relevant — either because of an Indian-American candidate, or because of an incumbent\'s track record on India-relevant legislation.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','interest')">
+      India-Relevant Races
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- Analysis & Commentary -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section records our analytical writings, commentary and long-form explainers on the 2026 mid-term elections and related issues.')" onmouseleave="ndHideTip()" onclick="ndGo('analysis')">
+      Analysis &amp; Commentary
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- About Us -->
+    <button class="nd-item nd-main" onclick="ndGo('about')">
+      About Us
+    </button>
+
+  </div>
+</div>
+<div class="nd-tip-popup" id="nd-tip-popup"></div>
 
 
 <div class="ticker-wrap">
@@ -752,6 +845,58 @@ function switchTabByName(name) {
   const btn = document.querySelector(`.nav-tab[onclick*="'${name}'"]`);
   switchTab(name, btn);
 }
+
+// ── HAMBURGER DRAWER ────────────────────────────────────────────────────────
+function toggleNavDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const overlay = document.getElementById('nd-overlay');
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) { closeNavDrawer(); } else { drawer.classList.add('open'); overlay.classList.add('open'); }
+}
+function closeNavDrawer() {
+  document.getElementById('nav-drawer').classList.remove('open');
+  document.getElementById('nd-overlay').classList.remove('open');
+  ndHideTip();
+}
+function ndGo(tab) {
+  closeNavDrawer();
+  switchTabByName(tab);
+}
+function ndGoSub(tab, subtab) {
+  closeNavDrawer();
+  switchTabByName(tab);
+  if (tab === 'home') {
+    // Small delay to ensure panel is visible before switching sub-tab
+    setTimeout(() => {
+      const btn = document.querySelector(`.home-sub-tab[data-subtab="${subtab}"]`);
+      if (btn) switchHomeTab(subtab, btn);
+    }, 80);
+  } else if (tab === 'india') {
+    // Wait for iframe to load, then postMessage
+    const frame = document.getElementById('frame-india');
+    const sendMsg = () => frame.contentWindow.postMessage({type:'ndSwitchTab', tab: subtab}, '*');
+    if (frame.src && frame.src !== window.location.href) {
+      setTimeout(sendMsg, 300);
+    } else {
+      frame.addEventListener('load', () => setTimeout(sendMsg, 100), {once: true});
+    }
+  }
+}
+// Tooltip for drawer items
+const _ndTip = document.getElementById('nd-tip-popup');
+function ndShowTip(el, text) {
+  _ndTip.textContent = text;
+  _ndTip.classList.add('visible');
+  const r = el.getBoundingClientRect();
+  let left = r.right + 10;
+  if (left + 270 > window.innerWidth) left = r.left - 280;
+  if (left < 8) left = 8;
+  let top = r.top;
+  if (top + _ndTip.offsetHeight > window.innerHeight - 10) top = window.innerHeight - _ndTip.offsetHeight - 10;
+  _ndTip.style.left = left + 'px';
+  _ndTip.style.top = Math.max(8, top) + 'px';
+}
+function ndHideTip() { _ndTip.classList.remove('visible'); }
 
 // ── DATA FETCH ─────────────────────────────────────────────────────────────────
 function esc(s) {

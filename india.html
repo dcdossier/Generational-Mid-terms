@@ -1609,6 +1609,11 @@ function switchTab(name) {
   if (name === 'presence' && !influenceMapLoaded) { loadInfluenceMap(); }
 }
 
+// ── postMessage listener (for hamburger nav from parent) ────────────────────
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'ndSwitchTab') { switchTab(e.data.tab); }
+});
+
 function switchInner(name) {
   document.querySelectorAll('.inner-tab').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().replace(/\s+/g,'-') === name || (name==='house-map' && b.textContent.includes('House')) || (name==='senate-map' && b.textContent.includes('Senate'))));
   document.querySelectorAll('.inner-panel').forEach(p => p.classList.toggle('active', p.id === 'inner-' + name));

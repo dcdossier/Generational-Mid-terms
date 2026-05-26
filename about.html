@@ -285,5 +285,8 @@ body {
   </div><!-- /team-grid -->
 
 </div><!-- /page-wrap -->
+<script>
+document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
+</script>
 </body>
 </html>

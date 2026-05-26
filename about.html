@@ -142,16 +142,15 @@ body {
 
 /* ── TEAM CARDS ──────────────────────────────────────────── */
 .team-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 .team-card {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  padding: 28px 24px;
+  gap: 28px;
+  align-items: flex-start;
+  padding: 28px 30px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
@@ -162,15 +161,15 @@ body {
   box-shadow: 0 2px 12px rgba(201,168,76,.08);
 }
 .team-photo {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top center;
   flex-shrink: 0;
   border: 3px solid var(--gold-lt);
 }
-.team-body { flex: 1; min-width: 0; width: 100%; }
+.team-body { flex: 1; min-width: 0; }
 .team-name {
   font: 700 18px var(--serif);
   color: var(--navy);
@@ -207,11 +206,11 @@ body {
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 680px) {
+@media (max-width: 560px) {
   .page-wrap { padding: 24px 16px 60px; }
   .tracker-intro { padding: 24px 20px; }
-  .team-grid { grid-template-columns: 1fr; }
-  .team-photo { width: 90px; height: 90px; }
+  .team-card { flex-direction: column; gap: 16px; }
+  .team-photo { width: 80px; height: 80px; }
   .institution-block { flex-direction: column; gap: 14px; }
 }
 </style>
@@ -246,24 +245,6 @@ body {
 
   <div class="team-grid">
 
-    <!-- Abhishek Kadiyala -->
-    <div class="team-card">
-      <img class="team-photo" src="assets/Abhishek_Kadiyala.png" alt="Abhishek Kadiyala">
-      <div class="team-body">
-        <div class="team-name">Abhishek Kadiyala</div>
-        <div class="team-role">Research Analyst</div>
-        <div class="team-org">Geostrategy Programme, Takshashila Institution</div>
-        <p class="team-bio">Abhishek's research sits at the intersection of US domestic politics, the US–India strategic relationship, and the broader dynamics shaping the Indo-Pacific. He curates <em>DC Dossier</em>, a newsletter tracking US congressional legislation as it bears on India, and manages <em>The US Trade Tracker</em>, which maps tariff negotiations and trade policy developments. He is the author of <em>Expeditionary</em>, a historical non-fiction account of the Allied landings in Normandy. Prior to Takshashila, he held research positions at think tanks focused on international security and conflict studies, and worked with UNESCO's OE4BW programme.</p>
-        <p class="team-bio" style="margin-top:8px">He holds a Master's in Intelligence and International Security from King's College London — where he was awarded the Vice Chancellor's India Award — and a Bachelor's in Journalism, International Relations, and Public Policy from St. Joseph's College, Bengaluru.</p>
-        <div class="team-tags">
-          <span class="team-tag">US Congress</span>
-          <span class="team-tag">US Foreign Policy</span>
-          <span class="team-tag">US–India Relations</span>
-          <span class="team-tag">Indo-Pacific</span>
-        </div>
-      </div>
-    </div>
-
     <!-- Brigadier Anil Raman -->
     <div class="team-card">
       <img class="team-photo" src="https://takshashila.org.in/content/team/images/Anil_Raman.png" alt="Brigadier Anil Raman" onerror="this.style.background='#e2e5ea';this.removeAttribute('src')">
@@ -279,6 +260,24 @@ body {
           <span class="team-tag">Indo-Pacific</span>
           <span class="team-tag">Indian Diaspora</span>
           <span class="team-tag">Defence Strategy</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Abhishek Kadiyala -->
+    <div class="team-card">
+      <img class="team-photo" src="assets/Abhishek_Kadiyala.png" alt="Abhishek Kadiyala">
+      <div class="team-body">
+        <div class="team-name">Abhishek Kadiyala</div>
+        <div class="team-role">Research Analyst</div>
+        <div class="team-org">Geostrategy Programme, Takshashila Institution</div>
+        <p class="team-bio">Abhishek's research sits at the intersection of US domestic politics, the US–India strategic relationship, and the broader dynamics shaping the Indo-Pacific. He curates <em>DC Dossier</em>, a newsletter tracking US congressional legislation as it bears on India, and manages <em>The US Trade Tracker</em>, which maps tariff negotiations and trade policy developments. He is the author of <em>Expeditionary</em>, a historical non-fiction account of the Allied landings in Normandy. Prior to Takshashila, he held research positions at think tanks focused on international security and conflict studies, and worked with UNESCO's OE4BW programme.</p>
+        <p class="team-bio" style="margin-top:8px">He holds a Master's in Intelligence and International Security from King's College London — where he was awarded the Vice Chancellor's India Award — and a Bachelor's in Journalism, International Relations, and Public Policy from St. Joseph's College, Bengaluru.</p>
+        <div class="team-tags">
+          <span class="team-tag">US Congress</span>
+          <span class="team-tag">US Foreign Policy</span>
+          <span class="team-tag">US–India Relations</span>
+          <span class="team-tag">Indo-Pacific</span>
         </div>
       </div>
     </div>

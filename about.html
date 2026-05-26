@@ -142,15 +142,16 @@ body {
 
 /* ── TEAM CARDS ──────────────────────────────────────────── */
 .team-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
 }
 .team-card {
   display: flex;
-  gap: 28px;
-  align-items: flex-start;
-  padding: 28px 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 28px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
@@ -161,15 +162,15 @@ body {
   box-shadow: 0 2px 12px rgba(201,168,76,.08);
 }
 .team-photo {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top center;
   flex-shrink: 0;
   border: 3px solid var(--gold-lt);
 }
-.team-body { flex: 1; min-width: 0; }
+.team-body { flex: 1; min-width: 0; width: 100%; }
 .team-name {
   font: 700 18px var(--serif);
   color: var(--navy);
@@ -206,11 +207,11 @@ body {
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 560px) {
+@media (max-width: 680px) {
   .page-wrap { padding: 24px 16px 60px; }
   .tracker-intro { padding: 24px 20px; }
-  .team-card { flex-direction: column; gap: 16px; }
-  .team-photo { width: 80px; height: 80px; }
+  .team-grid { grid-template-columns: 1fr; }
+  .team-photo { width: 90px; height: 90px; }
   .institution-block { flex-direction: column; gap: 14px; }
 }
 </style>

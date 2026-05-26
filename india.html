@@ -2360,6 +2360,10 @@ function _norm(s) {
 function _esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+// Decode HTML entities from RSS titles (e.g. &#8216; → ', &amp; → &) then re-escape safely
+const _entityDecoderIndia = document.createElement('textarea');
+function _decodeTitle(s) { _entityDecoderIndia.innerHTML = String(s||''); return _entityDecoderIndia.value; }
+function _escTitle(s) { return _esc(_decodeTitle(s)); }
 
 // Keyword map for member name matching
 const _memberKeywords = MEMBERS.map(m => ({
@@ -2425,7 +2429,7 @@ function _renderMemberNews() {
   if (_mnSearchQuery) {
     items = items.filter(i =>
       i.member.toLowerCase().includes(_mnSearchQuery) ||
-      i.title.toLowerCase().includes(_mnSearchQuery)
+      _decodeTitle(i.title).toLowerCase().includes(_mnSearchQuery)
     );
   }
 
@@ -2441,7 +2445,7 @@ function _renderMemberNews() {
           <span class="mn-article-source">${_esc(item.source)}</span>
           <span class="mn-article-member" style="background:${color}">${_esc(item.member)}</span>
         </div>
-        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_esc(item.title)}</a>
+        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_escTitle(item.title)}</a>
         <div class="mn-article-date">${_esc(item.date)}</div>
       </div>`;
     }).join('');
@@ -2472,7 +2476,7 @@ async function _loadAndRenderSidepanelNews(memberName) {
   listEl.innerHTML = items.map(item => `
     <div class="sp-news-item">
       <div class="sp-news-source">${_esc(item.source)}</div>
-      <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="sp-news-title">${_esc(item.title)}</a>
+      <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="sp-news-title">${_escTitle(item.title)}</a>
       <div class="sp-news-date">${_esc(item.date)}</div>
     </div>
   `).join('');

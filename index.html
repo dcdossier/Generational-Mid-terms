@@ -1020,7 +1020,13 @@ async function loadHomeData() {
   if (data.meta && data.meta.last_updated) {
     const dt = new Date(data.meta.last_updated);
     const fl = document.getElementById('home-freshness-label');
-    if (fl) fl.textContent = 'Last updated ' + dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) + ' · ' + dt.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) + ' UTC';
+    if (fl) {
+      const estTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'America/New_York',hour12:true});
+      const estDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'America/New_York'});
+      const istTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata',hour12:true});
+      const istDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});
+      fl.textContent = `Last updated ${estDate} · ${estTime} EST / ${istTime} IST (${istDate})`;
+    }
   }
 
   // News — store full array, render with filters

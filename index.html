@@ -902,6 +902,13 @@ function ndHideTip() { _ndTip.classList.remove('visible'); }
 function esc(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+// Decode HTML entities from RSS titles (e.g. &#8216; → ', &amp; → &) then re-escape for safe HTML insertion
+const _entityDecoder = document.createElement('textarea');
+function decodeTitle(s) {
+  _entityDecoder.innerHTML = String(s || '');
+  return _entityDecoder.value;
+}
+function escTitle(s) { return esc(decodeTitle(s)); }
 
 function relAge(d) {
   const diff = Date.now() - new Date(d).getTime();
@@ -1250,11 +1257,11 @@ async function loadAnalysisTicker(newsItems) {
   if (!ti) return;
 
   const newsHtml = newsSlice.map(item =>
-    `<div class="ticker-item"><span class="ticker-dot"></span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px">${esc(item.title||'')}</a></div>`
+    `<div class="ticker-item"><span class="ticker-dot"></span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px">${escTitle(item.title)}</a></div>`
   ).join('');
 
   const analysisHtml = analysisSlice.map(item =>
-    `<div class="ticker-item"><span class="ticker-dot" style="background:var(--gold);opacity:1"></span><span class="ticker-analysis-tag">Analysis</span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px;margin-left:4px">${esc(item.title||'')}</a></div>`
+    `<div class="ticker-item"><span class="ticker-dot" style="background:var(--gold);opacity:1"></span><span class="ticker-analysis-tag">Analysis</span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px;margin-left:4px">${escTitle(item.title)}</a></div>`
   ).join('');
 
   const combined = newsHtml + analysisHtml;
@@ -1371,7 +1378,7 @@ function renderHomeNews() {
       if (!tags.includes(_homeNewsFilter)) return false;
     }
     if (q) {
-      const hay = ((item.title||'') + ' ' + (item.source||'') + ' ' + (item.description||'')).toLowerCase();
+      const hay = (decodeTitle(item.title) + ' ' + (item.source||'') + ' ' + decodeTitle(item.description)).toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
@@ -1403,7 +1410,7 @@ function renderHomeNews() {
         <span class="hn-news-source">${esc(item.source||'')}</span>
         ${dateStr ? `<span class="hn-news-date">${dateStr}</span>` : ''}
       </div>
-      <a class="hn-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${esc(item.title||'Untitled')}</a>
+      <a class="hn-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${escTitle(item.title||'Untitled')}</a>
       ${item.description ? `<p class="hn-news-desc">${esc(item.description)}</p>` : ''}
       ${tagsHtml ? `<div class="hn-news-tags">${tagsHtml}</div>` : ''}
     </div>`;

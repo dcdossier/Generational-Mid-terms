@@ -951,6 +951,7 @@ function goToTellMeWhy(idx) {
     }
     // Re-open the dropdown for the same question
     if (idx !== undefined) {
+      _whyActive = -1; // reset so toggleWhyTab opens instead of closes
       const btn = document.querySelectorAll('.why-tab')[idx];
       if (btn) toggleWhyTab(idx, btn);
     }

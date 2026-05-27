@@ -393,14 +393,15 @@ body{background:#F5F5DC;color:#1E2232}
 .page-shell{flex:1;display:flex;flex-direction:column;overflow:hidden;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
 .page-shell.drawer-open{margin-left:300px}
 /* WHY QUESTIONS BAR */
+.nav-area{position:relative;flex-shrink:0;z-index:400}
 .why-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 15px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
 .why-tab:hover{color:var(--beige);background:var(--navy-light)}
 .why-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
-.why-dropdown{background:#fff;border-bottom:1px solid #E8E8E0;flex-shrink:0;max-height:0;overflow:hidden;transition:max-height .28s ease}
-.why-dropdown.open{max-height:180px}
-.why-dropdown-inner{padding:14px 28px 16px;display:flex;align-items:flex-start;gap:24px}
-.why-summary{font:400 12px/1.7 var(--sans);color:#3a3a3a;flex:1;min-width:0}
-.why-read-more{font:600 11px var(--sans);color:#581845;background:none;border:none;cursor:pointer;white-space:nowrap;padding:0;flex-shrink:0;text-decoration:underline;margin-top:1px}
+.why-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #E8E8E0;border-top:none;border-radius:0 0 10px 10px;box-shadow:0 8px 24px rgba(0,0,0,.13);padding:0;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:399}
+.why-dropdown.open{opacity:1;transform:translateY(0);pointer-events:all}
+.why-dropdown-inner{padding:14px 28px 16px}
+.why-summary{font:400 12px/1.75 var(--sans);color:#3a3a3a}
+.why-read-more{font:600 11px var(--sans);color:#581845;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-left:4px;vertical-align:baseline}
 .why-read-more:hover{color:#8B1A4A}
 .nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,.18);flex-shrink:0}
 .nd-header-title{font:700 13px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
@@ -436,6 +437,7 @@ body{background:#F5F5DC;color:#1E2232}
   </div>
 </header>
 
+<div class="nav-area">
 <nav class="nav-bar">
   <button class="nav-burger" onclick="toggleNavDrawer()" aria-label="Open navigation menu">
     <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -456,13 +458,13 @@ body{background:#F5F5DC;color:#1E2232}
   <button class="why-tab" onclick="toggleWhyTab(2,this)">Why is 2026 significant? &#9660;</button>
 </nav>
 
-<!-- Why dropdown panel -->
+<!-- Why dropdown panel (floats over content) -->
 <div class="why-dropdown" id="why-dropdown">
   <div class="why-dropdown-inner">
     <p class="why-summary" id="why-summary"></p>
-    <button class="why-read-more" onclick="goToTellMeWhy()">Read More &#8594;</button>
   </div>
 </div>
+</div><!-- /nav-area -->
 
 <!-- ── Navigation Drawer ── -->
 <div class="nd-overlay" id="nd-overlay" onclick="closeNavDrawer()"></div>
@@ -923,7 +925,7 @@ function toggleWhyTab(idx, btn) {
     _whyActive = -1;
   } else {
     btn.classList.add('active');
-    summaryEl.textContent = WHY_DATA[idx].s;
+    summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy()">Read More &rarr;</button>';
     dropdown.classList.add('open');
     _whyActive = idx;
   }

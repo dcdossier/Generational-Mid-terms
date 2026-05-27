@@ -925,7 +925,7 @@ function toggleWhyTab(idx, btn) {
     _whyActive = -1;
   } else {
     btn.classList.add('active');
-    summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy()">Read More &rarr;</button>';
+    summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy(' + idx + ')">Read More &rarr;</button>';
     // Position dropdown under the clicked button
     const navArea = dropdown.parentElement;
     const btnRect = btn.getBoundingClientRect();
@@ -938,10 +938,7 @@ function toggleWhyTab(idx, btn) {
     _whyActive = idx;
   }
 }
-function goToTellMeWhy() {
-  document.getElementById('why-dropdown').classList.remove('open');
-  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
-  _whyActive = -1;
+function goToTellMeWhy(idx) {
   switchTabByName('home');
   const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
   if (subBtn) switchHomeTab('overview', subBtn);
@@ -951,6 +948,11 @@ function goToTellMeWhy() {
     if (el && panel) {
       const offset = el.getBoundingClientRect().top - panel.getBoundingClientRect().top;
       panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
+    }
+    // Re-open the dropdown for the same question
+    if (idx !== undefined) {
+      const btn = document.querySelectorAll('.why-tab')[idx];
+      if (btn) toggleWhyTab(idx, btn);
     }
   }, 150);
 }

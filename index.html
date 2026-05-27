@@ -994,6 +994,11 @@ function goToTellMeWhy(idx) {
           const d = document.getElementById('why-detail-' + i);
           if (d) d.open = (i === idx);
         }
+        // Re-scroll so the heading sits at the top after content expands
+        setTimeout(() => {
+          const d = document.getElementById('why-detail-' + idx);
+          if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
       });
     }, 250); // wait for scroll to settle
   }, 200);

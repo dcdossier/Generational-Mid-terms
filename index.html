@@ -392,6 +392,16 @@ body{background:#F5F5DC;color:#1E2232}
 .nav-drawer.open{transform:translateX(0)}
 .page-shell{flex:1;display:flex;flex-direction:column;overflow:hidden;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
 .page-shell.drawer-open{margin-left:300px}
+/* WHY QUESTIONS BAR */
+.why-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 15px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
+.why-tab:hover{color:var(--beige);background:var(--navy-light)}
+.why-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
+.why-dropdown{background:#fff;border-bottom:1px solid #E8E8E0;flex-shrink:0;max-height:0;overflow:hidden;transition:max-height .28s ease}
+.why-dropdown.open{max-height:180px}
+.why-dropdown-inner{padding:14px 28px 16px;display:flex;align-items:flex-start;gap:24px}
+.why-summary{font:400 12px/1.7 var(--sans);color:#3a3a3a;flex:1;min-width:0}
+.why-read-more{font:600 11px var(--sans);color:#581845;background:none;border:none;cursor:pointer;white-space:nowrap;padding:0;flex-shrink:0;text-decoration:underline;margin-top:1px}
+.why-read-more:hover{color:#8B1A4A}
 .nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,.18);flex-shrink:0}
 .nd-header-title{font:700 13px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
 .nd-close{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#9a9a8a;border-radius:4px;transition:background .12s,color .12s;font-size:18px;line-height:1}
@@ -434,12 +444,25 @@ body{background:#F5F5DC;color:#1E2232}
       <rect y="12" width="18" height="2" rx="1" fill="#c9a84c"/>
     </svg>
   </button>
-  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
-  <button class="nav-tab" onclick="switchTab('map',this)">Election Trends</button>
-  <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
-  <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
-  <button class="nav-tab" onclick="switchTab('about',this)">About Us</button>
+  <!-- Hidden nav tabs kept for JS tab-switching compatibility -->
+  <button class="nav-tab active" onclick="switchTab('home',this)" style="display:none">&#8962; Home</button>
+  <button class="nav-tab" onclick="switchTab('map',this)" style="display:none">Election Trends</button>
+  <button class="nav-tab" onclick="switchTab('india',this)" style="display:none">India's Interest</button>
+  <button class="nav-tab" onclick="switchTab('analysis',this)" style="display:none">Analysis &amp; Commentary</button>
+  <button class="nav-tab" onclick="switchTab('about',this)" style="display:none">About Us</button>
+  <!-- Why questions -->
+  <button class="why-tab" onclick="toggleWhyTab(0,this)">US Political Process &#9660;</button>
+  <button class="why-tab" onclick="toggleWhyTab(1,this)">Why do the mid-terms matter? &#9660;</button>
+  <button class="why-tab" onclick="toggleWhyTab(2,this)">Why is 2026 significant? &#9660;</button>
 </nav>
+
+<!-- Why dropdown panel -->
+<div class="why-dropdown" id="why-dropdown">
+  <div class="why-dropdown-inner">
+    <p class="why-summary" id="why-summary"></p>
+    <button class="why-read-more" onclick="goToTellMeWhy()">Read More &#8594;</button>
+  </div>
+</div>
 
 <!-- ── Navigation Drawer ── -->
 <div class="nd-overlay" id="nd-overlay" onclick="closeNavDrawer()"></div>
@@ -633,7 +656,7 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
 
       <!-- TELL ME WHY ACCORDION -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
+      <h3 id="tell-me-why" style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
       <div style="margin-bottom:28px;display:flex;flex-direction:column;gap:8px">
 
         <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
@@ -884,6 +907,44 @@ function switchTabByName(name) {
 }
 
 // ── HAMBURGER DRAWER ────────────────────────────────────────────────────────
+// ── WHY QUESTIONS BAR ────────────────────────────────────────────────────────
+const WHY_DATA = [
+  { s: 'The US has a bicameral federal system — a 435-member House (2-year terms), 100-member Senate (6-year terms), the Presidency, and the Supreme Court. Midterms are held every two years and run by ~10,000 decentralised local jurisdictions, without a presidential race on the ballot.' },
+  { s: 'Trump\'s second term has brought sweeping changes on tariffs, immigration, healthcare, and foreign wars — affecting the US and key partners like India. The midterm outcome will determine whether Congress can act as a meaningful legislative check on the executive for the rest of his term.' },
+  { s: 'The path to 2026 has been turbulent — Liberation Day tariffs, DOGE layoffs, record-long government shutdowns, and military interventions in Venezuela and Iran have all eroded Trump\'s approval. A Democratic win could leave him a lame-duck president; a worst-case outcome could trigger impeachment proceedings.' }
+];
+let _whyActive = -1;
+function toggleWhyTab(idx, btn) {
+  const dropdown = document.getElementById('why-dropdown');
+  const summaryEl = document.getElementById('why-summary');
+  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
+  if (_whyActive === idx) {
+    dropdown.classList.remove('open');
+    _whyActive = -1;
+  } else {
+    btn.classList.add('active');
+    summaryEl.textContent = WHY_DATA[idx].s;
+    dropdown.classList.add('open');
+    _whyActive = idx;
+  }
+}
+function goToTellMeWhy() {
+  document.getElementById('why-dropdown').classList.remove('open');
+  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
+  _whyActive = -1;
+  switchTabByName('home');
+  const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
+  if (subBtn) switchHomeTab('overview', subBtn);
+  setTimeout(() => {
+    const el = document.getElementById('tell-me-why');
+    const panel = document.getElementById('home-subpanel-overview');
+    if (el && panel) {
+      const offset = el.getBoundingClientRect().top - panel.getBoundingClientRect().top;
+      panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
+    }
+  }, 150);
+}
+
 function toggleNavDrawer() {
   const drawer = document.getElementById('nav-drawer');
   const isOpen = drawer.classList.contains('open');

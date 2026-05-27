@@ -966,11 +966,9 @@ function closeNavDrawer() {
   ndHideTip();
 }
 function ndGo(tab) {
-  closeNavDrawer();
   switchTabByName(tab);
 }
 function ndGoSub(tab, subtab) {
-  closeNavDrawer();
   switchTabByName(tab);
   if (tab === 'home') {
     // Small delay to ensure panel is visible before switching sub-tab

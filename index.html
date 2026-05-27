@@ -59,7 +59,7 @@ body{
   background:var(--navy);
   color:var(--beige);
   font-family:var(--sans);
-  font-size:14px;
+  font-size:16px;
   display:flex;
   flex-direction:column;
   -webkit-font-smoothing:antialiased;
@@ -78,14 +78,14 @@ body{
   position:relative;
   z-index:200;
 }
-.header-left{display:flex;align-items:center;gap:14px}
+.header-left{display:flex;align-items:center;gap:16px}
 .header-logo{height:52px;width:auto;object-fit:contain;vertical-align:middle;padding:0;margin:0}
 .header-title{font-family:var(--serif);font-size:17px;font-weight:700;color:#581845;letter-spacing:.01em;line-height:1.2}
-.header-sub{font-size:11px;color:var(--t-muted);letter-spacing:.04em;margin-top:2px}
+.header-sub{font-size:13px;color:var(--t-muted);letter-spacing:.04em;margin-top:2px}
 .header-right{text-align:right}
-.countdown-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:4px}
-.countdown-timer{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--gold-light);letter-spacing:.02em}
-.countdown-sub{font-size:10px;color:var(--t-muted);margin-top:2px}
+.countdown-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:4px}
+.countdown-timer{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--gold-light);letter-spacing:.02em}
+.countdown-sub{font-size:11px;color:var(--t-muted);margin-top:2px}
 
 /* NAV TABS */
 .nav-bar{
@@ -102,13 +102,13 @@ body{
 .nav-bar::-webkit-scrollbar{display:none}
 .nav-tab{
   font-family:var(--sans);
-  font-size:13px;
+  font-size:15px;
   font-weight:500;
   color:var(--t-muted);
   background:none;
   border:none;
   border-bottom:2px solid transparent;
-  padding:14px 24px;
+  padding:16px 24px;
   cursor:pointer;
   transition:color .12s,border-color .12s,background .12s;
   white-space:nowrap;
@@ -156,16 +156,16 @@ body{
   animation:spin .7s linear infinite;
 }
 @keyframes spin{to{transform:rotate(360deg)}}
-.loading-text{font-size:13px;color:var(--t-muted);font-family:var(--serif);font-style:italic}
+.loading-text{font-size:15px;color:var(--t-muted);font-family:var(--serif);font-style:italic}
 
 
 /* TICKER */
 .ticker-wrap{background:var(--navy-mid);border-bottom:1px solid var(--br);height:30px;overflow:hidden;display:flex;align-items:center;gap:0;flex-shrink:0}
-.ticker-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:0 14px;flex-shrink:0;border-right:1px solid var(--br);height:100%;display:flex;align-items:center;white-space:nowrap}
+.ticker-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:0 16px;flex-shrink:0;border-right:1px solid var(--br);height:100%;display:flex;align-items:center;white-space:nowrap}
 .ticker-scroll{flex:1;overflow:hidden;position:relative}
 .ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:ticker-move 60s linear infinite;will-change:transform}
 .ticker-inner:hover{animation-play-state:paused}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font:400 11px var(--sans);color:var(--t-muted)}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font:400 13px var(--sans);color:var(--t-muted)}
 .ticker-item a{color:var(--beige);text-decoration:none;transition:color .12s}
 .ticker-item a:hover{color:var(--gold)}
 .ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
@@ -177,35 +177,35 @@ body{
 .panel-home.active{display:flex}
 /* HOME SUB-NAV */
 .home-subnav{display:flex;align-items:center;border-bottom:1px solid var(--br);padding:0 20px;background:var(--navy-mid);flex-shrink:0}
-.home-sub-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:12px 16px;cursor:pointer;transition:color .12s,border-color .12s;white-space:nowrap}
+.home-sub-tab{font:500 14px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 16px;cursor:pointer;transition:color .12s,border-color .12s;white-space:nowrap}
 .home-sub-tab:hover{color:var(--beige)}
 .home-sub-tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:600}
-.home-subnav-upd{font:400 10px var(--sans);color:var(--t-muted);margin-left:auto}
+.home-subnav-upd{font:400 11px var(--sans);color:var(--t-muted);margin-left:auto}
 .home-subpanel{display:none;flex:1;overflow-y:auto}
 .home-subpanel.active{display:block}
 /* FULL NEWS PANEL (light theme) */
 .hn-panel-wrap{background:#f8f7f2;min-height:100%}
-.hn-full-toolbar{background:#f0ede6;border-bottom:1px solid #dedad0;padding:14px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:12px;position:sticky;top:0;z-index:5}
-.hn-full-search{font:400 13px var(--sans);color:#1a1a1a;background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 12px 7px 34px;width:240px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center;transition:border-color .12s}
+.hn-full-toolbar{background:#f0ede6;border-bottom:1px solid #dedad0;padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;position:sticky;top:0;z-index:5}
+.hn-full-search{font:400 15px var(--sans);color:#1a1a1a;background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 14px 7px 34px;width:240px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:11px center;transition:border-color .12s}
 .hn-full-search:focus{border-color:#8a6a00}
 .hn-full-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.hn-full-chip{font:500 12px var(--sans);padding:5px 12px;border-radius:20px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-full-chip{font:500 14px var(--sans);padding:5px 14px;border-radius:20px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;transition:all .12s;white-space:nowrap}
 .hn-full-chip:hover{border-color:#8a6a00;color:#222}
 .hn-full-chip.active{background:#1A2B45;color:#fff;border-color:#1A2B45}
-.hn-full-sort{margin-left:auto;font:400 12px var(--sans);color:#444;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 10px;cursor:pointer;outline:none}
+.hn-full-sort{margin-left:auto;font:400 14px var(--sans);color:#444;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 11px;cursor:pointer;outline:none}
 .hn-full-content{padding:20px 28px}
-.hn-results-bar{font:400 12px var(--sans);color:#6b6b6b;padding:4px 0 16px}
+.hn-results-bar{font:400 14px var(--sans);color:#6b6b6b;padding:4px 0 16px}
 .hn-news-list{display:flex;flex-direction:column;gap:0}
 .hn-news-item{padding:20px 0;border-bottom:1px solid #e0ddd6;display:flex;flex-direction:column;gap:8px}
 .hn-news-item:last-child{border-bottom:none}
 .hn-news-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.hn-news-source{font:700 11px var(--sans);color:#6b6b6b;text-transform:uppercase;letter-spacing:.06em}
-.hn-news-date{font:400 11px var(--sans);color:#9b9b9b;margin-left:auto}
+.hn-news-source{font:700 13px var(--sans);color:#6b6b6b;text-transform:uppercase;letter-spacing:.06em}
+.hn-news-date{font:400 13px var(--sans);color:#9b9b9b;margin-left:auto}
 .hn-news-title{font:600 16px Georgia,'Source Serif 4',serif;color:#1a1a1a;line-height:1.4;text-decoration:none}
 .hn-news-title:hover{color:#8a6a00}
-.hn-news-desc{font:400 13px var(--sans);color:#4a4a4a;line-height:1.6}
+.hn-news-desc{font:400 15px var(--sans);color:#4a4a4a;line-height:1.6}
 .hn-news-tags{display:flex;gap:6px;flex-wrap:wrap}
-.hn-tag{font:700 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.hn-tag{font:700 11px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
 .hn-tag-major{background:#FEE2E2;color:#991B1B}
 .hn-tag-senate{background:#DBEAFE;color:#1E3A8A}
 .hn-tag-house{background:#EDE9FE;color:#4C1D95}
@@ -218,98 +218,98 @@ body{
 .home-body{max-width:1040px;margin:0 auto;padding:36px 32px 60px}
 
 /* HOME HERO */
-.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#0d2244 100%);border:1px solid var(--br);border-radius:12px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden;display:flex;gap:36px;align-items:flex-start}
+.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#0d2244 100%);border:1px solid var(--br);border-radius:14px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden;display:flex;gap:36px;align-items:flex-start}
 .home-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.06);pointer-events:none}
 .home-hero::after{content:'';position:absolute;right:40px;bottom:-80px;width:180px;height:180px;border-radius:50%;background:rgba(201,168,76,.04);pointer-events:none}
 .home-hero-left{flex:1;min-width:0;position:relative;z-index:1}
 .home-hero-right{flex-shrink:0;width:210px;position:relative;z-index:1;border-left:1px solid rgba(201,168,76,.2);padding-left:28px}
-.home-eyebrow{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:10px}
-.home-h1{font:700 28px var(--serif);color:var(--beige);line-height:1.25;margin-bottom:10px}
-.home-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
+.home-eyebrow{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:11px}
+.home-h1{font:700 28px var(--serif);color:var(--beige);line-height:1.25;margin-bottom:11px}
+.home-desc{font:400 16px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
 /* Hero why-questions panel */
-.hero-why-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:12px}
+.hero-why-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px}
 .hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
 .hero-why-item:last-of-type{border-bottom:none}
-.hero-why-btn{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:rgba(245,240,232,.65);font:500 11px/1.5 var(--sans);padding:10px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;transition:color .12s}
+.hero-why-btn{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:rgba(245,240,232,.65);font:500 13px/1.5 var(--sans);padding:11px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;transition:color .12s}
 .hero-why-btn:hover,.hero-why-btn.open{color:var(--gold)}
-.hero-why-chevron{flex-shrink:0;font-size:9px;margin-top:2px;transition:transform .2s}
+.hero-why-chevron{flex-shrink:0;font-size:10px;margin-top:2px;transition:transform .2s}
 .hero-why-item.open .hero-why-chevron{transform:rotate(180deg)}
 .hero-why-body{max-height:0;overflow:hidden;transition:max-height .28s ease}
 .hero-why-item.open .hero-why-body{max-height:300px}
-.hero-why-text{font:400 11px/1.7 var(--sans);color:rgba(245,240,232,.55);padding:0 0 10px}
-.hero-why-rm{font:600 10px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0 0 10px;text-decoration:underline;display:block}
+.hero-why-text{font:400 13px/1.7 var(--sans);color:rgba(245,240,232,.55);padding:0 0 11px}
+.hero-why-rm{font:600 11px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0 0 11px;text-decoration:underline;display:block}
 @media(max-width:700px){.home-hero{flex-direction:column}.home-hero-right{width:100%;border-left:none;border-top:1px solid rgba(201,168,76,.2);padding-left:0;padding-top:20px;margin-top:4px}}
 .home-big-countdown{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
 .home-days{font:700 64px var(--serif);color:var(--gold);line-height:1;letter-spacing:-.02em}
 .home-days-label{font:400 16px var(--sans);color:var(--t-muted)}
-.home-election-date{font:500 12px var(--sans);color:var(--t-muted);letter-spacing:.04em}
+.home-election-date{font:500 14px var(--sans);color:var(--t-muted);letter-spacing:.04em}
 .home-hero-pills{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
-.home-pill{font:600 11px var(--sans);padding:4px 12px;border-radius:20px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
+.home-pill{font:600 13px var(--sans);padding:4px 14px;border-radius:20px;background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25)}
 
 /* LIVE METRICS */
-.home-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.home-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
 @media(max-width:760px){.home-metrics{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:480px){.home-metrics{grid-template-columns:1fr 1fr}}
-.metric-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
-.metric-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.metric-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:18px 20px}
+.metric-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
 .metric-num{font:700 32px var(--serif);line-height:1;letter-spacing:-.02em}
-.metric-sub{font:400 11px var(--sans);color:var(--t-muted);margin-top:4px;line-height:1.4}
-.metric-trend{font:600 11px var(--sans);display:inline-block;padding:1px 6px;border-radius:8px;margin-top:6px}
+.metric-sub{font:400 13px var(--sans);color:var(--t-muted);margin-top:4px;line-height:1.4}
+.metric-trend{font:600 13px var(--sans);display:inline-block;padding:1px 6px;border-radius:8px;margin-top:6px}
 .mt-up{background:rgba(58,140,92,.2);color:#5EBD8A}
 .mt-dn{background:rgba(192,64,64,.2);color:#E08080}
 .mt-nt{background:rgba(201,168,76,.15);color:var(--gold)}
 
 /* FORECAST STRIP */
-.home-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+.home-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
 @media(max-width:600px){.home-forecast{grid-template-columns:1fr}}
-.hfb-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:12px}
+.hfb-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
 @media(max-width:600px){.hfb-wrap{grid-template-columns:1fr}}
-.hfb-card{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:18px 20px}
-.hfb-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:10px}
-.hfb-bar-wrap{display:flex;height:10px;border-radius:5px;overflow:hidden;background:#E8E8E0;margin-bottom:8px}
+.hfb-card{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:18px 20px}
+.hfb-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:11px}
+.hfb-bar-wrap{display:flex;height:11px;border-radius:5px;overflow:hidden;background:#E8E8E0;margin-bottom:8px}
 .hfb-bar-d{background:#4c8de0;height:100%}
 .hfb-bar-r{background:#E05555;height:100%}
-.hfb-leg{font:500 11px var(--sans);margin-bottom:8px}
-.hfb-text{font:400 13px var(--sans);color:#1E2232;margin-bottom:4px;line-height:1.45}
-.hfb-note{font:400 11px var(--sans);color:#888;font-style:italic}
-.forecast-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:18px 20px}
-.forecast-chamber{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
-.forecast-rating{font:700 14px var(--sans);padding:4px 10px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.hfb-leg{font:500 13px var(--sans);margin-bottom:8px}
+.hfb-text{font:400 15px var(--sans);color:#1E2232;margin-bottom:4px;line-height:1.45}
+.hfb-note{font:400 13px var(--sans);color:#888;font-style:italic}
+.forecast-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:18px 20px}
+.forecast-chamber{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.forecast-rating{font:700 16px var(--sans);padding:4px 11px;border-radius:6px;display:inline-block;margin-bottom:8px}
 .fr-likely-r{background:rgba(192,64,64,.25);color:#FF9090}
 .fr-lean-r{background:rgba(224,128,112,.25);color:#FFBB99}
 .fr-tossup{background:rgba(201,168,76,.25);color:#FFD97D}
-.forecast-seats{font:400 12px var(--sans);color:rgba(240,232,214,.7);margin-bottom:4px}
-.forecast-sub{font:400 11px var(--sans);color:var(--t-muted);line-height:1.45}
+.forecast-seats{font:400 14px var(--sans);color:rgba(240,232,214,.7);margin-bottom:4px}
+.forecast-sub{font:400 13px var(--sans);color:var(--t-muted);line-height:1.45}
 
 /* LIVE NEWS FEED */
-.hn-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
-.hn-search{font:400 12px var(--sans);color:var(--beige);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:6px 10px 6px 30px;width:200px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='none' stroke='%239a9a8a' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:9px center}
+.hn-toolbar{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:14px}
+.hn-search{font:400 14px var(--sans);color:var(--beige);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:6px 11px 6px 30px;width:200px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='none' stroke='%239a9a8a' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center}
 .hn-search:focus{border-color:var(--gold)}
 .hn-chips{display:flex;flex-wrap:wrap;gap:5px}
-.hn-chip{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.05em;padding:4px 10px;border-radius:20px;border:1px solid var(--br);background:transparent;color:var(--t-muted);cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-chip{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;padding:4px 11px;border-radius:20px;border:1px solid var(--br);background:transparent;color:var(--t-muted);cursor:pointer;transition:all .12s;white-space:nowrap}
 .hn-chip:hover{border-color:var(--gold);color:var(--beige)}
 .hn-chip.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
-.hn-sort{font:400 11px var(--sans);color:var(--t-muted);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:5px 8px;cursor:pointer;outline:none;margin-left:auto}
+.hn-sort{font:400 13px var(--sans);color:var(--t-muted);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:5px 8px;cursor:pointer;outline:none;margin-left:auto}
 .home-news-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
-.home-news-item{border-bottom:1px solid var(--br);padding:14px 0;display:flex;align-items:flex-start;gap:14px}
+.home-news-item{border-bottom:1px solid var(--br);padding:16px 0;display:flex;align-items:flex-start;gap:16px}
 .home-news-item:last-child{border-bottom:none}
-.home-news-source{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.07em;color:var(--gold);width:100px;flex-shrink:0;padding-top:2px}
+.home-news-source{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.07em;color:var(--gold);width:100px;flex-shrink:0;padding-top:2px}
 .home-news-body{flex:1}
-.home-news-title{font:500 13px var(--sans);color:var(--beige);line-height:1.45;text-decoration:none;display:block;transition:color .12s}
+.home-news-title{font:500 15px var(--sans);color:var(--beige);line-height:1.45;text-decoration:none;display:block;transition:color .12s}
 .home-news-title:hover{color:var(--gold)}
-.home-news-age{font:400 10px var(--sans);color:var(--t-muted);margin-top:3px}
-.home-news-tag{display:inline-block;font:700 9px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.home-news-age{font:400 11px var(--sans);color:var(--t-muted);margin-top:3px}
+.home-news-tag{display:inline-block;font:700 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
 
 /* SECTION CARDS */
-.home-sections{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.home-sections{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
 @media(max-width:760px){.home-sections{grid-template-columns:1fr}}
-.home-section-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:10px;padding:20px 22px;cursor:pointer;transition:border-color .15s,background .15s;text-align:left;display:flex;flex-direction:column;gap:8px}
+.home-section-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:20px 22px;cursor:pointer;transition:border-color .15s,background .15s;text-align:left;display:flex;flex-direction:column;gap:8px}
 .home-section-card:hover{border-color:var(--gold);background:var(--navy-light)}
 .hsc-icon{font-size:22px;line-height:1}
-.hsc-title{font:700 15px var(--serif);color:var(--gold)}
-.hsc-desc{font:400 12px var(--sans);color:var(--t-muted);line-height:1.55}
+.hsc-title{font:700 16px var(--serif);color:var(--gold)}
+.hsc-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.55}
 .hsc-sub-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
-.hsc-tag{font:500 10px var(--sans);background:rgba(201,168,76,.1);color:var(--gold);padding:1px 7px;border-radius:8px;border:1px solid rgba(201,168,76,.2)}
+.hsc-tag{font:500 11px var(--sans);background:rgba(201,168,76,.1);color:var(--gold);padding:1px 7px;border-radius:8px;border:1px solid rgba(201,168,76,.2)}
 
 /* CHART WRAPPERS */
 .chart-wrap{position:relative;height:240px}
@@ -323,46 +323,46 @@ body{
 
 /* GLOBAL FOOTER */
 .site-footer{flex-shrink:0;background:#FFFFFF;border-top:1px solid #E8E8E0;z-index:180;position:relative}
-.site-footer-inner{display:flex;align-items:center;gap:14px;padding:7px 24px;flex-wrap:wrap}
-.site-footer-sources{font:400 10px var(--sans);color:#6B6B6B;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.site-footer-logos{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.home-freshness{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.08);border:1px solid #E8E8E0;border-radius:20px;padding:3px 10px;flex-shrink:0;font:400 10px var(--sans);color:#6B6B6B}
+.site-footer-inner{display:flex;align-items:center;gap:16px;padding:7px 24px;flex-wrap:wrap}
+.site-footer-sources{font:400 11px var(--sans);color:#6B6B6B;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-footer-logos{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.home-freshness{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.08);border:1px solid #E8E8E0;border-radius:20px;padding:3px 11px;flex-shrink:0;font:400 11px var(--sans);color:#6B6B6B}
 .freshness-dot{width:5px;height:5px;border-radius:50%;background:#5EBD8A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes why-flash{0%,100%{background:#FFFFFF}50%{background:#f5edda}}
-@media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 14px}}
+@media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 16px}}
 
 @media(max-width:600px){
-  .header{padding:0 12px;height:50px}
+  .header{padding:0 14px;height:50px}
   .header-logo{height:38px}
-  .header-title{font-size:13px}
+  .header-title{font-size:15px}
   .header-sub{display:none}
-  .countdown-label{font-size:9px}
-  .countdown-timer{font-size:13px}
+  .countdown-label{font-size:10px}
+  .countdown-timer{font-size:15px}
   .countdown-sub{display:none}
-  .nav-tab{padding:11px 12px;font-size:12px}
+  .nav-tab{padding:13px 14px;font-size:14px}
   .ticker-wrap{height:26px}
-  .ticker-label{font-size:8px;padding:0 10px}
-  .ticker-item{font-size:10px;padding:0 20px}
-  .home-body{padding:20px 14px 40px}
+  .ticker-label{font-size:8px;padding:0 11px}
+  .ticker-item{font-size:11px;padding:0 20px}
+  .home-body{padding:20px 16px 40px}
   .home-hero{padding:22px 20px;margin-bottom:20px}
   .home-h1{font-size:19px}
-  .home-desc{font-size:13px;margin-bottom:16px}
+  .home-desc{font-size:15px;margin-bottom:16px}
   .home-days{font-size:40px}
-  .home-days-label{font-size:13px}
-  .home-hero-pills{gap:6px;margin-top:14px}
-  .home-pill{font-size:10px;padding:3px 9px}
-  .home-metrics{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-  .metric-card{padding:14px 14px}
+  .home-days-label{font-size:15px}
+  .home-hero-pills{gap:6px;margin-top:16px}
+  .home-pill{font-size:11px;padding:3px 10px}
+  .home-metrics{grid-template-columns:1fr 1fr;gap:11px;margin-bottom:20px}
+  .metric-card{padding:16px 16px}
   .metric-num{font-size:24px}
   .home-forecast{margin-bottom:20px}
-  .hfb-card{padding:14px 14px}
+  .hfb-card{padding:16px 16px}
   .home-news-source{width:70px;font-size:8px}
-  .home-news-item{gap:10px;padding:12px 0}
-  .home-news-title{font-size:12px}
-  .home-sections{gap:10px;margin-bottom:20px}
+  .home-news-item{gap:11px;padding:14px 0}
+  .home-news-title{font-size:14px}
+  .home-sections{gap:11px;margin-bottom:20px}
   .home-section-card{padding:16px 16px}
-  .hsc-title{font-size:14px}
+  .hsc-title{font-size:16px}
 }
 
 /* ── Colour overrides ── */
@@ -394,13 +394,13 @@ body{background:#F5F5DC;color:#1E2232}
 .hsc-title{color:#581845}
 .metric-num{color:#1E2232}
 /* INFO ICON + TOOLTIP */
-.info-btn{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:#d8d4cc;color:#555;font:700 9px var(--sans);cursor:pointer;vertical-align:middle;margin-left:5px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans);cursor:pointer;vertical-align:middle;margin-left:5px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
 .info-btn:hover{background:#581845;color:#fff}
-.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 12px var(--sans);line-height:1.65;padding:11px 14px;border-radius:8px;max-width:270px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
+.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 14px var(--sans);line-height:1.65;padding:13px 16px;border-radius:8px;max-width:270px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
 .info-tooltip.visible{display:block}
 
 /* ── HAMBURGER MENU ─────────────────────────────────────────── */
-.nav-burger{display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;flex-shrink:0;border-radius:0;transition:background .12s;padding:14px 16px;border-bottom:2px solid transparent;margin-right:0}
+.nav-burger{display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;flex-shrink:0;border-radius:0;transition:background .12s;padding:16px 16px;border-bottom:2px solid transparent;margin-right:0}
 .nav-burger:hover{background:rgba(201,168,76,.12)}
 .nav-burger svg{display:block}
 .nd-overlay{display:none}
@@ -410,27 +410,27 @@ body{background:#F5F5DC;color:#1E2232}
 .page-shell.drawer-open{margin-left:300px}
 /* WHY QUESTIONS BAR */
 .nav-area{position:relative;flex-shrink:0;z-index:400}
-.why-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 15px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
+.why-tab{font:500 14px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:16px 16px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
 .why-tab:hover{color:var(--beige);background:var(--navy-light)}
 .why-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
 .why-dropdown{position:absolute;top:100%;left:0;width:320px;background:#fff;border:1px solid #E8E8E0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.14);opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:399}
 .why-dropdown.open{opacity:1;transform:translateY(0);pointer-events:all}
-.why-dropdown-inner{padding:16px 18px 14px}
-.why-summary{font:400 12px/1.75 var(--sans);color:#3a3a3a}
-.why-read-more{font:600 11px var(--sans);color:#581845;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-left:4px;vertical-align:baseline}
+.why-dropdown-inner{padding:16px 18px 16px}
+.why-summary{font:400 14px/1.75 var(--sans);color:#3a3a3a}
+.why-read-more{font:600 13px var(--sans);color:#581845;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-left:4px;vertical-align:baseline}
 .why-read-more:hover{color:#8B1A4A}
 .nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,.18);flex-shrink:0}
-.nd-header-title{font:700 13px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
+.nd-header-title{font:700 15px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
 .nd-close{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#9a9a8a;border-radius:4px;transition:background .12s,color .12s;font-size:18px;line-height:1}
 .nd-close:hover{background:rgba(255,255,255,.08);color:#f5f0e8}
-.nd-scroll{flex:1;overflow-y:auto;padding:10px 0 20px}
-.nd-item{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;cursor:pointer;text-align:left;padding:11px 22px;font-family:var(--sans);transition:background .12s;position:relative}
-.nd-item.nd-main{font:600 13px var(--sans);color:#f5f0e8;border-left:3px solid transparent}
+.nd-scroll{flex:1;overflow-y:auto;padding:11px 0 20px}
+.nd-item{display:flex;align-items:center;gap:11px;width:100%;border:none;background:none;cursor:pointer;text-align:left;padding:13px 22px;font-family:var(--sans);transition:background .12s;position:relative}
+.nd-item.nd-main{font:600 15px var(--sans);color:#f5f0e8;border-left:3px solid transparent}
 .nd-item.nd-main:hover,.nd-item.nd-main.active{background:rgba(201,168,76,.1);border-left-color:var(--gold);color:var(--gold)}
-.nd-item.nd-sub{font:400 12px var(--sans);color:rgba(245,240,232,.65);padding-left:38px;border-left:3px solid transparent}
+.nd-item.nd-sub{font:400 14px var(--sans);color:rgba(245,240,232,.65);padding-left:38px;border-left:3px solid transparent}
 .nd-item.nd-sub:hover{background:rgba(255,255,255,.04);color:#f5f0e8}
 .nd-divider{height:1px;background:rgba(201,168,76,.12);margin:8px 20px}
-.nd-tip-popup{position:fixed;background:#111827;color:#f5f0e8;font:400 12px var(--sans);line-height:1.6;padding:10px 14px;border-radius:8px;max-width:260px;z-index:1300;box-shadow:0 4px 20px rgba(0,0,0,.4);pointer-events:none;display:none}
+.nd-tip-popup{position:fixed;background:#111827;color:#f5f0e8;font:400 14px var(--sans);line-height:1.6;padding:11px 16px;border-radius:8px;max-width:260px;z-index:1300;box-shadow:0 4px 20px rgba(0,0,0,.4);pointer-events:none;display:none}
 .nd-tip-popup.visible{display:block}
 </style>
 </head>
@@ -646,79 +646,79 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
 
       <!-- CHAMBER BREAKDOWN GRID -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
 
         <!-- House -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#1E3A8A;font-size:10px;letter-spacing:.08em">&#127979; House of Representatives</div>
-          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
-          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;217</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;212</span>
+          <div class="metric-label" style="color:#1E3A8A;font-size:11px;letter-spacing:.08em">&#127979; House of Representatives</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;217</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;212</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">42 <span style="font:400 13px var(--sans);color:#777">of 435</span></div>
-          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">42 <span style="font:400 15px var(--sans);color:#777">of 435</span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
         <!-- Senate -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#4C1D95;font-size:10px;letter-spacing:.08em">&#127981; Senate</div>
-          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
-          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;53</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D+I&nbsp;47</span>
+          <div class="metric-label" style="color:#4C1D95;font-size:11px;letter-spacing:.08em">&#127981; Senate</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;53</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D+I&nbsp;47</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">9 <span style="font:400 13px var(--sans);color:#777">of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
-          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">9 <span style="font:400 15px var(--sans);color:#777">of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
         <!-- Governor -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#134E4A;font-size:10px;letter-spacing:.08em">&#127963; Governorships</div>
-          <div style="font:700 11px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
-          <div style="display:flex;gap:6px;margin:10px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">R&nbsp;26</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 12px var(--sans);padding:4px 12px;border-radius:20px">D&nbsp;24</span>
+          <div class="metric-label" style="color:#134E4A;font-size:11px;letter-spacing:.08em">&#127963; Governorships</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;26</span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;24</span>
           </div>
-          <div style="font:500 11px var(--sans);color:#555;margin-top:10px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">7 <span style="font:400 13px var(--sans);color:#777">of 36 races</span></div>
-          <div style="font:400 11px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#581845;line-height:1.1">7 <span style="font:400 15px var(--sans);color:#777">of 36 races</span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
       </div>
 
       <!-- TELL ME WHY ACCORDION -->
-      <h3 id="tell-me-why" style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
+      <h3 id="tell-me-why" style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
       <div style="margin-bottom:28px;display:flex;flex-direction:column;gap:8px">
 
-        <details id="why-detail-0" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
-          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+        <details id="why-detail-0" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             US Political Process <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
-          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
             <p>The United States has a three branched, bicameral, federal system of governance. This means that at the National level, there is the Federal government consisting of the Presidency, with a 4-year term, acting as the executive branch. Then there is the Judicial branch consisting of the Supreme Court with indefinite terms. There is the bicameral legislature consisting of the House of Representatives with 435 members with 2-year terms and the Senate with 100 members of 6 year terms. While the House of Representatives represents districts within each state, the Senate elects 2 members representing the whole state.</p>
             <p style="margin-top:12px">The federal form of government in the US means that the States have a strong set of rights and responsibilities in the United States governing process that can also override the authority of the Federal government at times. This is what makes Governorships and State legislature election results an important development in the US political canvas.</p>
             <p style="margin-top:12px">This federal spirit is also visible in elections which is run in a decentralised way, with no single national body in charge. Each state sets its own election laws through its legislature, and a statewide official (usually the Secretary of State) oversees the process. The hands-on work, like setting up polling booths, printing ballots, and counting votes, is handled by county and local election officials across roughly 10,000 jurisdictions nationwide consisting of officials, and volunteers. District maps are drawn by state legislatures (or independent commissions in some states) based on Census data, and winners are certified first by local officials, then by the state, and in presidential races, finally by the governor. At the federal level, two bodies play limited but distinct roles. The Election Assistance Commission sets voluntary standards for running elections and distributes funding to states. The Federal Election Commission enforces campaign finance laws, regulating how money is raised and spent by candidates and political parties. Midterm elections, held two years into a presidential term, follow the exact same process, just without a presidential race on the ballot.</p>
           </div>
         </details>
 
-        <details id="why-detail-1" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
-          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+        <details id="why-detail-1" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             Why do the mid-terms matter? <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
-          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
             <p>Since the election of Donald Trump in 2024 for his second term, American citizens have been experiencing extreme changes in their day to day lives. Issues of inflation, immigration, foreign wars, tariffs, healthcare, state rights, and widening socio-economic divisions have emerged as a key issue as a result of these changes. The outcome of these elections would decide the direction the US will take on these issues in the coming years and the remaining period of President Trump&rsquo;s tenure. This direction would impact not only the US but also countries around the world, including India.</p>
             <p style="margin-top:12px">The US is among India&rsquo;s most important strategic, technological and economic partners in the 21st Century. Any changes in their foreign policy would gravely impact India as seen in the case of tariffs, Iran war, and US engagement with Pakistan and China. Similarly, the issue of immigration is also an important issue for the future of Indian Americans and Indian immigration to the US. Issues of healthcare, state rights and political polarisation among others are also issues that might not directly impact India, but have the potential to create lasting political changes in the US that in turn could redefine India-US ties.</p>
           </div>
         </details>
 
-        <details id="why-detail-2" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
-          <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+        <details id="why-detail-2" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             Why is 2026 significant? <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
-          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 13px/1.8 var(--sans);color:#3a3a3a">
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
             <p>The lead-up to the 2026 mid-terms has been a tumultuous path for US citizens. It began with the liberation day tariffs that disrupted vital supply chain networks of small scale businesses and led to inflation across sectors. This was followed by the DOGE cuts that led to removal of 300,000 federal employees across 27 departments. DOGE also led to the closure of several government programs that impacted the daily lives of US citizens. Following this came the Epstein files scandal that worsened an already declining public trust in the government and institutions. This also came in the period that saw two continuous government shutdowns in late 2025 and early 2026 that were the longest shutdowns in recorded history. This was in the context of the Trump administration&rsquo;s massive cuts to the government healthcare programs. Following this came the issues of immigration and ICE raids that further weakened public trust in federal use of force, and led to massive popular backlash and demonstrations against the agency. The last major development came with the US military interventions in Venezuela and Iran that worsened the overall inflation rates amidst spikes in energy prices.</p>
             <p style="margin-top:12px">Each of these developments has weakened the President politically, but his current hold over the 119th Congress ensures that his actions do not face any legislative guardrails and that his official appointments are processed comfortably. However, the results of this mid-term could severely impact his political standing. In case of a defeat his best case scenario would be the one where he would emerge as the &ldquo;lame-duck&rdquo; president who will not be able to bring major policy changes for the rest of his term. His worst case would be getting impeached and potentially investigated for allegations of corruption. Thereby, 2026 could prove to be a critical year for President Trump&rsquo;s political survival.</p>
           </div>
@@ -727,7 +727,7 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
 
       <!-- SECTION CARDS -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
       <div class="home-sections">
         <button class="home-section-card" onclick="switchTabByName('map')">
           <div class="hsc-icon">&#9654;</div>
@@ -776,12 +776,12 @@ body{background:#F5F5DC;color:#1E2232}
         <div class="hn-full-content">
           <div id="home-news-bar" class="hn-results-bar" style="display:none"></div>
           <div class="hn-news-list" id="home-news-list">
-            <div style="color:#6b6b6b;font:400 13px var(--sans);padding:40px 0 0;text-align:center">Loading&hellip;</div>
+            <div style="color:#6b6b6b;font:400 15px var(--sans);padding:40px 0 0;text-align:center">Loading&hellip;</div>
           </div>
-          <div id="home-news-empty" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 14px var(--sans)">
+          <div id="home-news-empty" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 16px var(--sans)">
             No news items yet &mdash; the live feed fetches from 150+ RSS sources every hour via GitHub Actions.
           </div>
-          <div id="home-news-no-results" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 14px var(--sans)">
+          <div id="home-news-no-results" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 16px var(--sans)">
             No results &mdash; try a different search term or clear the filter.
           </div>
         </div>
@@ -793,53 +793,53 @@ body{background:#F5F5DC;color:#1E2232}
     <div class="home-body">
 
       <!-- TRUMP APPROVAL CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
         </div>
         <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
       </div>
 
       <!-- CONGRESS APPROVAL CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval has fallen to <strong style="color:#9B2828">16%</strong> as of May 2026 &mdash; matching a near-record low. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup Congress &amp; Public Approval</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval has fallen to <strong style="color:#9B2828">16%</strong> as of May 2026 &mdash; matching a near-record low. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup Congress &amp; Public Approval</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
         </div>
         <div class="chart-wrap-sm"><canvas id="c-home-congress-approval"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Gallup Congress &amp; Public Approval Tracker</a>. Monthly readings, Jan 2025 &ndash; May 2026.</div>
       </div>
 
       <!-- RETIREMENTS CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the second highest retirement wave since WWII &mdash; only 1992 (72, bank scandal + redistricting) was higher. As of May 18, 2026, <strong style="color:#9B2828">68 members</strong> have announced departures &mdash; roughly <strong style="color:#9B2828">1 in 8 seats</strong>, reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Brookings</a></p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#378ADD"></span>House</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#E24B4A"></span>2026</span>
-          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#378ADD"></span>House</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#E24B4A"></span>2026</span>
+          <span style="font:400 13px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
         </div>
         <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
       </div>
 
       <!-- INFLATION CHART -->
-      <h3 style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Consumer Price Index &mdash; Inflation Trend</h3>
-      <p style="font:400 12px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; Apr 2026. After falling to 2.3% in Apr 2025, inflation has risen sharply to <strong style="color:#9B2828">3.8%</strong> by Apr 2026, driven by renewed tariff pressures. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
-      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:10px;padding:20px 20px 14px;margin-bottom:28px">
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Consumer Price Index &mdash; Inflation Trend</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; Apr 2026. After falling to 2.3% in Apr 2025, inflation has risen sharply to <strong style="color:#9B2828">3.8%</strong> by Apr 2026, driven by renewed tariff pressures. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
-          <span style="display:inline-flex;align-items:center;gap:5px;font:500 11px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:12px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
-          <span style="font:400 11px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#581845"></span>All Items CPI (YoY %)</span>
+          <span style="font:400 13px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
         </div>
         <div class="chart-wrap"><canvas id="c-home-cpi"></canvas></div>
-        <div style="font:400 11px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">U.S. Bureau of Labor Statistics &mdash; CPI by Category</a>. <span id="hm-cpi-desc">Year-over-year % change, Jan 2025 &ndash; Apr 2026. Latest: 3.8%.</span></div>
       </div>
 
     </div><!-- /home-body data -->
@@ -1317,7 +1317,7 @@ async function loadHomeData() {
                 ctx.setLineDash([3,3]); ctx.strokeStyle = 'rgba(88,24,69,0.25)'; ctx.lineWidth = 1;
                 ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
                 const txt = 'No-data: Govt. Shutdown';
-                ctx.font = '500 9px DM Sans,sans-serif'; ctx.setLineDash([]);
+                ctx.font = '500 10px DM Sans,sans-serif'; ctx.setLineDash([]);
                 const tw = ctx.measureText(txt).width;
                 const bx = Math.min(xp - tw / 2 - 4, ch.width - tw - 12);
                 const by = top + 6;
@@ -1373,7 +1373,7 @@ async function loadHomeData() {
                 const i = hYrs.indexOf(yr); if (i < 0) return;
                 const xp = c.scales.x.getPixelForValue(i);
                 const yp = c.scales.y.getPixelForValue(hT[i]) - 8;
-                ctx.save(); ctx.font = '500 10px DM Sans,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
+                ctx.save(); ctx.font = '500 11px DM Sans,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
               });
             } catch(e) { /* skip decorative labels */ }
           }}
@@ -1417,7 +1417,7 @@ async function loadAnalysisTicker(newsItems) {
   ).join('');
 
   const analysisHtml = analysisSlice.map(item =>
-    `<div class="ticker-item"><span class="ticker-dot" style="background:var(--gold);opacity:1"></span><span class="ticker-analysis-tag">Analysis</span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px;margin-left:4px">${escTitle(item.title)}</a></div>`
+    `<div class="ticker-item"><span class="ticker-dot" style="background:var(--gold);opacity:1"></span><span class="ticker-analysis-tag">Analysis</span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:13px;margin-left:4px">${escTitle(item.title)}</a></div>`
   ).join('');
 
   const combined = newsHtml + analysisHtml;

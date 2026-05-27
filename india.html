@@ -42,7 +42,7 @@
   --radius: 6px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 14px; }
+html { font-size: 16px; }
 body {
   background: var(--bg);
   color: var(--text);
@@ -67,13 +67,13 @@ body {
 }
 .sub-tab {
   font-family: var(--sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text3);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 14px 18px;
+  padding: 16px 18px;
   cursor: pointer;
   transition: color .12s, border-color .12s;
   white-space: nowrap;
@@ -103,7 +103,7 @@ body {
 .hero {
   background: linear-gradient(135deg, var(--navy) 0%, #1a3f8a 100%);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 11px;
   padding: 36px 40px;
   margin-bottom: 36px;
   position: relative;
@@ -118,23 +118,23 @@ body {
   background: rgba(201,168,76,.10);
 }
 .hero-eyebrow {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .12em;
   color: var(--gold);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .hero h1 {
   font-family: var(--serif);
   font-size: 26px;
   font-weight: 700;
   line-height: 1.3;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   color: #fff;
 }
 .hero p {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.7;
   color: rgba(255,255,255,.80);
   max-width: 620px;
@@ -153,16 +153,16 @@ body {
   color: var(--gold);
   line-height: 1;
 }
-.hstat-label { font-size: 11px; color: rgba(255,255,255,.60); text-transform: uppercase; letter-spacing: .06em; }
+.hstat-label { font-size: 13px; color: rgba(255,255,255,.60); text-transform: uppercase; letter-spacing: .06em; }
 
 /* SECTION HEADERS */
 .section-header {
   display: flex;
   align-items: baseline;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 18px;
   border-bottom: 2px solid var(--border);
-  padding-bottom: 10px;
+  padding-bottom: 11px;
 }
 .section-header h2 {
   font-family: var(--serif);
@@ -170,7 +170,7 @@ body {
   font-weight: 700;
   color: var(--navy);
 }
-.section-header .section-sub { font-size: 12px; color: var(--text3); }
+.section-header .section-sub { font-size: 16px; color: var(--text3); }
 .section { margin-bottom: 44px; }
 
 /* POLICY CARDS */
@@ -186,7 +186,7 @@ body {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 11px;
   transition: box-shadow .15s;
 }
 .policy-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
@@ -198,14 +198,14 @@ body {
   justify-content: center;
   font-size: 18px;
 }
-.policy-card h3 { font-family: var(--serif); font-size: 15px; font-weight: 600; color: var(--text); }
+.policy-card h3 { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--text); }
 .policy-card p { font-size: 12.5px; color: var(--text2); line-height: 1.6; flex: 1; }
 .policy-status {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .06em;
-  padding: 3px 9px;
+  padding: 3px 10px;
   border-radius: 4px;
   align-self: flex-start;
 }
@@ -215,11 +215,11 @@ body {
 .status-watch      { background: #F3EEFF; color: #5B21B6; }
 
 /* PARTY COMPARE */
-.compare-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.compare-table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .compare-table th {
-  padding: 10px 16px;
+  padding: 11px 16px;
   text-align: left;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -229,7 +229,7 @@ body {
 .compare-table th.rep-h { color: #9a1c1c; }
 .compare-table th.dem-h { color: #1A3F8A; }
 .compare-table td {
-  padding: 12px 16px;
+  padding: 14px 16px;
   vertical-align: top;
   border-bottom: 1px solid var(--border);
   line-height: 1.5;
@@ -243,7 +243,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   background: #E8F4FE;
   color: #1A5276;
@@ -259,7 +259,7 @@ body {
 .member-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
+  gap: 16px;
 }
 .member-card {
   background: var(--bg2);
@@ -270,11 +270,11 @@ body {
   flex-direction: column;
   gap: 6px;
 }
-.member-name { font-family: var(--serif); font-size: 14px; font-weight: 600; color: var(--text); }
-.member-seat { font-size: 12px; color: var(--text3); }
+.member-name { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--text); }
+.member-seat { font-size: 16px; color: var(--text3); }
 .member-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
 .pill {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -286,15 +286,15 @@ body {
 .pill-house { background: #F3EEFF; color: #4C1D95; }
 .pill-senate { background: #CCFBF1; color: #134E4A; }
 .pill-gov { background: #FEF3C7; color: #92400E; }
-.member-note { font-size: 11px; color: var(--text3); line-height: 1.5; margin-top: 4px; }
+.member-note { font-size: 13px; color: var(--text3); line-height: 1.5; margin-top: 4px; }
 
 /* INFLUENCE TABLE */
-.influence-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.influence-table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .influence-table th {
   background: var(--bg2);
-  padding: 10px 14px;
+  padding: 11px 16px;
   text-align: left;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .06em;
@@ -302,7 +302,7 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .influence-table td {
-  padding: 11px 14px;
+  padding: 13px 16px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
@@ -312,7 +312,7 @@ body {
 .pop-bar { height: 8px; border-radius: 4px; background: var(--saffron); }
 .state-name { font-weight: 600; color: var(--text); }
 .competitiveness {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -326,12 +326,12 @@ body {
 .comp-safe-r   { background: #7a1c1c; color: #fff; }
 
 /* INFLUENCE MAP VIEW TOGGLE */
-.influence-view-bar { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.influence-view-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .itog {
-  padding: 5px 14px;
+  padding: 5px 16px;
   border: 1px solid var(--border);
   border-radius: 20px;
-  font: 600 11px var(--sans);
+  font: 600 13px var(--sans);
   cursor: pointer;
   background: var(--bg2);
   color: var(--text2);
@@ -340,13 +340,13 @@ body {
 .itog.active, .itog:hover { background: var(--saffron); color: #fff; border-color: var(--saffron); }
 .influence-map-wrap { position: relative; background: var(--bg2); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
 #influence-legend {
-  position: absolute; bottom: 12px; left: 12px;
-  background: rgba(255,255,255,.93); border-radius: 6px; padding: 8px 12px;
-  font: 400 10px var(--sans); color: var(--text2); line-height: 1.9;
+  position: absolute; bottom: 14px; left: 14px;
+  background: rgba(255,255,255,.93); border-radius: 6px; padding: 8px 14px;
+  font: 400 11px var(--sans); color: var(--text2); line-height: 1.9;
   box-shadow: 0 1px 4px rgba(0,0,0,.08);
 }
 .ileg-row { display: flex; align-items: center; gap: 6px; }
-.ileg-swatch { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.ileg-swatch { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
 
 /* CALLOUT BOX */
 .callout {
@@ -355,19 +355,19 @@ body {
   border-radius: 0 6px 6px 0;
   padding: 16px 20px;
   margin-bottom: 24px;
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.6;
   color: var(--text2);
 }
 .callout strong { color: var(--text); }
 
 /* COMMITTEES */
-.committee-list { display: flex; flex-direction: column; gap: 12px; }
+.committee-list { display: flex; flex-direction: column; gap: 14px; }
 .committee-row {
   display: flex;
   gap: 16px;
   align-items: flex-start;
-  padding: 14px 16px;
+  padding: 16px 16px;
   background: var(--bg2);
   border-radius: 8px;
   border: 1px solid var(--border);
@@ -377,7 +377,7 @@ body {
 .committee-name { font-weight: 600; font-size: 13.5px; color: var(--text); }
 .committee-why { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
 .committee-chamber {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -386,21 +386,21 @@ body {
 }
 
 /* CURRENT POLICY */
-.cpolicy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.cpolicy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
 
 /* MAP CONTROLS */
-.map-ctrl { display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap; }
+.map-ctrl { display:flex;align-items:center;gap:11px;margin-bottom:14px;flex-wrap:wrap; }
 .map-ctrl-search {
-  font: 400 13px var(--sans); color: var(--text);
+  font: 400 15px var(--sans); color: var(--text);
   background: var(--bg); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 7px 12px;
+  border-radius: var(--radius); padding: 7px 14px;
   width: 230px; outline: none;
 }
 .map-ctrl-search:focus { border-color: var(--accent); }
-.map-ctrl-count { font: 400 11px var(--sans); color: var(--text3); }
+.map-ctrl-count { font: 400 13px var(--sans); color: var(--text3); }
 .tier-chips { display:flex; gap:5px; flex-wrap:wrap; }
 .tier-chip {
-  font: 600 10px var(--sans); padding: 4px 10px; border-radius: 20px;
+  font: 600 11px var(--sans); padding: 4px 11px; border-radius: 20px;
   border: 1.5px solid var(--border); background: var(--bg2);
   color: var(--text2); cursor: pointer; transition: opacity .12s, border-color .12s;
 }
@@ -410,38 +410,38 @@ body {
 .presence-map-section { margin-bottom: 28px; }
 @media(max-width:600px){ .cpolicy-grid { grid-template-columns: 1fr; } }
 .cpolicy-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
-.cpolicy-label { font: 700 10px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--saffron); margin-bottom: 6px; }
-.cpolicy-title { font: 600 14px var(--sans); color: var(--navy); margin-bottom: 6px; }
-.cpolicy-text { font: 400 12px var(--sans); color: var(--text2); line-height: 1.55; }
-.cpolicy-status { display: inline-block; font: 700 10px var(--sans); padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+.cpolicy-label { font: 700 11px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--saffron); margin-bottom: 6px; }
+.cpolicy-title { font: 600 16px var(--sans); color: var(--navy); margin-bottom: 6px; }
+.cpolicy-text { font: 400 14px var(--sans); color: var(--text2); line-height: 1.55; }
+.cpolicy-status { display: inline-block; font: 700 11px var(--sans); padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
 
 /* ALIGNMENT */
-.align-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 14px; }
+.align-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
 @media(max-width:600px){ .align-grid { grid-template-columns: 1fr; } }
 .align-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
 .align-pct { font: 700 36px var(--sans); line-height: 1; }
-.align-label { font: 400 12px var(--sans); color: var(--text3); margin: 2px 0 10px; }
-.align-bar { height: 10px; border-radius: 5px; margin-bottom: 6px; }
-.align-sub { font: 400 11px var(--sans); color: var(--text3); line-height: 1.5; }
-.align-trend { display: inline-block; font: 600 10px var(--sans); padding: 2px 7px; border-radius: 10px; margin-top: 6px; }
+.align-label { font: 400 14px var(--sans); color: var(--text3); margin: 2px 0 11px; }
+.align-bar { height: 11px; border-radius: 5px; margin-bottom: 6px; }
+.align-sub { font: 400 13px var(--sans); color: var(--text3); line-height: 1.5; }
+.align-trend { display: inline-block; font: 600 11px var(--sans); padding: 2px 7px; border-radius: 11px; margin-top: 6px; }
 .trend-up { background: #D1FAE5; color: #065F46; }
 .trend-down { background: #FEE2E2; color: #991B1B; }
 .trend-stable { background: #F3F4F6; color: #555; }
-.align-gen-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 14px; }
-.align-gen-card { background: var(--bg2); border-radius: 8px; padding: 14px; text-align: center; }
+.align-gen-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 11px; margin-top: 16px; }
+.align-gen-card { background: var(--bg2); border-radius: 8px; padding: 16px; text-align: center; }
 .align-gen-pct { font: 700 24px var(--sans); }
-.align-gen-label { font: 400 11px var(--sans); color: var(--text3); margin-top: 3px; }
+.align-gen-label { font: 400 13px var(--sans); color: var(--text3); margin-top: 3px; }
 
 /* KEY VOTES */
-.vote-table { width: 100%; border-collapse: collapse; font: 400 13px var(--sans); }
-.vote-table th { font: 700 11px var(--sans); color: var(--text3); text-transform: uppercase; letter-spacing: .06em; padding: 8px 12px; border-bottom: 2px solid var(--border); background: var(--bg2); text-align: left; }
-.vote-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.vote-table { width: 100%; border-collapse: collapse; font: 400 15px var(--sans); }
+.vote-table th { font: 700 13px var(--sans); color: var(--text3); text-transform: uppercase; letter-spacing: .06em; padding: 8px 14px; border-bottom: 2px solid var(--border); background: var(--bg2); text-align: left; }
+.vote-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
 .vote-table tr:hover td { background: var(--bg2); }
 .vote-y { color: var(--green-in); font-weight: 700; }
 .vote-n { color: #991B1B; font-weight: 700; }
 .vote-abs { color: var(--text3); }
-.vote-bill { font: 600 13px var(--sans); color: var(--text); }
-.vote-desc { font: 400 11px var(--sans); color: var(--text3); margin-top: 2px; }
+.vote-bill { font: 600 15px var(--sans); color: var(--text); }
+.vote-desc { font: 400 13px var(--sans); color: var(--text3); margin-top: 2px; }
 
 /* ── INDIA-RELEVANT RACES PANEL ── */
 /* Inner sub-nav */
@@ -452,12 +452,12 @@ body {
   margin-bottom: 24px;
 }
 .inner-tab {
-  font: 500 12px var(--sans);
+  font: 500 14px var(--sans);
   color: var(--text3);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 10px 20px;
+  padding: 11px 20px;
   cursor: pointer;
   transition: color .12s, border-color .12s;
   white-space: nowrap;
@@ -472,7 +472,7 @@ body {
   position: relative;
   background: #f0f4f8;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 11px;
   overflow: hidden;
   margin-bottom: 16px;
 }
@@ -492,7 +492,7 @@ body {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
   background: #f0f4f8;
-  font: 400 13px var(--sans);
+  font: 400 15px var(--sans);
   color: var(--text3);
   z-index: 5;
 }
@@ -501,18 +501,18 @@ body {
 .tier-legend {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin: 10px 0 24px;
+  gap: 11px;
+  margin: 11px 0 24px;
 }
 .tier-dot {
   display: flex;
   align-items: center;
   gap: 6px;
-  font: 400 11px var(--sans);
+  font: 400 13px var(--sans);
   color: var(--text2);
 }
 .tier-dot-swatch {
-  width: 12px; height: 12px;
+  width: 14px; height: 14px;
   border-radius: 3px;
   flex-shrink: 0;
 }
@@ -522,8 +522,8 @@ body {
   position: fixed;
   background: var(--navy);
   color: #fff;
-  font: 400 12px var(--sans);
-  padding: 8px 12px;
+  font: 400 14px var(--sans);
+  padding: 8px 14px;
   border-radius: 6px;
   pointer-events: none;
   z-index: 200;
@@ -562,31 +562,31 @@ body {
   background: none;
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 4px 10px;
-  font: 500 12px var(--sans);
+  padding: 4px 11px;
+  font: 500 14px var(--sans);
   cursor: pointer;
   color: var(--text3);
 }
 .sidepanel-close:hover { background: var(--bg3); }
 .sidepanel-body { padding: 20px; flex: 1; }
 .sp-name { font: 700 20px var(--serif); color: var(--navy); margin-bottom: 4px; }
-.sp-meta { font: 400 12px var(--sans); color: var(--text3); margin-bottom: 14px; }
+.sp-meta { font: 400 14px var(--sans); color: var(--text3); margin-bottom: 16px; }
 .sp-tier-badge {
   display: inline-block;
-  font: 700 10px var(--sans);
+  font: 700 11px var(--sans);
   text-transform: uppercase;
   letter-spacing: .06em;
-  padding: 4px 12px;
+  padding: 4px 14px;
   border-radius: 4px;
   color: #fff;
   margin-bottom: 16px;
 }
 .sp-section-label {
-  font: 700 10px var(--sans);
+  font: 700 11px var(--sans);
   text-transform: uppercase;
   letter-spacing: .07em;
   color: var(--text3);
-  margin: 14px 0 6px;
+  margin: 16px 0 6px;
 }
 .sp-text {
   font: 400 12.5px var(--sans);
@@ -599,7 +599,7 @@ body {
   margin: 6px 0;
 }
 .sp-bullets li {
-  font: 400 12px var(--sans);
+  font: 400 14px var(--sans);
   color: var(--text2);
   padding: 4px 0;
   border-bottom: 1px solid var(--border);
@@ -612,13 +612,13 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font: 500 11px var(--sans);
+  font: 500 13px var(--sans);
   color: var(--accent);
   text-decoration: none;
   padding: 4px 0;
 }
 .sp-link:hover { text-decoration: underline; }
-.sp-links-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+.sp-links-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
 .india-overlay {
   position: fixed;
   inset: 0;
@@ -633,14 +633,14 @@ body {
 .roster-table {
   width: 100%;
   border-collapse: collapse;
-  font: 400 12px var(--sans);
+  font: 400 14px var(--sans);
   min-width: 640px;
 }
 .roster-table th {
   background: var(--bg2);
-  padding: 9px 12px;
+  padding: 10px 14px;
   text-align: left;
-  font: 700 10px var(--sans);
+  font: 700 11px var(--sans);
   text-transform: uppercase;
   letter-spacing: .06em;
   color: var(--text3);
@@ -648,7 +648,7 @@ body {
   white-space: nowrap;
 }
 .roster-table td {
-  padding: 10px 12px;
+  padding: 11px 14px;
   border-bottom: 1px solid var(--border);
   vertical-align: middle;
 }
@@ -657,7 +657,7 @@ body {
 .roster-name { font: 600 12.5px var(--sans); color: var(--navy); }
 .roster-tier {
   display: inline-block;
-  font: 700 9px var(--sans);
+  font: 700 10px var(--sans);
   text-transform: uppercase;
   letter-spacing: .05em;
   padding: 2px 8px;
@@ -674,25 +674,25 @@ body {
   .page-body { padding: 20px 16px 48px; }
   .policy-grid { grid-template-columns: 1fr; }
   .member-grid { grid-template-columns: 1fr 1fr; }
-  .compare-table { font-size: 12px; }
-  .compare-table td, .compare-table th { padding: 9px 10px; }
+  .compare-table { font-size: 16px; }
+  .compare-table td, .compare-table th { padding: 10px 11px; }
   .india-sidepanel { width: 100%; }
   .map-wrap { min-height: 220px !important; }
   .inner-subnav { overflow-x: auto; }
-  .inner-tab { padding: 10px 14px; font-size: 11px; }
+  .inner-tab { padding: 11px 16px; font-size: 13px; }
   .roster-wrap { -webkit-overflow-scrolling: touch; }
   .roster-table { min-width: 520px; }
   .tier-legend { gap: 6px; }
-  .tier-dot { font-size: 10px; }
-  .sub-nav { overflow-x: auto; padding: 0 12px; }
-  .sub-tab { padding: 12px 14px; font-size: 12px; }
+  .tier-dot { font-size: 11px; }
+  .sub-nav { overflow-x: auto; padding: 0 14px; }
+  .sub-tab { padding: 14px 16px; font-size: 16px; }
   .news-grid { grid-template-columns: 1fr; }
 }
 /* ── MAP ZOOM CONTROLS ── */
 .map-zoom-ctrl {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 11px;
+  right: 11px;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -705,7 +705,7 @@ body {
   border: 1px solid #d1d5db;
   border-radius: 4px;
   cursor: pointer;
-  font: 600 15px sans-serif;
+  font: 600 16px sans-serif;
   color: #374151;
   display: flex;
   align-items: center;
@@ -714,7 +714,7 @@ body {
   box-shadow: 0 1px 3px rgba(0,0,0,.1);
 }
 .map-zoom-btn:hover { background: #f3f4f6; }
-.map-zoom-btn.reset { font-size: 12px; }
+.map-zoom-btn.reset { font-size: 16px; }
 /* ── INTEREST PANEL SUB-NAV ── */
 .interest-subnav {
   display: flex;
@@ -723,13 +723,13 @@ body {
   margin-bottom: 24px;
 }
 .interest-subtab {
-  font: 500 12px var(--sans);
+  font: 500 14px var(--sans);
   color: var(--text3);
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -2px;
-  padding: 10px 18px;
+  padding: 11px 18px;
   cursor: pointer;
   transition: color .12s, border-color .12s;
   display: inline-flex;
@@ -741,10 +741,10 @@ body {
 .interest-subpanel { display: none; }
 .interest-subpanel.active { display: block; }
 .interest-news-badge {
-  font: 700 10px var(--sans);
+  font: 700 11px var(--sans);
   background: var(--saffron);
   color: #fff;
-  border-radius: 10px;
+  border-radius: 11px;
   padding: 1px 7px;
   min-width: 20px;
   text-align: center;
@@ -754,15 +754,15 @@ body {
 .mn-toolbar {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 11px;
   flex-wrap: wrap;
   margin-bottom: 16px;
 }
 .mn-search {
-  font: 400 12px var(--sans);
+  font: 400 14px var(--sans);
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 6px 10px;
+  padding: 6px 11px;
   width: 220px;
   color: var(--text);
   background: var(--bg);
@@ -770,10 +770,10 @@ body {
 .mn-search:focus { outline: none; border-color: var(--accent); }
 .mn-tier-chips { display: flex; gap: 6px; flex-wrap: wrap; }
 .mn-chip {
-  font: 500 10px var(--sans);
+  font: 500 11px var(--sans);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 3px 10px;
+  border-radius: 14px;
+  padding: 3px 11px;
   cursor: pointer;
   background: var(--bg);
   color: var(--text3);
@@ -781,14 +781,14 @@ body {
 }
 .mn-chip:hover { background: var(--bg2); }
 .mn-chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-.mn-count { font: 400 11px var(--sans); color: var(--text3); margin-left: auto; white-space: nowrap; }
+.mn-count { font: 400 13px var(--sans); color: var(--text3); margin-left: auto; white-space: nowrap; }
 .mn-refresh {
-  font: 500 11px var(--sans);
+  font: 500 13px var(--sans);
   color: var(--navy);
   background: none;
   border: 1px solid var(--border);
   border-radius: 4px;
-  padding: 5px 10px;
+  padding: 5px 11px;
   cursor: pointer;
 }
 .mn-refresh:hover { background: var(--bg2); }
@@ -797,19 +797,19 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 14px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--border);
 }
 .mn-article:first-child { border-top: 1px solid var(--border); }
 .mn-article-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .mn-article-source {
-  font: 500 10px var(--sans);
+  font: 500 11px var(--sans);
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .04em;
 }
 .mn-article-member {
-  font: 600 10px var(--sans);
+  font: 600 11px var(--sans);
   color: #fff;
   border-radius: 3px;
   padding: 2px 7px;
@@ -821,15 +821,15 @@ body {
   line-height: 1.4;
 }
 .mn-article-title:hover { color: var(--accent); }
-.mn-article-date { font: 400 10px var(--sans); color: var(--text3); }
-.mn-empty { font: 400 13px var(--sans); color: var(--text3); padding: 24px 0; text-align: center; }
+.mn-article-date { font: 400 11px var(--sans); color: var(--text3); }
+.mn-empty { font: 400 15px var(--sans); color: var(--text3); padding: 24px 0; text-align: center; }
 
 /* ── SIDE PANEL NEWS ── */
 .sp-news-list { display: flex; flex-direction: column; margin-top: 4px; }
-.sp-news-item { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.sp-news-item { padding: 11px 0; border-bottom: 1px solid var(--border); }
 .sp-news-item:first-child { border-top: 1px solid var(--border); }
 .sp-news-source {
-  font: 500 9px var(--sans);
+  font: 500 10px var(--sans);
   color: var(--text3);
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -837,15 +837,15 @@ body {
 }
 .sp-news-title {
   display: block;
-  font: 600 12px var(--serif);
+  font: 600 14px var(--serif);
   color: var(--text);
   text-decoration: none;
   line-height: 1.4;
   margin-bottom: 3px;
 }
 .sp-news-title:hover { color: var(--accent); }
-.sp-news-date { font: 400 10px var(--sans); color: var(--text3); }
-.sp-news-empty { font: 400 12px var(--sans); color: var(--text3); padding: 10px 0; }
+.sp-news-date { font: 400 11px var(--sans); color: var(--text3); }
+.sp-news-empty { font: 400 14px var(--sans); color: var(--text3); padding: 11px 0; }
 </style>
 </head>
 <body>
@@ -1131,7 +1131,7 @@ body {
           <button class="map-zoom-btn reset" onclick="presenceZoomReset()">&#8859;</button>
         </div>
       </div>
-      <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Blue = Democrat district. All six Indian-American members are Democrats.</p>
+      <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Blue = Democrat district. All six Indian-American members are Democrats.</p>
     </div>
 
     <div class="member-grid">
@@ -1351,7 +1351,7 @@ body {
         <span class="align-trend trend-up">&#8593; Growing 2&ndash;3 pts per cycle</span>
       </div>
     </div>
-    <p style="font:700 13px var(--sans);color:var(--text2);margin:20px 0 8px">By generation &amp; income:</p>
+    <p style="font:700 15px var(--sans);color:var(--text2);margin:20px 0 8px">By generation &amp; income:</p>
     <div class="align-gen-grid">
       <div class="align-gen-card">
         <div class="align-gen-pct" style="color:#1A3F8A">74%</div>
@@ -1366,13 +1366,13 @@ body {
         <div class="align-gen-label">Income &gt;$150K &rarr; Democrat</div>
       </div>
     </div>
-    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:10px">Source: <a href="https://carnegieendowment.org" style="color:var(--accent)">Carnegie Endowment for International Peace</a>, <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>, 2024 Asian American Voter Survey.</p>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:10px">Source: <a href="https://carnegieendowment.org" style="color:var(--accent)">Carnegie Endowment for International Peace</a>, <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>, 2024 Asian American Voter Survey.</p>
 
-    <p style="font:700 13px var(--sans);color:var(--text2);margin:20px 0 10px">Party alignment trend &mdash; 2008 to 2026 projected:</p>
+    <p style="font:700 15px var(--sans);color:var(--text2);margin:20px 0 10px">Party alignment trend &mdash; 2008 to 2026 projected:</p>
     <div style="position:relative;height:220px">
       <canvas id="c-ia-alignment"></canvas>
     </div>
-    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Source: <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>; Asian American Voter Survey. Percentages exclude undecided or no-lean responses. 2026 data point is a trend projection based on the 2-point-per-cycle rightward shift observed since 2012.</p>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Source: <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>; Asian American Voter Survey. Percentages exclude undecided or no-lean responses. 2026 data point is a trend projection based on the 2-point-per-cycle rightward shift observed since 2012.</p>
   </div>
 
   <!-- KEY VOTES OF INDIAN-AMERICAN MEMBERS -->
@@ -1440,7 +1440,7 @@ body {
       </tbody>
     </table>
     </div>
-    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:8px">Nay votes on NDAA reflect concerns about defence spending levels, not opposition to US-India provisions specifically. All six members are strong advocates for the bilateral relationship.</p>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Nay votes on NDAA reflect concerns about defence spending levels, not opposition to US-India provisions specifically. All six members are strong advocates for the bilateral relationship.</p>
   </div>
 
 </div><!-- /page-body -->
@@ -1590,9 +1590,9 @@ body {
       <span class="mn-count" id="mn-count"></span>
       <button class="mn-refresh" onclick="loadMemberNews(true)">&#8635; Refresh</button>
     </div>
-    <div id="mn-loading" style="font:400 13px var(--sans);color:var(--text3);padding:24px 0">Loading member news&hellip;</div>
+    <div id="mn-loading" style="font:400 15px var(--sans);color:var(--text3);padding:24px 0">Loading member news&hellip;</div>
     <div id="mn-list" class="mn-list" style="display:none"></div>
-    <p style="font:400 10px var(--sans);color:var(--text3);margin-top:16px">Sources: <em>data.json</em> Live News feed (same as Overview tab) plus state political RSS feeds linked to each tracked member. Articles refreshed on page load via CORS proxy.</p>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Sources: <em>data.json</em> Live News feed (same as Overview tab) plus state political RSS feeds linked to each tracked member. Articles refreshed on page load via CORS proxy.</p>
   </div><!-- /interest-subpanel-news -->
 
 </div><!-- /page-body -->
@@ -1601,7 +1601,7 @@ body {
 <!-- SIDE PANEL -->
 <div class="india-sidepanel" id="india-sidepanel">
   <div class="sidepanel-header">
-    <span style="font:700 13px var(--sans);color:var(--navy)">Member Detail</span>
+    <span style="font:700 15px var(--sans);color:var(--navy)">Member Detail</span>
     <button class="sidepanel-close" onclick="closeSidePanel()">Close &times;</button>
   </div>
   <div class="sidepanel-body" id="sidepanel-body"></div>
@@ -1698,7 +1698,7 @@ function buildRoster() {
       <td><span class="pill ${m.chamber==='Senate'?'pill-senate':'pill-house'}">${m.chamber}</span></td>
       <td style="font:400 11.5px var(--sans);color:var(--text2)">${m.seat}</td>
       <td><span class="roster-tier" style="background:${TIER_COLORS[m.tier]}">${TIER_LABELS[m.tier]}</span></td>
-      <td style="font:400 11px var(--sans);color:var(--text3);max-width:200px">${m.role}</td>
+      <td style="font:400 13px var(--sans);color:var(--text3);max-width:200px">${m.role}</td>
       <td class="${m.up2026?'up-yes':'up-no'}">${m.up2026?'YES':'NO'}</td>
       <td>${m.source?`<a href="${m.source}" target="_blank" class="sp-link" onclick="event.stopPropagation()">Office</a>`:'&mdash;'}</td>
     `;
@@ -1735,11 +1735,11 @@ function openSidePanel(memberId) {
       ${m.news ? `<a href="${m.news}" target="_blank" class="sp-link">&#9656; State News RSS</a>` : ''}
       ${m.polling ? `<a href="${m.polling}" target="_blank" class="sp-link">&#9656; State Polling</a>` : ''}
     </div>
-    <p style="font:400 10px var(--sans);color:var(--text3);margin-top:16px">Position data sourced from member office newsrooms and India -interest.xlsx research roster (119th Congress). All positions verified against official statements and committee records.</p>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Position data sourced from member office newsrooms and India -interest.xlsx research roster (119th Congress). All positions verified against official statements and committee records.</p>
 
     <div class="sp-section-label" style="margin-top:20px">Latest News</div>
     <div id="sp-news-list" class="sp-news-list">
-      <div id="sp-news-loading" style="font:400 12px var(--sans);color:var(--text3);padding:10px 0">Loading news\u2026</div>
+      <div id="sp-news-loading" style="font:400 14px var(--sans);color:var(--text3);padding:11px 0">Loading news\u2026</div>
     </div>
   `;
   document.getElementById('india-sidepanel').classList.add('open');
@@ -2259,7 +2259,7 @@ function loadPresenceMap() {
       .attr('x', cx).attr('y', cy)
       .attr('dy', -(BASE_DOT + 4))
       .attr('text-anchor', 'middle')
-      .style('font', '700 9px var(--sans)')
+      .style('font', '700 10px var(--sans)')
       .style('fill', '#1A3F8A')
       .style('paint-order', 'stroke')
       .style('stroke', '#fff').style('stroke-width', '2.5px')

@@ -973,11 +973,7 @@ function goToTellMeWhy(idx) {
   // Step 1 — scroll to accordion (after panel is visible)
   setTimeout(() => {
     const target = document.getElementById('why-detail-' + idx);
-    const panel  = document.getElementById('home-subpanel-overview');
-    if (target && panel) {
-      const offset = target.getBoundingClientRect().top - panel.getBoundingClientRect().top;
-      panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
-    }
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     // Step 2 — wait for scroll to settle, then flash the summary
     setTimeout(() => {
@@ -987,7 +983,7 @@ function goToTellMeWhy(idx) {
       if (!summary) return;
 
       // Apply flash animation (3 pulses over 750ms)
-      summary.style.animation = 'why-flash 400ms ease 1';
+      summary.style.animation = 'why-flash 400ms ease 2';
 
       // Step 3 — after animation ends, open the accordion
       summary.addEventListener('animationend', function onEnd() {

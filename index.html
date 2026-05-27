@@ -938,6 +938,27 @@ function toggleWhyTab(idx, btn) {
     _whyActive = idx;
   }
 }
+function openWhyDropdown(idx) {
+  const dropdown = document.getElementById('why-dropdown');
+  const summaryEl = document.getElementById('why-summary');
+  const whyBtns = document.querySelectorAll('.why-tab');
+  const btn = whyBtns[idx];
+  if (!btn) return;
+  // Close any open dropdown first
+  dropdown.classList.remove('open');
+  whyBtns.forEach(b => b.classList.remove('active'));
+  _whyActive = -1;
+  // Now open for this idx
+  btn.classList.add('active');
+  summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy(' + idx + ')">Read More &rarr;</button>';
+  const navArea = dropdown.parentElement;
+  const btnRect = btn.getBoundingClientRect();
+  const areaRect = navArea.getBoundingClientRect();
+  const left = Math.min(btnRect.left - areaRect.left, areaRect.width - 320);
+  dropdown.style.left = left + 'px';
+  dropdown.classList.add('open');
+  _whyActive = idx;
+}
 function goToTellMeWhy(idx) {
   switchTabByName('home');
   const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
@@ -949,13 +970,8 @@ function goToTellMeWhy(idx) {
       const offset = el.getBoundingClientRect().top - panel.getBoundingClientRect().top;
       panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
     }
-    // Re-open the dropdown for the same question
-    if (idx !== undefined) {
-      _whyActive = -1; // reset so toggleWhyTab opens instead of closes
-      const btn = document.querySelectorAll('.why-tab')[idx];
-      if (btn) toggleWhyTab(idx, btn);
-    }
-  }, 150);
+    if (idx !== undefined) openWhyDropdown(idx);
+  }, 200);
 }
 
 function toggleNavDrawer() {

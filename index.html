@@ -218,12 +218,27 @@ body{
 .home-body{max-width:1040px;margin:0 auto;padding:36px 32px 60px}
 
 /* HOME HERO */
-.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#0d2244 100%);border:1px solid var(--br);border-radius:12px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden}
+.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#0d2244 100%);border:1px solid var(--br);border-radius:12px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden;display:flex;gap:36px;align-items:flex-start}
 .home-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(201,168,76,.06);pointer-events:none}
 .home-hero::after{content:'';position:absolute;right:40px;bottom:-80px;width:180px;height:180px;border-radius:50%;background:rgba(201,168,76,.04);pointer-events:none}
+.home-hero-left{flex:1;min-width:0;position:relative;z-index:1}
+.home-hero-right{flex-shrink:0;width:210px;position:relative;z-index:1;border-left:1px solid rgba(201,168,76,.2);padding-left:28px}
 .home-eyebrow{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:10px}
 .home-h1{font:700 28px var(--serif);color:var(--beige);line-height:1.25;margin-bottom:10px}
-.home-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.7;max-width:580px;margin-bottom:24px}
+.home-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
+/* Hero why-questions panel */
+.hero-why-label{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:12px}
+.hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.hero-why-item:last-of-type{border-bottom:none}
+.hero-why-btn{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:rgba(245,240,232,.65);font:500 11px/1.5 var(--sans);padding:10px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;transition:color .12s}
+.hero-why-btn:hover,.hero-why-btn.open{color:var(--gold)}
+.hero-why-chevron{flex-shrink:0;font-size:9px;margin-top:2px;transition:transform .2s}
+.hero-why-item.open .hero-why-chevron{transform:rotate(180deg)}
+.hero-why-body{max-height:0;overflow:hidden;transition:max-height .28s ease}
+.hero-why-item.open .hero-why-body{max-height:300px}
+.hero-why-text{font:400 11px/1.7 var(--sans);color:rgba(245,240,232,.55);padding:0 0 10px}
+.hero-why-rm{font:600 10px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0 0 10px;text-decoration:underline;display:block}
+@media(max-width:700px){.home-hero{flex-direction:column}.home-hero-right{width:100%;border-left:none;border-top:1px solid rgba(201,168,76,.2);padding-left:0;padding-top:20px;margin-top:4px}}
 .home-big-countdown{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
 .home-days{font:700 64px var(--serif);color:var(--gold);line-height:1;letter-spacing:-.02em}
 .home-days-label{font:400 16px var(--sans);color:var(--t-muted)}
@@ -447,24 +462,12 @@ body{background:#F5F5DC;color:#1E2232}
       <rect y="12" width="18" height="2" rx="1" fill="#c9a84c"/>
     </svg>
   </button>
-  <!-- Hidden nav tabs kept for JS tab-switching compatibility -->
-  <button class="nav-tab active" onclick="switchTab('home',this)" style="display:none">&#8962; Home</button>
-  <button class="nav-tab" onclick="switchTab('map',this)" style="display:none">Election Trends</button>
-  <button class="nav-tab" onclick="switchTab('india',this)" style="display:none">India's Interest</button>
-  <button class="nav-tab" onclick="switchTab('analysis',this)" style="display:none">Analysis &amp; Commentary</button>
-  <button class="nav-tab" onclick="switchTab('about',this)" style="display:none">About Us</button>
-  <!-- Why questions -->
-  <button class="why-tab" onclick="toggleWhyTab(0,this)">How does the American political system function? &#9660;</button>
-  <button class="why-tab" onclick="toggleWhyTab(1,this)">Why do the mid-terms matter? &#9660;</button>
-  <button class="why-tab" onclick="toggleWhyTab(2,this)">Why is 2026 significant? &#9660;</button>
+  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
+  <button class="nav-tab" onclick="switchTab('map',this)">Election Trends</button>
+  <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
+  <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
+  <button class="nav-tab" onclick="switchTab('about',this)">About Us</button>
 </nav>
-
-<!-- Why dropdown panel (floats over content) -->
-<div class="why-dropdown" id="why-dropdown">
-  <div class="why-dropdown-inner">
-    <p class="why-summary" id="why-summary"></p>
-  </div>
-</div>
 </div><!-- /nav-area -->
 
 <!-- ── Navigation Drawer ── -->
@@ -559,19 +562,47 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- HERO -->
       <div class="home-hero">
-        <div class="home-eyebrow">Geostrategy Programme &mdash; Takshashila Institution</div>
-        <h1 class="home-h1">US 2026 Mid-term Election Racebook</h1>
-        <p class="home-desc">By researchers of the Geostrategy Programme of the Takshashila Institution. Tracking the 2026 US House, Senate, and Governor elections &mdash; approval ratings, generic ballot, key races, redistricting, and the factors that will shape the next Congress.</p>
-        <div class="home-big-countdown">
-          <div class="home-days" id="home-days">&#8212;</div>
-          <div class="home-days-label">days until Election Day</div>
+        <!-- Left: headline + countdown -->
+        <div class="home-hero-left">
+          <div class="home-eyebrow">Geostrategy Programme &mdash; Takshashila Institution</div>
+          <h1 class="home-h1">US 2026 Mid-term Election Racebook</h1>
+          <p class="home-desc">By researchers of the Geostrategy Programme of the Takshashila Institution. Tracking the 2026 US House, Senate, and Governor elections &mdash; approval ratings, generic ballot, key races, redistricting, and the factors that will shape the next Congress.</p>
+          <div class="home-big-countdown">
+            <div class="home-days" id="home-days">&#8212;</div>
+            <div class="home-days-label">days until Election Day</div>
+          </div>
+          <div class="home-election-date">Tuesday, 3 November 2026</div>
+          <div class="home-hero-pills">
+            <span class="home-pill">435 House seats</span>
+            <span class="home-pill">33 Senate seats</span>
+            <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">36 Governor races &#8599;</a></span>
+            <span class="home-pill"><a href="https://data.census.gov/table?q=DP05&amp;y=2024" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">5.09M Indian-Americans (2024) &#8599;</a></span>
+          </div>
         </div>
-        <div class="home-election-date">Tuesday, 3 November 2026</div>
-        <div class="home-hero-pills">
-          <span class="home-pill">435 House seats</span>
-          <span class="home-pill">33 Senate seats</span>
-          <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">36 Governor races &#8599;</a></span>
-          <span class="home-pill"><a href="https://data.census.gov/table?q=DP05&amp;y=2024" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">5.09M Indian-Americans (2024) &#8599;</a></span>
+        <!-- Right: quick context questions -->
+        <div class="home-hero-right">
+          <div class="hero-why-label">Quick Context</div>
+          <div class="hero-why-item" id="hwi-0">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(0,this)">How does the American political system function? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">The US government has three branches: the Presidency, Congress, and the Supreme Court. Congress has two chambers. The House has 435 members elected every two years. The Senate has 100 members elected every six years. This year, while all 435 House members are heading for elections, 35 out of 100 Senators are also going to face elections.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(0)">Read More &#8594;</button>
+            </div>
+          </div>
+          <div class="hero-why-item" id="hwi-1">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(1,this)">Why do the mid-terms matter? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">The 2026 midterms will decide who controls Congress. Congress controls laws, budgets, and oversight of the President. The results will shape US policy on trade, immigration, and foreign affairs. This includes policies that directly affect India.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(1)">Read More &#8594;</button>
+            </div>
+          </div>
+          <div class="hero-why-item" id="hwi-2">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(2,this)">Why is 2026 significant? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">Trump's second term has been controversial. Tariff hikes, federal job cuts, and government shutdowns have hurt his popularity. His approval ratings are falling. The midterms could cost Republicans their majority in Congress, thereby stalling the administration's legislative agenda for the rest of Trump's term.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(2)">Read More &#8594;</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -910,97 +941,62 @@ function switchTabByName(name) {
 }
 
 // ── HAMBURGER DRAWER ────────────────────────────────────────────────────────
-// ── WHY QUESTIONS BAR ────────────────────────────────────────────────────────
-const WHY_DATA = [
-  { s: 'The US government has three branches: the Presidency, Congress, and the Supreme Court. Congress has two chambers. The House has 435 members elected every two years. The Senate has 100 members elected every six years. This year, while all the 435 members are heading for elections, 35 out of 100 Senators are also going to face elections.' },
-  { s: 'The 2026 midterms will decide who controls Congress. Congress controls laws, budgets, and oversight of the President. The results will shape US policy on trade, immigration, and foreign affairs. This includes policies that directly affect India.' },
-  { s: 'Trump\'s second term has been controversial. Tariff hikes, federal job cuts, and government shutdowns have hurt his popularity. His approval ratings are falling. The midterms could cost Republicans their majority in Congress, thereby stalling the administration\'s legislative agenda for the rest of Trump\'s term.' }
-];
-let _whyActive = -1;
-function toggleWhyTab(idx, btn) {
-  const dropdown = document.getElementById('why-dropdown');
-  const summaryEl = document.getElementById('why-summary');
-  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
-  if (_whyActive === idx) {
-    dropdown.classList.remove('open');
-    _whyActive = -1;
-  } else {
-    btn.classList.add('active');
-    summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy(' + idx + ')">Read More &rarr;</button>';
-    // Position dropdown under the clicked button
-    const navArea = dropdown.parentElement;
-    const btnRect = btn.getBoundingClientRect();
-    const areaRect = navArea.getBoundingClientRect();
-    let left = btnRect.left - areaRect.left;
-    // Keep it from overflowing the right edge
-    const maxLeft = areaRect.width - 320;
-    dropdown.style.left = Math.min(left, maxLeft) + 'px';
-    dropdown.classList.add('open');
-    _whyActive = idx;
+
+// ── HERO WHY-QUESTIONS (inline accordion) ─────────────────────────────────
+function toggleHeroWhy(idx, btn) {
+  for (let i = 0; i < 3; i++) {
+    const item = document.getElementById('hwi-' + i);
+    const b = item.querySelector('.hero-why-btn');
+    if (i === idx) {
+      const opening = !item.classList.contains('open');
+      item.classList.toggle('open', opening);
+      b.classList.toggle('open', opening);
+    } else {
+      item.classList.remove('open');
+      item.querySelector('.hero-why-btn').classList.remove('open');
+    }
   }
 }
-function openWhyDropdown(idx) {
-  const dropdown = document.getElementById('why-dropdown');
-  const summaryEl = document.getElementById('why-summary');
-  const whyBtns = document.querySelectorAll('.why-tab');
-  const btn = whyBtns[idx];
-  if (!btn) return;
-  // Close any open dropdown first
-  dropdown.classList.remove('open');
-  whyBtns.forEach(b => b.classList.remove('active'));
-  _whyActive = -1;
-  // Now open for this idx
-  btn.classList.add('active');
-  summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy(' + idx + ')">Read More &rarr;</button>';
-  const navArea = dropdown.parentElement;
-  const btnRect = btn.getBoundingClientRect();
-  const areaRect = navArea.getBoundingClientRect();
-  const left = Math.min(btnRect.left - areaRect.left, areaRect.width - 320);
-  dropdown.style.left = left + 'px';
-  dropdown.classList.add('open');
-  _whyActive = idx;
-}
+
 function goToTellMeWhy(idx) {
-  // Close the nav dropdown
-  document.getElementById('why-dropdown').classList.remove('open');
-  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
-  _whyActive = -1;
-  // Navigate to home / overview
+  // Collapse the hero why item
+  const hwi = document.getElementById('hwi-' + idx);
+  if (hwi) {
+    hwi.classList.remove('open');
+    hwi.querySelector('.hero-why-btn').classList.remove('open');
+  }
+  // Navigate to home / overview (safety for future placement)
   switchTabByName('home');
   const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
   if (subBtn) switchHomeTab('overview', subBtn);
 
-  // Step 1 — scroll to accordion (after panel is visible)
+  // Step 1 — scroll to accordion
   setTimeout(() => {
     const target = document.getElementById('why-detail-' + idx);
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-    // Step 2 — wait for scroll to settle, then flash the summary
+    // Step 2 — wait for scroll, then flash
     setTimeout(() => {
       const detail  = document.getElementById('why-detail-' + idx);
       if (!detail) return;
       const summary = detail.querySelector('summary');
       if (!summary) return;
-
-      // Apply flash animation (3 pulses over 750ms)
       summary.style.animation = 'why-flash 400ms ease 2';
 
-      // Step 3 — after animation ends, open the accordion
+      // Step 3 — open after flash
       summary.addEventListener('animationend', function onEnd() {
         summary.removeEventListener('animationend', onEnd);
         summary.style.animation = '';
-        // Close others, open this one
         for (let i = 0; i < 3; i++) {
           const d = document.getElementById('why-detail-' + i);
           if (d) d.open = (i === idx);
         }
-        // Re-scroll so the heading sits at the top after content expands
         setTimeout(() => {
           const d = document.getElementById('why-detail-' + idx);
           if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 60);
       });
-    }, 250); // wait for scroll to settle
+    }, 250);
   }, 200);
 }
 

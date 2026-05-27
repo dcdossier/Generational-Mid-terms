@@ -661,7 +661,7 @@ body{background:#F5F5DC;color:#1E2232}
       <h3 id="tell-me-why" style="font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
       <div style="margin-bottom:28px;display:flex;flex-direction:column;gap:8px">
 
-        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+        <details id="why-detail-0" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
           <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             US Political Process <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
@@ -672,7 +672,7 @@ body{background:#F5F5DC;color:#1E2232}
           </div>
         </details>
 
-        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+        <details id="why-detail-1" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
           <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             Why do the mid-terms matter? <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
@@ -682,7 +682,7 @@ body{background:#F5F5DC;color:#1E2232}
           </div>
         </details>
 
-        <details style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
+        <details id="why-detail-2" style="border:1px solid #E0DDD6;border-radius:10px;overflow:hidden">
           <summary style="padding:16px 20px;cursor:pointer;font:600 15px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
             Why is 2026 significant? <span style="font-size:16px;color:#581845">&#9660;</span>
           </summary>
@@ -960,17 +960,27 @@ function openWhyDropdown(idx) {
   _whyActive = idx;
 }
 function goToTellMeWhy(idx) {
+  // Close the nav dropdown
+  document.getElementById('why-dropdown').classList.remove('open');
+  document.querySelectorAll('.why-tab').forEach(b => b.classList.remove('active'));
+  _whyActive = -1;
+  // Navigate to home / overview
   switchTabByName('home');
   const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
   if (subBtn) switchHomeTab('overview', subBtn);
   setTimeout(() => {
-    const el = document.getElementById('tell-me-why');
+    // Open the matching accordion, close the others
+    for (let i = 0; i < 3; i++) {
+      const d = document.getElementById('why-detail-' + i);
+      if (d) d.open = (i === idx);
+    }
+    // Scroll to the opened accordion
+    const target = document.getElementById('why-detail-' + idx) || document.getElementById('tell-me-why');
     const panel = document.getElementById('home-subpanel-overview');
-    if (el && panel) {
-      const offset = el.getBoundingClientRect().top - panel.getBoundingClientRect().top;
+    if (target && panel) {
+      const offset = target.getBoundingClientRect().top - panel.getBoundingClientRect().top;
       panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
     }
-    if (idx !== undefined) openWhyDropdown(idx);
   }, 200);
 }
 

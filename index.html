@@ -387,10 +387,11 @@ body{background:#F5F5DC;color:#1E2232}
 .nav-burger{display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;flex-shrink:0;border-radius:0;transition:background .12s;padding:14px 16px;border-bottom:2px solid transparent;margin-right:0}
 .nav-burger:hover{background:rgba(201,168,76,.12)}
 .nav-burger svg{display:block}
-.nd-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:1200;opacity:0;pointer-events:none;transition:opacity .22s}
-.nd-overlay.open{opacity:1;pointer-events:all}
-.nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#1E2232;z-index:1201;transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;box-shadow:4px 0 24px rgba(0,0,0,.25)}
+.nd-overlay{display:none}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#1E2232;z-index:1201;transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;box-shadow:4px 0 24px rgba(0,0,0,.18)}
 .nav-drawer.open{transform:translateX(0)}
+.page-shell{flex:1;display:flex;flex-direction:column;overflow:hidden;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
+.page-shell.drawer-open{margin-left:300px}
 .nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(201,168,76,.18);flex-shrink:0}
 .nd-header-title{font:700 13px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
 .nd-close{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#9a9a8a;border-radius:4px;transition:background .12s,color .12s;font-size:18px;line-height:1}
@@ -407,6 +408,8 @@ body{background:#F5F5DC;color:#1E2232}
 </style>
 </head>
 <body>
+
+<div class="page-shell" id="page-shell">
 
 <header class="header">
   <div class="header-left">
@@ -818,6 +821,8 @@ body{background:#F5F5DC;color:#1E2232}
   </div>
 </footer>
 
+</div><!-- /page-shell -->
+
 <script>
 'use strict';
 const ELECTION_DATE = new Date('2026-11-03T00:00:00');
@@ -881,13 +886,12 @@ function switchTabByName(name) {
 // ── HAMBURGER DRAWER ────────────────────────────────────────────────────────
 function toggleNavDrawer() {
   const drawer = document.getElementById('nav-drawer');
-  const overlay = document.getElementById('nd-overlay');
   const isOpen = drawer.classList.contains('open');
-  if (isOpen) { closeNavDrawer(); } else { drawer.classList.add('open'); overlay.classList.add('open'); }
+  if (isOpen) { closeNavDrawer(); } else { drawer.classList.add('open'); document.getElementById('page-shell').classList.add('drawer-open'); }
 }
 function closeNavDrawer() {
   document.getElementById('nav-drawer').classList.remove('open');
-  document.getElementById('nd-overlay').classList.remove('open');
+  document.getElementById('page-shell').classList.remove('drawer-open');
   ndHideTip();
 }
 function ndGo(tab) {

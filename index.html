@@ -397,9 +397,9 @@ body{background:#F5F5DC;color:#1E2232}
 .why-tab{font:500 12px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 15px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
 .why-tab:hover{color:var(--beige);background:var(--navy-light)}
 .why-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
-.why-dropdown{position:absolute;top:100%;left:0;right:0;background:#fff;border:1px solid #E8E8E0;border-top:none;border-radius:0 0 10px 10px;box-shadow:0 8px 24px rgba(0,0,0,.13);padding:0;opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:399}
+.why-dropdown{position:absolute;top:100%;left:0;width:320px;background:#fff;border:1px solid #E8E8E0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.14);opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:399}
 .why-dropdown.open{opacity:1;transform:translateY(0);pointer-events:all}
-.why-dropdown-inner{padding:14px 28px 16px}
+.why-dropdown-inner{padding:16px 18px 14px}
 .why-summary{font:400 12px/1.75 var(--sans);color:#3a3a3a}
 .why-read-more{font:600 11px var(--sans);color:#581845;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-left:4px;vertical-align:baseline}
 .why-read-more:hover{color:#8B1A4A}
@@ -926,6 +926,14 @@ function toggleWhyTab(idx, btn) {
   } else {
     btn.classList.add('active');
     summaryEl.innerHTML = WHY_DATA[idx].s + ' <button class="why-read-more" onclick="goToTellMeWhy()">Read More &rarr;</button>';
+    // Position dropdown under the clicked button
+    const navArea = dropdown.parentElement;
+    const btnRect = btn.getBoundingClientRect();
+    const areaRect = navArea.getBoundingClientRect();
+    let left = btnRect.left - areaRect.left;
+    // Keep it from overflowing the right edge
+    const maxLeft = areaRect.width - 320;
+    dropdown.style.left = Math.min(left, maxLeft) + 'px';
     dropdown.classList.add('open');
     _whyActive = idx;
   }

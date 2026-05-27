@@ -314,6 +314,7 @@ body{
 .home-freshness{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.08);border:1px solid #E8E8E0;border-radius:20px;padding:3px 10px;flex-shrink:0;font:400 10px var(--sans);color:#6B6B6B}
 .freshness-dot{width:5px;height:5px;border-radius:50%;background:#5EBD8A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes why-flash{0%,100%{background:#FFFFFF}25%,75%{background:#f5edda}50%{background:#e8c96a}}
 @media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 14px}}
 
 @media(max-width:600px){
@@ -968,19 +969,37 @@ function goToTellMeWhy(idx) {
   switchTabByName('home');
   const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
   if (subBtn) switchHomeTab('overview', subBtn);
+
+  // Step 1 — scroll to accordion (after panel is visible)
   setTimeout(() => {
-    // Open the matching accordion, close the others
-    for (let i = 0; i < 3; i++) {
-      const d = document.getElementById('why-detail-' + i);
-      if (d) d.open = (i === idx);
-    }
-    // Scroll to the opened accordion
-    const target = document.getElementById('why-detail-' + idx) || document.getElementById('tell-me-why');
-    const panel = document.getElementById('home-subpanel-overview');
+    const target = document.getElementById('why-detail-' + idx);
+    const panel  = document.getElementById('home-subpanel-overview');
     if (target && panel) {
       const offset = target.getBoundingClientRect().top - panel.getBoundingClientRect().top;
       panel.scrollBy({ top: offset - 20, behavior: 'smooth' });
     }
+
+    // Step 2 — wait for scroll to settle, then flash the summary
+    setTimeout(() => {
+      const detail  = document.getElementById('why-detail-' + idx);
+      if (!detail) return;
+      const summary = detail.querySelector('summary');
+      if (!summary) return;
+
+      // Apply flash animation (3 pulses over 750ms)
+      summary.style.animation = 'why-flash 750ms ease 3';
+
+      // Step 3 — after animation ends, open the accordion
+      summary.addEventListener('animationend', function onEnd() {
+        summary.removeEventListener('animationend', onEnd);
+        summary.style.animation = '';
+        // Close others, open this one
+        for (let i = 0; i < 3; i++) {
+          const d = document.getElementById('why-detail-' + i);
+          if (d) d.open = (i === idx);
+        }
+      });
+    }, 450); // wait for scroll to settle
   }, 200);
 }
 

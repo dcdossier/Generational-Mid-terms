@@ -314,7 +314,7 @@ body{
 .home-freshness{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.08);border:1px solid #E8E8E0;border-radius:20px;padding:3px 10px;flex-shrink:0;font:400 10px var(--sans);color:#6B6B6B}
 .freshness-dot{width:5px;height:5px;border-radius:50%;background:#5EBD8A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes why-flash{0%,100%{background:#FFFFFF}25%,75%{background:#f5edda}50%{background:#e8c96a}}
+@keyframes why-flash{0%,100%{background:#FFFFFF}50%{background:#f5edda}}
 @media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 14px}}
 
 @media(max-width:600px){
@@ -987,7 +987,7 @@ function goToTellMeWhy(idx) {
       if (!summary) return;
 
       // Apply flash animation (3 pulses over 750ms)
-      summary.style.animation = 'why-flash 750ms ease 3';
+      summary.style.animation = 'why-flash 400ms ease 1';
 
       // Step 3 — after animation ends, open the accordion
       summary.addEventListener('animationend', function onEnd() {
@@ -999,7 +999,7 @@ function goToTellMeWhy(idx) {
           if (d) d.open = (i === idx);
         }
       });
-    }, 450); // wait for scroll to settle
+    }, 250); // wait for scroll to settle
   }, 200);
 }
 

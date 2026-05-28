@@ -332,37 +332,66 @@ body{
 @keyframes why-flash{0%,100%{background:#FFFFFF}50%{background:#f5edda}}
 @media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 16px}}
 
+/* ── COUNTDOWN: never wrap ─────────────────────────────────────────────── */
+.countdown-timer{white-space:nowrap}
+
+@media(max-width:700px){
+  /* Drawer overlays on mobile instead of pushing (300px push = off-screen) */
+  .page-shell.drawer-open{margin-left:0}
+  .nd-overlay.mobile-visible{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200}
+}
+
 @media(max-width:600px){
-  .header{padding:0 14px;height:50px}
-  .header-logo{height:38px}
-  .header-title{font-size:15px}
+  /* Header: safe-area for iPhone notch/Dynamic Island + breathing room */
+  .header{padding:0 14px;padding-top:max(10px,env(safe-area-inset-top));height:auto;min-height:54px}
+  .header-logo{height:34px}
+  .header-title{font-size:14px}
   .header-sub{display:none}
-  .countdown-label{font-size:10px}
-  .countdown-timer{font-size:15px}
+  .countdown-label{font-size:10px;margin-bottom:2px}
+  .countdown-timer{font-size:14px;letter-spacing:0}
   .countdown-sub{display:none}
-  .nav-tab{padding:13px 14px;font-size:14px}
+  /* Nav tabs: compact so all tabs fit without hard cut-off */
+  .nav-tab{padding:11px 10px;font-size:13px;white-space:nowrap}
+  .nav-burger{padding:11px 12px}
+  /* Ticker */
   .ticker-wrap{height:26px}
   .ticker-label{font-size:8px;padding:0 11px}
   .ticker-item{font-size:11px;padding:0 20px}
-  .home-body{padding:20px 16px 40px}
-  .home-hero{padding:22px 20px;margin-bottom:20px}
-  .home-h1{font-size:19px}
-  .home-desc{font-size:15px;margin-bottom:16px}
-  .home-days{font-size:40px}
+  /* Hero */
+  .home-body{padding:16px 14px 40px}
+  .home-hero{padding:20px 18px;margin-bottom:18px;gap:0;border-radius:10px}
+  .home-h1{font-size:19px;margin-bottom:8px}
+  .home-desc{font-size:14px;margin-bottom:14px;line-height:1.6}
+  .home-days{font-size:38px}
   .home-days-label{font-size:13px}
-  .home-hero-pills{gap:6px;margin-top:16px}
-  .home-pill{font-size:11px;padding:3px 10px}
-  .home-metrics{grid-template-columns:1fr 1fr;gap:11px;margin-bottom:20px}
-  .metric-card{padding:16px 16px}
+  .home-hero-pills{gap:6px;margin-top:14px;flex-wrap:wrap}
+  .home-pill{font-size:12px;padding:4px 10px}
+  /* Quick context right panel (stacked below hero text on mobile) */
+  .home-hero-right{padding-top:16px;margin-top:12px}
+  .hero-why-label{font-size:10px;margin-bottom:10px}
+  .hero-why-btn{font-size:12px;padding:9px 0}
+  .hero-why-text{font-size:12px;line-height:1.65}
+  .hero-why-rm{font-size:11px}
+  /* Metrics */
+  .home-metrics{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+  .metric-card{padding:14px}
   .metric-num{font-size:24px}
-  .home-forecast{margin-bottom:20px}
-  .hfb-card{padding:16px 16px}
-  .home-news-source{width:70px;font-size:8px}
-  .home-news-item{gap:11px;padding:14px 0}
+  .metric-sub{font-size:12px}
+  /* Forecast */
+  .home-forecast{margin-bottom:18px}
+  .hfb-card{padding:14px}
+  .hfb-text{font-size:13px}
+  /* News */
+  .home-news-source{width:68px;font-size:8px}
+  .home-news-item{gap:10px;padding:13px 0}
   .home-news-title{font-size:14px}
-  .home-sections{gap:11px;margin-bottom:20px}
-  .home-section-card{padding:16px 16px}
-  .hsc-title{font-size:16px}
+  /* Section cards */
+  .home-sections{gap:10px;margin-bottom:18px}
+  .home-section-card{padding:14px}
+  .hsc-title{font-size:15px}
+  .hsc-desc{font-size:12px}
+  /* Tell me why accordions */
+  .home-sub-tab{font-size:13px;padding:11px 13px}
 }
 
 /* ── Colour overrides ── */
@@ -1003,11 +1032,17 @@ function goToTellMeWhy(idx) {
 function toggleNavDrawer() {
   const drawer = document.getElementById('nav-drawer');
   const isOpen = drawer.classList.contains('open');
-  if (isOpen) { closeNavDrawer(); } else { drawer.classList.add('open'); document.getElementById('page-shell').classList.add('drawer-open'); }
+  if (isOpen) { closeNavDrawer(); } else {
+    drawer.classList.add('open');
+    document.getElementById('page-shell').classList.add('drawer-open');
+    // On mobile: show overlay instead of pushing content off-screen
+    if (window.innerWidth <= 700) document.getElementById('nd-overlay').classList.add('mobile-visible');
+  }
 }
 function closeNavDrawer() {
   document.getElementById('nav-drawer').classList.remove('open');
   document.getElementById('page-shell').classList.remove('drawer-open');
+  document.getElementById('nd-overlay').classList.remove('mobile-visible');
   ndHideTip();
 }
 function ndGo(tab) {

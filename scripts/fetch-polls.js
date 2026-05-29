@@ -7,10 +7,11 @@
  * Sources (in priority order):
  *  1. NYT polling CSVs       → generic_ballot, state_polls   (structured CSV)
  *  2. BLS public API         → cpi.history                   (structured JSON)
- *  3. Groq + Nate Silver      → approval.trump                (AI-extracted HTML, fallback Gallup)
+ *  3. Nate Silver Bulletin   → approval.trump                (Datawrapper CSV direct API)
+ *     Chart: datawrapper.dwcdn.net/kSCt4/ — fetches latest version, downloads CSV
  *  4. Groq + Gallup          → congress_approval             (AI-extracted HTML)
  *  5. Groq + Ballotpedia     → retirements totals/split      (AI-extracted HTML)
- *  6. RSS feed fallbacks     → supplemental signals for all  (regex extraction)
+ *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
  * Env vars:
  *  GROQ_API_KEY  — Groq API key (required for sources 3-5)
@@ -315,70 +316,105 @@ async function fetchCPI(data) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. TRUMP APPROVAL — Groq + Nate Silver Bulletin
+// 3. TRUMP APPROVAL — Nate Silver Bulletin (Datawrapper CSV, direct API)
+//    Source: https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin
+//    Chart:  https://datawrapper.dwcdn.net/kSCt4/ (approval average model)
+//    Method: fetch base chart URL → extract latest version → download CSV → take latest row
 // ─────────────────────────────────────────────────────────────────────────────
 
+const DW_APPROVAL_CHART = 'kSCt4';   // Nate Silver approval average chart ID
+const DW_BASE_URL       = 'https://datawrapper.dwcdn.net';
+const NATE_SILVER_URL   = 'https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin';
+
 async function fetchTrumpApproval(data) {
-  console.log('[3/6] Trump approval (Groq + Nate Silver Bulletin)…');
+  console.log('[3/6] Trump approval (Nate Silver Bulletin / Datawrapper CSV)…');
 
-  // Primary: Nate Silver Bulletin approval tracker
-  // Fallback: Gallup if Silver page is unreachable
-  const urls = [
-    'https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin',
-    'https://news.gallup.com/poll/203198/presidential-approval-ratings-donald-trump.aspx',
-  ];
+  // ── Step 1: discover the latest chart version ────────────────────────────
+  // The base URL (no version) always returns the latest chart HTML.
+  // That HTML contains the versioned path we need for the CSV endpoint.
+  let latestVersion = null;
+  try {
+    const res = await safeFetch(`${DW_BASE_URL}/${DW_APPROVAL_CHART}/`, {
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' },
+    });
+    const html = await res.text();
+    // e.g. src="https://datawrapper.dwcdn.net/kSCt4/5899/"
+    const m = html.match(new RegExp(`${DW_APPROVAL_CHART}/(\\d+)`));
+    if (m) latestVersion = m[1];
+  } catch (err) {
+    console.warn(`  [DW] Version discovery failed: ${err.message}`);
+  }
 
-  for (const url of urls) {
-    let html;
-    const isNateSilver = url.includes('natesilver.net');
+  if (!latestVersion) {
+    console.warn('  [DW] Could not determine chart version — skipping Datawrapper');
+  } else {
+    console.log(`  Chart version: ${DW_APPROVAL_CHART}/${latestVersion}`);
+
+    // ── Step 2: fetch the CSV dataset ───────────────────────────────────────
+    const csvUrl = `${DW_BASE_URL}/${DW_APPROVAL_CHART}/${latestVersion}/dataset.csv`;
+    let csvText = '';
     try {
-      const res = await safeFetch(url, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-          'Accept': 'text/html,application/xhtml+xml',
-        },
+      const res = await safeFetch(csvUrl, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' },
       });
-      html = await res.text();
+      csvText = await res.text();
     } catch (err) {
-      console.warn(`  [${isNateSilver ? 'NateSilver' : 'Gallup'}] Fetch failed: ${err.message}`);
-      continue;
+      console.warn(`  [DW] CSV fetch failed: ${err.message}`);
     }
 
-    const text = stripHtml(html).slice(0, 16000);
-    const sourceLabel = isNateSilver ? 'Nate Silver Bulletin' : 'Gallup';
-    const result = await groqExtract(
-      'You are a precise data extraction assistant. Extract approval rating numbers only. Return valid JSON.',
-      `From this ${sourceLabel} page about Trump presidential approval ratings, find the most recent approve percentage, disapprove percentage, and net approval (approve minus disapprove, can be negative).
-Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER, "net": NUMBER}
-Only return approve/disapprove between 20 and 80. Net can be between -60 and 60.
-If uncertain, still provide your best estimate from the data shown.
+    if (csvText) {
+      // ── Step 3: parse CSV and extract latest data point ──────────────────
+      // CSV columns: modeldate,approve,disapprove,approve_lo,approve_hi,disapprove_lo,disapprove_hi
+      const lines = csvText.trim().split('\n').filter(l => l.trim());
+      if (lines.length >= 2) {
+        const headers = lines[0].split(',').map(h => h.replace(/"/g, '').trim().toLowerCase());
+        const appIdx  = headers.findIndex(h => h === 'approve');
+        const disIdx  = headers.findIndex(h => h === 'disapprove');
+        const dateIdx = headers.findIndex(h => h === 'modeldate' || h === 'date');
 
-Page text:
-${text}`
-    );
+        if (appIdx !== -1 && disIdx !== -1) {
+          const lastLine = lines[lines.length - 1];
+          const cols     = lastLine.split(',').map(c => c.replace(/"/g, '').trim());
+          const approve    = parseFloat(parseFloat(cols[appIdx]).toFixed(1));
+          const disapprove = parseFloat(parseFloat(cols[disIdx]).toFixed(1));
+          const modelDate  = dateIdx !== -1 ? cols[dateIdx] : 'unknown';
 
-    if (result?.approve > 20 && result?.approve < 80 && result?.disapprove > 20 && result?.disapprove < 80) {
-      const approve    = parseFloat(Number(result.approve).toFixed(1));
-      const disapprove = parseFloat(Number(result.disapprove).toFixed(1));
-      const net        = result?.net != null
-        ? parseFloat(Number(result.net).toFixed(1))
-        : parseFloat((approve - disapprove).toFixed(1));
-      const month = monthLabel();
+          // ── Step 4: validate before writing ─────────────────────────────
+          const valid = (
+            approve    > 25 && approve    < 70 &&
+            disapprove > 30 && disapprove < 75 &&
+            Math.abs(approve + disapprove - 100) < 30  // not wildly off 100%
+          );
 
-      data.approval.trump.approve     = approve;
-      data.approval.trump.disapprove  = disapprove;
-      data.approval.trump.net         = net;
-      data.approval.trump.source      = sourceLabel;
-      upsertHistory(data.approval.trump.history, month,
-        { approve, disapprove, net }, { approve, disapprove, net });
-      data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
+          // Sanity: don't jump more than 15 points from last stored value
+          const prevApprove = data.approval.trump.approve;
+          const saneChange  = prevApprove == null || Math.abs(approve - prevApprove) < 15;
 
-      console.log(`  Trump approval [${sourceLabel}]: ${approve}% approve / ${disapprove}% disapprove / net ${net > 0 ? '+' : ''}${net}`);
-      return true;
+          if (valid && saneChange) {
+            const net   = parseFloat((approve - disapprove).toFixed(1));
+            const month = monthLabel();
+
+            data.approval.trump.approve    = approve;
+            data.approval.trump.disapprove = disapprove;
+            data.approval.trump.net        = net;
+            data.approval.trump.source     = 'Nate Silver Bulletin';
+            upsertHistory(data.approval.trump.history, month,
+              { approve, disapprove, net }, { approve, disapprove, net });
+            data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
+
+            console.log(`  ✓ Trump approval [Nate Silver/${DW_APPROVAL_CHART} v${latestVersion}] as of ${modelDate}: ${approve}% / ${disapprove}% / net ${net >= 0 ? '+' : ''}${net}`);
+            return true;
+          } else {
+            console.warn(`  [DW] Validation failed — approve=${approve} disapprove=${disapprove} prevApprove=${prevApprove} (sane=${saneChange})`);
+          }
+        } else {
+          console.warn(`  [DW] CSV missing approve/disapprove columns. Headers: ${headers.join(', ')}`);
+        }
+      }
     }
   }
 
-  console.warn('  [Trump] Could not extract approval — keeping existing values');
+  console.warn('  [Trump] Datawrapper primary failed — RSS fallback will run if needed');
   return false;
 }
 

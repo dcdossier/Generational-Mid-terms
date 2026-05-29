@@ -645,11 +645,18 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.nytimes.com/interactive/polls/congressional-vote-2026.html" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">NYT Polling</a></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Trump Approval</div>
+          <div class="metric-label">Trump Approval / Disapproval</div>
           <div class="metric-num" id="hm-trump" style="color:#E08080">&#8212;</div>
           <div class="metric-sub" id="hm-trump-sub">Approve / Disapprove</div>
           <span class="metric-trend" id="hm-trump-trend"></span>
-          <div class="metric-sub" style="margin-top:6px">Sources: <a href="https://projects.fivethirtyeight.com/polls/approval/donald-trump/" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">538</a> &middot; <a href="https://news.gallup.com/poll/203198/presidential-approval-ratings-donald-trump.aspx" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Gallup</a></div>
+          <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Nate Silver Bulletin</a></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Trump Net Approval <button class="info-btn" data-tip="Net approval = Approve% minus Disapprove%. A negative number means more Americans disapprove than approve of the President's job performance.">i</button></div>
+          <div class="metric-num" id="hm-trump-net" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub" id="hm-trump-net-sub">Approve minus Disapprove</div>
+          <span class="metric-trend mt-dn" id="hm-trump-net-trend"></span>
+          <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Nate Silver Bulletin</a></div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Congress Approval</div>
@@ -823,14 +830,14 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- TRUMP APPROVAL CHART -->
       <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
-      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">40%</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">58.5%</strong>. Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">YouGov Trump Approval Tracker</a>.</p>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">—</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">—</strong>. Source: <a href="https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin" target="_blank" rel="noopener" style="color:#581845;text-decoration:underline">Nate Silver Bulletin</a>.</p>
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
         </div>
         <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
-        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://yougov.com/en-us/trackers/donald-trump-approval" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">YouGov Donald Trump Approval Tracker</a>. Monthly averages, Jan 2025 &ndash; May 2026.</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Nate Silver Bulletin</a>. Monthly averages, Jan 2025 &ndash; present.</div>
       </div>
 
       <!-- CONGRESS APPROVAL CHART -->
@@ -1147,6 +1154,16 @@ async function loadHomeData() {
     set('hm-trump-sub', `Approve ${trump.approve}% · Disapprove ${trump.disapprove || '—'}%`);
     const ttrend = document.getElementById('hm-trump-trend');
     if (ttrend) { ttrend.textContent = '↓ Below average'; ttrend.className = 'metric-trend mt-dn'; }
+
+    // Net approval card
+    const net = trump.net != null ? trump.net : (trump.approve && trump.disapprove ? parseFloat((trump.approve - trump.disapprove).toFixed(1)) : null);
+    if (net != null) {
+      const netEl = document.getElementById('hm-trump-net');
+      if (netEl) { netEl.textContent = (net > 0 ? '+' : '') + net + '%'; netEl.style.color = net >= 0 ? '#5EBD8A' : '#E08080'; }
+      set('hm-trump-net-sub', `${net > 0 ? 'More approve than disapprove' : 'More disapprove than approve'}`);
+      const ntrend = document.getElementById('hm-trump-net-trend');
+      if (ntrend) { ntrend.textContent = net >= 0 ? '↑ Positive' : '↓ Negative'; ntrend.className = 'metric-trend ' + (net >= 0 ? 'mt-up' : 'mt-dn'); }
+    }
   }
 
   const ca = data.congress_approval || {};

@@ -7,7 +7,7 @@
  * Sources (in priority order):
  *  1. NYT polling CSVs       → generic_ballot, state_polls   (structured CSV)
  *  2. BLS public API         → cpi.history                   (structured JSON)
- *  3. Groq + Gallup          → approval.trump                (AI-extracted HTML)
+ *  3. Groq + Nate Silver      → approval.trump                (AI-extracted HTML, fallback Gallup)
  *  4. Groq + Gallup          → congress_approval             (AI-extracted HTML)
  *  5. Groq + Ballotpedia     → retirements totals/split      (AI-extracted HTML)
  *  6. RSS feed fallbacks     → supplemental signals for all  (regex extraction)
@@ -315,36 +315,43 @@ async function fetchCPI(data) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 3. TRUMP APPROVAL — Groq + Gallup
+// 3. TRUMP APPROVAL — Groq + Nate Silver Bulletin
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function fetchTrumpApproval(data) {
-  console.log('[3/6] Trump approval (Groq + Gallup)…');
+  console.log('[3/6] Trump approval (Groq + Nate Silver Bulletin)…');
 
-  // Try Gallup Trump tracking page (server-rendered, parseable)
+  // Primary: Nate Silver Bulletin approval tracker
+  // Fallback: Gallup if Silver page is unreachable
   const urls = [
+    'https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin',
     'https://news.gallup.com/poll/203198/presidential-approval-ratings-donald-trump.aspx',
-    'https://news.gallup.com/poll/1723/presidential-job-approval.aspx',
   ];
 
   for (const url of urls) {
     let html;
+    const isNateSilver = url.includes('natesilver.net');
     try {
       const res = await safeFetch(url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml',
+        },
       });
       html = await res.text();
     } catch (err) {
-      console.warn(`  [Gallup] Fetch failed (${url.split('/').pop()}): ${err.message}`);
+      console.warn(`  [${isNateSilver ? 'NateSilver' : 'Gallup'}] Fetch failed: ${err.message}`);
       continue;
     }
 
-    const text = stripHtml(html).slice(0, 14000);
+    const text = stripHtml(html).slice(0, 16000);
+    const sourceLabel = isNateSilver ? 'Nate Silver Bulletin' : 'Gallup';
     const result = await groqExtract(
       'You are a precise data extraction assistant. Extract approval rating numbers only. Return valid JSON.',
-      `From this Gallup page about Trump presidential approval ratings, find the most recent approve and disapprove percentages.
-Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER}
-Only return numbers between 20 and 80. If uncertain, still provide your best estimate from the data shown.
+      `From this ${sourceLabel} page about Trump presidential approval ratings, find the most recent approve percentage, disapprove percentage, and net approval (approve minus disapprove, can be negative).
+Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER, "net": NUMBER}
+Only return approve/disapprove between 20 and 80. Net can be between -60 and 60.
+If uncertain, still provide your best estimate from the data shown.
 
 Page text:
 ${text}`
@@ -353,15 +360,20 @@ ${text}`
     if (result?.approve > 20 && result?.approve < 80 && result?.disapprove > 20 && result?.disapprove < 80) {
       const approve    = parseFloat(Number(result.approve).toFixed(1));
       const disapprove = parseFloat(Number(result.disapprove).toFixed(1));
+      const net        = result?.net != null
+        ? parseFloat(Number(result.net).toFixed(1))
+        : parseFloat((approve - disapprove).toFixed(1));
       const month = monthLabel();
 
-      data.approval.trump.approve    = approve;
-      data.approval.trump.disapprove = disapprove;
+      data.approval.trump.approve     = approve;
+      data.approval.trump.disapprove  = disapprove;
+      data.approval.trump.net         = net;
+      data.approval.trump.source      = sourceLabel;
       upsertHistory(data.approval.trump.history, month,
-        { approve, disapprove }, { approve, disapprove });
+        { approve, disapprove, net }, { approve, disapprove, net });
       data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
 
-      console.log(`  Trump approval: ${approve}% approve / ${disapprove}% disapprove`);
+      console.log(`  Trump approval [${sourceLabel}]: ${approve}% approve / ${disapprove}% disapprove / net ${net > 0 ? '+' : ''}${net}`);
       return true;
     }
   }

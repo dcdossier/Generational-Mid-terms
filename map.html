@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <style>
@@ -29,8 +29,8 @@
   --t1:#191919; --t2:#292929; --t3:#6B6B6B; --t4:#959595;
   --orange:#FF6719; --orange-p:#FFF0E9;
   --red:#E24B4A; --blue:#378ADD; --green:#3A8C5C; --yellow:#D4931A;
-  --sans:'DM Sans',ui-sans-serif,system-ui,sans-serif;
-  --serif:'Source Serif 4',Georgia,serif;
+  --sans:'Inter','Lato',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Lora',Georgia,serif;
   /* Rating palette */
   --sr-bg:#7a1c1c; --sr-tx:#fff;
   --lr-bg:#C04040; --lr-tx:#fff;
@@ -173,10 +173,10 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 .ch-d{background:#EEF4FB;color:#1A3F8A;font:700 14px var(--sans);padding:4px 15px;border-radius:20px}
 .ch-divider{width:1px;height:24px;background:var(--br-md);flex-shrink:0}
 .ch-bg-block{display:flex;align-items:baseline;gap:5px}
-.ch-bg-n{font:700 22px var(--serif);color:#581845;line-height:1}
+.ch-bg-n{font:700 22px var(--serif);color:#620d3c;line-height:1}
 .ch-bg-text{font:400 14px var(--sans);color:var(--t3)}
 .ch-src{font:400 13px var(--sans);color:var(--t4);margin-left:auto}
-.ch-src a{color:#581845;text-decoration:underline}
+.ch-src a{color:#620d3c;text-decoration:underline}
 @media(max-width:700px){.ch-src{margin-left:0}.ch-divider{display:none}}
 
 /* ── D3 CHOROPLETH MAPS ── */
@@ -211,7 +211,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 }
 /* ── INFO TOOLTIP ── */
 .info-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans);cursor:pointer;vertical-align:middle;margin-left:4px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
-.info-btn:hover{background:#581845;color:#fff}
+.info-btn:hover{background:#620d3c;color:#fff}
 .info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 14px var(--sans);line-height:1.65;padding:13px 16px;border-radius:8px;max-width:310px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
 .info-tooltip.visible{display:block}
 </style>

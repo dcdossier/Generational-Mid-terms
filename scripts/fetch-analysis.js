@@ -546,13 +546,14 @@ const SEED_POSTS = [
 
 // ── RSS SOURCES ──────────────────────────────────────────────────────────────
 const RSS_SOURCES = [
-  // DC Dossier Substack — filtered by Congress/midterm keywords
+  // DC Dossier Substack — ALL posts included (primary research source, no keyword filter)
   // defaultAuthor covers the typical case (Abhishek Kadiyala); guest posts will
   // be caught via dc:creator in the RSS item once Substack includes it.
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
     type: 'newsletter',
+    forceInclude: true,
     defaultAuthor: 'Abhishek Kadiyala',
   },
   // YouTube is handled separately via fetchYouTubePodcasts() with GROQ name extraction
@@ -586,7 +587,10 @@ async function fetchYouTubePodcasts(channelId) {
     for (const raw of items) {
       const { title, link, desc, date } = parseRssItem(raw);
       if (!title || !link) continue;
-      if (!matchesKw(title, desc)) continue;
+      // Include Takshashila videos about US politics, Congress, midterms, or foreign policy
+      // Exclude pure tech/AI/economics episodes unrelated to the US political cycle
+      const isPolitics = /congress|midterm|senate|house|trump|election|democrat|republican|war powers|iran.*congress|congress.*iran|hegseth|tariff.*congress|2026.*race/i.test(title + ' ' + desc);
+      if (!isPolitics) continue;
 
       // Use GROQ to extract accurate host/guest names from the description
       const names = await extractNamesWithGroq(title, desc);

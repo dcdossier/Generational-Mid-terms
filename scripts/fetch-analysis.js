@@ -168,8 +168,42 @@ async function extractNamesWithGroq(title, description) {
   }
 }
 
+
+// ── GROQ: CHECK 2026 MIDTERM RELEVANCE ───────────────────────────────────────
+// Used for DC Dossier posts that don't match KW_RE keywords. Asks GROQ whether
+// the post is meaningfully about the 2026 elections, congressional dynamics,
+// electoral trends, or Trump's political standing.
+async function checkMidtermRelevance(title, desc) {
+  const apiKey = process.env.GROQ_API_KEY;
+  if (!apiKey) return false;
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      timeout: 10000,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [{
+          role: 'user',
+          content: `DC Dossier is a newsletter tracking US congressional legislation and the 2026 midterm elections from an Indian perspective. Does this issue deal with: US midterm elections, congressional dynamics, electoral trends, Trump's approval/political standing, economic factors affecting 2026 elections, or congressional oversight? Answer only "yes" or "no".\n\nTitle: ${title}\nDescription: ${(desc || '').slice(0, 400)}`,
+        }],
+        max_tokens: 5,
+        temperature: 0,
+      }),
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return (data.choices?.[0]?.message?.content || '').trim().toLowerCase().startsWith('yes');
+  } catch (e) {
+    return false;
+  }
+}
+
 // ── FETCH RSS ───────────────────────────────────────────────────────────────
-async function fetchRss(url, source, type, forceInclude, defaultAuthor) {
+async function fetchRss(url, source, type, forceInclude, defaultAuthor, groqCheck) {
   try {
     const res = await fetch(url, {
       timeout: FETCH_TIMEOUT,
@@ -182,15 +216,20 @@ async function fetchRss(url, source, type, forceInclude, defaultAuthor) {
     let items = channel.item || channel.entry || [];
     if (!Array.isArray(items)) items = items ? [items] : [];
 
-    return items.flatMap(raw => {
+    const posts = [];
+    for (const raw of items) {
       const { title, link, desc, date, creator } = parseRssItem(raw);
-      if (!title || !link) return [];
-      if (!forceInclude && !matchesKw(title, desc)) return [];
-      // Use full URL hash for unique id (avoid base64 prefix collisions)
+      if (!title || !link) continue;
+      // Relevance check: keyword match, then GROQ fallback for groqCheck sources
+      const kwMatch = forceInclude || matchesKw(title, desc);
+      if (!kwMatch) {
+        if (!groqCheck) continue;
+        const relevant = await checkMidtermRelevance(title, desc);
+        if (!relevant) continue;
+      }
       const id = 'rss-' + Buffer.from(link).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
-      // Use dc:creator from RSS if available, otherwise fall back to defaultAuthor
       const author = creator || defaultAuthor || '';
-      return [{
+      posts.push({
         id,
         type,
         title,
@@ -200,8 +239,9 @@ async function fetchRss(url, source, type, forceInclude, defaultAuthor) {
         date: date.toISOString(),
         tags: extractTags(title + ' ' + desc),
         author,
-      }];
-    });
+      });
+    }
+    return posts;
   } catch (e) {
     console.warn(`[fetch-analysis] RSS failed (${source}):`, e.message);
     return [];
@@ -546,14 +586,14 @@ const SEED_POSTS = [
 
 // ── RSS SOURCES ──────────────────────────────────────────────────────────────
 const RSS_SOURCES = [
-  // DC Dossier Substack — ALL posts included (primary research source, no keyword filter)
-  // defaultAuthor covers the typical case (Abhishek Kadiyala); guest posts will
-  // be caught via dc:creator in the RSS item once Substack includes it.
+  // DC Dossier Substack — keyword filter + GROQ fallback for borderline posts
+  // GROQ (when available) checks whether each post is relevant to the 2026 midterms.
+  // Without GROQ, only posts matching KW_RE keywords are included.
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
     type: 'newsletter',
-    forceInclude: true,
+    groqCheck: true,
     defaultAuthor: 'Abhishek Kadiyala',
   },
   // YouTube is handled separately via fetchYouTubePodcasts() with GROQ name extraction
@@ -749,7 +789,7 @@ async function main() {
 
   // Fetch RSS sources
   for (const src of RSS_SOURCES) {
-    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '');
+    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.groqCheck || false);
     console.log(`[fetch-analysis] ${src.source}: ${posts.length} matching items`);
     for (const post of posts) {
       if (seenUrls.has(post.url)) continue;

@@ -555,13 +555,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .kr-callout-senate{color:#9B2828}.kr-callout-house{color:#1A5EA8}
 @media(max-width:600px){.kr-proj-range{gap:10px}}
 
-/* ── DEF-TIP TOOLTIP ─────────────────────────────────────── */
-.def-tip-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px 'Inter','Lato',sans-serif;cursor:pointer;vertical-align:middle;line-height:1;padding:0;margin-left:3px;position:relative;top:-2px;flex-shrink:0;transition:background .15s;border:none;outline:none;user-select:none}
-.def-tip-btn:hover{background:#c98a10}
-#def-tip-box{position:fixed;z-index:999999;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;max-width:320px;box-shadow:0 6px 28px rgba(0,0,0,.22);font:400 13px/1.65 'Inter','Lato',sans-serif;color:#2a2a2a;display:none;pointer-events:auto}
-#def-tip-box.visible{display:block}
-#def-tip-box .tip-term{font:700 13px 'Lora',Georgia,serif;color:#620d3c;display:block;margin-bottom:3px}
-#def-tip-box p{margin:0 0 8px}
 </style>
 </head>
 <body>
@@ -1587,7 +1580,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- CALLOUT -->
   <div class="callout" id="ca-callout">
     <div class="callout-label" id="ca-callout-label">The "throw the bums out" effect &#8212; congressional approval and incumbent losses</div>
-    <span id="ca-callout-body">When congressional approval falls below <strong>20%</strong>, the incumbent-party's members face significantly higher defeat rates regardless of presidential approval. In 2014, 16% approval preceded outsized losses for vulnerable Democrats. The 119th Congress at <strong>16%</strong> places every marginal Republican seat in structural danger &#8212; particularly the 22 rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> or Lean in the House.</span>
+    <span id="ca-callout-body">When congressional approval falls below <strong>20%</strong>, the incumbent-party's members face significantly higher defeat rates regardless of presidential approval. In 2014, 16% approval preceded outsized losses for vulnerable Democrats. The 119th Congress at <strong>16%</strong> places every marginal Republican seat in structural danger &#8212; particularly the 22 rated Toss-up or Lean in the House.</span>
   </div>
 
   <!-- HISTORICAL MIDTERM TABLE -->
@@ -1666,7 +1659,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="stat-strip">
     <div class="stat-box"><div class="stat-num" id="kr-stat-senate">33</div><div class="stat-label">Senate Seats Up</div></div>
-    <div class="stat-box"><div class="stat-num" id="kr-stat-tossup">22</div><div class="stat-label">House Toss-ups<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span></div></div>
+    <div class="stat-box"><div class="stat-num" id="kr-stat-tossup">22</div><div class="stat-label">House Toss-ups</div></div>
     <div class="stat-box"><div class="stat-num" id="kr-stat-gov">17</div><div class="stat-label">Governor Races</div></div>
     <div class="stat-box"><div class="stat-num" id="kr-stat-flip">+4</div><div class="stat-label">D Seats Needed (Senate)</div></div>
   </div>
@@ -1676,7 +1669,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#8B0000"></div>Safe R</div>
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#C04040"></div>Likely R</div>
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#E08070"></div>Lean R</div>
-    <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#C9A227"></div>Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span></div>
+    <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#C9A227"></div>Toss-up</div>
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#5B8FD4"></div>Lean D</div>
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#1A5EA8"></div>Likely D</div>
     <div class="kr-legend-item"><div class="kr-legend-dot" style="background:#0D3580"></div>Safe D</div>
@@ -1772,7 +1765,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <div class="kr-path" id="kr-hou-path"></div>
 
   <h3 class="section-title" style="margin-top:18px;margin-bottom:6px">Competitive House Districts</h3>
-  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 8px">The 20 most competitive House districts. Toss-ups<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> are the decisive seats for House control.</p>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 8px">The 20 most competitive House districts. Toss-ups are the decisive seats for House control.</p>
   <div style="overflow-x:auto">
     <table class="kr-table" id="kr-house-table">
       <thead><tr>
@@ -1997,7 +1990,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="rd-legend">
       <div class="rd-li"><div class="rd-sq" style="background:#1a3d80"></div>Safe D</div>
       <div class="rd-li"><div class="rd-sq" style="background:#4c8de0"></div>Lean D</div>
-      <div class="rd-li"><div class="rd-sq" style="background:#888888"></div>Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span></div>
+      <div class="rd-li"><div class="rd-sq" style="background:#888888"></div>Toss-up</div>
       <div class="rd-li"><div class="rd-sq" style="background:#e05555"></div>Lean R</div>
       <div class="rd-li"><div class="rd-sq" style="background:#8b1c2e"></div>Safe R</div>
       <div class="rd-li"><div class="rd-sq" style="background:repeating-linear-gradient(45deg,#F0A030 0px,#F0A030 3px,rgba(240,160,48,.18) 3px,rgba(240,160,48,.18) 6px)"></div>In Litigation (boundaries may change)</div>
@@ -5751,35 +5744,91 @@ loadData();
 
 <script>
 (function(){
-  if(document.getElementById('def-tip-box'))return;
-  var box=document.createElement('div');
-  box.id='def-tip-box';
-  box.innerHTML='<p><span class="tip-term">Battleground seats</span>Any seat that could realistically flip parties in the election cycle. This is a broad category.</p><p><span class="tip-term">Toss-up seats</span>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.</p><p>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats &mdash; acting as a spectrum of likelihood of a seat being secured by a party or faction.</p>';
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats — a spectrum of how likely a seat is to change hands.';
+
+  /* --- inject CSS --- */
+  var st = document.createElement('style');
+  st.textContent = '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:3px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;box-sizing:border-box;padding:0}'
+    + '.dti-btn:hover{background:#c98a10}'
+    + '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}'
+    + '#dti-box.on{display:block}';
+  document.head.appendChild(st);
+
+  /* --- create tooltip box --- */
+  if(document.getElementById('dti-box'))return;
+  var box = document.createElement('div');
+  box.id = 'dti-box';
+  box.innerHTML = CONTENT;
   document.body.appendChild(box);
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.def-tip-btn');
+
+  /* --- inject icon buttons into text nodes --- */
+  function inject(root){
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n){
+        var p = n.parentElement;
+        if(!p) return NodeFilter.FILTER_REJECT;
+        var tag = p.nodeName;
+        if(/^(SCRIPT|STYLE|CODE|PRE|TEXTAREA|INPUT|NOSCRIPT)$/.test(tag)) return NodeFilter.FILTER_REJECT;
+        if(p.classList && (p.classList.contains('dti-btn') || p.getAttribute('data-dti'))) return NodeFilter.FILTER_REJECT;
+        return /battleground|toss-up/i.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    var nodes=[], n;
+    while((n=walker.nextNode())) nodes.push(n);
+    nodes.forEach(function(node){
+      // Skip if next sibling already a dti-btn (already processed)
+      if(node.nextSibling && node.nextSibling.classList && node.nextSibling.classList.contains('dti-btn')) return;
+      var val = node.nodeValue;
+      var re = /(battleground|toss-up)/gi, m, last=0;
+      var frag = document.createDocumentFragment();
+      while((m=re.exec(val))!==null){
+        if(m.index>last) frag.appendChild(document.createTextNode(val.slice(last,m.index)));
+        frag.appendChild(document.createTextNode(m[0]));
+        var btn = document.createElement('button');
+        btn.type='button';
+        btn.className='dti-btn';
+        btn.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+        btn.setAttribute('data-dti','1');
+        btn.textContent='i';
+        frag.appendChild(btn);
+        last=re.lastIndex;
+      }
+      if(last<val.length) frag.appendChild(document.createTextNode(val.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    });
+  }
+
+  /* --- click handler (bubble phase) --- */
+  var active = null;
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.dti-btn') : null;
     if(btn){
-      e.stopPropagation();
-      if(box.classList.contains('visible')&&box._t===btn){box.classList.remove('visible');box._t=null;return;}
-      box._t=btn;
-      box.classList.add('visible');
-      // Position after making visible so offsetWidth/Height are real
-      requestAnimationFrame(function(){
-        var r=btn.getBoundingClientRect();
-        var bw=box.offsetWidth||300,bh=box.offsetHeight||160;
-        var left=r.left+r.width/2-bw/2;
-        left=Math.max(8,Math.min(left,window.innerWidth-bw-8));
-        var top=r.top-bh-10;
-        if(top<8)top=r.bottom+8;
-        box.style.left=left+'px';
-        box.style.top=top+'px';
-      });
+      e.stopImmediatePropagation();
+      if(active===btn && box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      active=btn;
+      box.classList.add('on');
+      var r=btn.getBoundingClientRect(), w=300;
+      var left=r.left+r.width/2-w/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-w-8));
+      var top=r.bottom+8;
+      if(top+170>window.innerHeight) top=r.top-170-8;
+      if(top<8) top=r.bottom+8;
+      box.style.left=left+'px';
+      box.style.top=top+'px';
     }else{
-      box.classList.remove('visible');box._t=null;
+      box.classList.remove('on');active=null;
     }
-  },true);
+  });
+
+  /* --- run inject --- */
+  function run(){
+    inject(document.body);
+    // Re-run after 2s to catch any late-rendered dynamic content
+    setTimeout(function(){inject(document.body);},2000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
 })();
 </script>
-
 </body>
 </html>

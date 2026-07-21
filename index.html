@@ -464,13 +464,6 @@ body{background:#F5F5DC;color:#1E2232}
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
 
-/* ── DEF-TIP TOOLTIP ─────────────────────────────────────── */
-.def-tip-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px 'Inter','Lato',sans-serif;cursor:pointer;vertical-align:middle;line-height:1;padding:0;margin-left:3px;position:relative;top:-2px;flex-shrink:0;transition:background .15s;border:none;outline:none;user-select:none}
-.def-tip-btn:hover{background:#c98a10}
-#def-tip-box{position:fixed;z-index:999999;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;max-width:320px;box-shadow:0 6px 28px rgba(0,0,0,.22);font:400 13px/1.65 'Inter','Lato',sans-serif;color:#2a2a2a;display:none;pointer-events:auto}
-#def-tip-box.visible{display:block}
-#def-tip-box .tip-term{font:700 13px 'Lora',Georgia,serif;color:#620d3c;display:block;margin-bottom:3px}
-#def-tip-box p{margin:0 0 8px}
 </style>
 </head>
 <body>
@@ -676,14 +669,14 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Gallup</a></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">House Toss-ups<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div class="metric-label">House Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div class="metric-num" id="hm-tossups" style="color:var(--gold)">&#8212;</div>
           <div class="metric-sub">Seats that decide control</div>
           <span class="metric-trend mt-nt">435 seats total</span>
           <div class="metric-sub" style="margin-top:6px">Source: <a href="https://www.cookpolitical.com/ratings/house-race-ratings" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Cook Political</a></div>
         </div>
         <div class="metric-card">
-          <div class="metric-label">Senate Toss-ups<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div class="metric-label">Senate Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favored and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)">2</div>
           <div class="metric-sub">Seats in genuine contention</div>
           <span class="metric-trend mt-nt">33+2 seats up in 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span>
@@ -702,7 +695,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;217</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;212</span>
           </div>
-          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">42 <span style="font:400 15px var(--sans);color:#777">of 435</span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -715,7 +708,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;53</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D+I&nbsp;47</span>
           </div>
-          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">9 <span style="font:400 15px var(--sans);color:#777">of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -728,7 +721,7 @@ body{background:#F5F5DC;color:#1E2232}
             <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;26</span>
             <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;24</span>
           </div>
-          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">7 <span style="font:400 15px var(--sans);color:#777">of 36 races</span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
@@ -1682,35 +1675,91 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 
 <script>
 (function(){
-  if(document.getElementById('def-tip-box'))return;
-  var box=document.createElement('div');
-  box.id='def-tip-box';
-  box.innerHTML='<p><span class="tip-term">Battleground seats</span>Any seat that could realistically flip parties in the election cycle. This is a broad category.</p><p><span class="tip-term">Toss-up seats</span>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.</p><p>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats &mdash; acting as a spectrum of likelihood of a seat being secured by a party or faction.</p>';
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats — a spectrum of how likely a seat is to change hands.';
+
+  /* --- inject CSS --- */
+  var st = document.createElement('style');
+  st.textContent = '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:3px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;box-sizing:border-box;padding:0}'
+    + '.dti-btn:hover{background:#c98a10}'
+    + '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}'
+    + '#dti-box.on{display:block}';
+  document.head.appendChild(st);
+
+  /* --- create tooltip box --- */
+  if(document.getElementById('dti-box'))return;
+  var box = document.createElement('div');
+  box.id = 'dti-box';
+  box.innerHTML = CONTENT;
   document.body.appendChild(box);
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.def-tip-btn');
+
+  /* --- inject icon buttons into text nodes --- */
+  function inject(root){
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function(n){
+        var p = n.parentElement;
+        if(!p) return NodeFilter.FILTER_REJECT;
+        var tag = p.nodeName;
+        if(/^(SCRIPT|STYLE|CODE|PRE|TEXTAREA|INPUT|NOSCRIPT)$/.test(tag)) return NodeFilter.FILTER_REJECT;
+        if(p.classList && (p.classList.contains('dti-btn') || p.getAttribute('data-dti'))) return NodeFilter.FILTER_REJECT;
+        return /battleground|toss-up/i.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      }
+    });
+    var nodes=[], n;
+    while((n=walker.nextNode())) nodes.push(n);
+    nodes.forEach(function(node){
+      // Skip if next sibling already a dti-btn (already processed)
+      if(node.nextSibling && node.nextSibling.classList && node.nextSibling.classList.contains('dti-btn')) return;
+      var val = node.nodeValue;
+      var re = /(battleground|toss-up)/gi, m, last=0;
+      var frag = document.createDocumentFragment();
+      while((m=re.exec(val))!==null){
+        if(m.index>last) frag.appendChild(document.createTextNode(val.slice(last,m.index)));
+        frag.appendChild(document.createTextNode(m[0]));
+        var btn = document.createElement('button');
+        btn.type='button';
+        btn.className='dti-btn';
+        btn.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+        btn.setAttribute('data-dti','1');
+        btn.textContent='i';
+        frag.appendChild(btn);
+        last=re.lastIndex;
+      }
+      if(last<val.length) frag.appendChild(document.createTextNode(val.slice(last)));
+      node.parentNode.replaceChild(frag,node);
+    });
+  }
+
+  /* --- click handler (bubble phase) --- */
+  var active = null;
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest ? e.target.closest('.dti-btn') : null;
     if(btn){
-      e.stopPropagation();
-      if(box.classList.contains('visible')&&box._t===btn){box.classList.remove('visible');box._t=null;return;}
-      box._t=btn;
-      box.classList.add('visible');
-      // Position after making visible so offsetWidth/Height are real
-      requestAnimationFrame(function(){
-        var r=btn.getBoundingClientRect();
-        var bw=box.offsetWidth||300,bh=box.offsetHeight||160;
-        var left=r.left+r.width/2-bw/2;
-        left=Math.max(8,Math.min(left,window.innerWidth-bw-8));
-        var top=r.top-bh-10;
-        if(top<8)top=r.bottom+8;
-        box.style.left=left+'px';
-        box.style.top=top+'px';
-      });
+      e.stopImmediatePropagation();
+      if(active===btn && box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      active=btn;
+      box.classList.add('on');
+      var r=btn.getBoundingClientRect(), w=300;
+      var left=r.left+r.width/2-w/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-w-8));
+      var top=r.bottom+8;
+      if(top+170>window.innerHeight) top=r.top-170-8;
+      if(top<8) top=r.bottom+8;
+      box.style.left=left+'px';
+      box.style.top=top+'px';
     }else{
-      box.classList.remove('visible');box._t=null;
+      box.classList.remove('on');active=null;
     }
-  },true);
+  });
+
+  /* --- run inject --- */
+  function run(){
+    inject(document.body);
+    // Re-run after 2s to catch any late-rendered dynamic content
+    setTimeout(function(){inject(document.body);},2000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
 })();
 </script>
-
 </body>
 </html>

@@ -399,7 +399,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <div class="section-hdr" style="margin-bottom:10px">
     <div>
       <div class="section-title">House district map &#8212; all 435 districts, 2026</div>
-      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 20 individually-tracked competitive districts. Click any competitive district for detail.</div>
+      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 46 individually-tracked battleground districts (Ballotpedia 2026 battlegrounds). Click any highlighted district for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -434,20 +434,20 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- COMPETITIVE RACES -->
   <div class="callout">
     <div class="callout-label">Path to the majority</div>
-    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). There are <strong>40 competitive districts</strong> across all ratings &#8212; 11 Lean R, 22 Toss-up, and 9 Lean D &#8212; most held by Republicans in districts that Biden or Harris carried. Historical first-midterm headwinds and high presidential disapproval typically accelerate Democratic gains.
+    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). Ballotpedia identifies <strong>46 battleground districts</strong> in 2026 &#8212; 17 Lean D, 17 Toss-up, 5 Lean R, 4 Likely R, 3 Likely D, with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
   </div>
 
   <!-- SEAT DISTRIBUTION CHART -->
   <div class="chart-card">
     <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Full rating spectrum across all 435 House seats. The 20 individually-tracked competitive districts (Lean R, Toss-up, Lean D) show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder.</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats. The 46 individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
     <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
     <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
   </div>
 
   <div class="chart-card">
-    <div class="card-title">20 individually-tracked competitive districts</div>
-    <div class="card-sub">Districts rated Lean R, Toss-up, or Lean D &#8212; all competitive categories, not just Toss-ups. PVP = Presidential Vote Performance (2024 presidential margin in the district).</div>
+    <div class="card-title">46 battleground districts</div>
+    <div class="card-sub">All 46 Ballotpedia-identified 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
     <table class="race-table" id="comp-table">
       <thead>
         <tr>

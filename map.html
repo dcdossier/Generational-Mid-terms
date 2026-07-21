@@ -383,12 +383,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <div>
         <div class="section-eyebrow">119th Congress</div>
         <div class="section-title">Intraparty Factions — Senate</div>
-        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to highlight on the map.</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to filter the map and table, or view all factions at once.</div>
       </div>
     </div>
 
     <div class="faction-controls">
       <select class="faction-sel" id="senate-faction-sel" onchange="renderSenateFaction(this.value)">
+        <option value="ALL" selected>All Factions &mdash; 100 members</option>
         <option value="MD">Moderate Democrats (MD) &mdash; 24 members</option>
         <option value="PD">Progressive Democrats (PD) &mdash; 22 members</option>
         <option value="MR">MAGA Republicans (MR) &mdash; 25 members</option>
@@ -415,12 +416,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
 
     <div class="chart-card">
-      <div class="card-title" id="senate-faction-card-title">Select a faction above to view members</div>
+      <div class="card-title" id="senate-faction-card-title">All Senate Factions &mdash; 100 members</div>
       <input class="faction-table-search" type="search" placeholder="Search by name or state&hellip;" oninput="filterFactionTable('senate',this.value)">
       <table class="race-table" id="senate-faction-table">
-        <thead><tr><th>Member</th><th>State</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <thead id="senate-faction-thead"><tr><th>Faction</th><th>Member</th><th>State</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
         <tbody id="senate-faction-tbody">
-          <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">Select a faction above&hellip;</td></tr>
+          <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
         </tbody>
       </table>
     </div>
@@ -547,12 +548,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <div>
         <div class="section-eyebrow">119th Congress</div>
         <div class="section-title">Intraparty Factions — House</div>
-        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to highlight on the map.</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to filter the map and table, or view all factions at once.</div>
       </div>
     </div>
 
     <div class="faction-controls">
       <select class="faction-sel" id="house-faction-sel" onchange="renderHouseFaction(this.value)">
+        <option value="ALL" selected>All Factions &mdash; 430 members</option>
         <option value="MD">Moderate Democrats (MD) &mdash; 128 members</option>
         <option value="PD">Progressive Democrats (PD) &mdash; 84 members</option>
         <option value="MR">MAGA Republicans (MR) &mdash; 140 members</option>
@@ -579,12 +581,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
 
     <div class="chart-card">
-      <div class="card-title" id="house-faction-card-title">Select a faction above to view members</div>
+      <div class="card-title" id="house-faction-card-title">All House Factions &mdash; 430 members</div>
       <input class="faction-table-search" type="search" placeholder="Search by name or district&hellip;" oninput="filterFactionTable('house',this.value)">
       <table class="race-table" id="house-faction-table">
-        <thead><tr><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <thead id="house-faction-thead"><tr><th>Faction</th><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
         <tbody id="house-faction-tbody">
-          <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">Select a faction above&hellip;</td></tr>
+          <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
         </tbody>
       </table>
     </div>
@@ -1614,6 +1616,7 @@ const FACTION_NAMES  = {
   MD:'Moderate Democrats',PD:'Progressive Democrats',
   MR:'MAGA Republicans',AR:'America First Republicans',TR:'Traditional Republicans',IND:'Independent'
 };
+const FACTION_ORDER = ['MR','AR','TR','MD','PD'];
 
 let _factionData=null,_factionFetching=false,_factionWaiters=[];
 let _hFacZoom=null,_sFacZoom=null;
@@ -1632,7 +1635,7 @@ function fetchFactionData(cb){
 function updateFactionChips(chamber,code){
   document.querySelectorAll('#'+chamber+'-faction-section .faction-chip').forEach(c=>{
     const ccode=c.textContent.trim().replace(/[^A-Z]/g,'');
-    c.classList.toggle('active',ccode===code);
+    c.classList.toggle('active', code!=='ALL' && ccode===code);
   });
 }
 
@@ -1641,10 +1644,17 @@ function renderHouseFaction(code){
   const ld=document.getElementById('house-faction-loading');
   if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
   fetchFactionData(data=>{
-    const members=data.factions.house[code]||[];
-    document.getElementById('house-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' House members';
-    drawHouseFactionMap(code,data.houseMap);
-    populateFactionTable('house',code,members);
+    if(code==='ALL'){
+      const total=Object.values(data.factions.house).reduce((s,a)=>s+a.length,0);
+      document.getElementById('house-faction-card-title').textContent='All House Factions — '+total+' members';
+      drawHouseFactionMap('ALL',data.houseMap);
+      populateFactionTable('house','ALL',data.factions.house);
+    } else {
+      const members=data.factions.house[code]||[];
+      document.getElementById('house-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' House members';
+      drawHouseFactionMap(code,data.houseMap);
+      populateFactionTable('house',code,members);
+    }
   });
 }
 
@@ -1653,10 +1663,17 @@ function renderSenateFaction(code){
   const ld=document.getElementById('senate-faction-loading');
   if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
   fetchFactionData(data=>{
-    const members=data.factions.senate[code]||[];
-    document.getElementById('senate-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' Senate members';
-    drawSenateFactionMap(code,data.senateMap);
-    populateFactionTable('senate',code,members);
+    if(code==='ALL'){
+      const total=Object.values(data.factions.senate).reduce((s,a)=>s+a.length,0);
+      document.getElementById('senate-faction-card-title').textContent='All Senate Factions — '+total+' members';
+      drawSenateFactionMap('ALL',data.senateMap);
+      populateFactionTable('senate','ALL',data.factions.senate);
+    } else {
+      const members=data.factions.senate[code]||[];
+      document.getElementById('senate-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' Senate members';
+      drawSenateFactionMap(code,data.senateMap);
+      populateFactionTable('senate',code,members);
+    }
   });
 }
 
@@ -1665,7 +1682,6 @@ function drawHouseFactionMap(code,houseMap){
   svgEl.selectAll('*').remove();
   const g=svgEl.append('g');
   _hFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
-  const color=FACTION_COLORS[code];
   fetchDistrictsGeo(gj=>{
     const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
     const pg=d3.geoPath().projection(proj);
@@ -1676,14 +1692,21 @@ function drawHouseFactionMap(code,houseMap){
       .style('fill',d=>{
         const key=d.properties.state+'|'+d.properties.district;
         const m=houseMap[key];
-        return(m&&m.code===code)?color:'#D8D8D4';
+        if(!m) return '#D8D8D4';
+        if(code==='ALL') return FACTION_COLORS[m.code]||'#D8D8D4';
+        return m.code===code ? FACTION_COLORS[code] : '#D8D8D4';
       })
       .style('stroke','#fff').style('stroke-width','0.3px')
       .on('mousemove',function(event,d){
         const key=d.properties.state+'|'+d.properties.district;
         const m=houseMap[key];
-        if(m&&m.code===code) showTip(event,'<strong>'+m.name+'</strong><br>'+m.seat+' · '+FACTION_NAMES[code]);
-        else showTip(event,'<strong>'+d.properties.state+' '+(d.properties.district||'AL')+'</strong><br><span style="opacity:.7">'+FACTION_NAMES[code]+' member not in this district</span>');
+        const distLabel=d.properties.state+' '+(d.properties.district||'AL');
+        if(m && (code==='ALL' || m.code===code)){
+          showTip(event,'<strong>'+m.name+'</strong><br>'+m.seat
+            +(code==='ALL'?' · <span style="color:'+FACTION_COLORS[m.code]+'">'+m.code+'</span>':' · '+FACTION_NAMES[code]));
+        } else {
+          showTip(event,'<strong>'+distLabel+'</strong><br><span style="opacity:.7">'+(m?m.code+' — not selected':'No data')+'</span>');
+        }
       })
       .on('mouseleave',hideTip);
   });
@@ -1692,9 +1715,23 @@ function drawHouseFactionMap(code,houseMap){
 function drawSenateFactionMap(code,senateMap){
   const svgEl=d3.select('#senate-faction-svg');
   svgEl.selectAll('*').remove();
+  const defs=svgEl.append('defs');
   const g=svgEl.append('g');
   _sFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
-  const color=FACTION_COLORS[code];
+
+  // Pre-build split gradients for ALL mode (states with two different factions)
+  if(code==='ALL'){
+    Object.entries(senateMap).forEach(([state,senators])=>{
+      if(senators.length===2 && senators[0].code!==senators[1].code){
+        const id='sg-'+state.replace(/[^a-zA-Z]/g,'-');
+        const gr=defs.append('linearGradient').attr('id',id)
+          .attr('x1','0%').attr('y1','0%').attr('x2','100%').attr('y2','0%');
+        gr.append('stop').attr('offset','50%').attr('stop-color',FACTION_COLORS[senators[0].code]||'#D8D8D4');
+        gr.append('stop').attr('offset','50%').attr('stop-color',FACTION_COLORS[senators[1].code]||'#D8D8D4');
+      }
+    });
+  }
+
   fetchSenateGeo(gj=>{
     const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
     const pg=d3.geoPath().projection(proj);
@@ -1704,31 +1741,64 @@ function drawSenateFactionMap(code,senateMap){
       .attr('d',d=>pg(d)||'')
       .style('fill',d=>{
         const senators=senateMap[d.properties.NAME]||[];
-        return senators.some(s=>s.code===code)?color:'#D8D8D4';
+        if(!senators.length) return '#D8D8D4';
+        if(code==='ALL'){
+          if(senators.length===1) return FACTION_COLORS[senators[0].code]||'#D8D8D4';
+          if(senators[0].code===senators[1].code) return FACTION_COLORS[senators[0].code]||'#D8D8D4';
+          return 'url(#sg-'+d.properties.NAME.replace(/[^a-zA-Z]/g,'-')+')';
+        }
+        return senators.some(s=>s.code===code) ? FACTION_COLORS[code] : '#D8D8D4';
       })
       .style('stroke','#fff').style('stroke-width','0.5px')
       .on('mousemove',function(event,d){
         const senators=senateMap[d.properties.NAME]||[];
-        const matching=senators.filter(s=>s.code===code);
-        if(matching.length){
-          showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+matching.map(s=>s.name).join(', ')+'<br><span style="opacity:.8">'+FACTION_NAMES[code]+'</span>');
+        if(code==='ALL'){
+          const lines=senators.map(s=>'<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+FACTION_COLORS[s.code]+';margin-right:4px;vertical-align:middle"></span>'+escH(s.name)+' ('+s.code+')').join('<br>');
+          showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+lines);
         } else {
-          showTip(event,'<strong>'+d.properties.NAME+'</strong><br><span style="opacity:.7">No '+FACTION_NAMES[code]+' senator</span>');
+          const matching=senators.filter(s=>s.code===code);
+          if(matching.length){
+            showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+matching.map(s=>s.name).join(', ')+'<br><span style="opacity:.8">'+FACTION_NAMES[code]+'</span>');
+          } else {
+            showTip(event,'<strong>'+d.properties.NAME+'</strong><br><span style="opacity:.7">No '+FACTION_NAMES[code]+' senator</span>');
+          }
         }
       })
       .on('mouseleave',hideTip);
   });
 }
 
-function populateFactionTable(chamber,code,members){
+function populateFactionTable(chamber,code,membersOrMap){
   const tbody=document.getElementById(chamber+'-faction-tbody');
   if(!tbody)return;
-  if(!members.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">No members found.</td></tr>';return;}
-  tbody.innerHTML=members.map(m=>{
+  const isAll=code==='ALL';
+
+  // Build flat list
+  let rows;
+  if(isAll){
+    rows=[];
+    FACTION_ORDER.forEach(fc=>{
+      (membersOrMap[fc]||[]).forEach(m=>rows.push({...m,_fc:fc}));
+    });
+  } else {
+    rows=membersOrMap.map(m=>({...m,_fc:code}));
+  }
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">No members found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML=rows.map(m=>{
+    const fc=m._fc;
+    const badge='<span style="display:inline-flex;align-items:center;gap:4px;font:600 11px var(--sans);color:#fff;background:'+FACTION_COLORS[fc]+';border-radius:10px;padding:2px 8px">'+fc+'</span>';
     const caucusShort=m.c.split('•')[0].trim().split('(')[0].trim();
-    const scoreShort=m.e.length>100?m.e.substring(0,100)+'…':m.e;
+    const scoreShort=m.e.length>90?m.e.substring(0,90)+'…':m.e;
     const wingShort=m.w.split('(')[0].trim();
-    return '<tr><td><strong>'+escH(m.n)+'</strong></td><td>'+escH(m.s)+'</td>'
+    return '<tr>'
+      +'<td>'+badge+'</td>'
+      +'<td><strong>'+escH(m.n)+'</strong></td>'
+      +'<td>'+escH(m.s)+'</td>'
       +'<td style="font-size:12px">'+escH(caucusShort)+'</td>'
       +'<td style="font-size:12px;color:var(--t3)">'+escH(scoreShort)+'</td>'
       +'<td style="font-size:12px">'+escH(wingShort)+'</td></tr>';
@@ -1755,6 +1825,12 @@ function toggleMeth(btn){
   btn.querySelector('.meth-arrow').style.transform=open?'rotate(180deg)':'';
   btn.setAttribute('aria-expanded',open);
 }
+
+// Auto-render defaults on page load
+window.addEventListener('load',function(){
+  renderHouseFaction('ALL');
+  renderSenateFaction('ALL');
+});
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────
 loadData();

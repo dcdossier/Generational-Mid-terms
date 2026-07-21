@@ -465,62 +465,71 @@ body{background:#F5F5DC;color:#1E2232}
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
 /* ── ISSUES / FOUR I'S ───────────────────────────────────────────────────── */
-.fi-section{padding:16px 20px 20px;width:100%;box-sizing:border-box;flex:1;overflow-y:auto}
-.fi-hdr{margin-bottom:10px}
-.fi-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:#f1a222;margin-bottom:3px}
-.fi-title{font:700 24px var(--serif);color:#fffbe2;margin-bottom:5px;text-shadow:0 1px 3px rgba(0,0,0,0.3)}
-.fi-subtitle{font:400 13px/1.55 var(--sans);color:rgba(255,251,226,0.75);max-width:620px}
-.fi-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:8px;margin-bottom:4px}
-.fi-leg{display:flex;align-items:center;gap:6px;font:500 12px var(--sans);color:rgba(255,251,226,0.85)}
-.fi-leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-/* layout */
-.fi-body{display:flex;gap:14px;align-items:flex-start}
-.fi-diagram{flex:1 1 0;min-width:0;border:1px solid rgba(241,162,34,0.2);border-radius:8px;overflow:visible}
-.fi-diagram svg{display:block;width:100%;height:auto}
-/* right panel */
-.fi-panel{flex:0 0 190px;width:190px;background:#620d3c;border:1px solid rgba(241,162,34,0.22);border-radius:8px;overflow-y:auto;max-height:480px;position:sticky;top:8px;scrollbar-width:thin;scrollbar-color:rgba(241,162,34,.2) transparent}
-.fi-panel-inner{padding:14px 16px}
-/* summary (default view) */
-.fi-sum-eyebrow{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:rgba(241,162,34,0.65);margin-bottom:10px}
-.fi-sum-row{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid rgba(241,162,34,0.12);cursor:pointer}
-.fi-sum-row:last-of-type{border-bottom:none;padding-bottom:0}
-.fi-sum-row:hover .fi-sum-name{color:#f1a222}
-.fi-sum-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.fi-sum-name{font:600 12px var(--serif);color:#fffbe2;margin-bottom:3px;transition:color .12s}
-.fi-sum-pct{font:500 11px var(--sans);color:#f1a222;margin-left:5px}
-.fi-sum-bullets{list-style:none;margin:0;padding:0}
-.fi-sum-bullets li{font:400 11px/1.5 var(--sans);color:rgba(255,251,226,0.72);padding-left:9px;position:relative;margin-bottom:2px}
-.fi-sum-bullets li::before{content:'·';position:absolute;left:1px;color:rgba(241,162,34,0.5)}
-.fi-hint{font:400 10.5px var(--sans);color:rgba(255,251,226,0.35);font-style:italic;margin-top:10px;padding-top:8px;border-top:1px solid rgba(241,162,34,0.1)}
-/* detail view */
-.fi-back{background:none;border:none;cursor:pointer;color:rgba(255,251,226,0.45);font:400 11px var(--sans);padding:0 0 8px;display:flex;align-items:center;gap:3px}
-.fi-back:hover{color:#f1a222}
-.fi-tag{display:inline-block;font:600 9px var(--sans);text-transform:uppercase;letter-spacing:.08em;padding:2px 8px;border-radius:12px;background:rgba(241,162,34,0.18);color:#f1a222;margin-bottom:8px}
-.fi-det-h{font:700 15px var(--serif);color:#fffbe2;margin-bottom:2px}
-.fi-det-stat{font:700 18px var(--serif);color:#f1a222;margin:2px 0 10px}
-.fi-det-body p{font:400 12.5px/1.65 var(--sans);color:rgba(255,251,226,0.85);margin-bottom:7px}
-.fi-det-body ul{margin:0 0 7px;padding-left:14px}
-.fi-det-body li{font:400 12px/1.55 var(--sans);color:rgba(255,251,226,0.82);margin-bottom:5px}
-.fi-det-body a{color:#f1a222;text-decoration:underline;text-underline-offset:2px;font-weight:500}
-.fi-det-body a:hover{color:#fffbe2}
-.fi-det-body strong{color:#fffbe2}
-/* context accordion */
-.fi-ctx{margin-top:12px;padding-top:10px;border-top:1px solid rgba(241,162,34,0.15)}
-.fi-ctx-btn{width:100%;background:none;border:none;cursor:pointer;color:#f1a222;font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:6px;padding:0}
-.fi-ctx-arrow{margin-left:auto;font-size:8px;transition:transform .15s;color:rgba(255,251,226,0.4)}
-.fi-ctx-body{display:none;margin-top:8px}
-.fi-ctx-body.open{display:block}
-.fi-ctx-body p{font:400 12px/1.6 var(--sans);color:rgba(255,251,226,0.78);margin-bottom:6px}
-.fi-ctx-body a{color:#f1a222;text-decoration:underline}
-/* tooltip */
-#fi-tip{position:fixed;pointer-events:none;background:#3d0822;color:#fffbe2;border:1px solid rgba(241,162,34,0.3);font:400 12px var(--sans);padding:6px 10px;border-radius:5px;max-width:200px;line-height:1.4;z-index:9999;display:none}
-/* footer note */
-.fi-note{font:400 11px/1.55 var(--sans);color:rgba(255,251,226,0.35);margin-top:12px;padding-top:10px;border-top:1px solid rgba(241,162,34,0.1)}
-.fi-note a{color:rgba(241,162,34,0.5);text-decoration:underline}
-@media(max-width:680px){
-  .fi-body{flex-direction:column}
-  .fi-panel{flex:none;width:100%;max-height:none;position:static}
-}
+.fq-wrap{background:#fffbe2;padding:28px 28px 64px;min-height:100%}
+.fq-hdr{margin-bottom:28px;padding-bottom:22px;border-bottom:1px solid #e6e0d8}
+.fq-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:#6b6b6b;margin-bottom:5px}
+.fq-title{font:700 26px var(--serif);color:#620d3c;margin-bottom:7px;line-height:1.2}
+.fq-sub{font:400 14px/1.65 var(--sans);color:#4a4a4a;max-width:660px}
+/* Issue grid */
+.fq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.fq-card{background:#fff;border:1px solid #e6e0d8;border-radius:10px;overflow:hidden;cursor:default;transition:box-shadow .15s,transform .12s}
+.fq-card:hover{box-shadow:0 3px 18px rgba(98,13,60,.09);transform:translateY(-1px)}
+.fq-card-bar{height:4px}
+.fq-card-inner{padding:16px 18px 18px}
+.fq-code{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.13em;color:#9a9a8a;margin-bottom:5px}
+.fq-issue-name{font:700 18px var(--serif);color:#2a2a2a;margin-bottom:11px;line-height:1.2}
+.fq-kpi-n{font:700 32px var(--serif);display:block;line-height:1}
+.fq-kpi-l{font:400 12px/1.4 var(--sans);color:#6b6b6b;display:block;margin-top:3px}
+.fq-rule{border:none;border-top:1px solid #e6e0d8;margin:13px 0}
+.fq-dl{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#9a9a8a;margin-bottom:7px}
+.fq-drivers{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:5px}
+.fq-drivers li{display:flex;justify-content:space-between;align-items:baseline;font:400 12.5px var(--sans);color:#2a2a2a;gap:6px}
+.fq-drivers li span:first-child{flex:1;min-width:0}
+.fq-ds{font:600 11.5px var(--sans);color:#6b6b6b;white-space:nowrap;flex-shrink:0}
+.fq-btn{display:block;width:100%;background:#f1a222;color:#2a2a2a;border:none;border-radius:6px;font:600 12px var(--sans);padding:9px 12px;cursor:pointer;text-align:center;transition:background .12s;letter-spacing:.01em}
+.fq-btn:hover{background:#d4890e}
+/* Detail panel */
+.fq-detail{background:#620d3c;border-radius:10px;padding:26px 30px 30px;margin-bottom:28px;animation:fq-in .18s ease}
+@keyframes fq-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.fq-det-back{background:none;border:none;cursor:pointer;color:rgba(255,251,226,.42);font:400 12px var(--sans);padding:0 0 14px;display:flex;align-items:center;gap:4px;transition:color .12s}
+.fq-det-back:hover{color:#f1a222}
+.fq-det-tag{display:inline-block;font:600 9px var(--sans);text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:12px;margin-bottom:11px}
+.fq-det-h{font:700 24px var(--serif);color:#fffbe2;margin-bottom:3px;line-height:1.2}
+.fq-det-stat{font:700 40px var(--serif);color:#f1a222;line-height:1;margin-bottom:5px}
+.fq-det-stat-l{font:400 13px var(--sans);color:rgba(255,251,226,.6);display:block;margin-bottom:14px}
+.fq-det-body{font:400 13.5px/1.72 var(--sans);color:rgba(255,251,226,.82)}
+.fq-det-body p{margin-bottom:10px}
+.fq-det-body strong{color:#fffbe2}
+.fq-det-body a{color:#f1a222;text-decoration:underline;text-underline-offset:2px}
+.fq-det-body ul{padding-left:16px;margin-bottom:10px}
+.fq-det-body li{margin-bottom:5px}
+/* Overlap section */
+.fq-ov-section{background:#620d3c;border-radius:12px;padding:26px 26px 28px;margin-bottom:20px}
+.fq-ov-eyebrow{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.13em;color:rgba(241,162,34,.65);margin-bottom:5px}
+.fq-ov-title{font:700 20px var(--serif);color:#fffbe2;margin-bottom:6px}
+.fq-ov-sub{font:400 13px/1.6 var(--sans);color:rgba(255,251,226,.55);max-width:560px;margin-bottom:18px}
+.fq-ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.fq-ov-card{background:rgba(0,0,0,.18);border:1px solid rgba(241,162,34,.14);border-radius:8px;overflow:hidden;cursor:pointer;transition:border-color .15s,background .15s}
+.fq-ov-card:hover{border-color:rgba(241,162,34,.42);background:rgba(0,0,0,.26)}
+.fq-ov-bar{height:3px}
+.fq-ov-inner{padding:13px 14px 15px}
+.fq-ov-code{font:600 9px var(--sans);text-transform:uppercase;letter-spacing:.13em;color:rgba(255,251,226,.28);margin-bottom:9px}
+.fq-ov-pills{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:8px}
+.fq-ov-pill{font:500 9px var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:2px 7px;border-radius:10px}
+.fq-ov-x{font:400 10px var(--sans);color:rgba(255,251,226,.22)}
+.fq-ov-name{font:700 13px var(--serif);color:#fffbe2;margin-bottom:7px;line-height:1.3}
+.fq-ov-desc{font:400 11.5px/1.6 var(--sans);color:rgba(255,251,226,.62)}
+/* Overlap detail */
+.fq-ov-detail{margin-top:16px;padding-top:18px;border-top:1px solid rgba(241,162,34,.18);animation:fq-in .18s ease}
+.fq-ov-det-head{font:700 16px var(--serif);color:#fffbe2;margin-bottom:10px}
+.fq-ov-det-body{font:400 13px/1.7 var(--sans);color:rgba(255,251,226,.8)}
+.fq-ov-det-body p{margin-bottom:9px}
+.fq-ov-det-body strong{color:#fffbe2}
+.fq-ov-det-body a{color:#f1a222;text-decoration:underline;text-underline-offset:2px}
+/* Source note */
+.fq-note{font:400 11px/1.55 var(--sans);color:#9a9a8a;padding-top:6px}
+@media(max-width:960px){.fq-grid{grid-template-columns:repeat(2,1fr)}.fq-ov-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.fq-wrap{padding:18px 14px 48px}.fq-grid{grid-template-columns:1fr}.fq-ov-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -944,242 +953,188 @@ body{background:#F5F5DC;color:#1E2232}
 
     <!-- ISSUES / FOUR I'S SUB-PANEL -->
     <div class="home-subpanel" id="home-subpanel-issues">
-  <div class="fi-section">
+<div class="fq-wrap">
 
-    <!-- Header -->
-    <div class="fi-hdr">
-      <div class="fi-eyebrow">2026 US Midterms &mdash; Issue Landscape</div>
-      <div class="fi-title">The Four I&rsquo;s</div>
-      <div class="fi-subtitle">Economy, trust, war, and borders &mdash; the four issues shaping voter decisions in 2026. Click any circle or row for sourced analysis.</div>
-      <div class="fi-legend">
-        <span class="fi-leg"><span class="fi-leg-dot" style="background:#f1a222"></span>Inflation (48%)</span>
-        <span class="fi-leg"><span class="fi-leg-dot" style="background:#620d3c;border:1px solid rgba(255,251,226,0.3)"></span>Institutional Mistrust (36%)</span>
-        <span class="fi-leg"><span class="fi-leg-dot" style="background:#c1620a"></span>Iran War</span>
-        <span class="fi-leg"><span class="fi-leg-dot" style="background:#8c2252"></span>Immigration (25%)</span>
-        <span class="fi-leg"><span class="fi-leg-dot" style="background:#f1a222;opacity:0.5"></span>Triple Overlap</span>
+  <!-- ── Header ── -->
+  <div class="fq-hdr">
+    <div class="fq-eyebrow">2026 Voter Priorities</div>
+    <h2 class="fq-title">The Four I&rsquo;s</h2>
+    <p class="fq-sub">Four issues dominate voter decision-making ahead of November 2026 &mdash; each compounding the others across cost of living, trust, conflict, and borders. Click <em>Deep Dive</em> for sourced analysis; click an overlap zone to see where issues converge.</p>
+  </div>
+
+  <!-- ── Issue Cards ── -->
+  <div class="fq-grid">
+
+    <!-- I.01 Inflation -->
+    <div class="fq-card">
+      <div class="fq-card-bar" style="background:#f1a222"></div>
+      <div class="fq-card-inner">
+        <div class="fq-code">I.01</div>
+        <div class="fq-issue-name">Inflation</div>
+        <span class="fq-kpi-n" style="color:#f1a222">48%</span>
+        <span class="fq-kpi-l">cite inflation as top concern</span>
+        <hr class="fq-rule">
+        <div class="fq-dl">Sub-drivers</div>
+        <ul class="fq-drivers">
+          <li><span>Jobs &amp; Economy</span><span class="fq-ds">24%</span></li>
+          <li><span>Healthcare premiums</span><span class="fq-ds">+58%</span></li>
+          <li><span>Housing costs</span><span class="fq-ds">16%</span></li>
+          <li><span>Energy prices</span><span class="fq-ds">+23.5%</span></li>
+          <li><span>Tariffs (public perception)</span><span class="fq-ds">70%</span></li>
+        </ul>
+        <button class="fq-btn" onclick="fqSelect('inflation')">Deep Dive &rarr;</button>
       </div>
     </div>
 
-    <!-- Diagram + Panel -->
-    <div class="fi-body">
-      <div class="fi-diagram">
-        <svg id="fi-svg" viewBox="0 60 900 580" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
-  <style>
-    .fi-g{cursor:pointer}.fi-g:hover circle{opacity:.72}.fi-g:hover rect{opacity:.85}
-    .lbl{font-family:"Inter",Arial,sans-serif;text-anchor:middle;dominant-baseline:middle}
-    .lbl-m{font-size:14px;font-weight:700;fill:#fff}
-    .lbl-ms{font-size:10px;font-weight:500;fill:rgba(255,255,255,0.88)}
-    .lbl-s{font-size:10px;font-weight:700;fill:#fff}
-    .lbl-ss{font-size:9px;font-weight:500;fill:rgba(255,255,255,0.85)}
-    .lbl-ov{font-size:9px;font-weight:600;fill:#fffbe2}
-    .lbl-co{font-size:10px;font-weight:700;fill:#3d0822}
-  </style>
-  <!-- Background -->
-  <rect width="900" height="640" fill="#3d0822"/>
-
-  <!-- ── Main circle fills (translucent) ── -->
-  <g class="fi-g" data-key="inflation" onclick="fiSelect('inflation')">
-    <circle cx="235" cy="305" r="175" fill="rgba(241,162,34,0.28)" stroke="#f1a222" stroke-width="2.5"/>
-  </g>
-  <g class="fi-g" data-key="mistrust" onclick="fiSelect('mistrust')">
-    <circle cx="470" cy="250" r="155" fill="rgba(220,80,150,0.1)" stroke="#d4678a" stroke-width="2.5"/>
-  </g>
-  <g class="fi-g" data-key="iran" onclick="fiSelect('iran')">
-    <circle cx="352" cy="435" r="130" fill="rgba(193,98,10,0.25)" stroke="#c1620a" stroke-width="2.5"/>
-  </g>
-  <g class="fi-g" data-key="immigration" onclick="fiSelect('immigration')">
-    <circle cx="608" cy="412" r="130" fill="rgba(140,34,82,0.25)" stroke="#8c2252" stroke-width="2.5"/>
-  </g>
-
-  <!-- ── Sub-bubbles: Inflation (gold) ── -->
-  <g class="fi-g" data-key="inflation" onclick="fiSelect('inflation')">
-    <circle cx="155" cy="208" r="44" fill="#f1a222" stroke="#c37f0a" stroke-width="1"/>
-    <text x="155" y="203" class="lbl lbl-s">Jobs &amp;</text><text x="155" y="216" class="lbl lbl-s">Economy</text>
-    <text x="155" y="229" class="lbl lbl-ss">24%</text>
-
-    <circle cx="305" cy="188" r="37" fill="#f1a222" stroke="#c37f0a" stroke-width="1"/>
-    <text x="305" y="185" class="lbl lbl-s">Healthcare</text>
-    <text x="305" y="197" class="lbl lbl-ss">21%</text>
-
-    <circle cx="360" cy="252" r="32" fill="#f1a222" stroke="#c37f0a" stroke-width="1"/>
-    <text x="360" y="250" class="lbl lbl-s">Housing</text>
-    <text x="360" y="262" class="lbl lbl-ss">16%</text>
-
-    <circle cx="148" cy="356" r="40" fill="#f1a222" stroke="#c37f0a" stroke-width="1"/>
-    <text x="148" y="353" class="lbl lbl-s">Energy</text>
-    <text x="148" y="365" class="lbl lbl-ss">+23.5%</text>
-
-    <circle cx="268" cy="418" r="37" fill="#f1a222" stroke="#c37f0a" stroke-width="1"/>
-    <text x="268" y="415" class="lbl lbl-s">Tariffs</text>
-    <text x="268" y="427" class="lbl lbl-ss">70% feel cost</text>
-  </g>
-
-  <!-- ── Sub-bubbles: Mistrust (maroon) ── -->
-  <g class="fi-g" data-key="mistrust" onclick="fiSelect('mistrust')">
-    <circle cx="408" cy="156" r="36" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="408" y="152" class="lbl lbl-s">Congress</text><text x="408" y="164" class="lbl lbl-s">Approval</text>
-    <text x="408" y="176" class="lbl lbl-ss">80% disapprove</text>
-
-    <circle cx="527" cy="147" r="32" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="527" y="144" class="lbl lbl-s">Epstein</text><text x="527" y="156" class="lbl lbl-s">Files</text>
-
-    <circle cx="577" cy="238" r="31" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="577" y="234" class="lbl lbl-s">Supreme</text><text x="577" y="246" class="lbl lbl-s">Court</text>
-    <text x="577" y="258" class="lbl lbl-ss">27% apprvl</text>
-
-    <circle cx="540" cy="328" r="29" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="540" y="325" class="lbl lbl-s">Election</text><text x="540" y="337" class="lbl lbl-s">ID &amp; Laws</text>
-
-    <circle cx="412" cy="325" r="31" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="412" y="322" class="lbl lbl-s">Corruption</text>
-    <text x="412" y="334" class="lbl lbl-ss">13%</text>
-
-    <circle cx="474" cy="175" r="25" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
-    <text x="474" y="172" class="lbl lbl-s">Exec.</text><text x="474" y="184" class="lbl lbl-s">Excess</text>
-  </g>
-
-  <!-- ── Sub-bubbles: Iran (amber) ── -->
-  <g class="fi-g" data-key="iran" onclick="fiSelect('iran')">
-    <circle cx="278" cy="431" r="35" fill="#c1620a" stroke="#8a4006" stroke-width="1"/>
-    <text x="278" y="427" class="lbl lbl-s">Economic</text><text x="278" y="439" class="lbl lbl-s">Impact</text>
-    <text x="278" y="451" class="lbl lbl-ss">86% say worse</text>
-
-    <circle cx="355" cy="528" r="31" fill="#c1620a" stroke="#8a4006" stroke-width="1"/>
-    <text x="355" y="525" class="lbl lbl-s">Intl.</text><text x="355" y="537" class="lbl lbl-s">Reputation</text>
-    <text x="355" y="549" class="lbl lbl-ss">72% say worse</text>
-
-    <circle cx="432" cy="450" r="29" fill="#c1620a" stroke="#8a4006" stroke-width="1"/>
-    <text x="432" y="447" class="lbl lbl-s">Security</text><text x="432" y="459" class="lbl lbl-s">Risk</text>
-
-    <circle cx="340" cy="357" r="25" fill="#c1620a" stroke="#8a4006" stroke-width="1"/>
-    <text x="340" y="354" class="lbl lbl-s">Ideol.</text><text x="340" y="366" class="lbl lbl-s">Split</text>
-  </g>
-
-  <!-- ── Sub-bubbles: Immigration (rose) ── -->
-  <g class="fi-g" data-key="immigration" onclick="fiSelect('immigration')">
-    <circle cx="535" cy="400" r="35" fill="#8c2252" stroke="#5a1234" stroke-width="1"/>
-    <text x="535" y="396" class="lbl lbl-s">ICE</text><text x="535" y="408" class="lbl lbl-s">Actions</text>
-    <text x="535" y="420" class="lbl lbl-ss">63% disapprove</text>
-
-    <circle cx="604" cy="340" r="29" fill="#8c2252" stroke="#5a1234" stroke-width="1"/>
-    <text x="604" y="337" class="lbl lbl-s">Admin.</text><text x="604" y="349" class="lbl lbl-s">Record</text>
-
-    <circle cx="676" cy="417" r="27" fill="#8c2252" stroke="#5a1234" stroke-width="1"/>
-    <text x="676" y="414" class="lbl lbl-s">Nat.</text><text x="676" y="426" class="lbl lbl-s">Guard</text>
-
-    <circle cx="604" cy="483" r="26" fill="#8c2252" stroke="#5a1234" stroke-width="1"/>
-    <text x="604" y="480" class="lbl lbl-s">Issue</text><text x="604" y="492" class="lbl lbl-s">Ranking</text>
-  </g>
-
-  <!-- ── Overlap zones (dashed) ── -->
-  <g class="fi-g" data-key="ov1" onclick="fiOvSelect('ov1')">
-    <circle cx="348" cy="278" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="348" y="274" class="lbl lbl-ov">OBBBA</text><text x="348" y="286" class="lbl lbl-ov">&amp; ACA</text>
-  </g>
-  <g class="fi-g" data-key="ov2" onclick="fiOvSelect('ov2')">
-    <circle cx="293" cy="375" r="27" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="293" y="371" class="lbl lbl-ov">Energy</text><text x="293" y="383" class="lbl lbl-ov">Spike</text>
-  </g>
-  <g class="fi-g" data-key="ov3" onclick="fiOvSelect('ov3')">
-    <circle cx="404" cy="355" r="26" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="404" y="351" class="lbl lbl-ov">WPR &amp;</text><text x="404" y="363" class="lbl lbl-ov">Epstein</text>
-  </g>
-  <g class="fi-g" data-key="ov4" onclick="fiOvSelect('ov4')">
-    <circle cx="547" cy="347" r="25" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
-    <text x="547" y="343" class="lbl lbl-ov">ICE /</text><text x="547" y="355" class="lbl lbl-ov">Courts</text>
-  </g>
-
-  <!-- ── Core triple overlap (gold) ── -->
-  <g class="fi-g" data-key="core" onclick="fiOvSelect('core')">
-    <circle cx="370" cy="348" r="42" fill="rgba(241,162,34,0.28)" stroke="#f1a222" stroke-width="2.5"/>
-    <text x="370" y="343" class="lbl lbl-co">War Powers</text><text x="370" y="357" class="lbl lbl-co">Resolution</text>
-  </g>
-
-  <!-- ── Main label badges (solid pills, always on top) ── -->
-  <g class="fi-g" data-key="inflation" onclick="fiSelect('inflation')" style="cursor:pointer">
-    <rect x="130" y="284" width="210" height="42" rx="21" fill="#f1a222"/>
-    <text x="235" y="302" class="lbl lbl-m">Inflation</text>
-    <text x="235" y="316" class="lbl lbl-ms">48% top concern</text>
-  </g>
-  <g class="fi-g" data-key="mistrust" onclick="fiSelect('mistrust')" style="cursor:pointer">
-    <rect x="348" y="222" width="244" height="56" rx="28" fill="#620d3c"/>
-    <text x="470" y="243" class="lbl lbl-m">Institutional</text>
-    <text x="470" y="258" class="lbl lbl-m">Mistrust</text>
-    <text x="470" y="271" class="lbl lbl-ms">36% cite threats to democracy</text>
-  </g>
-  <g class="fi-g" data-key="iran" onclick="fiSelect('iran')" style="cursor:pointer">
-    <rect x="248" y="415" width="208" height="42" rx="21" fill="#c1620a"/>
-    <text x="352" y="433" class="lbl lbl-m">Iran War</text>
-    <text x="352" y="447" class="lbl lbl-ms">~1% direct, high spillover</text>
-  </g>
-  <g class="fi-g" data-key="immigration" onclick="fiSelect('immigration')" style="cursor:pointer">
-    <rect x="494" y="392" width="228" height="42" rx="21" fill="#8c2252"/>
-    <text x="608" y="410" class="lbl lbl-m">Immigration</text>
-    <text x="608" y="424" class="lbl lbl-ms">25% top-two issue</text>
-  </g>
-</svg>
+    <!-- I.02 Institutional Mistrust -->
+    <div class="fq-card">
+      <div class="fq-card-bar" style="background:#620d3c"></div>
+      <div class="fq-card-inner">
+        <div class="fq-code">I.02</div>
+        <div class="fq-issue-name">Institutional Mistrust</div>
+        <span class="fq-kpi-n" style="color:#620d3c">36%</span>
+        <span class="fq-kpi-l">cite threats to democracy</span>
+        <hr class="fq-rule">
+        <div class="fq-dl">Sub-drivers</div>
+        <ul class="fq-drivers">
+          <li><span>Congress disapproval</span><span class="fq-ds">80%</span></li>
+          <li><span>Supreme Court approval</span><span class="fq-ds">27%</span></li>
+          <li><span>Epstein files distrust</span><span class="fq-ds">77%</span></li>
+          <li><span>Corruption</span><span class="fq-ds">13%</span></li>
+          <li><span>Political violence</span><span class="fq-ds">12%</span></li>
+        </ul>
+        <button class="fq-btn" onclick="fqSelect('mistrust')">Deep Dive &rarr;</button>
       </div>
-      <div class="fi-panel">
-        <div class="fi-panel-inner">
-          <!-- Default: summary -->
-          <div id="fi-default-view">
-            <div class="fi-sum-eyebrow">2026 Voter Priorities</div>
-            <div class="fi-sum-row" onclick="fiSelect('inflation')">
-              <div class="fi-sum-dot" style="background:#f1a222;margin-top:5px"></div>
-              <div>
-                <div class="fi-sum-name">Inflation <span class="fi-sum-pct">48%</span></div>
-                <ul class="fi-sum-bullets">
-                  <li>Economy &amp; cost of living ranked #1 voter priority</li>
-                  <li>ACA premiums up 58%; energy costs up 23.5%</li>
-                  <li>Democrats hold a 172-pt advantage on inflation-linked issues</li>
-                </ul>
-              </div>
-            </div>
-            <div class="fi-sum-row" onclick="fiSelect('mistrust')">
-              <div class="fi-sum-dot" style="background:#620d3c;border:1px solid rgba(255,251,226,0.4);margin-top:5px"></div>
-              <div>
-                <div class="fi-sum-name">Institutional Mistrust <span class="fi-sum-pct">36%</span></div>
-                <ul class="fi-sum-bullets">
-                  <li>Congress approval at record low — 10%</li>
-                  <li>Supreme Court approval down to 27%</li>
-                  <li>Epstein files, corruption &amp; executive excess</li>
-                </ul>
-              </div>
-            </div>
-            <div class="fi-sum-row" onclick="fiSelect('iran')">
-              <div class="fi-sum-dot" style="background:#c1620a;margin-top:5px"></div>
-              <div>
-                <div class="fi-sum-name">Iran War <span class="fi-sum-pct">~1%, high spillover</span></div>
-                <ul class="fi-sum-bullets">
-                  <li>86% say the war worsened cost of living</li>
-                  <li>72% say it hurt America&rsquo;s reputation</li>
-                  <li>Failed War Powers Resolution ties it to both above</li>
-                </ul>
-              </div>
-            </div>
-            <div class="fi-sum-row" onclick="fiSelect('immigration')">
-              <div class="fi-sum-dot" style="background:#8c2252;margin-top:5px"></div>
-              <div>
-                <div class="fi-sum-name">Immigration <span class="fi-sum-pct">25%</span></div>
-                <ul class="fi-sum-bullets">
-                  <li>63% disapprove of ICE actions</li>
-                  <li>ICE given USD&nbsp;75bn; targeting 1M deportations</li>
-                  <li>Framed as extension of institutional mistrust</li>
-                </ul>
-              </div>
-            </div>
-            <p class="fi-hint">Click any row or circle to see full sourced analysis</p>
+    </div>
+
+    <!-- I.03 Iran War -->
+    <div class="fq-card">
+      <div class="fq-card-bar" style="background:#c1620a"></div>
+      <div class="fq-card-inner">
+        <div class="fq-code">I.03</div>
+        <div class="fq-issue-name">Iran War</div>
+        <span class="fq-kpi-n" style="color:#c1620a">~1%</span>
+        <span class="fq-kpi-l">direct concern &mdash; structural spillover</span>
+        <hr class="fq-rule">
+        <div class="fq-dl">Sub-drivers</div>
+        <ul class="fq-drivers">
+          <li><span>Cost of living worsened</span><span class="fq-ds">86%</span></li>
+          <li><span>Intl. reputation damage</span><span class="fq-ds">72%</span></li>
+          <li><span>National security risk</span><span class="fq-ds">65%</span></li>
+          <li><span>Household finances hit</span><span class="fq-ds">64%</span></li>
+          <li><span>MAGA vs. America First</span><span class="fq-ds">Ideol. split</span></li>
+        </ul>
+        <button class="fq-btn" onclick="fqSelect('iran')">Deep Dive &rarr;</button>
+      </div>
+    </div>
+
+    <!-- I.04 Immigration -->
+    <div class="fq-card">
+      <div class="fq-card-bar" style="background:#8c2252"></div>
+      <div class="fq-card-inner">
+        <div class="fq-code">I.04</div>
+        <div class="fq-issue-name">Immigration</div>
+        <span class="fq-kpi-n" style="color:#8c2252">25%</span>
+        <span class="fq-kpi-l">rank as top-two issue</span>
+        <hr class="fq-rule">
+        <div class="fq-dl">Sub-drivers</div>
+        <ul class="fq-drivers">
+          <li><span>ICE actions disapproval</span><span class="fq-ds">63%</span></li>
+          <li><span>Admin. record disapproval</span><span class="fq-ds">58%</span></li>
+          <li><span>Nat. Guard deployment</span><span class="fq-ds">49% oppose</span></li>
+          <li><span>Most-important issue</span><span class="fq-ds">12%</span></li>
+          <li><span>ICE budget (OBBBA)</span><span class="fq-ds">$75B</span></li>
+        </ul>
+        <button class="fq-btn" onclick="fqSelect('immigration')">Deep Dive &rarr;</button>
+      </div>
+    </div>
+
+  </div><!-- /fq-grid -->
+
+  <!-- ── Detail Panel (shown on Deep Dive) ── -->
+  <div class="fq-detail" id="fq-detail" style="display:none">
+    <div id="fq-detail-inner"></div>
+  </div>
+
+  <!-- ── Overlap Zones ── -->
+  <div class="fq-ov-section">
+    <div class="fq-ov-eyebrow">Where Issues Compound</div>
+    <div class="fq-ov-title">Overlap Zones</div>
+    <p class="fq-ov-sub">No I operates in isolation. These are the structural nodes where two issues converge into a compounding electoral force. Click to expand.</p>
+    <div class="fq-ov-grid">
+
+      <!-- OV.01 OBBBA -->
+      <div class="fq-ov-card" onclick="fqOvSelect('obbba')">
+        <div class="fq-ov-bar" style="background:linear-gradient(90deg,#f1a222,#620d3c)"></div>
+        <div class="fq-ov-inner">
+          <div class="fq-ov-code">OV.01</div>
+          <div class="fq-ov-pills">
+            <span class="fq-ov-pill" style="background:rgba(241,162,34,.14);color:#f1a222;border:1px solid rgba(241,162,34,.28)">Inflation</span>
+            <span class="fq-ov-x">&times;</span>
+            <span class="fq-ov-pill" style="background:rgba(255,255,255,.07);color:#e8b4ce;border:1px solid rgba(255,255,255,.14)">Mistrust</span>
           </div>
-          <!-- Detail view (filled by JS) -->
-          <div id="fi-detail-view" style="display:none"></div>
+          <div class="fq-ov-name">OBBBA &amp; Congressional Inaction</div>
+          <p class="fq-ov-desc">The One Big Beautiful Bill Act cut $1T from federal healthcare and funded ICE expansion &mdash; compounding both economic pain and institutional disillusionment in a single piece of legislation.</p>
         </div>
       </div>
+
+      <!-- OV.02 Energy -->
+      <div class="fq-ov-card" onclick="fqOvSelect('energy')">
+        <div class="fq-ov-bar" style="background:linear-gradient(90deg,#f1a222,#c1620a)"></div>
+        <div class="fq-ov-inner">
+          <div class="fq-ov-code">OV.02</div>
+          <div class="fq-ov-pills">
+            <span class="fq-ov-pill" style="background:rgba(241,162,34,.14);color:#f1a222;border:1px solid rgba(241,162,34,.28)">Inflation</span>
+            <span class="fq-ov-x">&times;</span>
+            <span class="fq-ov-pill" style="background:rgba(193,98,10,.18);color:#f7aa6d;border:1px solid rgba(193,98,10,.36)">Iran War</span>
+          </div>
+          <div class="fq-ov-name">Energy &amp; Cost-of-Living Spiral</div>
+          <p class="fq-ov-desc">Iran war-driven energy spikes (gasoline $3.15&rarr;$4.65; energy +23.5%) turned a geopolitical conflict into a domestic kitchen-table crisis for 64% of American households.</p>
+        </div>
+      </div>
+
+      <!-- OV.03 War Powers -->
+      <div class="fq-ov-card" onclick="fqOvSelect('wpr')">
+        <div class="fq-ov-bar" style="background:linear-gradient(90deg,#c1620a,#620d3c)"></div>
+        <div class="fq-ov-inner">
+          <div class="fq-ov-code">OV.03</div>
+          <div class="fq-ov-pills">
+            <span class="fq-ov-pill" style="background:rgba(193,98,10,.18);color:#f7aa6d;border:1px solid rgba(193,98,10,.36)">Iran War</span>
+            <span class="fq-ov-x">&times;</span>
+            <span class="fq-ov-pill" style="background:rgba(255,255,255,.07);color:#e8b4ce;border:1px solid rgba(255,255,255,.14)">Mistrust</span>
+          </div>
+          <div class="fq-ov-name">War Powers &amp; Checks on Executive</div>
+          <p class="fq-ov-desc">Congress failed to pass a War Powers Resolution against the Iran intervention. Courts resisted tariff and ICE excesses but were circumvented &mdash; exposing systemic gaps in checks and balances.</p>
+        </div>
+      </div>
+
+      <!-- OV.04 ICE -->
+      <div class="fq-ov-card" onclick="fqOvSelect('ice')">
+        <div class="fq-ov-bar" style="background:linear-gradient(90deg,#620d3c,#8c2252)"></div>
+        <div class="fq-ov-inner">
+          <div class="fq-ov-code">OV.04</div>
+          <div class="fq-ov-pills">
+            <span class="fq-ov-pill" style="background:rgba(255,255,255,.07);color:#e8b4ce;border:1px solid rgba(255,255,255,.14)">Mistrust</span>
+            <span class="fq-ov-x">&times;</span>
+            <span class="fq-ov-pill" style="background:rgba(140,34,82,.18);color:#f0a8c8;border:1px solid rgba(140,34,82,.36)">Immigration</span>
+          </div>
+          <div class="fq-ov-name">ICE, Courts &amp; Congressional Funding</div>
+          <p class="fq-ov-desc">Congress funded ICE&rsquo;s $75B expansion via OBBBA; courts pushed back on deportations but the administration found workarounds &mdash; leaving both institutions looking unable to check the crisis they enabled.</p>
+        </div>
+      </div>
+
+    </div><!-- /fq-ov-grid -->
+
+    <!-- Overlap detail (expands below grid) -->
+    <div class="fq-ov-detail" id="fq-ov-detail" style="display:none">
+      <div id="fq-ov-detail-inner"></div>
     </div>
 
-    <!-- Footer note -->
-    <p class="fi-note">Sources: <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">POS 2026 Midterm Overview</a> &middot; <a href="https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1" target="_blank" rel="noopener">Data for Progress</a> &middot; <a href="https://www.pewresearch.org/politics/2026/05/11/americans-see-health-care-costs-deficit-inflation-as-big-problems-facing-the-nation/" target="_blank" rel="noopener">Pew Research</a> &middot; Gallup &middot; Reuters/Ipsos &middot; BLS &middot; NYT/Siena &middot; Global Affairs &middot; YouGov &middot; DNI ATA 2026. Analysis: DC Dossier / Takshashila Institution.</p>
+  </div><!-- /fq-ov-section -->
 
-  </div>
+  <p class="fq-note">Sources: POS 2026 Midterms Overview &middot; Reuters/Ipsos Feb 2026 &middot; Gallup &middot; BLS CPI &middot; CNBC/ACA Enrollment 2026 &middot; NYT/Siena Poll Jan 2026 &middot; Chicago Council on Global Affairs &middot; DNI Annual Threat Assessment 2026 &middot; Marquette Law School Poll &middot; Data for Progress Swing Voter Report</p>
+
+</div><!-- /fq-wrap -->
 </div><!-- /home-subpanel-issues -->
 
   </div>
@@ -2079,95 +2034,97 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 
 var DETAIL = {
   inflation:{
-    tag:'Core Issue', head:'Inflation', stat:'48% cite as top concern',
-    body:'<p>Inflation is the single largest issue for voters, spanning healthcare, housing, jobs, energy and tariffs.</p><ul>'+
-      '<li>Economy &amp; cost of living are the <a href="https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1" target="_blank" rel="noopener">top-most voter priority</a>; <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">48% cite inflation</a> as top concern.</li>'+
-      '<li>US inflation rose to 4.2% by <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener">May 2026</a>. Energy spiked <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>; gasoline from USD&nbsp;3.15 to USD&nbsp;4.65.</li>'+
-      '<li>OBBBA cut over <a href="https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/" target="_blank" rel="noopener">USD&nbsp;1 trillion</a> from federal healthcare; <a href="https://www.aha.org/news/headline/2025-06-04-cbo-report-finds-nearly-11-million-could-become-uninsured-if-reconciliation-bill-enacted" target="_blank" rel="noopener">11 million</a> at risk of losing coverage.</li>'+
-      '<li>ACA premiums rose <a href="https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html" target="_blank" rel="noopener">58%</a>; only <a href="https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx" target="_blank" rel="noopener">49%</a> can consistently afford healthcare &mdash; a five-year low.</li>'+
-      '</ul>'
+    tag:'I.01 — Inflation', tagBg:'rgba(241,162,34,.18)', tagColor:'#f1a222', tagBorder:'rgba(241,162,34,.35)',
+    title:'Inflation', stat:'48%', statL:'cite inflation as their top concern',
+    html:'<p><strong>Baseline:</strong> US inflation rose from 2.9% (Jan 2024) to 4.2% by May 2026. Energy was the sharpest spike &mdash; gasoline from $3.15 (Dec 2024) to $4.65 by May 2026; overall energy up <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>. Republicans are most exposed: the highest inflation is in the <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-region.htm" target="_blank" rel="noopener">South (3.9%) and Midwest (5%)</a> &mdash; together accounting for over 160 House members and 40 GOP Senators.</p><p><strong>OBBBA &amp; ACA:</strong> The One Big Beautiful Bill Act (Jul 2025) cut over <a href="https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/" target="_blank" rel="noopener">$1 trillion</a> from federal healthcare over 10 years, with <a href="https://www.aha.org/news/headline/2025-06-04-cbo-report-finds-nearly-11-million-could-become-uninsured-if-reconciliation-bill-enacted" target="_blank" rel="noopener">11 million Americans</a> at risk of losing coverage. The administration\'s decision not to extend ACA premium subsidies pushed premiums up <a href="https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html" target="_blank" rel="noopener">58%</a> since January 2026, with only <a href="https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx" target="_blank" rel="noopener">49%</a> of Americans now able to consistently afford healthcare.</p><p><strong>Tariffs:</strong> Despite limited direct inflationary impact in <a href="https://www.brookings.edu/articles/why-havent-tariffs-significantly-damaged-the-economy/" target="_blank" rel="noopener">economic analysis</a>, 7 in 10 Americans believe Trump\'s tariffs drove up prices &mdash; including 64% of Republicans. Congressional approval collapsed to a record <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a> by April 2026, with Congress blamed for passing OBBBA, failing to resist ACA cuts, and failing to pass the War Powers Resolution.</p>'
   },
   mistrust:{
-    tag:'Core Issue', head:'Institutional Mistrust', stat:'36% cite threats to democracy',
-    body:'<p>Declining confidence in Congress, the courts, and the executive, sharpened by the Epstein files and the Iran war.</p><ul>'+
-      '<li><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">36%</a> cite threats to democracy as top concern; <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">corruption at 13%</a>.</li>'+
-      '<li>About <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">80% disapprove</a> of Congress; approval collapsed to a record <strong>10%</strong> by April 2026.</li>'+
-      '<li>Supreme Court approval fell to <a href="https://news.gallup.com/poll/1597/confidence-institutions.aspx" target="_blank" rel="noopener">27%</a>; majority believe courts favour the Trump administration.</li>'+
-      '<li>Only <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">32%</a> trust Congress vs 56% who trust local government.</li>'+
-      '</ul>'
+    tag:'I.02 — Institutional Mistrust', tagBg:'rgba(255,255,255,.07)', tagColor:'#e8b4ce', tagBorder:'rgba(255,255,255,.18)',
+    title:'Institutional Mistrust', stat:'36%', statL:'cite threats to democracy as top concern',
+    html:'<p><strong>The erosion:</strong> By May 2026, <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">80%</a> of voters disapprove of Congress, the Supreme Court approval has fallen to <a href="https://news.gallup.com/poll/1597/confidence-institutions.aspx" target="_blank" rel="noopener">27%</a>, and <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">36%</a> cite threats to democracy as their primary concern. Corruption (13%) and political violence/extremism (12%) compound this reading.</p><p><strong>Epstein files:</strong> <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">65%</a> of Americans believe the federal government is deliberately withholding Epstein information; <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">77%</a> say the files lowered their trust in political and business leaders. Congressional efforts to release them were overshadowed by two record government shutdowns in the same period.</p><p><strong>Systemic failures:</strong> Courts resisted tariff implementation and ICE excesses, yet <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">61%</a> of Americans believe Trump wins at the Supreme Court &ldquo;almost always or most of the time&rdquo; &mdash; because the administration found legally permissible workarounds each time. Institutional resistance appears performative, deepening rather than restoring confidence. Only <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">32%</a> trust Congress versus 56% who trust local government.</p>'
   },
   iran:{
-    tag:'Core Issue', head:'Iran War', stat:'~1% direct — high spillover',
-    body:'<p>Ranked low as a standalone issue (~1%), but the Iran war amplified both Inflation and Institutional Mistrust drastically.</p><ul>'+
-      '<li><a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a> believe the war worsened the cost of living.</li>'+
-      '<li><a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">72%</a> say it worsened America's international reputation.</li>'+
-      '<li>Congress failed to pass a War Powers Resolution against the intervention.</li>'+
-      '<li>The 2026 DNI assessment highlights heightened <a href="https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf" target="_blank" rel="noopener">Islamist terrorism risk</a>.</li>'+
-      '</ul>'
+    tag:'I.03 — Iran War', tagBg:'rgba(193,98,10,.2)', tagColor:'#f7aa6d', tagBorder:'rgba(193,98,10,.38)',
+    title:'Iran War', stat:'~1%', statL:'cite war as direct concern — structural spillover is decisive',
+    html:'<p><strong>Direct vs. indirect:</strong> As of February 2026, only ~1% of voters cited war and foreign conflict as their top concern. The war's electoral power is structural, not direct. US-Israel strikes on Iran began on 28 February 2026; a Memorandum of Understanding was subsequently signed, nominally concluding the war, but its consequences remain active.</p><p><strong>Economic spillover:</strong> <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a> of Americans believe the war worsened their cost of living; <a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> say energy spikes from the war directly hurt their household finances. Gasoline rose from $3.15 to $4.65 during this period, turning a geopolitical decision into a domestic economic grievance.</p><p><strong>Reputational &amp; security damage:</strong> <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">72%</a> of Americans believe the war worsened US international standing; <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">65%</a> say it worsened national security. The <a href="https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf" target="_blank" rel="noopener">2026 DNI Annual Threat Assessment</a> highlights elevated Islamist terrorism risk as a consequence of the strikes.</p><p><strong>Intra-Republican fracture:</strong> The war exposed a faultline between the MAGA faction and the anti-war America First wing. AIPAC's influence over Congress &mdash; which repeatedly blocked the War Powers Resolution &mdash; has become a source of bipartisan public concern since the 2024 elections.</p>'
   },
   immigration:{
-    tag:'Core Issue', head:'Immigration', stat:'25% top-two issue',
-    body:'<p>Framed largely as an extension of institutional mistrust, with a strong enforcement dimension.</p><ul>'+
-      '<li><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">25%</a> rank immigration among their top two issues (up from 12% in January).</li>'+
-      '<li><a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63% disapprove</a> of ICE actions.</li>'+
-      '<li>Congress granted ICE <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">USD&nbsp;75 billion</a> via OBBBA; ICE targets <a href="https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/" target="_blank" rel="noopener">1 million deportations</a> annually.</li>'+
-      '<li><a href="https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october" target="_blank" rel="noopener">49%</a> oppose National Guard deployment against sanctuary cities.</li>'+
-      '</ul>'
-  },
-  ov1:{tag:'Overlap Zone',head:'OBBBA &amp; ACA',stat:'',
-    body:'<p>Both Inflation and Institutional Mistrust are fed by OBBBA, which cut USD&nbsp;1 trillion from healthcare while generating congressional disapproval.</p>'},
-  ov2:{tag:'Overlap Zone',head:'Energy Price Spike',stat:'',
-    body:'<p>The US-Israel strikes on Iran (from 28 Feb 2026) triggered a sharp energy price spike &mdash; gasoline from USD&nbsp;3.15 to USD&nbsp;4.65 &mdash; directly worsening inflation.</p>'},
-  ov3:{tag:'Overlap Zone',head:'WPR &amp; Epstein',stat:'',
-    body:'<p>Congress's failure to pass a War Powers Resolution is the central grievance. Israel's influence over US Iran policy, sharpened by Epstein file conspiracy theories, is its own source of institutional mistrust.</p>'},
-  ov4:{tag:'Overlap Zone',head:'ICE / Courts',stat:'',
-    body:'<p>Congress, via OBBBA, is viewed as the primary enabler of ICE's expansion. Courts pushed back with limited durable effect.</p>'},
-  core:{tag:'Triple Overlap',head:'War Powers Resolution',stat:'',
-    body:'<p><strong>Core overlap of Inflation, Iran War &amp; Institutional Mistrust.</strong></p>'+
-      '<p>Congress's failure to pass a War Powers Resolution sits at the centre of all three I's: institutional inaction (mistrust), unchecked war and its energy shock (inflation), and congressional approval collapsing to a record <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a>.</p>'}
+    tag:'I.04 — Immigration', tagBg:'rgba(140,34,82,.18)', tagColor:'#f0a8c8', tagBorder:'rgba(140,34,82,.36)',
+    title:'Immigration', stat:'25%', statL:'rank it among their top-two issues',
+    html:'<p><strong>The national picture:</strong> As of March 2026, <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">25%</a> of voters rank immigration among their top two issues. In January 2026, <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">12%</a> named it the single most important issue &mdash; second only to inflation (NYT/Siena).</p><p><strong>ICE expansion:</strong> Via OBBBA, Congress allocated <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">$75 billion</a> to ICE ($45B for detention, $30B for processing) and ICE announced a <a href="https://www.dhs.gov/news/2026/01/03/ice-announces-historic-120-manpower-increase-thanks-recruitment-campaign-brought" target="_blank" rel="noopener">120% manpower increase</a>, targeting <a href="https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/" target="_blank" rel="noopener">one million deportations</a> per year. By January 2026, <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63%</a> disapproved of ICE actions.</p><p><strong>Institutional dimension:</strong> Courts repeatedly challenged deportation orders; the administration found legal workarounds each time. National Guard deployment targeting sanctuary cities drew opposition from <a href="https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october" target="_blank" rel="noopener">49%</a> of Americans. At the national level, immigration functions primarily as an extension of institutional mistrust rather than a standalone border concern. Its local-level variation &mdash; in districts with significant immigrant communities &mdash; makes it a distinct driver of voter mobilisation and primary dynamics.</p>'
+  }
 };
 
-var CTX = '<div class="fi-ctx">'+
-  '<button class="fi-ctx-btn" onclick="fiCtxToggle(this)" aria-expanded="false">'+
-    'Do Issues Decide Elections? <span class="fi-ctx-arrow">&#9660;</span></button>'+
-  '<div class="fi-ctx-body">'+
-    '<p>In US Congressional elections, issues may not determine voter behaviour as drastically as expected. Partisan identity is increasingly prioritised over issue stances &mdash; a <a href="https://blogs.lse.ac.uk/usappblog/2023/11/13/increasingly-nationalized-us-elections-are-increasing-polarization-and-government-dysfunction/" target="_blank" rel="noopener">consequence of nationalised elections</a>.</p>'+
-    '<p>Polling shows <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">56% of voters</a> trust local government vs 32% who trust Congress.</p>'+
-    '<p>With a <a href="https://www.economist.com/interactive/trump-approval-tracker" target="_blank" rel="noopener">net approval of &minus;23</a>, President Trump is directly blamed for all four I's.</p>'+
-  '</div></div>';
+var OV_DETAIL = {
+  obbba:{
+    name:'OBBBA &amp; Congressional Inaction',
+    pills:[{l:'Inflation',c:'#f1a222',bg:'rgba(241,162,34,.14)',bc:'rgba(241,162,34,.28)'},{l:'Mistrust',c:'#e8b4ce',bg:'rgba(255,255,255,.07)',bc:'rgba(255,255,255,.14)'}],
+    html:'<p>The One Big Beautiful Bill Act is the single piece of legislation most directly responsible for compounding inflation and institutional mistrust. Its $1T in Medicaid cuts drove healthcare premiums up 58% since January 2026; its $75B ICE funding allocation empowered aggressive deportation; and its passage preceded two of the longest government shutdowns in US history &mdash; all within 18 months.</p><p>Congress is blamed for both the economic harm (healthcare costs, ACA subsidies lapse) and the institutional harm (shutdowns, executive empowerment). This is the legislative overlap where voters experience all four I's simultaneously: prices rising, institutions failing, a war Congress did not stop, and an immigration enforcement system it directly funded. Congressional approval collapsed to a record <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a> by April 2026.</p>'
+  },
+  energy:{
+    name:'Energy &amp; Cost-of-Living Spiral',
+    pills:[{l:'Inflation',c:'#f1a222',bg:'rgba(241,162,34,.14)',bc:'rgba(241,162,34,.28)'},{l:'Iran War',c:'#f7aa6d',bg:'rgba(193,98,10,.18)',bc:'rgba(193,98,10,.36)'}],
+    html:'<p>The Iran war, beginning 28 February 2026, triggered an immediate energy shock. Gasoline rose from $3.15 (December 2024) to $4.65 by May 2026; overall energy prices spiked <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>. For <a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> of Americans, this directly worsened household finances; for <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a>, it worsened perceptions of cost of living overall.</p><p>The political danger is that it converts geopolitical decision-making into domestic economic grievance. The war is not experienced as a foreign policy choice; it is experienced at the petrol station. Republicans, whose voter base in the South and Midwest already faces the highest regional inflation, are most exposed to this compounding effect.</p>'
+  },
+  wpr:{
+    name:'War Powers &amp; Checks on Executive',
+    pills:[{l:'Iran War',c:'#f7aa6d',bg:'rgba(193,98,10,.18)',bc:'rgba(193,98,10,.36)'},{l:'Mistrust',c:'#e8b4ce',bg:'rgba(255,255,255,.07)',bc:'rgba(255,255,255,.14)'}],
+    html:'<p>Congress\'s failure to pass the War Powers Resolution against US intervention in Iran is the defining institutional failure of the 119th Congress. The resolution would have invoked the War Powers Act to require congressional approval for continued military operations &mdash; its absence left the executive\'s Iran decisions unchecked and, more importantly, visibly unchecked.</p><p>This sits alongside a broader pattern: courts pushed back on tariffs, only for the administration to use delegated congressional powers to circumvent the rulings; courts resisted ICE excesses, only for the administration to find new legally permissible workarounds. The institutional machinery of checks and balances was activated &mdash; and seen to fail &mdash; across all three branches. This is why <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">61%</a> of Americans believe Trump wins &ldquo;almost always or most of the time&rdquo; at the Supreme Court, even when formal rulings go against him.</p>'
+  },
+  ice:{
+    name:'ICE, Courts &amp; Congressional Funding',
+    pills:[{l:'Mistrust',c:'#e8b4ce',bg:'rgba(255,255,255,.07)',bc:'rgba(255,255,255,.14)'},{l:'Immigration',c:'#f0a8c8',bg:'rgba(140,34,82,.18)',bc:'rgba(140,34,82,.36)'}],
+    html:'<p>The ICE expansion is a case study in how immigration policy and institutional trust interact. Congress &mdash; via OBBBA &mdash; provided the funding ($75B); the executive deployed it aggressively; courts issued restraining orders; the administration found legal workarounds. The result: <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63%</a> disapprove of ICE's conduct, and 58% disapprove of the overall immigration record, but the policies continue.</p><p>What voters are observing is not immigration enforcement alone. They are watching an institution (Congress) fund an action (ICE expansion) that a majority opposes; another institution (courts) attempting to limit it; and the executive finding its way around both. It is a live demonstration of institutional dysfunction &mdash; which is why immigration, at the national level, reads primarily as an extension of institutional mistrust rather than a standalone border concern.</p>'
+  }
+};
 
-function renderDetail(key) {
-  var d = DETAIL[key]; if (!d) return;
-  var defV = document.getElementById('fi-default-view');
-  var detV = document.getElementById('fi-detail-view');
-  if (defV) defV.style.display = 'none';
-  if (!detV) return;
-  detV.style.display = '';
-  detV.innerHTML =
-    '<button class="fi-back" onclick="fiShowDefault()">&#8592; All issues</button>'+
-    '<span class="fi-tag">'+d.tag+'</span>'+
-    '<div class="fi-det-h">'+d.head+'</div>'+
-    (d.stat?'<div class="fi-det-stat">'+d.stat+'</div>':'')+
-    '<div class="fi-det-body">'+d.body+'</div>'+CTX;
-  document.querySelectorAll('#fi-svg .fi-g').forEach(function(g){
-    g.classList.toggle('fi-sel', g.getAttribute('data-key')===key);
-  });
+function pillsHtml(pills) {
+  return pills.map(function(p){
+    return '<span style="font:500 10px var(--sans);text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:10px;background:'+p.bg+';color:'+p.c+';border:1px solid '+p.bc+'">'+p.l+'</span>';
+  }).join('<span style="color:rgba(255,251,226,.22);font-size:11px;margin:0 3px">&times;</span>');
 }
 
-window.fiSelect   = function(k){ renderDetail(k); };
-window.fiOvSelect = function(k){ renderDetail(k); };
-window.fiShowDefault = function(){
-  var defV=document.getElementById('fi-default-view');
-  var detV=document.getElementById('fi-detail-view');
-  if(defV) defV.style.display='';
-  if(detV){ detV.style.display='none'; detV.innerHTML=''; }
-  document.querySelectorAll('#fi-svg .fi-g').forEach(function(g){ g.classList.remove('fi-sel'); });
+window.fqSelect = function(key) {
+  var d = DETAIL[key]; if (!d) return;
+  var panel = document.getElementById('fq-detail');
+  var inner = document.getElementById('fq-detail-inner');
+  if (!panel || !inner) return;
+  inner.innerHTML =
+    '<button class="fq-det-back" onclick="fqClose()">← Back to all issues</button>'+
+    '<span class="fq-det-tag" style="background:'+d.tagBg+';color:'+d.tagColor+';border:1px solid '+d.tagBorder+'">'+d.tag+'</span>'+
+    '<div class="fq-det-h">'+d.title+'</div>'+
+    '<div class="fq-det-stat">'+d.stat+'</div>'+
+    '<span class="fq-det-stat-l">'+d.statL+'</span>'+
+    '<div class="fq-det-body">'+d.html+'</div>';
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+  // close overlap detail if open
+  var ovd = document.getElementById('fq-ov-detail');
+  if (ovd) ovd.style.display = 'none';
 };
-window.fiCtxToggle = function(btn){
-  var b=btn.nextElementSibling; var open=!b.classList.contains('open');
-  b.classList.toggle('open',open);
-  btn.querySelector('.fi-ctx-arrow').style.transform=open?'rotate(180deg)':'';
-  btn.setAttribute('aria-expanded',open);
+
+window.fqOvSelect = function(key) {
+  var d = OV_DETAIL[key]; if (!d) return;
+  var panel = document.getElementById('fq-ov-detail');
+  var inner = document.getElementById('fq-ov-detail-inner');
+  if (!panel || !inner) return;
+  inner.innerHTML =
+    '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:12px">'+
+    pillsHtml(d.pills)+
+    '<button onclick="fqOvClose()" style="margin-left:auto;background:none;border:none;cursor:pointer;color:rgba(255,251,226,.3);font:400 11px var(--sans);padding:0">&#10005;</button></div>'+
+    '<div class="fq-ov-det-head">'+d.name+'</div>'+
+    '<div class="fq-ov-det-body">'+d.html+'</div>';
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+};
+
+window.fqClose = function() {
+  var p = document.getElementById('fq-detail');
+  if (p) p.style.display = 'none';
+};
+window.fqOvClose = function() {
+  var p = document.getElementById('fq-ov-detail');
+  if (p) p.style.display = 'none';
 };
 
 }());

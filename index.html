@@ -182,7 +182,7 @@ body{
 .home-sub-tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:600}
 .home-subnav-upd{font:400 11px var(--sans);color:var(--t-muted);margin-left:auto}
 .home-subpanel{display:none;flex:1;overflow-y:auto}
-.home-subpanel.active{display:block}
+.home-subpanel.active{display:flex;flex-direction:column}
 /* FULL NEWS PANEL (light theme) */
 .hn-panel-wrap{background:#f8f7f2;min-height:100%}
 .hn-full-toolbar{background:#f0ede6;border-bottom:1px solid #dedad0;padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;position:sticky;top:0;z-index:5}
@@ -465,20 +465,20 @@ body{background:#F5F5DC;color:#1E2232}
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
 /* ── ISSUES / FOUR I'S ───────────────────────────────────────────────────── */
-.fi-section{padding:16px 20px 20px;width:100%;box-sizing:border-box}
-.fi-hdr{margin-bottom:14px}
+.fi-section{padding:16px 20px 20px;width:100%;box-sizing:border-box;flex:1;overflow-y:auto}
+.fi-hdr{margin-bottom:10px}
 .fi-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:#f1a222;margin-bottom:3px}
-.fi-title{font:700 22px var(--serif);color:#fffbe2;margin-bottom:4px}
-.fi-subtitle{font:400 13px/1.55 var(--sans);color:rgba(255,251,226,0.6);max-width:620px}
-.fi-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:10px}
-.fi-leg{display:flex;align-items:center;gap:6px;font:400 12px var(--sans);color:rgba(255,251,226,0.65)}
+.fi-title{font:700 24px var(--serif);color:#fffbe2;margin-bottom:5px;text-shadow:0 1px 3px rgba(0,0,0,0.3)}
+.fi-subtitle{font:400 13px/1.55 var(--sans);color:rgba(255,251,226,0.75);max-width:620px}
+.fi-legend{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:8px;margin-bottom:4px}
+.fi-leg{display:flex;align-items:center;gap:6px;font:500 12px var(--sans);color:rgba(255,251,226,0.85)}
 .fi-leg-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
 /* layout */
 .fi-body{display:flex;gap:14px;align-items:flex-start}
-.fi-diagram{flex:1 1 0;min-width:0;border:1px solid rgba(241,162,34,0.2);border-radius:8px;overflow:hidden}
+.fi-diagram{flex:1 1 0;min-width:0;border:1px solid rgba(241,162,34,0.2);border-radius:8px;overflow:visible}
 .fi-diagram svg{display:block;width:100%;height:auto}
 /* right panel */
-.fi-panel{flex:0 0 230px;width:230px;background:#620d3c;border:1px solid rgba(241,162,34,0.22);border-radius:8px;overflow-y:auto;max-height:480px;position:sticky;top:8px;scrollbar-width:thin;scrollbar-color:rgba(241,162,34,.2) transparent}
+.fi-panel{flex:0 0 190px;width:190px;background:#620d3c;border:1px solid rgba(241,162,34,0.22);border-radius:8px;overflow-y:auto;max-height:480px;position:sticky;top:8px;scrollbar-width:thin;scrollbar-color:rgba(241,162,34,.2) transparent}
 .fi-panel-inner{padding:14px 16px}
 /* summary (default view) */
 .fi-sum-eyebrow{font:600 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:rgba(241,162,34,0.65);margin-bottom:10px}
@@ -963,7 +963,7 @@ body{background:#F5F5DC;color:#1E2232}
     <!-- Diagram + Panel -->
     <div class="fi-body">
       <div class="fi-diagram">
-        <svg id="fi-svg" viewBox="0 0 900 640" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
+        <svg id="fi-svg" viewBox="0 80 900 500" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
   <style>
     .fi-g{cursor:pointer}.fi-g:hover circle{opacity:.72}.fi-g:hover rect{opacity:.85}
     .lbl{font-family:"Inter",Arial,sans-serif;text-anchor:middle;dominant-baseline:middle}

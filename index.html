@@ -963,7 +963,7 @@ body{background:#F5F5DC;color:#1E2232}
     <!-- Diagram + Panel -->
     <div class="fi-body">
       <div class="fi-diagram">
-        <svg id="fi-svg" viewBox="0 80 900 500" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
+        <svg id="fi-svg" viewBox="0 80 900 540" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%;height:auto">
   <style>
     .fi-g{cursor:pointer}.fi-g:hover circle{opacity:.72}.fi-g:hover rect{opacity:.85}
     .lbl{font-family:"Inter",Arial,sans-serif;text-anchor:middle;dominant-baseline:middle}
@@ -971,24 +971,24 @@ body{background:#F5F5DC;color:#1E2232}
     .lbl-ms{font-size:10px;font-weight:500;fill:rgba(255,255,255,0.88)}
     .lbl-s{font-size:10px;font-weight:700;fill:#fff}
     .lbl-ss{font-size:9px;font-weight:500;fill:rgba(255,255,255,0.85)}
-    .lbl-ov{font-size:9px;font-weight:600;fill:#3d0822}
+    .lbl-ov{font-size:9px;font-weight:600;fill:#fffbe2}
     .lbl-co{font-size:10px;font-weight:700;fill:#3d0822}
   </style>
   <!-- Background -->
-  <rect width="900" height="640" fill="#fff"/>
+  <rect width="900" height="640" fill="#3d0822"/>
 
   <!-- ── Main circle fills (translucent) ── -->
   <g class="fi-g" data-key="inflation" onclick="fiSelect('inflation')">
-    <circle cx="235" cy="305" r="175" fill="rgba(241,162,34,0.22)" stroke="#f1a222" stroke-width="2.5"/>
+    <circle cx="235" cy="305" r="175" fill="rgba(241,162,34,0.28)" stroke="#f1a222" stroke-width="2.5"/>
   </g>
   <g class="fi-g" data-key="mistrust" onclick="fiSelect('mistrust')">
-    <circle cx="470" cy="250" r="155" fill="rgba(98,13,60,0.18)" stroke="#620d3c" stroke-width="2.5"/>
+    <circle cx="470" cy="250" r="155" fill="rgba(220,80,150,0.1)" stroke="#d4678a" stroke-width="2.5"/>
   </g>
   <g class="fi-g" data-key="iran" onclick="fiSelect('iran')">
-    <circle cx="352" cy="450" r="130" fill="rgba(193,98,10,0.18)" stroke="#c1620a" stroke-width="2.5"/>
+    <circle cx="352" cy="450" r="130" fill="rgba(193,98,10,0.25)" stroke="#c1620a" stroke-width="2.5"/>
   </g>
   <g class="fi-g" data-key="immigration" onclick="fiSelect('immigration')">
-    <circle cx="608" cy="412" r="130" fill="rgba(140,34,82,0.18)" stroke="#8c2252" stroke-width="2.5"/>
+    <circle cx="608" cy="412" r="130" fill="rgba(140,34,82,0.25)" stroke="#8c2252" stroke-width="2.5"/>
   </g>
 
   <!-- ── Sub-bubbles: Inflation (gold) ── -->
@@ -1016,25 +1016,25 @@ body{background:#F5F5DC;color:#1E2232}
 
   <!-- ── Sub-bubbles: Mistrust (maroon) ── -->
   <g class="fi-g" data-key="mistrust" onclick="fiSelect('mistrust')">
-    <circle cx="408" cy="156" r="36" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="408" cy="156" r="36" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="408" y="152" class="lbl lbl-s">Congress</text><text x="408" y="164" class="lbl lbl-s">Approval</text>
     <text x="408" y="176" class="lbl lbl-ss">80% disapprove</text>
 
-    <circle cx="527" cy="147" r="32" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="527" cy="147" r="32" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="527" y="144" class="lbl lbl-s">Epstein</text><text x="527" y="156" class="lbl lbl-s">Files</text>
 
-    <circle cx="577" cy="238" r="31" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="577" cy="238" r="31" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="577" y="234" class="lbl lbl-s">Supreme</text><text x="577" y="246" class="lbl lbl-s">Court</text>
     <text x="577" y="258" class="lbl lbl-ss">27% apprvl</text>
 
-    <circle cx="540" cy="328" r="29" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="540" cy="328" r="29" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="540" y="325" class="lbl lbl-s">Election</text><text x="540" y="337" class="lbl lbl-s">ID &amp; Laws</text>
 
-    <circle cx="412" cy="325" r="31" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="412" cy="325" r="31" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="412" y="322" class="lbl lbl-s">Corruption</text>
     <text x="412" y="334" class="lbl lbl-ss">13%</text>
 
-    <circle cx="474" cy="175" r="25" fill="#620d3c" stroke="#3d0822" stroke-width="1"/>
+    <circle cx="474" cy="175" r="25" fill="#9a2060" stroke="#3d0822" stroke-width="1"/>
     <text x="474" y="172" class="lbl lbl-s">Exec.</text><text x="474" y="184" class="lbl lbl-s">Excess</text>
   </g>
 
@@ -1073,25 +1073,25 @@ body{background:#F5F5DC;color:#1E2232}
 
   <!-- ── Overlap zones (dashed) ── -->
   <g class="fi-g" data-key="ov1" onclick="fiOvSelect('ov1')">
-    <circle cx="348" cy="278" r="30" fill="rgba(255,255,255,0.55)" stroke="rgba(98,13,60,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <circle cx="348" cy="278" r="30" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
     <text x="348" y="274" class="lbl lbl-ov">OBBBA</text><text x="348" y="286" class="lbl lbl-ov">&amp; ACA</text>
   </g>
   <g class="fi-g" data-key="ov2" onclick="fiOvSelect('ov2')">
-    <circle cx="293" cy="390" r="27" fill="rgba(255,255,255,0.55)" stroke="rgba(193,98,10,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <circle cx="293" cy="390" r="27" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
     <text x="293" y="386" class="lbl lbl-ov">Energy</text><text x="293" y="398" class="lbl lbl-ov">Spike</text>
   </g>
   <g class="fi-g" data-key="ov3" onclick="fiOvSelect('ov3')">
-    <circle cx="404" cy="355" r="26" fill="rgba(255,255,255,0.55)" stroke="rgba(98,13,60,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <circle cx="404" cy="355" r="26" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
     <text x="404" y="351" class="lbl lbl-ov">WPR &amp;</text><text x="404" y="363" class="lbl lbl-ov">Epstein</text>
   </g>
   <g class="fi-g" data-key="ov4" onclick="fiOvSelect('ov4')">
-    <circle cx="547" cy="347" r="25" fill="rgba(255,255,255,0.55)" stroke="rgba(140,34,82,0.5)" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <circle cx="547" cy="347" r="25" fill="rgba(255,255,255,0.08)" stroke="rgba(241,162,34,0.4)" stroke-width="1.5" stroke-dasharray="4,3"/>
     <text x="547" y="343" class="lbl lbl-ov">ICE /</text><text x="547" y="355" class="lbl lbl-ov">Courts</text>
   </g>
 
   <!-- ── Core triple overlap (gold) ── -->
   <g class="fi-g" data-key="core" onclick="fiOvSelect('core')">
-    <circle cx="370" cy="348" r="42" fill="rgba(241,162,34,0.22)" stroke="#f1a222" stroke-width="2.5"/>
+    <circle cx="370" cy="348" r="42" fill="rgba(241,162,34,0.28)" stroke="#f1a222" stroke-width="2.5"/>
     <text x="370" y="343" class="lbl lbl-co">War Powers</text><text x="370" y="357" class="lbl lbl-co">Resolution</text>
   </g>
 

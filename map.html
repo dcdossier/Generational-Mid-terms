@@ -216,6 +216,31 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
 
+
+/* ── FACTION TRACKER ─────────────────────────────────────────────── */
+.section-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:#f1a222;margin-bottom:5px}
+.faction-section{margin-top:36px}
+.faction-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.faction-sel{font:500 14px var(--sans);border:1.5px solid var(--br-md);border-radius:8px;padding:9px 36px 9px 14px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B6B6B'/%3E%3C/svg%3E") no-repeat right 12px center;cursor:pointer;color:var(--t1);min-width:280px;-webkit-appearance:none;appearance:none}
+.faction-chips{display:flex;gap:7px;flex-wrap:wrap}
+.faction-chip{display:inline-flex;align-items:center;gap:5px;font:600 11px var(--sans);color:#fff;padding:4px 11px;border-radius:12px;white-space:nowrap;letter-spacing:.04em;cursor:pointer;transition:opacity .12s;opacity:.5}
+.faction-chip.active{opacity:1;box-shadow:0 0 0 2px rgba(0,0,0,.18)}
+.faction-table-search{font:400 14px var(--sans);border:1.5px solid var(--br);border-radius:8px;padding:8px 14px;width:100%;max-width:360px;background:#fff;color:var(--t1);margin-bottom:10px}
+.faction-table-search:focus{outline:none;border-color:var(--br-md)}
+/* methodology */
+.meth-section{margin-top:48px;border-top:1px solid var(--br);padding:28px 0 8px}
+.meth-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:0;text-align:left;gap:12px}
+.meth-toggle-title{font:600 16px var(--serif);color:var(--t1)}
+.meth-arrow{font-size:18px;color:var(--t3);transition:transform .2s;flex-shrink:0}
+.meth-body{display:none;margin-top:18px;padding:20px 24px;background:#fafaf8;border:1px solid var(--br);border-radius:8px}
+.meth-body.open{display:block}
+.meth-body h4{font:700 14px var(--serif);color:#620d3c;margin:18px 0 6px}
+.meth-body h4:first-child{margin-top:0}
+.meth-body ul{margin:0 0 0 18px;padding:0}
+.meth-body ul li{font:400 13px/1.85 var(--sans);color:var(--t2)}
+.meth-sources{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.meth-src{font:500 12px var(--sans);color:#620d3c;border:1px solid #e6e0d8;border-radius:20px;padding:4px 13px;text-decoration:none;transition:background .12s}
+.meth-src:hover{background:#fffbe2}
 </style>
 </head>
 <body>
@@ -352,6 +377,55 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="chart-note" id="senate-source-note">Source: Preliminary analyst estimates</div>
   </div>
 
+  <!-- ── INTRAPARTY FACTIONS (Senate) ─────────────────────────────── -->
+  <div class="faction-section" id="senate-faction-section">
+    <div class="section-hdr" style="margin-bottom:14px">
+      <div>
+        <div class="section-eyebrow">119th Congress</div>
+        <div class="section-title">Intraparty Factions — Senate</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to highlight on the map.</div>
+      </div>
+    </div>
+
+    <div class="faction-controls">
+      <select class="faction-sel" id="senate-faction-sel" onchange="renderSenateFaction(this.value)">
+        <option value="MD">Moderate Democrats (MD) &mdash; 24 members</option>
+        <option value="PD">Progressive Democrats (PD) &mdash; 22 members</option>
+        <option value="MR">MAGA Republicans (MR) &mdash; 25 members</option>
+        <option value="AR">America First Republicans (AR) &mdash; 9 members</option>
+        <option value="TR">Traditional Republicans (TR) &mdash; 19 members</option>
+      </select>
+      <div class="faction-chips">
+        <span class="faction-chip" style="background:#7393B3" onclick="document.getElementById('senate-faction-sel').value='MD';renderSenateFaction('MD')">&#9632; MD</span>
+        <span class="faction-chip" style="background:#0096FF" onclick="document.getElementById('senate-faction-sel').value='PD';renderSenateFaction('PD')">&#9632; PD</span>
+        <span class="faction-chip" style="background:#800000" onclick="document.getElementById('senate-faction-sel').value='MR';renderSenateFaction('MR')">&#9632; MR</span>
+        <span class="faction-chip" style="background:#DC143C" onclick="document.getElementById('senate-faction-sel').value='AR';renderSenateFaction('AR')">&#9632; AR</span>
+        <span class="faction-chip" style="background:#986868" onclick="document.getElementById('senate-faction-sel').value='TR';renderSenateFaction('TR')">&#9632; TR</span>
+      </div>
+    </div>
+
+    <div class="d3-map-wrap" style="margin-bottom:18px">
+      <svg id="senate-faction-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+      <div class="map-loading" id="senate-faction-loading">Select a faction to load map&hellip;</div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="senateFactionZoomBy(1.5)" title="Zoom in">+</button>
+        <button class="map-zoom-btn" onclick="senateFactionZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+        <button class="map-zoom-btn reset" onclick="senateFactionZoomReset()" title="Reset">&#8634;</button>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-title" id="senate-faction-card-title">Select a faction above to view members</div>
+      <input class="faction-table-search" type="search" placeholder="Search by name or state&hellip;" oninput="filterFactionTable('senate',this.value)">
+      <table class="race-table" id="senate-faction-table">
+        <thead><tr><th>Member</th><th>State</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <tbody id="senate-faction-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">Select a faction above&hellip;</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 </div>
 
@@ -465,6 +539,55 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       </tbody>
     </table>
     <div class="chart-note">Source: Cook Political Report, Inside Elections. PVP = 2024 presidential vote performance in district. Positive R = district voted more Republican than national average.</div>
+  </div>
+
+  <!-- ── INTRAPARTY FACTIONS (House) ──────────────────────────────── -->
+  <div class="faction-section" id="house-faction-section">
+    <div class="section-hdr" style="margin-bottom:14px">
+      <div>
+        <div class="section-eyebrow">119th Congress</div>
+        <div class="section-title">Intraparty Factions — House</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to highlight on the map.</div>
+      </div>
+    </div>
+
+    <div class="faction-controls">
+      <select class="faction-sel" id="house-faction-sel" onchange="renderHouseFaction(this.value)">
+        <option value="MD">Moderate Democrats (MD) &mdash; 128 members</option>
+        <option value="PD">Progressive Democrats (PD) &mdash; 84 members</option>
+        <option value="MR">MAGA Republicans (MR) &mdash; 140 members</option>
+        <option value="AR">America First Republicans (AR) &mdash; 39 members</option>
+        <option value="TR">Traditional Republicans (TR) &mdash; 39 members</option>
+      </select>
+      <div class="faction-chips">
+        <span class="faction-chip" style="background:#7393B3" onclick="document.getElementById('house-faction-sel').value='MD';renderHouseFaction('MD')">&#9632; MD</span>
+        <span class="faction-chip" style="background:#0096FF" onclick="document.getElementById('house-faction-sel').value='PD';renderHouseFaction('PD')">&#9632; PD</span>
+        <span class="faction-chip" style="background:#800000" onclick="document.getElementById('house-faction-sel').value='MR';renderHouseFaction('MR')">&#9632; MR</span>
+        <span class="faction-chip" style="background:#DC143C" onclick="document.getElementById('house-faction-sel').value='AR';renderHouseFaction('AR')">&#9632; AR</span>
+        <span class="faction-chip" style="background:#986868" onclick="document.getElementById('house-faction-sel').value='TR';renderHouseFaction('TR')">&#9632; TR</span>
+      </div>
+    </div>
+
+    <div class="d3-map-wrap" style="margin-bottom:18px">
+      <svg id="house-faction-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+      <div class="map-loading" id="house-faction-loading">Select a faction to load map&hellip;</div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="houseFactionZoomBy(1.5)" title="Zoom in">+</button>
+        <button class="map-zoom-btn" onclick="houseFactionZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+        <button class="map-zoom-btn reset" onclick="houseFactionZoomReset()" title="Reset">&#8634;</button>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-title" id="house-faction-card-title">Select a faction above to view members</div>
+      <input class="faction-table-search" type="search" placeholder="Search by name or district&hellip;" oninput="filterFactionTable('house',this.value)">
+      <table class="race-table" id="house-faction-table">
+        <thead><tr><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <tbody id="house-faction-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">Select a faction above&hellip;</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
 </div>
@@ -593,6 +716,80 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   </div>
 
 </div>
+</div>
+
+
+<!-- ── METHODOLOGY ──────────────────────────────────────────────────────────── -->
+<div class="panel-inner" style="max-width:900px;margin:0 auto;padding:0 28px 40px">
+  <div class="meth-section">
+    <button class="meth-toggle" onclick="toggleMeth(this)" aria-expanded="false">
+      <span class="meth-toggle-title">Faction Methodology &amp; Sources</span>
+      <span class="meth-arrow">&#9660;</span>
+    </button>
+    <div class="meth-body" id="meth-body">
+      <p style="font:400 14px/1.8 var(--sans);color:var(--t2);margin-bottom:14px">Members of Congress have been assigned to specific factions based on their caucus memberships, voting record, endorsements by leaders and broader public-ideological identity. On policy stances and political alignments, each of these factions is also determined based on the following points:</p>
+
+      <h4>Traditional Republican / Establishment</h4>
+      <ul>
+        <li>Supports free trade and international alliances (like NATO)</li>
+        <li>Comfortable with corporate business interests and Wall Street</li>
+        <li>Prefers working within party leadership, not against it</li>
+        <li>Cautious about picking public fights with party leaders</li>
+        <li>Often has long ties to donor networks and business groups</li>
+        <li>Skeptical of isolationism</li>
+        <li>Oftentimes pro-Trump; criticism is private</li>
+      </ul>
+
+      <h4>MAGA Republican</h4>
+      <ul>
+        <li>Strongly and publicly loyal to Trump personally</li>
+        <li>Prioritises immigration crackdowns and border security</li>
+        <li>Distrusts mainstream media and federal agencies (FBI, DOJ)</li>
+        <li>Willing to challenge own party leadership publicly</li>
+        <li>Focuses on culture-war issues (schools, gender, &ldquo;woke&rdquo; topics)</li>
+        <li>Frequently uses combative, us-vs-them language</li>
+      </ul>
+
+      <h4>America First Republican</h4>
+      <ul>
+        <li>Publicly critical of the Trump administration</li>
+        <li>Sceptical of foreign wars and overseas military spending</li>
+        <li>Wants less U.S. involvement in international conflicts (like Ukraine)</li>
+        <li>Focuses on domestic manufacturing and jobs over global trade deals</li>
+        <li>Often overlaps with MAGA but stresses non-interventionism specifically</li>
+        <li>Wary of multinational institutions (UN, NATO funding)</li>
+        <li>Prioritises &ldquo;America&rsquo;s interests first&rdquo; framing on trade and foreign policy</li>
+      </ul>
+
+      <h4>Moderate Democrat</h4>
+      <ul>
+        <li>Willing to work across the aisle with Republicans</li>
+        <li>Cautious about big government spending programmes</li>
+        <li>Supports incremental reforms, not sweeping overhauls</li>
+        <li>Represents swing districts, so avoids far-left labels</li>
+        <li>Less likely to support defunding police or Medicare for All</li>
+        <li>Focuses on pragmatic, &ldquo;get things done&rdquo; messaging</li>
+      </ul>
+
+      <h4>Progressive Democrat</h4>
+      <ul>
+        <li>Limited willingness to work across the aisle</li>
+        <li>Supports bold structural change (Medicare for All, Green New Deal)</li>
+        <li>Comfortable being vocal against corporate influence in politics</li>
+        <li>Prioritises racial and economic justice issues strongly</li>
+        <li>Often represents safe, deep-blue districts</li>
+        <li>Willing to criticise own party leadership publicly</li>
+        <li>Focuses on systemic reform over incremental fixes</li>
+      </ul>
+
+      <div class="meth-sources">
+        <a class="meth-src" href="https://americansforprosperity.org/national-scorecard/#/" target="_blank" rel="noopener">AFP National Scorecard (Traditional Republicans)</a>
+        <a class="meth-src" href="https://heritageaction.com/scorecard" target="_blank" rel="noopener">Heritage Action Scorecard (MAGA Republicans)</a>
+        <a class="meth-src" href="https://progressivepunch.org/scores.htm?house=senate#progvsbench" target="_blank" rel="noopener">Progressive Punch &mdash; Senate</a>
+        <a class="meth-src" href="https://progressivepunch.org/scores.htm?x=20&amp;y=6&amp;house=house&amp;party=&amp;sort=crucial-current&amp;order=down#progvsbench" target="_blank" rel="noopener">Progressive Punch &mdash; House</a>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="map-tip" id="map-tip"></div>
@@ -1408,6 +1605,155 @@ function searchGovMap(q) {
     if (match && r) ct++;
   });
   document.getElementById('gov-srch-ct').textContent = ql ? ct + ' match' + (ct !== 1 ? 'es' : '') : '';
+}
+
+
+// ── FACTION TRACKER ──────────────────────────────────────────────────────────
+const FACTION_COLORS = {MD:'#7393B3',PD:'#0096FF',MR:'#800000',AR:'#DC143C',TR:'#986868',IND:'#888888'};
+const FACTION_NAMES  = {
+  MD:'Moderate Democrats',PD:'Progressive Democrats',
+  MR:'MAGA Republicans',AR:'America First Republicans',TR:'Traditional Republicans',IND:'Independent'
+};
+
+let _factionData=null,_factionFetching=false,_factionWaiters=[];
+let _hFacZoom=null,_sFacZoom=null;
+
+function fetchFactionData(cb){
+  if(_factionData){cb(_factionData);return;}
+  _factionWaiters.push(cb);
+  if(_factionFetching)return;
+  _factionFetching=true;
+  fetch('assets/factions119.json?v=1')
+    .then(r=>r.json())
+    .then(d=>{_factionData=d;_factionWaiters.forEach(fn=>fn(d));_factionWaiters=[];})
+    .catch(e=>console.error('faction data load failed',e));
+}
+
+function updateFactionChips(chamber,code){
+  document.querySelectorAll('#'+chamber+'-faction-section .faction-chip').forEach(c=>{
+    const ccode=c.textContent.trim().replace(/[^A-Z]/g,'');
+    c.classList.toggle('active',ccode===code);
+  });
+}
+
+function renderHouseFaction(code){
+  updateFactionChips('house',code);
+  const ld=document.getElementById('house-faction-loading');
+  if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
+  fetchFactionData(data=>{
+    const members=data.factions.house[code]||[];
+    document.getElementById('house-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' House members';
+    drawHouseFactionMap(code,data.houseMap);
+    populateFactionTable('house',code,members);
+  });
+}
+
+function renderSenateFaction(code){
+  updateFactionChips('senate',code);
+  const ld=document.getElementById('senate-faction-loading');
+  if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
+  fetchFactionData(data=>{
+    const members=data.factions.senate[code]||[];
+    document.getElementById('senate-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' Senate members';
+    drawSenateFactionMap(code,data.senateMap);
+    populateFactionTable('senate',code,members);
+  });
+}
+
+function drawHouseFactionMap(code,houseMap){
+  const svgEl=d3.select('#house-faction-svg');
+  svgEl.selectAll('*').remove();
+  const g=svgEl.append('g');
+  _hFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
+  const color=FACTION_COLORS[code];
+  fetchDistrictsGeo(gj=>{
+    const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const pg=d3.geoPath().projection(proj);
+    const ld=document.getElementById('house-faction-loading');
+    if(ld)ld.style.display='none';
+    g.selectAll('path').data(gj.features).join('path')
+      .attr('d',d=>pg(d)||'')
+      .style('fill',d=>{
+        const key=d.properties.state+'|'+d.properties.district;
+        const m=houseMap[key];
+        return(m&&m.code===code)?color:'#D8D8D4';
+      })
+      .style('stroke','#fff').style('stroke-width','0.3px')
+      .on('mousemove',function(event,d){
+        const key=d.properties.state+'|'+d.properties.district;
+        const m=houseMap[key];
+        if(m&&m.code===code) showTip(event,'<strong>'+m.name+'</strong><br>'+m.seat+' · '+FACTION_NAMES[code]);
+        else showTip(event,'<strong>'+d.properties.state+' '+(d.properties.district||'AL')+'</strong><br><span style="opacity:.7">'+FACTION_NAMES[code]+' member not in this district</span>');
+      })
+      .on('mouseleave',hideTip);
+  });
+}
+
+function drawSenateFactionMap(code,senateMap){
+  const svgEl=d3.select('#senate-faction-svg');
+  svgEl.selectAll('*').remove();
+  const g=svgEl.append('g');
+  _sFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
+  const color=FACTION_COLORS[code];
+  fetchSenateGeo(gj=>{
+    const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const pg=d3.geoPath().projection(proj);
+    const ld=document.getElementById('senate-faction-loading');
+    if(ld)ld.style.display='none';
+    g.selectAll('path').data(gj.features).join('path')
+      .attr('d',d=>pg(d)||'')
+      .style('fill',d=>{
+        const senators=senateMap[d.properties.NAME]||[];
+        return senators.some(s=>s.code===code)?color:'#D8D8D4';
+      })
+      .style('stroke','#fff').style('stroke-width','0.5px')
+      .on('mousemove',function(event,d){
+        const senators=senateMap[d.properties.NAME]||[];
+        const matching=senators.filter(s=>s.code===code);
+        if(matching.length){
+          showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+matching.map(s=>s.name).join(', ')+'<br><span style="opacity:.8">'+FACTION_NAMES[code]+'</span>');
+        } else {
+          showTip(event,'<strong>'+d.properties.NAME+'</strong><br><span style="opacity:.7">No '+FACTION_NAMES[code]+' senator</span>');
+        }
+      })
+      .on('mouseleave',hideTip);
+  });
+}
+
+function populateFactionTable(chamber,code,members){
+  const tbody=document.getElementById(chamber+'-faction-tbody');
+  if(!tbody)return;
+  if(!members.length){tbody.innerHTML='<tr><td colspan="5" style="text-align:center;padding:24px;color:var(--t4)">No members found.</td></tr>';return;}
+  tbody.innerHTML=members.map(m=>{
+    const caucusShort=m.c.split('•')[0].trim().split('(')[0].trim();
+    const scoreShort=m.e.length>100?m.e.substring(0,100)+'…':m.e;
+    const wingShort=m.w.split('(')[0].trim();
+    return '<tr><td><strong>'+escH(m.n)+'</strong></td><td>'+escH(m.s)+'</td>'
+      +'<td style="font-size:12px">'+escH(caucusShort)+'</td>'
+      +'<td style="font-size:12px;color:var(--t3)">'+escH(scoreShort)+'</td>'
+      +'<td style="font-size:12px">'+escH(wingShort)+'</td></tr>';
+  }).join('');
+}
+
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function filterFactionTable(chamber,query){
+  const q=(query||'').toLowerCase();
+  document.querySelectorAll('#'+chamber+'-faction-tbody tr').forEach(row=>{
+    row.style.display=(!q||row.textContent.toLowerCase().includes(q))?'':'none';
+  });
+}
+
+function houseFactionZoomBy(f){_hFacZoom&&_hFacZoom.zoomBy(f);}
+function houseFactionZoomReset(){_hFacZoom&&_hFacZoom.reset();}
+function senateFactionZoomBy(f){_sFacZoom&&_sFacZoom.zoomBy(f);}
+function senateFactionZoomReset(){_sFacZoom&&_sFacZoom.reset();}
+
+function toggleMeth(btn){
+  const body=document.getElementById('meth-body');
+  const open=body.classList.toggle('open');
+  btn.querySelector('.meth-arrow').style.transform=open?'rotate(180deg)':'';
+  btn.setAttribute('aria-expanded',open);
 }
 
 // ── BOOT ─────────────────────────────────────────────────────────────────────

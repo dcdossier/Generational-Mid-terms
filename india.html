@@ -846,6 +846,17 @@ body {
 .sp-news-title:hover { color: var(--accent); }
 .sp-news-date { font: 400 11px var(--sans); color: var(--text3); }
 .sp-news-empty { font: 400 14px var(--sans); color: var(--text3); padding: 11px 0; }
+
+/* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
+
+
+/* ── DEF-TIP TOOLTIP ─────────────────────────────────────── */
+.def-tip-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px 'Inter','Lato',sans-serif;cursor:pointer;vertical-align:middle;line-height:1;padding:0;margin-left:3px;position:relative;top:-2px;flex-shrink:0;transition:background .15s;border:none;outline:none;user-select:none}
+.def-tip-btn:hover{background:#c98a10}
+#def-tip-box{position:fixed;z-index:999999;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;max-width:320px;box-shadow:0 6px 28px rgba(0,0,0,.22);font:400 13px/1.65 'Inter','Lato',sans-serif;color:#2a2a2a;display:none;pointer-events:auto}
+#def-tip-box.visible{display:block}
+#def-tip-box .tip-term{font:700 13px 'Lora',Georgia,serif;color:#620d3c;display:block;margin-bottom:3px}
+#def-tip-box p{margin:0 0 8px}
 </style>
 </head>
 <body>
@@ -1255,7 +1266,7 @@ body {
           <td>1.5%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:69%"></div></div></td>
           <td><span class="competitiveness comp-lean-r">Lean R</span></td>
-          <td>Several suburban Houston and Dallas House seats rated Toss-up or Lean</td>
+          <td>Several suburban Houston and Dallas House seats rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span> or Lean</td>
         </tr>
         <tr>
           <td><span class="state-name">New Jersey</span></td>
@@ -1263,7 +1274,7 @@ body {
           <td>4.4%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:63%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>NJ-07 and NJ-11 rated Toss-up; Senate seat rated Lean D</td>
+          <td>NJ-07 and NJ-11 rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span>; Senate seat rated Lean D</td>
         </tr>
         <tr>
           <td><span class="state-name">New York</span></td>
@@ -1287,7 +1298,7 @@ body {
           <td>1.1%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:19%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>Senate seat rated Toss-up; Ossoff among most vulnerable incumbents</td>
+          <td>Senate seat rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span>; Ossoff among most vulnerable incumbents</td>
         </tr>
         <tr>
           <td><span class="state-name">Virginia</span></td>
@@ -1303,7 +1314,7 @@ body {
           <td>0.9%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:15%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>Open Senate seat rated Toss-up; MI-13 (Thanedar incumbent)</td>
+          <td>Open Senate seat rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span>; MI-13 (Thanedar incumbent)</td>
         </tr>
         <tr>
           <td><span class="state-name">Pennsylvania</span></td>
@@ -1319,7 +1330,7 @@ body {
           <td>0.7%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:6%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>Senate race rated Toss-up; community concentrated in Madison and Milwaukee suburbs</td>
+          <td>Senate race rated Toss-up<span class="def-tip-btn" role="button" tabindex="0" aria-label="What is a Battleground / Toss-up seat?">i</span>; community concentrated in Madison and Milwaukee suburbs</td>
         </tr>
       </tbody>
     </table>
@@ -2595,5 +2606,39 @@ async function loadMemberNews(force) {
 <script>
 document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
 </script>
+
+
+<script>
+(function(){
+  if(document.getElementById('def-tip-box'))return;
+  var box=document.createElement('div');
+  box.id='def-tip-box';
+  box.innerHTML='<p><span class="tip-term">Battleground seats</span>Any seat that could realistically flip parties in the election cycle. This is a broad category.</p><p><span class="tip-term">Toss-up seats</span>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.</p><p>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats &mdash; acting as a spectrum of likelihood of a seat being secured by a party or faction.</p>';
+  document.body.appendChild(box);
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest('.def-tip-btn');
+    if(btn){
+      e.stopPropagation();
+      if(box.classList.contains('visible')&&box._t===btn){box.classList.remove('visible');box._t=null;return;}
+      box._t=btn;
+      box.classList.add('visible');
+      // Position after making visible so offsetWidth/Height are real
+      requestAnimationFrame(function(){
+        var r=btn.getBoundingClientRect();
+        var bw=box.offsetWidth||300,bh=box.offsetHeight||160;
+        var left=r.left+r.width/2-bw/2;
+        left=Math.max(8,Math.min(left,window.innerWidth-bw-8));
+        var top=r.top-bh-10;
+        if(top<8)top=r.bottom+8;
+        box.style.left=left+'px';
+        box.style.top=top+'px';
+      });
+    }else{
+      box.classList.remove('visible');box._t=null;
+    }
+  },true);
+})();
+</script>
+
 </body>
 </html>

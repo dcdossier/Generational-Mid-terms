@@ -463,6 +463,51 @@ body{background:#F5F5DC;color:#1E2232}
 
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
+/* ── FOUR I'S PANEL ──────────────────────────────────────── */
+.four-i-wrap{padding:20px 24px 28px;width:100%}
+.four-i-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.four-i-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:4px}
+.four-i-title{font:700 24px var(--serif);color:var(--beige);margin-bottom:5px}
+.four-i-sub{font:400 13px/1.6 var(--sans);color:var(--t-muted);max-width:600px}
+.four-i-legend{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding-top:4px;flex-shrink:0}
+.fi-leg-item{display:flex;align-items:center;gap:7px;font:400 12px var(--sans);color:var(--t-muted);white-space:nowrap}
+.fi-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex-shrink:0}
+.four-i-layout{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.four-i-diagram-wrap{flex:2 1 560px;border:1px solid var(--br);border-radius:12px;overflow:hidden;background:rgba(0,0,0,0.18);min-width:280px}
+.four-i-diagram-wrap svg{display:block;width:100%;height:auto}
+.four-i-panel{flex:1 1 290px;min-width:260px;max-height:450px;overflow-y:auto;background:rgba(0,0,0,0.22);border:1px solid var(--br);border-radius:12px;padding:18px 20px;position:sticky;top:12px;scrollbar-width:thin;scrollbar-color:rgba(241,162,34,.2) transparent}
+.four-i-panel .fi-tag{display:inline-block;font:600 10px var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-bottom:9px}
+.four-i-panel h3{font:700 16px var(--serif);color:var(--beige);margin-bottom:3px}
+.four-i-panel .fi-stat{font:700 20px var(--serif);margin:3px 0 11px}
+.four-i-panel p{font:400 13px/1.7 var(--sans);color:rgba(255,251,226,0.83);margin-bottom:9px}
+.four-i-panel ul{margin:0 0 9px;padding-left:16px}
+.four-i-panel li{font:400 13px/1.6 var(--sans);color:rgba(255,251,226,0.83);margin-bottom:6px}
+.four-i-panel a{color:var(--gold-light);text-decoration:underline;text-underline-offset:2px;font-weight:500}
+.four-i-panel a:hover{color:var(--gold)}
+.four-i-panel strong{color:var(--beige)}
+.fi-placeholder{font:400 13px/1.7 var(--sans);color:var(--t-muted);font-style:italic}
+.four-i-context{margin-top:18px;border-top:1px solid var(--br);padding-top:14px}
+.four-i-context-toggle{display:flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;padding:0;color:var(--gold);font:600 12px var(--sans);letter-spacing:.04em;text-transform:uppercase;width:100%;text-align:left}
+.four-i-context-arrow{font-size:9px;transition:transform .18s;margin-left:auto;color:var(--t-muted)}
+.four-i-context-body{display:none;margin-top:12px}
+.four-i-context-body.open{display:block}
+.four-i-context-body p{font:400 13px/1.7 var(--sans);color:rgba(255,251,226,0.78);margin-bottom:8px}
+.four-i-context-body a{color:var(--gold-light);text-decoration:underline;font-weight:500}
+.four-i-context-body a:hover{color:var(--gold)}
+.four-i-note{font:400 11.5px/1.65 var(--sans);color:var(--t-muted);margin-top:16px;border-top:1px solid var(--br);padding-top:12px}
+.four-i-note a{color:rgba(241,162,34,0.65);text-decoration:underline}
+.four-i-note a:hover{color:var(--gold)}
+#fi-tooltip{position:fixed;pointer-events:none;background:rgba(15,6,20,0.92);color:var(--beige);font:400 12px var(--sans);padding:8px 12px;border-radius:6px;max-width:230px;line-height:1.45;z-index:9999;display:none;box-shadow:0 4px 16px rgba(0,0,0,.5);border:1px solid rgba(241,162,34,0.25)}
+.fi-bubble{cursor:pointer}
+.fi-bubble .fi-shape{transition:opacity .12s,stroke-width .12s}
+.fi-bubble:hover .fi-shape,.fi-bubble:focus .fi-shape{opacity:.7}
+.fi-bubble.fi-sel .fi-shape{stroke-width:2.5}
+@media(max-width:700px){
+  .four-i-layout{flex-direction:column}
+  .four-i-panel{max-height:none;position:static;margin-top:0}
+  .four-i-wrap{padding:14px 14px 20px}
+  .four-i-legend{gap:6px 14px}
+}
 
 </style>
 </head>
@@ -585,6 +630,7 @@ body{background:#F5F5DC;color:#1E2232}
       <button class="home-sub-tab active" data-subtab="overview" onclick="switchHomeTab('overview',this)">Overview</button>
       <button class="home-sub-tab" data-subtab="news" onclick="switchHomeTab('news',this)">Latest Updates</button>
       <button class="home-sub-tab" data-subtab="data" onclick="switchHomeTab('data',this)">Data Indicators</button>
+      <button class="home-sub-tab" data-subtab="issues" onclick="switchHomeTab('issues',this)">The Four I&#8217;s</button>
       <span class="home-subnav-upd" id="home-subnav-updated"></span>
     </nav>
 
@@ -883,6 +929,54 @@ body{background:#F5F5DC;color:#1E2232}
 
     </div><!-- /home-body data -->
     </div><!-- /home-subpanel-data -->
+
+    <!-- ISSUES / FOUR I'S SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-issues">
+    <div class="four-i-wrap">
+
+      <div class="four-i-header">
+        <div>
+          <div class="four-i-eyebrow">2026 US Midterms &mdash; Issue Landscape</div>
+          <div class="four-i-title">The Four I&#8217;s</div>
+          <div class="four-i-sub">Economy, trust, war, and borders &mdash; the four issues shaping voter decisions in 2026. Click any circle for sourced analysis; sub-bubble size reflects relative polling weight within its group.</div>
+        </div>
+        <div class="four-i-legend">
+          <span class="fi-leg-item"><i class="fi-dot" style="background:#f1a222"></i> Inflation (48%)</span>
+          <span class="fi-leg-item"><i class="fi-dot" style="background:#7fc8e8"></i> Institutional Mistrust (36%)</span>
+          <span class="fi-leg-item"><i class="fi-dot" style="background:#e88c50"></i> Iran War</span>
+          <span class="fi-leg-item"><i class="fi-dot" style="background:#5ec48a"></i> Immigration (25%)</span>
+          <span class="fi-leg-item"><i class="fi-dot" style="background:rgba(255,251,226,0.15);border:1.5px dashed rgba(255,251,226,0.3);display:inline-block;border-radius:50%"></i> Overlap</span>
+          <span class="fi-leg-item"><i class="fi-dot" style="background:#E53935"></i> War Powers Resolution</span>
+        </div>
+      </div>
+
+      <div class="four-i-layout">
+        <div class="four-i-diagram-wrap">
+          <svg viewBox="0 0 1050 750" id="fi-svg" aria-label="Four I's Venn diagram"></svg>
+        </div>
+        <div class="four-i-panel" id="fi-panel">
+          <p class="fi-placeholder">Click any circle or overlap zone to see sourced data and analysis. Hover for a quick preview.</p>
+          <div class="four-i-context">
+            <button class="four-i-context-toggle" onclick="fiToggleContext(this)" aria-expanded="false">
+              Do Issues Actually Decide Elections?
+              <span class="four-i-context-arrow">&#9660;</span>
+            </button>
+            <div class="four-i-context-body" id="fi-context-body">
+              <p>In US Congressional elections, issues may not determine voter behaviour as drastically as expected. Increasingly, partisan identity is prioritised over issue stances &mdash; a <a href="https://blogs.lse.ac.uk/usappblog/2023/11/13/increasingly-nationalized-us-elections-are-increasing-polarization-and-government-dysfunction/" target="_blank" rel="noopener">consequence of &ldquo;nationalised&rdquo; elections</a> where national issues determine outcomes at all levels.</p>
+              <p>Polling shows <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">56% of voters</a> trust their local government to handle issues, compared to just 32% who trust Congress. This means macro anxieties like inflation or immigration drive concern, but voters look locally for solutions.</p>
+              <p>On <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">top issues</a> alone, Republicans rank favourably on four of nine issues (combined advantage 64%) while Democrats dominate the remaining five (combined advantage 172%) &mdash; including inflation (48%), healthcare (21%), and housing (16%).</p>
+              <p>With a <a href="https://www.economist.com/interactive/trump-approval-tracker" target="_blank" rel="noopener">net approval rating of &minus;23</a>, President Trump is at his lowest &mdash; directly blamed for all four I&rsquo;s. Factions pledging extremes of resistance or alignment to the President are likely to see increased success, paving the way for a highly polarised Congress.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="four-i-note">
+        Sources: <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">POS 2026 Midterm Elections Overview</a> &middot; <a href="https://carnegieendowment.org/research/2026/02/indian-americans-in-a-time-of-turbulence-2026-survey-results" target="_blank" rel="noopener">Carnegie Endowment &mdash; Indian Americans Survey 2026</a> &middot; <a href="https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1" target="_blank" rel="noopener">Data for Progress Swing Voter Report</a> &middot; <a href="https://www.pewresearch.org/politics/2026/05/11/americans-see-health-care-costs-deficit-inflation-as-big-problems-facing-the-nation/" target="_blank" rel="noopener">Pew Research Center</a> &middot; Reuters/Ipsos &middot; Gallup &middot; NYT/Siena &middot; BLS &middot; Global Affairs &middot; YouGov &middot; DNI ATA 2026. Statistics reflecting disapproval or mistrust are noted in the detail panel. Analysis: DC Dossier / Takshashila Institution Geostrategy Programme.
+      </div>
+
+    </div>
+    </div><!-- /home-subpanel-issues -->
 
   </div>
   <!-- /HOME PANEL -->
@@ -1773,5 +1867,363 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
   else run();
 })();
 </script>
+
+// ── FOUR I'S VENN DIAGRAM ─────────────────────────────────────────────────────
+(function(){
+const FI_D = {
+  inflation:{type:'main',label:'Inflation',stat:'48% top issue',cx:300,cy:365,r:185,
+    color:'#f1a222',colorL:'rgba(241,162,34,.13)',colorD:'#c37f0a',
+    preview:'Top overall issue: economy, healthcare, housing, energy, tariffs.',
+    detail:`<p>Inflation is the single largest issue for voters heading into the midterms, spanning healthcare, housing, jobs, energy and tariffs.</p>
+<ul>
+<li>Economy, cost of living and jobs are the <a href="https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1" target="_blank" rel="noopener">top-most voter priority</a>; <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">48% cite inflation</a> as their top concern and jobs/economy at 24%.</li>
+<li>US inflation rose from 2.9% in January 2024 to 4.2% by <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener">May 2026</a>. Gasoline rose from USD&nbsp;3.15 to USD&nbsp;4.65, with overall energy spiking <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>.</li>
+<li>Highest inflation is in the <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-region.htm" target="_blank" rel="noopener">South and Midwest</a> (3.9% and 5%) &mdash; where over 160 House members and 40 Senators represent Republican districts.</li>
+<li>OBBBA cut over <a href="https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/" target="_blank" rel="noopener">USD&nbsp;1 trillion</a> from federal healthcare programmes, with <a href="https://www.aha.org/news/headline/2025-06-04-cbo-report-finds-nearly-11-million-could-become-uninsured-if-reconciliation-bill-enacted" target="_blank" rel="noopener">11 million Americans</a> at risk of losing coverage.</li>
+<li>ACA premiums rose <a href="https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html" target="_blank" rel="noopener">58%</a> since January 2026; only <a href="https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx" target="_blank" rel="noopener">49%</a> can consistently afford healthcare &mdash; a five-year low.</li>
+</ul>`},
+
+  mistrust:{type:'main',label:'Institutional Mistrust',stat:'36% top concern',cx:590,cy:295,r:160,
+    color:'#7fc8e8',colorL:'rgba(127,200,232,.13)',colorD:'#3a8fbf',
+    preview:'Threats to democracy, congressional collapse, courts, Epstein files.',
+    detail:`<p>Declining confidence in Congress, the courts and the executive branch, sharpened by the Epstein files, tariffs and the Iran war.</p>
+<ul>
+<li><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">36%</a> cite &ldquo;threats to democracy&rdquo; as their top concern; <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">corruption at 13%</a> and political violence at 12%.</li>
+<li>About <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">80% disapprove</a> of Congress; approval collapsed to a record 10% by April 2026.</li>
+<li>Supreme Court approval fell to <a href="https://news.gallup.com/poll/1597/confidence-institutions.aspx" target="_blank" rel="noopener">27%</a>; a <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">majority believe</a> the courts favour the Trump administration.</li>
+<li>Only <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">32% trust Congress</a> to handle issues, versus 56% who trust local government.</li>
+<li><a href="https://uspollingdata.com/issues/voting-rights/" target="_blank" rel="noopener">58% of voters</a> believe the election system is trustworthy &mdash; a meaningful minority who do not.</li>
+</ul>`},
+
+  iran:{type:'main',label:'Iran War',stat:'~1% direct, high spillover',cx:450,cy:558,r:130,
+    color:'#e88c50',colorL:'rgba(232,140,80,.12)',colorD:'#b05a1a',
+    preview:'Low as standalone issue but amplifies inflation and institutional mistrust.',
+    detail:`<p>Ranked low as a standalone top issue (~1%), but the Iran war is a key &ldquo;I&rdquo; because it amplified both inflation and institutional mistrust drastically.</p>
+<ul>
+<li>About <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">1% of respondents</a> ranked war and foreign conflicts as their top concern in February 2026.</li>
+<li><a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a> believe the war worsened the cost of living; <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">72%</a> say it worsened America&rsquo;s international reputation.</li>
+<li>The war exposed a MAGA vs &ldquo;America First&rdquo; ideological split and drew attention to AIPAC&rsquo;s influence on Iran policy. Israel&rsquo;s influence on US Iran policy, already an issue in <a href="https://news.gallup.com/poll/651719/economy-important-issue-2024-presidential-vote.aspx" target="_blank" rel="noopener">2024</a>, came into sharper focus after the US-Israel strikes on Iran began on 28 February 2026.</li>
+<li>The 2026 US intelligence threat assessment highlights heightened risk of <a href="https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf" target="_blank" rel="noopener">Islamist terrorism</a> following the strikes.</li>
+<li>Most Americans <a href="https://yougov.com/en-us/articles/55030-one-quarter-americans-say-united-states-won-war-iran-june-19-22-2026-economist-yougov-poll" target="_blank" rel="noopener">remain unsure</a> about the Iran-US memorandum of understanding.</li>
+</ul>`},
+
+  immigration:{type:'main',label:'Immigration',stat:'25% top-two issue',cx:758,cy:490,r:130,
+    color:'#5ec48a',colorL:'rgba(94,196,138,.12)',colorD:'#1f8a55',
+    preview:'Extension of institutional mistrust: ICE, deportations, National Guard.',
+    detail:`<p>Framed largely as an extension of institutional mistrust, with a strong local, legal and enforcement dimension.</p>
+<ul>
+<li><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">25%</a> of voters rank immigration among their top two issues by March 2026 (up from <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">12%</a> in January).</li>
+<li><a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63% disapprove</a> of ICE&rsquo;s actions; <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">58% disapprove</a> of the administration&rsquo;s immigration record.</li>
+<li>Congress, via OBBBA, granted ICE <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">USD&nbsp;75 billion</a>; ICE targets annual deportations of <a href="https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/" target="_blank" rel="noopener">one million</a>.</li>
+<li><a href="https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october" target="_blank" rel="noopener">49%</a> oppose National Guard deployment against &ldquo;sanctuary cities.&rdquo;</li>
+</ul>`},
+
+  // INFLATION SUB-BUBBLES
+  infl_jobs:{type:'sub',parent:'inflation',label:'Jobs &
+Economy',stat:'24%',cx:225,cy:258,r:47,color:'#f1a222',colorD:'#c37f0a',
+    preview:'24% rank jobs and the economy as a top issue.',
+    detail:`<p><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">24%</a> cite jobs and the economy as a top issue. Economy and cost of living are ranked the <a href="https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1" target="_blank" rel="noopener">top-most voter priority</a> overall &mdash; closely tied to the broader inflation issue.</p>`},
+
+  infl_healthcare:{type:'sub',parent:'inflation',label:'Healthcare',stat:'21%',cx:345,cy:224,r:43,color:'#f1a222',colorD:'#c37f0a',
+    preview:'21% top priority; ACA premiums up 58% since Jan 2026.',
+    detail:`<p>Healthcare costs spiked after ACA subsidy cuts and OBBBA&rsquo;s federal healthcare reductions.</p>
+<ul>
+<li><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">21%</a> rank healthcare costs a top priority.</li>
+<li>Premiums rose <a href="https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html" target="_blank" rel="noopener">58% since January 2026</a>; only <a href="https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx" target="_blank" rel="noopener">49%</a> can consistently afford healthcare &mdash; a five-year low.</li>
+<li>OBBBA cut <a href="https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/" target="_blank" rel="noopener">USD&nbsp;1 trillion</a> from federal healthcare programmes over 10 years.</li>
+</ul>`},
+
+  infl_housing:{type:'sub',parent:'inflation',label:'Housing',stat:'16%',cx:420,cy:266,r:39,color:'#f1a222',colorD:'#c37f0a',
+    preview:'16% rank housing costs a top priority.',
+    detail:`<p><a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">16%</a> rank housing costs as a top priority &mdash; fourth within the inflation cluster, representing a structural challenge tied to supply-side constraints and rising mortgage rates.</p>`},
+
+  infl_energy:{type:'sub',parent:'inflation',label:'Energy',stat:'+23.5%',cx:205,cy:408,r:45,color:'#f1a222',colorD:'#c37f0a',
+    preview:'Energy costs up 23.5%; gasoline spiked sharply after Iran war began.',
+    detail:`<p>Energy prices rose sharply once the Iran war began.</p>
+<ul>
+<li>Overall energy costs rose <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>; gasoline from USD&nbsp;3.15 (Dec 2024) to USD&nbsp;4.65 by <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-average-price-data.htm" target="_blank" rel="noopener">May 2026</a>.</li>
+<li><a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> say the war&rsquo;s energy spikes worsened their household finances.</li>
+</ul>`},
+
+  infl_tariffs:{type:'sub',parent:'inflation',label:'Tariffs',stat:'70% say prices up',cx:338,cy:455,r:42,color:'#f1a222',colorD:'#c37f0a',
+    preview:'7 in 10 Americans link tariffs to higher prices.',
+    detail:`<p>Tariffs are widely blamed for keeping prices elevated, even though economists are divided.</p>
+<ul>
+<li>7 in 10 Americans feel tariffs resulted in higher prices, per a March 2026 Guardian poll; 64% of Republicans agree; 60% see a net negative consumer impact.</li>
+<li><a href="https://www.brookings.edu/articles/why-havent-tariffs-significantly-damaged-the-economy/" target="_blank" rel="noopener">Brookings</a> and the <a href="https://www.epi.org/blog/tariff-increases-did-not-cause-inflation-and-their-removal-would-undermine-domestic-supply-chains/" target="_blank" rel="noopener">Economic Policy Institute</a> argue tariffs had limited direct inflationary impact &mdash; but public perception tells a different story.</li>
+</ul>`},
+
+  // MISTRUST SUB-BUBBLES
+  mis_congress:{type:'sub',parent:'mistrust',label:'Congress
+Approval',stat:'80% disapprove',cx:525,cy:198,r:48,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'Congressional approval collapsed to record 10% by April 2026.',
+    detail:`<p>Congressional disapproval is the sharpest institutional mistrust indicator.</p>
+<ul>
+<li><a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">80% disapprove</a> of Congress; approval collapsed to a record 10% by April 2026.</li>
+<li>Just <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">32% trust Congress</a> versus 56% who trust local government.</li>
+</ul>`},
+
+  mis_epstein:{type:'sub',parent:'mistrust',label:'Epstein
+Files',stat:'65% withheld',cx:650,cy:193,r:43,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'65% believe the government is withholding Epstein files.',
+    detail:`<p>The Epstein files drove institutional dissatisfaction across party lines.</p>
+<ul>
+<li><a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">65%</a> believe the government is deliberately withholding information.</li>
+<li><a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">77%</a> say the files lowered their trust in political and business leaders.</li>
+<li>Conspiracy theories around the Epstein case brought renewed scrutiny of Israel&rsquo;s influence on US policy, sharpened after the February 2026 US-Israel strikes on Iran.</li>
+</ul>`},
+
+  mis_scotus:{type:'sub',parent:'mistrust',label:'Supreme
+Court',stat:'27% approval',cx:587,cy:165,r:35,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'Supreme Court approval fell to 27%.',
+    detail:`<p>Confidence in the Supreme Court has fallen sharply.</p>
+<ul>
+<li>Approval fell to <a href="https://news.gallup.com/poll/1597/confidence-institutions.aspx" target="_blank" rel="noopener">27%</a>.</li>
+<li>A <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">majority believe</a> the courts favour Trump &mdash; even after rulings curbing tariffs and ICE, the administration found other legally justifiable routes.</li>
+</ul>`},
+
+  mis_election:{type:'sub',parent:'mistrust',label:'Election ID
+& Influence',stat:'58% trust',cx:510,cy:378,r:40,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'Only 58% trust the election system.',
+    detail:`<p><a href="https://uspollingdata.com/issues/voting-rights/" target="_blank" rel="noopener">58% of voters</a> believe the election system is trustworthy &mdash; a meaningful minority who do not. Election ID requirements and foreign influence remain live issues.</p>`},
+
+  mis_corruption:{type:'sub',parent:'mistrust',label:'Corruption',stat:'13%',cx:632,cy:385,r:31,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'13% cite corruption as a top concern.',
+    detail:`<p><a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">13% cite corruption</a> as a top concern; political violence and extremism at 12% round out the second tier of institutional mistrust drivers.</p>`},
+
+  mis_executive:{type:'sub',parent:'mistrust',label:'Executive
+Excesses',stat:'tariffs & ICE',cx:700,cy:352,r:37,color:'#7fc8e8',colorD:'#3a8fbf',
+    preview:'Administration circumvented court rulings on tariffs and ICE.',
+    detail:`<p>Courts pushed back on tariffs and ICE actions, but the administration found other legally justifiable routes around those rulings. <a href="https://yougov.com/en-us/articles/54148-most-americans-approve-of-the-supreme-court-striking-down-trumps-tariffs" target="_blank" rel="noopener">Court actions on tariffs were actively supported by the public</a>, but a <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">majority still believe the courts favour the administration</a>. This highlighted legal gaps and deepened institutional mistrust.</p>`},
+
+  // IRAN SUB-BUBBLES
+  iran_econ:{type:'sub',parent:'iran',label:'Economic
+Impact',stat:'64% worse off',cx:385,cy:492,r:37,color:'#e88c50',colorD:'#b05a1a',
+    preview:'64% say energy spikes from the war worsened household finances.',
+    detail:`<p><a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> say the war&rsquo;s energy spikes worsened their household finances. The economic impact of the Iran war has been the most direct and immediate effect on the public.</p>`},
+
+  iran_reputation:{type:'sub',parent:'iran',label:'Intl.
+Reputation',stat:'72% say worse',cx:507,cy:488,r:39,color:'#e88c50',colorD:'#b05a1a',
+    preview:'72% say the war worsened America's international reputation.',
+    detail:`<p>Beyond economics, Americans see significant reputational costs abroad.</p>
+<ul>
+<li><a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a> believe the war worsened the cost of living; <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">72%</a> believe it worsened America&rsquo;s international reputation.</li>
+<li>Most Americans <a href="https://yougov.com/en-us/articles/55030-one-quarter-americans-say-united-states-won-war-iran-june-19-22-2026-economist-yougov-poll" target="_blank" rel="noopener">remain unsure</a> about the Iran-US memorandum of understanding.</li>
+</ul>`},
+
+  iran_security:{type:'sub',parent:'iran',label:'National
+Security',stat:'65% neg. impact',cx:390,cy:625,r:37,color:'#e88c50',colorD:'#b05a1a',
+    preview:'65% feel the war negatively impacted US national security.',
+    detail:`<p><a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">65%</a> feel the war negatively impacted US national security. The 2026 US intelligence threat assessment highlights a heightened risk of <a href="https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf" target="_blank" rel="noopener">Islamist terrorism</a> following the strikes.</p>`},
+
+  iran_ideology:{type:'sub',parent:'iran',label:'Ideological
+Split',stat:'MAGA vs. Amer. First',cx:513,cy:627,r:29,color:'#e88c50',colorD:'#b05a1a',
+    preview:'MAGA vs. "America First" split exposed by the Iran war.',
+    detail:`<p>The war exposed a split between the MAGA power elite and the anti-war &ldquo;America First&rdquo; faction within the Republican coalition. The issue of Israel influencing US policy, which emerged in <a href="https://news.gallup.com/poll/651719/economy-important-issue-2024-presidential-vote.aspx" target="_blank" rel="noopener">the 2024 Presidential elections</a>, gained bipartisan attention in 2026.</p>`},
+
+  // IMMIGRATION SUB-BUBBLES
+  imm_ice:{type:'sub',parent:'immigration',label:'ICE
+Disapproval',stat:'63%',cx:698,cy:428,r:37,color:'#5ec48a',colorD:'#1f8a55',
+    preview:'63% disapprove of ICE actions.',
+    detail:`<p>By January 2026, <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63% disapproved of ICE&rsquo;s actions</a>. ICE aimed to <a href="https://www.dhs.gov/news/2026/01/03/ice-announces-historic-120-manpower-increase-thanks-recruitment-campaign-brought" target="_blank" rel="noopener">double its agents</a>, targeting an annual deportation rate of <a href="https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/" target="_blank" rel="noopener">one million</a>.</p>`},
+
+  imm_admin:{type:'sub',parent:'immigration',label:'Admin.
+Record',stat:'58% disapprove',cx:820,cy:422,r:35,color:'#5ec48a',colorD:'#1f8a55',
+    preview:'58% disapprove of the administration's immigration record.',
+    detail:`<p><a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">58% disapprove</a> of the Trump administration&rsquo;s record on immigration. Congress, via OBBBA, granted ICE <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">USD&nbsp;75 billion</a> &mdash; USD&nbsp;45bn for detention centres and USD&nbsp;30bn for processing.</p>`},
+
+  imm_guard:{type:'sub',parent:'immigration',label:'National
+Guard',stat:'49% oppose',cx:700,cy:562,r:33,color:'#5ec48a',colorD:'#1f8a55',
+    preview:'49% oppose National Guard deployment against sanctuary cities.',
+    detail:`<p><a href="https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october" target="_blank" rel="noopener">49%</a> oppose deploying the National Guard against &ldquo;sanctuary cities&rdquo; &mdash; a flashpoint for debates about federalism and executive power.</p>`},
+
+  imm_rank:{type:'sub',parent:'immigration',label:'Issue
+Ranking',stat:'12%→25%',cx:822,cy:566,r:30,color:'#5ec48a',colorD:'#1f8a55',
+    preview:'Rose from 12% (Jan 2026) to 25% (Mar 2026) as a top issue.',
+    detail:`<p>Immigration&rsquo;s ranking as a top issue climbed rapidly: <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">12%</a> in January 2026 rising to <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">25%</a> by March 2026.</p>`},
+
+  // OVERLAP ZONES
+  ov_infl_mis:{type:'overlap',label:'OBBBA, ACA
+& Tariffs',cx:437,cy:330,r:52,
+    preview:'Where inflation meets mistrust: OBBBA healthcare cuts, ACA subsidies, tariff excesses.',
+    detail:`<p>Congress is blamed both for OBBBA&rsquo;s healthcare and safety-net cuts and for failing to check the ACA subsidy lapse. Tariffs add to this via executive excesses &mdash; courts curbed tariffs, but the administration found other routes.</p>
+<ul><li>Congress failed to resist ACA premium cuts, with <a href="https://www.forbes.com/sites/omerawan/2026/06/27/five-million-americans-lost-aca-health-insurance-heres-what-that-could-mean-for-public-health/" target="_blank" rel="noopener">five million Americans</a> losing ACA health insurance.</li></ul>`},
+
+  ov_infl_iran:{type:'overlap',label:'Energy
+Price Spike',cx:372,cy:463,r:34,
+    preview:'Iran war energy price spikes feed directly into inflation.',
+    detail:`<p>The war pushed gasoline and broader energy prices sharply higher, reinforcing inflation as the dominant voter issue. <a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> say the war&rsquo;s energy spikes worsened their finances.</p>`},
+
+  ov_mis_iran:{type:'overlap',label:'WPR &
+Israel/Epstein',cx:520,cy:440,r:38,
+    preview:'Failed War Powers Resolution vote and Israel/AIPAC scrutiny.',
+    detail:`<p>Congress&rsquo;s failure to pass a War Powers Resolution against US intervention is the central grievance here. Israel&rsquo;s influence over US Iran policy &mdash; sharpened by Epstein file conspiracy theories and AIPAC&rsquo;s lobbying against limits on involvement &mdash; is its own source of mistrust.</p>`},
+
+  ov_mis_imm:{type:'overlap',label:'ICE Funding
+& Courts',cx:672,cy:400,r:37,
+    preview:'Congress funded ICE via OBBBA; courts pushed back with limited effect.',
+    detail:`<p>Congress, via OBBBA, is viewed as the primary enabler of ICE&rsquo;s expansion. Courts pushed back on ICE excesses with limited durable effect. OBBBA granted ICE <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">USD&nbsp;75 billion</a> in funding.</p>`},
+
+  // TRIPLE OVERLAP / CORE
+  core_wpr:{type:'core',label:'War Powers
+Resolution',cx:463,cy:418,r:42,
+    preview:'The one issue tying inflation, the Iran war, and institutional mistrust together.',
+    detail:`<p><strong>Core overlap of all three: inflation, the Iran war and institutional mistrust.</strong></p>
+<p>Congress&rsquo;s failure to pass a War Powers Resolution against US intervention in Iran sits at the centre of the Four I&rsquo;s argument. It is read as institutional inaction (feeding mistrust), it let the war &mdash; and its energy price shock &mdash; continue unchecked (feeding inflation), and is one of the specific failures that dragged congressional approval to a record low.</p>
+<ul><li>Congressional approval collapsed to <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a> by April 2026, per Gallup.</li></ul>`}
+};
+
+const NS = 'http://www.w3.org/2000/svg';
+const svgEl = document.getElementById('fi-svg');
+if(!svgEl) return;
+
+function mkEl(tag, attrs){
+  const e = document.createElementNS(NS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  return e;
+}
+
+function drawWrappedText(parent, x, y, text, cls, fill, lineH){
+  const lines = text.split('\n');
+  const t = mkEl('text',{x:x,y:y,'text-anchor':'middle',class:cls,fill:fill});
+  const startDy = -((lines.length-1)*lineH)/2;
+  lines.forEach((line,i)=>{
+    const ts = mkEl('tspan',{x:x, dy: i===0 ? startDy : lineH});
+    ts.textContent = line;
+    t.appendChild(ts);
+  });
+  parent.appendChild(t);
+}
+
+const tip = document.createElement('div');
+tip.id = 'fi-tooltip';
+document.body.appendChild(tip);
+
+function attachEv(g, key){
+  g.addEventListener('click',()=>fiSelect(key));
+  g.addEventListener('mouseenter',e=>{
+    tip.textContent = FI_D[key].preview || FI_D[key].label.replace('\n',' ');
+    tip.style.display='block'; fiMoveTip(e);
+  });
+  g.addEventListener('mousemove', fiMoveTip);
+  g.addEventListener('mouseleave',()=>{ tip.style.display='none'; });
+}
+function fiMoveTip(e){ tip.style.left=(e.clientX+14)+'px'; tip.style.top=(e.clientY+14)+'px'; }
+
+// SVG text styles injected as <style> inside the SVG
+const svgStyle = mkEl('style',{});
+svgStyle.textContent = `
+  .fi-main-lbl{font:700 16px Inter,system-ui,sans-serif}
+  .fi-main-stat{font:500 11px Inter,system-ui,sans-serif}
+  .fi-sub-lbl{font:700 10.5px Inter,system-ui,sans-serif}
+  .fi-sub-stat{font:500 9px Inter,system-ui,sans-serif}
+  .fi-ov-lbl{font:600 9.5px Inter,system-ui,sans-serif}
+  .fi-core-lbl{font:700 11px Inter,system-ui,sans-serif}
+`;
+svgEl.appendChild(svgStyle);
+
+// 1. Main circles (background fill)
+['inflation','mistrust','iran','immigration'].forEach(k=>{
+  const d=FI_D[k];
+  const g=mkEl('g',{class:'fi-bubble','data-key':k});
+  g.appendChild(mkEl('circle',{class:'fi-shape',cx:d.cx,cy:d.cy,r:d.r,fill:d.colorL,stroke:d.color,'stroke-width':1.5,opacity:0.9}));
+  svgEl.appendChild(g);
+  attachEv(g,k);
+});
+
+// 2. Sub-bubbles
+Object.keys(FI_D).filter(k=>FI_D[k].type==='sub').forEach(k=>{
+  const d=FI_D[k];
+  const g=mkEl('g',{class:'fi-bubble','data-key':k});
+  g.appendChild(mkEl('circle',{class:'fi-shape',cx:d.cx,cy:d.cy,r:d.r,fill:d.color,stroke:d.colorD,'stroke-width':1,opacity:0.92}));
+  drawWrappedText(g, d.cx, d.cy-5, d.label, 'fi-sub-lbl', '#fff', 12);
+  const st=mkEl('text',{x:d.cx,y:d.cy+d.r-12,'text-anchor':'middle',class:'fi-sub-stat',fill:'rgba(255,255,255,0.85)'});
+  st.textContent=d.stat;
+  g.appendChild(st);
+  svgEl.appendChild(g);
+  attachEv(g,k);
+});
+
+// 3. Overlap zones
+Object.keys(FI_D).filter(k=>FI_D[k].type==='overlap').forEach(k=>{
+  const d=FI_D[k];
+  const g=mkEl('g',{class:'fi-bubble','data-key':k});
+  g.appendChild(mkEl('circle',{class:'fi-shape',cx:d.cx,cy:d.cy,r:d.r,fill:'rgba(255,251,226,0.07)',stroke:'rgba(255,251,226,0.35)','stroke-width':1.2,'stroke-dasharray':'4,3',opacity:1}));
+  drawWrappedText(g, d.cx, d.cy, d.label, 'fi-ov-lbl', 'rgba(255,251,226,0.75)', 11.5);
+  svgEl.appendChild(g);
+  attachEv(g,k);
+});
+
+// 4. Core WPR badge
+(()=>{
+  const k='core_wpr', d=FI_D[k];
+  const g=mkEl('g',{class:'fi-bubble','data-key':k});
+  g.appendChild(mkEl('circle',{class:'fi-shape',cx:d.cx,cy:d.cy,r:d.r,fill:'rgba(229,57,53,0.18)',stroke:'#E53935','stroke-width':2.5,opacity:1}));
+  drawWrappedText(g, d.cx, d.cy, d.label, 'fi-core-lbl', '#ff8a80', 14);
+  svgEl.appendChild(g);
+  attachEv(g,k);
+})();
+
+// 5. Main label bands (drawn on top)
+['inflation','mistrust','iran','immigration'].forEach(k=>{
+  const d=FI_D[k];
+  const bw=d.r*1.5;
+  const g=mkEl('g',{class:'fi-bubble','data-key':k,style:'cursor:pointer'});
+  const labelLines = d.label.split(' ');
+  const shortLabel = labelLines.length > 2 ? labelLines[0] + '…' : d.label;
+  g.appendChild(mkEl('rect',{x:d.cx-bw/2,y:d.cy-22,width:bw,height:44,rx:22,fill:d.color,opacity:0.97}));
+  const t1=mkEl('text',{x:d.cx,y:d.cy-4,'text-anchor':'middle',class:'fi-main-lbl',fill:'#fff'});
+  t1.textContent = d.r < 150 ? shortLabel : d.label;
+  g.appendChild(t1);
+  const t2=mkEl('text',{x:d.cx,y:d.cy+13,'text-anchor':'middle',class:'fi-main-stat',fill:'rgba(255,255,255,0.88)'});
+  t2.textContent=d.stat;
+  g.appendChild(t2);
+  svgEl.appendChild(g);
+  attachEv(g,k);
+});
+
+// ── PANEL RENDER ──────────────────────────────────────────
+function fiSelect(key){
+  document.querySelectorAll('.fi-bubble').forEach(b=>b.classList.remove('fi-sel'));
+  document.querySelectorAll(`.fi-bubble[data-key="${key}"]`).forEach(b=>b.classList.add('fi-sel'));
+  const d=FI_D[key];
+  const panel=document.getElementById('fi-panel');
+  const isMain=d.type==='main', isSub=d.type==='sub', isCore=d.type==='core', isOv=d.type==='overlap';
+  const tagText=isMain?'Core Issue':isSub?'Sub-issue':isCore?'Triple Overlap':'Overlap Zone';
+  let tagBg, tagColor;
+  if(isMain||isSub){tagBg=d.color+'28';tagColor=d.color;}
+  else if(isCore){tagBg='rgba(229,57,53,0.2)';tagColor='#ff8a80';}
+  else{tagBg='rgba(255,251,226,0.1)';tagColor='rgba(255,251,226,0.6)';}
+  const statHtml = d.stat ? `<div class="fi-stat" style="color:${isMain||isSub?d.color:isCore?'#ff8a80':'rgba(255,251,226,0.8)'}">${d.stat}</div>` : '';
+  panel.innerHTML = `
+    <span class="fi-tag" style="background:${tagBg};color:${tagColor}">${tagText}</span>
+    <h3>${d.label.replace('\n',' ')}</h3>
+    ${statHtml}
+    ${d.detail}
+    <div class="four-i-context">
+      <button class="four-i-context-toggle" onclick="fiToggleContext(this)" aria-expanded="false">
+        Do Issues Actually Decide Elections?
+        <span class="four-i-context-arrow">&#9660;</span>
+      </button>
+      <div class="four-i-context-body" id="fi-context-body">
+        <p>In US Congressional elections, partisan identity is increasingly prioritised over issue stances &mdash; a <a href="https://blogs.lse.ac.uk/usappblog/2023/11/13/increasingly-nationalized-us-elections-are-increasing-polarization-and-government-dysfunction/" target="_blank" rel="noopener">consequence of &ldquo;nationalised&rdquo; elections</a>.</p>
+        <p>Polling shows <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">56% of voters</a> trust their local government versus just 32% who trust Congress. On <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">top issues</a>, Republicans rank favourably on four of nine (combined advantage 64%) while Democrats dominate five (combined advantage 172%) &mdash; including inflation, healthcare and housing. With a <a href="https://www.economist.com/interactive/trump-approval-tracker" target="_blank" rel="noopener">net approval of &minus;23</a>, President Trump is directly blamed for all four I&rsquo;s.</p>
+      </div>
+    </div>
+  `;
+}
+
+window.fiToggleContext = function(btn){
+  const body = btn.nextElementSibling;
+  if(!body) return;
+  const open = !body.classList.contains('open');
+  body.classList.toggle('open', open);
+  btn.querySelector('.four-i-context-arrow').style.transform = open ? 'rotate(180deg)' : '';
+  btn.setAttribute('aria-expanded', open);
+};
+
+fiSelect('inflation');
+})();
+
 </body>
 </html>

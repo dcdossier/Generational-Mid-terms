@@ -5744,86 +5744,98 @@ loadData();
 
 <script>
 (function(){
-  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats — a spectrum of how likely a seat is to change hands.';
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats \u2014 a spectrum of how likely a seat is to change hands.';
 
-  /* --- inject CSS --- */
+  /* --- CSS --- */
   var st = document.createElement('style');
-  st.textContent = '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:3px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;box-sizing:border-box;padding:0}'
-    + '.dti-btn:hover{background:#c98a10}'
-    + '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}'
-    + '#dti-box.on{display:block}';
+  st.textContent =
+    '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:4px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;padding:0;box-sizing:border-box}' +
+    '.dti-btn:hover{background:#c98a10}' +
+    '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}' +
+    '#dti-box.on{display:block}';
   document.head.appendChild(st);
 
-  /* --- create tooltip box --- */
-  if(document.getElementById('dti-box'))return;
+  /* --- tooltip box --- */
+  if(document.getElementById('dti-box')) return;
   var box = document.createElement('div');
   box.id = 'dti-box';
   box.innerHTML = CONTENT;
   document.body.appendChild(box);
 
-  /* --- inject icon buttons into text nodes --- */
-  function inject(root){
-    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode: function(n){
-        var p = n.parentElement;
-        if(!p) return NodeFilter.FILTER_REJECT;
-        var tag = p.nodeName;
-        if(/^(SCRIPT|STYLE|CODE|PRE|TEXTAREA|INPUT|NOSCRIPT)$/.test(tag)) return NodeFilter.FILTER_REJECT;
-        if(p.classList && (p.classList.contains('dti-btn') || p.getAttribute('data-dti'))) return NodeFilter.FILTER_REJECT;
-        return /battleground|toss-up/i.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-      }
-    });
-    var nodes=[], n;
-    while((n=walker.nextNode())) nodes.push(n);
-    nodes.forEach(function(node){
-      // Skip if next sibling already a dti-btn (already processed)
-      if(node.nextSibling && node.nextSibling.classList && node.nextSibling.classList.contains('dti-btn')) return;
-      var val = node.nodeValue;
-      var re = /(battleground|toss-up)/gi, m, last=0;
-      var frag = document.createDocumentFragment();
-      while((m=re.exec(val))!==null){
-        if(m.index>last) frag.appendChild(document.createTextNode(val.slice(last,m.index)));
-        frag.appendChild(document.createTextNode(m[0]));
-        var btn = document.createElement('button');
-        btn.type='button';
-        btn.className='dti-btn';
-        btn.setAttribute('aria-label','Define: Battleground / Toss-up seat');
-        btn.setAttribute('data-dti','1');
-        btn.textContent='i';
-        frag.appendChild(btn);
-        last=re.lastIndex;
-      }
-      if(last<val.length) frag.appendChild(document.createTextNode(val.slice(last)));
-      node.parentNode.replaceChild(frag,node);
-    });
+  /* --- nearest block-level ancestor (span included per design) --- */
+  var BLOCKS = {DIV:1,P:1,LI:1,SPAN:1,TD:1,TH:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,
+    BLOCKQUOTE:1,DT:1,DD:1,SECTION:1,ARTICLE:1,HEADER:1,FOOTER:1,MAIN:1,ASIDE:1,
+    DETAILS:1,SUMMARY:1,FIGCAPTION:1,LABEL:1,CAPTION:1};
+  var SKIP  = {SCRIPT:1,STYLE:1,CODE:1,PRE:1,TEXTAREA:1,INPUT:1,NOSCRIPT:1,BUTTON:1};
+
+  function nearestBlock(node){
+    var el = node.nodeType===3 ? node.parentElement : node;
+    while(el){ if(BLOCKS[el.nodeName]) return el; el=el.parentElement; }
+    return null;
   }
 
-  /* --- click handler (bubble phase) --- */
-  var active = null;
-  document.addEventListener('click', function(e){
-    var btn = e.target.closest ? e.target.closest('.dti-btn') : null;
+  function makeBtn(){
+    var b=document.createElement('button');
+    b.type='button'; b.className='dti-btn';
+    b.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+    b.textContent='i';
+    return b;
+  }
+
+  function inject(root){
+    /* 1. Walk text nodes, collect unique block ancestors */
+    var seen = [];
+    var seenSet = typeof Set!=='undefined' ? new Set() : null;
+    var walker = document.createTreeWalker(root, 1|4 /* ELEMENT|TEXT */, {
+      acceptNode: function(n){
+        if(n.nodeType===1){
+          if(SKIP[n.nodeName]) return 3; /* FILTER_SKIP subtree */
+          if(n.classList && n.classList.contains('dti-btn')) return 2; /* FILTER_REJECT */
+          return 1;
+        }
+        /* text node */
+        return /battleground|toss-up/i.test(n.nodeValue) ? 1 : 3;
+      }
+    });
+    var n;
+    while((n=walker.nextNode())){
+      if(n.nodeType!==3) continue;
+      var block = nearestBlock(n);
+      if(!block) continue;
+      /* deduplicate */
+      if(seenSet){ if(seenSet.has(block)) continue; seenSet.add(block); }
+      else { if(seen.indexOf(block)!==-1) continue; seen.push(block); }
+      /* 2. Append icon at end of block if not already there */
+      if(!block.querySelector('.dti-btn')){
+        block.appendChild(makeBtn());
+      }
+    }
+  }
+
+  /* --- click handler --- */
+  var active=null;
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest ? e.target.closest('.dti-btn') : null;
     if(btn){
       e.stopImmediatePropagation();
-      if(active===btn && box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      if(active===btn&&box.classList.contains('on')){box.classList.remove('on');active=null;return;}
       active=btn;
       box.classList.add('on');
-      var r=btn.getBoundingClientRect(), w=300;
+      var r=btn.getBoundingClientRect(),w=300;
       var left=r.left+r.width/2-w/2;
       left=Math.max(8,Math.min(left,window.innerWidth-w-8));
       var top=r.bottom+8;
-      if(top+170>window.innerHeight) top=r.top-170-8;
+      if(top+210>window.innerHeight) top=r.top-210-8;
       if(top<8) top=r.bottom+8;
-      box.style.left=left+'px';
-      box.style.top=top+'px';
+      box.style.left=left+'px'; box.style.top=top+'px';
     }else{
       box.classList.remove('on');active=null;
     }
   });
 
-  /* --- run inject --- */
+  /* --- run --- */
   function run(){
     inject(document.body);
-    // Re-run after 2s to catch any late-rendered dynamic content
     setTimeout(function(){inject(document.body);},2000);
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);

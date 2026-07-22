@@ -142,74 +142,74 @@ body {
 
 /* ── TEAM CARDS ──────────────────────────────────────────── */
 .team-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 }
 .team-card {
   display: flex;
-  gap: 28px;
-  align-items: flex-start;
-  padding: 28px 30px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 28px 20px 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--bg);
+  text-decoration: none;
+  color: inherit;
   transition: border-color .15s, box-shadow .15s;
 }
 .team-card:hover {
   border-color: var(--gold);
-  box-shadow: 0 2px 14px rgba(241,162,34,.08);
+  box-shadow: 0 3px 16px rgba(241,162,34,.1);
 }
 .team-photo {
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top center;
   flex-shrink: 0;
   border: 3px solid var(--gold-lt);
+  margin-bottom: 14px;
 }
-.team-body { flex: 1; min-width: 0; }
 .team-name {
-  font: 700 18px var(--serif);
+  font: 700 16px var(--serif);
   color: var(--navy);
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+  line-height: 1.3;
 }
 .team-role {
-  font: 500 14px var(--sans);
+  font: 600 10px var(--sans);
   color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: .07em;
-  margin-bottom: 3px;
+  letter-spacing: .09em;
+  margin-bottom: 5px;
 }
 .team-org {
-  font: 400 14px var(--sans);
+  font: 400 12px/1.5 var(--sans);
   color: var(--text3);
-  margin-bottom: 16px;
-}
-.team-bio {
-  font: 400 15px/1.75 var(--sans);
-  color: var(--text2);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .team-tags {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 5px;
+  justify-content: center;
 }
 .team-tag {
-  font: 500 13px var(--sans);
+  font: 500 10px var(--sans);
   color: var(--accent);
   background: #fff8e8;
   border-radius: 20px;
-  padding: 3px 11px;
+  padding: 2px 8px;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────────── */
 @media (max-width: 560px) {
   .page-wrap { padding: 24px 16px 60px; }
   .tracker-intro { padding: 24px 20px; }
-  .team-card { flex-direction: column; gap: 16px; }
+  .team-grid { grid-template-columns: 1fr; }
   .team-photo { width: 80px; height: 80px; }
   .institution-block { flex-direction: column; gap: 16px; }
 }
@@ -245,42 +245,34 @@ body {
 
   <div class="team-grid">
 
-    <!-- Brigadier Anil Raman -->
-    <div class="team-card">
-      <img class="team-photo" src="https://takshashila.org.in/content/team/images/Anil_Raman.png" alt="Brigadier Anil Raman" onerror="this.style.background='#e2e5ea';this.removeAttribute('src')">
-      <div class="team-body">
-        <div class="team-name">Brigadier Anil Raman (Retd.)</div>
-        <div class="team-role">Research Fellow</div>
-        <div class="team-org">Geostrategy Programme &amp; Defence Fellowship, Takshashila Institution</div>
-        <p class="team-bio">Brigadier Raman brings over three decades of military experience to his policy work at Takshashila, where he also heads the Defence Fellowship Program. His army career spanned command and staff appointments in disputed border regions and counter-insurgency operations, as well as senior roles at the Army War College — including as a REDFOR analyst and senior instructor. He also completed the higher air command course at the College of Air Warfare.</p>
-        <p class="team-bio" style="margin-top:8px">As a scholar, his attention centres on American domestic politics and foreign policy formation, future conflict paradigms, and military operations across the Indo-Pacific. He was a Visiting Fellow at the US National Defense University, and holds a Master's from the University of Wyoming, where his thesis examined how the Clinton and Bush administrations shaped US foreign policy toward India. His writing appears regularly in <em>The Hindu</em>, <em>The Indian Express</em>, <em>War on the Rocks</em>, and NDTV, covering topics from US–China competition to Iran policy.</p>
-        <div class="team-tags">
-          <span class="team-tag">US Foreign Policy</span>
-          <span class="team-tag">US Defence Policy</span>
-          <span class="team-tag">Indo-Pacific</span>
-          <span class="team-tag">Indian Diaspora</span>
-          <span class="team-tag">Defence Strategy</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Abhishek Kadiyala -->
-    <div class="team-card">
+    <!-- Abhishek Kadiyala (LEFT) -->
+    <a class="team-card" href="https://takshashila.org.in/content/team/abhishek-kadiyala.html" target="_blank" rel="noopener noreferrer">
       <img class="team-photo" src="assets/Abhishek_Kadiyala.png" alt="Abhishek Kadiyala">
-      <div class="team-body">
-        <div class="team-name">Abhishek Kadiyala</div>
-        <div class="team-role">Research Analyst</div>
-        <div class="team-org">Geostrategy Programme, Takshashila Institution</div>
-        <p class="team-bio">Abhishek's research sits at the intersection of US domestic politics, the US–India strategic relationship, and the broader dynamics shaping the Indo-Pacific. He curates <em>DC Dossier</em>, a newsletter tracking US congressional legislation as it bears on India, and manages <em>The US Trade Tracker</em>, which maps tariff negotiations and trade policy developments. He is the author of <em>Expeditionary</em>, a historical non-fiction account of the Allied landings in Normandy. Prior to Takshashila, he held research positions at think tanks focused on international security and conflict studies, and worked with UNESCO's OE4BW programme.</p>
-        <p class="team-bio" style="margin-top:8px">He holds a Master's in Intelligence and International Security from King's College London — where he was awarded the Vice Chancellor's India Award — and a Bachelor's in Journalism, International Relations, and Public Policy from St. Joseph's College, Bengaluru.</p>
-        <div class="team-tags">
-          <span class="team-tag">US Congress</span>
-          <span class="team-tag">US Foreign Policy</span>
-          <span class="team-tag">US–India Relations</span>
-          <span class="team-tag">Indo-Pacific</span>
-        </div>
+      <div class="team-name">Abhishek Kadiyala</div>
+      <div class="team-role">Research Analyst</div>
+      <div class="team-org">Geostrategy Programme, Takshashila Institution</div>
+      <div class="team-tags">
+        <span class="team-tag">US Congress</span>
+        <span class="team-tag">US Foreign Policy</span>
+        <span class="team-tag">US&ndash;India Relations</span>
+        <span class="team-tag">Indo-Pacific</span>
       </div>
-    </div>
+    </a>
+
+    <!-- Brigadier Anil Raman (RIGHT) -->
+    <a class="team-card" href="https://takshashila.org.in/content/team/anil-raman.html" target="_blank" rel="noopener noreferrer">
+      <img class="team-photo" src="https://takshashila.org.in/content/team/images/Anil_Raman.png" alt="Brigadier Anil Raman" onerror="this.style.background='#e2e5ea';this.removeAttribute('src')">
+      <div class="team-name">Brigadier Anil Raman (Retd.)</div>
+      <div class="team-role">Research Fellow</div>
+      <div class="team-org">Geostrategy Programme &amp; Defence Fellowship, Takshashila Institution</div>
+      <div class="team-tags">
+        <span class="team-tag">US Foreign Policy</span>
+        <span class="team-tag">US Defence Policy</span>
+        <span class="team-tag">Indo-Pacific</span>
+        <span class="team-tag">Indian Diaspora</span>
+        <span class="team-tag">Defence Strategy</span>
+      </div>
+    </a>
 
   </div><!-- /team-grid -->
 

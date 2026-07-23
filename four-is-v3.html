@@ -34,10 +34,11 @@ body{
 .wrap{max-width:1440px;margin:0 auto;padding:4px 8px 0}
 
 /* masthead */
-.masthead{display:none}
+.masthead{display:flex;align-items:center;padding:4px 0 5px;border-bottom:1px solid var(--hairline)}
+.masthead .hint{font-size:11px;color:var(--muted);line-height:1.45;margin:0}
 
 /* stage */
-.stage{position:relative;margin-top:0;background:var(--surface);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;height:calc(100dvh - 12px);min-height:320px}
+.stage{position:relative;margin-top:4px;background:var(--surface);border:1px solid var(--hairline);border-radius:2px;overflow:hidden;height:calc(100dvh - 46px);min-height:320px}
 svg#viz{display:block;width:100%;height:100%;touch-action:none;cursor:grab}
 svg#viz.dragging{cursor:grabbing}
 
@@ -130,11 +131,7 @@ svg#viz.dragging{cursor:grabbing}
 <div class="wrap">
 
   <header class="masthead">
-    <div>
-      <p class="eyebrow">DC Dossier · Issue map</p>
-      <h1>The Four I's of the 2026 US mid-terms</h1>
-    </div>
-    <p class="hint">Four shapes, four concerns. Hover a shape to open its sub-issues, hover a shaded band to name the shared ground, click anything to read the analysis.</p>
+    <p class="hint">Four shapes, four concerns. Hover a shape to open its sub-issues,<br>hover a shaded band to name the shared ground, click anything to read the analysis.</p>
   </header>
 
   <div class="stage" id="stage">

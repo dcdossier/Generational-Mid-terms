@@ -116,7 +116,7 @@ svg#viz.dragging{cursor:grabbing}
 
 .mainshape{transition:opacity .18s ease}
 .subgroup{opacity:0;transition:opacity .2s ease;pointer-events:none}
-.subgroup.on{opacity:1}
+.subgroup.on{opacity:1;pointer-events:auto;cursor:pointer}
 .pill{opacity:0;transition:opacity .18s ease;pointer-events:none}
 .pill.on{opacity:1}
 .pill.clickable.on{pointer-events:auto;cursor:pointer}
@@ -505,6 +505,7 @@ SUB.forEach(s=>{
   g.appendChild(c);
   lSub.appendChild(g);
   subGroups[s.p].push(g);
+  g.addEventListener("click",e=>{e.stopPropagation();select(s.id,"sub");});
 });
 
 /* ---------- labels ---------- */
@@ -657,6 +658,15 @@ function select(id,kind){
   if(kind==="sub"){const s=SUB.find(x=>x.id===id);dimExcept([s.p]);accent([s.p]);hideAllSubs();showSubs(s.p);
     Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
     subPills[id].rect.setAttribute("fill","rgba(241,162,34,.55)");
+    /* reset all sub-circle visuals then highlight selected */
+    SUB.forEach(sub=>{const grp=lSub.querySelector(`[data-sub="${sub.id}"]`);if(!grp)return;
+      const c=grp.querySelector("circle");
+      c.setAttribute("stroke-opacity",".75");c.setAttribute("stroke-width",sub.ring?"1.1":"1.3");
+      if(!sub.ring)c.setAttribute("fill-opacity",".1");});
+    const selGrp=lSub.querySelector(`[data-sub="${id}"]`);
+    if(selGrp){const c=selGrp.querySelector("circle");
+      c.setAttribute("stroke-opacity","1");c.setAttribute("stroke-width","3");
+      if(!s.ring)c.setAttribute("fill-opacity",".28");}
     zoomToCircle(s.cx,s.cy,s.r);}
   if(kind==="ov"){resetView();const o=OV.find(x=>x.id===id);dimExcept(o.members);accent(o.members);
     hideAllSubs();o.members.forEach(m=>showSubs(m,false));
@@ -665,7 +675,11 @@ function select(id,kind){
   render(C[id]||INTRO);openCard();
 }
 function deselect(){
-  if(lockKind==="sub")resetView();
+  if(lockKind==="sub"){resetView();
+    SUB.forEach(sub=>{const grp=lSub.querySelector(`[data-sub="${sub.id}"]`);if(!grp)return;
+      const c=grp.querySelector("circle");
+      c.setAttribute("stroke-opacity",".75");c.setAttribute("stroke-width",sub.ring?"1.1":"1.3");
+      if(!sub.ring)c.setAttribute("fill-opacity",".1");});}
   locked=null;lockKind=null;
   Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
   clearTransient();render(INTRO);
@@ -779,6 +793,13 @@ function exportPng(showAll){
       ["fill","stroke","stop-color"].forEach(attr=>{
         const v=el.getAttribute(attr);if(v&&varMap[v])el.setAttribute(attr,varMap[v]);
       });
+    });
+    /* Widen pill rects: system fonts render wider than web-loaded Lora/Inter */
+    clone.querySelectorAll(".pill rect").forEach(r=>{
+      const w=parseFloat(r.getAttribute("width")||0);
+      if(w<8)return; /* skip the 3px colour bar on main banners */
+      r.setAttribute("x",String(parseFloat(r.getAttribute("x")||0)-25));
+      r.setAttribute("width",String(w+50));
     });
     const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}.banner-text{fill:#2a2a2a}.banner-text.mainstat{fill:#6b6b6b}.sub-text{fill:#2a2a2a}.ov-text{fill:#fffbe2}.lead{stroke:#620d3c}`;
     const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);

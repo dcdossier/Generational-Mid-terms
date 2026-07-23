@@ -63,7 +63,7 @@ svg#viz.dragging{cursor:grabbing}
 .brandmark{position:absolute;right:14px;bottom:12px;z-index:3;font-family:Lora,Georgia,serif;font-size:12.5px;color:var(--llama);opacity:.7;letter-spacing:.03em}
 
 /* hovering detail tab */
-.card{position:absolute;right:14px;top:14px;width:360px;max-width:calc(100% - 28px);z-index:6;
+.card{position:absolute;right:14px;top:14px;width:220px;max-width:calc(100% - 28px);z-index:6;
   background:rgba(255,255,255,.86);
   -webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);
   border:1px solid var(--hairline);border-radius:3px;
@@ -101,7 +101,7 @@ svg#viz.dragging{cursor:grabbing}
 
 /* svg type */
 .banner-text{font-family:Lora,Georgia,serif;font-weight:600;fill:var(--ink)}
-.banner-text.main{font-size:23px}
+.banner-text.main{font-size:19px}
 .banner-text.mainstat{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--muted);letter-spacing:.04em}
 .sub-text{font-family:Inter,sans-serif;font-size:13px;font-weight:500;fill:var(--ink)}
 .ov-text{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--paper);letter-spacing:.01em}
@@ -214,9 +214,9 @@ const L=(u,t)=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
 
 /* ---------- geometry ---------- */
 const MAIN={
-  inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top issue",anchor:[215,415]},
-  institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutions",stat:"36% top issue",anchor:[890,248]},
-  immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top issue",anchor:[1150,612]},
+  inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top issue",anchor:[260,415]},
+  institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutional mistrust",stat:"36% top issue",anchor:[790,248]},
+  immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top issue",anchor:[1095,612]},
   iran:{kind:"tri",pts:"470,515 915,515 665,880",tone:"var(--iran)",label:"Iran War",stat:"1% standalone",anchor:[672,762]}
 };
 const SUB=[
@@ -237,8 +237,8 @@ const SUB=[
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[665,262],corruption:[905,618],congress:[742,472],scotus:[668,392],
-  epstein:[830,556],violence:[978,378],ice:[1016,548],crime:[1105,340],border:[1178,455]};
+  overreach:[692,265],corruption:[868,614],congress:[742,472],scotus:[668,392],
+  epstein:[830,556],violence:[942,378],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
 const OV=[

@@ -241,17 +241,19 @@ const SUB=[
   {id:"premiums",p:"inflation",cx:600,cy:265,r:80,label:"Healthcare premiums",stat:"21%"},
 
   {id:"overreach",p:"institutions",cx:895,cy:305,r:75,label:"Executive overreach",stat:""},
+  {id:"corruption",p:"institutions",cx:840,cy:430,r:85,label:"Corruption",stat:"13%"},
   {id:"congress",p:"institutions",cx:720,cy:430,r:150,label:"US Congress",stat:""},
   {id:"scotus",p:"institutions",cx:668,cy:425,r:88,label:"Supreme Court",stat:""},
   {id:"epstein",p:"institutions",cx:855,cy:540,r:85,label:"Epstein files",stat:""},
+  {id:"violence",p:"institutions",cx:975,cy:445,r:75,label:"Political violence",stat:"12%"},
 
   {id:"ice",p:"immigration",cx:1030,cy:510,r:80,label:"ICE",stat:""},
   {id:"crime",p:"immigration",cx:1090,cy:400,r:75,label:"Crime",stat:"10%"},
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[895,260],congress:[742,472],scotus:[668,392],
-  epstein:[830,556],ice:[1016,548],crime:[1095,340],border:[1155,455]};
+  overreach:[895,260],corruption:[848,492],congress:[742,472],scotus:[668,392],
+  epstein:[830,556],violence:[975,418],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
 const OV=[
@@ -266,7 +268,7 @@ const OV=[
    label:"WPR",anchor:[662,562],pill:[648,692],core:true,focus:["congress","overreach"]},
   {id:"ov_inst_imm",members:["institutions","immigration"],clip:["institutions"],base:"immigration",
    label:"Congress · ICE · Court",anchor:[992,440],pill:[1012,192],
-   focus:["ice","crime","congress","scotus"]}
+   focus:["ice","crime","violence","congress","scotus"]}
 ];
 
 /* ---------- content, summarised from the dossier ---------- */
@@ -403,8 +405,8 @@ C.epstein={code:"Sub-issue I.02e",title:"Epstein files",stat:"65% believe inform
 
 C.violence={code:"Sub-issue I.02f",title:"Political violence",stat:"12% name it a top concern",
  body:`<p>Political violence and extremism are the top concern for ${L(src.ipsos,"12%")} of respondents. Alongside it, ${L(src.pos,"58%")} still consider the election system trustworthy and 52% back police reform.</p>
- ${SHARE("crime, in the immigration circle; it is the only element that crosses out of the mistrust circle")}
- <p class="take">Enforcement conduct and public order appear to be argued as one subject at the local level, which is where this crossing matters.</p>`};
+ ${SHARE("corruption inside the institutional mistrust circle, and with crime on the immigration side — it does not overlap with Congress, the Supreme Court, or Executive Overreach")}
+ <p class="take">Political violence sits at the edge of institutional mistrust, where policing conduct and public order cross into the corruption argument at the local level. Its only connection to the immigration circle runs through crime, not through ICE or border policy.</p>`};
 
 C.ice={code:"Sub-issue I.04a",title:"ICE",stat:"63% disapprove of its conduct",
  body:`<p>OBBBA funding of ${L(src.senate,"USD 75 billion")} was followed by higher deportation volumes, more aggressive arrests and repeated confrontations with protesters and state governments. ${L(src.nyt,"63% disapprove")} of ICE conduct.</p>

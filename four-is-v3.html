@@ -145,6 +145,7 @@ svg#viz.dragging{cursor:grabbing}
       <button class="ctl" id="reset" type="button">Reset</button>
       <button class="ctl" id="full" type="button">Full screen</button>
       <button class="ctl" id="png" type="button">PNG</button>
+      <button class="ctl" id="png-full" type="button">PNG (All)</button>
     </div>
 
     <svg id="viz" viewBox="100 70 1230 860" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vt vd">
@@ -239,7 +240,7 @@ const SUB=[
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[692,265],corruption:[868,614],congress:[742,472],scotus:[668,392],
+  overreach:[870,310],corruption:[868,614],congress:[742,472],scotus:[668,392],
   epstein:[830,556],violence:[942,378],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
@@ -735,44 +736,50 @@ document.getElementById("reset").addEventListener("click",()=>{zoom=1;tx=0;ty=0;
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){deselect();}});
 
 /* ---------- PNG export ---------- */
-document.getElementById("png").addEventListener("click",()=>{
+function loadImg(src){return new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src;});}
+
+function exportPng(showAll){
   try{
     const TITLE_H=100;
     const W=2800,SVG_H=1880,H=SVG_H+TITLE_H;
     const clone=svg.cloneNode(true);
-    clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
-    clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
+    if(showAll){
+      clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",1));
+      clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",1));
+    }else{
+      clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
+      clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
+    }
     const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}`;
     const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);
     clone.setAttribute("width",W);clone.setAttribute("height",SVG_H);
     const svgBlob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});
     const svgUrl=URL.createObjectURL(svgBlob);
     const logoSrcs=["assets/Mid-term-logo.png","assets/download.jpeg","assets/dcd-logo-small.webp"];
-    function loadImg(src){return new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src;});}
     Promise.all([loadImg(svgUrl),...logoSrcs.map(loadImg)]).then(([svgImg,...logos])=>{
       const cv=document.createElement("canvas");cv.width=W;cv.height=H;
       const ctx=cv.getContext("2d");
-      /* white background */
       ctx.fillStyle="#ffffff";ctx.fillRect(0,0,W,H);
-      /* title band */
       ctx.fillStyle="#620d3c";ctx.font="bold 52px Georgia,serif";
       ctx.textAlign="center";ctx.textBaseline="middle";
       ctx.fillText("The Four \u2018I\u2019s of the 2026 US Mid-term Elections",W/2,TITLE_H/2);
-      /* diagram */
       ctx.drawImage(svgImg,0,TITLE_H);
       URL.revokeObjectURL(svgUrl);
-      /* logos bottom-right */
       const lh=60,ly=H-lh-20;let lx=W-20;
       [...logos].reverse().forEach(li=>{
         if(!li)return;
         const lw=Math.round(li.naturalWidth*lh/li.naturalHeight);
         lx-=lw;ctx.drawImage(li,lx,ly,lw,lh);lx-=16;
       });
+      const fname=showAll?"four-is-2026-midterms-full.png":"four-is-2026-midterms.png";
       cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
-        a.download="four-is-2026-midterms.png";a.click();});
+        a.download=fname;a.click();});
     }).catch(()=>alert("PNG export failed in this browser. Use a screenshot instead."));
   }catch(err){alert("PNG export failed in this browser. Use a screenshot instead.");}
-});
+}
+
+document.getElementById("png").addEventListener("click",()=>exportPng(false));
+document.getElementById("png-full").addEventListener("click",()=>exportPng(true));
 
 applyView();
 </script>

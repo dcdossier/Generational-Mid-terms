@@ -59,8 +59,8 @@ svg#viz.dragging{cursor:grabbing}
 .key i.core{background-image:repeating-linear-gradient(45deg,rgba(98,13,60,.55) 0 1.4px,transparent 1.4px 5px),repeating-linear-gradient(-45deg,rgba(98,13,60,.55) 0 1.4px,transparent 1.4px 5px)}
 
 /* brand */
-.brandmark{position:absolute;right:14px;bottom:12px;z-index:3;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.75);padding:5px 8px;border-radius:6px;border:1px solid var(--hairline)}
-.brandmark img{height:22px;width:auto;object-fit:contain;opacity:.85;transition:opacity .15s;display:block}
+.brandmark{position:absolute;right:14px;bottom:12px;z-index:3;display:flex;align-items:center;gap:10px}
+.brandmark img{height:22px;width:auto;object-fit:contain;opacity:.8;transition:opacity .15s;display:block}
 .brandmark img:hover{opacity:1}
 
 /* hovering detail tab */
@@ -737,20 +737,40 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){deselect();}});
 /* ---------- PNG export ---------- */
 document.getElementById("png").addEventListener("click",()=>{
   try{
+    const TITLE_H=100;
+    const W=2800,SVG_H=1880,H=SVG_H+TITLE_H;
     const clone=svg.cloneNode(true);
     clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
     clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
     const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}`;
     const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);
-    clone.setAttribute("width",2800);clone.setAttribute("height",1880);
-    const blob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});
-    const url=URL.createObjectURL(blob),img=new Image();
-    img.onload=()=>{const cv=document.createElement("canvas");cv.width=2800;cv.height=1880;
-      const cx=cv.getContext("2d");cx.fillStyle="#ffffff";cx.fillRect(0,0,2800,1880);cx.drawImage(img,0,0);
+    clone.setAttribute("width",W);clone.setAttribute("height",SVG_H);
+    const svgBlob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});
+    const svgUrl=URL.createObjectURL(svgBlob);
+    const logoSrcs=["assets/Mid-term-logo.png","assets/download.jpeg","assets/dcd-logo-small.webp"];
+    function loadImg(src){return new Promise(res=>{const i=new Image();i.onload=()=>res(i);i.onerror=()=>res(null);i.src=src;});}
+    Promise.all([loadImg(svgUrl),...logoSrcs.map(loadImg)]).then(([svgImg,...logos])=>{
+      const cv=document.createElement("canvas");cv.width=W;cv.height=H;
+      const ctx=cv.getContext("2d");
+      /* white background */
+      ctx.fillStyle="#ffffff";ctx.fillRect(0,0,W,H);
+      /* title band */
+      ctx.fillStyle="#620d3c";ctx.font="bold 52px Georgia,serif";
+      ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.fillText("The Four \u2018I\u2019s of the 2026 US Mid-term Elections",W/2,TITLE_H/2);
+      /* diagram */
+      ctx.drawImage(svgImg,0,TITLE_H);
+      URL.revokeObjectURL(svgUrl);
+      /* logos bottom-right */
+      const lh=60,ly=H-lh-20;let lx=W-20;
+      [...logos].reverse().forEach(li=>{
+        if(!li)return;
+        const lw=Math.round(li.naturalWidth*lh/li.naturalHeight);
+        lx-=lw;ctx.drawImage(li,lx,ly,lw,lh);lx-=16;
+      });
       cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
-        a.download="four-is-2026-midterms.png";a.click();URL.revokeObjectURL(url);});};
-    img.onerror=()=>alert("PNG export failed in this browser. Use a screenshot instead.");
-    img.src=url;
+        a.download="four-is-2026-midterms.png";a.click();});
+    }).catch(()=>alert("PNG export failed in this browser. Use a screenshot instead."));
   }catch(err){alert("PNG export failed in this browser. Use a screenshot instead.");}
 });
 

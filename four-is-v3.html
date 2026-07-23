@@ -60,6 +60,13 @@ svg#viz.dragging{cursor:grabbing}
 
 /* brand */
 .brandmark{position:absolute;right:14px;bottom:12px;z-index:3;display:flex;align-items:center;gap:10px}
+
+/* png dropdown */
+.ctl-drop{position:relative}
+.ctl-menu{display:none;position:absolute;top:calc(100% + 4px);right:0;background:#fff;border:1px solid var(--hairline);border-radius:2px;z-index:10;box-shadow:0 2px 8px rgba(0,0,0,.12);min-width:110px}
+.ctl-menu.open{display:block}
+.ctl-item{display:block;width:100%;text-align:left;font-family:Inter,sans-serif;font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--ink);background:none;border:0;padding:8px 12px;cursor:pointer;line-height:1}
+.ctl-item:hover{background:rgba(241,162,34,.25);color:var(--llama)}
 .brandmark img{height:22px;width:auto;object-fit:contain;opacity:.8;transition:opacity .15s;display:block}
 .brandmark img:hover{opacity:1}
 
@@ -144,8 +151,13 @@ svg#viz.dragging{cursor:grabbing}
       <button class="ctl" id="zin" type="button" aria-label="Zoom in">+</button>
       <button class="ctl" id="reset" type="button">Reset</button>
       <button class="ctl" id="full" type="button">Full screen</button>
-      <button class="ctl" id="png" type="button">PNG</button>
-      <button class="ctl" id="png-full" type="button">PNG (All)</button>
+      <div class="ctl-drop" id="png-wrap">
+        <button class="ctl" id="png-btn" type="button">PNG &#9662;</button>
+        <div class="ctl-menu" id="png-menu">
+          <button class="ctl-item" id="png" type="button">Simple</button>
+          <button class="ctl-item" id="png-full" type="button">All issues</button>
+        </div>
+      </div>
     </div>
 
     <svg id="viz" viewBox="100 70 1230 860" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vt vd">
@@ -641,17 +653,19 @@ render(INTRO);
 function select(id,kind){
   locked=null;clearTransient();
   locked=id;lockKind=kind;
-  if(kind==="main"){dimExcept([id]);accent([id]);hideAllSubs();showSubs(id);}
+  if(kind==="main"){resetView();dimExcept([id]);accent([id]);hideAllSubs();showSubs(id);}
   if(kind==="sub"){const s=SUB.find(x=>x.id===id);dimExcept([s.p]);accent([s.p]);hideAllSubs();showSubs(s.p);
     Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
-    subPills[id].rect.setAttribute("fill","rgba(241,162,34,.55)");}
-  if(kind==="ov"){const o=OV.find(x=>x.id===id);dimExcept(o.members);accent(o.members);
+    subPills[id].rect.setAttribute("fill","rgba(241,162,34,.55)");
+    zoomToCircle(s.cx,s.cy,s.r);}
+  if(kind==="ov"){resetView();const o=OV.find(x=>x.id===id);dimExcept(o.members);accent(o.members);
     hideAllSubs();o.members.forEach(m=>showSubs(m,false));
     (o.focus||[]).forEach(f=>subPills[f]&&subPills[f].g.classList.add("on"));
     OV.forEach(x=>ovPills[x.id].g.classList.toggle("on",x.id===id));}
   render(C[id]||INTRO);openCard();
 }
 function deselect(){
+  if(lockKind==="sub")resetView();
   locked=null;lockKind=null;
   Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
   clearTransient();render(INTRO);
@@ -692,6 +706,13 @@ function zoomAt(factor,cx,cy){
   tx=cx-(cx-tx)*(nz/zoom);ty=cy-(cy-ty)*(nz/zoom);
   zoom=nz;clampPan();applyView();
 }
+function zoomToCircle(cx,cy,r){
+  /* zoom so the circle fills ~40% of the viewport, centred on it */
+  zoom=Math.min(3,Math.max(1.8,280/r));
+  tx=700-cx*zoom;ty=470-cy*zoom;
+  clampPan();applyView();
+}
+function resetView(){zoom=1;tx=0;ty=0;applyView();}
 const VB={x:0,y:0,w:1400,h:940};
 function clampPan(){
   tx=Math.min(VB.x*(1-zoom),Math.max((VB.x+VB.w)*(1-zoom),tx));
@@ -705,7 +726,7 @@ svg.addEventListener("wheel",e=>{e.preventDefault();
   const [x,y]=svgPoint(e);zoomAt(e.deltaY<0?1.12:1/1.12,x,y);},{passive:false});
 document.getElementById("zin").addEventListener("click",()=>zoomAt(1.3,700,470));
 document.getElementById("zout").addEventListener("click",()=>zoomAt(1/1.3,700,470));
-document.getElementById("reset").addEventListener("click",()=>{zoom=1;tx=0;ty=0;applyView();deselect();});
+document.getElementById("reset").addEventListener("click",()=>{resetView();deselect();});
 
 (function(){
   let on=false,sx=0,sy=0,ox=0,oy=0;
@@ -750,7 +771,16 @@ function exportPng(showAll){
       clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
       clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
     }
-    const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}`;
+    /* resolve CSS variables in SVG attributes (they don't work in standalone SVG blobs) */
+    const varMap={"var(--llama)":"#620d3c","var(--marigold)":"#f1a222","var(--hairline)":"#e6e0d8",
+      "var(--infl)":"#620d3c","var(--inst)":"#8f3f36","var(--imm)":"#c07028","var(--iran)":"#6b6b6b",
+      "var(--paper)":"#fffbe2","var(--surface)":"#ffffff","var(--ink)":"#2a2a2a","var(--muted)":"#6b6b6b"};
+    clone.querySelectorAll("*").forEach(el=>{
+      ["fill","stroke","stop-color"].forEach(attr=>{
+        const v=el.getAttribute(attr);if(v&&varMap[v])el.setAttribute(attr,varMap[v]);
+      });
+    });
+    const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}.banner-text{fill:#2a2a2a}.banner-text.mainstat{fill:#6b6b6b}.sub-text{fill:#2a2a2a}.ov-text{fill:#fffbe2}.lead{stroke:#620d3c}`;
     const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);
     clone.setAttribute("width",W);clone.setAttribute("height",SVG_H);
     const svgBlob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});
@@ -778,8 +808,12 @@ function exportPng(showAll){
   }catch(err){alert("PNG export failed in this browser. Use a screenshot instead.");}
 }
 
-document.getElementById("png").addEventListener("click",()=>exportPng(false));
-document.getElementById("png-full").addEventListener("click",()=>exportPng(true));
+/* PNG dropdown toggle */
+const pngMenu=document.getElementById("png-menu");
+document.getElementById("png-btn").addEventListener("click",e=>{e.stopPropagation();pngMenu.classList.toggle("open");});
+document.addEventListener("click",()=>pngMenu.classList.remove("open"));
+document.getElementById("png").addEventListener("click",()=>{pngMenu.classList.remove("open");exportPng(false);});
+document.getElementById("png-full").addEventListener("click",()=>{pngMenu.classList.remove("open");exportPng(true);});
 
 applyView();
 </script>

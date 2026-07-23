@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Four I's of the 2026 US Mid-terms</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fffbe2;
+  --surface:#ffffff;
+  --ink:#2a2a2a;
+  --muted:#6b6b6b;
+  --hairline:#e6e0d8;
+  --llama:#620d3c;
+  --marigold:#f1a222;
+  --infl:#620d3c;
+  --inst:#8f3f36;
+  --imm:#c07028;
+  --iran:#6b6b6b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:Inter,Lato,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:15px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1440px;margin:0 auto;padding:18px 20px 26px}
+
+/* masthead */
+.masthead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding-bottom:12px;border-bottom:1px solid var(--hairline)}
+.eyebrow{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);margin:0 0 4px}
+h1{font-family:Lora,Georgia,serif;font-weight:600;font-size:30px;line-height:1.15;margin:0;color:var(--llama)}
+.masthead .hint{font-size:12.5px;color:var(--muted);max-width:340px;text-align:right;line-height:1.5}
+
+/* stage */
+.stage{position:relative;margin-top:14px;background:var(--surface);border:1px solid var(--hairline);background:var(--surface);border-radius:2px;overflow:hidden}
+svg#viz{display:block;width:100%;height:auto;touch-action:none;cursor:grab}
+svg#viz.dragging{cursor:grabbing}
+
+/* controls */
+.controls{position:absolute;top:12px;right:12px;display:flex;gap:6px;z-index:4}
+.ctl{font-family:Inter,sans-serif;font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--ink);
+  background:rgba(255,255,255,.9);border:1px solid var(--hairline);border-radius:2px;padding:5px 9px;cursor:pointer;line-height:1}
+.ctl:hover{background:var(--marigold);border-color:var(--marigold)}
+.ctl:focus-visible{outline:2px solid var(--llama);outline-offset:1px}
+
+/* key */
+.key{position:absolute;left:14px;bottom:12px;z-index:3;display:flex;gap:16px;flex-wrap:wrap;
+  font-size:11.5px;color:var(--muted);letter-spacing:.02em;background:rgba(255,255,255,.72);padding:6px 10px;border:1px solid var(--hairline);border-radius:2px}
+.key span{display:flex;align-items:center;gap:6px}
+.key i{width:16px;height:10px;display:inline-block;border:1px solid var(--hairline)}
+.key i.shared{background-image:repeating-linear-gradient(45deg,rgba(98,13,60,.42) 0 1px,transparent 1px 6px)}
+.key i.core{background-image:repeating-linear-gradient(45deg,rgba(98,13,60,.55) 0 1.4px,transparent 1.4px 5px),repeating-linear-gradient(-45deg,rgba(98,13,60,.55) 0 1.4px,transparent 1.4px 5px)}
+
+/* brand */
+.brandmark{position:absolute;right:14px;bottom:12px;z-index:3;font-family:Lora,Georgia,serif;font-size:12.5px;color:var(--llama);opacity:.7;letter-spacing:.03em}
+
+/* hovering detail tab */
+.card{position:absolute;right:14px;top:14px;width:360px;max-width:calc(100% - 28px);z-index:6;
+  background:rgba(255,255,255,.86);
+  -webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);
+  border:1px solid var(--hairline);border-radius:3px;
+  display:none;flex-direction:column;max-height:calc(100% - 28px)}
+.card.open{display:flex}
+.card.min .card-body{display:none}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:9px 11px;border-bottom:1px solid var(--hairline);cursor:move;user-select:none}
+.card.min .card-head{border-bottom:0}
+.card-code{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.card-btns{display:flex;gap:2px}
+.card-btns button{border:0;background:none;font-size:14px;line-height:1;color:var(--muted);cursor:pointer;padding:2px 5px;border-radius:2px}
+.card-btns button:hover{color:var(--llama);background:rgba(241,162,34,.35)}
+.card-body{padding:11px 13px 15px;overflow-y:auto}
+.card-body h2{font-family:Lora,Georgia,serif;font-size:20px;font-weight:600;margin:0 0 2px;color:var(--llama);line-height:1.2}
+.card-stat{font-size:13px;font-weight:500;color:var(--ink);margin:0 0 9px;font-variant-numeric:tabular-nums}
+.card-body p{margin:0 0 9px;font-size:13.5px;line-height:1.55}
+.card-body p.take{border-top:1px solid var(--hairline);padding-top:9px;margin-top:11px;color:var(--llama);font-size:13px}
+.card-body p.shares{font-size:12px;color:var(--muted);margin-top:-3px}
+.card-body a{color:var(--llama);text-decoration:underline;text-underline-offset:2px;text-decoration-thickness:.5px}
+.card-body a:hover{background:rgba(241,162,34,.3)}
+.deflist{margin:0 0 9px;border-top:1px solid var(--hairline)}
+.deflist div{display:flex;gap:10px;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--hairline);font-size:12.5px}
+.deflist dt{color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:10.5px;margin:0;padding-top:2px}
+.deflist dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+
+/* intro block below the chart */
+.brief{margin-top:20px;padding-top:16px;border-top:1px solid var(--hairline);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px}
+.brief h2{grid-column:1/-1;font-family:Lora,Georgia,serif;font-size:22px;font-weight:600;
+  margin:0;color:var(--llama)}
+.brief p{margin:0;font-size:13.5px;line-height:1.6;color:var(--ink)}
+.brief .eyebrow{margin:0 0 5px}
+@media (max-width:820px){.brief{grid-template-columns:1fr;gap:14px}}
+
+/* svg type */
+.banner-text{font-family:Lora,Georgia,serif;font-weight:600;fill:var(--ink)}
+.banner-text.main{font-size:23px}
+.banner-text.mainstat{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--muted);letter-spacing:.04em}
+.sub-text{font-family:Inter,sans-serif;font-size:13px;font-weight:500;fill:var(--ink)}
+.ov-text{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--paper);letter-spacing:.01em}
+
+.mainshape{transition:opacity .18s ease}
+.subgroup{opacity:0;transition:opacity .2s ease;pointer-events:none}
+.subgroup.on{opacity:1}
+.pill{opacity:0;transition:opacity .18s ease;pointer-events:none}
+.pill.on{opacity:1}
+.pill.clickable.on{pointer-events:auto;cursor:pointer}
+.ovregion{cursor:pointer}
+.dim{opacity:.16}
+.lead{stroke:var(--llama);stroke-width:1;opacity:.5}
+
+@media (max-width:820px){
+  h1{font-size:23px}
+  .masthead{flex-direction:column;align-items:flex-start}
+  .masthead .hint{text-align:left;max-width:none}
+  .card{position:static;width:auto;max-width:none;margin:10px;max-height:none;
+    background:rgba(255,255,255,.95)}
+  .card.open{display:flex}
+  .key{position:relative;left:0;bottom:0;margin:0 10px 10px;background:none;border:0;padding:0}
+  .brandmark{bottom:auto;top:12px;right:12px}
+  .controls{top:auto;bottom:10px;right:10px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">DC Dossier · Issue map</p>
+      <h1>The Four I's of the 2026 US mid-terms</h1>
+    </div>
+    <p class="hint">Four shapes, four concerns. Hover a shape to open its sub-issues, hover a shaded band to name the shared ground, click anything to read the analysis.</p>
+  </header>
+
+  <div class="stage" id="stage">
+    <div class="controls">
+      <button class="ctl" id="zout" type="button" aria-label="Zoom out">&minus;</button>
+      <button class="ctl" id="zin" type="button" aria-label="Zoom in">+</button>
+      <button class="ctl" id="reset" type="button">Reset</button>
+      <button class="ctl" id="full" type="button">Full screen</button>
+      <button class="ctl" id="png" type="button">PNG</button>
+    </div>
+
+    <svg id="viz" viewBox="0 0 1400 940" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vt vd">
+      <title id="vt">The four I's of the 2026 US mid-terms</title>
+      <desc id="vd">A Venn-style issue map. Inflation, institutional mistrust and immigration are circles. The Iran war is a wedge, because its electoral weight sits mostly inside the other issues.</desc>
+      <defs>
+        <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#620d3c" stroke-width="1" opacity=".34"></line>
+        </pattern>
+        <pattern id="hatch2" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line x1="0" y1="0" x2="0" y2="6" stroke="#620d3c" stroke-width="1.5" opacity=".42"></line>
+          <line x1="0" y1="0" x2="6" y2="0" stroke="#620d3c" stroke-width="1.5" opacity=".42"></line>
+        </pattern>
+      </defs>
+      <g id="root">
+        <g id="l-main"></g>
+        <g id="l-ov"></g>
+        <g id="l-sub"></g>
+        <g id="l-lab"></g>
+      </g>
+    </svg>
+
+    <aside class="card" id="card">
+      <div class="card-head" id="cardhead">
+        <span class="card-code" id="cardcode">Detail</span>
+        <span class="card-btns">
+          <button id="cardmin" type="button" aria-label="Minimise the panel">&#8211;</button>
+          <button id="cardclose" type="button" aria-label="Close the panel">&times;</button>
+        </span>
+      </div>
+      <div class="card-body" id="cardbody"></div>
+    </aside>
+
+    <div class="key">
+      <span><i class="shared"></i> Shared ground between two issues</span>
+      <span><i class="core"></i> Shared by three</span>
+      <span>Dashed outline · sub-issue</span>
+    </div>
+    <div class="brandmark">Takshashila</div>
+  </div>
+
+  <section class="brief">
+    <h2>Four I's, one ballot</h2>
+    <div>
+      <p class="eyebrow">The frame</p>
+      <p>Four concerns dominate voter decision-making going into November 2026. Inflation, institutional mistrust, Iran and immigration. Each has percolated down to the local level and may shape results across key battleground seats.</p>
+    </div>
+    <div>
+      <p class="eyebrow">How to read it</p>
+      <p>Circle size follows how many voters name the issue. The shaded bands are the ground two or more issues share, and most of the analytical work of this dossier sits in those bands rather than in the circles themselves.</p>
+    </div>
+    <div>
+      <p class="eyebrow">Why Iran is a wedge</p>
+      <p>Almost none of the war's area stands alone. As a standalone issue it barely registers, yet it cuts into both of the two largest concerns, which is the argument the shape is making.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+"use strict";
+const NS="http://www.w3.org/2000/svg";
+const S=(t,a={})=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);return n;};
+const L=(u,t)=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+
+/* ---------- geometry ---------- */
+const MAIN={
+  inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top issue",anchor:[215,415]},
+  institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutions",stat:"36% top issue",anchor:[890,248]},
+  immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top issue",anchor:[1150,612]},
+  iran:{kind:"tri",pts:"470,515 915,515 665,880",tone:"var(--iran)",label:"Iran War",stat:"1% standalone",anchor:[672,762]}
+};
+const SUB=[
+  {id:"housing",p:"inflation",cx:335,cy:310,r:135,label:"Housing",stat:"16%"},
+  {id:"jobs",p:"inflation",cx:320,cy:530,r:120,label:"Economy & jobs",stat:"24%"},
+  {id:"tariffs",p:"inflation",cx:600,cy:515,r:98,label:"Tariffs",stat:""},
+  {id:"premiums",p:"inflation",cx:600,cy:265,r:80,label:"Healthcare premiums",stat:"21%"},
+
+  {id:"overreach",p:"institutions",cx:800,cy:400,r:208,label:"Executive overreach",stat:"",ring:true},
+  {id:"corruption",p:"institutions",cx:805,cy:420,r:196,label:"Corruption",stat:"13%",ring:true},
+  {id:"congress",p:"institutions",cx:720,cy:430,r:150,label:"US Congress",stat:""},
+  {id:"scotus",p:"institutions",cx:668,cy:425,r:88,label:"Supreme Court",stat:""},
+  {id:"epstein",p:"institutions",cx:855,cy:540,r:85,label:"Epstein files",stat:""},
+  {id:"violence",p:"institutions",cx:940,cy:415,r:95,label:"Political violence",stat:"12%"},
+
+  {id:"ice",p:"immigration",cx:1030,cy:510,r:80,label:"ICE",stat:""},
+  {id:"crime",p:"immigration",cx:1090,cy:400,r:75,label:"Crime",stat:"10%"},
+  {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
+];
+const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
+  overreach:[665,262],corruption:[905,618],congress:[742,472],scotus:[668,392],
+  epstein:[830,556],violence:[978,378],ice:[1016,548],crime:[1105,340],border:[1178,455]};
+
+/* inline pills sit inside their band; the rest use a short leader */
+const OV=[
+  {id:"ov_infl_inst",members:["inflation","institutions"],clip:["institutions"],base:"inflation",
+   label:"Congress · Courts · Executive",anchor:[658,238],pill:[655,120],
+   focus:["tariffs","premiums","congress","scotus","overreach"]},
+  {id:"ov_infl_iran",members:["inflation","iran"],clip:["inflation"],base:"iran",
+   label:"Energy prices",anchor:[565,590],pill:[565,590],inline:true,focus:["tariffs"]},
+  {id:"ov_inst_iran",members:["institutions","iran"],clip:["institutions"],base:"iran",
+   label:"Israel lobby · AIPAC",anchor:[798,588],pill:[798,588],inline:true,focus:["epstein","congress"]},
+  {id:"ov_core",members:["inflation","institutions","iran"],clip:["institutions","iran"],base:"inflation",
+   label:"WPR",anchor:[662,556],pill:[662,556],inline:true,core:true,focus:["congress","overreach"]},
+  {id:"ov_inst_imm",members:["institutions","immigration"],clip:["institutions"],base:"immigration",
+   label:"Congress · ICE · Court",anchor:[992,440],pill:[1012,192],
+   focus:["ice","crime","violence","congress","scotus"]}
+];
+
+/* ---------- content, summarised from the dossier ---------- */
+const src={
+  pos:"https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf",
+  dfp:"https://www.dataforprogress.org/blog/2026/7/9/midterms-swing-voter-report-1",
+  ipsos:"https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf",
+  gas:"https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances",
+  cpi:"https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm",
+  cpiAvg:"https://www.bls.gov/charts/consumer-price-index/consumer-price-index-average-price-data.htm",
+  cpiCat:"https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm",
+  cpiReg:"https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-region.htm",
+  gallupCong:"https://news.gallup.com/poll/1600/congress-public.aspx",
+  gallupInst:"https://news.gallup.com/poll/1597/confidence-institutions.aspx",
+  gallupCare:"https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx",
+  cnbc:"https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html",
+  forbes:"https://www.forbes.com/sites/omerawan/2026/06/27/five-million-americans-lost-aca-health-insurance-heres-what-that-could-mean-for-public-health/",
+  cap:"https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/",
+  aha:"https://www.aha.org/news/headline/2025-06-04-cbo-report-finds-nearly-11-million-could-become-uninsured-if-reconciliation-bill-enacted",
+  brookings:"https://www.brookings.edu/articles/why-havent-tariffs-significantly-damaged-the-economy/",
+  epi:"https://www.epi.org/blog/tariff-increases-did-not-cause-inflation-and-their-removal-would-undermine-domestic-supply-chains/",
+  yougovSc:"https://yougov.com/en-us/articles/54148-most-americans-approve-of-the-supreme-court-striking-down-trumps-tariffs",
+  marquette:"https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/",
+  gac:"https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states",
+  yougovWar:"https://yougov.com/en-us/articles/55030-one-quarter-americans-say-united-states-won-war-iran-june-19-22-2026-economist-yougov-poll",
+  ata:"https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf",
+  nyt:"https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html",
+  axios:"https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october",
+  senate:"https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill",
+  dhs:"https://www.dhs.gov/news/2026/01/03/ice-announces-historic-120-manpower-increase-thanks-recruitment-campaign-brought",
+  wt:"https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/",
+  washu:"https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions",
+  lse:"https://blogs.lse.ac.uk/usappblog/2023/11/13/increasingly-nationalized-us-elections-are-increasing-polarization-and-government-dysfunction/",
+  econ:"https://www.economist.com/interactive/trump-approval-tracker",
+  gallup24:"https://news.gallup.com/poll/651719/economy-important-issue-2024-presidential-vote.aspx"
+};
+
+const SHARE=t=>`<p class="shares">Shares ground with ${t}.</p>`;
+
+const C={};
+
+C.inflation={code:"Issue I.01",title:"Inflation",stat:"48% name it their top issue",
+ body:`<p>The economy, the cost of living and jobs rank as the ${L(src.dfp,"top voter priority")}, with ${L(src.pos,"48% citing inflation")} as their single top issue and jobs and the economy following at 24%. Rising healthcare and housing costs are named as a top priority by 21% and 16% respectively.</p>
+ <div class="deflist">
+  <div><dt>CPI, Jan 2024</dt><dd>2.9%</dd></div>
+  <div><dt>CPI, May 2026</dt><dd>4.2%</dd></div>
+  <div><dt>Petrol, Dec 2024 to May 2026</dt><dd>USD 3.15 to 4.65</dd></div>
+  <div><dt>Energy basket</dt><dd>+23.5%</dd></div>
+ </div>
+ <p>Price growth is steepest in the ${L(src.cpiReg,"South and the Midwest")} at 3.9% and 5%. Those two regions also send the largest Republican bloc to Congress, with over 160 House members and over 40 Senators. (${L(src.cpi,"BLS series")}, ${L(src.cpiAvg,"average prices")}, ${L(src.cpiCat,"category index")}.)</p>
+ <p class="take">High prices have been a constant since 2024, so this is not a war-driven spike alone. The geography of the pain and the geography of Republican representation overlap almost exactly, which may make incumbency the liability this cycle.</p>`};
+
+C.institutions={code:"Issue I.02",title:"Institutional mistrust",stat:"36% name threats to democracy",
+ body:`<p>The United States has leaned on institutional failsafes for stability, and confidence in them has been eroding for a decade. The 119th Congress has deepened the slide through its response, or lack of one, to successive crises.</p>
+ <div class="deflist">
+  <div><dt>Threats to democracy</dt><dd>36%</dd></div>
+  <div><dt>Corruption</dt><dd>13%</dd></div>
+  <div><dt>Political violence</dt><dd>12%</dd></div>
+  <div><dt>Congress disapproval</dt><dd>80%</dd></div>
+  <div><dt>Supreme Court confidence</dt><dd>27%</dd></div>
+ </div>
+ <p>Sources: ${L(src.pos,"Public Opinion Strategies")}, ${L(src.ipsos,"Reuters/Ipsos")}, ${L(src.gallupCong,"Gallup on Congress")} and ${L(src.gallupInst,"Gallup on institutions")}.</p>
+ <p class="take">The complaint appears to be less about any one institution than about the sense that rulings and legislation no longer constrain the executive. Courts curbed tariffs and ICE excesses, yet both continued through other lawful routes, which may have made the gap look structural rather than partisan.</p>`};
+
+C.iran={code:"Issue I.03",title:"Iran war",stat:"1% rank war as their top concern",
+ body:`<p>In a February 2026 poll, war and foreign conflict were the top concern for about ${L(src.ipsos,"1% of respondents")}. As an electoral issue in its own right the war remains marginal. Its effect runs through the other issues instead.</p>
+ <div class="deflist">
+  <div><dt>Worsened cost of living</dt><dd>86%</dd></div>
+  <div><dt>Damaged standing abroad</dt><dd>72%</dd></div>
+  <div><dt>Harmed national security</dt><dd>65%</dd></div>
+  <div><dt>Hit household finances</dt><dd>64%</dd></div>
+ </div>
+ <p>Sources: ${L(src.gac,"Chicago Council")} and ${L(src.gas,"Ipsos")}. Most Americans ${L(src.yougovWar,"remain unsure")} about the memorandum of understanding even while backing its central clause, and the 2026 ${L(src.ata,"annual threat assessment")} flags a raised risk of Islamist terrorism following the strikes.</p>
+ ${SHARE("tariffs, on the price side, and with Congress and executive overreach on the institutional side")}
+ <p class="take">The war is drawn as a wedge because almost none of its area stands alone. The memorandum has closed it as a live issue, yet the ideological split it exposed between the MAGA elite and the anti-war America First faction, and the institutional lapses it revealed, remain in play.</p>`};
+
+C.immigration={code:"Issue I.04",title:"Immigration",stat:"25% rank it among their top issues",
+ body:`<p>Nationally, immigration works largely as an extension of institutional mistrust. Locally it stands on its own, with legal, institutional and political effects. ${L(src.pos,"25% of voters")} place immigration and border control among their top issues, behind inflation and mistrust.</p>
+ <div class="deflist">
+  <div><dt>ICE funding under OBBBA</dt><dd>USD 75 bn</dd></div>
+  <div><dt>Of which detention</dt><dd>USD 45 bn</dd></div>
+  <div><dt>Deportation target</dt><dd>1 mn a year</dd></div>
+  <div><dt>Disapprove of ICE</dt><dd>63%</dd></div>
+ </div>
+ <p>Congress supplied the money through the ${L(src.senate,"OBBBA")}, ICE moved to ${L(src.dhs,"double its agent count")} and set a ${L(src.wt,"million-person annual target")}. By January 2026, ${L(src.nyt,"63% disapproved of ICE conduct")} and 58% disapproved of the administration's immigration record, while ${L(src.axios,"49% opposed")} National Guard deployment in major cities.</p>
+ ${SHARE("institutional mistrust only, through ICE and crime; it does not touch the price issues")}
+ <p class="take">Congress, after the executive, is read as the primary enabler of ICE. That is why the issue keeps folding back into the mistrust circle rather than sitting apart from it.</p>`};
+
+C.housing={code:"Sub-issue I.01a",title:"Housing",stat:"16% name it a top priority",
+ body:`<p>Housing costs are named a top priority by ${L(src.pos,"16% of voters")}, placing them fourth among cost-of-living concerns.</p>
+ ${SHARE("the economy and jobs, and with nothing else on the map")}
+ <p class="take">Housing is the one cost pressure voters do not appear to route through Washington. It stays clear of the institutional circle entirely, which is why it never enters the mistrust argument.</p>`};
+
+C.jobs={code:"Sub-issue I.01b",title:"Economy and jobs",stat:"24% name it a top issue",
+ body:`<p>Jobs and the wider economy follow inflation at ${L(src.pos,"24%")}, and the economy, cost of living and jobs together form the ${L(src.dfp,"top-ranked cluster")} for swing voters.</p>
+ ${SHARE("housing, and with nothing else")}
+ <p class="take">Voters appear to reason about wages and housing as one household budget. Neither connects to the tariff argument or the healthcare argument, which is why the price story splits into two halves rather than one.</p>`};
+
+C.tariffs={code:"Sub-issue I.01c",title:"Tariffs",stat:"7 in 10 blame tariffs for higher prices",
+ body:`<p>Economists and policy analysts read the limited measured inflation effect of tariffs as a ${L(src.brookings,"success")}, a reading the ${L(src.epi,"data broadly supports")}. Public opinion diverges sharply. A March 2026 Guardian poll found 7 in 10 Americans believe the tariffs raised prices, including 64% of Republicans, and 60% of Republicans judge the overall consumer effect negative.</p>
+ ${SHARE("Congress and the Supreme Court inside the mistrust circle, and it is the only price issue that the Iran wedge cuts into")}
+ <p class="take">Tariffs may matter electorally less for what they did to prices than for what voters think they did. The gap between the measured effect and the perceived effect is itself the political fact, and it is the single point where prices, institutions and the war all meet.</p>`};
+
+C.premiums={code:"Sub-issue I.01d",title:"Healthcare premiums",stat:"21% name healthcare costs a top priority",
+ body:`<p>The OBBBA announced over ${L(src.cap,"USD 1 trillion")} in federal healthcare cuts across ten years, with ${L(src.aha,"nearly 11 million")} projected to lose coverage. Ending the ACA premium subsidies had the faster effect. Premiums rose ${L(src.cnbc,"58% since January 2026")} across all states, the share of adults who can consistently afford care fell to ${L(src.gallupCare,"49%")}, and around ${L(src.forbes,"five million")} lost ACA cover.</p>
+ ${SHARE("Congress alone; it touches no other price issue and does not reach the war")}
+ <p class="take">Healthcare premiums sit inside the price bubble but only in the part that overlaps the institutions. Voters appear to treat this as a decision taken, not a price that drifted.</p>`};
+
+C.congress={code:"Sub-issue I.02a",title:"US Congress",stat:"Approval at 10%, disapproval near 80%",
+ body:`<p>Congressional approval collapsed to a record ${L(src.gallupCong,"10% by April 2026")}, with disapproval near 80% by May. It is blamed for passing the OBBBA, for failing to resist the ${L(src.forbes,"ACA premium cuts")} and for failing to pass a war powers resolution on Iran.</p>
+ <p>Trust is comparatively local. ${L(src.washu,"56% trust their local government")} to handle issues against 32% for Congress.</p>
+ ${SHARE("tariffs and healthcare premiums on the price side, the Epstein files inside the mistrust circle, and the Iran wedge through the war powers question")}
+ <p class="take">Congress is the busiest junction on this map. It reaches into prices, into healthcare, into the war and, through ICE funding, into immigration, which may be why institutional mistrust behaves like a container for the other three issues rather than a rival to them.</p>`};
+
+C.scotus={code:"Sub-issue I.02b",title:"Supreme Court",stat:"Confidence at 27%",
+ body:`<p>Confidence in the Court has fallen to ${L(src.gallupInst,"27%")}. Americans ${L(src.yougovSc,"approved")} of the ruling against the tariffs, yet a ${L(src.marquette,"majority")} still believe the courts go out of their way to accommodate the administration.</p>
+ ${SHARE("tariffs alone on the price side, and with Congress inside the mistrust circle")}
+ <p class="take">Both things appear to be true at once. The Court ruled against the tariffs and the tariffs survived through delegated congressional powers, so a win on paper may have read to voters as a demonstration of the Court's limits.</p>`};
+
+C.overreach={code:"Sub-issue I.02c",title:"Executive overreach",stat:"",
+ body:`<p>Tariffs stayed active through powers Congress had delegated to the President even after adverse rulings, and the courts' reach proved narrow. Similar patterns followed on deportations and ICE deployment.</p>
+ ${SHARE("every other element inside the mistrust circle, and with the Iran wedge")}
+ <p class="take">Drawn as a ring because it touches everything inside its own circle. It is less a discrete grievance than the mechanism through which the others operate.</p>`};
+
+C.corruption={code:"Sub-issue I.02d",title:"Corruption",stat:"13% name it a top concern",
+ body:`<p>${L(src.ipsos,"13% of respondents")} name corruption as their top concern, alongside political violence and extremism at 12%.</p>
+ ${SHARE("every other element inside the mistrust circle")}
+ <p class="take">Also drawn as a ring. Corruption functions as a lens applied to the other institutional failures rather than a separate one. Campaign funding, the Epstein disclosures and lobbying influence are all read through it.</p>`};
+
+C.epstein={code:"Sub-issue I.02e",title:"Epstein files",stat:"65% believe information is being withheld",
+ body:`<p>Two figures carry this. ${L(src.ipsos,"65% of respondents")} believe the federal government is deliberately withholding information on the files, and ${L(src.ipsos,"77%")} say the episode lowered their trust in political and business leaders. Both come from the February 2026 Reuters and Ipsos topline.</p>
+ ${SHARE("Congress, and it sits against the Iran wedge where the lobbying-influence question forms")}
+ <p class="take">Congressional efforts secured releases, yet those months coincided with two of the longest shutdowns in US history. Congress may have been acting and losing standing at the same time, which is the sharpest illustration of the mistrust problem on this map.</p>`};
+
+C.violence={code:"Sub-issue I.02f",title:"Political violence",stat:"12% name it a top concern",
+ body:`<p>Political violence and extremism are the top concern for ${L(src.ipsos,"12%")} of respondents. Alongside it, ${L(src.pos,"58%")} still consider the election system trustworthy and 52% back police reform.</p>
+ ${SHARE("crime, in the immigration circle; it is the only element that crosses out of the mistrust circle")}
+ <p class="take">Enforcement conduct and public order appear to be argued as one subject at the local level, which is where this crossing matters.</p>`};
+
+C.ice={code:"Sub-issue I.04a",title:"ICE",stat:"63% disapprove of its conduct",
+ body:`<p>OBBBA funding of ${L(src.senate,"USD 75 billion")} was followed by higher deportation volumes, more aggressive arrests and repeated confrontations with protesters and state governments. ${L(src.nyt,"63% disapprove")} of ICE conduct.</p>
+ ${SHARE("crime and the border, and it reaches into the mistrust circle")}
+ <p class="take">ICE is where the immigration circle physically reaches the institutional one. The objection recorded in polling is mostly about conduct and authorisation, not about the underlying policy goal.</p>`};
+
+C.crime={code:"Sub-issue I.04b",title:"Crime",stat:"10% name it a top issue",
+ body:`<p>Crime is a top issue for about ${L(src.pos,"10% of voters")}, one of the four issues on which Republicans are rated more favourably.</p>
+ ${SHARE("the border most heavily, with ICE more lightly, and with political violence across the circle boundary")}
+ <p class="take">Crime and the border are argued together far more tightly than either is argued with enforcement conduct. Its weakness is arithmetic. Republicans lead on issues a minority of voters prioritise.</p>`};
+
+C.border={code:"Sub-issue I.04c",title:"Border",stat:"Part of the 25% cluster",
+ body:`<p>Border management is polled together with immigration, and the pair sit among the ${L(src.pos,"top two issues for 25%")} of voters by March 2026.</p>
+ ${SHARE("crime heavily and ICE lightly; it stays clear of the institutional arguments")}
+ <p class="take">The border question travels better in some districts than the ICE record does, because it carries none of the conduct objections attached to enforcement.</p>`};
+
+C.ov_infl_inst={code:"Shared ground",title:"Congress, the courts and the executive",stat:"Inflation × Institutions",
+ body:`<p>Three decisions put prices and institutions in the same argument. The OBBBA cut ${L(src.cap,"over USD 1 trillion")} from federal healthcare. The ACA premium subsidies were allowed to lapse, lifting premiums ${L(src.cnbc,"58%")}. Tariffs survived an adverse ${L(src.yougovSc,"Supreme Court ruling")} through delegated congressional powers.</p>
+ <p>Two price issues sit inside this band and nowhere else. Healthcare premiums meet Congress. Tariffs meet both Congress and the Court.</p>
+ <p class="take">This is the largest shared band on the map and probably the most consequential. Voters here are not describing a price shock, they are describing a decision, which converts an economic grievance into an institutional one.</p>`};
+
+C.ov_infl_iran={code:"Shared ground",title:"Energy prices",stat:"Inflation × Iran",
+ body:`<p>Petrol rose from ${L(src.cpiAvg,"USD 3.15 to USD 4.65")} between December 2024 and May 2026, with the energy basket up ${L(src.cpiCat,"23.5%")}. ${L(src.gas,"64% of Americans")} say the rise in energy costs from the war worsened their household finances, and ${L(src.gac,"86%")} say the war worsened the cost of living.</p>
+ <p>Tariffs is the only price issue the wedge actually cuts. Housing, jobs and healthcare premiums stay outside it.</p>
+ <p class="take">This band is how a foreign war that 1% of voters name as their top concern still reaches the top issue of the cycle. It is a transmission channel rather than an issue.</p>`};
+
+C.ov_inst_iran={code:"Shared ground",title:"Israel lobby influence and AIPAC",stat:"Institutions × Iran",
+ body:`<p>The question of Israeli influence over US policy first surfaced electorally in ${L(src.gallup24,"2024")} and drew bipartisan attention in 2026 after the US-Israel strikes on Iran began on 28 February 2026. Efforts by AIPAC and allied groups to block legislation that would limit, stall or stop US involvement kept the question live.</p>
+ <p>The electoral mechanism is straightforward and does not depend on any theory of motive. Outside money funds primary challenges, funded members vote on war powers, and voters observe that a resolution their representatives could have passed was not passed. The result is read as capture rather than as disagreement, which is why the argument lands in the mistrust circle rather than in foreign policy. It sits beside corruption for the same reason.</p>
+ <p>The Epstein files sit against this band without merging into it. Attention to the influence question was amplified by conspiracy theories attached to that case. That is a fact about how the argument spread, and it is worth stating, but it is not evidence of a connection between the two and the map keeps them as separate elements.</p>
+ <p class="take">Read as a funding and accountability question, this band is durable. It survives the memorandum of understanding that closed the war, because what voters are judging is the legislative record, not the conflict.</p>`};
+
+C.ov_core={code:"Shared ground · three-way",title:"War Powers Resolution",stat:"Inflation × Institutions × Iran",
+ body:`<p>The failure to pass a war powers resolution against intervention in Iran is one of the charges behind the collapse in congressional approval to ${L(src.gallupCong,"10%")}. It sits inside all three of the largest concerns at once. It is a war question, an institutional question, and through energy costs a price question.</p>
+ <p class="take">This is the densest point on the map. If the war has a durable electoral legacy, the reasoning here suggests it will be procedural rather than foreign-policy, remembered as the moment Congress declined to use a power it holds.</p>`};
+
+C.ov_inst_imm={code:"Shared ground",title:"Congress, ICE and the Court",stat:"Institutions × Immigration",
+ body:`<p>Congress funded ICE through the ${L(src.senate,"OBBBA")}, the courts moved against parts of the deportation and deployment programme, and the programme continued. ${L(src.nyt,"63% disapprove")} of ICE conduct and ${L(src.axios,"49%")} oppose National Guard deployment in cities.</p>
+ <p>ICE and crime are the two elements that physically cross this boundary. Congress and the Supreme Court are the institutional actors named in the same argument, though on the map their circles stay inside the mistrust bubble.</p>
+ <p class="take">Immigration reaches the national conversation mainly through this band. The pattern matches the tariff case closely. A court ruled, the policy continued, and the mistrust deepened.</p>`};
+
+const INTRO={code:"Detail",title:"Pick an element",stat:"",
+ body:`<p>Click a circle, a sub-issue label or a shaded band to read the analysis behind it. The summary of the whole frame sits below the chart.</p>`};
+
+/* ---------- build ---------- */
+const svg=document.getElementById("viz"),defs=svg.querySelector("defs"),root=document.getElementById("root");
+const lMain=document.getElementById("l-main"),lOv=document.getElementById("l-ov"),
+      lSub=document.getElementById("l-sub"),lLab=document.getElementById("l-lab");
+
+function shapeOf(k,extra={}){
+  const m=MAIN[k];
+  return m.kind==="circle"?S("circle",Object.assign({cx:m.cx,cy:m.cy,r:m.r},extra))
+                          :S("polygon",Object.assign({points:m.pts},extra));
+}
+/* clip defs */
+Object.keys(MAIN).forEach(k=>{
+  const cp=S("clipPath",{id:"cp-"+k});
+  cp.appendChild(shapeOf(k));
+  defs.appendChild(cp);
+});
+
+/* main shapes */
+const mainEls={};
+Object.entries(MAIN).forEach(([k,m])=>{
+  const g=S("g",{class:"mainshape","data-id":k});
+  const sh=shapeOf(k,{fill:m.tone,"fill-opacity":.09,stroke:m.tone,"stroke-width":1.8,
+    "stroke-linejoin":"round",style:"cursor:pointer"});
+  g.appendChild(sh);
+  lMain.appendChild(g);
+  mainEls[k]=g;
+  sh.addEventListener("pointerenter",()=>hoverMain(k));
+  sh.addEventListener("pointerleave",()=>unhoverMain());
+  sh.addEventListener("click",e=>{e.stopPropagation();select(k,"main");});
+});
+
+/* overlap regions */
+const ovEls={};
+OV.forEach(o=>{
+  let node=shapeOf(o.base,{fill:"url(#"+(o.core?"hatch2":"hatch")+")",stroke:"none",class:"ovregion"});
+  const target=node;
+  o.clip.forEach(c=>{const g=S("g",{"clip-path":"url(#cp-"+c+")"});g.appendChild(node);node=g;});
+  lOv.appendChild(node);
+  ovEls[o.id]={hit:target,outer:node};
+  target.addEventListener("pointerenter",()=>hoverOv(o.id));
+  target.addEventListener("pointerleave",()=>unhoverOv(o.id));
+  target.addEventListener("click",e=>{e.stopPropagation();select(o.id,"ov");});
+});
+
+/* sub shapes */
+const subGroups={inflation:[],institutions:[],immigration:[],iran:[]};
+SUB.forEach(s=>{
+  const tone=MAIN[s.p].tone;
+  const g=S("g",{class:"subgroup","data-sub":s.id});
+  const c=S("circle",{cx:s.cx,cy:s.cy,r:s.r,fill:s.ring?"none":tone,"fill-opacity":s.ring?0:.1,
+    stroke:tone,"stroke-width":s.ring?1.1:1.3,"stroke-dasharray":s.ring?"2 6":"6 5","stroke-opacity":.75});
+  g.appendChild(c);
+  lSub.appendChild(g);
+  subGroups[s.p].push(g);
+});
+
+/* ---------- labels ---------- */
+function pill(x,y,text,variant,cls){
+  const g=S("g",{class:"pill "+(cls||"")});
+  const rect=S("rect",{rx:variant==="main"?4:11,ry:variant==="main"?4:11});
+  const t=S("text",{x:x,y:y,"text-anchor":"middle","dominant-baseline":"middle",
+    class:variant==="ov"?"ov-text":(variant==="main"?"banner-text main":"sub-text")});
+  t.textContent=text;
+  g.appendChild(rect);g.appendChild(t);
+  lLab.appendChild(g);
+  return {g,rect,t,x,y,variant};
+}
+const pills=[];
+function sizePill(p,padX,padY){
+  const b=p.t.getBBox();
+  p.rect.setAttribute("x",b.x-padX);
+  p.rect.setAttribute("y",b.y-padY);
+  p.rect.setAttribute("width",b.width+padX*2);
+  p.rect.setAttribute("height",b.height+padY*2);
+}
+
+/* main banners */
+const mainPills={};
+Object.entries(MAIN).forEach(([k,m])=>{
+  const g=S("g",{class:"pill on clickable","data-main-label":k});
+  const rect=S("rect",{rx:4,fill:"#ffffff",stroke:"var(--hairline)","stroke-width":1});
+  const bar=S("rect",{width:3,fill:m.tone});
+  const t=S("text",{x:m.anchor[0],y:m.anchor[1],"text-anchor":"middle",class:"banner-text main"});
+  t.textContent=m.label;
+  const st=S("text",{x:m.anchor[0],y:m.anchor[1]+20,"text-anchor":"middle",class:"banner-text mainstat"});
+  st.textContent=m.stat;
+  g.appendChild(rect);g.appendChild(bar);g.appendChild(t);g.appendChild(st);
+  lLab.appendChild(g);
+  mainPills[k]={g,rect,bar,t,st,m};
+  g.addEventListener("click",e=>{e.stopPropagation();select(k,"main");});
+  g.addEventListener("pointerenter",()=>hoverMain(k));
+  g.addEventListener("pointerleave",()=>unhoverMain());
+});
+function layoutMainPills(){
+  Object.values(mainPills).forEach(o=>{
+    const b1=o.t.getBBox(),b2=o.st.getBBox();
+    const w=Math.max(b1.width,b2.width)+30,h=b1.height+b2.height+16;
+    const x=o.m.anchor[0]-w/2,y=b1.y-9;
+    o.rect.setAttribute("x",x);o.rect.setAttribute("y",y);
+    o.rect.setAttribute("width",w);o.rect.setAttribute("height",h);
+    o.bar.setAttribute("x",x);o.bar.setAttribute("y",y);o.bar.setAttribute("height",h);
+  });
+}
+
+/* sub banners */
+const subPills={};
+SUB.forEach(s=>{
+  const pos=SUBLAB[s.id];
+  const g=S("g",{class:"pill subpill clickable","data-subpill":s.id,"data-parent":s.p});
+  const rect=S("rect",{rx:10,fill:"#ffffff",stroke:MAIN[s.p].tone,"stroke-width":.9,"stroke-opacity":.55});
+  const t=S("text",{x:pos[0],y:pos[1],"text-anchor":"middle","dominant-baseline":"middle",class:"sub-text"});
+  t.textContent=s.stat?`${s.label} · ${s.stat}`:s.label;
+  g.appendChild(rect);g.appendChild(t);
+  lLab.appendChild(g);
+  subPills[s.id]={g,rect,t};
+  g.addEventListener("click",e=>{e.stopPropagation();select(s.id,"sub");});
+});
+function layoutSubPills(){
+  SUB.forEach(s=>{
+    const o=subPills[s.id],b=o.t.getBBox();
+    o.rect.setAttribute("x",b.x-9);o.rect.setAttribute("y",b.y-5);
+    o.rect.setAttribute("width",b.width+18);o.rect.setAttribute("height",b.height+10);
+  });
+}
+
+/* overlap banners with leader lines */
+const ovPills={};
+OV.forEach(o=>{
+  const g=S("g",{class:"pill clickable","data-ovpill":o.id});
+  if(!o.inline){
+    g.appendChild(S("line",{x1:o.pill[0],y1:o.pill[1],x2:o.anchor[0],y2:o.anchor[1],class:"lead"}));
+    g.appendChild(S("circle",{cx:o.anchor[0],cy:o.anchor[1],r:3,fill:"var(--llama)"}));
+  }
+  const rect=S("rect",{rx:11,fill:"var(--llama)"});
+  const t=S("text",{x:o.pill[0],y:o.pill[1],"text-anchor":"middle","dominant-baseline":"middle",class:"ov-text"});
+  t.textContent=o.label;
+  g.appendChild(rect);g.appendChild(t);
+  lLab.appendChild(g);
+  ovPills[o.id]={g,rect,t};
+  g.addEventListener("pointerenter",()=>{clearTimeout(ovTimer);});
+  g.addEventListener("pointerleave",()=>{if(!locked)unhoverOv(o.id);});
+  g.addEventListener("click",e=>{e.stopPropagation();select(o.id,"ov");});
+});
+function layoutOvPills(){
+  OV.forEach(o=>{
+    const p=ovPills[o.id],b=p.t.getBBox();
+    p.rect.setAttribute("x",b.x-12);p.rect.setAttribute("y",b.y-7);
+    p.rect.setAttribute("width",b.width+24);p.rect.setAttribute("height",b.height+14);
+  });
+}
+
+function layoutAll(){layoutMainPills();layoutSubPills();layoutOvPills();}
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(layoutAll);}
+layoutAll();
+window.addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(layoutAll,150);});
+
+/* ---------- state ---------- */
+let locked=null, lockKind=null, zoom=1, tx=0, ty=0, detail=false;
+
+function showSubs(parent,withPills=true){subGroups[parent].forEach(g=>g.classList.add("on"));
+  if(withPills)SUB.filter(s=>s.p===parent).forEach(s=>subPills[s.id].g.classList.add("on"));}
+function hideSubs(parent){subGroups[parent].forEach(g=>g.classList.remove("on"));
+  SUB.filter(s=>s.p===parent).forEach(s=>subPills[s.id].g.classList.remove("on"));}
+function hideAllSubs(){Object.keys(subGroups).forEach(hideSubs);}
+function showAllSubs(){Object.keys(subGroups).forEach(showSubs);}
+function dimExcept(keys){
+  Object.entries(mainEls).forEach(([k,g])=>g.classList.toggle("dim",keys.length>0&&!keys.includes(k)));
+  Object.entries(mainPills).forEach(([k,o])=>o.g.style.opacity=(keys.length===0||keys.includes(k))?1:.2);
+}
+function accent(keys){
+  Object.entries(mainEls).forEach(([k,g])=>{
+    const sh=g.firstChild;
+    if(keys.includes(k)){sh.setAttribute("stroke","var(--marigold)");sh.setAttribute("stroke-width",3.2);}
+    else{sh.setAttribute("stroke",MAIN[k].tone);sh.setAttribute("stroke-width",1.8);}
+  });
+}
+function clearTransient(){
+  if(locked)return;
+  hideAllSubs();dimExcept([]);accent([]);
+  OV.forEach(o=>ovPills[o.id].g.classList.remove("on"));
+  if(detail){showAllSubs();OV.forEach(o=>ovPills[o.id].g.classList.add("on"));}
+}
+function hoverMain(k){if(locked)return;clearTimeout(ovTimer);dimExcept([k]);hideAllSubs();showSubs(k);}
+function unhoverMain(){clearTransient();}
+let ovTimer=null;
+function hoverOv(id){if(locked)return;clearTimeout(ovTimer);const o=OV.find(x=>x.id===id);
+  OV.forEach(x=>ovPills[x.id].g.classList.toggle("on",x.id===id||detail));
+  ovPills[id].g.classList.add("on");dimExcept(o.members);accent(o.members);}
+function unhoverOv(id){clearTimeout(ovTimer);ovTimer=setTimeout(clearTransient,220);}
+
+/* ---------- card ---------- */
+const card=document.getElementById("card"),cardBody=document.getElementById("cardbody"),
+      cardCode=document.getElementById("cardcode");
+function openCard(){card.classList.add("open");card.classList.remove("min");}
+function render(entry){cardCode.textContent=entry.code;
+  cardBody.innerHTML=`<h2>${entry.title}</h2>`+(entry.stat?`<p class="card-stat">${entry.stat}</p>`:"")+entry.body;
+  cardBody.scrollTop=0;}
+render(INTRO);
+
+function select(id,kind){
+  locked=null;clearTransient();
+  locked=id;lockKind=kind;
+  if(kind==="main"){dimExcept([id]);accent([id]);hideAllSubs();showSubs(id);}
+  if(kind==="sub"){const s=SUB.find(x=>x.id===id);dimExcept([s.p]);accent([s.p]);hideAllSubs();showSubs(s.p);
+    Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
+    subPills[id].rect.setAttribute("fill","rgba(241,162,34,.55)");}
+  if(kind==="ov"){const o=OV.find(x=>x.id===id);dimExcept(o.members);accent(o.members);
+    hideAllSubs();o.members.forEach(m=>showSubs(m,false));
+    (o.focus||[]).forEach(f=>subPills[f]&&subPills[f].g.classList.add("on"));
+    OV.forEach(x=>ovPills[x.id].g.classList.toggle("on",x.id===id));}
+  render(C[id]||INTRO);openCard();
+}
+function deselect(){
+  locked=null;lockKind=null;
+  Object.values(subPills).forEach(p=>p.rect.setAttribute("fill","#ffffff"));
+  clearTransient();render(INTRO);
+}
+document.getElementById("cardclose").addEventListener("click",()=>{card.classList.remove("open");deselect();});
+document.getElementById("cardmin").addEventListener("click",()=>card.classList.toggle("min"));
+document.getElementById("full").addEventListener("click",()=>{
+  const st=document.getElementById("stage");
+  if(document.fullscreenElement){document.exitFullscreen();}
+  else if(st.requestFullscreen){st.requestFullscreen().catch(()=>{});}
+});
+svg.addEventListener("click",deselect);
+
+/* drag the card */
+(function(){
+  const head=document.getElementById("cardhead");let dx=0,dy=0,on=false;
+  head.addEventListener("pointerdown",e=>{if(window.innerWidth<=820)return;
+    on=true;head.setPointerCapture(e.pointerId);
+    const r=card.getBoundingClientRect(),p=card.parentElement.getBoundingClientRect();
+    dx=e.clientX-r.left;dy=e.clientY-r.top;card.style.right="auto";
+    card.style.left=(r.left-p.left)+"px";card.style.top=(r.top-p.top)+"px";});
+  head.addEventListener("pointermove",e=>{if(!on)return;
+    const p=card.parentElement.getBoundingClientRect();
+    card.style.left=Math.max(6,Math.min(p.width-card.offsetWidth-6,e.clientX-p.left-dx))+"px";
+    card.style.top=Math.max(6,Math.min(p.height-60,e.clientY-p.top-dy))+"px";});
+  head.addEventListener("pointerup",()=>on=false);
+})();
+
+/* ---------- zoom and pan ---------- */
+function applyView(){
+  root.setAttribute("transform",`translate(${tx} ${ty}) scale(${zoom})`);
+  const nowDetail=zoom>1.32;
+  if(nowDetail!==detail){detail=nowDetail;clearTransient();}
+}
+function zoomAt(factor,cx,cy){
+  const nz=Math.min(3,Math.max(1,zoom*factor));
+  if(nz===zoom)return;
+  tx=cx-(cx-tx)*(nz/zoom);ty=cy-(cy-ty)*(nz/zoom);
+  zoom=nz;clampPan();applyView();
+}
+const VB={x:0,y:0,w:1400,h:940};
+function clampPan(){
+  tx=Math.min(VB.x*(1-zoom),Math.max((VB.x+VB.w)*(1-zoom),tx));
+  ty=Math.min(VB.y*(1-zoom),Math.max((VB.y+VB.h)*(1-zoom),ty));
+}
+function svgPoint(e){
+  const r=svg.getBoundingClientRect();
+  return [VB.x+(e.clientX-r.left)/r.width*VB.w,VB.y+(e.clientY-r.top)/r.height*VB.h];
+}
+svg.addEventListener("wheel",e=>{e.preventDefault();
+  const [x,y]=svgPoint(e);zoomAt(e.deltaY<0?1.12:1/1.12,x,y);},{passive:false});
+document.getElementById("zin").addEventListener("click",()=>zoomAt(1.3,700,470));
+document.getElementById("zout").addEventListener("click",()=>zoomAt(1/1.3,700,470));
+document.getElementById("reset").addEventListener("click",()=>{zoom=1;tx=0;ty=0;applyView();deselect();});
+
+(function(){
+  let on=false,sx=0,sy=0,ox=0,oy=0;
+  svg.addEventListener("pointerdown",e=>{if(zoom<=1)return;
+    on=true;sx=e.clientX;sy=e.clientY;ox=tx;oy=ty;svg.classList.add("dragging");svg.setPointerCapture(e.pointerId);});
+  svg.addEventListener("pointermove",e=>{if(!on)return;
+    const r=svg.getBoundingClientRect();
+    tx=ox+(e.clientX-sx)/r.width*VB.w;ty=oy+(e.clientY-sy)/r.height*VB.h;
+    clampPan();applyView();});
+  svg.addEventListener("pointerup",()=>{on=false;svg.classList.remove("dragging");});
+  svg.addEventListener("pointercancel",()=>{on=false;svg.classList.remove("dragging");});
+})();
+
+/* pinch */
+(function(){
+  let d0=null;
+  svg.addEventListener("touchmove",e=>{
+    if(e.touches.length!==2)return;e.preventDefault();
+    const a=e.touches[0],b=e.touches[1];
+    const d=Math.hypot(a.clientX-b.clientX,a.clientY-b.clientY);
+    if(d0){const r=svg.getBoundingClientRect();
+      zoomAt(d/d0,VB.x+((a.clientX+b.clientX)/2-r.left)/r.width*VB.w,VB.y+((a.clientY+b.clientY)/2-r.top)/r.height*VB.h);}
+    d0=d;},{passive:false});
+  svg.addEventListener("touchend",()=>{d0=null;});
+})();
+
+/* keyboard */
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){deselect();}});
+
+/* ---------- PNG export ---------- */
+document.getElementById("png").addEventListener("click",()=>{
+  try{
+    const clone=svg.cloneNode(true);
+    clone.querySelectorAll(".pill").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
+    clone.querySelectorAll(".subgroup").forEach(p=>p.setAttribute("opacity",p.classList.contains("on")?1:0));
+    const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}`;
+    const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);
+    clone.setAttribute("width",2800);clone.setAttribute("height",1880);
+    const blob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});
+    const url=URL.createObjectURL(blob),img=new Image();
+    img.onload=()=>{const cv=document.createElement("canvas");cv.width=2800;cv.height=1880;
+      const cx=cv.getContext("2d");cx.fillStyle="#ffffff";cx.fillRect(0,0,2800,1880);cx.drawImage(img,0,0);
+      cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
+        a.download="four-is-2026-midterms.png";a.click();URL.revokeObjectURL(url);});};
+    img.onerror=()=>alert("PNG export failed in this browser. Use a screenshot instead.");
+    img.src=url;
+  }catch(err){alert("PNG export failed in this browser. Use a screenshot instead.");}
+});
+
+applyView();
+</script>
+</body>
+</html>

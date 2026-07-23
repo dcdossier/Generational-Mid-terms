@@ -240,20 +240,18 @@ const SUB=[
   {id:"tariffs",p:"inflation",cx:600,cy:515,r:98,label:"Tariffs",stat:""},
   {id:"premiums",p:"inflation",cx:600,cy:265,r:80,label:"Healthcare premiums",stat:"21%"},
 
-  {id:"overreach",p:"institutions",cx:800,cy:400,r:208,label:"Executive overreach",stat:"",ring:true},
-  {id:"corruption",p:"institutions",cx:805,cy:420,r:196,label:"Corruption",stat:"13%",ring:true},
+  {id:"overreach",p:"institutions",cx:895,cy:305,r:75,label:"Executive overreach",stat:""},
   {id:"congress",p:"institutions",cx:720,cy:430,r:150,label:"US Congress",stat:""},
   {id:"scotus",p:"institutions",cx:668,cy:425,r:88,label:"Supreme Court",stat:""},
   {id:"epstein",p:"institutions",cx:855,cy:540,r:85,label:"Epstein files",stat:""},
-  {id:"violence",p:"institutions",cx:940,cy:415,r:95,label:"Political violence",stat:"12%"},
 
   {id:"ice",p:"immigration",cx:1030,cy:510,r:80,label:"ICE",stat:""},
   {id:"crime",p:"immigration",cx:1090,cy:400,r:75,label:"Crime",stat:"10%"},
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[870,310],corruption:[868,614],congress:[742,472],scotus:[668,392],
-  epstein:[830,556],violence:[942,378],ice:[1016,548],crime:[1095,340],border:[1155,455]};
+  overreach:[895,260],congress:[742,472],scotus:[668,392],
+  epstein:[830,556],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
 const OV=[
@@ -261,14 +259,14 @@ const OV=[
    label:"Congress · Courts · Executive",anchor:[658,238],pill:[655,120],
    focus:["tariffs","premiums","congress","scotus","overreach"]},
   {id:"ov_infl_iran",members:["inflation","iran"],clip:["inflation"],base:"iran",
-   label:"Energy prices",anchor:[565,590],pill:[565,590],inline:true,focus:["tariffs"]},
+   label:"Energy prices",anchor:[548,592],pill:[472,692],focus:["tariffs"]},
   {id:"ov_inst_iran",members:["institutions","iran"],clip:["institutions"],base:"iran",
-   label:"Israel lobby · AIPAC",anchor:[798,588],pill:[798,588],inline:true,focus:["epstein","congress"]},
+   label:"Israel lobby · AIPAC",anchor:[798,592],pill:[818,692],focus:["epstein","congress"]},
   {id:"ov_core",members:["inflation","institutions","iran"],clip:["institutions","iran"],base:"inflation",
-   label:"WPR",anchor:[662,556],pill:[662,556],inline:true,core:true,focus:["congress","overreach"]},
+   label:"WPR",anchor:[662,562],pill:[648,692],core:true,focus:["congress","overreach"]},
   {id:"ov_inst_imm",members:["institutions","immigration"],clip:["institutions"],base:"immigration",
    label:"Congress · ICE · Court",anchor:[992,440],pill:[1012,192],
-   focus:["ice","crime","violence","congress","scotus"]}
+   focus:["ice","crime","congress","scotus"]}
 ];
 
 /* ---------- content, summarised from the dossier ---------- */

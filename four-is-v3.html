@@ -71,7 +71,7 @@ svg#viz.dragging{cursor:grabbing}
 .brandmark img:hover{opacity:1}
 
 /* hovering detail tab */
-.card{position:absolute;right:14px;top:14px;width:220px;max-width:calc(100% - 28px);z-index:6;
+.card{position:absolute;left:14px;top:14px;width:220px;max-width:calc(100% - 28px);z-index:6;
   background:rgba(255,255,255,.86);
   -webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1);
   border:1px solid var(--hairline);border-radius:3px;
@@ -154,7 +154,7 @@ svg#viz.dragging{cursor:grabbing}
       <div class="ctl-drop" id="png-wrap">
         <button class="ctl" id="png-btn" type="button">PNG &#9662;</button>
         <div class="ctl-menu" id="png-menu">
-          <button class="ctl-item" id="png" type="button">Simple</button>
+          <button class="ctl-item" id="png" type="button">Major Issues</button>
           <button class="ctl-item" id="png-full" type="button">All issues</button>
         </div>
       </div>
@@ -252,7 +252,7 @@ const SUB=[
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[895,260],corruption:[848,492],congress:[742,472],scotus:[668,392],
+  overreach:[895,308],corruption:[848,492],congress:[720,435],scotus:[668,392],
   epstein:[830,556],violence:[975,418],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */

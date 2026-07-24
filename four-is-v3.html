@@ -854,7 +854,7 @@ function exportPng(showAll){
         ctx.fillText("Three-issue overlap",LX+LP+PW+14,RY);
         ctx.restore();
       }
-            const fname=showAll?"four-is-2026-midterms-full.png":"four-is-2026-midterms.png";
+            const fname=showAll?"All-Issues-2026-Mid-terms.png":"Major-Issues-2026-Mid-terms.png";
       cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
         a.download=fname;a.click();});
     }).catch(()=>alert("PNG export failed in this browser. Use a screenshot instead."));

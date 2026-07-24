@@ -260,7 +260,7 @@ const SUBLAB={housing:[335,272],jobs:[480,380],tariffs:[600,556],premiums:[578,3
 /* inline pills sit inside their band; the rest use a short leader */
 const OV=[
   {id:"ov_infl_inst",members:["inflation","institutions"],clip:["institutions"],base:"inflation",
-   label:"Congress · Courts · Executive",anchor:[658,238],pill:[655,120],
+   label:"Congress · Courts · Executive",anchor:[665,375],pill:[660,104],
    focus:["tariffs","premiums","congress","scotus","overreach"]},
   {id:"ov_infl_iran",members:["inflation","iran"],clip:["inflation"],base:"iran",
    label:"Energy prices",anchor:[548,592],pill:[472,692],focus:["tariffs"]},
@@ -820,7 +820,41 @@ function exportPng(showAll){
         const lw=Math.round(li.naturalWidth*lh/li.naturalHeight);
         lx-=lw;ctx.drawImage(li,lx,ly,lw,lh);lx-=16;
       });
-      const fname=showAll?"four-is-2026-midterms-full.png":"four-is-2026-midterms.png";
+      if(showAll){
+        const LX=48,LY=1590,LW=420,LH=290,LP=28,LGP=60,LCOL="#2a2a2a";
+        function rrect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
+        ctx.save();
+        rrect(LX,LY,LW,LH,16);ctx.fillStyle="rgba(255,251,226,0.95)";ctx.fill();
+        ctx.strokeStyle="#d4cec6";ctx.lineWidth=2;ctx.stroke();
+        ctx.fillStyle=LCOL;ctx.font="bold 28px Georgia,serif";ctx.textAlign="left";ctx.textBaseline="middle";
+        ctx.fillText("Key",LX+LP,LY+LP+14);
+        const R=18;let RY=LY+LP+52;
+        /* Row 1: major circle */
+        ctx.beginPath();ctx.arc(LX+LP+R,RY,R,0,Math.PI*2);ctx.fillStyle="rgba(98,13,60,0.12)";ctx.fill();ctx.setLineDash([]);ctx.strokeStyle="#620d3c";ctx.lineWidth=2;ctx.stroke();
+        ctx.fillStyle=LCOL;ctx.font="22px Helvetica,Arial,sans-serif";ctx.textBaseline="middle";
+        ctx.fillText("Major concern area",LX+LP+R*2+14,RY);
+        /* Row 2: sub-issue dashed circle */
+        RY+=LGP;
+        ctx.beginPath();ctx.arc(LX+LP+R,RY,R,0,Math.PI*2);ctx.fillStyle="rgba(98,13,60,0.07)";ctx.fill();ctx.setLineDash([5,4]);ctx.strokeStyle="#620d3c";ctx.lineWidth=1.5;ctx.stroke();ctx.setLineDash([]);
+        ctx.fillStyle=LCOL;ctx.fillText("Sub-issue within a concern",LX+LP+R*2+14,RY);
+        /* Row 3: 2-issue overlap pill */
+        RY+=LGP;const PW=116,PH=34,PR=12;
+        rrect(LX+LP,RY-PH/2,PW,PH,PR);ctx.fillStyle="#620d3c";ctx.fill();
+        ctx.fillStyle="#fffbe2";ctx.font="bold 18px Helvetica,Arial,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+        ctx.fillText("2× overlap",LX+LP+PW/2,RY);
+        ctx.textAlign="left";ctx.fillStyle=LCOL;ctx.font="22px Helvetica,Arial,sans-serif";
+        ctx.fillText("Two-issue overlap",LX+LP+PW+14,RY);
+        /* Row 4: 3-issue core overlap */
+        RY+=LGP;
+        rrect(LX+LP,RY-PH/2,PW,PH,PR);ctx.fillStyle="#3d0822";ctx.fill();
+        ctx.strokeStyle="rgba(255,251,226,0.45)";ctx.lineWidth=1.5;ctx.stroke();
+        ctx.fillStyle="#fffbe2";ctx.font="bold 18px Helvetica,Arial,sans-serif";ctx.textAlign="center";ctx.textBaseline="middle";
+        ctx.fillText("3× overlap",LX+LP+PW/2,RY);
+        ctx.textAlign="left";ctx.fillStyle=LCOL;ctx.font="22px Helvetica,Arial,sans-serif";
+        ctx.fillText("Three-issue overlap",LX+LP+PW+14,RY);
+        ctx.restore();
+      }
+            const fname=showAll?"four-is-2026-midterms-full.png":"four-is-2026-midterms.png";
       cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
         a.download=fname;a.click();});
     }).catch(()=>alert("PNG export failed in this browser. Use a screenshot instead."));

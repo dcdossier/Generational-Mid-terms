@@ -741,15 +741,18 @@ document.getElementById("zout").addEventListener("click",()=>zoomAt(1/1.3,700,47
 document.getElementById("reset").addEventListener("click",()=>{resetView();deselect();});
 
 (function(){
-  let on=false,sx=0,sy=0,ox=0,oy=0;
+  let on=false,pending=false,sx=0,sy=0,ox=0,oy=0,pid=null;
   svg.addEventListener("pointerdown",e=>{if(zoom<=1)return;
-    on=true;sx=e.clientX;sy=e.clientY;ox=tx;oy=ty;svg.classList.add("dragging");svg.setPointerCapture(e.pointerId);});
-  svg.addEventListener("pointermove",e=>{if(!on)return;
+    pending=true;on=false;sx=e.clientX;sy=e.clientY;ox=tx;oy=ty;pid=e.pointerId;});
+  svg.addEventListener("pointermove",e=>{
+    if(pending&&!on&&Math.hypot(e.clientX-sx,e.clientY-sy)>4){
+      on=true;svg.classList.add("dragging");svg.setPointerCapture(pid);}
+    if(!on)return;
     const r=svg.getBoundingClientRect();
     tx=ox+(e.clientX-sx)/r.width*VB.w;ty=oy+(e.clientY-sy)/r.height*VB.h;
     clampPan();applyView();});
-  svg.addEventListener("pointerup",()=>{on=false;svg.classList.remove("dragging");});
-  svg.addEventListener("pointercancel",()=>{on=false;svg.classList.remove("dragging");});
+  svg.addEventListener("pointerup",()=>{on=false;pending=false;svg.classList.remove("dragging");});
+  svg.addEventListener("pointercancel",()=>{on=false;pending=false;svg.classList.remove("dragging");});
 })();
 
 /* pinch */

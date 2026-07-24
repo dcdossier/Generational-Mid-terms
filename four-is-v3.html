@@ -120,6 +120,8 @@ svg#viz.dragging{cursor:grabbing}
 .pill{opacity:0;transition:opacity .18s ease;pointer-events:none}
 .pill.on{opacity:1}
 .pill.clickable.on{pointer-events:auto;cursor:pointer}
+/* sub-issue pills always receive clicks even when invisible */
+.pill.subpill{pointer-events:auto;cursor:pointer}
 .ovregion{cursor:pointer}
 .dim{opacity:.16}
 .lead{stroke:var(--llama);stroke-width:1;opacity:.5}
@@ -252,7 +254,7 @@ const SUB=[
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
 const SUBLAB={housing:[335,272],jobs:[320,566],tariffs:[600,556],premiums:[578,318],
-  overreach:[895,308],corruption:[848,492],congress:[720,435],scotus:[668,392],
+  overreach:[895,308],corruption:[840,430],congress:[720,435],scotus:[668,392],
   epstein:[830,556],violence:[975,418],ice:[1016,548],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
@@ -611,7 +613,7 @@ layoutAll();
 window.addEventListener("resize",()=>{clearTimeout(window.__rt);window.__rt=setTimeout(layoutAll,150);});
 
 /* ---------- state ---------- */
-let locked=null, lockKind=null, zoom=1, tx=0, ty=0, detail=false;
+let locked=null, lockKind=null, zoom=1, tx=0, ty=0;
 
 function showSubs(parent,withPills=true){subGroups[parent].forEach(g=>g.classList.add("on"));
   if(withPills)SUB.filter(s=>s.p===parent).forEach(s=>subPills[s.id].g.classList.add("on"));}
@@ -634,7 +636,6 @@ function clearTransient(){
   if(locked)return;
   hideAllSubs();dimExcept([]);accent([]);
   OV.forEach(o=>ovPills[o.id].g.classList.remove("on"));
-  if(detail){showAllSubs();OV.forEach(o=>ovPills[o.id].g.classList.add("on"));}
 }
 function hoverMain(k){if(locked)return;clearTimeout(ovTimer);clearTimeout(subTimer);dimExcept([k]);hideAllSubs();showSubs(k);}
 function unhoverMain(){clearTransient();}
@@ -710,8 +711,6 @@ svg.addEventListener("click",deselect);
 /* ---------- zoom and pan ---------- */
 function applyView(){
   root.setAttribute("transform",`translate(${tx} ${ty}) scale(${zoom})`);
-  const nowDetail=zoom>1.32;
-  if(nowDetail!==detail){detail=nowDetail;clearTransient();}
 }
 function zoomAt(factor,cx,cy){
   const nz=Math.min(3,Math.max(1,zoom*factor));

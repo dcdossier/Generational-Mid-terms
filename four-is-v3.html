@@ -109,7 +109,7 @@ svg#viz.dragging{cursor:grabbing}
 
 /* svg type */
 .banner-text{font-family:Lora,Georgia,serif;font-weight:600;fill:var(--ink)}
-.banner-text.main{font-size:19px}
+.banner-text.main{font-size:23px}
 .banner-text.mainstat{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--muted);letter-spacing:.04em}
 .sub-text{font-family:Inter,sans-serif;font-size:13px;font-weight:500;fill:var(--ink)}
 .ov-text{font-family:Inter,sans-serif;font-size:12.5px;font-weight:500;fill:var(--paper);letter-spacing:.01em}
@@ -538,7 +538,7 @@ Object.entries(MAIN).forEach(([k,m])=>{
   const g=S("g",{class:"pill on clickable","data-main-label":k});
   const rect=S("rect",{rx:4,fill:"#ffffff",stroke:"var(--hairline)","stroke-width":1});
   const bar=S("rect",{width:3,fill:m.tone});
-  const t=S("text",{x:m.anchor[0],y:m.anchor[1],"text-anchor":"middle",class:"banner-text main"});
+  const t=S("text",{x:m.anchor[0],y:m.anchor[1],"text-anchor":"middle",class:"banner-text main",style:"fill:"+m.tone});
   t.textContent=m.label;
   const st=S("text",{x:m.anchor[0],y:m.anchor[1]+20,"text-anchor":"middle",class:"banner-text mainstat"});
   st.textContent=m.stat;

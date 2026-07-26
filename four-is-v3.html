@@ -234,15 +234,15 @@ const MAIN={
   inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top issue",anchor:[260,415]},
   institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutional mistrust",stat:"36% top issue",anchor:[790,248]},
   immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top issue",anchor:[1095,612]},
-  iran:{kind:"tri",pts:"470,515 915,515 665,880",tone:"var(--iran)",label:"Iran War",stat:"1% standalone",anchor:[672,762]}
+  iran:{kind:"tri",pts:"410,480 895,512 645,877",tone:"var(--iran)",label:"Iran War",stat:"1% standalone",anchor:[672,762]}
 };
 const SUB=[
   {id:"housing",p:"inflation",cx:335,cy:310,r:135,label:"Housing",stat:"16%"},
   {id:"jobs",p:"inflation",cx:480,cy:380,r:120,label:"Economy & jobs",stat:"24%"},
-  {id:"tariffs",p:"inflation",cx:600,cy:515,r:98,label:"Tariffs",stat:""},
+  {id:"tariffs",p:"inflation",cx:620,cy:420,r:68,label:"Tariffs",stat:""},
   {id:"premiums",p:"inflation",cx:600,cy:265,r:80,label:"Healthcare premiums",stat:"21%"},
 
-  {id:"overreach",p:"institutions",cx:895,cy:305,r:75,label:"Executive overreach",stat:""},
+  {id:"overreach",p:"institutions",cx:820,cy:320,r:78,label:"Executive overreach",stat:""},
   {id:"corruption",p:"institutions",cx:840,cy:430,r:85,label:"Corruption",stat:"13%"},
   {id:"congress",p:"institutions",cx:720,cy:430,r:150,label:"US Congress",stat:""},
   {id:"scotus",p:"institutions",cx:668,cy:425,r:88,label:"Supreme Court",stat:""},
@@ -253,14 +253,14 @@ const SUB=[
   {id:"crime",p:"immigration",cx:1090,cy:400,r:75,label:"Crime",stat:"10%"},
   {id:"border",p:"immigration",cx:1160,cy:460,r:80,label:"Border",stat:""}
 ];
-const SUBLAB={housing:[335,272],jobs:[480,380],tariffs:[600,556],premiums:[578,318],
-  overreach:[895,308],corruption:[840,430],congress:[720,462],scotus:[668,392],
+const SUBLAB={housing:[335,272],jobs:[480,380],tariffs:[620,390],premiums:[578,318],
+  overreach:[820,288],corruption:[840,430],congress:[720,462],scotus:[668,392],
   epstein:[830,556],violence:[975,483],ice:[1065,555],crime:[1095,340],border:[1155,455]};
 
 /* inline pills sit inside their band; the rest use a short leader */
 const OV=[
   {id:"ov_infl_inst",members:["inflation","institutions"],clip:["institutions"],base:"inflation",
-   label:"Congress · Courts · Executive",anchor:[665,375],pill:[660,104],
+   label:"Congress · Courts · Executive",anchor:[720,460],pill:[660,104],
    focus:["tariffs","premiums","congress","scotus","overreach"]},
   {id:"ov_infl_iran",members:["inflation","iran"],clip:["inflation"],base:"iran",
    label:"Energy prices",anchor:[548,592],pill:[472,692],focus:["tariffs"]},

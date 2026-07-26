@@ -802,7 +802,7 @@ function exportPng(showAll){
       r.setAttribute("x",String(parseFloat(r.getAttribute("x")||0)-25));
       r.setAttribute("width",String(w+50));
     });
-    const css=`text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}.banner-text{fill:#2a2a2a}.banner-text.mainstat{fill:#6b6b6b}.sub-text{fill:#2a2a2a}.ov-text{fill:#fffbe2}.lead{stroke:#620d3c}`;
+    const css=`:root{--infl:#620d3c;--inst:#8f3f36;--imm:#c07028;--iran:#6b6b6b}text{font-family:Georgia,serif}.sub-text,.ov-text,.banner-text.mainstat{font-family:Helvetica,Arial,sans-serif}.banner-text.mainstat{fill:#6b6b6b}.sub-text{fill:#2a2a2a}.ov-text{fill:#fffbe2}.lead{stroke:#620d3c}`;
     const st=document.createElementNS(NS,"style");st.textContent=css;clone.insertBefore(st,clone.firstChild);
     clone.setAttribute("width",W);clone.setAttribute("height",SVG_H);
     const svgBlob=new Blob(['<?xml version="1.0"?>'+new XMLSerializer().serializeToString(clone)],{type:"image/svg+xml"});

@@ -627,10 +627,10 @@ async function fetchYouTubePodcasts(channelId) {
     for (const raw of items) {
       const { title, link, desc, date } = parseRssItem(raw);
       if (!title || !link) continue;
-      // Include Takshashila videos about US politics, Congress, midterms, or foreign policy
-      // Exclude pure tech/AI/economics episodes unrelated to the US political cycle
-      const isPolitics = /congress|midterm|senate|house|trump|election|democrat|republican|war powers|iran.*congress|congress.*iran|hegseth|tariff.*congress|2026.*race/i.test(title + ' ' + desc);
-      if (!isPolitics) continue;
+      // Must explicitly reference US Congress, midterms, or war powers — "trump"
+      // or "tariff" alone is NOT enough (catches energy/trade/blockchain episodes)
+      const isMidterm = /\b(us\s+congress|u\.s\.\s+congress|congressional|midterm|2026\s+(election|race|midterm|senate|house)|senate\s+(race|vote|majority|hearing)|house\s+(race|vote|majority|hearing)|war\s+powers|congress.*iran|iran.*congress|congress.*trump|trump.*congress|hegseth|redistrict|gerrymander|senate\s+bill|house\s+bill)\b/i.test(title + ' ' + desc);
+      if (!isMidterm) continue;
 
       // Use GROQ to extract accurate host/guest names from the description
       const names = await extractNamesWithGroq(title, desc);
@@ -782,6 +782,10 @@ async function main() {
   }
   const existingByUrl = new Map((existing.posts || []).map(p => [p.url, p]));
 
+  // Permanent blocklist — URLs in this set are NEVER re-added even if fetched.
+  // Add a URL here (or to the blocklist array in analysis.json) to ban it forever.
+  const blocklist = new Set(existing.blocklist || []);
+
   const seedUrls = new Set(SEED_POSTS.map(p => p.url));
   const seenUrls = new Set(seedUrls);
   // Start with seeds (always preserved)
@@ -803,7 +807,7 @@ async function main() {
     const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.groqCheck || false);
     console.log(`[fetch-analysis] ${src.source}: ${posts.length} matching items`);
     for (const post of posts) {
-      if (seenUrls.has(post.url)) continue;
+      if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
       seenUrls.add(post.url);
       // Preserve any manually-set fields from the existing file
       const prev = existingByUrl.get(post.url);
@@ -815,7 +819,7 @@ async function main() {
   const YT_CHANNEL_ID = 'UC5AVrL4ryKhR1Vi0HxdgP2Q'; // @TakshashilaInst
   const ytPosts = await fetchYouTubePodcasts(YT_CHANNEL_ID);
   for (const post of ytPosts) {
-    if (seenUrls.has(post.url)) continue;
+    if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
     seenUrls.add(post.url);
     allPosts.push(post);
   }
@@ -823,7 +827,7 @@ async function main() {
   // Scrape Takshashila op-eds (United States tagged, GROQ-filtered for Congress relevance)
   const opedPosts = await scrapeTakshashilaOpEds(seenUrls);
   for (const post of opedPosts) {
-    if (seenUrls.has(post.url)) continue;
+    if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
     seenUrls.add(post.url);
     allPosts.push(post);
   }
@@ -832,7 +836,7 @@ async function main() {
   for (const pg of AUTHOR_PAGES) {
     const posts = await scrapeAuthorPage(pg.url, pg.author, pg.source);
     for (const post of posts) {
-      if (seenUrls.has(post.url)) continue;
+      if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
       seenUrls.add(post.url);
       allPosts.push(post);
     }
@@ -850,6 +854,7 @@ async function main() {
       count: capped.length,
       sources: ['DC Dossier (Substack)', 'All Things Policy (Takshashila)', 'Takshashila Institution Publications', 'Takshashila Op-Eds (NDTV, The Hindu, Times of India, Firstpost)'],
     },
+    blocklist: [...blocklist],
     posts: capped,
   };
 

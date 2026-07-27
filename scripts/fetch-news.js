@@ -276,11 +276,39 @@ const FEEDS = [
 
 ];
 
-// ── KEYWORD FILTERS ────────────────────────────────────────────────────────────
-const FILTER_KEYWORDS = [
-  'midterm', 'congress', 'senate', 'house', 'election 2026',
-  'primary', 'redistrict', 'retirement', 'caucus', 'ballot',
-];
+// ── RELEVANCE CHECK ──────────────────────────────────────────────────────────
+// Word-boundary regex so 'house' does NOT match 'greenhouse'/'housing market',
+// 'primary' does NOT match 'primary school/care', etc.
+const RELEVANCE_RE = new RegExp([
+  // Unambiguous midterm/congressional terms
+  '\\b(midterm|congressional|redistrict|gerrymander|filibuster|cloture|caucus)\\b',
+  '2026\\s+election', 'election\\s+2026',
+  '\\b(119th|120th)\\s+congress\\b',
+  // "The House" / "The Senate" / "US House" — explicit institutional references
+  '\\bthe\\s+(house|senate)\\b',
+  'u\\.s\\.\\s+(house|senate|congress)\\b',
+  // House/Senate + action/political qualifier — blocks real-estate/school false hits
+  '\\bhouse\\s+(of\\s+rep|race|seat|bill|vote|district|speaker|majority|minority|floor|republican|democrat|gop|pass|fail|approv|reject|primary)',
+  '\\bsenate\\s+(race|seat|bill|vote|majority|republican|democrat|gop|pass|fail|approv|runoff|hearing|floor)',
+  // Congress + action verb
+  '\\bcongress\\s+(pass|fail|vote|approv|block|reject|debate|overrid|introduc)',
+  // Unambiguous ballot/primary phrases
+  '\\bballot\\s+(measure|initiative|access|box)',
+  '\\bprimary\\s+(election|race|result|runoff)',
+].join('|'), 'i');
+
+// Patterns that are reliable false positives even if they match RELEVANCE_RE
+const FALSE_POSITIVE_RE = /\bhousing\s+(market|price|crisis|cost|bubble|data)\b|\bhouse\s+(fire|price|market|sale|hunt|warm|clean|plant|music|party)\b|\bprimary\s+(school|care|colo[ur]|source|sector)\b|\b(real\s+estate|property\s+market|home\s+price)\b/i;
+
+// Reject social-media/aggregator noise: excessive symbols, hashtag-spam, RT
+const NOISE_TITLE_RE = /^(BREAKING[\s:!]|WATCH[\s:!]|READ[\s:!]|THREAD[\s:!]|RT\s+@)|#{2,}|\*{3,}|[★✦✩☆♦]{2,}/;
+
+function isRelevant(title, description) {
+  const text = `${title} ${description}`;
+  if (NOISE_TITLE_RE.test(title))     return false;
+  if (FALSE_POSITIVE_RE.test(text))   return false;
+  return RELEVANCE_RE.test(text);
+}
 
 // ── AUTO-TAGGING ───────────────────────────────────────────────────────────────
 const TAG_RULES = [
@@ -409,9 +437,8 @@ async function main() {
     // Skip already-seen URLs
     if (existingUrls.has(item.url)) continue;
 
-    // Filter by relevance keywords
-    const relevant = containsKeyword(`${item.title} ${item.description}`, FILTER_KEYWORDS);
-    if (!relevant) continue;
+    // Filter by relevance
+    if (!isRelevant(item.title, item.description)) continue;
 
     // Auto-tag
     const tags = [...new Set([...autoTag(item.title, item.description), ...(item.forceTags || [])])];

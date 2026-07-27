@@ -787,6 +787,17 @@ async function main() {
   // Start with seeds (always preserved)
   const allPosts = [...SEED_POSTS];
 
+  // Preserve any manually-pinned posts (pinned: true in analysis.json).
+  // These survive every automated run — add "pinned": true to any post you
+  // want to keep permanently without it being a SEED_POST in this script.
+  const pinnedPosts = (existing.posts || []).filter(p => p.pinned && !seedUrls.has(p.url));
+  for (const p of pinnedPosts) {
+    if (seenUrls.has(p.url)) continue;
+    seenUrls.add(p.url);
+    allPosts.push(p);
+  }
+  if (pinnedPosts.length) console.log(`[fetch-analysis] Preserved ${pinnedPosts.length} pinned manual post(s).`);
+
   // Fetch RSS sources
   for (const src of RSS_SOURCES) {
     const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.groqCheck || false);

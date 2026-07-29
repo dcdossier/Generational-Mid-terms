@@ -791,16 +791,17 @@ async function main() {
   // Start with seeds (always preserved)
   const allPosts = [...SEED_POSTS];
 
-  // Preserve any manually-pinned posts (pinned: true in analysis.json).
-  // These survive every automated run — add "pinned": true to any post you
-  // want to keep permanently without it being a SEED_POST in this script.
-  const pinnedPosts = (existing.posts || []).filter(p => p.pinned && !seedUrls.has(p.url));
-  for (const p of pinnedPosts) {
-    if (seenUrls.has(p.url)) continue;
+  // Preserve ALL existing posts (minus seeds already added and blocklisted URLs).
+  // This means if Substack/YouTube RSS is unreachable in CI, previously-fetched
+  // posts are NOT lost — they carry forward until explicitly blocklisted.
+  let preserved = 0;
+  for (const p of (existing.posts || [])) {
+    if (seenUrls.has(p.url) || blocklist.has(p.url)) continue;
     seenUrls.add(p.url);
     allPosts.push(p);
+    preserved++;
   }
-  if (pinnedPosts.length) console.log(`[fetch-analysis] Preserved ${pinnedPosts.length} pinned manual post(s).`);
+  if (preserved) console.log(`[fetch-analysis] Carried forward ${preserved} existing post(s) from previous run.`);
 
   // Fetch RSS sources
   for (const src of RSS_SOURCES) {

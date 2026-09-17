@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-09-17T09:08:54.115Z",
+    "last_updated": "2026-09-17T16:08:57.273Z",
     "election_date": "2026-11-03",
     "forecaster_consensus": {
       "last_updated": "2026-05-17",
@@ -987,10 +987,10 @@
   },
   "approval": {
     "trump": {
-      "approve": 38.4,
-      "disapprove": 58.5,
+      "approve": 38.3,
+      "disapprove": 58.7,
       "unsure": 3,
-      "trend": 0.1,
+      "trend": 0,
       "history": [
         {
           "month": "Jan 2025",
@@ -1098,12 +1098,12 @@
         },
         {
           "month": "Sep 2026",
-          "approve": 38.4,
-          "disapprove": 58.5,
-          "net": -20.1
+          "approve": 38.3,
+          "disapprove": 58.7,
+          "net": -20.4
         }
       ],
-      "net": -20.1,
+      "net": -20.4,
       "source": "Nate Silver Bulletin"
     },
     "congress": {
@@ -1159,10 +1159,10 @@
   },
   "generic_ballot": {
     "democrat": 48.2,
-    "republican": 41.8,
+    "republican": 41.7,
     "trend_d": 0,
-    "trend_r": 0,
-    "undecided": 10,
+    "trend_r": -0.1,
+    "undecided": 10.1,
     "history": [
       {
         "month": "Jan 2025",
@@ -1267,7 +1267,7 @@
       {
         "month": "Sep 2026",
         "democrat": 48.2,
-        "republican": 41.8
+        "republican": 41.7
       }
     ],
     "pollsters": [
@@ -7249,10 +7249,10 @@
       "updated": "2026-09-17"
     },
     "MI": {
-      "DEM": 45.5,
-      "REP": 43.9,
-      "margin": 1.6,
-      "n_polls": 24,
+      "DEM": 45.8,
+      "REP": 44,
+      "margin": 1.8,
+      "n_polls": 26,
       "updated": "2026-09-17"
     },
     "KY": {
@@ -7278,9 +7278,9 @@
     },
     "TX": {
       "DEM": 47.5,
-      "REP": 44.4,
-      "margin": 3.1,
-      "n_polls": 20,
+      "REP": 44.5,
+      "margin": 3,
+      "n_polls": 22,
       "updated": "2026-09-17"
     },
     "WA": {
@@ -7305,10 +7305,10 @@
       "updated": "2026-09-17"
     },
     "PA": {
-      "DEM": 45.2,
-      "REP": 47.9,
-      "margin": -2.7,
-      "n_polls": 2,
+      "DEM": 44.2,
+      "REP": 48.8,
+      "margin": -4.6,
+      "n_polls": 3,
       "updated": "2026-09-17"
     },
     "FL": {
@@ -7326,10 +7326,10 @@
       "updated": "2026-09-17"
     },
     "AK": {
-      "DEM": 30.7,
-      "REP": 48.4,
-      "margin": -17.7,
-      "n_polls": 8,
+      "DEM": 31.7,
+      "REP": 47.5,
+      "margin": -15.8,
+      "n_polls": 13,
       "updated": "2026-09-17"
     },
     "MA": {

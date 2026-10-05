@@ -19,8 +19,11 @@
 <meta name="twitter:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/seat-panel.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="assets/js/seat-ids.js"></script>
+<script src="assets/js/seat-panel.js"></script>
 <style>
 :root {
   --bg: #ffffff;
@@ -619,12 +622,18 @@ body {
 }
 .sp-link:hover { text-decoration: underline; }
 .sp-links-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+/* Decorative dimming only -- pointer-events stays "none" even when open,
+   so a click elsewhere (e.g. a different seat on the map) reaches its own
+   handler instead of being swallowed by a full-viewport scrim. Click-
+   outside-closes is handled in JS via a document-level listener, same
+   pattern as assets/js/seat-panel.js's own overlay. */
 .india-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,.2);
   z-index: 299;
   display: none;
+  pointer-events: none;
 }
 .india-overlay.open { display: block; }
 
@@ -653,6 +662,8 @@ body {
   vertical-align: middle;
 }
 .roster-table tr:hover td { background: var(--bg2); }
+.roster-table tr.sp-row-selected td { background: var(--bg3); }
+.roster-table tr[tabindex]:focus-visible { outline: 2px solid var(--navy); outline-offset: -2px; }
 .roster-table tr:last-child td { border-bottom: none; }
 .roster-name { font: 600 12.5px var(--sans); color: var(--navy); }
 .roster-tier {
@@ -1582,7 +1593,7 @@ body {
   </div>
   <div class="sidepanel-body" id="sidepanel-body"></div>
 </div>
-<div class="india-overlay" id="india-overlay" onclick="closeSidePanel()"></div>
+<div class="india-overlay" id="india-overlay"></div>
 
 <!-- MAP TOOLTIP -->
 <div class="map-tooltip" id="map-tooltip"></div>
@@ -1661,12 +1672,24 @@ const MEMBERS = [
 ];
 
 // ── BUILD ROSTER TABLE ────────────────────────────────────────────────────
+let _indiaRosterRowEl = null;
+
 function buildRoster() {
   const tbody = document.getElementById('roster-tbody');
   MEMBERS.forEach(m => {
     const tr = document.createElement('tr');
     tr.style.cursor = 'pointer';
-    tr.onclick = () => openSidePanel(m.id);
+    tr.tabIndex = 0;
+    tr.onclick = (e) => {
+      e.stopPropagation(); // don't let the "click outside closes" listener fire for this same click
+      if (_indiaRosterRowEl) _indiaRosterRowEl.classList.remove('sp-row-selected');
+      _indiaRosterRowEl = tr;
+      tr.classList.add('sp-row-selected');
+      openSidePanel(m.id);
+    };
+    tr.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tr.click(); }
+    };
     tr.innerHTML = `
       <td style="color:var(--text3);font-size:11px">${m.id}</td>
       <td><div class="roster-name">${m.name}</div></td>
@@ -1683,9 +1706,21 @@ function buildRoster() {
 }
 
 // ── SIDE PANEL ─────────────────────────────────────────────────────────────
+// Canonical seat ID for a MEMBERS entry, per its actual chamber (most of
+// the roster is House, but it includes senators too).
+function memberSeatId(m) {
+  return m.chamber === 'Senate' ? toSeatId('senate', m.state) : toSeatId('house', m.state + '_' + m.district);
+}
+
+let _sidepanelLastFocused = null;
+
 function openSidePanel(memberId) {
   const m = MEMBERS.find(x => x.id === memberId);
   if (!m) return;
+  if (window.SeatPanel) window.SeatPanel.close(); // only one detail panel visible at a time
+  if (!document.getElementById('india-sidepanel').classList.contains('open')) {
+    _sidepanelLastFocused = document.activeElement;
+  }
   const body = document.getElementById('sidepanel-body');
   const tierColor = TIER_COLORS[m.tier];
   body.innerHTML = `
@@ -1713,6 +1748,9 @@ function openSidePanel(memberId) {
     </div>
     <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Position data sourced from member office newsrooms and India -interest.xlsx research roster (119th Congress). All positions verified against official statements and committee records.</p>
 
+    <div class="sp-section-label" id="sp-brief-label" style="margin-top:20px;display:none">Seat Brief</div>
+    <div id="sp-embedded-brief"></div>
+
     <div class="sp-section-label" style="margin-top:20px">Latest News</div>
     <div id="sp-news-list" class="sp-news-list">
       <div id="sp-news-loading" style="font:400 14px var(--sans);color:var(--text3);padding:11px 0">Loading news\u2026</div>
@@ -1721,12 +1759,43 @@ function openSidePanel(memberId) {
   document.getElementById('india-sidepanel').classList.add('open');
   document.getElementById('india-overlay').classList.add('open');
   _loadAndRenderSidepanelNews(m.name);
+
+  // Embed that member's seat brief (India block + 5 sections + Key Issues)
+  // using SeatPanel's own renderer -- no duplicated rendering code here.
+  const seatId = memberSeatId(m);
+  if (window.SeatPanel && seatId) {
+    window.SeatPanel.renderBriefInto(document.getElementById('sp-embedded-brief'), seatId, { mode: 'india' })
+      .then(found => { if (found) document.getElementById('sp-brief-label').style.display = ''; });
+  }
 }
 
 function closeSidePanel() {
   document.getElementById('india-sidepanel').classList.remove('open');
   document.getElementById('india-overlay').classList.remove('open');
+  if (_indiaRosterRowEl) { _indiaRosterRowEl.classList.remove('sp-row-selected'); _indiaRosterRowEl = null; }
+  const toFocus = _sidepanelLastFocused;
+  _sidepanelLastFocused = null;
+  if (toFocus && document.contains(toFocus) && typeof toFocus.focus === 'function') toFocus.focus();
 }
+
+// Bubble-phase click-outside-closes for the member side panel (same pattern
+// as seat-panel.js's own overlay -- see the .india-overlay CSS comment).
+document.addEventListener('click', function (e) {
+  const panel = document.getElementById('india-sidepanel');
+  if (!panel.classList.contains('open')) return;
+  if (panel.contains(e.target)) return;
+  closeSidePanel();
+});
+
+// Only one detail panel visible at a time: close the member side panel
+// whenever SeatPanel opens (e.g. a seat/district map click).
+window.addEventListener('seatpanel:open', closeSidePanel);
+
+// Esc closes the member side panel (pre-existing gap -- this panel never had it).
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('india-sidepanel').classList.contains('open')) closeSidePanel();
+});
 
 // ── MAP SETUP ───────────────────────────────────────────────────────────────
 const tooltip = document.getElementById('map-tooltip');
@@ -1977,6 +2046,26 @@ function setInfluenceView(view, btn) {
 }
 
 // ── INTEREST HOUSE MAP ──────────────────────────────────────────────────────
+// ── SEAT PANEL INTEGRATION (India-Relevant Races maps) ──────────────────────
+// Map clicks are seat-centric and always go through SeatPanel in "india"
+// mode, regardless of whether the district/state has a tracked roster
+// member -- that's how AZ-01 and CA-40 (neither a tracked member's seat)
+// become clickable. Member-centric clicks (roster rows, presence-map pins)
+// keep using openSidePanel, unchanged.
+let _indiaSeatPathEl = null;
+let _indiaSeatPathDefaultWidth = '0.4px';
+
+function indiaHighlightSeat(pathEl, defaultWidth) {
+  if (_indiaSeatPathEl) {
+    d3.select(_indiaSeatPathEl).style('stroke', '#fff').style('stroke-width', _indiaSeatPathDefaultWidth);
+  }
+  _indiaSeatPathEl = pathEl || null;
+  _indiaSeatPathDefaultWidth = defaultWidth || '0.4px';
+  if (_indiaSeatPathEl) d3.select(_indiaSeatPathEl).style('stroke', '#111').style('stroke-width', '2.5px');
+}
+
+window.addEventListener('seatpanel:close', () => indiaHighlightSeat(null));
+
 let _interestHouseSel = null;
 let _interestHouseTier = 'all';
 
@@ -1995,6 +2084,7 @@ function loadHouseMap() {
       .data(gj.features)
       .join('path')
       .attr('d', d => pathGen(d) || '')
+      .attr('data-seat-id', d => toSeatId('house', d.properties.state + '_' + d.properties.district))
       .style('fill', d => {
         const key = d.properties.state + '_' + d.properties.district;
         const m = houseIdx[key];
@@ -2013,9 +2103,11 @@ function loadHouseMap() {
       })
       .on('mouseleave', () => { tooltip.style.display = 'none'; })
       .on('click', function(event, d) {
-        const key = d.properties.state + '_' + d.properties.district;
-        const m = houseIdx[key];
-        if (m) openSidePanel(m.id);
+        event.stopPropagation();
+        const id = toSeatId('house', d.properties.state + '_' + d.properties.district);
+        if (!id) return;
+        indiaHighlightSeat(this, '0.4px');
+        window.SeatPanel.open(id, { mode: 'india' });
       });
   });
 }
@@ -2067,6 +2159,7 @@ function loadSenateMap() {
         .data(gj.features)
         .join('path')
         .attr('d', d => pathGen(d) || '')
+        .attr('data-seat-id', d => toSeatId('senate', d.properties.NAME))
         .style('fill', d => {
           const members = senateIdx[d.properties.NAME];
           if (!members || !members.length) return '#d1d5db';
@@ -2088,8 +2181,11 @@ function loadSenateMap() {
         })
         .on('mouseleave', () => { tooltip.style.display = 'none'; })
         .on('click', function(event, d) {
-          const members = senateIdx[d.properties.NAME];
-          if (members && members.length) openSidePanel(members[0].id);
+          event.stopPropagation();
+          const id = toSeatId('senate', d.properties.NAME);
+          if (!id) return;
+          indiaHighlightSeat(this, '0.8px');
+          window.SeatPanel.open(id, { mode: 'india' });
         });
     })
     .catch(err => {
@@ -2180,6 +2276,7 @@ function loadPresenceMap() {
       })
       .on('mouseleave', () => { tooltip.style.display = 'none'; })
       .on('click', function(event, d) {
+        event.stopPropagation();
         const key = d.properties.state + '_' + d.properties.district;
         const ia = iaIdx[key];
         if (!ia) return;
@@ -2221,6 +2318,7 @@ function loadPresenceMap() {
       })
       .on('mouseleave', () => { tooltip.style.display = 'none'; })
       .on('click', function(event, d) {
+        event.stopPropagation();
         const key = d.properties.state + '_' + d.properties.district;
         const ia = iaIdx[key];
         if (!ia) return;

@@ -3604,9 +3604,8 @@ function renderBallotStats() {
 
 function renderPollsterTable(pollsters) {
   const tbody = document.getElementById('gb-pollster-tbody');
-  // Filter out fetch-script artefacts: names containing '/' or values out of realistic range
+  // Drop values outside a realistic range (names can contain '/', e.g. "YouGov/The Economist")
   const clean = pollsters.filter(p =>
-    !p.name.includes('/') &&
     p.democrat >= 30 && p.democrat <= 65 &&
     p.republican >= 30 && p.republican <= 65
   );

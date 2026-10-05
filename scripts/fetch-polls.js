@@ -5,12 +5,12 @@
  * fetch-polls.js — comprehensive live data updater
  *
  * Sources (in priority order):
- *  1. NYT polling CSVs       → generic_ballot, state_polls   (structured CSV)
+ *  1. NYT polling CSVs       → generic_ballot, race_polls    (House/Senate/Governor CSVs)
  *  2. BLS public API         → cpi.history                   (structured JSON)
  *  3. Nate Silver Bulletin   → approval.trump                (Datawrapper CSV direct API)
  *     Chart: datawrapper.dwcdn.net/kSCt4/ — fetches latest version, downloads CSV
  *  4. Gallup                 → congress_approval             (HTML table; AI backup)
- *  5. Ballotpedia            → retirements totals/split      (list tables; Wikipedia fallback)
+ *  5. Wikipedia API          → retirements totals/split      (Ballotpedia fallback)
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
  * Env vars (both optional — every source has a non-AI path; see ai.js):
@@ -124,112 +124,254 @@ async function safeFetch(url, opts = {}) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 1. NYT POLLING CSV → generic_ballot + state_polls
+// 1. NYT POLLING CSVs → generic_ballot (+ pollster table) and race_polls
 // ─────────────────────────────────────────────────────────────────────────────
+//
+// One CSV row is one candidate's share in one question of one poll. A poll can
+// ask several questions about the same race (likely vs registered voters,
+// ranked-choice rounds); pickQuestion() keeps one per poll per race.
 
-async function fetchNYTPolls(data) {
-  console.log('[1/6] NYT Polling CSVs…');
-  const polls = {};
-  const CSVS = [
-    'https://www.nytimes.com/newsgraphics/polls/house.csv',
-    'https://www.nytimes.com/newsgraphics/polls/senate.csv',
-  ];
+const NYT_CSVS = {
+  House:    'https://www.nytimes.com/newsgraphics/polls/house.csv',
+  Senate:   'https://www.nytimes.com/newsgraphics/polls/senate.csv',
+  Governor: 'https://www.nytimes.com/newsgraphics/polls/governor.csv',
+};
+const NYT_SOURCE = 'New York Times polling averages data (nytimes.com/newsgraphics/polls)';
+const AT_LARGE_STATES = new Set(['AK', 'DE', 'ND', 'SD', 'VT', 'WY']);
+const POPULATION_RANK = { lv: 0, rv: 1, v: 2 };   // 'a' (all adults) is not used
+const MAJOR_PARTIES = new Set(['DEM', 'REP']);
+const DAY_MS = 24 * 60 * 60 * 1000;
 
-  for (const csvUrl of CSVS) {
+// "9/28/26" → Date at UTC midnight
+function parseNytDate(s) {
+  const p = String(s || '').split('/');
+  if (p.length !== 3) return null;
+  const d = new Date(Date.UTC(2000 + parseInt(p[2], 10), parseInt(p[0], 10) - 1, parseInt(p[1], 10)));
+  return isNaN(d) ? null : d;
+}
+const isoDay = d => d.toISOString().slice(0, 10);
+
+// Canonical seat IDs: "AZ-01", "AK-AL", "Senate-TX", "Gov-TX"
+function canonicalSeatId(office, state, seatNumber) {
+  if (office === 'Senate') return `Senate-${state}`;
+  if (office === 'Governor') return `Gov-${state}`;
+  if (AT_LARGE_STATES.has(state)) return `${state}-AL`;
+  const n = parseInt(seatNumber, 10);
+  return Number.isFinite(n) && n > 0 ? `${state}-${String(n).padStart(2, '0')}` : null;
+}
+
+// Reads the three CSVs into questions: { office, raceKey, pollId, pollster, …, answers: [] }
+async function loadNytQuestions() {
+  const questions = new Map();
+  for (const [office, url] of Object.entries(NYT_CSVS)) {
     let text;
-    try {
-      const res = await safeFetch(csvUrl);
-      text = await res.text();
-    } catch (err) {
-      warn(`  [NYT] ${csvUrl.split('/').pop()} fetch failed: ${err.message}`);
-      continue;
-    }
-
+    try { text = await (await safeFetch(url)).text(); }
+    catch (err) { warn(`  [NYT] ${office} CSV fetch failed: ${err.message}`); continue; }
     const { idx, rows } = parseCSV(text);
-    const cutoff = Date.now() - 60 * 24 * 60 * 60 * 1000; // 60 days
-
     for (const line of rows) {
       const f = parseCSVRow(line);
       const get = k => (f[idx[k]] || '').replace(/"/g, '').trim();
-
-      if (get('stage') !== 'general') continue;
-      if (!['rv', 'lv', 'v'].includes(get('population'))) continue;
-      if (!['DEM', 'REP'].includes(get('party'))) continue;
-
-      const parts = get('end_date').split('/');
-      if (parts.length !== 3) continue;
-      const date = new Date(2000 + parseInt(parts[2], 10), parseInt(parts[0], 10) - 1, parseInt(parts[1], 10));
-      if (isNaN(date.getTime()) || date.getTime() < cutoff) continue;
-
-      const key = get('poll_id') + '_' + get('question_id');
-      if (!polls[key]) {
-        polls[key] = {
-          state:   get('state'),
-          seatNum: get('seat_number'),
-          partisan:get('partisan'),
-          n:       parseInt(get('sample_size'), 10) || 1000,
-          date,
-          DEM: null, REP: null,
-        };
+      if (get('cycle') !== '2026' || get('stage') !== 'general') continue;
+      if (get('hypothetical') === 'true' || !(get('population') in POPULATION_RANK)) continue;
+      const end = parseNytDate(get('end_date'));
+      if (!end) continue;
+      const qKey = `${office}|${get('question_id')}|${get('ranked_choice_round')}`;
+      if (!questions.has(qKey)) {
+        questions.set(qKey, {
+          office,
+          state: get('state'),
+          seatNumber: get('seat_number'),
+          raceKey: `${office}|${get('race_id')}`,
+          pollId: get('poll_id'),
+          pollster: get('display_name') || get('pollster'),
+          sponsors: get('sponsors'),
+          start: parseNytDate(get('start_date')),
+          end,
+          sample: parseInt(get('sample_size'), 10) || null,
+          population: get('population'),
+          partisan: get('partisan'),
+          internal: get('internal') === 'true',
+          rcvRound: parseInt(get('ranked_choice_round'), 10) || 0,
+          answers: [],
+        });
       }
-      polls[key][get('party')] = parseFloat(get('pct'));
+      const pct = parseFloat(get('pct'));
+      if (Number.isFinite(pct)) questions.get(qKey).answers.push({ name: get('candidate_name') || get('answer'), party: get('party'), pct });
     }
   }
+  return [...questions.values()];
+}
 
-  const complete = Object.values(polls).filter(p => p.DEM !== null && p.REP !== null);
-  if (!complete.length) { warn('  [NYT] No complete polls found'); return false; }
+// One question per poll per race: likely voters first, then registered, then
+// all voters; first-round results where a poll reports ranked-choice rounds.
+function pickQuestion(qs) {
+  return qs.slice().sort((a, b) =>
+    (POPULATION_RANK[a.population] - POPULATION_RANK[b.population]) ||
+    ((a.rcvRound || 1) - (b.rcvRound || 1)) ||
+    (b.answers.length - a.answers.length))[0];
+}
 
-  // ── National generic ballot ───────────────────────────────────────────────
-  const national = complete.filter(p => p.state === 'US' && p.seatNum === '' && !p.partisan);
-  if (national.length >= 3) {
-    let tw = 0, wd = 0, wr = 0;
-    national.forEach(p => { const w = Math.min(p.n, 3000); tw += w; wd += p.DEM * w; wr += p.REP * w; });
-    const avgD = parseFloat((wd / tw).toFixed(1));
-    const avgR = parseFloat((wr / tw).toFixed(1));
-    const month = monthLabel();
+function toPollEntry(q) {
+  const byPct = q.answers.slice().sort((a, b) => b.pct - a.pct);
+  const top = party => byPct.find(a => a.party === party) || null;
+  const dem = top('DEM'), rep = top('REP');
+  return {
+    pollster: q.pollster,
+    sponsors: q.sponsors || null,
+    start: q.start ? isoDay(q.start) : null,
+    end: isoDay(q.end),
+    sample: q.sample,
+    population: q.population,
+    partisan: q.partisan || null,
+    dem: dem ? { name: dem.name, pct: dem.pct } : null,
+    rep: rep ? { name: rep.name, pct: rep.pct } : null,
+    others: byPct.filter(a => a !== dem && a !== rep && a.party !== 'NONE').map(a => ({ name: a.name, party: a.party, pct: a.pct })),
+  };
+}
 
+// Nominee surnames per canonical seat ID from assets/briefs.json, used to drop
+// polls of matchups that won't be on the ballot (pre-primary or hypothetical
+// pairings, which the CSV doesn't always flag). Seats without a brief keep all polls.
+const fold = s => String(s || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+function surnameKey(name) {
+  const words = String(name || '').replace(/\([^)]*\)/g, ' ').trim().split(/\s+/).filter(w => !/^(jr|sr|ii|iii|iv)\.?$/i.test(w));
+  return fold(words[words.length - 1]);
+}
+function loadNominees() {
+  try {
+    const briefs = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../assets/briefs.json'), 'utf8'));
+    const out = {};
+    for (const [id, b] of Object.entries(briefs)) {
+      const names = [b.dem, b.rep].filter(Boolean).join(' / ').replace(/\([^)]*\)/g, ' ').split(/[\/;,]/).map(s => s.trim()).filter(Boolean);
+      if (names.length) out[id] = new Set(names.map(surnameKey));
+    }
+    return out;
+  } catch (err) {
+    warn(`  [NYT] Could not read assets/briefs.json for nominee filter: ${err.message}`);
+    return {};
+  }
+}
+function isNomineeMatchup(entry, nominees) {
+  const names = [entry.dem, entry.rep].filter(Boolean).map(c => c.name);
+  if (names.some(n => /\bgeneric\b/i.test(n))) return false;
+  if (!nominees) return true;
+  return names.length > 0 && names.every(n => nominees.has(surnameKey(n)));
+}
+
+// Sample-weighted (capped at 3,000) D and R average of the given poll entries
+function weightedAverage(entries) {
+  let tw = 0, wd = 0, wr = 0;
+  for (const p of entries) {
+    const w = Math.min(p.sample || 1000, 3000);
+    tw += w; wd += p.dem.pct * w; wr += p.rep.pct * w;
+  }
+  if (!tw) return null;
+  const dem = +(wd / tw).toFixed(1), rep = +(wr / tw).toFixed(1);
+  return { dem, rep, margin: +(dem - rep).toFixed(1), n_polls: entries.length };
+}
+
+async function fetchNYTPolls(data) {
+  console.log('[1/6] NYT Polling CSVs…');
+  const fetched = new Date().toISOString();
+  const questions = await loadNytQuestions();
+  if (!questions.length) { warn('  [NYT] No usable poll questions in the CSVs'); return false; }
+
+  // Group: race → poll → questions, then keep one question per poll
+  const races = new Map();
+  for (const q of questions) {
+    if (!races.has(q.raceKey)) races.set(q.raceKey, new Map());
+    const polls = races.get(q.raceKey);
+    if (!polls.has(q.pollId)) polls.set(q.pollId, []);
+    polls.get(q.pollId).push(q);
+  }
+
+  // ── National generic ballot (House CSV, state "US") ────────────────────────
+  const national = [];
+  const racePolls = {};
+  const nominees = loadNominees();
+  let droppedMatchups = 0;
+  const now = Date.now();
+  for (const polls of races.values()) {
+    const picked = [...polls.values()].map(pickQuestion).sort((a, b) => b.end - a.end);
+    const first = picked[0];
+    if (first.office === 'House' && first.state === 'US') { national.push(...picked); continue; }
+
+    const id = canonicalSeatId(first.office, first.state, first.seatNumber);
+    if (!id) continue;
+    const all = picked.map(toPollEntry);
+    const entries = all.filter(e => isNomineeMatchup(e, nominees[id]));
+    droppedMatchups += all.length - entries.length;
+    if (!entries.length) continue;
+    const recent = entries.filter(p => p.dem && p.rep && !p.partisan && now - Date.parse(p.end) <= 30 * DAY_MS);
+    const race = {
+      office: first.office,
+      state: first.state,
+      source: NYT_SOURCE,
+      as_of: entries[0].end,
+      fetched,
+      n_polls: entries.length,
+      latest: entries.slice(0, 5),
+      average_30d: recent.length ? { ...weightedAverage(recent), window_days: 30 } : null,
+    };
+    // Two races can share a seat ID (e.g. a special election); keep the one polled most recently
+    if (!racePolls[id] || racePolls[id].as_of < race.as_of) racePolls[id] = race;
+  }
+
+  const nationalEntries = national
+    .map(toPollEntry)
+    .filter(p => p.dem && p.rep && !p.partisan)
+    .sort((a, b) => b.end.localeCompare(a.end));
+  const last60 = nationalEntries.filter(p => now - Date.parse(p.end) <= 60 * DAY_MS);
+  if (last60.length >= 3) {
+    const avg = weightedAverage(last60);
     const prevD = data.generic_ballot.democrat;
     const prevR = data.generic_ballot.republican;
-    data.generic_ballot.democrat   = avgD;
-    data.generic_ballot.republican = avgR;
-    data.generic_ballot.undecided  = parseFloat((100 - avgD - avgR).toFixed(1));
-    if (prevD != null) data.generic_ballot.trend_d = parseFloat((avgD - prevD).toFixed(1));
-    if (prevR != null) data.generic_ballot.trend_r = parseFloat((avgR - prevR).toFixed(1));
+    data.generic_ballot.democrat   = avg.dem;
+    data.generic_ballot.republican = avg.rep;
+    data.generic_ballot.undecided  = +(100 - avg.dem - avg.rep).toFixed(1);
+    if (prevD != null) data.generic_ballot.trend_d = +(avg.dem - prevD).toFixed(1);
+    if (prevR != null) data.generic_ballot.trend_r = +(avg.rep - prevR).toFixed(1);
+    upsertHistory(data.generic_ballot.history, monthLabel(new Date(nationalEntries[0].end)),
+      { democrat: avg.dem, republican: avg.rep }, { democrat: avg.dem, republican: avg.rep });
 
-    upsertHistory(data.generic_ballot.history, month,
-      { democrat: avgD, republican: avgR },
-      { democrat: avgD, republican: avgR });
-
-    console.log(`  Generic ballot: D=${avgD}% R=${avgR}% (${national.length} polls, 60-day weighted avg)`);
+    // Pollster table: the 10 most recent national polls, latest one per pollster
+    const seenPollsters = new Set();
+    data.generic_ballot.pollsters = nationalEntries.filter(p => {
+      if (seenPollsters.has(p.pollster)) return false;
+      seenPollsters.add(p.pollster);
+      return true;
+    }).slice(0, 10).map(p => ({
+      name: p.sponsors ? `${p.pollster} (${p.sponsors})` : p.pollster,
+      democrat: p.dem.pct,
+      republican: p.rep.pct,
+      date: new Date(p.end).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }),
+      start: p.start,
+      end: p.end,
+      sample: p.sample,
+      population: p.population,
+    }));
+    data.generic_ballot.source  = NYT_SOURCE;
+    data.generic_ballot.as_of   = nationalEntries[0].end;
+    data.generic_ballot.fetched = fetched;
+    console.log(`  Generic ballot: D=${avg.dem}% R=${avg.rep}% (${last60.length} polls, 60-day weighted avg); pollster table: ${data.generic_ballot.pollsters.length} pollsters`);
+  } else {
+    warn(`  [NYT] Only ${last60.length} national polls in 60 days — generic ballot left unchanged`);
   }
 
-  // ── State-level polls ─────────────────────────────────────────────────────
-  const byState = {};
-  for (const p of complete.filter(p => p.state !== 'US' && /^[A-Z]{2}$/.test(p.state))) {
-    if (!byState[p.state]) byState[p.state] = [];
-    byState[p.state].push(p);
-  }
+  // ── Race polls ─────────────────────────────────────────────────────────────
+  const ids = Object.keys(racePolls).sort();
+  const asOf = ids.map(id => racePolls[id].as_of).sort().pop() || null;
+  data.race_polls = {
+    source: NYT_SOURCE,
+    as_of: asOf,
+    fetched,
+    races: Object.fromEntries(ids.map(id => [id, racePolls[id]])),
+  };
+  delete data.state_polls; // replaced by race_polls
+  const byOffice = o => ids.filter(id => racePolls[id].office === o).length;
+  console.log(`  Race polls: ${ids.length} races (House ${byOffice('House')}, Senate ${byOffice('Senate')}, Governor ${byOffice('Governor')}), latest poll ${asOf}; ${droppedMatchups} polls of non-nominee matchups dropped`);
 
-  data.state_polls = data.state_polls || {};
-  let stateCount = 0;
-  for (const [st, stPolls] of Object.entries(byState)) {
-    if (!stPolls.length) continue;
-    let tw = 0, wd = 0, wr = 0;
-    stPolls.forEach(p => { const w = Math.min(p.n, 3000); tw += w; wd += p.DEM * w; wr += p.REP * w; });
-    const avgD = parseFloat((wd / tw).toFixed(1));
-    const avgR = parseFloat((wr / tw).toFixed(1));
-    data.state_polls[st] = {
-      DEM:     avgD,
-      REP:     avgR,
-      margin:  parseFloat((avgD - avgR).toFixed(1)),
-      n_polls: stPolls.length,
-      updated: new Date().toISOString().slice(0, 10),
-    };
-    stateCount++;
-  }
-  if (stateCount) console.log(`  State polls updated: ${stateCount} states`);
-
-  return complete.length;
+  return questions.length;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -292,6 +434,11 @@ async function fetchCPI(data) {
     data.cpi.current  = latest?.all_items ?? null;
     data.cpi.month    = latest?.month ?? null;
     data.cpi.updated  = new Date().toISOString().slice(0, 10);
+    // BLS lists newest first; period "M08" → as_of "2026-08"
+    const newest = series.find(s => /^M(0[1-9]|1[0-2])$/.test(s.period));
+    data.cpi.source  = 'US Bureau of Labor Statistics, CPI-U all items (CUUR0000SA0)';
+    data.cpi.as_of   = newest ? `${newest.year}-${newest.period.slice(1)}` : null;
+    data.cpi.fetched = new Date().toISOString();
 
     console.log(`  CPI: ${latest?.all_items}% YoY (${latest?.month}), ${merged.length} months history`);
     return merged.length;
@@ -378,12 +525,15 @@ async function fetchTrumpApproval(data) {
 
           if (valid && saneChange) {
             const net   = parseFloat((approve - disapprove).toFixed(1));
-            const month = monthLabel();
+            const dataDate = new Date(modelDate);   // "10/5/2026"
+            const month = monthLabel(isNaN(dataDate) ? new Date() : dataDate);
 
             data.approval.trump.approve    = approve;
             data.approval.trump.disapprove = disapprove;
             data.approval.trump.net        = net;
             data.approval.trump.source     = 'Nate Silver Bulletin';
+            data.approval.trump.as_of      = isNaN(dataDate) ? null : `${dataDate.getFullYear()}-${String(dataDate.getMonth() + 1).padStart(2, '0')}-${String(dataDate.getDate()).padStart(2, '0')}`;
+            data.approval.trump.fetched    = new Date().toISOString();
             upsertHistory(data.approval.trump.history, month,
               { approve, disapprove, net }, { approve, disapprove, net });
             data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
@@ -408,12 +558,17 @@ async function fetchTrumpApproval(data) {
 // 4. CONGRESS APPROVAL — Gallup table, AI as backup
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Finds the first table with "Approve" and "Disapprove" column headers and
-// returns its first data row (Gallup lists newest first), e.g.
-//   2026 Sep 1-17 | 16 | 79 | 4
+// Reads the newest row of Gallup's "Congress Approval Table" (overall
+// approval of Congress), e.g. "2026 Sep 1-17 | 16 | 79 | 4". The page has
+// other Approve/Disapprove tables (Republicans/Democrats in Congress, leaders,
+// own member) whose newest rows can be years old, so only the table with that
+// caption is used. If the page has no captions at all, the first table with
+// Approve/Disapprove headers is used instead.
 function parseGallupApprovalTable(html) {
   const cellText = c => stripHtml(c).replace(/\s+/g, ' ').trim();
+  const found = [];
   for (const table of html.match(/<table[\s\S]*?<\/table>/gi) || []) {
+    const caption = cellText((table.match(/<caption[^>]*>([\s\S]*?)<\/caption>/i) || [])[1] || '');
     const rows = (table.match(/<tr[\s\S]*?<\/tr>/gi) || [])
       .map(r => (r.match(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/gi) || []).map(cellText));
     const headerIdx = rows.findIndex(r => r.some(c => /^approve$/i.test(c)) && r.some(c => /^disapprove$/i.test(c)));
@@ -423,10 +578,30 @@ function parseGallupApprovalTable(html) {
     for (const row of rows.slice(headerIdx + 1)) {
       const approve    = parseFloat(row[aCol]);
       const disapprove = parseFloat(row[dCol]);
-      if (!isNaN(approve) && !isNaN(disapprove)) return { approve, disapprove, period: row[0] || '' };
+      if (!isNaN(approve) && !isNaN(disapprove)) { found.push({ approve, disapprove, period: row[0] || '', caption }); break; }
     }
   }
+  const main = found.find(r => /congress approval table/i.test(r.caption));
+  if (main) return main;
+  if (found.length && found.every(r => !r.caption)) return found[0];
   return null;
+}
+
+// A reading counts only if its field period ended within the last 120 days
+const GALLUP_MAX_AGE_DAYS = 120;
+
+// Gallup field period → reading month and end date (UTC):
+//   "2026 Sep 1-17"        → { month: 'Sep 2026', end: '2026-09-17' }
+//   "2026 Aug 25-Sep 7"    → { month: 'Aug 2026', end: '2026-09-07' }
+//   "2025 Dec 29-2026 Jan 9" → { month: 'Dec 2025', end: '2026-01-09' }
+function parseGallupPeriod(period) {
+  const m = String(period || '').match(/^(\d{4}) ([A-Z][a-z]{2})\w* (\d{1,2})\s*[-–]\s*(?:(\d{4}) )?(?:([A-Z][a-z]{2})\w* )?(\d{1,2})$/);
+  if (!m) return null;
+  const [, y1, mon1, , y2, mon2, d2] = m;
+  const start = new Date(`${mon1} 1, ${y1} UTC`);
+  const end = new Date(`${mon2 || mon1} ${d2}, ${y2 || y1} UTC`);
+  if (isNaN(start) || isNaN(end)) return null;
+  return { month: monthLabel(new Date(start.getTime() + 12 * 3600e3)), end: end.toISOString().slice(0, 10) };
 }
 
 async function fetchCongressApproval(data) {
@@ -443,28 +618,48 @@ async function fetchCongressApproval(data) {
     return false;
   }
 
+  const isFresh = r => {
+    const p = r && parseGallupPeriod(r.period);
+    return !!p && Date.now() - Date.parse(p.end) <= GALLUP_MAX_AGE_DAYS * 24 * 3600e3;
+  };
   let result = parseGallupApprovalTable(html);
+  if (result && !isFresh(result)) {
+    warn(`  [Gallup] Table's newest row is "${result.period}" — older than ${GALLUP_MAX_AGE_DAYS} days or unreadable; ignoring it`);
+    result = null;
+  }
   if (result) {
-    console.log(`  [Gallup] Parsed table row "${result.period}": ${result.approve} / ${result.disapprove}`);
+    console.log(`  [Gallup] Parsed "${result.caption || 'table'}" row "${result.period}": ${result.approve} / ${result.disapprove}`);
   } else {
-    warn('  [Gallup] Approval table not found — trying AI backup');
+    warn('  [Gallup] Congress Approval Table not found — trying AI backup');
     const text = stripHtml(html).slice(0, 14000);
     result = await aiExtract(
       'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
       `From this Gallup page tracking Congressional approval ratings, extract the most recent approve and disapprove percentages.
-Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER}
+Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER, "period": "YYYY Mon D-D"}
 Numbers should be between 5 and 55 for approve, and 40 and 95 for disapprove.
+"period" is the survey's field dates as Gallup writes them, e.g. "2026 Sep 1-17".
 
 Page text:
 ${text}`,
       { label: 'Congress approval' }
     );
+    if (result && !isFresh(result)) {
+      warn(`  [Gallup] AI reading "${result.period}" is older than ${GALLUP_MAX_AGE_DAYS} days or has no readable period — not used`);
+      result = null;
+    }
   }
 
   if (result?.approve > 5 && result?.approve < 55 && result?.disapprove > 30 && result?.disapprove < 95) {
     const approve    = parseFloat(Number(result.approve).toFixed(1));
     const disapprove = parseFloat(Number(result.disapprove).toFixed(1));
-    const month = monthLabel();
+    const reading = parseGallupPeriod(result.period);
+    if (!reading) warn(`  [Gallup] Could not read the field period "${result.period}" — history not updated`);
+    const provenance = {
+      source: 'Gallup, Congress and the Public (news.gallup.com/poll/1600)',
+      as_of: reading ? reading.end : null,
+      period: result.period || null,
+      fetched: new Date().toISOString(),
+    };
 
     // Update both congress_approval and approval.congress
     data.congress_approval.combined.approve    = approve;
@@ -472,14 +667,18 @@ ${text}`,
     data.congress_approval.combined.trend      = calcTrend(
       (data.approval.congress?.history || []).concat([{ approve }]), 'approve'
     );
+    Object.assign(data.congress_approval.combined, provenance);
 
     data.approval.congress.approve    = approve;
     data.approval.congress.disapprove = disapprove;
-    upsertHistory(data.approval.congress.history, month,
-      { approve, disapprove }, { approve, disapprove });
+    Object.assign(data.approval.congress, provenance);
+    if (reading) {
+      upsertHistory(data.approval.congress.history, reading.month,
+        { approve, disapprove }, { approve, disapprove });
+    }
     data.approval.congress.trend = calcTrend(data.approval.congress.history, 'approve');
 
-    console.log(`  Congress approval: ${approve}% approve / ${disapprove}% disapprove`);
+    console.log(`  Congress approval: ${approve}% approve / ${disapprove}% disapprove (field period ${result.period || 'unknown'}, recorded as ${reading ? reading.month : '—'})`);
     return 1;
   }
 
@@ -488,10 +687,15 @@ ${text}`,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. RETIREMENTS — Ballotpedia list tables (Wikipedia fallback), no AI
+// 5. RETIREMENTS — Wikipedia API (Ballotpedia fallback), no AI
 // ─────────────────────────────────────────────────────────────────────────────
 //
-// Ballotpedia's page has one table per category ("Retiring from public office,
+// Primary: the "Retirements" sections of Wikipedia's 2026 House and Senate
+// election pages, read through the MediaWiki API and counted per chamber.
+// Wikipedia's Senate table doesn't say who is running for another office, so
+// the Senate retiring/other-office split is null when Wikipedia is the source.
+//
+// Fallback: Ballotpedia's page has one table per category ("Retiring from public office,
 // 2026", "Running for governor, 2026", …) under a Senate and a House heading.
 // Every row is one member, so chamber, party and retiring-vs-other-office are
 // counted directly from the rows. Ballotpedia counts voting members only and
@@ -582,7 +786,14 @@ async function fetchWikipediaRetirements() {
   // The Senate table doesn't say who is running for another office
   counts.senate_retiring = null;
   counts.senate_other_office = null;
-  return counts;
+
+  // as_of: the later of the two pages' last edits — the date of the data itself
+  const revs = await (await safeFetch(
+    'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=timestamp&format=json&formatversion=2' +
+    '&titles=2026_United_States_House_of_Representatives_elections|2026_United_States_Senate_elections',
+    { label: 'Wikipedia revision dates' })).json();
+  const stamps = (revs.query?.pages || []).map(p => p.revisions?.[0]?.timestamp).filter(Boolean).sort();
+  return { counts, asOf: stamps.length ? new Date(stamps[stamps.length - 1]) : null };
 }
 
 function retirementsAddUp(c) {
@@ -592,48 +803,47 @@ function retirementsAddUp(c) {
 }
 
 async function fetchRetirements(data) {
-  console.log('[5/6] Retirements (Ballotpedia list tables, Wikipedia fallback)…');
+  console.log('[5/6] Retirements (Wikipedia election pages, Ballotpedia fallback)…');
   let counts = null, source = null, asOf = null;
-  let bpError = null, bpCount = 0;
-  lastWarning = null;
 
+  // Primary: Wikipedia API — House and Senate "Retirements" sections, counted separately
   try {
-    const res = await safeFetch(BP_RETIRE_URL, {
-      label: 'Ballotpedia',
-      minBytes: 50 * 1024, // smaller means a bot challenge or an empty page
-      headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
-    });
-    const parsed = parseBallotpediaRetirements(await res.text());
-    const c = parsed.counts;
-    console.log(`  [Ballotpedia] Table rows: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
-    const s = parsed.summary;
-    if (!s) {
-      warn('  [Ballotpedia] Summary sentence not found — cannot cross-check table counts');
-    } else if (s.total !== c.total || s.senate !== c.senate || s.house !== c.house) {
-      warn(`  [Ballotpedia] Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})`);
-    }
-    if (s && s.total === c.total && s.senate === c.senate && s.house === c.house) {
-      counts = c; source = 'Ballotpedia'; asOf = parsed.asOf;
-      if (retirementsAddUp(c)) bpCount = c.total;
-    }
-    if (!bpCount) bpError = lastWarning || 'Table counts failed validation';
+    const wiki = await fetchWikipediaRetirements();
+    const c = wiki.counts;
+    console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
+    const ok = retirementsAddUp(c);
+    if (ok) { counts = c; source = 'Wikipedia'; asOf = wiki.asOf; }
+    else warn(`  [Wikipedia] Counts don't add up: ${JSON.stringify(c)} — trying Ballotpedia`);
+    recordStatus('Retirements (Wikipedia)', { group: 'polls', primary: true, ok, count: ok ? c.total : 0, error: ok ? null : 'Counts did not add up' });
   } catch (err) {
-    bpError = err.message;
-    warn(`  [Ballotpedia] Failed: ${err.message} — falling back to Wikipedia`);
+    warn(`  [Wikipedia] Failed: ${err.message} — trying Ballotpedia`);
+    recordStatus('Retirements (Wikipedia)', { group: 'polls', primary: true, ok: false, error: err.message });
   }
-  recordStatus('Retirements (Ballotpedia)', { group: 'polls', primary: true, ok: bpCount > 0, count: bpCount, error: bpError });
 
+  // Fallback: Ballotpedia list tables, cross-checked against its summary sentence
   if (!counts) {
+    lastWarning = null;
+    let bpError = null, bpCount = 0;
     try {
-      const c = await fetchWikipediaRetirements();
-      console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
-      counts = c; source = 'Wikipedia'; asOf = new Date();
-      const ok = retirementsAddUp(c);
-      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok, count: ok ? c.total : 0, error: ok ? null : 'Counts did not add up' });
+      const res = await safeFetch(BP_RETIRE_URL, {
+        label: 'Ballotpedia',
+        minBytes: 50 * 1024, // smaller means a bot challenge or an empty page
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+      });
+      const parsed = parseBallotpediaRetirements(await res.text());
+      const c = parsed.counts, s = parsed.summary;
+      console.log(`  [Ballotpedia] Table rows: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
+      if (s && s.total === c.total && s.senate === c.senate && s.house === c.house && retirementsAddUp(c)) {
+        counts = c; source = 'Ballotpedia'; asOf = parsed.asOf; bpCount = c.total;
+      } else {
+        bpError = s ? `Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})` : 'Summary sentence not found';
+        warn(`  [Ballotpedia] ${bpError}`);
+      }
     } catch (err) {
-      warn(`  [Wikipedia] Failed: ${err.message}`);
-      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok: false, error: err.message });
+      bpError = err.message;
+      warn(`  [Ballotpedia] Failed: ${err.message}`);
     }
+    recordStatus('Retirements (Ballotpedia fallback)', { group: 'polls', ok: bpCount > 0, count: bpCount, error: bpError });
   }
 
   if (!counts || !retirementsAddUp(counts)) {
@@ -649,7 +859,8 @@ async function fetchRetirements(data) {
   if (counts.senate_other_office !== null) r.seeking_office_pct = Math.round(100 * otherOffice / counts.total);
   r.source = source;
   r.source_url = source === 'Ballotpedia' ? BP_RETIRE_URL : 'https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections#Retirements';
-  r.as_of = (asOf && !isNaN(asOf) ? asOf : new Date()).toISOString().slice(0, 10);
+  r.as_of = asOf && !isNaN(asOf) ? asOf.toISOString().slice(0, 10) : null;
+  r.fetched = new Date().toISOString();
   // Keep the 2026 bar of the historical chart in step with the live counts
   const bar2026 = (r.historical_chart || []).find(d => d.year === '2026');
   if (bar2026) { bar2026.house = counts.house; bar2026.senate = counts.senate; }
@@ -752,6 +963,7 @@ async function fetchRSSFallback(data, needsTrump, needsCongress) {
     const med  = vals[Math.floor(vals.length / 2)];
     const disVals = accum.trump.map(x => x.disapprove).filter(x => x > 25 && x < 75).sort((a, b) => a - b);
     const dismed  = disVals.length ? disVals[Math.floor(disVals.length / 2)] : null;
+    Object.assign(data.approval.trump, { source: 'RSS fallback (median of headline figures)', as_of: null, fetched: new Date().toISOString() });
     data.approval.trump.approve    = med;
     if (dismed) data.approval.trump.disapprove = dismed;
     upsertHistory(data.approval.trump.history, month,
@@ -764,6 +976,9 @@ async function fetchRSSFallback(data, needsTrump, needsCongress) {
   if (needsCongress && accum.congress.length >= 2) {
     const vals = accum.congress.map(x => x.approve).sort((a, b) => a - b);
     const med  = vals[Math.floor(vals.length / 2)];
+    const rssProvenance = { source: 'RSS fallback (median of headline figures)', as_of: null, period: null, fetched: new Date().toISOString() };
+    Object.assign(data.congress_approval.combined, rssProvenance);
+    Object.assign(data.approval.congress, rssProvenance);
     data.congress_approval.combined.approve = med;
     data.approval.congress.approve = med;
     upsertHistory(data.approval.congress.history, month,
@@ -801,7 +1016,6 @@ async function main() {
   data.congress_approval      = data.congress_approval      || {};
   data.congress_approval.combined = data.congress_approval.combined || { approve: null, disapprove: null, trend: 0 };
   data.cpi                    = data.cpi                    || { history: [] };
-  data.state_polls            = data.state_polls            || {};
 
   // Run all fetchers
   const nytOk     = await track('NYT polling CSVs', fetchNYTPolls, data);

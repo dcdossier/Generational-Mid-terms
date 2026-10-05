@@ -5,49 +5,49 @@
     "forecaster_consensus": {
       "last_updated": "2026-05-17",
       "house": {
-        "rating": "Lean R Hold",
-        "rating_class": "lean-r",
+        "rating": "Toss-up",
+        "rating_class": "tossup",
         "sources": [
           "Cook Political Report",
           "Sabato's Crystal Ball",
           "Inside Elections"
         ],
-        "summary": "D need +5 net seats; 22 toss-ups are decisive",
+        "summary": "D need +4 net seats (214->218); 208 R vs 205 D on safe+likely+lean, 22 toss-ups decisive",
         "projected_r": "220–230",
         "projected_d": "205–215"
       },
       "senate": {
-        "rating": "Likely R Hold",
-        "rating_class": "likely-r",
+        "rating": "Toss-up",
+        "rating_class": "tossup",
         "sources": [
           "Cook Political Report",
           "Sabato's Crystal Ball",
           "Inside Elections"
         ],
-        "summary": "D need to flip 4 R seats on tough Class II map",
-        "projected_r": "51–54",
-        "projected_d": "46–49"
+        "summary": "Cook now calls Senate control a true toss-up; Democrats need to flip 4 Republican-held seats",
+        "projected_r": "48-54",
+        "projected_d": "46-52"
       },
       "governors": {
-        "rating": "4 Toss-ups",
+        "rating": "5 Toss-ups",
         "rating_class": "tossup",
         "sources": [
           "Cook Political Report",
           "Sabato's Crystal Ball"
         ],
-        "summary": "ME, MI, NV, WI all genuine toss-ups",
+        "summary": "AK, GA, NV, OH, WI all genuine toss-ups",
         "projected_r": "25–28",
         "projected_d": "22–25"
       }
     }
   },
   "retirements": {
-    "total": 68,
+    "total": 72,
     "republican": 43,
     "democrat": 25,
-    "seeking_office_pct": 45,
-    "senate": 11,
-    "house": 57,
+    "seeking_office_pct": 39,
+    "senate": 14,
+    "house": 58,
     "compare_2024": {
       "senate": 8,
       "house": 42
@@ -417,8 +417,8 @@
       },
       {
         "year": "2026",
-        "house": 57,
-        "senate": 11
+        "house": 58,
+        "senate": 14
       }
     ],
     "tenure_chart": [
@@ -983,7 +983,8 @@
         17,
         19
       ]
-    }
+    },
+    "as_of": "NPR, 29 May 2026 (includes Bennet and Klobuchar, who are running for governor mid-term)"
   },
   "approval": {
     "trump": {
@@ -1249,18 +1250,6 @@
       }
     ],
     "pollsters": [
-      {
-        "name": "GNews:EmersonBallot / GNews:GenericBallot",
-        "democrat": 43,
-        "republican": 47,
-        "date": "May 2026"
-      },
-      {
-        "name": "GNews:GenericBallot / GNews:EmersonBallot",
-        "democrat": 56.5,
-        "republican": 47,
-        "date": "May 2026"
-      },
       {
         "name": "RealClearPolitics avg",
         "democrat": 48.1,
@@ -5181,23 +5170,23 @@
       },
       "source": "Preliminary analyst estimates — Cook Political Report / Inside Elections / Sabato's Crystal Ball",
       "ratings_summary": {
-        "safe_r": 17,
-        "likely_r": 1,
-        "lean_r": 3,
-        "toss_up": 2,
-        "lean_d": 3,
-        "likely_d": 0,
+        "safe_r": 11,
+        "likely_r": 4,
+        "lean_r": 1,
+        "toss_up": 7,
+        "lean_d": 1,
+        "likely_d": 2,
         "safe_d": 9
       },
       "races": [
         {
           "state": "Alabama",
           "code": "AL",
-          "incumbent": "Tommy Tuberville",
+          "incumbent": "Open seat (Tuberville running for governor)",
           "party": "R",
-          "open": false,
+          "open": true,
           "rating": "Safe R",
-          "note": "Tuberville won by 20 pts in 2020; no credible challenger."
+          "note": "Tuberville is running for governor, not re-election. Alabama remains safely Republican."
         },
         {
           "state": "Alaska",
@@ -5205,8 +5194,8 @@
           "incumbent": "Dan Sullivan",
           "party": "R",
           "open": false,
-          "rating": "Likely R",
-          "note": "Sullivan won by 7 pts in 2020. Democrats targeting but Alaska leans R."
+          "rating": "Toss-up",
+          "note": "Cook rates Toss Up amid strong Democratic recruitment. Sullivan's 2020 margin was about 13 points."
         },
         {
           "state": "Arkansas",
@@ -5223,8 +5212,8 @@
           "incumbent": "John Hickenlooper",
           "party": "D",
           "open": false,
-          "rating": "Lean D",
-          "note": "Hickenlooper won by 9 pts in 2020 but Colorado is trending closer in federal races."
+          "rating": "Safe D",
+          "note": "Hickenlooper won by 9 pts in 2020. Colorado remains reliably Democratic in federal races."
         },
         {
           "state": "Delaware",
@@ -5241,17 +5230,17 @@
           "incumbent": "Jon Ossoff",
           "party": "D",
           "open": false,
-          "rating": "Toss-up",
-          "note": "Ossoff won his January 2021 runoff by under 1 pt. Georgia is a perennial battleground."
+          "rating": "Likely D",
+          "note": "Ossoff won his January 2021 runoff by 1.2 points. Georgia remains competitive but Cook has shifted this race to Likely D."
         },
         {
           "state": "Idaho",
           "code": "ID",
           "incumbent": "Jim Risch",
           "party": "R",
-          "open": true,
+          "open": false,
           "rating": "Safe R",
-          "note": "Risch not seeking re-election. Idaho is safe Republican — open-seat primary underway."
+          "note": "Risch is running for re-election. Idaho is safely Republican."
         },
         {
           "state": "Illinois",
@@ -5259,17 +5248,17 @@
           "incumbent": "Dick Durbin",
           "party": "D",
           "open": true,
-          "rating": "Likely D",
-          "note": "Durbin retiring after 28 years. Illinois leans Democratic but open seat invites competition."
+          "rating": "Safe D",
+          "note": "Durbin retiring after 28 years. Nominees are Juliana Stratton (D) and Don Tracy (R). Illinois is reliably Democratic."
         },
         {
           "state": "Iowa",
           "code": "IA",
-          "incumbent": "Joni Ernst",
+          "incumbent": "Open seat (Ernst retiring)",
           "party": "R",
-          "open": false,
-          "rating": "Lean R",
-          "note": "Ernst won by 3 pts in 2020. Iowa has shifted R but Democrats recruiting strong challenger."
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Ernst is retiring. Cook rates this a Toss Up. Ernst's 2020 margin was about 6.6 points."
         },
         {
           "state": "Kansas",
@@ -5277,8 +5266,8 @@
           "incumbent": "Roger Marshall",
           "party": "R",
           "open": false,
-          "rating": "Safe R",
-          "note": "Marshall is safe in deep-red Kansas."
+          "rating": "Lean R",
+          "note": "Marshall is favored but Cook rates this Lean R, not Safe R."
         },
         {
           "state": "Kentucky",
@@ -5292,11 +5281,11 @@
         {
           "state": "Louisiana",
           "code": "LA",
-          "incumbent": "Bill Cassidy",
+          "incumbent": "Open seat (Cassidy not seeking re-election)",
           "party": "R",
-          "open": false,
+          "open": true,
           "rating": "Likely R",
-          "note": "Cassidy survived a censure for his impeachment vote; faces primary challenge but Louisiana is solidly R."
+          "note": "Cassidy is not on the November ballot. Louisiana remains a heavily Republican state."
         },
         {
           "state": "Maine",
@@ -5304,8 +5293,8 @@
           "incumbent": "Susan Collins",
           "party": "R",
           "open": false,
-          "rating": "Lean R",
-          "note": "Collins has won in blue-leaning Maine four times. Faces toughest map yet but a formidable fundraiser."
+          "rating": "Toss-up",
+          "note": "Collins has won five consecutive terms in blue-leaning Maine. Cook rates this a Toss Up."
         },
         {
           "state": "Massachusetts",
@@ -5319,20 +5308,20 @@
         {
           "state": "Michigan",
           "code": "MI",
-          "incumbent": "Gary Peters",
+          "incumbent": "Open seat (Peters retiring)",
           "party": "D",
-          "open": false,
-          "rating": "Lean D",
-          "note": "Peters won by 1.5 pts in 2020. Michigan is a key battleground — Republicans recruiting hard."
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Peters is retiring, making this one of two open Senate races projected as highly competitive. Peters' 2020 margin was about 1.7 points."
         },
         {
           "state": "Minnesota",
           "code": "MN",
-          "incumbent": "Tina Smith",
+          "incumbent": "Open seat (Smith retiring)",
           "party": "D",
-          "open": false,
+          "open": true,
           "rating": "Likely D",
-          "note": "Smith won by 5 pts in 2020. Minnesota leans D in Senate races."
+          "note": "Smith is retiring. Cook rating of Likely D still holds."
         },
         {
           "state": "Mississippi",
@@ -5346,11 +5335,11 @@
         {
           "state": "Montana",
           "code": "MT",
-          "incumbent": "Steve Daines",
+          "incumbent": "Open seat (Daines retiring)",
           "party": "R",
-          "open": false,
-          "rating": "Lean R",
-          "note": "Daines won by 10 pts in 2020 but Democrats see an opening as Montana has split-ticket history."
+          "open": true,
+          "rating": "Safe R",
+          "note": "Daines announced he wouldn't seek a third term. Montana remains safely Republican even with the open seat."
         },
         {
           "state": "Nebraska",
@@ -5358,8 +5347,8 @@
           "incumbent": "Pete Ricketts",
           "party": "R",
           "open": false,
-          "rating": "Safe R",
-          "note": "Ricketts was appointed after Ben Sasse resigned. Won full-term election in 2024. Nebraska is safe R."
+          "rating": "Likely R",
+          "note": "2024 was a special election for the balance of Ben Sasse's term. The full six-year term is on the 2026 ballot. Cook rates this Likely R."
         },
         {
           "state": "New Hampshire",
@@ -5376,35 +5365,35 @@
           "incumbent": "Cory Booker",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
-          "note": "Booker won by 16 pts in 2020. New Jersey leans Democratic in federal races."
+          "rating": "Safe D",
+          "note": "Cook rates Booker Solid/Safe D."
         },
         {
           "state": "New Mexico",
           "code": "NM",
-          "incumbent": "Martin Heinrich",
+          "incumbent": "Ben Ray Luján",
           "party": "D",
           "open": false,
           "rating": "Safe D",
-          "note": "Heinrich won by 16 pts in 2020. New Mexico is safe D."
+          "note": "The 2026 New Mexico seat belongs to Ben Ray Luján; Martin Heinrich was last elected in 2024."
         },
         {
           "state": "North Carolina",
           "code": "NC",
-          "incumbent": "Thom Tillis",
+          "incumbent": "Open seat (Tillis retiring)",
           "party": "R",
-          "open": false,
-          "rating": "Lean R",
-          "note": "Tillis survived 2020 by under 1.8 pts — NC is a perennial battleground. Democrats are competitive."
+          "open": true,
+          "rating": "Lean D",
+          "note": "Tillis is retiring. Cook rates the open seat Lean D."
         },
         {
           "state": "Oklahoma",
           "code": "OK",
-          "incumbent": "James Lankford",
+          "incumbent": "Alan Armstrong (appointed)",
           "party": "R",
-          "open": false,
+          "open": true,
           "rating": "Safe R",
-          "note": "Lankford won the 2022 special to fill Inhofe's seat. Oklahoma is safe Republican."
+          "note": "The Class II seat was Markwayne Mullin's; he became DHS Secretary. Gov. Stitt appointed energy businessman Alan Armstrong (R) to serve the balance of the term. Armstrong is not running for the full term, so the seat is open; Oklahoma remains safely Republican."
         },
         {
           "state": "Oregon",
@@ -5412,26 +5401,26 @@
           "incumbent": "Jeff Merkley",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
-          "note": "Merkley won by 17 pts in 2020. Oregon leans D in Senate races."
+          "rating": "Safe D",
+          "note": "Cook rates Merkley Solid/Safe D."
         },
         {
           "state": "Rhode Island",
           "code": "RI",
-          "incumbent": "Sheldon Whitehouse",
+          "incumbent": "Jack Reed",
           "party": "D",
           "open": false,
           "rating": "Safe D",
-          "note": "Whitehouse is safe in one of the most Democratic states."
+          "note": "The 2026 Rhode Island seat belongs to Jack Reed; Sheldon Whitehouse was last elected in 2024."
         },
         {
           "state": "South Carolina",
           "code": "SC",
-          "incumbent": "Lindsey Graham",
+          "incumbent": "Darline Graham Nordone (appointed)",
           "party": "R",
-          "open": false,
+          "open": true,
           "rating": "Likely R",
-          "note": "Graham won by 10 pts in 2020 in a surprisingly competitive race. SC leans R but not completely safe for him."
+          "note": "Sen. Lindsey Graham died on 11 July 2026. Darline Graham Nordone was appointed and serves until 3 Jan 2027; the seat is open for a full term."
         },
         {
           "state": "South Dakota",
@@ -5454,11 +5443,11 @@
         {
           "state": "Texas",
           "code": "TX",
-          "incumbent": "John Cornyn",
+          "incumbent": "Open seat (Cornyn not seeking re-election)",
           "party": "R",
-          "open": false,
-          "rating": "Likely R",
-          "note": "Cornyn won by 10 pts in 2020 but Texas has been narrowing. No top-tier Democratic challenger yet."
+          "open": true,
+          "rating": "Toss-up",
+          "note": "Cook lists Texas as OPEN and a Toss Up. Cornyn is not on the November ballot."
         },
         {
           "state": "Virginia",
@@ -5466,8 +5455,8 @@
           "incumbent": "Mark Warner",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
-          "note": "Warner won by 12 pts in 2020. Virginia has shifted D at the federal level."
+          "rating": "Safe D",
+          "note": "Cook rates Warner Solid/Safe D."
         },
         {
           "state": "West Virginia",
@@ -5476,16 +5465,34 @@
           "party": "R",
           "open": false,
           "rating": "Safe R",
-          "note": "Capito won by 27 pts in 2020. West Virginia is deep-red."
+          "note": "Capito's 2020 margin was about 43 points (70%-27%), not 27 points."
         },
         {
           "state": "Wyoming",
           "code": "WY",
-          "incumbent": "Cynthia Lummis",
+          "incumbent": "Open seat (Lummis retiring)",
+          "party": "R",
+          "open": true,
+          "rating": "Safe R",
+          "note": "Lummis announced she would not seek a second full term. Wyoming remains safely Republican."
+        },
+        {
+          "state": "Florida",
+          "code": "FL",
+          "incumbent": "Ashley Moody",
           "party": "R",
           "open": false,
           "rating": "Safe R",
-          "note": "Lummis is safe in the most Republican state by margin."
+          "note": "Special election to complete Marco Rubio’s term. Moody was appointed in Jan 2025 and is heavily favored in red Florida."
+        },
+        {
+          "state": "Ohio",
+          "code": "OH",
+          "incumbent": "Jon Husted",
+          "party": "R",
+          "open": false,
+          "rating": "Toss-up",
+          "note": "Special election to complete JD Vance’s term. Husted was appointed in Jan 2025; Cook rates the race a Toss Up."
         }
       ],
       "path_to_majority": {
@@ -5494,41 +5501,43 @@
         "needed": 51,
         "d_seats_retained": 34,
         "d_seats_up": 13,
-        "r_seats_up": 20,
-        "d_likely_wins": 13,
-        "d_projected_baseline": 47,
-        "d_needs_to_flip": 4,
-        "flip_targets": [
-          "Iowa (Lean R)",
-          "Maine (Lean R)",
-          "Montana (Lean R)",
-          "North Carolina (Lean R)"
-        ],
-        "tossups": [
-          "Georgia",
+        "r_seats_up": 22,
+        "d_safe_likely": 11,
+        "d_tossups_to_hold": [
+          "Michigan",
           "New Hampshire"
         ],
-        "summary": "Democrats need to hold all 13 of their seats up — including toss-ups in GA and NH — and then flip at least 4 of the 4 lean-R seats (IA, ME, MT, NC) to reach 51. A very narrow path."
+        "flip_targets": [
+          "Alaska (Toss-up)",
+          "Iowa (Toss-up)",
+          "Maine (Toss-up)",
+          "North Carolina (Lean D)",
+          "Texas (Toss-up)",
+          "Ohio (Toss-up)"
+        ],
+        "summary": "Republicans defend 22 seats this cycle, Democrats 13. Democrats start from a base of 34 seats not up. To reach 51, they must hold their 11 safe/likely seats plus the two D-held toss-ups (Michigan, New Hampshire), then flip Republican-held seats — North Carolina (Lean D) is the single best target, with Alaska, Iowa, Maine, Ohio and Texas (all Toss-up) the stretch targets. A narrow path either way."
       }
     },
     "house": {
       "cycle": 2026,
       "total_seats": 435,
       "current_balance": {
-        "r": 217,
-        "d": 212
+        "r": 218,
+        "d": 214,
+        "i": 1,
+        "vacant": 2
       },
       "needed_majority": 218,
       "source": "Preliminary analyst estimates — Cook Political Report / Inside Elections",
       "ratings_summary": {
-        "safe_r": 184,
-        "likely_r": 4,
-        "lean_r": 5,
-        "toss_up": 17,
-        "lean_d": 17,
-        "likely_d": 3,
-        "safe_d": 182,
-        "competitive_total": 46,
+        "safe_r": 185,
+        "likely_r": 12,
+        "lean_r": 11,
+        "toss_up": 22,
+        "lean_d": 10,
+        "likely_d": 19,
+        "safe_d": 176,
+        "competitive_total": 49,
         "solid_r": 0,
         "solid_d": 0
       },
@@ -5537,27 +5546,27 @@
           "district": "AZ-01",
           "incumbent": "Open seat (Schweikert retired)",
           "party": "R",
-          "rating": "Toss-up",
+          "rating": "Lean D",
           "pvp": "R+5",
-          "note": "David Schweikert retired; open seat in a Trump-leaning exurban Phoenix district. All three major forecasters rate Toss-up.",
+          "note": "David Schweikert retired; open seat in a Trump-leaning exurban Phoenix district. Cook now rates this Lean D.",
           "open": true
         },
         {
           "district": "CA-04",
           "incumbent": "Mike Thompson",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Safe D",
           "pvp": "D+20",
           "note": "Thompson returns after redistricting. Cook and Inside Elections rate Solid D; listed for Dem-vs-Dem general dynamics.",
           "open": false
         },
         {
           "district": "CA-11",
-          "incumbent": "Open seat",
+          "incumbent": "Open seat (Pelosi retiring)",
           "party": "D",
           "rating": "Lean D",
           "pvp": "D+38",
-          "note": "East Bay seat held by Lateefah Simon (D), now open. Dem-vs-Dem general in a safely blue district.",
+          "note": "CA-11 is Nancy Pelosi's open seat (Pelosi retiring); Dem-vs-Dem general expected in a safely blue district. Lateefah Simon holds neighboring CA-12.",
           "open": true
         },
         {
@@ -5580,18 +5589,18 @@
         },
         {
           "district": "CA-40",
-          "incumbent": "Young Kim",
+          "incumbent": "Young Kim (merged seat under new CA map)",
           "party": "R",
-          "rating": "Lean R",
+          "rating": "Safe R",
           "pvp": "R+4",
-          "note": "Kim holds a suburban Orange County seat. Cook: Solid R; Ballotpedia battleground due to first-term and demographic dynamics.",
+          "note": "Kim holds this merged Orange County seat under the new California map, first elected in 2020. Cook: Solid R.",
           "open": false
         },
         {
           "district": "CA-41",
           "incumbent": "Linda Sánchez",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Safe D",
           "pvp": "D+12",
           "note": "Sánchez holds a safely D district east of LA. Cook: Solid D; on battleground list for candidate dynamics.",
           "open": false
@@ -5600,27 +5609,27 @@
           "district": "CA-45",
           "incumbent": "Derek Tran",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Likely D",
           "pvp": "D+2",
           "note": "Freshman Tran won a narrow 2024 upset over Michelle Steel (R). Rematch expected; Cook and Sabato: Lean D.",
           "open": false
         },
         {
           "district": "CA-48",
-          "incumbent": "Open seat (Min running for Senate)",
-          "party": "D",
-          "rating": "Lean D",
+          "incumbent": "Open seat (Issa retiring)",
+          "party": "R",
+          "rating": "Toss-up",
           "pvp": "D+8",
-          "note": "Dave Min (D) vacated for a Senate run; suburban Orange County seat. Cook: Lean D.",
+          "note": "CA-48 is Darrell Issa's open seat (Issa retiring); Prop 50 made this once-safe GOP Orange County-area seat competitive. Cook: Toss-up.",
           "open": true
         },
         {
           "district": "CO-05",
           "incumbent": "Jeff Crank",
           "party": "R",
-          "rating": "Likely R",
+          "rating": "Lean R",
           "pvp": "R+20",
-          "note": "Crank defeated incumbent Lamborn in the primary. Colorado Springs district is safely R; battleground due to primary upset dynamics.",
+          "note": "Crank won an open primary after Lamborn's 2024 retirement, not by defeating a sitting incumbent. Colorado Springs district; Cook: Lean R.",
           "open": false
         },
         {
@@ -5634,48 +5643,48 @@
         },
         {
           "district": "FL-14",
-          "incumbent": "Open seat",
-          "party": "R",
-          "rating": "Lean R",
+          "incumbent": "Kathy Castor",
+          "party": "D",
+          "rating": "Toss-up",
           "pvp": "R+6",
-          "note": "Anna Paulina Luna (R) potentially vacating for Senate; R-leaning Tampa Bay area seat. Cook/Inside: Lean R.",
-          "open": true
+          "note": "FL-14 is Kathy Castor's (D) seat, not open. Cook/Inside: Toss-up.",
+          "open": false
         },
         {
           "district": "FL-22",
-          "incumbent": "Open seat",
-          "party": "R",
-          "rating": "Lean R",
+          "incumbent": "Open seat (Frankel moved to FL-23)",
+          "party": "D",
+          "rating": "Toss-up",
           "pvp": "R+5",
-          "note": "Lois Frankel (D) retiring; Palm Beach County seat that leans Republican. Cook/Inside: Lean R.",
+          "note": "Open seat after the new Florida map moved Lois Frankel to FL-23; Palm Beach County seat. Cook: Toss-up.",
           "open": true
         },
         {
           "district": "FL-23",
-          "incumbent": "Open seat",
+          "incumbent": "Lois Frankel",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Safe D",
           "pvp": "D+8",
-          "note": "Jared Moskowitz stepping aside; Broward County seat. Cook/Inside: Solid D, but Sabato rates Toss-up.",
-          "open": true
+          "note": "Lois Frankel (D) is running here under the new Florida map, not stepping aside; Broward County seat. Cook: Solid D.",
+          "open": false
         },
         {
           "district": "FL-25",
-          "incumbent": "Open seat",
-          "party": "R",
+          "incumbent": "Jared Moskowitz",
+          "party": "D",
           "rating": "Toss-up",
           "pvp": "R+3",
-          "note": "Mario Diaz-Balart retiring; Miami-Dade seat with significant Hispanic voter realignment. Cook/Inside/Sabato: Toss-up.",
-          "open": true
+          "note": "Jared Moskowitz (D) is running here under the new Florida map; Miami-Dade-area seat with significant Hispanic voter realignment. Mario Diaz-Balart is retiring from FL-26, not this seat. Cook/Inside/Sabato: Toss-up.",
+          "open": false
         },
         {
           "district": "IL-04",
-          "incumbent": "Jesús 'Chuy' García",
+          "incumbent": "Open seat (García retiring)",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Safe D",
           "pvp": "D+30",
-          "note": "Heavily Democratic Chicago district; on battleground list for candidate dynamics. Cook: Solid D.",
-          "open": false
+          "note": "Open seat after Jesús 'Chuy' García's retirement; heavily Democratic Chicago district. Cook: Solid D.",
+          "open": true
         },
         {
           "district": "IA-01",
@@ -5692,53 +5701,53 @@
           "party": "R",
           "rating": "Toss-up",
           "pvp": "R+4",
-          "note": "Nunn won by 1.6 pts in 2022. Suburban Des Moines seat; Cook/Sabato Toss-up, Inside: Tilt R.",
+          "note": "Nunn's 2022 margin over Cindy Axne was under 1 point. Suburban Des Moines seat; Cook/Sabato Toss-up, Inside: Tilt R.",
           "open": false
         },
         {
           "district": "ME-02",
-          "incumbent": "Austin Theriault",
-          "party": "R",
+          "incumbent": "Open seat (Golden retiring)",
+          "party": "D",
           "rating": "Likely R",
           "pvp": "R+6",
-          "note": "Theriault (R) defeated Jared Golden in 2024. Trump+6 district; Cook/Inside: Likely R. Sabato: Lean R.",
-          "open": false
+          "note": "Golden (D) won in 2024 and is retiring; Theriault did not defeat him. Trump+6 open seat; Cook: Likely R.",
+          "open": true
         },
         {
           "district": "MI-07",
-          "incumbent": "Open seat (Barrett ran for Senate)",
+          "incumbent": "Tom Barrett",
           "party": "R",
           "rating": "Toss-up",
           "pvp": "D+1",
-          "note": "Tom Barrett vacated for a Senate run. Biden-won district now open; all three forecasters rate Toss-up.",
-          "open": true
+          "note": "Tom Barrett is running for re-election, not vacating for Senate; Biden-won district; all three forecasters rate Toss-up.",
+          "open": false
         },
         {
           "district": "MI-08",
-          "incumbent": "Open seat (Slotkin ran for Senate)",
+          "incumbent": "Kristen McDonald Rivet",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Likely D",
           "pvp": "D+4",
-          "note": "Elissa Slotkin vacated for Senate; suburban Lansing seat. Cook: Lean D, Inside/Sabato: Likely D.",
-          "open": true
+          "note": "Kristen McDonald Rivet (D) is the incumbent — Slotkin left this seat for the Senate in 2024, not 2026; suburban Lansing seat. Cook: Likely D.",
+          "open": false
         },
         {
           "district": "MI-10",
-          "incumbent": "Open seat (James ran for Senate)",
+          "incumbent": "Open seat (James running for governor)",
           "party": "R",
-          "rating": "Lean R",
+          "rating": "Toss-up",
           "pvp": "R+5",
-          "note": "John James vacated for a Senate run. Suburban Detroit seat; Cook: Lean R, Inside: Tilt R, Sabato: Toss-up.",
+          "note": "John James is running for governor, not Senate; seat is open. Suburban Detroit seat; Cook: Toss-up.",
           "open": true
         },
         {
           "district": "MT-01",
-          "incumbent": "Ryan Zinke",
+          "incumbent": "Open seat (Zinke retiring)",
           "party": "R",
-          "rating": "Likely R",
+          "rating": "Lean R",
           "pvp": "R+8",
-          "note": "Zinke holds a comfortably Republican western Montana district. Cook/Inside/Sabato: Likely R.",
-          "open": false
+          "note": "Zinke is retiring; open seat in a comfortably Republican western Montana district. Cook: Lean R.",
+          "open": true
         },
         {
           "district": "NE-02",
@@ -5746,7 +5755,7 @@
           "party": "R",
           "rating": "Lean D",
           "pvp": "D+2",
-          "note": "Don Bacon retired; Omaha-area seat that Biden won in 2020 and 2024. Cook/Inside/Sabato: Lean D without incumbent.",
+          "note": "Don Bacon retired; Omaha-area seat that Biden carried in 2020 and Harris carried in 2024. Cook/Inside/Sabato: Lean D without incumbent.",
           "open": true
         },
         {
@@ -5771,9 +5780,9 @@
           "district": "NJ-07",
           "incumbent": "Tom Kean Jr.",
           "party": "R",
-          "rating": "Toss-up",
+          "rating": "Lean D",
           "pvp": "D+4",
-          "note": "Kean holds a D+4 district in suburban NJ; top Democratic target. Cook/Sabato: Toss-up; Inside: Tilt D.",
+          "note": "Kean holds this suburban NJ district; top Democratic target. Cook: Lean D.",
           "open": false
         },
         {
@@ -5791,7 +5800,7 @@
           "party": "D",
           "rating": "Lean D",
           "pvp": "R+4",
-          "note": "Vasquez holds a Trump+4 southern NM district, having defeated two R incumbents consecutively. Cook/Inside/Sabato: Lean D.",
+          "note": "Vasquez holds a Trump+4 southern NM district, having defeated the same Republican, Yvette Herrell, twice (she was the incumbent in 2022, the challenger in 2024). Cook/Inside/Sabato: Lean D.",
           "open": false
         },
         {
@@ -5825,7 +5834,7 @@
           "district": "NY-19",
           "incumbent": "Josh Riley",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Likely D",
           "pvp": "D+2",
           "note": "Riley flipped this upstate New York seat in 2024. Cook/Inside/Sabato: Lean D.",
           "open": false
@@ -5841,12 +5850,12 @@
         },
         {
           "district": "OH-09",
-          "incumbent": "Open seat (Kaptur retiring)",
+          "incumbent": "Marcy Kaptur",
           "party": "D",
           "rating": "Toss-up",
           "pvp": "R+5",
-          "note": "Marcy Kaptur retiring after 40+ years; open seat in a Trump+5 Toledo-area district. Cook/Sabato: Toss-up; Inside: Tilt R.",
-          "open": true
+          "note": "Marcy Kaptur is running for re-election after 40+ years, not retiring; Trump+5 Toledo-area district. Cook/Sabato: Toss-up; Inside: Tilt R.",
+          "open": false
         },
         {
           "district": "PA-07",
@@ -5879,9 +5888,9 @@
           "district": "TX-15",
           "incumbent": "Monica De La Cruz",
           "party": "R",
-          "rating": "Likely R",
+          "rating": "Toss-up",
           "pvp": "R+8",
-          "note": "De La Cruz won decisively in 2024. South Texas seat that has shifted R with Hispanic voter realignment. Cook: Likely R.",
+          "note": "De La Cruz won decisively in 2024, but Cook now rates this South Texas seat, which has shifted with Hispanic voter realignment, a Toss-up.",
           "open": false
         },
         {
@@ -5917,49 +5926,73 @@
           "party": "D",
           "rating": "Likely D",
           "pvp": "D+6",
-          "note": "Vindman (impeachment witness) won this Northern Virginia seat in 2024. Cook/Inside/Sabato: Likely D.",
+          "note": "Eugene Vindman won this Northern Virginia seat in 2024; his twin brother Alexander Vindman, not Eugene, was the 2019 impeachment witness. Cook/Inside/Sabato: Likely D.",
           "open": false
         },
         {
           "district": "WA-03",
-          "incumbent": "Open seat",
-          "party": "R",
+          "incumbent": "Marie Gluesenkamp Perez",
+          "party": "D",
           "rating": "Toss-up",
           "pvp": "R+4",
-          "note": "Marie Perez (D) may vacate; competitive SW Washington district. Cook/Inside: Toss-up; Sabato: Lean D.",
-          "open": true
+          "note": "Marie Gluesenkamp Perez (D) is running for re-election, not vacating; competitive SW Washington district. Cook/Inside: Toss-up; Sabato: Lean D.",
+          "open": false
         },
         {
           "district": "WA-09",
-          "incumbent": "Open seat (Smith retiring)",
+          "incumbent": "Adam Smith",
           "party": "D",
-          "rating": "Lean D",
+          "rating": "Safe D",
           "pvp": "D+22",
-          "note": "Adam Smith retiring after 28 years; safely Democratic suburban Seattle district. Cook: Solid D.",
-          "open": true
+          "note": "Adam Smith is running for re-election, not retiring; safely Democratic suburban Seattle district. Cook: Solid D.",
+          "open": false
         },
         {
           "district": "WI-03",
-          "incumbent": "Open seat (Van Orden ran for Senate)",
+          "incumbent": "Derrick Van Orden",
           "party": "R",
           "rating": "Toss-up",
           "pvp": "R+5",
-          "note": "Derrick Van Orden vacated for Senate; Trump+5 western Wisconsin seat now open. Cook/Inside/Sabato: Toss-up.",
-          "open": true
+          "note": "Derrick Van Orden is running for re-election — there is no 2026 Wisconsin Senate race; Trump+5 western Wisconsin seat. Cook/Inside/Sabato: Toss-up.",
+          "open": false
+        },
+        {
+          "district": "AZ-06",
+          "incumbent": "Juan Ciscomani",
+          "party": "R",
+          "open": false,
+          "rating": "Toss-up",
+          "pvp": "—"
+        },
+        {
+          "district": "NC-11",
+          "incumbent": "Open seat (Edwards)",
+          "party": "R",
+          "open": true,
+          "rating": "Toss-up",
+          "pvp": "—"
+        },
+        {
+          "district": "OH-07",
+          "incumbent": "Max Miller",
+          "party": "R",
+          "open": false,
+          "rating": "Toss-up",
+          "pvp": "—"
         }
       ],
       "path_to_majority": {
-        "current_r": 222,
-        "current_d": 213,
+        "current_r": 218,
+        "current_d": 214,
         "needed": 218,
-        "d_safe_likely": 196,
-        "r_safe_likely": 197,
+        "d_safe_likely": 205,
+        "r_safe_likely": 208,
         "tossups": 22,
-        "lean_d": 9,
+        "lean_d": 10,
         "lean_r": 11,
-        "d_needs_from_tossups": 22,
-        "r_needs_from_tossups": 21,
-        "summary": "Neither party reaches 218 on safe+likely alone. Democrats (196) must sweep all 9 lean-D seats plus win ≥13 of 22 toss-ups. Republicans (197) need the 11 lean-R seats plus ≥10 toss-ups. The 22 toss-ups are the entire ballgame."
+        "d_needs_from_tossups": 13,
+        "r_needs_from_tossups": 10,
+        "summary": "Neither party reaches 218 on safe+likely alone. Democrats (205) must win ≥13 of the 22 toss-ups. Republicans (208) need ≥10 of the 22 toss-ups to hold the majority. The 22 toss-ups decide the House."
       }
     },
     "governor": {
@@ -5984,16 +6017,16 @@
           "incumbent": "Open (Mike Dunleavy — TL)",
           "party": "R",
           "open": true,
-          "rating": "Likely R",
-          "note": "Dunleavy is term-limited after two terms. Alaska leans R but uses ranked-choice voting, introducing uncertainty."
+          "rating": "Toss-up",
+          "note": "Dunleavy is term-limited after two terms. Cook rates this a Toss Up."
         },
         {
           "state": "Arizona",
           "incumbent": "Katie Hobbs",
           "party": "D",
           "open": false,
-          "rating": "Toss-up",
-          "note": "Hobbs won by only 0.6% in 2022. Arizona is a premier presidential battleground making this a top toss-up."
+          "rating": "Lean D",
+          "note": "Hobbs won by only 0.6% in 2022. Cook rates this Lean D, not a Toss-up."
         },
         {
           "state": "Arkansas",
@@ -6001,7 +6034,7 @@
           "party": "R",
           "open": false,
           "rating": "Safe R",
-          "note": "Sanders won by 65 points in 2022. Arkansas is a deep Republican state."
+          "note": "Sanders won by about 28 points in 2022 (roughly 63%-35%), not 65 points."
         },
         {
           "state": "California",
@@ -6024,7 +6057,7 @@
           "incumbent": "Ned Lamont",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
+          "rating": "Safe D",
           "note": "Lamont re-elected in 2022. Connecticut is a reliably Democratic state."
         },
         {
@@ -6032,7 +6065,7 @@
           "incumbent": "Open (Ron DeSantis — TL)",
           "party": "R",
           "open": true,
-          "rating": "Likely R",
+          "rating": "Lean R",
           "note": "DeSantis is term-limited. Florida has shifted rightward but an open seat adds some uncertainty."
         },
         {
@@ -6040,8 +6073,8 @@
           "incumbent": "Open (Brian Kemp — TL)",
           "party": "R",
           "open": true,
-          "rating": "Lean R",
-          "note": "Kemp is term-limited. Georgia is a top battleground; the open seat makes this a competitive race."
+          "rating": "Toss-up",
+          "note": "Kemp is term-limited. Cook rates the open seat a Toss Up."
         },
         {
           "state": "Hawaii",
@@ -6064,7 +6097,7 @@
           "incumbent": "JB Pritzker",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
+          "rating": "Safe D",
           "note": "Pritzker is eligible for a third term. Illinois is solidly Democratic at the statewide level."
         },
         {
@@ -6072,7 +6105,7 @@
           "incumbent": "Open (Kim Reynolds — retiring)",
           "party": "R",
           "open": true,
-          "rating": "Likely R",
+          "rating": "Lean D",
           "note": "Reynolds announced she will not seek a third term. Iowa has shifted strongly Republican in recent cycles."
         },
         {
@@ -6080,7 +6113,7 @@
           "incumbent": "Open (Laura Kelly — TL)",
           "party": "D",
           "open": true,
-          "rating": "Likely R",
+          "rating": "Lean R",
           "note": "Kelly is term-limited. Kansas is a reliably Republican state and is expected to flip back to the GOP."
         },
         {
@@ -6088,7 +6121,7 @@
           "incumbent": "Open (Janet Mills — TL)",
           "party": "D",
           "open": true,
-          "rating": "Lean D",
+          "rating": "Safe D",
           "note": "Mills is term-limited. Maine is competitive and uses ranked-choice voting; leans Democratic."
         },
         {
@@ -6112,16 +6145,16 @@
           "incumbent": "Open (Gretchen Whitmer — TL)",
           "party": "D",
           "open": true,
-          "rating": "Toss-up",
-          "note": "Whitmer is term-limited. Michigan is the premier governor battleground of 2026 — a genuine toss-up open seat."
+          "rating": "Lean D",
+          "note": "Whitmer is term-limited. Cook rates the open seat Lean D."
         },
         {
           "state": "Minnesota",
-          "incumbent": "Open (Tim Walz — not running)",
+          "incumbent": "Open (Tim Walz ended re-election bid, 5 Jan 2026)",
           "party": "D",
           "open": true,
-          "rating": "Lean D",
-          "note": "Walz will not seek re-election after his 2024 VP run. Minnesota leans Democratic in statewide races."
+          "rating": "Safe D",
+          "note": "Walz ended his campaign on 5 Jan 2026 amid state fraud scrutiny. Cook rates the open seat Solid/Safe D."
         },
         {
           "state": "Nebraska",
@@ -6144,7 +6177,7 @@
           "incumbent": "Kelly Ayotte",
           "party": "R",
           "open": false,
-          "rating": "Lean R",
+          "rating": "Likely R",
           "note": "Ayotte won the 2024 race (2-year term). NH is competitive but Ayotte has strong crossover appeal."
         },
         {
@@ -6152,7 +6185,7 @@
           "incumbent": "Open (MLG — TL)",
           "party": "D",
           "open": true,
-          "rating": "Likely D",
+          "rating": "Safe D",
           "note": "Michelle Lujan Grisham is term-limited. New Mexico has trended Democratic and the nominee is favored."
         },
         {
@@ -6160,7 +6193,7 @@
           "incumbent": "Kathy Hochul",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
+          "rating": "Safe D",
           "note": "Hochul survived a competitive 2022 race. New York leans heavily Democratic in statewide races."
         },
         {
@@ -6168,8 +6201,8 @@
           "incumbent": "Open (Mike DeWine — TL)",
           "party": "R",
           "open": true,
-          "rating": "Likely R",
-          "note": "DeWine is term-limited. Ohio has shifted Republican but the open seat could draw strong Democratic challengers."
+          "rating": "Toss-up",
+          "note": "DeWine is term-limited. Cook rates the open seat a Toss Up."
         },
         {
           "state": "Oklahoma",
@@ -6184,7 +6217,7 @@
           "incumbent": "Tina Kotek",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
+          "rating": "Lean D",
           "note": "Kotek won narrowly in a 3-way 2022 race. Oregon trends Democratic, especially in a two-party contest."
         },
         {
@@ -6192,32 +6225,32 @@
           "incumbent": "Josh Shapiro",
           "party": "D",
           "open": false,
-          "rating": "Likely D",
+          "rating": "Safe D",
           "note": "Shapiro won by 15 points in 2022. Pennsylvania is a key swing state with a strong Democratic incumbent."
         },
         {
           "state": "Rhode Island",
-          "incumbent": "Dan McKee",
+          "incumbent": "Open seat (McKee not renominated)",
           "party": "D",
-          "open": false,
+          "open": true,
           "rating": "Safe D",
-          "note": "Rhode Island is a deep blue state. Republicans have not won the governorship since 2010."
+          "note": "Cook lists Rhode Island as OPEN; McKee is not the Democratic nominee."
         },
         {
           "state": "South Carolina",
-          "incumbent": "Henry McMaster",
-          "party": "R",
-          "open": false,
-          "rating": "Safe R",
-          "note": "McMaster re-elected by 12 points in 2022. South Carolina is a reliably Republican state."
-        },
-        {
-          "state": "South Dakota",
-          "incumbent": "Open (Kristi Noem — TL)",
+          "incumbent": "Open (Henry McMaster — TL)",
           "party": "R",
           "open": true,
           "rating": "Safe R",
-          "note": "Noem is term-limited. South Dakota is a deep Republican state with no competitive race expected."
+          "note": "McMaster is term-limited. His 2022 re-election margin was about 17 points, not 12."
+        },
+        {
+          "state": "South Dakota",
+          "incumbent": "Larry Rhoden",
+          "party": "R",
+          "open": false,
+          "rating": "Safe R",
+          "note": "Noem left in Jan 2025 to become DHS Secretary. Larry Rhoden is governor and is on the ballot."
         },
         {
           "state": "Tennessee",
@@ -6232,7 +6265,7 @@
           "incumbent": "Greg Abbott",
           "party": "R",
           "open": false,
-          "rating": "Safe R",
+          "rating": "Lean R",
           "note": "Abbott won by 11 points in 2022. Texas is reliably Republican at the statewide level."
         },
         {
@@ -6245,11 +6278,11 @@
         },
         {
           "state": "Wisconsin",
-          "incumbent": "Tony Evers",
+          "incumbent": "Open (Tony Evers — not running)",
           "party": "D",
-          "open": false,
+          "open": true,
           "rating": "Toss-up",
-          "note": "Wisconsin is the ultimate national battleground. Evers narrowly won in both 2018 and 2022."
+          "note": "Evers is not running for re-election. Cook still rates this a Toss Up."
         },
         {
           "state": "Wyoming",
@@ -6261,12 +6294,21 @@
         }
       ],
       "path_to_majority": {
-        "summary": "Republicans currently hold 27 governorships vs. Democrats 23. Of the 36 races in 2026, 18 lean Republican, 14 lean Democratic, and 4 are toss-ups. The key open seats in Michigan, Georgia, and Kansas, plus incumbent battles in Arizona and Wisconsin, will define the 2026 governor map."
+        "summary": "Republicans currently hold 26 governorships vs. Democrats 24. Of the 36 races in 2026, 14 lean Republican, 17 lean Democratic, and 5 are toss-ups (AK, GA, NV, OH, WI). Key open seats in Georgia, Michigan and Ohio, plus incumbent battles in Arizona, Nevada and Wisconsin, will define the 2026 governor map."
+      },
+      "ratings_summary": {
+        "safe_r": 10,
+        "likely_r": 1,
+        "lean_r": 3,
+        "toss_up": 5,
+        "lean_d": 4,
+        "likely_d": 0,
+        "safe_d": 13
       }
     }
   },
   "redistricting": {
-    "last_updated": "",
+    "last_updated": "2026-10-05",
     "scoreboard": {
       "baseline": {
         "r_gains": 0,
@@ -6292,7 +6334,7 @@
         "state": "California",
         "code": "CA",
         "status": "Enacted",
-        "summary": "New map passed by independent commission favouring Democrats",
+        "summary": "New map approved by voters via Proposition 50 (legislature-drawn, bypassing the independent commission), favouring Democrats",
         "impact": "+3D projected",
         "url": "https://ballotpedia.org/Redistricting_in_California_ahead_of_the_2026_elections"
       },
@@ -6324,8 +6366,8 @@
         "state": "Utah",
         "code": "UT",
         "status": "Enacted",
-        "summary": "Litigation led to new court-ordered map",
-        "impact": "+1R projected",
+        "summary": "Utah's top court imposed a new congressional map that helps Democrats (UT-01 now OPEN, rated Solid Democrat)",
+        "impact": "+1D projected",
         "url": "https://ballotpedia.org/Redistricting_in_Utah_ahead_of_the_2026_elections"
       },
       {
@@ -6339,7 +6381,7 @@
       {
         "state": "Florida",
         "code": "FL",
-        "status": "Pending",
+        "status": "Enacted",
         "summary": "Gov. DeSantis called special session April 2026 -- new map passed",
         "impact": "+3R projected",
         "url": "https://ballotpedia.org/Redistricting_in_Florida_ahead_of_the_2026_elections"
@@ -6363,15 +6405,15 @@
       {
         "state": "Louisiana",
         "code": "LA",
-        "status": "In Litigation",
-        "summary": "Primary suspended after Louisiana v. Callais ruling -- new map being drawn",
-        "impact": "Contested",
+        "status": "Enacted",
+        "summary": "Primary suspended after Louisiana v. Callais ruling; new map in use for 2026 -- LA-06 (Fields's former seat) now rated Solid R",
+        "impact": "+1R projected",
         "url": "https://ballotpedia.org/Redistricting_in_Louisiana_ahead_of_the_2026_elections"
       },
       {
         "state": "Tennessee",
         "code": "TN",
-        "status": "Pending",
+        "status": "Enacted",
         "summary": "Legislature passed map carving up majority-Black Memphis district",
         "impact": "+1R projected",
         "url": "https://ballotpedia.org/Redistricting_in_Tennessee_ahead_of_the_2026_elections"
@@ -6379,7 +6421,7 @@
       {
         "state": "Virginia",
         "code": "VA",
-        "status": "Enacted",
+        "status": "Struck down",
         "summary": "Supreme Court struck down Democratic redistricting plan",
         "impact": "No change",
         "url": "https://ballotpedia.org/Redistricting_in_Virginia_ahead_of_the_2026_elections"
@@ -6598,9 +6640,10 @@
   },
   "congress_approval": {
     "combined": {
-      "approve": 15,
-      "disapprove": 80,
-      "trend": 0
+      "approve": 16,
+      "disapprove": 74,
+      "trend": 0,
+      "as_of": "May 2026 (Gallup) — most recent reading on file"
     },
     "senate": {
       "approve": 18,
@@ -6630,13 +6673,18 @@
     "history": [
       {
         "month": "Jan 2025",
-        "approve": 19,
-        "disapprove": 71
+        "approve": 17,
+        "disapprove": 76
+      },
+      {
+        "month": "Feb 2025",
+        "approve": 29,
+        "disapprove": 68
       },
       {
         "month": "Mar 2025",
-        "approve": 17,
-        "disapprove": 73
+        "approve": 31,
+        "disapprove": 65
       },
       {
         "month": "Jun 2025",
@@ -6657,6 +6705,11 @@
         "month": "Mar 2026",
         "approve": 16,
         "disapprove": 74
+      },
+      {
+        "month": "Apr 2026",
+        "approve": 10,
+        "disapprove": 86
       },
       {
         "month": "May 2026",
@@ -6739,47 +6792,32 @@
     "key_events": [
       {
         "date": "Jan 2025",
-        "event": "Speaker vote takes 3 rounds -- slim 3-seat majority exposed immediately",
-        "impact": "negative"
-      },
-      {
-        "date": "Feb 2025",
-        "event": "44-day government shutdown begins -- longest all-department shutdown in US history",
-        "impact": "negative"
-      },
-      {
-        "date": "Mar 2025",
-        "event": "Shutdown ends with continuing resolution; no major policy wins for either side",
+        "event": "Speaker Johnson re-elected on the first ballot, 3 Jan 2025, after two holdout members switched their votes",
         "impact": "neutral"
       },
       {
-        "date": "Jun 2025",
-        "event": "Debt ceiling crisis -- Treasury uses extraordinary measures for 6 weeks before deal",
-        "impact": "negative"
-      },
-      {
-        "date": "Aug 2025",
-        "event": "76-day DHS and border agencies shutdown -- second record-breaking closure of the 119th Congress",
-        "impact": "negative"
-      },
-      {
-        "date": "Nov 2025",
-        "event": "Second shutdown ends; Freedom Caucus blocks omnibus; CR extended to March",
+        "date": "Jul 2025",
+        "event": "Debt limit raised as part of the July 2025 reconciliation law",
         "impact": "neutral"
       },
       {
-        "date": "Jan 2026",
-        "event": "Speaker faces third motion to vacate threat; survives by 2 votes",
+        "date": "Oct-Nov 2025",
+        "event": "First FY2026 government shutdown, 1 Oct-12 Nov 2025 (43 days)",
         "impact": "negative"
       },
       {
-        "date": "Mar 2026",
-        "event": "Third near-shutdown averted by 1 vote at 11:45pm; CR extended through August",
-        "impact": "neutral"
+        "date": "Jan-Feb 2026",
+        "event": "Second, brief funding lapse, 31 Jan-2 Feb 2026 (3 days)",
+        "impact": "negative"
+      },
+      {
+        "date": "Feb-Apr 2026",
+        "event": "Third lapse shuts down DHS and related agencies for 76 days beginning 14 Feb 2026 -- the longest shutdown in US history",
+        "impact": "negative"
       },
       {
         "date": "Apr 2026",
-        "event": "119th Congress passes fewest bills of any Congress since records began per GovTrack",
+        "event": "119th Congress passes fewest bills of any Congress since records began, per GovTrack",
         "impact": "negative"
       }
     ]
@@ -6858,7 +6896,7 @@
         "wave": "none",
         "wave_party": "D",
         "nickname": "Impeachment Backlash",
-        "context": "Only second time since WWII that the president's party gained House seats in midterms. Republican impeachment of Clinton backfired. Booming economy and Clinton's 66% approval drove Democratic gains.",
+        "context": "The first post-WWII midterm in which the president's party gained House seats. Republican impeachment of Clinton backfired. Booming economy and Clinton's 66% approval drove Democratic gains.",
         "key_factors": [
           "Clinton impeachment backfired on Republicans",
           "Record-high presidential approval",
@@ -6898,10 +6936,10 @@
         "wave": "none",
         "wave_party": "R",
         "nickname": "Post-9/11 Rally",
-        "context": "Rare midterm gain for the president's party. 9/11 national unity and Bush's 63% approval — highest any president heading into midterms — propelled Republicans to gains in both chambers. Democrats struggled to oppose the Iraq War.",
+        "context": "Rare midterm gain for the president's party. 9/11 national unity and Bush's 63% approval — propelled Republicans to gains in both chambers. Democrats struggled to oppose the Iraq War.",
         "key_factors": [
           "9/11 national unity rally",
-          "Highest pre-midterm presidential approval in modern history",
+          "Among the highest pre-midterm presidential approval ratings in modern history",
           "Democrats divided on Iraq War authorisation",
           "Republicans flipped Senate majority"
         ]
@@ -6938,7 +6976,7 @@
         "wave": "large",
         "wave_party": "D",
         "nickname": "Iraq War Referendum",
-        "context": "Iraq War dominated the election. Mark Foley congressional page scandal broke weeks before Election Day. Nancy Pelosi became the first female Speaker. Democrats flipped both chambers simultaneously for the first time since 1986.",
+        "context": "Iraq War dominated the election. Mark Foley congressional page scandal broke weeks before Election Day. Nancy Pelosi became the first female Speaker. Democrats flipped both chambers simultaneously for the first time since 1954.",
         "key_factors": [
           "Iraq War deeply unpopular",
           "Mark Foley page scandal",
@@ -7179,11 +7217,6 @@
         "estimated": false
       },
       {
-        "month": "undefined 2025",
-        "all_items": 2.6,
-        "estimated": false
-      },
-      {
         "month": "Jan 2026",
         "all_items": 2.4,
         "estimated": false
@@ -7212,10 +7245,15 @@
         "month": "Jun 2026",
         "all_items": 3.5,
         "estimated": false
+      },
+      {
+        "month": "Aug 2026",
+        "all_items": 3.4,
+        "estimated": false
       }
     ],
-    "current": 3.5,
-    "month": "Jun 2026",
+    "current": 3.4,
+    "month": "Aug 2026",
     "updated": "2026-07-29"
   },
   "state_polls": {

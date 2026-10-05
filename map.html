@@ -534,7 +534,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <div class="section-hdr" style="margin-bottom:10px">
     <div>
       <div class="section-title">House district map &#8212; all 435 districts, 2026</div>
-      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 46 individually-tracked battleground districts (Ballotpedia 2026 battlegrounds). Click any highlighted district for detail.</div>
+      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 49 individually-tracked battleground districts (Ballotpedia 2026 battlegrounds plus Cook-rated toss-ups). Several 2026 races also run on new maps (at least CA, FL, MO, NC, OH, TX, UT, plus TN and LA redraws) — district colouring reflects the current 2026 boundaries and ratings, not prior-cycle results. Click any highlighted district for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -577,19 +577,19 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- COMPETITIVE RACES -->
   <div class="callout">
     <div class="callout-label">Path to the majority</div>
-    Democrats need a net gain of <strong>3 seats</strong> to reclaim the House majority (218). Ballotpedia identifies <strong>46 battleground districts</strong> in 2026 &#8212; 17 Lean D, 17 Toss-up, 5 Lean R, 4 Likely R, 3 Likely D, with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
+    Democrats need a net gain of <strong>4 seats</strong> (214&rarr;218) to reclaim the House majority. This tracker follows <strong>49 battleground districts</strong> in 2026 &#8212; 23 Toss-up, 10 Lean D, 6 Likely D, 5 Safe D, 3 Lean R, 1 Likely R, 1 Safe R &#8212; with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
   </div>
 
   <!-- SEAT DISTRIBUTION CHART -->
   <div class="chart-card">
     <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Full rating spectrum across all 435 House seats. The 46 individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current holder. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats, on current 2026 district boundaries. The 49 individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current 2026 rating. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
     <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
     <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
   </div>
 
   <div class="chart-card">
-    <div class="card-title">46 battleground districts</div>
+    <div class="card-title">49 battleground districts</div>
     <div class="card-sub">All 46 Ballotpedia-identified 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
     <table class="race-table" id="comp-table">
       <thead>
@@ -625,7 +625,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
     <div class="faction-controls">
       <select class="faction-sel" id="house-faction-sel" onchange="renderHouseFaction(this.value)">
-        <option value="ALL" selected>All Factions &mdash; 430 members</option>
+        <option value="ALL" selected>All Factions &mdash; 433 members</option>
         <option value="MD">Moderate Democrats (MD) &mdash; 128 members</option>
         <option value="PD">Progressive Democrats (PD) &mdash; 84 members</option>
         <option value="MR">MAGA Republicans (MR) &mdash; 140 members</option>
@@ -652,7 +652,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
 
     <div class="chart-card">
-      <div class="card-title" id="house-faction-card-title">All House Factions &mdash; 430 members</div>
+      <div class="card-title" id="house-faction-card-title">All House Factions &mdash; 433 members</div>
       <input class="faction-table-search" type="search" placeholder="Search by name or district&hellip;" oninput="filterFactionTable('house',this.value)">
       <table class="race-table" id="house-faction-table">
         <thead id="house-faction-thead"><tr><th>Faction</th><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
@@ -755,7 +755,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- CONTEXT -->
   <div class="callout">
     <div class="callout-label">Governor context &#8212; 2026</div>
-    36 states hold gubernatorial elections in 2026. <strong>12 are open seats</strong> due to term limits or retirements, including Michigan, California, Florida, Georgia, and Kansas. The 4 toss-up races &#8212; Arizona, Michigan, Nevada, and Wisconsin &#8212; will define the governor map. Historical first-midterm patterns typically cost the president&#8217;s party 3&#8211;5 governorships.
+    36 states hold gubernatorial elections in 2026. <strong>19 are open seats</strong> due to term limits or retirements: AL, AK, CA, CO, FL, GA, IA, KS, ME, MI, MN, NM, OH, OK, RI, SC, TN, WI, and WY. The 5 toss-up races &#8212; Alaska, Georgia, Nevada, Ohio, and Wisconsin &#8212; will define the governor map.
   </div>
 
   <!-- FILTER + TABLE -->
@@ -825,7 +825,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
       <h4>America First Republican</h4>
       <ul>
-        <li>Publicly critical of the Trump administration</li>
+        <li>Generally Trump-aligned, but distinguished from MAGA by an explicit non-interventionist foreign-policy emphasis</li>
         <li>Sceptical of foreign wars and overseas military spending</li>
         <li>Wants less U.S. involvement in international conflicts (like Ukraine)</li>
         <li>Focuses on domestic manufacturing and jobs over global trade deals</li>
@@ -1755,7 +1755,7 @@ const FACTION_NAMES  = {
   MD:'Moderate Democrats',PD:'Progressive Democrats',
   MR:'MAGA Republicans',AR:'America First Republicans',TR:'Traditional Republicans',IND:'Independent'
 };
-const FACTION_ORDER = ['MR','AR','TR','MD','PD'];
+const FACTION_ORDER = ['MR','AR','TR','MD','PD','IND'];
 
 let _factionData=null,_factionFetching=false,_factionWaiters=[];
 let _hFacZoom=null,_sFacZoom=null;

@@ -10,7 +10,7 @@
  *  3. Nate Silver Bulletin   → approval.trump                (Datawrapper CSV direct API)
  *     Chart: datawrapper.dwcdn.net/kSCt4/ — fetches latest version, downloads CSV
  *  4. Gallup                 → congress_approval             (HTML table; AI backup)
- *  5. Ballotpedia            → retirements totals/split      (regex; AI for R/D split)
+ *  5. Ballotpedia            → retirements totals/split      (list tables; Wikipedia fallback)
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
  * Env vars (both optional — every source has a non-AI path; see ai.js):
@@ -83,14 +83,24 @@ function parseCSV(text) {
   return { idx, rows: lines.slice(1) };
 }
 
+// Fetches a URL, reads the body and logs status and size for every source.
+// Treats non-2xx, 202 (often a bot challenge) and bodies under opts.minBytes as
+// failures. Returns a minimal response with text() and json().
 async function safeFetch(url, opts = {}) {
+  const u = new URL(url);
+  const { label = u.hostname + u.pathname.replace(/^.*\//, '/'), minBytes = 0, headers, ...rest } = opts;
   const res = await fetch(url, {
-    headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' },
+    headers: headers || { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' },
     timeout: 25000,
-    ...opts,
+    ...rest,
   });
+  const body = await res.text();
+  const bytes = Buffer.byteLength(body);
+  console.log(`  [fetch] ${label}: HTTP ${res.status}, ${bytes} bytes`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res;
+  if (res.status === 202) throw new Error('HTTP 202 (likely a bot challenge)');
+  if (bytes < minBytes) throw new Error(`body ${bytes} bytes, under ${minBytes} — likely a bot challenge or empty page`);
+  return { status: res.status, text: async () => body, json: async () => JSON.parse(body) };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -458,88 +468,166 @@ ${text}`,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. RETIREMENTS — Groq + Ballotpedia
+// 5. RETIREMENTS — Ballotpedia list tables (Wikipedia fallback), no AI
 // ─────────────────────────────────────────────────────────────────────────────
+//
+// Ballotpedia's page has one table per category ("Retiring from public office,
+// 2026", "Running for governor, 2026", …) under a Senate and a House heading.
+// Every row is one member, so chamber, party and retiring-vs-other-office are
+// counted directly from the rows. Ballotpedia counts voting members only and
+// excludes senators not up in 2026 who are running for another office.
+
+const BP_RETIRE_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
+const WIKI_API = 'https://en.wikipedia.org/w/api.php?action=parse&prop=wikitext&format=json&formatversion=2';
+
+function partyKey(text) {
+  if (/republican/i.test(text)) return 'republican';
+  if (/democrat|\bDFL\b/i.test(text)) return 'democrat';
+  return 'others';
+}
+
+function emptyCounts() {
+  return { total: 0, senate: 0, house: 0, republican: 0, democrat: 0, others: 0,
+           senate_retiring: 0, senate_other_office: 0, house_retiring: 0, house_other_office: 0 };
+}
+
+// "Oct. 2, 2026" / "Sept. 30, 2026" → Date at UTC midnight (no timezone drift)
+function parseUtcDate(text) {
+  return new Date(text.replace('.', '').replace(/^Sept\b/, 'Sep') + ' UTC');
+}
+
+function parseBallotpediaRetirements(html) {
+  const cell = c => stripHtml(c).replace(/\[\d+\]/g, '').replace(/\s+/g, ' ').trim();
+  const counts = emptyCounts();
+  const tableRe = /<table[^>]*>[\s\S]*?<\/table>/gi;
+  let m;
+  while ((m = tableRe.exec(html)) !== null) {
+    const table = m[0];
+    const caption = cell((table.match(/<caption[^>]*>([\s\S]*?)<\/caption>/i) || [])[1] || '');
+    const rows = (table.match(/<tr[\s\S]*?<\/tr>/gi) || [])
+      .map(r => (r.match(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/gi) || []).map(cell));
+    // Only the "not seeking re-election" lists: Name | Party | Seat | Date announced
+    if (!rows.length || rows[0].join('|') !== 'Name|Party|Seat|Date announced') continue;
+    const retiring = /retiring from public office/i.test(caption);
+    for (const row of rows.slice(1)) {
+      if (row.length < 3 || !row[0]) continue;
+      const chamber = /congressional district/i.test(row[2]) ? 'house' : 'senate';
+      counts.total++;
+      counts[chamber]++;
+      counts[partyKey(row[1])]++;
+      counts[`${chamber}_${retiring ? 'retiring' : 'other_office'}`]++;
+    }
+  }
+  // Cross-check against the page's own summary sentence
+  const text = stripHtml(html);
+  const summary = text.match(/As of ([A-Z][a-z]+\.? \d{1,2}, \d{4}), (\d+) voting members of the U\.S\. Congress[^.]*?(\d+) members of the U\.S\. Senate[^.]*?(\d+) members of the U\.S\. House/i);
+  return {
+    counts,
+    asOf: summary ? parseUtcDate(summary[1]) : null,
+    summary: summary ? { total: +summary[2], senate: +summary[3], house: +summary[4] } : null,
+  };
+}
+
+// Wikipedia fallback: House "Retirements" lists ({{ushr|ST|N|X}} lines under
+// ===Democratic=== / ===Republican===) and the Senate "Retirements" table
+// ({{Party shading/…}} cells). Non-voting delegates are excluded.
+async function fetchWikipediaRetirements() {
+  const wikitext = async (page, sectionName) => {
+    const sections = await (await safeFetch(`${WIKI_API.replace('prop=wikitext', 'prop=sections')}&page=${page}`, { label: `Wikipedia ${page} sections` })).json();
+    const sec = (sections.parse?.sections || []).find(s => s.line.trim().toLowerCase() === sectionName);
+    if (!sec) throw new Error(`No "${sectionName}" section on ${page}`);
+    const res = await safeFetch(`${WIKI_API}&page=${page}&section=${sec.index}`, { label: `Wikipedia ${page} §${sec.index}` });
+    return (await res.json()).parse?.wikitext || '';
+  };
+  const counts = emptyCounts();
+
+  const house = await wikitext('2026_United_States_House_of_Representatives_elections', 'retirements');
+  let party = null;
+  for (const line of house.split('\n')) {
+    const heading = line.match(/^===\s*(Democratic|Republican|[^=]+?)\s*===/);
+    if (heading) { party = heading[1]; continue; }
+    const seat = line.match(/^#\s*\{\{ushr\|([A-Z]{2})\|/);
+    if (!seat || !party || /^Summary$/i.test(party)) continue;
+    if (['DC', 'PR', 'GU', 'VI', 'AS', 'MP'].includes(seat[1])) continue; // delegates
+    counts.total++; counts.house++;
+    counts[partyKey(party)]++;
+    counts[/retiring to .*run for|to run for/i.test(line) ? 'house_other_office' : 'house_retiring']++;
+  }
+
+  const senate = await wikitext('2026_United_States_Senate_elections', 'retirements');
+  for (const shading of senate.match(/\{\{Party shading\/[^}]+\}\}/g) || []) {
+    counts.total++; counts.senate++;
+    counts[partyKey(shading)]++;
+  }
+  // The Senate table doesn't say who is running for another office
+  counts.senate_retiring = null;
+  counts.senate_other_office = null;
+  return counts;
+}
+
+function retirementsAddUp(c) {
+  return c.total > 20 && c.total < 250
+    && c.senate + c.house === c.total
+    && c.republican + c.democrat + c.others === c.total;
+}
 
 async function fetchRetirements(data) {
-  console.log('[5/6] Retirements (Ballotpedia — regex, AI for R/D split)…');
-  const BP_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
+  console.log('[5/6] Retirements (Ballotpedia list tables, Wikipedia fallback)…');
+  let counts = null, source = null, asOf = null;
 
-  let html;
   try {
-    const res = await safeFetch(BP_URL, {
+    const res = await safeFetch(BP_RETIRE_URL, {
+      label: 'Ballotpedia',
+      minBytes: 50 * 1024, // smaller means a bot challenge or an empty page
       headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
     });
-    html = await res.text();
-    const looksLikeChallenge = res.status === 202 || html.length < 20000 || !/not running for re-election/i.test(html);
-    console.log(`  [Ballotpedia] HTTP ${res.status}, ${html.length} bytes — ${looksLikeChallenge ? 'looks like a bot challenge or empty page' : 'full page'}`);
+    const parsed = parseBallotpediaRetirements(await res.text());
+    const c = parsed.counts;
+    console.log(`  [Ballotpedia] Table rows: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
+    const s = parsed.summary;
+    if (!s) {
+      console.warn('  [Ballotpedia] Summary sentence not found — cannot cross-check table counts');
+    } else if (s.total !== c.total || s.senate !== c.senate || s.house !== c.house) {
+      console.warn(`  [Ballotpedia] Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})`);
+    }
+    if (s && s.total === c.total && s.senate === c.senate && s.house === c.house) {
+      counts = c; source = 'Ballotpedia'; asOf = parsed.asOf;
+    }
   } catch (err) {
-    console.warn(`  [Ballotpedia] Fetch failed: ${err.message}`);
+    console.warn(`  [Ballotpedia] Failed: ${err.message} — falling back to Wikipedia`);
+  }
+
+  if (!counts) {
+    try {
+      const c = await fetchWikipediaRetirements();
+      console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
+      counts = c; source = 'Wikipedia'; asOf = new Date();
+    } catch (err) {
+      console.warn(`  [Wikipedia] Failed: ${err.message}`);
+    }
+  }
+
+  if (!counts || !retirementsAddUp(counts)) {
+    if (counts) console.warn(`  [Retirements] Counts don't add up — keeping old values: ${JSON.stringify(counts)}`);
+    else console.warn('  [Retirements] No source succeeded — keeping old values');
     return false;
   }
 
-  // Strip HTML and find the summary paragraph (it appears after the page JS noise)
-  const fullText = stripHtml(html);
+  const r = data.retirements = data.retirements || {};
+  const prev = r.total;
+  Object.assign(r, counts);
+  const otherOffice = (counts.senate_other_office ?? 0) + counts.house_other_office;
+  if (counts.senate_other_office !== null) r.seeking_office_pct = Math.round(100 * otherOffice / counts.total);
+  r.source = source;
+  r.source_url = source === 'Ballotpedia' ? BP_RETIRE_URL : 'https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections#Retirements';
+  r.as_of = (asOf && !isNaN(asOf) ? asOf : new Date()).toISOString().slice(0, 10);
+  // Keep the 2026 bar of the historical chart in step with the live counts
+  const bar2026 = (r.historical_chart || []).find(d => d.year === '2026');
+  if (bar2026) { bar2026.house = counts.house; bar2026.senate = counts.senate; }
 
-  // ── Regex-first: Ballotpedia always has a sentence like:
-  // "As of [date], 68 voting members of the U.S. Congress — 11 members of the U.S. Senate
-  //  and 57 members of the U.S. House of Representatives — are not seeking re-election"
-  const summaryMatch = fullText.match(
-    /(\d+)\s+voting members of the U\.S\. Congress[^.]*?(\d+)\s+members of the U\.S\. Senate[^.]*?(\d+)\s+members of the U\.S\. House/i
-  );
-
-  let total = null, senate = null, house = null;
-  if (summaryMatch) {
-    total  = parseInt(summaryMatch[1], 10);
-    senate = parseInt(summaryMatch[2], 10);
-    house  = parseInt(summaryMatch[3], 10);
-    console.log(`  [Regex] total=${total} senate=${senate} house=${house}`);
-  }
-
-  // ── AI: extract R/D breakdown and verify/supplement totals
-  // Send the key summary paragraphs (skip the first 5k of JS boilerplate)
-  const summaryStart = fullText.indexOf('voting members of the U.S. Congress');
-  const relevantText = summaryStart > 0
-    ? fullText.slice(Math.max(0, summaryStart - 200), summaryStart + 4000)
-    : fullText.slice(0, 8000);
-
-  const result = await aiExtract(
-    'You are a precise data extraction assistant. Extract congressional retirement counts from Ballotpedia. Return valid JSON with integers only.',
-    `From this Ballotpedia summary about US Congress members NOT seeking re-election in 2026, extract the counts.
-The text contains sentences like "X Democrats and Y Republicans" for Senate and House separately.
-Sum them across all categories (retiring + running for other office) to get total R and total D.
-
-Return JSON: {"total": INTEGER, "republican": INTEGER, "democrat": INTEGER, "house": INTEGER, "senate": INTEGER}
-
-Text:
-${relevantText}`,
-    { label: 'Retirements R/D split' }
-  );
-
-  // Merge regex (more reliable for totals) with AI (better for R/D split)
-  const merged = {
-    total:      total  ?? result?.total,
-    senate:     senate ?? result?.senate,
-    house:      house  ?? result?.house,
-    republican: result?.republican || null,
-    democrat:   result?.democrat   || null,
-  };
-
-  if (merged.total > 20 && merged.total < 250) {
-    const prev = data.retirements.total;
-    data.retirements.total  = merged.total;
-    if (merged.senate > 0 && merged.senate < 100) data.retirements.senate = merged.senate;
-    if (merged.house  > 0 && merged.house  < 200) data.retirements.house  = merged.house;
-    if (merged.republican > 0 && merged.republican < 200) data.retirements.republican = merged.republican;
-    if (merged.democrat   > 0 && merged.democrat   < 200) data.retirements.democrat   = merged.democrat;
-
-    const changed = prev !== merged.total ? ` (was ${prev})` : '';
-    console.log(`  Retirements: ${merged.total} total${changed} (R=${merged.republican ?? '?'} D=${merged.democrat ?? '?'} House=${merged.house} Senate=${merged.senate})`);
-    return true;
-  }
-
-  console.warn(`  [Retirements] Could not extract valid counts: ${JSON.stringify(merged)}`);
-  return false;
+  const changed = prev !== counts.total ? ` (was ${prev})` : '';
+  console.log(`  Retirements [${source}, as of ${r.as_of}]: ${counts.total} total${changed} — Senate ${counts.senate}, House ${counts.house}; R ${counts.republican}, D ${counts.democrat}, other ${counts.others}`);
+  return true;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -587,8 +675,7 @@ async function fetchRSSFallback(data, needsTrump, needsCongress) {
   for (const feed of RSS_FEEDS) {
     let items = [];
     try {
-      const res = await fetch(feed.url, { headers: { 'User-Agent': 'DCDossier/2.0' }, timeout: 12000 });
-      if (!res.ok) continue;
+      const res = await safeFetch(feed.url, { label: `RSS ${feed.source}`, headers: { 'User-Agent': 'DCDossier/2.0' }, timeout: 12000 });
       const xml = await res.text();
       const parsed = parser.parse(xml);
       const channel = parsed?.rss?.channel || parsed?.feed || {};
@@ -599,7 +686,10 @@ async function fetchRSSFallback(data, needsTrump, needsCongress) {
         hints: feed.hints || [],
         source: feed.source,
       }));
-    } catch { continue; }
+    } catch (err) {
+      console.warn(`  [RSS] ${feed.source}: ${err.message}`);
+      continue;
+    }
 
     for (const item of items) {
       const text  = `${item.title} ${item.description}`;

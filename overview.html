@@ -596,7 +596,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="chart-card">
     <div class="card-title">Chamber breakdown &#8212; Senate vs House departures in 2026</div>
-    <div class="card-sub">14 senators and 58 House members have announced they will not return (NPR, 29 May 2026). Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
+    <div class="card-sub"><span id="ret-chamber-sub">&#8230;</span> have announced they will not seek re-election. <span class="ret-src">Source: Ballotpedia</span>.<sup>*</sup></div>
     <table class="chamber-table">
       <thead>
         <tr>
@@ -610,6 +610,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
         <tr><td colspan="4" style="color:var(--t4);text-align:center;padding:18px">Loading&#8230;</td></tr>
       </tbody>
     </table>
+    <div class="chart-note"><sup>*</sup> Senators who are not up for re-election in 2026 but are running for another office mid-term (such as Bennet and Klobuchar, both running for governor) are not counted.</div>
     <div class="chart-note">Source: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, NPR tracker, <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>. Senate comparison by year: 8 in 2024, 6 in 2022, 4 in 2018.</div>
   </div>
 
@@ -628,7 +629,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="chart-card">
     <div class="card-title">Where departing members are headed &#8212; who is running for other offices</div>
-    <div class="card-sub">About 39% of all departing members pursue other offices rather than retire outright. 14 are running for governorships, including Sens. Bennet (CO) and Klobuchar (MN), who are not up for Senate re-election in 2026 and would keep their seats if they lose. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
+    <div class="card-sub">About <span class="ret-pct">&#8230;</span>% of all departing members pursue other offices rather than retire outright. 14 are running for governorships, including Sens. Bennet (CO) and Klobuchar (MN), who are not up for Senate re-election in 2026 and would keep their seats if they lose. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
     <div style="position:relative;height:240px;max-width:440px;margin:0 auto"><canvas id="c-destdough"></canvas></div>
     <div class="chart-note">Source: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, NPR tracker. 28 of 72 announced departures (NPR, 29 May 2026) are running for other offices rather than retiring outright. Of these: 14 running for governor (incl. Bennet and Klobuchar, who are not up for Senate re-election in 2026), 13 for Senate, 1 for state AG. See also: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>.</div>
   </div>
@@ -666,7 +667,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <div class="stat-strip">
     <div class="stat-box"><div class="stat-n" style="color:#9B2828">72</div><div class="stat-l">1992 previous record &#8212; bank scandal + redistricting</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--t1)">40</div><div class="stat-l">Modern average per cycle (post-WWII)</div></div>
-    <div class="stat-box"><div class="stat-n" style="color:var(--orange)">72</div><div class="stat-l">2026 &#8212; ties the record as of 29 May 2026 (NPR)</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--orange)" id="stat-2026-total">&#8230;</div><div class="stat-l">2026 &#8212; <span class="ret-src">Source: Ballotpedia</span><sup>*</sup></div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--blue)">10%</div><div class="stat-l">Congress approval rating, Apr 2026 &#8212; near-record low (all-time Gallup low: 9%, Nov 2013)</div></div>
   </div>
 
@@ -722,7 +723,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="chart-card">
     <div class="card-title">Chart 4 &#8212; Retiring outright vs seeking another office &#8212; long-run ratio, 1974&#8211;2026</div>
-    <div class="card-sub">In 2026, about 39% of all departing members pursue office rather than retire outright. Of 72 announced departures (NPR, 29 May 2026), 28 are seeking other offices. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
+    <div class="card-sub">In 2026, about <span class="ret-pct">&#8230;</span>% of all departing members pursue office rather than retire outright. Of <span class="ret-total">&#8230;</span> announced departures, <span class="ret-other">&#8230;</span> are seeking other offices. <span class="ret-src">Source: Ballotpedia</span>.<sup>*</sup> Historical data: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>.</div>
     <div class="legend">
       <div class="li"><div class="lsq" style="background:#D4D4D0"></div>Retiring</div>
       <div class="li"><div class="lsq" style="background:var(--green)"></div>Governor</div>
@@ -2104,30 +2105,49 @@ function renderAll() {
   document.getElementById('stat-dem').textContent = r.democrat;
   document.getElementById('stat-seeking').textContent = r.seeking_office_pct + ' %';
 
-  // Chamber table
-  const senRetiring = r.destination_doughnut.data[0] - (r.senate - 2);
+  // Live-count labels: "Source: Ballotpedia, as of 2 Oct 2026"
+  const dash = v => (v === null || v === undefined) ? '&#8212;' : v;
+  const otherOffice = (r.senate_other_office ?? null) === null ? null : r.senate_other_office + r.house_other_office;
+  document.getElementById('ret-chamber-sub').textContent = `${r.senate} senators and ${r.house} House members`;
+  document.getElementById('stat-2026-total').textContent = r.total;
+  document.querySelectorAll('.ret-src').forEach(el => { el.innerHTML = retireSourceLabel(r); });
+  document.querySelectorAll('.ret-pct').forEach(el => { el.textContent = r.seeking_office_pct; });
+  document.querySelectorAll('.ret-total').forEach(el => { el.textContent = r.total; });
+  document.querySelectorAll('.ret-other').forEach(el => { el.innerHTML = dash(otherOffice); });
+
+  // Chamber table (voting members only)
+  const sum = (a, b) => (a === null || a === undefined || b === null || b === undefined) ? null : a + b;
   const tbody = document.getElementById('chamber-tbody');
   tbody.innerHTML = `
     <tr>
       <td><span class="chamber-badge" style="background:#FFF0E9;color:#9B2828">Senate</span></td>
-      <td style="text-align:right">9</td>
-      <td style="text-align:right">2</td>
+      <td style="text-align:right">${dash(r.senate_retiring)}</td>
+      <td style="text-align:right">${dash(r.senate_other_office)}</td>
       <td style="text-align:right;font-weight:600">${r.senate}</td>
     </tr>
     <tr>
       <td><span class="chamber-badge" style="background:#EEF4FB;color:#1A5EA8">House</span></td>
-      <td style="text-align:right">32 (+2 delegates)</td>
-      <td style="text-align:right">27</td>
-      <td style="text-align:right;font-weight:600">${r.house} (+2 delegates)</td>
+      <td style="text-align:right">${dash(r.house_retiring)}</td>
+      <td style="text-align:right">${dash(r.house_other_office)}</td>
+      <td style="text-align:right;font-weight:600">${r.house}</td>
     </tr>
     <tr>
       <td>Total</td>
-      <td style="text-align:right">41 (+2)</td>
-      <td style="text-align:right">29</td>
-      <td style="text-align:right">${r.total} (+2)</td>
+      <td style="text-align:right">${dash(sum(r.senate_retiring, r.house_retiring))}</td>
+      <td style="text-align:right">${dash(otherOffice)}</td>
+      <td style="text-align:right">${r.total}</td>
     </tr>`;
 
   renderCharts(r);
+}
+
+// "Source: Ballotpedia, as of 2 Oct 2026" for the live retirement counts
+function retireSourceLabel(r) {
+  const name = r.source || 'Ballotpedia';
+  const d = r.as_of && /^\d{4}-\d{2}-\d{2}$/.test(r.as_of) ? new Date(r.as_of + 'T00:00:00Z') : null;
+  const date = d ? ', as of ' + d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
+  const link = r.source_url ? `<a href="${r.source_url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">${name}</a>` : name;
+  return `Source: ${link}${date}`;
 }
 
 let chartsReady = false;
@@ -5447,7 +5467,8 @@ function ratingsStrip(summary, total) {
 
 function pathBox(el, info) {
   if (!el || !info) return;
-  const tags = (info.flip_targets || info.tossups || []).map(t => `<span class="kr-path-tag">${t}</span>`).join('');
+  const list = info.flip_targets || info.tossups; // House tossups is a count, not a list
+  const tags = (Array.isArray(list) ? list : []).map(t => `<span class="kr-path-tag">${t}</span>`).join('');
   el.innerHTML = `<div class="kr-path-title">&#9654; Path to Majority</div>
     <div class="kr-path-text">${info.summary}</div>
     ${tags ? `<div class="kr-path-targets">${tags}</div>` : ''}`;

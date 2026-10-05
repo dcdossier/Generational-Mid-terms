@@ -20,6 +20,9 @@ const { XMLParser } = require('fast-xml-parser');
 const { aiExtract, aiStatus } = require('./ai');
 
 const OUT_PATH     = path.resolve(__dirname, '../analysis.json');
+// Items awaiting keyword review. Kept out of analysis.json so the site never
+// shows them; analysis.html and index.html only read analysis.json.
+const REVIEW_PATH  = path.resolve(__dirname, '../analysis-review.json');
 const FETCH_TIMEOUT = 14000;
 const MAX_POSTS    = 150;
 
@@ -170,8 +173,8 @@ Description: ${(desc || '').slice(0, 400)}`,
 }
 
 // ── REVIEW QUEUE ────────────────────────────────────────────────────────────
-// Items with no keyword match that AI could not classify. They are kept in
-// analysis.json under review_queue (not shown on the site) instead of dropped.
+// Items with no keyword match that AI could not classify. They are written to
+// analysis-review.json (never shown on the site) instead of being dropped.
 const reviewQueue = [];
 
 function queueForReview(item) {
@@ -573,7 +576,7 @@ const SEED_POSTS = [
 const RSS_SOURCES = [
   // DC Dossier Substack — keyword filter, then AI for borderline posts
   // AI (when available) checks whether each post is relevant to the 2026 midterms.
-  // Without AI, non-matching posts go to review_queue instead of being dropped.
+  // Without AI, non-matching posts go to analysis-review.json instead of being dropped.
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
@@ -700,7 +703,10 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
       if (!titleMatch) continue;
       let rawUrl = titleMatch[1].trim();
       // Fix Quarto's https://(www. URL artifact
-      rawUrl = rawUrl.replace(/^https?:\/\/\(/, 'https://');
+      // e.g. "https://(www.x.com/a)" or "https://(https://x.com/a)"
+      if (/^https?:\/\/\(/.test(rawUrl)) {
+        rawUrl = 'https://' + rawUrl.replace(/^https?:\/\/\((https?:\/\/)?/, '').replace(/\)$/, '');
+      }
       const title = stripHtml(titleMatch[2]).trim();
       if (!title || !rawUrl || existingSeedUrls.has(rawUrl)) continue;
 
@@ -829,12 +835,25 @@ async function main() {
     },
     blocklist: [...blocklist],
     posts: capped,
-    review_queue: buildReviewQueue(existing.review_queue, capped, blocklist),
+  };
+
+  let previousQueue = [];
+  if (fs.existsSync(REVIEW_PATH)) {
+    try { previousQueue = JSON.parse(fs.readFileSync(REVIEW_PATH, 'utf8')).items || []; }
+    catch (e) { console.warn('[fetch-analysis] Could not parse existing analysis-review.json'); }
+  }
+  const review = {
+    meta: {
+      last_updated: new Date().toISOString(),
+      note: 'Items with no keyword match that AI could not classify. Not shown on the site. Move an item into analysis.json by adding its URL to SEED_POSTS, or add it to the blocklist.',
+    },
+    items: buildReviewQueue(previousQueue, capped, blocklist),
   };
 
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
+  fs.writeFileSync(REVIEW_PATH, JSON.stringify(review, null, 2));
   if (reviewQueue.length) console.log(`[fetch-analysis] ${reviewQueue.length} item(s) queued for keyword review (AI unavailable)`);
-  console.log(`[fetch-analysis] Done — ${capped.length} posts saved to analysis.json, ${out.review_queue.length} in review_queue`);
+  console.log(`[fetch-analysis] Done — ${capped.length} posts saved to analysis.json, ${review.items.length} in analysis-review.json`);
   process.exit(0);
 }
 

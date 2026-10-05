@@ -24,6 +24,7 @@ const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 
 const { aiExtract, aiStatus } = require('./ai');
+const { recordStatus, saveStatus } = require('./status');
 
 const DATA_PATH  = path.resolve(__dirname, '../data.json');
 
@@ -86,6 +87,25 @@ function parseCSV(text) {
 // Fetches a URL, reads the body and logs status and size for every source.
 // Treats non-2xx, 202 (often a bot challenge) and bodies under opts.minBytes as
 // failures. Returns a minimal response with text() and json().
+// Warnings double as the error message recorded in status.json for a source.
+let lastWarning = null;
+function warn(msg) {
+  console.warn(msg);
+  lastWarning = String(msg).trim();
+}
+
+// Runs one primary fetcher and records the outcome in status.json. Fetchers
+// return the number of items they got (0/false on failure).
+async function track(name, fn, data) {
+  lastWarning = null;
+  let result = 0, error = null;
+  try { result = await fn(data); }
+  catch (err) { error = err.message; warn(`  [${name}] ${err.message}`); }
+  const ok = typeof result === 'number' && result > 0;
+  recordStatus(name, { group: 'polls', primary: true, ok, count: ok ? result : 0, error: ok ? null : (error || lastWarning) });
+  return ok;
+}
+
 async function safeFetch(url, opts = {}) {
   const u = new URL(url);
   const { label = u.hostname + u.pathname.replace(/^.*\//, '/'), minBytes = 0, headers, ...rest } = opts;
@@ -121,7 +141,7 @@ async function fetchNYTPolls(data) {
       const res = await safeFetch(csvUrl);
       text = await res.text();
     } catch (err) {
-      console.warn(`  [NYT] ${csvUrl.split('/').pop()} fetch failed: ${err.message}`);
+      warn(`  [NYT] ${csvUrl.split('/').pop()} fetch failed: ${err.message}`);
       continue;
     }
 
@@ -157,7 +177,7 @@ async function fetchNYTPolls(data) {
   }
 
   const complete = Object.values(polls).filter(p => p.DEM !== null && p.REP !== null);
-  if (!complete.length) { console.warn('  [NYT] No complete polls found'); return false; }
+  if (!complete.length) { warn('  [NYT] No complete polls found'); return false; }
 
   // ── National generic ballot ───────────────────────────────────────────────
   const national = complete.filter(p => p.state === 'US' && p.seatNum === '' && !p.partisan);
@@ -209,7 +229,7 @@ async function fetchNYTPolls(data) {
   }
   if (stateCount) console.log(`  State polls updated: ${stateCount} states`);
 
-  return true;
+  return complete.length;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -274,9 +294,9 @@ async function fetchCPI(data) {
     data.cpi.updated  = new Date().toISOString().slice(0, 10);
 
     console.log(`  CPI: ${latest?.all_items}% YoY (${latest?.month}), ${merged.length} months history`);
-    return true;
+    return merged.length;
   } catch (err) {
-    console.warn(`  [BLS] CPI fetch failed: ${err.message}`);
+    warn(`  [BLS] CPI fetch failed: ${err.message}`);
     return false;
   }
 }
@@ -308,11 +328,11 @@ async function fetchTrumpApproval(data) {
     const m = html.match(new RegExp(`${DW_APPROVAL_CHART}/(\\d+)`));
     if (m) latestVersion = m[1];
   } catch (err) {
-    console.warn(`  [DW] Version discovery failed: ${err.message}`);
+    warn(`  [DW] Version discovery failed: ${err.message}`);
   }
 
   if (!latestVersion) {
-    console.warn('  [DW] Could not determine chart version — skipping Datawrapper');
+    warn('  [DW] Could not determine chart version — skipping Datawrapper');
   } else {
     console.log(`  Chart version: ${DW_APPROVAL_CHART}/${latestVersion}`);
 
@@ -325,7 +345,7 @@ async function fetchTrumpApproval(data) {
       });
       csvText = await res.text();
     } catch (err) {
-      console.warn(`  [DW] CSV fetch failed: ${err.message}`);
+      warn(`  [DW] CSV fetch failed: ${err.message}`);
     }
 
     if (csvText) {
@@ -369,18 +389,18 @@ async function fetchTrumpApproval(data) {
             data.approval.trump.trend = calcTrend(data.approval.trump.history, 'approve');
 
             console.log(`  ✓ Trump approval [Nate Silver/${DW_APPROVAL_CHART} v${latestVersion}] as of ${modelDate}: ${approve}% / ${disapprove}% / net ${net >= 0 ? '+' : ''}${net}`);
-            return true;
+            return lines.length - 1;
           } else {
-            console.warn(`  [DW] Validation failed — approve=${approve} disapprove=${disapprove} prevApprove=${prevApprove} (sane=${saneChange})`);
+            warn(`  [DW] Validation failed — approve=${approve} disapprove=${disapprove} prevApprove=${prevApprove} (sane=${saneChange})`);
           }
         } else {
-          console.warn(`  [DW] CSV missing approve/disapprove columns. Headers: ${headers.join(', ')}`);
+          warn(`  [DW] CSV missing approve/disapprove columns. Headers: ${headers.join(', ')}`);
         }
       }
     }
   }
 
-  console.warn('  [Trump] Datawrapper primary failed — RSS fallback will run if needed');
+  warn('  [Trump] Datawrapper primary failed — RSS fallback will run if needed');
   return false;
 }
 
@@ -419,7 +439,7 @@ async function fetchCongressApproval(data) {
     });
     html = await res.text();
   } catch (err) {
-    console.warn(`  [Gallup] Congress page fetch failed: ${err.message}`);
+    warn(`  [Gallup] Congress page fetch failed: ${err.message}`);
     return false;
   }
 
@@ -427,7 +447,7 @@ async function fetchCongressApproval(data) {
   if (result) {
     console.log(`  [Gallup] Parsed table row "${result.period}": ${result.approve} / ${result.disapprove}`);
   } else {
-    console.warn('  [Gallup] Approval table not found — trying AI backup');
+    warn('  [Gallup] Approval table not found — trying AI backup');
     const text = stripHtml(html).slice(0, 14000);
     result = await aiExtract(
       'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
@@ -460,10 +480,10 @@ ${text}`,
     data.approval.congress.trend = calcTrend(data.approval.congress.history, 'approve');
 
     console.log(`  Congress approval: ${approve}% approve / ${disapprove}% disapprove`);
-    return true;
+    return 1;
   }
 
-  console.warn('  [Congress] Could not extract approval — keeping existing values');
+  warn('  [Congress] Could not extract approval — keeping existing values');
   return false;
 }
 
@@ -574,6 +594,8 @@ function retirementsAddUp(c) {
 async function fetchRetirements(data) {
   console.log('[5/6] Retirements (Ballotpedia list tables, Wikipedia fallback)…');
   let counts = null, source = null, asOf = null;
+  let bpError = null, bpCount = 0;
+  lastWarning = null;
 
   try {
     const res = await safeFetch(BP_RETIRE_URL, {
@@ -586,31 +608,38 @@ async function fetchRetirements(data) {
     console.log(`  [Ballotpedia] Table rows: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
     const s = parsed.summary;
     if (!s) {
-      console.warn('  [Ballotpedia] Summary sentence not found — cannot cross-check table counts');
+      warn('  [Ballotpedia] Summary sentence not found — cannot cross-check table counts');
     } else if (s.total !== c.total || s.senate !== c.senate || s.house !== c.house) {
-      console.warn(`  [Ballotpedia] Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})`);
+      warn(`  [Ballotpedia] Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})`);
     }
     if (s && s.total === c.total && s.senate === c.senate && s.house === c.house) {
       counts = c; source = 'Ballotpedia'; asOf = parsed.asOf;
+      if (retirementsAddUp(c)) bpCount = c.total;
     }
+    if (!bpCount) bpError = lastWarning || 'Table counts failed validation';
   } catch (err) {
-    console.warn(`  [Ballotpedia] Failed: ${err.message} — falling back to Wikipedia`);
+    bpError = err.message;
+    warn(`  [Ballotpedia] Failed: ${err.message} — falling back to Wikipedia`);
   }
+  recordStatus('Retirements (Ballotpedia)', { group: 'polls', primary: true, ok: bpCount > 0, count: bpCount, error: bpError });
 
   if (!counts) {
     try {
       const c = await fetchWikipediaRetirements();
       console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
       counts = c; source = 'Wikipedia'; asOf = new Date();
+      const ok = retirementsAddUp(c);
+      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok, count: ok ? c.total : 0, error: ok ? null : 'Counts did not add up' });
     } catch (err) {
-      console.warn(`  [Wikipedia] Failed: ${err.message}`);
+      warn(`  [Wikipedia] Failed: ${err.message}`);
+      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok: false, error: err.message });
     }
   }
 
   if (!counts || !retirementsAddUp(counts)) {
-    if (counts) console.warn(`  [Retirements] Counts don't add up — keeping old values: ${JSON.stringify(counts)}`);
-    else console.warn('  [Retirements] No source succeeded — keeping old values');
-    return false;
+    if (counts) warn(`  [Retirements] Counts don't add up — keeping old values: ${JSON.stringify(counts)}`);
+    else warn('  [Retirements] No source succeeded — keeping old values');
+    return 0;
   }
 
   const r = data.retirements = data.retirements || {};
@@ -627,7 +656,7 @@ async function fetchRetirements(data) {
 
   const changed = prev !== counts.total ? ` (was ${prev})` : '';
   console.log(`  Retirements [${source}, as of ${r.as_of}]: ${counts.total} total${changed} — Senate ${counts.senate}, House ${counts.house}; R ${counts.republican}, D ${counts.democrat}, other ${counts.others}`);
-  return true;
+  return counts.total;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -686,8 +715,10 @@ async function fetchRSSFallback(data, needsTrump, needsCongress) {
         hints: feed.hints || [],
         source: feed.source,
       }));
+      recordStatus(`RSS fallback: ${feed.source}`, { group: 'polls', ok: true, count: items.length });
     } catch (err) {
-      console.warn(`  [RSS] ${feed.source}: ${err.message}`);
+      warn(`  [RSS] ${feed.source}: ${err.message}`);
+      recordStatus(`RSS fallback: ${feed.source}`, { group: 'polls', ok: false, error: err.message });
       continue;
     }
 
@@ -773,11 +804,11 @@ async function main() {
   data.state_polls            = data.state_polls            || {};
 
   // Run all fetchers
-  const nytOk     = await fetchNYTPolls(data);
-  const cpiOk     = await fetchCPI(data);
-  const trumpOk   = await fetchTrumpApproval(data);
-  const congressOk= await fetchCongressApproval(data);
-  const retireOk  = await fetchRetirements(data);
+  const nytOk     = await track('NYT polling CSVs', fetchNYTPolls, data);
+  const cpiOk     = await track('BLS CPI', fetchCPI, data);
+  const trumpOk   = await track('Trump approval (Datawrapper)', fetchTrumpApproval, data);
+  const congressOk= await track('Congress approval (Gallup)', fetchCongressApproval, data);
+  const retireOk  = (await fetchRetirements(data)) > 0; // records its own status
 
   // RSS fallback for any primary sources that failed
   await fetchRSSFallback(data, !trumpOk, !congressOk);
@@ -794,10 +825,12 @@ async function main() {
   console.log(`  Results: NYT=${nytOk?'✓':'✗'}  CPI=${cpiOk?'✓':'✗'}  Trump=${trumpOk?'✓':'✗'}  Congress=${congressOk?'✓':'✗'}  Retirements=${retireOk?'✓':'✗'}`);
   console.log(`  data.json written. Elapsed: ${elapsed}s`);
   console.log('════════════════════════════════════════');
+  saveStatus();
   process.exit(0);
 }
 
 main().catch(err => {
   console.error('[fetch-polls] Fatal error:', err);
+  saveStatus();
   process.exit(1);
 });

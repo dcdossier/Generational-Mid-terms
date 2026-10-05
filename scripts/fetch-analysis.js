@@ -18,6 +18,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 const { aiExtract, aiStatus } = require('./ai');
+const { recordStatus, saveStatus } = require('./status');
 
 const OUT_PATH     = path.resolve(__dirname, '../analysis.json');
 // Items awaiting keyword review. Kept out of analysis.json so the site never
@@ -189,18 +190,23 @@ function queueForReview(item) {
 }
 
 // ── FETCH RSS ───────────────────────────────────────────────────────────────
-async function fetchRss(url, source, type, forceInclude, defaultAuthor, aiCheck) {
+async function fetchRss(url, source, type, forceInclude, defaultAuthor, aiCheck, statusName = `Analysis: ${source}`) {
   try {
     const res = await fetch(url, {
       timeout: FETCH_TIMEOUT,
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0; +https://dcdossier.substack.com)' },
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn(`[fetch-analysis] RSS ${source}: HTTP ${res.status}`);
+      recordStatus(statusName, { group: 'analysis', ok: false, error: `HTTP ${res.status}` });
+      return [];
+    }
     const xml = await res.text();
     const feed = xmlParser.parse(xml);
     const channel = feed?.rss?.channel || feed?.feed || {};
     let items = channel.item || channel.entry || [];
     if (!Array.isArray(items)) items = items ? [items] : [];
+    recordStatus(statusName, { group: 'analysis', ok: true, count: items.length });
 
     const posts = [];
     for (const raw of items) {
@@ -232,6 +238,7 @@ async function fetchRss(url, source, type, forceInclude, defaultAuthor, aiCheck)
     return posts;
   } catch (e) {
     console.warn(`[fetch-analysis] RSS failed (${source}):`, e.message);
+    recordStatus(statusName, { group: 'analysis', ok: false, error: e.message });
     return [];
   }
 }
@@ -243,7 +250,11 @@ async function scrapeAuthorPage(pageUrl, author, sourceName) {
       timeout: FETCH_TIMEOUT,
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn(`[fetch-analysis] Author page ${pageUrl}: HTTP ${res.status}`);
+      recordStatus(`Analysis: author page ${pageUrl.replace(/^https:\/\/takshashila\.org\.in/, '')}`, { group: 'analysis', ok: false, error: `HTTP ${res.status}` });
+      return [];
+    }
     const html = await res.text();
 
     const posts = [];
@@ -290,10 +301,12 @@ async function scrapeAuthorPage(pageUrl, author, sourceName) {
         author,
       });
     }
-    console.log(`[fetch-analysis] Author page ${pageUrl}: ${posts.length} items found`);
+    console.log(`[fetch-analysis] Author page ${pageUrl}: ${posts.length} items found (${seen.size} links scanned)`);
+    recordStatus(`Analysis: author page ${pageUrl.replace(/^https:\/\/takshashila\.org\.in/, '')}`, { group: 'analysis', ok: true, count: seen.size });
     return posts;
   } catch (e) {
     console.warn(`[fetch-analysis] Author page failed (${pageUrl}):`, e.message);
+    recordStatus(`Analysis: author page ${pageUrl.replace(/^https:\/\/takshashila\.org\.in/, '')}`, { group: 'analysis', ok: false, error: e.message });
     return [];
   }
 }
@@ -605,11 +618,16 @@ async function fetchYouTubePodcasts(channelId) {
       timeout: FETCH_TIMEOUT,
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn(`[fetch-analysis] YouTube (Takshashila): HTTP ${res.status}`);
+      recordStatus('Analysis: YouTube (Takshashila)', { group: 'analysis', ok: false, error: `HTTP ${res.status}` });
+      return [];
+    }
     const xml = await res.text();
     const feed = xmlParser.parse(xml);
     const entries = feed?.feed?.entry || [];
     const items = Array.isArray(entries) ? entries : (entries ? [entries] : []);
+    recordStatus('Analysis: YouTube (Takshashila)', { group: 'analysis', ok: true, count: items.length });
 
     const posts = [];
     for (const raw of items) {
@@ -640,6 +658,7 @@ async function fetchYouTubePodcasts(channelId) {
     return posts;
   } catch (e) {
     console.warn('[fetch-analysis] YouTube podcast fetch failed:', e.message);
+    recordStatus('Analysis: YouTube (Takshashila)', { group: 'analysis', ok: false, error: e.message });
     return [];
   }
 }
@@ -680,12 +699,17 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
       timeout: FETCH_TIMEOUT,
       headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier-Bot/1.0)' },
     });
-    if (!res.ok) return [];
+    if (!res.ok) {
+      console.warn(`[fetch-analysis] Takshashila op-eds: HTTP ${res.status}`);
+      recordStatus('Analysis: Takshashila op-eds', { group: 'analysis', ok: false, error: `HTTP ${res.status}` });
+      return [];
+    }
     const html = await res.text();
 
     const posts = [];
     // Split on quarto-post div boundaries; index 0 is preamble, 1+ are post chunks
     const chunks = html.split(/<div[^>]+class="[^"]*\bquarto-post\b[^"]*"/);
+    recordStatus('Analysis: Takshashila op-eds', { group: 'analysis', ok: true, count: chunks.length - 1 });
 
     for (let i = 1; i < chunks.length; i++) {
       const chunk = chunks[i];
@@ -745,6 +769,7 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
     return posts;
   } catch (e) {
     console.warn('[fetch-analysis] Takshashila op-ed scrape failed:', e.message);
+    recordStatus('Analysis: Takshashila op-eds', { group: 'analysis', ok: false, error: e.message });
     return [];
   }
 }
@@ -782,8 +807,11 @@ async function main() {
   if (preserved) console.log(`[fetch-analysis] Carried forward ${preserved} existing post(s) from previous run.`);
 
   // Fetch RSS sources
+  const sourceNames = {};
   for (const src of RSS_SOURCES) {
-    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.aiCheck || false);
+    sourceNames[src.source] = (sourceNames[src.source] || 0) + 1;
+    const statusName = `Analysis: ${src.source}` + (sourceNames[src.source] > 1 ? ` (${sourceNames[src.source]})` : '');
+    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.aiCheck || false, statusName);
     console.log(`[fetch-analysis] ${src.source}: ${posts.length} matching items`);
     for (const post of posts) {
       if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
@@ -854,6 +882,7 @@ async function main() {
   fs.writeFileSync(REVIEW_PATH, JSON.stringify(review, null, 2));
   if (reviewQueue.length) console.log(`[fetch-analysis] ${reviewQueue.length} item(s) queued for keyword review (AI unavailable)`);
   console.log(`[fetch-analysis] Done — ${capped.length} posts saved to analysis.json, ${review.items.length} in analysis-review.json`);
+  saveStatus();
   process.exit(0);
 }
 
@@ -869,4 +898,4 @@ function buildReviewQueue(previous, posts, blocklist) {
   return [...byUrl.values()].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 100);
 }
 
-main().catch(e => { console.error('[fetch-analysis] Fatal:', e); process.exit(1); });
+main().catch(e => { console.error('[fetch-analysis] Fatal:', e); saveStatus(); process.exit(1); });

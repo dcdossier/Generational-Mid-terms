@@ -5,6 +5,12 @@ on:
     - cron: '43 */4 * * *'   # every 4 hours, off-peak minute
   workflow_dispatch:         # manual trigger any time
 
+# Both workflows write data.json and status.json, so they share one group and
+# never run at the same time (a queued run waits; it is not cancelled).
+concurrency:
+  group: data-json-writers
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -25,6 +31,12 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefix scripts
 
+      - name: Check Groq models list
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/ai.js --check-models
+
       - name: Fetch all live data
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
@@ -41,10 +53,21 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json analysis.json analysis-review.json
+          git add data.json analysis.json analysis-review.json status.json
           if git diff --cached --quiet; then
             echo "No data changes — nothing to commit."
-          else
-            git commit -m "chore(data): live update [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "chore(data): live update [skip ci]"
+          # Rebase onto anything pushed since checkout, then push; retry on a race
+          for attempt in 1 2 3; do
+            if git pull --rebase origin "$GITHUB_REF_NAME" && git push; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::Push attempt $attempt failed; retrying"
+            sleep $((attempt * 10))
+          done
+          echo "::error::Could not push after 3 attempts"
+          exit 1
+
+      - name: Fail if a primary source has been down for over 48 hours
+        run: node scripts/check-status.js polls analysis

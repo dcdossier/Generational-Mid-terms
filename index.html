@@ -859,7 +859,7 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- RETIREMENTS CHART -->
       <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
-      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 ties 1992 as the largest combined House+Senate retirement wave since WWII &mdash; 72 departures each (1992: 65 House + 7 Senate, driven by the banking scandal and redistricting; 2026: 58 House + 14 Senate). For the House alone, 1992's 65 remains the modern record. As of 29 May 2026 (NPR), <strong style="color:#9B2828">72 members</strong> had announced departures &mdash; a figure that includes Bennet and Klobuchar, who are running for governor mid-term rather than retiring outright &mdash; reflecting historic institutional frustration. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Brookings</a> &middot; <a href="https://www.whro.org/2025-09-15/a-record-number-of-congressional-lawmakers-arent-running-for-reelection-in-2026-heres-the-list" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">NPR via WHRO</a></p>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the largest combined House+Senate retirement wave since 1992. <strong style="color:#9B2828"><span id="hm-retire-total">&#8230;</span> members</strong> (<span id="hm-retire-chambers">&#8230;</span>) have announced they will not seek re-election, <span id="hm-retire-record">close to</span> the post-WWII record of 72 set in 1992 (65 House + 7 Senate, driven by the banking scandal and redistricting) &mdash; reflecting historic institutional frustration. For the House alone, 1992's 65 remains the modern record. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. <span class="hm-retire-src">Source: Ballotpedia</span>.<sup>*</sup> Historical data: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Brookings</a>.</p>
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#378ADD"></span>House</span>
@@ -868,7 +868,8 @@ body{background:#F5F5DC;color:#1E2232}
           <span style="font:400 13px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
         </div>
         <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
-        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024); <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Ballotpedia</a> / NPR tracker (2026).</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024). 2026 figures &mdash; <span class="hm-retire-src">Source: Ballotpedia</span>.<sup>*</sup></div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:4px"><sup>*</sup> Senators who are not up for re-election in 2026 but are running for another office mid-term (such as Bennet and Klobuchar, both running for governor) are not counted.</div>
       </div>
 
       <!-- INFLATION CHART -->
@@ -1132,6 +1133,16 @@ const TAG_COLORS = {
   'Primary':'#FEF3C7:#92400E',
 };
 
+
+// "Source: Ballotpedia, as of 2 Oct 2026" for the live retirement counts
+function retireSourceLabel(r, linkColour) {
+  const name = r.source || 'Ballotpedia';
+  const d = r.as_of && /^\d{4}-\d{2}-\d{2}$/.test(r.as_of) ? new Date(r.as_of + 'T00:00:00Z') : null;
+  const date = d ? ', as of ' + d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
+  const link = r.source_url ? `<a href="${r.source_url}" target="_blank" rel="noopener" style="color:${linkColour};text-decoration:underline">${name}</a>` : name;
+  return `Source: ${link}${date}`;
+}
+
 async function loadHomeData() {
   try {
   let data = null;
@@ -1190,10 +1201,10 @@ async function loadHomeData() {
   // Retirements — live from Ballotpedia via fetch-polls.js
   const ret = data.retirements || {};
   if (ret.total) {
-    set('hm-retire-count', `${ret.total} departures — ties 1992 for the largest wave since WWII`);
-    if (ret.seeking_office_pct) set('hm-retire-pct', `${ret.seeking_office_pct}% running for other offices`);
-    const sp = document.getElementById('hm-retire-split');
-    if (sp) sp.textContent = `R: ${ret.republican ?? '—'} · D: ${ret.democrat ?? '—'} · House: ${ret.house ?? '—'} · Senate: ${ret.senate ?? '—'}`;
+    set('hm-retire-total', ret.total);
+    set('hm-retire-chambers', `${ret.house ?? '—'} House + ${ret.senate ?? '—'} Senate`);
+    set('hm-retire-record', ret.total > 72 ? 'breaking' : ret.total === 72 ? 'tying' : `${72 - ret.total} short of`);
+    document.querySelectorAll('.hm-retire-src').forEach(el => { el.innerHTML = retireSourceLabel(ret, '#620d3c'); });
   }
 
   // CPI — update chart description with latest month
@@ -1432,11 +1443,11 @@ async function loadHomeData() {
           { id: 'lbl', afterDraw(c) {
             try {
               const { ctx } = c;
-              [['1992','Record 72','#7a1c1c'],['2026','Ties record →','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
+              [['1992','Record 72','#7a1c1c'],['2026', hT[hYrs.indexOf('2026')] > 72 ? 'New record →' : hT[hYrs.indexOf('2026')] === 72 ? 'Ties record →' : 'Near record →','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
                 const i = hYrs.indexOf(yr); if (i < 0) return;
                 const xp = c.scales.x.getPixelForValue(i);
                 const yp = c.scales.y.getPixelForValue(hT[i]) - 8;
-                ctx.save(); ctx.font = '500 11px Inter,sans-serif'; ctx.fillStyle = col; ctx.textAlign = 'center'; ctx.fillText(lbl, xp, yp); ctx.restore();
+                ctx.save(); ctx.font = '500 11px Inter,sans-serif'; ctx.fillStyle = col; ctx.textAlign = yr === '2026' ? 'right' : 'center'; ctx.fillText(lbl, yr === '2026' ? xp + 6 : xp, yp); ctx.restore();
               });
             } catch(e) { /* skip decorative labels */ }
           }}

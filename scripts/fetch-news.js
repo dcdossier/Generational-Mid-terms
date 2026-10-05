@@ -12,6 +12,7 @@ const fs = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
+const { recordStatus, saveStatus } = require('./status');
 
 const DATA_PATH = path.resolve(__dirname, '../data.json');
 
@@ -372,6 +373,7 @@ async function fetchFeed(feed) {
     });
     if (!res.ok) {
       console.warn(`[SKIP] ${feed.source}: HTTP ${res.status}`);
+      recordStatus(feed.statusName, { group: 'news', ok: false, error: `HTTP ${res.status}` });
       return [];
     }
     const xml = await res.text();
@@ -382,15 +384,19 @@ async function fetchFeed(feed) {
     const rawItems = channel.item || channel.entry || [];
     const items = Array.isArray(rawItems) ? rawItems : [rawItems];
 
-    return items.map(item => {
+    const mapped = items.map(item => {
       const title       = stripHtml(item.title || '');
       const url         = String(item.link || item['@_href'] || item.id || '').trim().replace(/^<|>$/g, '');
       const description = stripHtml(item.description || item.summary || item.content || '').slice(0, 280);
       const date        = parseDate(item.pubDate || item.published || item.updated || item['dc:date']);
       return { title, url, source: feed.source, date, description, forceTags: feed.forceTags || [] };
     }).filter(i => i.url && i.title);
+    if (!mapped.length) console.warn(`[EMPTY] ${feed.source}: HTTP ${res.status} but 0 items`);
+    recordStatus(feed.statusName, { group: 'news', ok: true, count: mapped.length });
+    return mapped;
   } catch (err) {
     console.warn(`[ERROR] ${feed.source}: ${err.message}`);
+    recordStatus(feed.statusName, { group: 'news', ok: false, error: err.message });
     return [];
   }
 }
@@ -425,11 +431,21 @@ async function main() {
   // Build dedup set from the surviving 24h window
   const existingUrls = new Set(data.news.map(n => n.url));
 
+  // Unique status.json names (two feeds can share a source label)
+  const seenNames = {};
+  for (const feed of FEEDS) {
+    seenNames[feed.source] = (seenNames[feed.source] || 0) + 1;
+    feed.statusName = `News: ${feed.source}` + (seenNames[feed.source] > 1 ? ` (${seenNames[feed.source]})` : '');
+  }
+
   // Fetch all feeds concurrently
   const results = await Promise.all(FEEDS.map(fetchFeed));
   const allItems = results.flat();
 
-  console.log(`[fetch-news] Fetched ${allItems.length} raw items from ${FEEDS.length} feeds.`);
+  const working = results.filter(r => r.length).length;
+  console.log(`[fetch-news] Fetched ${allItems.length} raw items from ${FEEDS.length} feeds (${working} returned items).`);
+  recordStatus('News feeds (all)', { group: 'news', primary: true, ok: true, count: allItems.length,
+    error: allItems.length ? null : `0 items from ${FEEDS.length} feeds` });
 
   let newCount = 0;
 
@@ -467,10 +483,12 @@ async function main() {
   // Write back
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
   console.log(`[fetch-news] Done. Added ${newCount} new items. Repository total: ${data.news.length} articles (24h window).`);
+  saveStatus();
   process.exit(0);
 }
 
 main().catch(err => {
   console.error('[fetch-news] Fatal error:', err);
+  saveStatus();
   process.exit(1);
 });

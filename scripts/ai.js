@@ -14,7 +14,10 @@
 const fetch = require('node-fetch');
 
 const GROQ_KEY        = process.env.GROQ_API_KEY || '';
-const GROQ_MODEL      = 'llama-3.3-70b-versatile';
+// First one that Groq's models API lists as available is used. Checked against
+// console.groq.com/docs/deprecations (Oct 2026): llama-3.1-8b-instant was shut
+// down on 16 Aug 2026; these three are current production models.
+const GROQ_MODEL_PREFERENCE = ['llama-3.3-70b-versatile', 'openai/gpt-oss-120b', 'openai/gpt-oss-20b'];
 const ANTHROPIC_KEY   = process.env.ANTHROPIC_API_KEY || '';
 const ANTHROPIC_MODEL = 'claude-haiku-4-5-20251001';
 
@@ -22,14 +25,55 @@ const ANTHROPIC_MODEL = 'claude-haiku-4-5-20251001';
 // account), skip it for the rest of the run instead of failing on every call.
 const disabled = { groq: false, anthropic: false };
 
-function parseJson(text) {
+function parseJson(text, provider) {
   const match = String(text || '').match(/\{[\s\S]*\}/);
-  if (!match) return null;
-  try { return JSON.parse(match[0]); } catch { return null; }
+  if (!match) {
+    console.warn(`  [AI] ${provider} reply had no JSON object: ${String(text || '').slice(0, 80)}`);
+    return null;
+  }
+  try { return JSON.parse(match[0]); }
+  catch (err) {
+    console.warn(`  [AI] ${provider} reply was not valid JSON (${err.message}): ${match[0].slice(0, 80)}`);
+    return null;
+  }
+}
+
+// Picks a Groq model from the live models list (once per run). Returns null and
+// disables Groq if the list can't be read with this key or no preferred model
+// is available; network/5xx errors fall back to the first preference.
+let groqModel = null;
+async function resolveGroqModel() {
+  if (groqModel || !GROQ_KEY || disabled.groq) return groqModel;
+  try {
+    const res = await fetch('https://api.groq.com/openai/v1/models', {
+      headers: { 'Authorization': `Bearer ${GROQ_KEY}` },
+      timeout: 15000,
+    });
+    if (!res.ok) {
+      const body = await res.text();
+      console.warn(`  [AI] Groq models API HTTP ${res.status}: ${body.slice(0, 120)}`);
+      if (res.status < 500 && res.status !== 429) { disabled.groq = true; return null; }
+      groqModel = GROQ_MODEL_PREFERENCE[0];
+    } else {
+      const ids = ((await res.json()).data || []).filter(m => m.active !== false).map(m => m.id);
+      groqModel = GROQ_MODEL_PREFERENCE.find(id => ids.includes(id)) || null;
+      if (!groqModel) {
+        console.warn(`  [AI] Groq models API lists none of ${GROQ_MODEL_PREFERENCE.join(', ')} — disabling Groq. Available: ${ids.join(', ')}`);
+        disabled.groq = true;
+        return null;
+      }
+      console.log(`  [AI] Groq models API: ${ids.length} models available; using ${groqModel}`);
+    }
+  } catch (err) {
+    console.warn(`  [AI] Groq models API error: ${err.message} — trying ${GROQ_MODEL_PREFERENCE[0]}`);
+    groqModel = GROQ_MODEL_PREFERENCE[0];
+  }
+  return groqModel;
 }
 
 async function tryGroq(systemPrompt, userContent, maxTokens) {
-  if (!GROQ_KEY || disabled.groq) return null;
+  const model = await resolveGroqModel();
+  if (!model) return null;
   // One retry, and only for rate limits, server errors and network failures.
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
@@ -40,7 +84,7 @@ async function tryGroq(systemPrompt, userContent, maxTokens) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: GROQ_MODEL,
+          model,
           temperature: 0,
           max_tokens: maxTokens,
           response_format: { type: 'json_object' },
@@ -59,7 +103,7 @@ async function tryGroq(systemPrompt, userContent, maxTokens) {
         return null;
       }
       const json = await res.json();
-      return parseJson(json.choices?.[0]?.message?.content);
+      return parseJson(json.choices?.[0]?.message?.content, `Groq (${model})`);
     } catch (err) {
       console.warn(`  [AI] Groq error: ${err.message}`);
     }
@@ -83,7 +127,7 @@ async function tryAnthropic(systemPrompt, userContent, maxTokens) {
       messages: [{ role: 'user', content: userContent }],
     });
     const text = response.content.filter(b => b.type === 'text').map(b => b.text).join('');
-    return parseJson(text);
+    return parseJson(text, 'Anthropic');
   } catch (err) {
     if (err instanceof Anthropic.AuthenticationError || err instanceof Anthropic.PermissionDeniedError) {
       console.warn(`  [AI] Anthropic ${err.status}: ${err.message.slice(0, 120)} — disabling for this run`);
@@ -109,7 +153,7 @@ async function aiExtract(systemPrompt, userContent, { label = 'extract', maxToke
 
   const fromGroq = await tryGroq(systemPrompt, content, maxTokens);
   if (fromGroq) {
-    console.log(`  [AI] ${label}: used Groq (${GROQ_MODEL})`);
+    console.log(`  [AI] ${label}: used Groq (${groqModel})`);
     return fromGroq;
   }
   const fromAnthropic = await tryAnthropic(systemPrompt, content, maxTokens);
@@ -131,3 +175,13 @@ function aiStatus() {
 }
 
 module.exports = { aiExtract, aiStatus };
+
+// `node scripts/ai.js --check-models` logs which Groq model this run would use.
+// Always exits 0: AI is optional, so this must never fail the workflow.
+if (require.main === module && process.argv.includes('--check-models')) {
+  console.log(`[AI] Keys: ${aiStatus()}`);
+  resolveGroqModel().then(m => {
+    console.log(m ? `[AI] Groq model for this run: ${m}` : '[AI] Groq unavailable for this run — Anthropic or non-AI paths will be used');
+    process.exit(0);
+  });
+}

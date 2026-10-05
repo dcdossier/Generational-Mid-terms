@@ -5,6 +5,12 @@ on:
     - cron: '17 * * * *'   # every hour, off-peak minute
   workflow_dispatch:
 
+# Both workflows write data.json and status.json, so they share one group and
+# never run at the same time (a queued run waits; it is not cancelled).
+concurrency:
+  group: data-json-writers
+  cancel-in-progress: false
+
 jobs:
   fetch:
     runs-on: ubuntu-latest
@@ -32,10 +38,21 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json status.json
           if git diff --cached --quiet; then
             echo "No news changes — nothing to commit."
-          else
-            git commit -m "chore(data): update news feed [skip ci]"
-            git push
+            exit 0
           fi
+          git commit -m "chore(data): update news feed [skip ci]"
+          # Rebase onto anything pushed since checkout, then push; retry on a race
+          for attempt in 1 2 3; do
+            if git pull --rebase origin "$GITHUB_REF_NAME" && git push; then exit 0; fi
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::Push attempt $attempt failed; retrying"
+            sleep $((attempt * 10))
+          done
+          echo "::error::Could not push after 3 attempts"
+          exit 1
+
+      - name: Fail if a primary source has been down for over 48 hours
+        run: node scripts/check-status.js news

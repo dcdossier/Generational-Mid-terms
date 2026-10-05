@@ -1,0 +1,1643 @@
+{
+  "sources": {
+    "News feeds (all)": {
+      "group": "news",
+      "primary": true,
+      "last_attempt": "2026-10-05T22:36:41.796Z",
+      "last_success": "2026-10-05T22:36:41.796Z",
+      "item_count": 8418,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Arizona Capitol Times": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.460Z",
+      "last_success": "2026-10-05T22:36:27.460Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Arizona Mirror": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.918Z",
+      "last_success": "2026-10-05T22:36:27.918Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Arizona Republic": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.903Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:27.903Z"
+    },
+    "News: Atlanta Journal-Constitution": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.223Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:28.223Z"
+    },
+    "News: Axios": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.098Z",
+      "last_success": "2026-10-05T22:36:27.098Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Ballotpedia": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.107Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:27.107Z"
+    },
+    "News: Bangor Daily News": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.327Z",
+      "last_success": "2026-10-05T22:36:28.327Z",
+      "item_count": 20,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Bridge Michigan": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.264Z",
+      "last_success": "2026-10-05T22:36:28.264Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Brookings": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.334Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:32.334Z"
+    },
+    "News: CalMatters": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.610Z",
+      "last_success": "2026-10-05T22:36:27.610Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Capitol News Illinois": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.637Z",
+      "last_success": "2026-10-05T22:36:31.637Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Cardinal News": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.292Z",
+      "last_success": "2026-10-05T22:36:32.292Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Carolina Public Press": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.173Z",
+      "last_success": "2026-10-05T22:36:30.173Z",
+      "item_count": 5,
+      "error": null,
+      "failing_since": null
+    },
+    "News: City & State NY": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.887Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:32.887Z"
+    },
+    "News: Cleveland Plain Dealer": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.701Z",
+      "last_success": "2026-10-05T22:36:30.701Z",
+      "item_count": 50,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Colorado Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.789Z",
+      "last_success": "2026-10-05T22:36:27.789Z",
+      "item_count": 500,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Colorado Sun": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.705Z",
+      "last_success": "2026-10-05T22:36:27.705Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Columbus Dispatch": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.945Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:30.945Z"
+    },
+    "News: CommonWealth Beacon": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.005Z",
+      "last_success": "2026-10-05T22:36:32.005Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Concord Monitor": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.057Z",
+      "last_success": "2026-10-05T22:36:29.057Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Cook Political Report": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.251Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 403",
+      "failing_since": "2026-10-05T22:36:27.251Z"
+    },
+    "News: CPR News": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.365Z",
+      "last_success": "2026-10-05T22:36:32.365Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Crosscut / Cascade PBS": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.387Z",
+      "last_success": "2026-10-05T22:36:31.387Z",
+      "item_count": 15,
+      "error": null,
+      "failing_since": null
+    },
+    "News: CT Mirror": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.614Z",
+      "last_success": "2026-10-05T22:36:31.614Z",
+      "item_count": 40,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Elon Poll (NC)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.949Z",
+      "last_success": "2026-10-05T22:36:30.949Z",
+      "item_count": 1,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Florida Phoenix": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.546Z",
+      "last_success": "2026-10-05T22:36:28.546Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Florida Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.262Z",
+      "last_success": "2026-10-05T22:36:28.262Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Gallup": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.270Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:27.270Z"
+    },
+    "News: Georgia Recorder": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.568Z",
+      "last_success": "2026-10-05T22:36:28.568Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: abqjournal.com New Mexico election 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.427Z",
+      "last_success": "2026-10-05T22:36:30.427Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: apnews.com congress midterm": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.048Z",
+      "last_success": "2026-10-05T22:36:30.048Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Baldwin Wallace poll Ohio 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.940Z",
+      "last_success": "2026-10-05T22:36:30.940Z",
+      "item_count": 49,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Ball State CBER poll Indiana 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.931Z",
+      "last_success": "2026-10-05T22:36:31.931Z",
+      "item_count": 1,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Berkeley IGS poll California 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.024Z",
+      "last_success": "2026-10-05T22:36:28.024Z",
+      "item_count": 56,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: BGSU poll Ohio 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.981Z",
+      "last_success": "2026-10-05T22:36:30.981Z",
+      "item_count": 55,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: billingsgazette.com Montana election 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.767Z",
+      "last_success": "2026-10-05T22:36:28.767Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: CNU Wason poll Virginia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.402Z",
+      "last_success": "2026-10-05T22:36:31.402Z",
+      "item_count": 25,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: detroitnews.com Michigan election 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.655Z",
+      "last_success": "2026-10-05T22:36:28.655Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Elway Research poll Washington 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.440Z",
+      "last_success": "2026-10-05T22:36:31.440Z",
+      "item_count": 12,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Arizona 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.858Z",
+      "last_success": "2026-10-05T22:36:27.858Z",
+      "item_count": 68,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll California 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.069Z",
+      "last_success": "2026-10-05T22:36:28.069Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Colorado 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.059Z",
+      "last_success": "2026-10-05T22:36:28.059Z",
+      "item_count": 53,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Florida 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.192Z",
+      "last_success": "2026-10-05T22:36:28.192Z",
+      "item_count": 69,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Georgia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.335Z",
+      "last_success": "2026-10-05T22:36:28.335Z",
+      "item_count": 67,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Iowa 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.596Z",
+      "last_success": "2026-10-05T22:36:28.596Z",
+      "item_count": 70,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Maine 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.798Z",
+      "last_success": "2026-10-05T22:36:28.798Z",
+      "item_count": 67,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Montana 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.776Z",
+      "last_success": "2026-10-05T22:36:28.776Z",
+      "item_count": 52,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Nebraska 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.153Z",
+      "last_success": "2026-10-05T22:36:29.153Z",
+      "item_count": 59,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Nevada 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.318Z",
+      "last_success": "2026-10-05T22:36:29.318Z",
+      "item_count": 55,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll New Mexico 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.290Z",
+      "last_success": "2026-10-05T22:36:30.290Z",
+      "item_count": 58,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Texas 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.314Z",
+      "last_success": "2026-10-05T22:36:31.314Z",
+      "item_count": 74,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Virginia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.460Z",
+      "last_success": "2026-10-05T22:36:31.460Z",
+      "item_count": 71,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Washington state 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.609Z",
+      "last_success": "2026-10-05T22:36:31.609Z",
+      "item_count": 79,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Emerson poll Wisconsin 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.857Z",
+      "last_success": "2026-10-05T22:36:31.857Z",
+      "item_count": 76,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: EPIC-MRA poll Michigan 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.620Z",
+      "last_success": "2026-10-05T22:36:28.620Z",
+      "item_count": 47,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Franklin Marshall poll Pennsylvania 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.157Z",
+      "last_success": "2026-10-05T22:36:31.157Z",
+      "item_count": 60,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Glengariff poll Michigan 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.666Z",
+      "last_success": "2026-10-05T22:36:28.666Z",
+      "item_count": 53,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Goucher poll Maryland 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.126Z",
+      "last_success": "2026-10-05T22:36:32.126Z",
+      "item_count": 37,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: High Point University poll North Carolina 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.002Z",
+      "last_success": "2026-10-05T22:36:31.002Z",
+      "item_count": 62,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Marist poll New York 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.578Z",
+      "last_success": "2026-10-05T22:36:30.578Z",
+      "item_count": 66,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: MassINC poll Massachusetts 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.295Z",
+      "last_success": "2026-10-05T22:36:32.295Z",
+      "item_count": 48,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Meredith poll North Carolina 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.835Z",
+      "last_success": "2026-10-05T22:36:30.835Z",
+      "item_count": 48,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Monmouth poll New Jersey 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.027Z",
+      "last_success": "2026-10-05T22:36:30.027Z",
+      "item_count": 65,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Muhlenberg poll Pennsylvania 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.109Z",
+      "last_success": "2026-10-05T22:36:31.109Z",
+      "item_count": 49,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Paul Simon Institute poll Illinois 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.934Z",
+      "last_success": "2026-10-05T22:36:31.934Z",
+      "item_count": 30,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Politico poll congress senate house 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.628Z",
+      "last_success": "2026-10-05T22:36:27.628Z",
+      "item_count": 39,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Arizona 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.816Z",
+      "last_success": "2026-10-05T22:36:27.816Z",
+      "item_count": 57,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Colorado 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.230Z",
+      "last_success": "2026-10-05T22:36:28.230Z",
+      "item_count": 49,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Connecticut 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.003Z",
+      "last_success": "2026-10-05T22:36:32.003Z",
+      "item_count": 70,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Florida 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.321Z",
+      "last_success": "2026-10-05T22:36:28.321Z",
+      "item_count": 56,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Georgia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.295Z",
+      "last_success": "2026-10-05T22:36:28.295Z",
+      "item_count": 53,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Iowa 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.848Z",
+      "last_success": "2026-10-05T22:36:28.848Z",
+      "item_count": 54,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Maine 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.709Z",
+      "last_success": "2026-10-05T22:36:28.709Z",
+      "item_count": 52,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Michigan 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.612Z",
+      "last_success": "2026-10-05T22:36:28.612Z",
+      "item_count": 60,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Montana 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.711Z",
+      "last_success": "2026-10-05T22:36:28.711Z",
+      "item_count": 17,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Nevada 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.394Z",
+      "last_success": "2026-10-05T22:36:29.394Z",
+      "item_count": 34,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll New Jersey 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.036Z",
+      "last_success": "2026-10-05T22:36:30.036Z",
+      "item_count": 59,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll New Mexico 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.095Z",
+      "last_success": "2026-10-05T22:36:30.095Z",
+      "item_count": 48,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll New York 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.355Z",
+      "last_success": "2026-10-05T22:36:30.355Z",
+      "item_count": 76,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Ohio 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.077Z",
+      "last_success": "2026-10-05T22:36:31.077Z",
+      "item_count": 59,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Pennsylvania 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.173Z",
+      "last_success": "2026-10-05T22:36:31.173Z",
+      "item_count": 56,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Quinnipiac poll Wisconsin 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.755Z",
+      "last_success": "2026-10-05T22:36:31.755Z",
+      "item_count": 55,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: redistricting 2026 congress": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.999Z",
+      "last_success": "2026-10-05T22:36:31.999Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: reuters.com congress midterm": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.438Z",
+      "last_success": "2026-10-05T22:36:27.438Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Saint Anselm NHIOP poll New Hampshire 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.392Z",
+      "last_success": "2026-10-05T22:36:29.392Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Selzer poll Iowa 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.444Z",
+      "last_success": "2026-10-05T22:36:28.444Z",
+      "item_count": 40,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Selzer poll Nebraska 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.018Z",
+      "last_success": "2026-10-05T22:36:29.018Z",
+      "item_count": 9,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Siena poll Nebraska 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.062Z",
+      "last_success": "2026-10-05T22:36:29.062Z",
+      "item_count": 45,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Siena poll New York 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.514Z",
+      "last_success": "2026-10-05T22:36:30.514Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Star Tribune Minnesota poll 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.614Z",
+      "last_success": "2026-10-05T22:36:32.614Z",
+      "item_count": 81,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Stetson poll Florida 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.198Z",
+      "last_success": "2026-10-05T22:36:28.198Z",
+      "item_count": 62,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Arizona 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.704Z",
+      "last_success": "2026-10-05T22:36:27.704Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Colorado 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.970Z",
+      "last_success": "2026-10-05T22:36:27.970Z",
+      "item_count": 12,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Georgia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.279Z",
+      "last_success": "2026-10-05T22:36:28.279Z",
+      "item_count": 19,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Maine 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.501Z",
+      "last_success": "2026-10-05T22:36:28.501Z",
+      "item_count": 27,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Montana 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.854Z",
+      "last_success": "2026-10-05T22:36:28.854Z",
+      "item_count": 14,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll New Hampshire 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.597Z",
+      "last_success": "2026-10-05T22:36:29.597Z",
+      "item_count": 54,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll New Jersey 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.110Z",
+      "last_success": "2026-10-05T22:36:30.110Z",
+      "item_count": 55,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll New Mexico 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.261Z",
+      "last_success": "2026-10-05T22:36:30.261Z",
+      "item_count": 22,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Virginia 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.492Z",
+      "last_success": "2026-10-05T22:36:31.492Z",
+      "item_count": 58,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Suffolk poll Washington state 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.789Z",
+      "last_success": "2026-10-05T22:36:31.789Z",
+      "item_count": 73,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: UNH Survey Center poll New Hampshire 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.475Z",
+      "last_success": "2026-10-05T22:36:29.475Z",
+      "item_count": 57,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: unionleader.com New Hampshire election 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.381Z",
+      "last_success": "2026-10-05T22:36:29.381Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: UT Texas Politics poll Texas 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.410Z",
+      "last_success": "2026-10-05T22:36:31.410Z",
+      "item_count": 76,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: UT Tyler poll Texas 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.348Z",
+      "last_success": "2026-10-05T22:36:31.348Z",
+      "item_count": 68,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: VPAP Virginia election 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.397Z",
+      "last_success": "2026-10-05T22:36:31.397Z",
+      "item_count": 45,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Google News: Winthrop poll South Carolina 2026": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.423Z",
+      "last_success": "2026-10-05T22:36:32.423Z",
+      "item_count": 43,
+      "error": null,
+      "failing_since": null
+    },
+    "News: GPB News": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.144Z",
+      "last_success": "2026-10-05T22:36:28.144Z",
+      "item_count": 20,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Hartford Courant – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.614Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 403",
+      "failing_since": "2026-10-05T22:36:31.614Z"
+    },
+    "News: Houston Chronicle": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.956Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:30.956Z"
+    },
+    "News: Idaho Press – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.518Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 429",
+      "failing_since": "2026-10-05T22:36:32.518Z"
+    },
+    "News: Illinois Policy Institute": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:33.908Z",
+      "last_success": "2026-10-05T22:36:33.908Z",
+      "item_count": 25,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Indiana Capital Chronicle": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.411Z",
+      "last_success": "2026-10-05T22:36:32.411Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: IndyStar – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.064Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:32.064Z"
+    },
+    "News: Inside Elections": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.574Z",
+      "last_success": "2026-10-05T22:36:27.574Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Insider NJ": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.988Z",
+      "last_success": "2026-10-05T22:36:32.988Z",
+      "item_count": 5,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Iowa Capital Dispatch": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.682Z",
+      "last_success": "2026-10-05T22:36:28.682Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Iowa Starting Line": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.592Z",
+      "last_success": "2026-10-05T22:36:28.592Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Las Vegas Review-Journal": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.947Z",
+      "last_success": "2026-10-05T22:36:28.947Z",
+      "item_count": 30,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Lincoln Journal Star": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.563Z",
+      "last_success": "2026-10-05T22:36:32.563Z",
+      "item_count": 50,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Los Angeles Times": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.494Z",
+      "last_success": "2026-10-05T22:36:27.494Z",
+      "item_count": 97,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Maine Morning Star": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.813Z",
+      "last_success": "2026-10-05T22:36:28.813Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Marist Poll (NY)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.208Z",
+      "last_success": "2026-10-05T22:36:32.208Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Marquette Law Poll (WI)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.777Z",
+      "last_success": "2026-10-05T22:36:31.777Z",
+      "item_count": 1,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Maryland Matters": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:33.961Z",
+      "last_success": "2026-10-05T22:36:33.961Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: MassLive – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.366Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:32.366Z"
+    },
+    "News: Michigan Advance": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.955Z",
+      "last_success": "2026-10-05T22:36:28.955Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Milwaukee Journal Sentinel": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.533Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:31.533Z"
+    },
+    "News: Minnesota Reformer": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.823Z",
+      "last_success": "2026-10-05T22:36:32.823Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: MinnPost": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.958Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:31.958Z"
+    },
+    "News: Monmouth Poll (NJ)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:33.761Z",
+      "last_success": "2026-10-05T22:36:33.761Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Montana Free Press": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.467Z",
+      "last_success": "2026-10-05T22:36:28.467Z",
+      "item_count": 8,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Montana Public Radio": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.650Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:30.650Z"
+    },
+    "News: NC Newsline": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.616Z",
+      "last_success": "2026-10-05T22:36:30.616Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Nebraska Examiner": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.935Z",
+      "last_success": "2026-10-05T22:36:28.935Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Nevada Current": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.327Z",
+      "last_success": "2026-10-05T22:36:29.327Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Nevada Ind. Polls": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.934Z",
+      "last_success": "2026-10-05T22:36:29.934Z",
+      "item_count": 63,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Nevada Independent": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.882Z",
+      "last_success": "2026-10-05T22:36:28.882Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: New York Focus": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:37.016Z",
+      "last_success": "2026-10-05T22:36:37.016Z",
+      "item_count": 50,
+      "error": null,
+      "failing_since": null
+    },
+    "News: NH Bulletin": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.709Z",
+      "last_success": "2026-10-05T22:36:29.709Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: NJ Monitor": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.599Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "request to https://njmonitor.com/feed/ failed, reason: Hostname/IP does not match certificate's altnames: Host: njmonitor.com. is not in the cert's altnames: DNS:*.hostmonster.com, DNS:hostmonster.com",
+      "failing_since": "2026-10-05T22:36:29.599Z"
+    },
+    "News: NJ Spotlight News": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:34.706Z",
+      "last_success": "2026-10-05T22:36:34.706Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: NJ.com – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.674Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:32.674Z"
+    },
+    "News: NM Political Report": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.773Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 403",
+      "failing_since": "2026-10-05T22:36:29.773Z"
+    },
+    "News: NY State of Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.691Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:32.691Z"
+    },
+    "News: Ohio Capital Journal": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.086Z",
+      "last_success": "2026-10-05T22:36:31.086Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Omaha World-Herald": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.558Z",
+      "last_success": "2026-10-05T22:36:32.558Z",
+      "item_count": 34,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Pew Research": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.168Z",
+      "last_success": "2026-10-05T22:36:27.168Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Philadelphia Inquirer": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.961Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:30.961Z"
+    },
+    "News: Pittsburgh Post-Gazette": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.989Z",
+      "last_success": "2026-10-05T22:36:30.989Z",
+      "item_count": 20,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Politico": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:26.976Z",
+      "last_success": "2026-10-05T22:36:26.976Z",
+      "item_count": 30,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Politico Elections": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:26.987Z",
+      "last_success": "2026-10-05T22:36:26.987Z",
+      "item_count": 30,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Portland Press Herald": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.189Z",
+      "last_success": "2026-10-05T22:36:29.189Z",
+      "item_count": 50,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Post and Courier – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.334Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 429",
+      "failing_since": "2026-10-05T22:36:32.334Z"
+    },
+    "News: PPIC": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.647Z",
+      "last_success": "2026-10-05T22:36:27.647Z",
+      "item_count": 20,
+      "error": null,
+      "failing_since": null
+    },
+    "News: RealClearPolitics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.370Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 403",
+      "failing_since": "2026-10-05T22:36:27.370Z"
+    },
+    "News: Richmond Times-Dispatch": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.249Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 429",
+      "failing_since": "2026-10-05T22:36:31.249Z"
+    },
+    "News: Roll Call": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.324Z",
+      "last_success": "2026-10-05T22:36:27.324Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Sabato's Crystal Ball": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.392Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 403",
+      "failing_since": "2026-10-05T22:36:27.392Z"
+    },
+    "News: Sacramento Bee": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:41.795Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "network timeout at: https://www.sacbee.com/arcio/rss/",
+      "failing_since": "2026-10-05T22:36:41.795Z"
+    },
+    "News: SC Daily Gazette": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.796Z",
+      "last_success": "2026-10-05T22:36:32.796Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Seattle Times": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.128Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:31.128Z"
+    },
+    "News: Source New Mexico": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.242Z",
+      "last_success": "2026-10-05T22:36:30.242Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Spotlight PA": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.918Z",
+      "last_success": "2026-10-05T22:36:30.918Z",
+      "item_count": 50,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Star Tribune – Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:32.071Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 429",
+      "failing_since": "2026-10-05T22:36:32.071Z"
+    },
+    "News: Tampa Bay Times": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.031Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:28.031Z"
+    },
+    "News: Texas Observer": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.092Z",
+      "last_success": "2026-10-05T22:36:31.092Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Texas Tribune": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:33.493Z",
+      "last_success": "2026-10-05T22:36:33.493Z",
+      "item_count": 20,
+      "error": null,
+      "failing_since": null
+    },
+    "News: The Gazette (IA)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.559Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 429",
+      "failing_since": "2026-10-05T22:36:28.559Z"
+    },
+    "News: The Guardian": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:27.048Z",
+      "last_success": "2026-10-05T22:36:27.048Z",
+      "item_count": 17,
+      "error": null,
+      "failing_since": null
+    },
+    "News: The Hill": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:26.946Z",
+      "last_success": "2026-10-05T22:36:26.946Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: The Hill (House)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:26.880Z",
+      "last_success": "2026-10-05T22:36:26.880Z",
+      "item_count": 15,
+      "error": null,
+      "failing_since": null
+    },
+    "News: The Hill (Senate)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:26.884Z",
+      "last_success": "2026-10-05T22:36:26.884Z",
+      "item_count": 15,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Times Union (Albany)": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:29.994Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "returned 0 items",
+      "failing_since": "2026-10-05T22:36:29.994Z"
+    },
+    "News: Virginia Mercury": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.709Z",
+      "last_success": "2026-10-05T22:36:31.709Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Washington State Standard": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.776Z",
+      "last_success": "2026-10-05T22:36:31.776Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: WBAL-TV Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.973Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 404",
+      "failing_since": "2026-10-05T22:36:31.973Z"
+    },
+    "News: Wisconsin Examiner": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.853Z",
+      "last_success": "2026-10-05T22:36:31.853Z",
+      "item_count": 100,
+      "error": null,
+      "failing_since": null
+    },
+    "News: Wisconsin Watch": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:31.507Z",
+      "last_success": "2026-10-05T22:36:31.507Z",
+      "item_count": 12,
+      "error": null,
+      "failing_since": null
+    },
+    "News: WUNC Politics": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:30.467Z",
+      "last_success": "2026-10-05T22:36:30.467Z",
+      "item_count": 10,
+      "error": null,
+      "failing_since": null
+    },
+    "News: YouGov": {
+      "group": "news",
+      "primary": false,
+      "last_attempt": "2026-10-05T22:36:28.305Z",
+      "last_success": "2026-10-05T22:36:28.305Z",
+      "item_count": 200,
+      "error": null,
+      "failing_since": null
+    }
+  },
+  "updated": "2026-10-05T22:36:41.850Z"
+}

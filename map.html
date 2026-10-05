@@ -20,8 +20,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/seat-panel.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="assets/js/seat-ids.js"></script>
+<script src="assets/js/seat-panel.js"></script>
 <style>
 :root {
   --bg:#FFFFFF; --bg-s:#F7F7F7; --bg-h:#F2F2F2;
@@ -92,6 +95,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 .map-wrap{overflow-x:auto;padding-bottom:8px;margin-bottom:20px}
 
 /* ── RACE DETAIL CARD ── */
+/* Row highlighted in a seat list while SeatPanel is open for that seat. */
+.race-table tbody tr.sp-row-selected{background:var(--bg-h)}
+.race-table tbody tr[tabindex]:focus-visible{outline:2px solid var(--t1);outline-offset:-2px}
 .detail-card{background:var(--bg-s);border:1px solid var(--br-md);border-radius:8px;padding:20px 22px;margin-bottom:20px;display:none}
 .detail-card.visible{display:block}
 .detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
@@ -136,6 +142,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 .filter-btn.active{border-color:var(--t1);background:var(--t1);color:#fff}
 .filter-label{font-size:16px;color:var(--t4);margin-right:4px}
 
+.race-table-wrap{overflow-x:auto}
 .race-table{width:100%;border-collapse:collapse;font-size:15px}
 .race-table th{text-align:left;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:8px 11px;border-bottom:2px solid var(--br);cursor:pointer;user-select:none;white-space:nowrap}
 .race-table th:hover{color:var(--t2)}
@@ -365,32 +372,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   </div>
 
   <!-- DETAIL CARD -->
-  <div class="detail-card" id="detail-card">
-    <div class="detail-top">
-      <div>
-        <div class="detail-state" id="dc-state">&#8230;</div>
-        <div class="detail-incumbent" id="dc-incumbent">&#8230;</div>
-      </div>
-      <div class="detail-right">
-        <button class="detail-close" onclick="closeDetail()" title="Close">&#x2715;</button>
-        <div class="detail-rating-badge" id="dc-rating-badge">&#8230;</div>
-        <div class="detail-badges">
-          <span class="badge-party" id="dc-party-badge">&#8230;</span>
-          <span class="badge-open" id="dc-open-badge" style="display:none">Open seat</span>
-        </div>
-      </div>
-    </div>
-    <div class="detail-note" id="dc-note">&#8230;</div>
-    <div class="issues-panel" id="dc-issues">
-      <button class="issues-toggle" onclick="toggleIssues('dc-issues-body',this)" aria-expanded="false">
-        <span class="issues-toggle-label">Key Issues</span>
-        <span class="issues-toggle-count" id="dc-issues-count"></span>
-        <span class="issues-toggle-arrow">&#9660;</span>
-      </button>
-      <div class="issues-body" id="dc-issues-body"></div>
-    </div>
-  </div>
-
   <!-- FILTER ROW -->
   <div class="chart-card">
     <div class="card-title">All 33+2 Senate races &#8212; 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
@@ -404,6 +385,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <button class="filter-btn" onclick="filterTable('Safe',this)">Safe R / Safe D</button>
       <button class="filter-btn" onclick="filterTable('open',this)">Open seats</button>
     </div>
+    <div class="race-table-wrap">
     <table class="race-table" id="race-table">
       <thead>
         <tr>
@@ -418,6 +400,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
+    </div>
     <div class="chart-note" id="senate-source-note">Source: Preliminary analyst estimates</div>
   </div>
 
@@ -467,12 +450,14 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="chart-card">
       <div class="card-title" id="senate-faction-card-title">All Senate Factions &mdash; 100 members</div>
       <input class="faction-table-search" type="search" placeholder="Search by name or state&hellip;" oninput="filterFactionTable('senate',this.value)">
+      <div class="race-table-wrap">
       <table class="race-table" id="senate-faction-table">
         <thead id="senate-faction-thead"><tr><th>Faction</th><th>Member</th><th>State</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
         <tbody id="senate-faction-tbody">
           <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
   </div></div>
@@ -551,28 +536,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <button class="map-zoom-btn reset" onclick="houseZoomReset()" title="Reset view">&#8634;</button>
     </div>
   </div>
-  <div class="detail-card" id="house-detail-card">
-    <div class="detail-top">
-      <div>
-        <div class="detail-state" id="hdc-dist">&hellip;</div>
-        <div class="detail-incumbent" id="hdc-inc">&hellip;</div>
-      </div>
-      <div class="detail-right">
-        <button class="detail-close" onclick="closeHouseDetail()" title="Close">&#x2715;</button>
-        <div class="detail-rating-badge" id="hdc-badge">&hellip;</div>
-        <div class="detail-badges"><span class="badge-party" id="hdc-party">&hellip;</span></div>
-      </div>
-    </div>
-    <div class="detail-note" id="hdc-pvp">&hellip;</div>
-    <div class="issues-panel" id="hdc-issues">
-      <button class="issues-toggle" onclick="toggleIssues('hdc-issues-body',this)" aria-expanded="false">
-        <span class="issues-toggle-label">Key Issues</span>
-        <span class="issues-toggle-count" id="hdc-issues-count"></span>
-        <span class="issues-toggle-arrow">&#9660;</span>
-      </button>
-      <div class="issues-body" id="hdc-issues-body"></div>
-    </div>
-  </div>
 
   <!-- COMPETITIVE RACES -->
   <div class="callout">
@@ -590,7 +553,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
   <div class="chart-card">
     <div class="card-title">49 battleground districts</div>
-    <div class="card-sub">All 46 Ballotpedia-identified 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
+    <div class="card-sub">All 49 individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
+    <div class="race-table-wrap">
     <table class="race-table" id="comp-table">
       <thead>
         <tr>
@@ -605,6 +569,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
+    </div>
     <div class="chart-note">Source: Cook Political Report, Inside Elections. PVP = 2024 presidential vote performance in district. Positive R = district voted more Republican than national average.</div>
   </div>
 
@@ -654,12 +619,14 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="chart-card">
       <div class="card-title" id="house-faction-card-title">All House Factions &mdash; 433 members</div>
       <input class="faction-table-search" type="search" placeholder="Search by name or district&hellip;" oninput="filterFactionTable('house',this.value)">
+      <div class="race-table-wrap">
       <table class="race-table" id="house-faction-table">
         <thead id="house-faction-thead"><tr><th>Faction</th><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
         <tbody id="house-faction-tbody">
           <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
   </div></div>
@@ -734,23 +701,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   </div>
 
   <!-- DETAIL CARD -->
-  <div class="detail-card" id="gov-detail-card">
-    <div class="detail-top">
-      <div>
-        <div class="detail-state" id="gdc-state">&#8230;</div>
-        <div class="detail-incumbent" id="gdc-incumbent">&#8230;</div>
-      </div>
-      <div class="detail-right">
-        <button class="detail-close" onclick="closeGovDetail()" title="Close">&#x2715;</button>
-        <div class="detail-rating-badge" id="gdc-badge">&#8230;</div>
-        <div class="detail-badges">
-          <span class="badge-party" id="gdc-party">&#8230;</span>
-          <span class="badge-open" id="gdc-open-badge" style="display:none">Open seat</span>
-        </div>
-      </div>
-    </div>
-    <div class="detail-note" id="gdc-note">&#8230;</div>
-  </div>
 
   <!-- CONTEXT -->
   <div class="callout">
@@ -771,6 +721,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <button class="filter-btn gov-filter" onclick="filterGovTable('Safe',this)">Safe R / Safe D</button>
       <button class="filter-btn gov-filter" onclick="filterGovTable('open',this)">Open seats</button>
     </div>
+    <div class="race-table-wrap">
     <table class="race-table" id="gov-race-table">
       <thead>
         <tr>
@@ -785,6 +736,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
+    </div>
     <div class="chart-note" id="gov-source-note">Source: Ballotpedia / Cook Political Report / Sabato&#8217;s Crystal Ball</div>
   </div>
 
@@ -871,52 +823,71 @@ Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
 Chart.defaults.color = '#6B6B6B';
 Chart.defaults.plugins.legend.display = false;
 
-// ── ISSUES DATA ───────────────────────────────────────────────────────────────
-let _issuesData=null,_issuesFetching=false,_issuesWaiters=[];
-function fetchIssuesData(cb){
-  if(_issuesData){cb(_issuesData);return;}
-  _issuesWaiters.push(cb);
-  if(_issuesFetching)return;
-  _issuesFetching=true;
-  fetch('assets/issues.json?v=1')
-    .then(r=>r.json())
-    .then(d=>{_issuesData=d;_issuesWaiters.forEach(fn=>fn(d));_issuesWaiters=[];})
-    .catch(e=>console.error('issues data load failed',e));
+// ── SEAT PANEL INTEGRATION ──────────────────────────────────────────────────
+// Clicking a seat (map shape or list row) opens window.SeatPanel for that
+// canonical ID and highlights both the shape and the row. The highlight is
+// shared across all three chambers since only one seat can be open at once.
+// Clearing happens on 'seatpanel:close', which fires however the panel was
+// closed (X, Esc, outside click, or switching to a different seat entirely
+// closing first) -- so this file never needs to know which close path fired.
+let _spPathEl = null;
+let _spRowEl = null;
+
+function spClearHighlight() {
+  if (_spPathEl) {
+    const w = _spPathEl.classList.contains('d-path') ? '0.3px' : '0.5px';
+    d3.select(_spPathEl).style('stroke', '#fff').style('stroke-width', w);
+    _spPathEl = null;
+  }
+  if (_spRowEl) {
+    _spRowEl.classList.remove('sp-row-selected');
+    _spRowEl = null;
+  }
 }
 
-function toggleIssues(bodyId,btn){
-  const body=document.getElementById(bodyId);
-  if(!body)return;
-  const open=!body.classList.contains('open');
-  body.classList.toggle('open',open);
-  const arrow=btn.querySelector('.issues-toggle-arrow');
-  if(arrow)arrow.style.transform=open?'rotate(180deg)':'';
-  btn.setAttribute('aria-expanded',open);
+function spSelectSeat(seatId, pathEl) {
+  spClearHighlight();
+  _spPathEl = pathEl || document.querySelector('path[data-seat-id="' + seatId + '"]');
+  if (_spPathEl) d3.select(_spPathEl).style('stroke', '#111').style('stroke-width', '2.5px');
+  _spRowEl = document.querySelector('tr[data-seat-id="' + seatId + '"]');
+  if (_spRowEl) {
+    _spRowEl.classList.add('sp-row-selected');
+    _spRowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
 }
 
-function renderIssues(panelId,bodyId,countId,issues){
-  const panel=document.getElementById(panelId);
-  const body=document.getElementById(bodyId);
-  if(!panel||!body)return;
-  const countEl=document.getElementById(countId);
-  if(!issues||issues.length===0){panel.classList.remove('has-issues');return;}
-  panel.classList.add('has-issues');
-  if(countEl)countEl.textContent='('+issues.length+')';
-  body.innerHTML=issues.map(iss=>{
-    const relTag=iss.r?`<span class="issue-rel">${iss.r}</span>`:'';
-    const srcLink=iss.su
-      ?`<span class="issue-src"><a href="${iss.su}" target="_blank" rel="noopener noreferrer">${iss.sl}</a></span>`
-      :(iss.sl?`<span class="issue-src">${iss.sl}</span>`:'');
-    return `<div class="issue-item">
-      <div class="issue-title">${iss.t}</div>
-      <div class="issue-desc">${iss.d}</div>
-      <div class="issue-footer">${relTag}${srcLink}</div>
-    </div>`;
-  }).join('');
-  // Reset to collapsed state each time a new seat is opened
-  body.classList.remove('open');
-  const toggleBtn=panel.querySelector('.issues-toggle');
-  if(toggleBtn){toggleBtn.querySelector('.issues-toggle-arrow').style.transform='';toggleBtn.setAttribute('aria-expanded','false');}
+window.addEventListener('seatpanel:close', spClearHighlight);
+
+// Opens SeatPanel for a race object from any of the three chambers, passing
+// through the same rating/incumbent/note context the old inline detail
+// cards used to show. 'kind' is 'senate' | 'house' | 'governor'.
+// Some data.json incumbent strings for open seats are already fully
+// self-descriptive (e.g. "Open seat (Cornyn not seeking re-election)",
+// "Open (Kay Ivey — TL)"); others are still a bare name (e.g. "Dick
+// Durbin") or an "(appointed)" note. Only prefix "Open seat —" when the
+// string doesn't already say "Open", so it's never duplicated.
+function openSeatIncumbentLine(incumbent) {
+  return /^open\b/i.test(incumbent) ? incumbent : `Open seat — ${incumbent}`;
+}
+
+function openSeatFromRace(kind, race, pathEl) {
+  let id, incumbentLine, note;
+  if (kind === 'senate') {
+    id = toSeatId('senate', race.state);
+    incumbentLine = race.open ? openSeatIncumbentLine(race.incumbent) : `${race.incumbent} (incumbent)`;
+    note = race.note;
+  } else if (kind === 'governor') {
+    id = toSeatId('governor', race.state);
+    incumbentLine = race.open ? openSeatIncumbentLine(race.incumbent) : `${race.incumbent} (incumbent)`;
+    note = race.note;
+  } else {
+    id = toSeatId('house', race.district);
+    incumbentLine = race.incumbent;
+    note = 'Presidential Vote Performance (2024): ' + race.pvp;
+  }
+  if (!id) return;
+  spSelectSeat(id, pathEl);
+  window.SeatPanel.open(id, { mode: 'default', rating: race.rating, incumbent: incumbentLine, note: note });
 }
 
 function goInner(chamber, tab, btn) {
@@ -1213,7 +1184,6 @@ function govZoomReset(){ _govZoom?.reset(); }
 // ── SENATE CHOROPLETH ────────────────────────────────────────────────────────
 let _senSel = null;
 let _senRaceByState = {};
-let _selSenPath = null;
 let _senG = null;
 
 function highlightMapByRating(rating) {
@@ -1242,6 +1212,10 @@ function buildSenateMap(races) {
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_senRaceByState[d.properties.NAME] ? ' clickable' : ''))
+      .attr('data-seat-id', d => {
+        const r = _senRaceByState[d.properties.NAME];
+        return r ? toSeatId('senate', r.state) : null;
+      })
       .attr('d', d => pathGen(d) || '')
       .style('fill', d => {
         const r = _senRaceByState[d.properties.NAME];
@@ -1256,13 +1230,10 @@ function buildSenateMap(races) {
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {
+        event.stopPropagation();
         const r = _senRaceByState[d.properties.NAME];
         if (!r) return;
-        if (_selSenPath) d3.select(_selSenPath).style('stroke', '#fff').style('stroke-width', '0.5px');
-        if (_selSenPath === this) { _selSenPath = null; closeDetail(); return; }
-        _selSenPath = this;
-        d3.select(this).style('stroke', '#111').style('stroke-width', '2.5px');
-        showDetail(r);
+        openSeatFromRace('senate', r, this);
       });
 
     // State abbreviation labels for races only
@@ -1290,31 +1261,6 @@ function buildSenateMap(races) {
   });
 }
 
-function showDetail(race) {
-  const cfg = RC[race.rating] || { bg:'#ccc', tx:'#fff' };
-  document.getElementById('dc-state').textContent = race.state;
-  document.getElementById('dc-incumbent').textContent = race.open
-    ? `Open seat — ${race.incumbent} not seeking re-election`
-    : `${race.incumbent} (incumbent)`;
-  const badge = document.getElementById('dc-rating-badge');
-  badge.textContent = race.rating; badge.style.background = cfg.bg; badge.style.color = cfg.tx;
-  const pb = document.getElementById('dc-party-badge');
-  pb.textContent = race.party==='R'?'Republican':race.party==='D'?'Democrat':race.party;
-  pb.className = 'badge-party ' + race.party;
-  document.getElementById('dc-open-badge').style.display = race.open ? 'inline-block' : 'none';
-  document.getElementById('dc-note').textContent = race.note;
-  const card = document.getElementById('detail-card');
-  card.classList.add('visible');
-  card.scrollIntoView({ behavior:'smooth', block:'nearest' });
-  fetchIssuesData(data => {
-    renderIssues('dc-issues','dc-issues-body','dc-issues-count', data.senate[race.state] || []);
-  });
-}
-
-function closeDetail() {
-  document.getElementById('detail-card').classList.remove('visible');
-  if (_selSenPath) { d3.select(_selSenPath).style('stroke','#fff').style('stroke-width','0.5px'); _selSenPath=null; }
-}
 
 function searchSenMap(q) {
   if (!_senSel) return;
@@ -1380,8 +1326,8 @@ function renderTable(races, filter, col, dir) {
 
   tbody.innerHTML = filtered.map(r => {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
-    return `<tr class="${r.open ? 'open-seat' : ''}">
-      <td><a class="state-link" onclick="clickTableRow('${r.code}')">${r.state}</a></td>
+    return `<tr class="${r.open ? 'open-seat' : ''}" style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('senate', r.state)}" onclick="clickTableRow('${r.code}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+      <td><span class="state-link">${r.state}</span></td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party === 'R' ? 'R' : 'D'}</span></td>
       <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
@@ -1390,9 +1336,10 @@ function renderTable(races, filter, col, dir) {
   }).join('');
 }
 
-function clickTableRow(code) {
+function clickTableRow(code, event) {
+  if (event) event.stopPropagation();
   const race = DATA.races.senate.races.find(r => r.code === code);
-  if (race) showDetail(race);
+  if (race) openSeatFromRace('senate', race);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -1432,6 +1379,11 @@ function buildHouseDistrictMap(competitive) {
         const k = d.properties.state + '_' + d.properties.district;
         return 'd-path' + (_houseRaceByKey[k] ? ' clickable' : '');
       })
+      .attr('data-seat-id', d => {
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        return r ? toSeatId('house', r.district) : null;
+      })
       .attr('d', d => pathGen(d) || '')
       .style('fill', d => {
         const k = d.properties.state + '_' + d.properties.district;
@@ -1455,32 +1407,16 @@ function buildHouseDistrictMap(competitive) {
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {
+        event.stopPropagation();
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
-        if (r) showHouseDetail(r);
+        if (r) openSeatFromRace('house', r, this);
       });
 
     const ld = document.getElementById('house-loading');
     if (ld) ld.classList.add('done');
   });
 }
-
-function showHouseDetail(race) {
-  const cfg = RC[race.rating] || {bg:'#ccc',tx:'#fff'};
-  document.getElementById('hdc-dist').textContent = race.district;
-  document.getElementById('hdc-inc').textContent = race.incumbent;
-  const badge = document.getElementById('hdc-badge');
-  badge.textContent = race.rating; badge.style.background = cfg.bg; badge.style.color = cfg.tx;
-  const pb = document.getElementById('hdc-party');
-  pb.textContent = race.party==='R'?'Republican':'Democrat'; pb.className = 'badge-party ' + race.party;
-  document.getElementById('hdc-pvp').textContent = 'Presidential Vote Performance (2024): ' + race.pvp;
-  document.getElementById('house-detail-card').classList.add('visible');
-  fetchIssuesData(data => {
-    renderIssues('hdc-issues','hdc-issues-body','hdc-issues-count', data.house[race.district] || []);
-  });
-}
-
-function closeHouseDetail() { document.getElementById('house-detail-card').classList.remove('visible'); }
 
 function searchHouseMap(q) {
   if (!_houseSel) return;
@@ -1521,6 +1457,10 @@ function buildGovMap(races) {
       .data(gj.features)
       .join('path')
       .attr('class', d => 's-path' + (_govRaceByState[d.properties.NAME] ? ' clickable' : ''))
+      .attr('data-seat-id', d => {
+        const r = _govRaceByState[d.properties.NAME];
+        return r ? toSeatId('governor', r.state) : null;
+      })
       .attr('d', d => pathGen(d) || '')
       .style('fill', d => {
         const r = _govRaceByState[d.properties.NAME];
@@ -1535,13 +1475,10 @@ function buildGovMap(races) {
       })
       .on('mouseleave', hideTip)
       .on('click', function(event, d) {
+        event.stopPropagation();
         const r = _govRaceByState[d.properties.NAME];
         if (!r) return;
-        if (_selGovPath) d3.select(_selGovPath).style('stroke', '#fff').style('stroke-width', '0.5px');
-        if (_selGovPath === this) { _selGovPath = null; closeGovDetail(); return; }
-        _selGovPath = this;
-        d3.select(this).style('stroke', '#111').style('stroke-width', '2.5px');
-        showGovDetail(r);
+        openSeatFromRace('governor', r, this);
       });
 
     // State abbreviation labels for race states
@@ -1620,7 +1557,8 @@ function renderCompTable(races) {
   tbody.innerHTML = sorted.map(r => {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
     const pvpR = r.pvp.startsWith('R');
-    return `<tr>
+    const seatId = toSeatId('house', r.district);
+    return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${seatId}" onclick="clickCompTableRow('${r.district}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td style="font-weight:600">${r.district}</td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
@@ -1630,11 +1568,16 @@ function renderCompTable(races) {
   }).join('');
 }
 
+function clickCompTableRow(district, event) {
+  if (event) event.stopPropagation();
+  const race = DATA.races.house.competitive.find(r => r.district === district);
+  if (race) openSeatFromRace('house', race);
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GOVERNOR
 // ─────────────────────────────────────────────────────────────────────────────
 let _govSel = null;
-let _selGovPath = null;
 let govSortCol = 3, govSortDir = 1;
 let govActiveFilter = 'all';
 
@@ -1683,7 +1626,7 @@ function renderGovTable(races, filter, col, dir) {
   const tbody = document.getElementById('gov-race-tbody');
   tbody.innerHTML = sorted.map(r => {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
-    return `<tr>
+    return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('governor', r.state)}" onclick="clickGovTableRow('${r.state.replace(/'/g, "\\'")}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td style="font-weight:600">${r.state}</td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
@@ -1691,6 +1634,12 @@ function renderGovTable(races, filter, col, dir) {
       <td>${r.open ? '<span class="badge-open" style="font-size:11px;padding:2px 7px">Open</span>' : '&#8212;'}</td>
     </tr>`;
   }).join('');
+}
+
+function clickGovTableRow(state, event) {
+  if (event) event.stopPropagation();
+  const race = DATA.races.governor.races.find(r => r.state === state);
+  if (race) openSeatFromRace('governor', race);
 }
 
 function sortGovTable(col) {
@@ -1706,29 +1655,6 @@ function filterGovTable(filter, btn) {
     btn.classList.add('active');
   }
   renderGovTable(DATA.races.governor.races, govActiveFilter, govSortCol, govSortDir);
-}
-
-function showGovDetail(race) {
-  const cfg = RC[race.rating] || { bg: '#ccc', tx: '#fff' };
-  document.getElementById('gdc-state').textContent = race.state;
-  document.getElementById('gdc-incumbent').textContent = race.open
-    ? `Open seat \u2014 ${race.incumbent}`
-    : `${race.incumbent} (incumbent)`;
-  const badge = document.getElementById('gdc-badge');
-  badge.textContent = race.rating; badge.style.background = cfg.bg; badge.style.color = cfg.tx;
-  const pb = document.getElementById('gdc-party');
-  pb.textContent = race.party === 'R' ? 'Republican' : 'Democrat';
-  pb.className = 'badge-party ' + race.party;
-  document.getElementById('gdc-open-badge').style.display = race.open ? 'inline-block' : 'none';
-  document.getElementById('gdc-note').textContent = race.note;
-  const card = document.getElementById('gov-detail-card');
-  card.classList.add('visible');
-  card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function closeGovDetail() {
-  document.getElementById('gov-detail-card').classList.remove('visible');
-  if (_selGovPath) { d3.select(_selGovPath).style('stroke', '#fff').style('stroke-width', '0.5px'); _selGovPath = null; }
 }
 
 function searchGovMap(q) {

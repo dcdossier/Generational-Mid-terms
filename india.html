@@ -837,26 +837,6 @@ body {
 
 /* ── SIDE PANEL NEWS ── */
 .sp-news-list { display: flex; flex-direction: column; margin-top: 4px; }
-.sp-news-item { padding: 11px 0; border-bottom: 1px solid var(--border); }
-.sp-news-item:first-child { border-top: 1px solid var(--border); }
-.sp-news-source {
-  font: 500 10px var(--sans);
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-  margin-bottom: 3px;
-}
-.sp-news-title {
-  display: block;
-  font: 600 14px var(--serif);
-  color: var(--text);
-  text-decoration: none;
-  line-height: 1.4;
-  margin-bottom: 3px;
-}
-.sp-news-title:hover { color: var(--accent); }
-.sp-news-date { font: 400 11px var(--sans); color: var(--text3); }
-.sp-news-empty { font: 400 14px var(--sans); color: var(--text3); padding: 11px 0; }
 
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
@@ -1562,7 +1542,7 @@ body {
   <!-- MEMBER NEWS sub-panel -->
   <div id="interest-subpanel-news" class="interest-subpanel">
     <div class="callout" style="margin-bottom:16px">
-      Live news filtered for the 39 tracked India-Relevant members, drawn from the same sources as the Live News Feed (<em>data.json</em>) plus member-office RSS feeds. Click any member row in the roster to see their news in their profile.
+      Recent Google News coverage of the 39 tracked India-Relevant members: articles from the last 7 days that name the member, up to six each. Click any member row in the roster to see their news in their profile.
     </div>
     <div class="mn-toolbar">
       <input type="search" class="mn-search" id="mn-search" placeholder="Search member or keyword&hellip;" oninput="filterMemberNewsPanel(this.value)">
@@ -1579,7 +1559,7 @@ body {
     </div>
     <div id="mn-loading" style="font:400 15px var(--sans);color:var(--text3);padding:24px 0">Loading member news&hellip;</div>
     <div id="mn-list" class="mn-list" style="display:none"></div>
-    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Sources: <em>data.json</em> Live News feed (same as Overview tab) plus state political RSS feeds linked to each tracked member. Articles refreshed on page load via CORS proxy.</p>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Source: Google News, searched for each member by name every 6 hours. <span id="mn-checked"></span></p>
   </div><!-- /interest-subpanel-news -->
 
 </div><!-- /page-body -->
@@ -1753,12 +1733,12 @@ function openSidePanel(memberId) {
 
     <div class="sp-section-label" style="margin-top:20px">Latest News</div>
     <div id="sp-news-list" class="sp-news-list">
-      <div id="sp-news-loading" style="font:400 14px var(--sans);color:var(--text3);padding:11px 0">Loading news\u2026</div>
+      <div class="sp-latest-empty">Loading news\u2026</div>
     </div>
   `;
   document.getElementById('india-sidepanel').classList.add('open');
   document.getElementById('india-overlay').classList.add('open');
-  _loadAndRenderSidepanelNews(m.name);
+  _loadAndRenderSidepanelNews(m.id);
 
   // Embed that member's seat brief (India block + 5 sections + Key Issues)
   // using SeatPanel's own renderer -- no duplicated rendering code here.
@@ -2418,47 +2398,16 @@ buildRoster();
 
 // ── MEMBER NEWS FEED ────────────────────────────────────────────────────────
 
-// Unique RSS feeds from MEMBERS array
-const _memberNewsFeeds = [...new Set(MEMBERS.filter(m => m.news).map(m => m.news))];
+// News comes from assets/candidate-news.json (Google News, refreshed every 6
+// hours by scripts/fetch-candidate-news.js), keyed by member id.
 
 // Member → tier lookup for colour-coding
 const _memberTierMap = {};
 MEMBERS.forEach(m => { _memberTierMap[m.name] = m.tier; });
 
-// Normalize: strip diacritics, lowercase (handles André → andre)
-function _norm(s) {
-  return s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
-}
-
 // HTML escape helper
 function _esc(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-// Decode HTML entities from RSS titles (e.g. &#8216; → ', &amp; → &) then re-escape safely
-const _entityDecoderIndia = document.createElement('textarea');
-function _decodeTitle(s) { _entityDecoderIndia.innerHTML = String(s||''); return _entityDecoderIndia.value; }
-function _escTitle(s) { return _esc(_decodeTitle(s)); }
-
-// Keyword map for member name matching
-const _memberKeywords = MEMBERS.map(m => ({
-  name: m.name,
-  keywords: _norm(m.name).split(/\s+/)
-}));
-
-function _articleMentionsMember(text) {
-  const lower = _norm(text);
-  for (const mk of _memberKeywords) {
-    const lastName = mk.keywords[mk.keywords.length - 1];
-    const fullName = mk.keywords.join(' ');
-    // Match: full name, first+last appearing anywhere, or title+lastname
-    if (lower.includes(fullName)) return mk.name;
-    if (lastName.length > 3 && lower.includes(lastName) && lower.includes(mk.keywords[0])) return mk.name;
-    if (lastName.length > 3) {
-      const titles = ['sen. ', 'rep. ', 'senator ', 'representative '];
-      if (titles.some(t => lower.includes(t + lastName))) return mk.name;
-    }
-  }
-  return null;
 }
 
 let _allNewsItems   = [];
@@ -2503,7 +2452,7 @@ function _renderMemberNews() {
   if (_mnSearchQuery) {
     items = items.filter(i =>
       i.member.toLowerCase().includes(_mnSearchQuery) ||
-      _decodeTitle(i.title).toLowerCase().includes(_mnSearchQuery)
+      i.title.toLowerCase().includes(_mnSearchQuery)
     );
   }
 
@@ -2519,7 +2468,7 @@ function _renderMemberNews() {
           <span class="mn-article-source">${_esc(item.source)}</span>
           <span class="mn-article-member" style="background:${color}">${_esc(item.member)}</span>
         </div>
-        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_escTitle(item.title)}</a>
+        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_esc(item.title)}</a>
         <div class="mn-article-date">${_esc(item.date)}</div>
       </div>`;
     }).join('');
@@ -2528,130 +2477,61 @@ function _renderMemberNews() {
 }
 
 // ── Side panel: render per-member news ──────────────────────────────────────
-async function _loadAndRenderSidepanelNews(memberName) {
-  // If a fetch is already in flight, wait for it to finish
-  if (_newsLoading) {
-    await new Promise(resolve => {
-      const poll = setInterval(() => { if (!_newsLoading) { clearInterval(poll); resolve(); } }, 200);
-    });
-  } else {
-    await loadMemberNews(false);
-  }
+async function _loadAndRenderSidepanelNews(memberId) {
+  const news = await window.SeatPanel.loadCandidateNews();
   const listEl = document.getElementById('sp-news-list');
-  const loadEl = document.getElementById('sp-news-loading');
   if (!listEl) return;
-  if (loadEl) loadEl.remove();
-
-  const items = _allNewsItems.filter(i => i.member === memberName).slice(0, 8);
-  if (items.length === 0) {
-    listEl.innerHTML = '<p class="sp-news-empty">No recent news found for this member.</p>';
-    return;
-  }
-  listEl.innerHTML = items.map(item => `
-    <div class="sp-news-item">
-      <div class="sp-news-source">${_esc(item.source)}</div>
-      <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="sp-news-title">${_escTitle(item.title)}</a>
-      <div class="sp-news-date">${_esc(item.date)}</div>
-    </div>
-  `).join('');
-}
-
-// ── RSS CORS proxy ───────────────────────────────────────────────────────────
-async function _fetchFeedViaProxy(url) {
-  const api = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&api_key=&count=20`;
-  try {
-    const r = await fetch(api);
-    if (!r.ok) return [];
-    const j = await r.json();
-    if (j.status !== 'ok' || !Array.isArray(j.items)) return [];
-    return j.items.map(item => ({
-      title: (item.title || '').replace(/<[^>]*>/g, '').trim(),
-      link:  item.link || item.url || '',
-      description: (item.description || item.content || '').replace(/<[^>]*>/g, '').slice(0, 300),
-      pubDate: item.pubDate || ''
-    }));
-  } catch { return []; }
+  const entry = news.members && news.members[memberId];
+  window.SeatPanel.renderNewsList(listEl, entry ? entry.items : [], news.meta && news.meta.updated);
 }
 
 // ── Main news loader ─────────────────────────────────────────────────────────
+// Flattens assets/candidate-news.json's per-member items into one list for the
+// Member News sub-panel. force re-fetches the file.
 async function loadMemberNews(force) {
   if (!force && _newsLoadedOnce) {
     _renderMemberNews();
     return;
   }
-  if (_newsLoading) return;   // already fetching — caller will get results when done
+  if (_newsLoading) return;
   _newsLoading = true;
 
   const loadEl = document.getElementById('mn-loading');
   const listEl = document.getElementById('mn-list');
   if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Loading member news\u2026'; }
   if (listEl) listEl.style.display = 'none';
-  _allNewsItems = [];
 
   try {
-  // Source 1: data.json — same feed as the Live News Feed in the Overview tab
-  try {
-    const r = await fetch('data.json?t=' + Date.now());
-    if (r.ok) {
-      const data = await r.json();
-      (Array.isArray(data.news) ? data.news : []).forEach(item => {
-        const searchText = (item.title || '') + ' ' + (item.description || '');
-        const member = _articleMentionsMember(searchText);
-        if (!member) return;
-        let date = '';
-        if (item.date) {
-          try { date = new Date(item.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
-          catch { date = (item.date || '').slice(0, 10); }
-        }
-        const ts = item.date ? (new Date(item.date).getTime() || 0) : 0;
-        _allNewsItems.push({ title: item.title || '', link: item.url || '', source: item.source || 'Live News', member, date, _ts: ts });
-      });
+    const news = await window.SeatPanel.loadCandidateNews(force);
+    const seen = new Set();
+    _allNewsItems = MEMBERS.flatMap(m => ((news.members && news.members[m.id]) || {}).items?.map(item => ({
+      title: item.title,
+      link: item.url,
+      source: item.source,
+      member: m.name,
+      date: new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+      _ts: new Date(item.date).getTime() || 0,
+    })) || [])
+      .sort((a, b) => b._ts - a._ts)
+      .filter(i => { if (!i.link || seen.has(i.link)) return false; seen.add(i.link); return true; });
+
+    const checked = document.getElementById('mn-checked');
+    if (checked && news.meta && news.meta.updated) {
+      checked.textContent = 'Last checked ' + new Date(news.meta.updated).toLocaleString('en-GB',
+        { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }) + '.';
     }
-  } catch(e) { /* continue to RSS feeds */ }
-
-  // Source 2: member-office RSS feeds (via rss2json CORS proxy)
-  const feeds = _memberNewsFeeds.slice(0, 30);
-  const results = await Promise.allSettled(feeds.map(url => _fetchFeedViaProxy(url)));
-  results.forEach((res, i) => {
-    if (res.status !== 'fulfilled') return;
-    const feedUrl = feeds[i];
-    res.value.forEach(item => {
-      const searchText = item.title + ' ' + item.description;
-      const member = _articleMentionsMember(searchText);
-      if (!member) return;
-      const source = feedUrl.replace(/https?:\/\/(www\.)?/, '').split('/')[0];
-      let date = '';
-      if (item.pubDate) {
-        try { date = new Date(item.pubDate).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'numeric'}); }
-        catch { date = (item.pubDate || '').slice(0, 10); }
-      }
-      const ts = item.pubDate ? (new Date(item.pubDate).getTime() || 0) : 0;
-      _allNewsItems.push({ title: item.title, link: item.link, source, member, date, _ts: ts });
-    });
-  });
-
-  // Sort by date desc, deduplicate by URL
-  const seen = new Set();
-  _allNewsItems = _allNewsItems
-    .sort((a, b) => b._ts - a._ts)
-    .filter(i => { if (!i.link || seen.has(i.link)) return false; seen.add(i.link); return true; });
-
-  if (loadEl) loadEl.style.display = 'none';
-
-  // Update article count badge on the "Member News" tab button
-  const badge = document.getElementById('interest-news-badge');
-  if (badge) {
-    badge.textContent = _allNewsItems.length;
-    badge.style.display = _allNewsItems.length > 0 ? 'inline-block' : 'none';
-  }
-
+    const badge = document.getElementById('interest-news-badge');
+    if (badge) {
+      badge.textContent = _allNewsItems.length;
+      badge.style.display = _allNewsItems.length > 0 ? 'inline-block' : 'none';
+    }
   } finally {
     _newsLoading    = false;
     _newsLoadedOnce = true;
   }
 
   if (_allNewsItems.length === 0) {
-    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No member-relevant articles found.'; }
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No coverage found in the last 7 days.'; }
     return;
   }
   _renderMemberNews();

@@ -42,6 +42,19 @@
 //   if it doesn't (so the caller can skip adding an empty section).
 //   Does not touch the panel itself, the URL hash, or focus.
 //
+// The panel's own body also gets a "Latest news" block for the seat's
+// nominees, from assets/candidate-news.json (built every 6 hours by
+// scripts/fetch-candidate-news.js). renderBriefInto does not add it -- an
+// embedding page shows its own news for the person it is about.
+//
+// loadCandidateNews(force) -> Promise<object>
+//   Cached read of assets/candidate-news.json ({} if it fails); force
+//   re-fetches past the cache and the browser cache.
+// renderNewsList(containerEl, items, checkedAt)
+//   Renders a list of {title, url, source, date} items into containerEl, or
+//   "No coverage found in the last 7 days" with the time of the last check.
+//   Shared with india.html's member side panel.
+//
 // Dispatches 'seatpanel:open' / 'seatpanel:close' CustomEvents on window
 // (detail: {id}) so a host page can sync its own UI (e.g. map/list
 // highlighting, or closing its own competing detail panel) without polling.
@@ -51,6 +64,7 @@
 
   var BRIEFS_URL = 'assets/briefs.json';
   var ISSUES_URL = 'assets/issues.json';
+  var NEWS_URL   = 'assets/candidate-news.json';
 
   var ABBR_TO_STATE = {
     AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
@@ -67,6 +81,7 @@
   };
 
   var briefsPromise = null;
+  var newsPromise = null;
   var issuesPromise = null;
   var dom = null;
   var isOpen = false;
@@ -138,6 +153,12 @@
 
   function loadIssues() {
     return loadJson(ISSUES_URL, function () { return issuesPromise; }, function (p) { issuesPromise = p; });
+  }
+
+  function loadCandidateNews(force) {
+    if (force) newsPromise = null;
+    var url = force ? NEWS_URL + '?t=' + Date.now() : NEWS_URL;
+    return loadJson(url, function () { return newsPromise; }, function (p) { newsPromise = p; });
   }
 
   // ── DOM ──────────────────────────────────────────────────────────────────
@@ -329,6 +350,67 @@
     }
   }
 
+  // ── Latest news (assets/candidate-news.json) ────────────────────────────
+
+  function formatDate(iso, withTime) {
+    var d = new Date(iso);
+    if (isNaN(d)) return '';
+    var o = { day: 'numeric', month: 'short', year: 'numeric' };
+    if (withTime) { o.hour = '2-digit'; o.minute = '2-digit'; o.timeZoneName = 'short'; }
+    return d.toLocaleString('en-GB', o);
+  }
+
+  function renderNewsList(containerEl, items, checkedAt) {
+    if (!containerEl) return;
+    if (!items || !items.length) {
+      var checked = checkedAt ? 'Last checked ' + formatDate(checkedAt, true) + '.' : 'News has not been checked yet.';
+      containerEl.innerHTML = '<div class="sp-latest-empty">No coverage found in the last 7 days. ' + escapeHtml(checked) + '</div>';
+      return;
+    }
+    containerEl.innerHTML = items.map(function (it) {
+      return '<div class="sp-latest-item">' +
+        '<div class="sp-latest-meta">' + escapeHtml(it.source || '') + ' · ' + escapeHtml(formatDate(it.date)) + '</div>' +
+        '<a class="sp-latest-title" href="' + escapeHtml(it.url || '#') + '" target="_blank" rel="noopener">' + escapeHtml(it.title || '') + '</a>' +
+      '</div>';
+    }).join('');
+  }
+
+  // One sub-list per nominee in the brief (Democrat, then Republican).
+  function buildNewsSection(id, entry, news) {
+    var details = document.createElement('details');
+    details.className = 'sp-section';
+    details.setAttribute('open', '');
+    var summary = document.createElement('summary');
+    summary.textContent = 'Latest news';
+    var body = document.createElement('div');
+    body.className = 'sp-section-body';
+
+    var seat = news && news.seats && news.seats[id];
+    var candidates = (seat && seat.candidates) || [];
+    var checkedAt = news && news.meta && news.meta.updated;
+    // Fall back to the brief's nominee names if the seat isn't in the news file yet
+    if (!candidates.length && entry) {
+      if (entry.dem) candidates.push({ name: entry.dem, party: 'D', items: [] });
+      if (entry.rep) candidates.push({ name: entry.rep, party: 'R', items: [] });
+    }
+    if (!candidates.length) {
+      body.innerHTML = '<div class="sp-latest-empty">No nominees listed for this seat yet.</div>';
+    }
+    candidates.forEach(function (c) {
+      var head = document.createElement('div');
+      head.className = 'sp-latest-name';
+      head.textContent = c.name + ' (' + c.party + ')';
+      var list = document.createElement('div');
+      list.className = 'sp-latest-list';
+      renderNewsList(list, c.items, checkedAt);
+      body.appendChild(head);
+      body.appendChild(list);
+    });
+    details.appendChild(summary);
+    details.appendChild(body);
+    return details;
+  }
+
   function loadIssuesDataFor(id) {
     var lookup = issuesLookupFor(id);
     if (!lookup) return Promise.resolve(null);
@@ -374,9 +456,10 @@
     currentId = id;
     isOpen = true;
 
-    Promise.all([loadBriefs(), loadIssuesDataFor(id)]).then(function (results) {
+    Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews()]).then(function (results) {
       if (currentId !== id) return; // superseded by a later open() call
       render(id, results[0][id], opts, results[1]);
+      ensureDom().body.appendChild(buildNewsSection(id, results[0][id], results[2]));
     });
 
     d.overlay.removeAttribute('hidden');
@@ -450,5 +533,11 @@
     }
   });
 
-  window.SeatPanel = { open: open, close: close, renderBriefInto: renderBriefInto };
+  window.SeatPanel = {
+    open: open,
+    close: close,
+    renderBriefInto: renderBriefInto,
+    loadCandidateNews: loadCandidateNews,
+    renderNewsList: renderNewsList,
+  };
 })();

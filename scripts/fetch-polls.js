@@ -9,12 +9,13 @@
  *  2. BLS public API         → cpi.history                   (structured JSON)
  *  3. Nate Silver Bulletin   → approval.trump                (Datawrapper CSV direct API)
  *     Chart: datawrapper.dwcdn.net/kSCt4/ — fetches latest version, downloads CSV
- *  4. Groq + Gallup          → congress_approval             (AI-extracted HTML)
- *  5. Groq + Ballotpedia     → retirements totals/split      (AI-extracted HTML)
+ *  4. Gallup                 → congress_approval             (HTML table; AI backup)
+ *  5. Ballotpedia            → retirements totals/split      (regex; AI for R/D split)
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
- * Env vars:
- *  GROQ_API_KEY  — Groq API key (required for sources 3-5)
+ * Env vars (both optional — every source has a non-AI path; see ai.js):
+ *  GROQ_API_KEY      — Groq API key
+ *  ANTHROPIC_API_KEY — Anthropic API key (used if Groq fails)
  */
 
 const fs    = require('fs');
@@ -22,9 +23,9 @@ const path  = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 
+const { aiExtract, aiStatus } = require('./ai');
+
 const DATA_PATH  = path.resolve(__dirname, '../data.json');
-const GROQ_KEY   = process.env.GROQ_API_KEY || '';
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // SHARED HELPERS
@@ -39,6 +40,7 @@ function stripHtml(str) {
     .replace(/<[^>]+>/g, ' ')
     .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ')
+    .replace(/[ \t]+/g, ' ')
     .replace(/\s{3,}/g, '\n').trim();
 }
 
@@ -89,52 +91,6 @@ async function safeFetch(url, opts = {}) {
   });
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// GROQ AI EXTRACTION
-// ─────────────────────────────────────────────────────────────────────────────
-
-async function groqExtract(systemPrompt, userContent) {
-  if (!GROQ_KEY) {
-    console.warn('  [Groq] No GROQ_API_KEY set — skipping AI extraction');
-    return null;
-  }
-  for (let attempt = 1; attempt <= 3; attempt++) {
-    try {
-      const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${GROQ_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: GROQ_MODEL,
-          temperature: 0,
-          max_tokens: 512,
-          response_format: { type: 'json_object' },
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user',   content: userContent.slice(0, 14000) },
-          ],
-        }),
-        timeout: 30000,
-      });
-      if (!res.ok) {
-        const body = await res.text();
-        console.warn(`  [Groq] HTTP ${res.status} on attempt ${attempt}: ${body.slice(0, 120)}`);
-        if (res.status === 401) return null; // bad key, don't retry
-        continue;
-      }
-      const json = await res.json();
-      const content = json.choices?.[0]?.message?.content || '';
-      const match = content.match(/\{[\s\S]*\}/);
-      if (match) return JSON.parse(match[0]);
-    } catch (err) {
-      console.warn(`  [Groq] Error attempt ${attempt}: ${err.message}`);
-    }
-  }
-  return null;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -419,11 +375,32 @@ async function fetchTrumpApproval(data) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 4. CONGRESS APPROVAL — Groq + Gallup
+// 4. CONGRESS APPROVAL — Gallup table, AI as backup
 // ─────────────────────────────────────────────────────────────────────────────
 
+// Finds the first table with "Approve" and "Disapprove" column headers and
+// returns its first data row (Gallup lists newest first), e.g.
+//   2026 Sep 1-17 | 16 | 79 | 4
+function parseGallupApprovalTable(html) {
+  const cellText = c => stripHtml(c).replace(/\s+/g, ' ').trim();
+  for (const table of html.match(/<table[\s\S]*?<\/table>/gi) || []) {
+    const rows = (table.match(/<tr[\s\S]*?<\/tr>/gi) || [])
+      .map(r => (r.match(/<t[hd][^>]*>[\s\S]*?<\/t[hd]>/gi) || []).map(cellText));
+    const headerIdx = rows.findIndex(r => r.some(c => /^approve$/i.test(c)) && r.some(c => /^disapprove$/i.test(c)));
+    if (headerIdx === -1) continue;
+    const aCol = rows[headerIdx].findIndex(c => /^approve$/i.test(c));
+    const dCol = rows[headerIdx].findIndex(c => /^disapprove$/i.test(c));
+    for (const row of rows.slice(headerIdx + 1)) {
+      const approve    = parseFloat(row[aCol]);
+      const disapprove = parseFloat(row[dCol]);
+      if (!isNaN(approve) && !isNaN(disapprove)) return { approve, disapprove, period: row[0] || '' };
+    }
+  }
+  return null;
+}
+
 async function fetchCongressApproval(data) {
-  console.log('[4/6] Congress approval (Groq + Gallup)…');
+  console.log('[4/6] Congress approval (Gallup table, AI backup)…');
 
   let html;
   try {
@@ -436,16 +413,23 @@ async function fetchCongressApproval(data) {
     return false;
   }
 
-  const text = stripHtml(html).slice(0, 14000);
-  const result = await groqExtract(
-    'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
-    `From this Gallup page tracking Congressional approval ratings, extract the most recent approve and disapprove percentages.
+  let result = parseGallupApprovalTable(html);
+  if (result) {
+    console.log(`  [Gallup] Parsed table row "${result.period}": ${result.approve} / ${result.disapprove}`);
+  } else {
+    console.warn('  [Gallup] Approval table not found — trying AI backup');
+    const text = stripHtml(html).slice(0, 14000);
+    result = await aiExtract(
+      'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
+      `From this Gallup page tracking Congressional approval ratings, extract the most recent approve and disapprove percentages.
 Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER}
 Numbers should be between 5 and 55 for approve, and 40 and 95 for disapprove.
 
 Page text:
-${text}`
-  );
+${text}`,
+      { label: 'Congress approval' }
+    );
+  }
 
   if (result?.approve > 5 && result?.approve < 55 && result?.disapprove > 30 && result?.disapprove < 95) {
     const approve    = parseFloat(Number(result.approve).toFixed(1));
@@ -478,7 +462,7 @@ ${text}`
 // ─────────────────────────────────────────────────────────────────────────────
 
 async function fetchRetirements(data) {
-  console.log('[5/6] Retirements (Ballotpedia — regex + Groq)…');
+  console.log('[5/6] Retirements (Ballotpedia — regex, AI for R/D split)…');
   const BP_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
 
   let html;
@@ -487,6 +471,8 @@ async function fetchRetirements(data) {
       headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
     });
     html = await res.text();
+    const looksLikeChallenge = res.status === 202 || html.length < 20000 || !/not running for re-election/i.test(html);
+    console.log(`  [Ballotpedia] HTTP ${res.status}, ${html.length} bytes — ${looksLikeChallenge ? 'looks like a bot challenge or empty page' : 'full page'}`);
   } catch (err) {
     console.warn(`  [Ballotpedia] Fetch failed: ${err.message}`);
     return false;
@@ -510,14 +496,14 @@ async function fetchRetirements(data) {
     console.log(`  [Regex] total=${total} senate=${senate} house=${house}`);
   }
 
-  // ── Groq: extract R/D breakdown and verify/supplement totals
+  // ── AI: extract R/D breakdown and verify/supplement totals
   // Send the key summary paragraphs (skip the first 5k of JS boilerplate)
   const summaryStart = fullText.indexOf('voting members of the U.S. Congress');
   const relevantText = summaryStart > 0
     ? fullText.slice(Math.max(0, summaryStart - 200), summaryStart + 4000)
     : fullText.slice(0, 8000);
 
-  const result = await groqExtract(
+  const result = await aiExtract(
     'You are a precise data extraction assistant. Extract congressional retirement counts from Ballotpedia. Return valid JSON with integers only.',
     `From this Ballotpedia summary about US Congress members NOT seeking re-election in 2026, extract the counts.
 The text contains sentences like "X Democrats and Y Republicans" for Senate and House separately.
@@ -526,10 +512,11 @@ Sum them across all categories (retiring + running for other office) to get tota
 Return JSON: {"total": INTEGER, "republican": INTEGER, "democrat": INTEGER, "house": INTEGER, "senate": INTEGER}
 
 Text:
-${relevantText}`
+${relevantText}`,
+    { label: 'Retirements R/D split' }
   );
 
-  // Merge regex (more reliable for totals) with Groq (better for R/D split)
+  // Merge regex (more reliable for totals) with AI (better for R/D split)
   const merged = {
     total:      total  ?? result?.total,
     senate:     senate ?? result?.senate,
@@ -673,7 +660,7 @@ async function main() {
   const start = Date.now();
   console.log('════════════════════════════════════════');
   console.log(' fetch-polls.js — live data update');
-  console.log(`  Groq key: ${GROQ_KEY ? '✓ set' : '✗ missing (Groq sources will be skipped)'}`);
+  console.log(`  AI keys: ${aiStatus()} (AI is optional)`);
   console.log('════════════════════════════════════════');
 
   // Load data.json
@@ -717,6 +704,7 @@ async function main() {
   console.log(`  Results: NYT=${nytOk?'✓':'✗'}  CPI=${cpiOk?'✓':'✗'}  Trump=${trumpOk?'✓':'✗'}  Congress=${congressOk?'✓':'✗'}  Retirements=${retireOk?'✓':'✗'}`);
   console.log(`  data.json written. Elapsed: ${elapsed}s`);
   console.log('════════════════════════════════════════');
+  process.exit(0);
 }
 
 main().catch(err => {

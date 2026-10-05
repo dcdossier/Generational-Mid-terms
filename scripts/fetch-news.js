@@ -467,6 +467,7 @@ async function main() {
   // Write back
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
   console.log(`[fetch-news] Done. Added ${newCount} new items. Repository total: ${data.news.length} articles (24h window).`);
+  process.exit(0);
 }
 
 main().catch(err => {

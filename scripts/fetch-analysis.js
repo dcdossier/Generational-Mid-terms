@@ -17,6 +17,7 @@ const fs   = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
+const { aiExtract, aiStatus } = require('./ai');
 
 const OUT_PATH     = path.resolve(__dirname, '../analysis.json');
 const FETCH_TIMEOUT = 14000;
@@ -132,78 +133,60 @@ function parseRssItem(raw) {
   return { title, link, desc, date: isNaN(date) ? new Date() : date, creator };
 }
 
-// ── GROQ: EXTRACT NAMES FROM PODCAST DESCRIPTION ────────────────────────────
-// Uses the GROQ LLM API to identify all hosts and guests mentioned in a
-// YouTube video description. Returns a comma-separated name string.
-async function extractNamesWithGroq(title, description) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey || !description) return '';
-  try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      timeout: 10000,
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        messages: [{
-          role: 'user',
-          content: `From this podcast title and description, list ALL hosts and guests by full name. Return ONLY a comma-separated list of names (e.g. "Jane Smith, John Doe"). If no names are mentioned, return an empty string. No explanation, no labels.\n\nTitle: ${title}\nDescription: ${description.slice(0, 800)}`,
-        }],
-        max_tokens: 80,
-        temperature: 0,
-      }),
-    });
-    if (!res.ok) return '';
-    const data = await res.json();
-    const names = (data.choices?.[0]?.message?.content || '').trim();
-    // Reject if it looks like a sentence rather than a name list
-    if (names.split(' ').length > 12 && !names.includes(',')) return '';
-    return names;
-  } catch (e) {
-    console.warn('[fetch-analysis] GROQ name extraction failed:', e.message);
-    return '';
-  }
+// ── AI: EXTRACT NAMES FROM PODCAST DESCRIPTION ──────────────────────────────
+// Identifies hosts and guests in a YouTube video description. Returns a
+// comma-separated name string, or '' when AI is unavailable (author left blank).
+async function extractNames(title, description) {
+  if (!description) return '';
+  const result = await aiExtract(
+    'You extract people\'s names from podcast descriptions. Return valid JSON.',
+    `From this podcast title and description, list ALL hosts and guests by full name.
+Return JSON exactly: {"names": "Jane Smith, John Doe"} — use an empty string if no names are mentioned.
+
+Title: ${title}
+Description: ${description.slice(0, 800)}`,
+    { label: 'Podcast names', maxTokens: 120 }
+  );
+  const names = String(result?.names || '').trim();
+  // Reject if it looks like a sentence rather than a name list
+  if (names.split(' ').length > 12 && !names.includes(',')) return '';
+  return names;
 }
 
-
-// ── GROQ: CHECK 2026 MIDTERM RELEVANCE ───────────────────────────────────────
-// Used for DC Dossier posts that don't match KW_RE keywords. Asks GROQ whether
-// the post is meaningfully about the 2026 elections, congressional dynamics,
-// electoral trends, or Trump's political standing.
+// ── AI: CHECK 2026 MIDTERM RELEVANCE ────────────────────────────────────────
+// Used for DC Dossier posts that don't match KW_RE keywords. Returns true/false,
+// or null when no AI provider answered — callers queue those for keyword review.
 async function checkMidtermRelevance(title, desc) {
-  const apiKey = process.env.GROQ_API_KEY;
-  if (!apiKey) return false;
-  try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      timeout: 10000,
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        messages: [{
-          role: 'user',
-          content: `DC Dossier is a newsletter tracking US congressional legislation and the 2026 midterm elections from an Indian perspective. Does this issue deal with: US midterm elections, congressional dynamics, electoral trends, Trump's approval/political standing, economic factors affecting 2026 elections, or congressional oversight? Answer only "yes" or "no".\n\nTitle: ${title}\nDescription: ${(desc || '').slice(0, 400)}`,
-        }],
-        max_tokens: 5,
-        temperature: 0,
-      }),
-    });
-    if (!res.ok) return false;
-    const data = await res.json();
-    return (data.choices?.[0]?.message?.content || '').trim().toLowerCase().startsWith('yes');
-  } catch (e) {
-    return false;
-  }
+  const result = await aiExtract(
+    'You classify newsletter issues for relevance. Return valid JSON.',
+    `DC Dossier is a newsletter tracking US congressional legislation and the 2026 midterm elections from an Indian perspective. Does this issue deal with: US midterm elections, congressional dynamics, electoral trends, Trump's approval/political standing, economic factors affecting 2026 elections, or congressional oversight?
+Return JSON exactly: {"relevant": true} or {"relevant": false}
+
+Title: ${title}
+Description: ${(desc || '').slice(0, 400)}`,
+    { label: 'Substack relevance', maxTokens: 20 }
+  );
+  return typeof result?.relevant === 'boolean' ? result.relevant : null;
+}
+
+// ── REVIEW QUEUE ────────────────────────────────────────────────────────────
+// Items with no keyword match that AI could not classify. They are kept in
+// analysis.json under review_queue (not shown on the site) instead of dropped.
+const reviewQueue = [];
+
+function queueForReview(item) {
+  reviewQueue.push({
+    title: item.title,
+    url: item.url,
+    source: item.source,
+    date: item.date,
+    reason: 'No keyword match and AI unavailable',
+    queued_at: new Date().toISOString(),
+  });
 }
 
 // ── FETCH RSS ───────────────────────────────────────────────────────────────
-async function fetchRss(url, source, type, forceInclude, defaultAuthor, groqCheck) {
+async function fetchRss(url, source, type, forceInclude, defaultAuthor, aiCheck) {
   try {
     const res = await fetch(url, {
       timeout: FETCH_TIMEOUT,
@@ -220,11 +203,13 @@ async function fetchRss(url, source, type, forceInclude, defaultAuthor, groqChec
     for (const raw of items) {
       const { title, link, desc, date, creator } = parseRssItem(raw);
       if (!title || !link) continue;
-      // Relevance check: keyword match, then GROQ fallback for groqCheck sources
+      // Relevance check: keyword match, then AI for aiCheck sources. If AI is
+      // unavailable, queue the item for keyword review rather than dropping it.
       const kwMatch = forceInclude || matchesKw(title, desc);
       if (!kwMatch) {
-        if (!groqCheck) continue;
+        if (!aiCheck) continue;
         const relevant = await checkMidtermRelevance(title, desc);
+        if (relevant === null) queueForReview({ title, url: link, source, date: date.toISOString() });
         if (!relevant) continue;
       }
       const id = 'rss-' + Buffer.from(link).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
@@ -586,17 +571,17 @@ const SEED_POSTS = [
 
 // ── RSS SOURCES ──────────────────────────────────────────────────────────────
 const RSS_SOURCES = [
-  // DC Dossier Substack — keyword filter + GROQ fallback for borderline posts
-  // GROQ (when available) checks whether each post is relevant to the 2026 midterms.
-  // Without GROQ, only posts matching KW_RE keywords are included.
+  // DC Dossier Substack — keyword filter, then AI for borderline posts
+  // AI (when available) checks whether each post is relevant to the 2026 midterms.
+  // Without AI, non-matching posts go to review_queue instead of being dropped.
   {
     url: 'https://dcdossier.substack.com/feed',
     source: 'DC Dossier — Substack',
     type: 'newsletter',
-    groqCheck: true,
+    aiCheck: true,
     defaultAuthor: 'Abhishek Kadiyala',
   },
-  // YouTube is handled separately via fetchYouTubePodcasts() with GROQ name extraction
+  // YouTube is handled separately via fetchYouTubePodcasts() with AI name extraction
   // Google News RSS — author and show searches
   { url: 'https://news.google.com/rss/search?q=%22Abhishek+Kadiyala%22+Congress&hl=en-US&gl=US&ceid=US%3Aen',                     source: 'Abhishek Kadiyala (Google News)', type: 'research' },
   { url: 'https://news.google.com/rss/search?q=%22Anil+Raman%22+Takshashila+Congress&hl=en-US&gl=US&ceid=US%3Aen',               source: 'Takshashila (Google News)',       type: 'research' },
@@ -608,7 +593,7 @@ const RSS_SOURCES = [
 // ── YOUTUBE PODCAST FETCHER ──────────────────────────────────────────────────
 // Primary and sole source for All Things Policy podcast episodes.
 // Fetches the @TakshashilaInst YouTube channel RSS, filters by midterm/Congress
-// keywords, then uses GROQ to accurately extract host and guest names from each
+// keywords, then uses AI (if available) to extract host and guest names from each
 // video description. This is the authoritative pipeline for podcast attribution.
 async function fetchYouTubePodcasts(channelId) {
   const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
@@ -632,8 +617,8 @@ async function fetchYouTubePodcasts(channelId) {
       const isMidterm = /\b(us\s+congress|u\.s\.\s+congress|congressional|midterm|2026\s+(election|race|midterm|senate|house)|senate\s+(race|vote|majority|hearing)|house\s+(race|vote|majority|hearing)|war\s+powers|congress.*iran|iran.*congress|congress.*trump|trump.*congress|hegseth|redistrict|gerrymander|senate\s+bill|house\s+bill)\b/i.test(title + ' ' + desc);
       if (!isMidterm) continue;
 
-      // Use GROQ to extract accurate host/guest names from the description
-      const names = await extractNamesWithGroq(title, desc);
+      // Use AI (if available) to extract host/guest names from the description
+      const names = await extractNames(title, desc);
 
       const id = 'yt-' + Buffer.from(link).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
       posts.push({
@@ -663,44 +648,27 @@ const AUTHOR_PAGES = [
   { url: 'https://takshashila.org.in/pages/publications/',                  author: 'Abhishek Kadiyala',     source: 'Takshashila Institution' },
 ];
 
-// ── GROQ: CHECK CONGRESS/MIDTERM RELEVANCE ───────────────────────────────────
-// Returns true if the title/description clearly concern US Congress, midterms,
-// war powers, or congressional oversight — used to filter Takshashila op-eds.
-async function checkCongressRelevanceWithGroq(title, author) {
-  const apiKey = process.env.GROQ_API_KEY;
-  // Fast local check first — avoids GROQ call for obvious matches
+// ── CHECK CONGRESS/MIDTERM RELEVANCE (keywords, then AI) ────────────────────
+// Returns true if the title clearly concerns US Congress, midterms, war powers,
+// or congressional oversight — used to filter Takshashila op-eds. Returns null
+// when there is no keyword match and no AI provider answered.
+async function checkCongressRelevance(title, author) {
   if (matchesKw(title, '')) return true;
-  if (!apiKey) return false;
-  try {
-    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-      method: 'POST',
-      timeout: 10000,
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
-        messages: [{
-          role: 'user',
-          content: `Does this op-ed focus on US Congress, US midterm elections, war powers, or congressional oversight of the executive? Answer only "yes" or "no".\n\nTitle: ${title}\nAuthor: ${author}`,
-        }],
-        max_tokens: 5,
-        temperature: 0,
-      }),
-    });
-    if (!res.ok) return false;
-    const data = await res.json();
-    return (data.choices?.[0]?.message?.content || '').trim().toLowerCase().startsWith('yes');
-  } catch (e) {
-    console.warn('[fetch-analysis] GROQ relevance check failed:', e.message);
-    return false;
-  }
+  const result = await aiExtract(
+    'You classify op-eds for relevance. Return valid JSON.',
+    `Does this op-ed focus on US Congress, US midterm elections, war powers, or congressional oversight of the executive?
+Return JSON exactly: {"relevant": true} or {"relevant": false}
+
+Title: ${title}
+Author: ${author}`,
+    { label: 'Op-ed relevance', maxTokens: 20 }
+  );
+  return typeof result?.relevant === 'boolean' ? result.relevant : null;
 }
 
 // ── SCRAPE TAKSHASHILA OP-EDS ────────────────────────────────────────────────
 // Fetches https://takshashila.org.in/pages/news/, filters articles tagged
-// "United States", then uses GROQ to keep only those about Congress/midterms.
+// "United States", then keeps those about Congress/midterms (keywords, then AI).
 // Runs after SEED_POSTS are loaded so duplicates are safely skipped.
 async function scrapeTakshashilaOpEds(existingSeedUrls) {
   const pageUrl = 'https://takshashila.org.in/pages/news/';
@@ -745,11 +713,14 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
       const author   = authorMatch ? stripHtml(authorMatch[1]).trim() : '';
       const srcLabel = sourceMatch ? stripHtml(sourceMatch[1]).trim() : '';
 
-      // GROQ relevance gate
-      const relevant = await checkCongressRelevanceWithGroq(title, author);
+      // Relevance gate: keywords, then AI; queue for review if AI is unavailable
+      const date = dateStr ? new Date(dateStr) : new Date();
+      const relevant = await checkCongressRelevance(title, author);
+      if (relevant === null) {
+        queueForReview({ title, url: rawUrl, source: srcLabel || 'Takshashila Institution', date: (isNaN(date) ? new Date() : date).toISOString() });
+      }
       if (!relevant) continue;
 
-      const date = dateStr ? new Date(dateStr) : new Date();
       const id = 'oped-' + Buffer.from(rawUrl).toString('base64').replace(/[^A-Za-z0-9]/g, '').slice(-24);
       posts.push({
         id,
@@ -774,6 +745,7 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
+  console.log(`[fetch-analysis] AI keys: ${aiStatus()} (AI is optional)`);
   // Load existing file for deduplication and metadata preservation
   let existing = { meta: {}, posts: [] };
   if (fs.existsSync(OUT_PATH)) {
@@ -805,7 +777,7 @@ async function main() {
 
   // Fetch RSS sources
   for (const src of RSS_SOURCES) {
-    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.groqCheck || false);
+    const posts = await fetchRss(src.url, src.source, src.type, src.forceInclude || false, src.defaultAuthor || '', src.aiCheck || false);
     console.log(`[fetch-analysis] ${src.source}: ${posts.length} matching items`);
     for (const post of posts) {
       if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
@@ -816,7 +788,7 @@ async function main() {
     }
   }
 
-  // Fetch Takshashila YouTube channel — primary podcast source with GROQ name extraction
+  // Fetch Takshashila YouTube channel — primary podcast source with AI name extraction
   const YT_CHANNEL_ID = 'UC5AVrL4ryKhR1Vi0HxdgP2Q'; // @TakshashilaInst
   const ytPosts = await fetchYouTubePodcasts(YT_CHANNEL_ID);
   for (const post of ytPosts) {
@@ -825,7 +797,7 @@ async function main() {
     allPosts.push(post);
   }
 
-  // Scrape Takshashila op-eds (United States tagged, GROQ-filtered for Congress relevance)
+  // Scrape Takshashila op-eds (United States tagged, filtered for Congress relevance)
   const opedPosts = await scrapeTakshashilaOpEds(seenUrls);
   for (const post of opedPosts) {
     if (seenUrls.has(post.url) || blocklist.has(post.url)) continue;
@@ -857,10 +829,25 @@ async function main() {
     },
     blocklist: [...blocklist],
     posts: capped,
+    review_queue: buildReviewQueue(existing.review_queue, capped, blocklist),
   };
 
   fs.writeFileSync(OUT_PATH, JSON.stringify(out, null, 2));
-  console.log(`[fetch-analysis] Done — ${capped.length} posts saved to analysis.json`);
+  if (reviewQueue.length) console.log(`[fetch-analysis] ${reviewQueue.length} item(s) queued for keyword review (AI unavailable)`);
+  console.log(`[fetch-analysis] Done — ${capped.length} posts saved to analysis.json, ${out.review_queue.length} in review_queue`);
+  process.exit(0);
+}
+
+// Merges this run's queued items with the previous queue, dropping anything
+// already published or blocklisted. Oldest entries fall off past 100.
+function buildReviewQueue(previous, posts, blocklist) {
+  const published = new Set(posts.map(p => p.url));
+  const byUrl = new Map();
+  for (const item of [...(previous || []), ...reviewQueue]) {
+    if (!item.url || published.has(item.url) || blocklist.has(item.url) || byUrl.has(item.url)) continue;
+    byUrl.set(item.url, item);
+  }
+  return [...byUrl.values()].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 100);
 }
 
 main().catch(e => { console.error('[fetch-analysis] Fatal:', e); process.exit(1); });

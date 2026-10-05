@@ -2,7 +2,7 @@ name: Fetch Live Data
 
 on:
   schedule:
-    - cron: '0 */4 * * *'   # every 4 hours
+    - cron: '43 */4 * * *'   # every 4 hours, off-peak minute
   workflow_dispatch:         # manual trigger any time
 
 jobs:
@@ -28,11 +28,13 @@ jobs:
       - name: Fetch all live data
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/fetch-polls.js
 
       - name: Fetch analysis & commentary
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: node scripts/fetch-analysis.js
 
       - name: Commit and push if data changed

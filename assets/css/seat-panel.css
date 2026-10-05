@@ -356,3 +356,47 @@
   text-decoration-color: var(--sp-coral);
   text-underline-offset: 2px;
 }
+
+/* ── Latest news (assets/candidate-news.json) ─────────────────────────── */
+/* sp-latest-* rather than sp-news-*: india.html already uses sp-news-*. */
+.sp-latest-name {
+  font: 700 13.5px var(--sp-sans);
+  color: var(--sp-navy);
+  margin: 12px 0 2px;
+}
+.sp-latest-name:first-child {
+  margin-top: 0;
+}
+.sp-latest-item {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--sp-border);
+}
+.sp-latest-item:last-child {
+  border-bottom: none;
+}
+.sp-latest-meta {
+  font: 500 10.5px var(--sp-sans);
+  color: var(--sp-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 3px;
+}
+/* doubled class so it beats .sp-section-body a inside the seat panel */
+.sp-latest-title.sp-latest-title {
+  display: block;
+  font: 600 14px/1.4 var(--sp-serif);
+  color: var(--sp-ink);
+  text-decoration: none;
+}
+.sp-latest-title.sp-latest-title:hover {
+  color: var(--sp-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--sp-coral);
+  text-underline-offset: 2px;
+}
+.sp-latest-empty {
+  font: 400 13.5px/1.6 var(--sp-sans);
+  color: var(--sp-ink-soft);
+  font-style: italic;
+  padding: 6px 0;
+}

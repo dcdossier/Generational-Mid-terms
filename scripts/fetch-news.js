@@ -15,6 +15,7 @@ const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 const he = require('he');
 const { recordStatus, saveStatus } = require('./status');
+const { COMMON_SURNAMES, candidateNames, cleanText, splitGoogleNewsTitle, loadMembers, loadBriefs, seatState, escapeRe } = require('./news-utils');
 
 const DATA_PATH = path.resolve(__dirname, '../data.json');
 
@@ -304,32 +305,7 @@ const BLOCKLIST_RE = new RegExp([
 // Social-media noise carried over from the old filter (case-sensitive: "BREAKING:", not "Breaking the…")
 const NOISE_TITLE_RE = /^(BREAKING|WATCH|READ|THREAD)[\s:!]|^RT\s+@|#{2,}|\*{3,}|[★✦✩☆♦]{2,}/;
 
-// Surnames too common to identify a candidate on their own
-const COMMON_SURNAMES = new Set(['smith', 'johnson', 'williams', 'brown', 'jones', 'miller', 'davis', 'wilson',
-  'moore', 'taylor', 'anderson', 'thomas', 'jackson', 'white', 'harris', 'martin', 'thompson', 'garcia',
-  'martinez', 'robinson', 'clark', 'rodriguez', 'lewis', 'walker', 'young', 'allen', 'king', 'wright', 'scott',
-  'green', 'baker', 'adams', 'nelson', 'hill', 'campbell', 'mitchell', 'roberts', 'carter', 'phillips', 'evans',
-  'turner', 'torres', 'parker', 'collins', 'edwards', 'stewart', 'morris', 'murphy', 'cook', 'rogers', 'morgan',
-  'cooper', 'peterson', 'bailey', 'reed', 'kelly', 'howard', 'price', 'bennett', 'wood', 'barnes', 'ross',
-  'henderson', 'coleman', 'jenkins', 'perry', 'powell', 'long', 'patterson', 'hughes', 'flores', 'washington',
-  'butler', 'simmons', 'foster', 'gonzales', 'bryant', 'alexander', 'russell', 'griffin', 'hayes', 'myers',
-  'ford', 'hamilton', 'graham', 'sullivan', 'wallace', 'woods', 'west', 'jordan', 'owens', 'reynolds', 'fisher',
-  'ellis', 'harrison', 'gibson', 'marshall', 'warren', 'grant', 'hunter', 'black', 'stone', 'hudson', 'young',
-  'house', 'senate', 'trump', 'biden', 'vance', 'bush', 'clinton', 'obama']);
-
 const ORDINAL = n => n + ({ 1: 'st', 2: 'nd', 3: 'rd' }[(n % 100 >= 11 && n % 100 <= 13) ? 0 : n % 10] || 'th');
-const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-
-// Turns "Brian Lambert (Libertarian); write-ins Salomon Hernandez Sr., Keith Varian"
-// into ['Brian Lambert', 'Salomon Hernandez Sr', 'Keith Varian']
-function candidateNames(field) {
-  return String(field || '')
-    .replace(/\([^)]*\)/g, ' ')
-    .replace(/[“"][^”"]*[”"]/g, ' ')           // nicknames
-    .split(/[;,/]| vs\.? /)
-    .map(s => s.replace(/^\s*(write-ins?|and)\s+/i, '').replace(/\.$/, '').trim())
-    .filter(s => /^\p{Lu}[\p{L}.'’-]*( (von|van|de|del|la|\p{Lu}[\p{L}.'’-]*)){1,3}$/u.test(s));
-}
 
 // Builds the +2 matcher from assets/briefs.json and the MEMBERS list in india.html.
 function buildEntityMatcher() {
@@ -344,12 +320,11 @@ function buildEntityMatcher() {
   };
 
   try {
-    const briefs = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../assets/briefs.json'), 'utf8'));
-    for (const [id, b] of Object.entries(briefs)) {
+    for (const [id, b] of Object.entries(loadBriefs())) {
       candidateNames(b.dem).forEach(n => addPerson(n, true));
       candidateNames(b.rep).forEach(n => addPerson(n, true));
       candidateNames(b.others).forEach(n => addPerson(n, false));
-      const state = (b.title || '').replace(/\s*(District \d+|At-Large)?\s*\(.*$/, '').trim();
+      const state = seatState(b);
       const house = id.match(/^([A-Z]{2})-(\d+)$/);
       if (house) {
         const n = parseInt(house[2], 10);
@@ -364,13 +339,7 @@ function buildEntityMatcher() {
     console.warn(`[fetch-news] Could not read assets/briefs.json: ${err.message}`);
   }
 
-  try {
-    const html = fs.readFileSync(path.resolve(__dirname, '../india.html'), 'utf8');
-    const block = html.slice(html.indexOf('const MEMBERS = ['), html.indexOf('];', html.indexOf('const MEMBERS = [')));
-    for (const m of block.matchAll(/\bname:'((?:[^'\\]|\\.)*)'/g)) addPerson(m[1].replace(/\\'/g, "'"), true);
-  } catch (err) {
-    console.warn(`[fetch-news] Could not read MEMBERS from india.html: ${err.message}`);
-  }
+  for (const m of loadMembers()) addPerson(m.name, true);
 
   const uniqueSurnames = [...surnames].filter(([, n]) => n === 1).map(([s]) => s);
   const words = [...fullNames, ...uniqueSurnames].sort((a, b) => b.length - a.length).map(escapeRe);
@@ -430,16 +399,6 @@ function autoTag(title, description) {
   return [...new Set(tags)];
 }
 
-// Decodes HTML entities (twice, for feeds that double-encode "&amp;#8217;"),
-// strips tags and collapses whitespace.
-function cleanText(str) {
-  let t = String(str ?? '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1');
-  t = he.decode(t);
-  t = t.replace(/<[^>]+>/g, ' ');
-  t = he.decode(t);
-  return t.replace(/\s+/g, ' ').trim();
-}
-
 // Returns an ISO date, or null when the feed gives no usable pubDate.
 function parseDate(raw) {
   if (!raw) return null;
@@ -449,16 +408,6 @@ function parseDate(raw) {
 
 const MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;   // drop items published more than 7 days ago
 const MAX_PER_SOURCE = 10;                    // per publisher, per run
-
-// Google News titles end in " - Publisher"; the real publisher is also in <source>.
-function splitGoogleNewsTitle(title, sourceEl) {
-  const publisher = cleanText(typeof sourceEl === 'object' ? sourceEl['#text'] : sourceEl);
-  if (publisher && title.endsWith(` - ${publisher}`)) {
-    return { title: title.slice(0, -(publisher.length + 3)).trim(), publisher };
-  }
-  const m = title.match(/^(.*\S)\s+-\s+([^-]{2,60})$/);
-  return m ? { title: m[1], publisher: publisher || m[2].trim() } : { title, publisher };
-}
 
 async function fetchFeed(feed) {
   try {

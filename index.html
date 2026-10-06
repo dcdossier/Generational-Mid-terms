@@ -230,11 +230,11 @@ body{
 .home-desc{font:400 16px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
 /* Hero why-questions panel */
 .hero-why-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px}
-/* Primary action: coral with dark ink text (about 6:1 contrast; white on coral would be about 2.6:1) */
+/* Primary action: white with dark ink text, standing out on the dark hero */
 .hero-seatwise{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;margin:0 0 14px;
-  padding:10px 16px;background:#FF6F59;color:#20242B;font:700 14px var(--sans);text-decoration:none;border-radius:6px;white-space:nowrap;
+  padding:10px 16px;background:#FFFFFF;color:#20242B;font:700 14px var(--sans);text-decoration:none;border-radius:6px;white-space:nowrap;
   box-shadow:0 1px 0 rgba(0,0,0,.15)}
-.hero-seatwise:hover{background:#FF8572}
+.hero-seatwise:hover{background:#F5F0DC}
 .hero-seatwise:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
 .hero-why-item:last-of-type{border-bottom:none}
@@ -626,8 +626,8 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
         <!-- Right: quick context questions -->
         <div class="home-hero-right">
-          <div class="hero-why-label">Quick Context</div>
           <a class="hero-seatwise" href="map.html#seats" onclick="return openSeatwise(event)">Seat-wise analysis <span aria-hidden="true">&#8594;</span></a>
+          <div class="hero-why-label">Quick Context</div>
           <div class="hero-why-item" id="hwi-0">
             <button class="hero-why-btn" onclick="toggleHeroWhy(0,this)">How does the American political system function? <span class="hero-why-chevron">&#9660;</span></button>
             <div class="hero-why-body">

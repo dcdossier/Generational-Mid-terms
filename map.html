@@ -920,10 +920,11 @@ function openSeatFromRace(kind, race, pathEl, extraOpts) {
 }
 
 // ── SEAT-WISE ENTRY (#seats, #seats-senate, #seats-governor, banner) ────────
-// #seats and the banner land on the chamber's map. Set OPEN_FEATURED_SEAT to
-// true to also open a featured seat's panel; FEATURED_SEAT picks it (an empty
-// string means "the first Toss-up seat in that chamber's list").
-const OPEN_FEATURED_SEAT = false;
+// #seats, the home "Seat-wise analysis" button and the banner land on the
+// chamber's map and open the featured seat's panel beside it. FEATURED_SEAT
+// picks the seat (an empty string means "the first Toss-up seat in that
+// chamber's list"); set OPEN_FEATURED_SEAT to false to show the map alone.
+const OPEN_FEATURED_SEAT = true;
 const FEATURED_SEAT = { house: '', senate: 'Senate-ME', governor: 'Gov-GA' };
 
 function activeChamber() {
@@ -964,12 +965,21 @@ function openSeatwise(chamber) {
   if (racesTab && !racesTab.classList.contains('active')) goInner(chamber, 'races', racesTab);
   scrollToMap(chamber);
   if (!OPEN_FEATURED_SEAT) return;
+  const scrolledAt = Date.now();
   const race = featuredRace(chamber);
   if (!race) return;
   // Esc from the panel returns focus to the banner when it is showing
   const go = document.getElementById('seatwise-go');
   const returnFocus = go && !document.getElementById('seatwise-banner').hidden ? go : null;
-  setTimeout(() => openSeatFromRace(chamber, race, null, returnFocus ? { returnFocus } : {}), 450);   // after the scroll settles
+  // Open once the map has drawn the seat's shape (so it can be outlined), after
+  // the scroll settles; give up waiting after about 4 s and open anyway.
+  const id = toSeatId(chamber, chamber === 'house' ? race.district : race.state);
+  const started = Date.now();
+  (function openWhenDrawn() {
+    const drawn = document.querySelector(`path[data-seat-id="${id}"]`);
+    if ((!drawn && Date.now() - started < 4000) || Date.now() - scrolledAt < 450) { setTimeout(openWhenDrawn, 150); return; }
+    openSeatFromRace(chamber, race, drawn || null, returnFocus ? { returnFocus } : {});
+  })();
 }
 
 function handleSeatsHash() {

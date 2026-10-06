@@ -289,14 +289,14 @@ const FEEDS = [
 //   -5  title or summary hits the blocklist
 const MIN_SCORE = 3;
 
-const TITLE_TERMS_RE = /\b(mid-?terms?|2026 elections?|senate races?|house races?|governor['’]s races?|gubernatorial races?|battlegrounds?|generic ballot|redistricting|primary results?|runoffs?|nominees?)\b/i;
+const TITLE_TERMS_RE = /\b(mid-?terms?|2026 elections?|senate races?|house races?|governor['’]s races?|gubernatorial races?|battlegrounds?|generic ballot|redistricting|primar(y|ies)(?!\s+(care|school|source|colou?r|sector|residence|reason))|runoffs?|nominees?)\b/i;
 const SUMMARY_TERMS_RE = /\b(poll(s|ing|ster)?|campaign(s|ing)?|ballots?|candidates?|districts?|forecasts?|inside elections)\b/i;
 const SUMMARY_NAMES_RE = /\b(Cook|Sabato)\b/; // case-sensitive: not "cook" the verb
 const BLOCKLIST_RE = new RegExp([
   '\\bsports?\\b', '\\b(NFL|NBA|MLB|NHL|MLS)\\b', '\\bplayoffs?\\b', '\\bquarterback\\b', '\\btouchdowns?\\b',
   '\\bcollege athletics\\b', '\\bNCAA\\b', '\\bathletic (director|department)\\b',
   '\\bweather\\b', '\\btornado (watch|warning)\\b', '\\bheat advisory\\b', '\\bwinter storm\\b',
-  '\\b(crime|police) blotter\\b', '\\bpolice log\\b',
+  '\\bcrimes?\\b', '\\bpolice (blotter|log)\\b',
   '\\bobituar(y|ies)\\b',
   '\\brecipes?\\b',
   '\\bdaylight saving',

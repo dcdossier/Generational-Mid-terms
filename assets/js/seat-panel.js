@@ -28,6 +28,8 @@
 //                   "Jon Ossoff (incumbent)" or "Open seat -- X not
 //                   seeking re-election".
 //   opts.note       optional free-text race note from the caller's own data.
+//   opts.returnFocus optional element to focus when the panel closes
+//                   (default: whatever had focus when it opened).
 // These three are supplementary context the caller already has in memory
 // (e.g. map.html's data.json race object) -- SeatPanel does not fetch
 // data.json itself.
@@ -249,9 +251,15 @@
     close();
   }
 
+  // Canonical seat IDs only ("AZ-01", "AK-AL", "Senate-TX", "Gov-TX"); other
+  // hashes (e.g. map.html's "#seats") belong to the host page.
+  function isSeatId(s) {
+    return /^([A-Z]{2}-(\d{2}|AL)|Senate-[A-Z]{2}|Gov-[A-Z]{2})$/.test(s);
+  }
+
   function onPopState() {
     var hashId = location.hash ? decodeURIComponent(location.hash.slice(1)) : '';
-    if (!hashId) {
+    if (!hashId || !isSeatId(hashId)) {
       if (isOpen) close();
       return;
     }
@@ -529,6 +537,8 @@
     if (opts.mode !== 'india') opts.mode = 'default';
 
     if (!isOpen) lastFocused = document.activeElement;
+    // A host page can say where focus goes on close (e.g. map.html's banner)
+    if (opts.returnFocus) lastFocused = opts.returnFocus;
 
     var d = ensureDom();
     currentId = id;
@@ -586,11 +596,13 @@
 
     var toFocus = lastFocused;
     lastFocused = null;
+
+    // Fire first so the host can un-hide elements (e.g. the banner on mobile)
+    window.dispatchEvent(new CustomEvent('seatpanel:close', { detail: { id: closedId } }));
+
     if (toFocus && document.contains(toFocus) && typeof toFocus.focus === 'function') {
       toFocus.focus();
     }
-
-    window.dispatchEvent(new CustomEvent('seatpanel:close', { detail: { id: closedId } }));
   }
 
   // Embeds a brief into a host page's own container (see file header).
@@ -616,7 +628,7 @@
       // exact seat (e.g. a caller-triggered open() that itself set this
       // hash moments earlier), calling open() again here would clobber any
       // richer opts (rating/incumbent/note) that call already supplied.
-      if (hashId && hashId !== currentId) open(hashId, { mode: 'default' });
+      if (hashId && isSeatId(hashId) && hashId !== currentId) open(hashId, { mode: 'default' });
     }
   });
 

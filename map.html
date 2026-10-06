@@ -277,6 +277,29 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 .inner-panel{display:none}
 .inner-panel.active{display:block}
 @media(max-width:560px){.inner-tab-bar{padding:0 12px}.inner-tab{padding:10px 12px;font-size:13px}}
+
+/* ── SEAT-WISE BANNER ─────────────────────────────────────────────── */
+/* Sticky just below the chamber bar (its height is set in --subtab-h by JS).
+   z-index sits under the chamber bar (190), tooltips (400+) and the seat panel (900). */
+.seatwise-banner{position:sticky;top:var(--subtab-h,49px);z-index:180;display:flex;align-items:center;gap:8px;
+  background:#F5F0DC;border-bottom:1px solid #E4DEC9;border-left:4px solid #FF6F59;
+  padding:6px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left))}
+.seatwise-banner[hidden]{display:none}
+.seatwise-go{flex:1;text-align:left;background:none;border:none;cursor:pointer;color:#1A3F8A;
+  font:600 14px/1.4 var(--sans);padding:6px 4px;white-space:normal;min-height:36px;border-radius:4px}
+.seatwise-go:hover{text-decoration:underline;text-underline-offset:3px}
+.seatwise-close{flex:0 0 auto;width:36px;height:36px;border:none;background:none;cursor:pointer;
+  color:#1A3F8A;font:400 22px/1 var(--sans);border-radius:4px}
+.seatwise-close:hover{background:rgba(26,63,138,.08)}
+.seatwise-go:focus-visible,.seatwise-close:focus-visible{outline:3px solid #1A3F8A;outline-offset:2px}
+/* the list scrolls clear of both sticky bars */
+#comp-table,#race-table,#gov-race-table{scroll-margin-top:calc(var(--subtab-h,49px) + 64px)}
+@media(max-width:768px){
+  .seatwise-go{font-size:13px;min-height:44px}
+  .seatwise-close{width:44px;height:44px}
+  /* the seat panel is full-screen here: hide the banner while it is open */
+  body.sp-is-open .seatwise-banner{display:none}
+}
 </style>
 </head>
 <body>
@@ -290,6 +313,11 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
     <span class="source-note" id="source-note">Loading&#8230;</span>
   </div>
+</div>
+
+<div class="seatwise-banner" id="seatwise-banner" role="region" aria-label="Seat-wise analysis">
+  <button type="button" class="seatwise-go" id="seatwise-go">Click any seat on the map or in the list for seat-wise analysis <span aria-hidden="true">&#8594;</span></button>
+  <button type="button" class="seatwise-close" id="seatwise-close" aria-label="Hide this tip for this visit">&times;</button>
 </div>
 
 <!-- ══════════════════════════════════════════════
@@ -875,7 +903,7 @@ function openSeatIncumbentLine(incumbent) {
   return /^open\b/i.test(incumbent) ? incumbent : `Open seat — ${incumbent}`;
 }
 
-function openSeatFromRace(kind, race, pathEl) {
+function openSeatFromRace(kind, race, pathEl, extraOpts) {
   let id, incumbentLine, note;
   if (kind === 'senate') {
     id = toSeatId('senate', race.state);
@@ -892,8 +920,74 @@ function openSeatFromRace(kind, race, pathEl) {
   }
   if (!id) return;
   spSelectSeat(id, pathEl);
-  window.SeatPanel.open(id, { mode: 'default', rating: race.rating, incumbent: incumbentLine, note: note });
+  window.SeatPanel.open(id, Object.assign({ mode: 'default', rating: race.rating, incumbent: incumbentLine, note: note }, extraOpts));
 }
+
+// ── SEAT-WISE ENTRY (#seats, #seats-senate, #seats-governor, banner) ────────
+// Featured seat per chamber, opened by #seats and the banner. An empty string
+// means "the first Toss-up seat in that chamber's list".
+const FEATURED_SEAT = { house: '', senate: 'Senate-ME', governor: 'Gov-GA' };
+const SEAT_LIST_TABLE = { house: 'comp-table', senate: 'race-table', governor: 'gov-race-table' };
+
+function activeChamber() {
+  const btn = document.querySelector('.subtab-btn.active');
+  const t = btn ? btn.textContent.toLowerCase() : '';
+  return t.includes('senate') ? 'senate' : t.includes('governor') ? 'governor' : 'house';
+}
+
+function featuredRace(chamber) {
+  const r = DATA && DATA.races && DATA.races[chamber];
+  const list = r ? (chamber === 'house' ? r.competitive : r.races) || [] : [];
+  const idOf = race => toSeatId(chamber, chamber === 'house' ? race.district : race.state);
+  const want = FEATURED_SEAT[chamber];
+  return (want && list.find(race => idOf(race) === want)) ||
+    list.find(race => /toss/i.test(race.rating || '')) || list[0] || null;
+}
+
+// Switches to the chamber, scrolls to its seat list and opens the featured seat.
+function openSeatwise(chamber) {
+  if (!DATA || !DATA.races) return;
+  chamber = chamber || activeChamber();
+  const btn = [...document.querySelectorAll('.subtab-btn')].find(b => b.textContent.toLowerCase().includes(chamber));
+  if (btn && !btn.classList.contains('active')) goSub(chamber, btn);
+  const racesTab = document.querySelector(`#subpanel-${chamber} .inner-tab`);
+  if (racesTab && !racesTab.classList.contains('active')) goInner(chamber, 'races', racesTab);
+  const table = document.getElementById(SEAT_LIST_TABLE[chamber]);
+  if (table) table.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const race = featuredRace(chamber);
+  if (!race) return;
+  // Esc from the panel returns focus to the banner when it is showing
+  const go = document.getElementById('seatwise-go');
+  const returnFocus = go && !document.getElementById('seatwise-banner').hidden ? go : null;
+  setTimeout(() => openSeatFromRace(chamber, race, null, returnFocus ? { returnFocus } : {}), 450);   // after the scroll settles
+}
+
+function handleSeatsHash() {
+  const m = location.hash.match(/^#seats(?:-(house|senate|governor))?$/i);
+  if (m) openSeatwise((m[1] || 'house').toLowerCase());
+}
+
+// Shell page (index.html) entry point when this page is already loaded in its iframe
+window.SeatwiseEntry = { open: openSeatwise };
+
+(function initSeatwiseBanner() {
+  const banner = document.getElementById('seatwise-banner');
+  const setSubtabHeight = () => {
+    const bar = document.querySelector('.subtab-bar');
+    if (bar) document.documentElement.style.setProperty('--subtab-h', bar.offsetHeight + 'px');
+  };
+  setSubtabHeight();
+  window.addEventListener('resize', setSubtabHeight);
+  try { if (sessionStorage.getItem('seatwiseBannerHidden') === '1') banner.hidden = true; } catch (e) { /* storage unavailable */ }
+  document.getElementById('seatwise-go').addEventListener('click', () => openSeatwise());
+  document.getElementById('seatwise-close').addEventListener('click', () => {
+    banner.hidden = true;   // this visit only; it returns in a new session
+    try { sessionStorage.setItem('seatwiseBannerHidden', '1'); } catch (e) { /* storage unavailable */ }
+  });
+  window.addEventListener('seatpanel:open', () => document.body.classList.add('sp-is-open'));
+  window.addEventListener('seatpanel:close', () => document.body.classList.remove('sp-is-open'));
+  window.addEventListener('hashchange', handleSeatsHash);
+})();
 
 function goInner(chamber, tab, btn) {
   const sec = document.getElementById('subpanel-' + chamber);
@@ -1004,7 +1098,7 @@ async function loadData() {
       if (res.ok) { DATA = await res.json(); break; }
     } catch(_) {}
   }
-  if (DATA && DATA.races) renderAll();
+  if (DATA && DATA.races) { renderAll(); handleSeatsHash(); }
   else document.querySelectorAll('[id$="-tbody"],[id$="-grid"]').forEach(el => { el.innerHTML = '<tr><td colspan="5" style="color:var(--t4);text-align:center;padding:24px">Could not load data.json</td></tr>'; });
 }
 

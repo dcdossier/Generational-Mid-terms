@@ -1796,8 +1796,10 @@ function fetchDistrictGeo(cb) {
   _districtGeoWaiters.push(cb);
   if (_districtGeoFetching) return;
   _districtGeoFetching = true;
-  fetch('assets/districts119.geojson')
-    .then(r => r.json())
+  // 2026 district boundaries; the 119th Congress file is the fallback
+  const getJson = url => fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  getJson('assets/districts2026.geojson?v=1')
+    .catch(e => { console.warn('districts2026.geojson unavailable, using districts119.geojson', e); return getJson('assets/districts119.geojson'); })
     .then(gj => { _cachedDistrictGeo = gj; _districtGeoWaiters.forEach(fn => fn(gj)); _districtGeoWaiters.length = 0; })
     .catch(() => {
       ['house-map-loading','presence-map-loading'].forEach(id => {

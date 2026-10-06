@@ -1247,7 +1247,7 @@ function fetchDistrictsGeo(cb) {
   _districtsFetching = true;
 
   function onFail(e) {
-    console.error('Failed to load districts119.geojson', e);
+    console.error('Failed to load district boundaries (2026 and 119 files)', e);
     _districtsFetching = false;
     const ld = document.getElementById('house-loading');
     if (ld) ld.textContent = 'Map unavailable \u2014 district boundary data could not be fetched.';
@@ -1255,9 +1255,19 @@ function fetchDistrictsGeo(cb) {
 
   const timer = setTimeout(() => { if (!_districtsGeo) onFail(new Error('timeout')); }, 40000);
 
-  function attempt(tries) {
-    fetch('assets/districts119.geojson?v=1')
+  // 2026 district boundaries; the 119th Congress file is the fallback
+  function getDistricts() {
+    return fetch('assets/districts2026.geojson?v=1')
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .catch(e => {
+        console.warn('districts2026.geojson unavailable, using districts119.geojson', e);
+        return fetch('assets/districts119.geojson?v=1')
+          .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      });
+  }
+
+  function attempt(tries) {
+    getDistricts()
       .then(gj => {
         clearTimeout(timer);
         _districtsGeo = gj;

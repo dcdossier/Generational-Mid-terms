@@ -230,6 +230,12 @@ body{
 .home-desc{font:400 16px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
 /* Hero why-questions panel */
 .hero-why-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px}
+/* Primary action: coral with dark ink text (about 6:1 contrast; white on coral would be about 2.6:1) */
+.hero-seatwise{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;margin:0 0 14px;
+  padding:10px 16px;background:#FF6F59;color:#20242B;font:700 14px var(--sans);text-decoration:none;border-radius:6px;white-space:nowrap;
+  box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.hero-seatwise:hover{background:#FF8572}
+.hero-seatwise:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
 .hero-why-item:last-of-type{border-bottom:none}
 .hero-why-btn{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:rgba(245,240,232,.65);font:500 13px/1.5 var(--sans);padding:11px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;transition:color .12s}
@@ -371,6 +377,10 @@ body{
   /* Quick context right panel (stacked below hero text on mobile) */
   .home-hero-right{padding-top:16px;margin-top:12px}
   .hero-why-label{font-size:10px;margin-bottom:10px}
+  .hero-seatwise{display:flex;width:100%}
+  /* keep the hero inside narrow screens (its content was forcing ~420px at 375px) */
+  .home-body{width:100%;min-width:0;box-sizing:border-box}
+  .home-hero,.home-hero-left,.home-hero-right{min-width:0;max-width:100%;box-sizing:border-box}
   .hero-why-btn{font-size:12px;padding:9px 0}
   .hero-why-text{font-size:12px;line-height:1.65}
   .hero-why-rm{font-size:11px}
@@ -617,6 +627,7 @@ body{background:#F5F5DC;color:#1E2232}
         <!-- Right: quick context questions -->
         <div class="home-hero-right">
           <div class="hero-why-label">Quick Context</div>
+          <a class="hero-seatwise" href="map.html#seats" onclick="return openSeatwise(event)">Seat-wise analysis <span aria-hidden="true">&#8594;</span></a>
           <div class="hero-why-item" id="hwi-0">
             <button class="hero-why-btn" onclick="toggleHeroWhy(0,this)">How does the American political system function? <span class="hero-why-chevron">&#9660;</span></button>
             <div class="hero-why-body">
@@ -983,6 +994,28 @@ function switchTab(name, btn) {
       frame.onload = () => loader.classList.remove('visible');
     }
   }
+}
+
+// "Seat-wise analysis →": open Election Trends inside this page with #seats.
+// Modified clicks (new tab/window) follow the link to map.html#seats instead.
+function openSeatwise(e) {
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0)) return true;
+  if (e) e.preventDefault();
+  const frame = document.getElementById('frame-map');
+  const loaded = frame.src && frame.src !== window.location.href;
+  if (!loaded) {
+    // First visit: load the iframe with the hash; map.html handles it once its data is in
+    const base = (frame.getAttribute('data-src') || 'map.html').replace(/#.*$/, '');
+    frame.setAttribute('data-src', base + '#seats');
+    switchTabByName('map');
+    frame.setAttribute('data-src', base);
+  } else {
+    switchTabByName('map');
+    try { frame.contentWindow.SeatwiseEntry.open('house'); }
+    catch (err) { frame.contentWindow.location.hash = 'seats'; }
+  }
+  frame.focus();
+  return false;
 }
 
 function switchTabByName(name) {

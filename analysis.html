@@ -103,6 +103,7 @@ body {
 
 /* SECTIONS */
 .ac-section {
+  --accent: var(--coral);        /* card top border and title marker */
   scroll-margin-top: 64px;       /* clear the sticky sub-nav when scrolled to */
   background: var(--beige-lt);
   border: 1px solid var(--border);
@@ -121,6 +122,17 @@ body {
   font: 700 22px var(--serif);
   color: var(--navy);
 }
+.ac-section-title::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+.ac-section[data-section="newsletter"] { --accent: var(--navy); }
 .ac-explore {
   font: 600 14px var(--sans);
   color: var(--coral-dk);
@@ -191,7 +203,7 @@ body {
   min-height: 210px;
   background: var(--bg);
   border: 1px solid var(--border);
-  border-top: 3px solid var(--coral);
+  border-top: 3px solid var(--accent, var(--coral));
   border-radius: 8px;
   padding: 14px 16px 12px;
   color: var(--ink);
@@ -312,8 +324,9 @@ body {
 
 // ── CATEGORIES & AUTHORS ─────────────────────────────────────────────────────
 const SECTIONS = [
-  { key: 'oped',     title: 'Op-eds',             types: ['op-ed', 'blog', 'newsletter'] },
-  { key: 'research', title: 'Research Documents', types: ['research'] },
+  { key: 'oped',       title: 'Op-eds',             types: ['op-ed', 'blog'] },
+  { key: 'newsletter', title: 'Newsletters',        types: ['newsletter'] },
+  { key: 'research',   title: 'Research Documents', types: ['research'] },
   { key: 'media',    title: 'Media/In-News',      types: ['media', 'interview'] },
   { key: 'podcast',  title: 'Podcasts',           types: ['podcast'] },
 ];
@@ -367,7 +380,17 @@ function normaliseManual(e, i) {
   };
 }
 
-const urlKey = u => String(u || '').trim().replace(/^https?:\/\/(www\.)?/, '').replace(/[#?].*$/, '').replace(/\/$/, '').toLowerCase();
+// Merge key: host + path + query without tracking parameters or #fragment.
+// The query is kept (YouTube episodes differ only by ?v=…) with its case.
+function urlKey(u) {
+  try {
+    const x = new URL(String(u || '').trim());
+    [...x.searchParams.keys()].forEach(k => { if (/^(utm_|fbclid$|gclid$|ref$|ref_src$)/.test(k)) x.searchParams.delete(k); });
+    return (x.hostname.replace(/^www\./, '') + x.pathname.replace(/\/$/, '')).toLowerCase() + x.search;
+  } catch (e) {
+    return String(u || '').trim().toLowerCase();
+  }
+}
 
 async function loadData() {
   const manual = await fetchJson('analysis-manual.json');

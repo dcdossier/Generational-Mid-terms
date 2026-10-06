@@ -2,6 +2,11 @@
 'use strict';
 
 /**
+ * ARCHIVED — no longer run by any workflow. Analysis & Commentary now comes
+ * from analysis-manual.json (hand-curated) merged with the static
+ * analysis.json; see scripts/enrich-manual.js. Kept for reference; paths and
+ * the aiExtract('ac', …) signature are updated so it still runs if needed.
+ *
  * fetch-analysis.js
  * Fetches content from:
  *   - DC Dossier Substack (RSS)
@@ -17,13 +22,13 @@ const fs   = require('fs');
 const path = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
-const { aiExtract, aiStatus } = require('./ai');
-const { recordStatus, saveStatus } = require('./status');
+const { initAI, aiExtract } = require('../ai');
+const { recordStatus, saveStatus } = require('../status');
 
-const OUT_PATH     = path.resolve(__dirname, '../analysis.json');
+const OUT_PATH     = path.resolve(__dirname, '../../analysis.json');
 // Items awaiting keyword review. Kept out of analysis.json so the site never
 // shows them; analysis.html and index.html only read analysis.json.
-const REVIEW_PATH  = path.resolve(__dirname, '../analysis-review.json');
+const REVIEW_PATH  = path.resolve(__dirname, '../../analysis-review.json');
 const FETCH_TIMEOUT = 14000;
 const MAX_POSTS    = 150;
 
@@ -142,7 +147,7 @@ function parseRssItem(raw) {
 // comma-separated name string, or '' when AI is unavailable (author left blank).
 async function extractNames(title, description) {
   if (!description) return '';
-  const result = await aiExtract(
+  const result = await aiExtract('ac',
     'You extract people\'s names from podcast descriptions. Return valid JSON.',
     `From this podcast title and description, list ALL hosts and guests by full name.
 Return JSON exactly: {"names": "Jane Smith, John Doe"} — use an empty string if no names are mentioned.
@@ -161,7 +166,7 @@ Description: ${description.slice(0, 800)}`,
 // Used for DC Dossier posts that don't match KW_RE keywords. Returns true/false,
 // or null when no AI provider answered — callers queue those for keyword review.
 async function checkMidtermRelevance(title, desc) {
-  const result = await aiExtract(
+  const result = await aiExtract('ac',
     'You classify newsletter issues for relevance. Return valid JSON.',
     `DC Dossier is a newsletter tracking US congressional legislation and the 2026 midterm elections from an Indian perspective. Does this issue deal with: US midterm elections, congressional dynamics, electoral trends, Trump's approval/political standing, economic factors affecting 2026 elections, or congressional oversight?
 Return JSON exactly: {"relevant": true} or {"relevant": false}
@@ -676,7 +681,7 @@ const AUTHOR_PAGES = [
 // when there is no keyword match and no AI provider answered.
 async function checkCongressRelevance(title, author) {
   if (matchesKw(title, '')) return true;
-  const result = await aiExtract(
+  const result = await aiExtract('ac',
     'You classify op-eds for relevance. Return valid JSON.',
     `Does this op-ed focus on US Congress, US midterm elections, war powers, or congressional oversight of the executive?
 Return JSON exactly: {"relevant": true} or {"relevant": false}
@@ -776,7 +781,7 @@ async function scrapeTakshashilaOpEds(existingSeedUrls) {
 
 // ── MAIN ──────────────────────────────────────────────────────────────────────
 async function main() {
-  console.log(`[fetch-analysis] AI keys: ${aiStatus()} (AI is optional)`);
+  await initAI('ac');
   // Load existing file for deduplication and metadata preservation
   let existing = { meta: {}, posts: [] };
   if (fs.existsSync(OUT_PATH)) {

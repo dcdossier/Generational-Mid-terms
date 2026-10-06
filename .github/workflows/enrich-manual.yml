@@ -1,19 +1,21 @@
-name: Fetch Live Data
+name: Enrich Manual Analysis
 
 on:
-  schedule:
-    - cron: '43 */4 * * *'   # every 4 hours, off-peak minute
-  workflow_dispatch:         # manual trigger any time
+  push:
+    branches: [main]
+    paths: ['analysis-manual.json']
+  workflow_dispatch:
 
-# Both workflows write data.json and status.json, so they share one group and
-# never run at the same time (a queued run waits; it is not cancelled).
+# Writes status.json like the other data workflows, so it shares their group
+# and never runs at the same time as them (a queued run waits).
 concurrency:
   group: data-json-writers
   cancel-in-progress: false
 
 jobs:
-  fetch:
+  enrich:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     permissions:
       contents: write
 
@@ -31,21 +33,21 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefix scripts
 
-      - name: Fetch all live data
+      - name: Summarise entries without a description
         env:
-          MID_TERMS_HOME: ${{ secrets.MID_TERMS_HOME }}   # Home tab AI (Congress approval backup)
-        run: node scripts/fetch-polls.js
+          MID_TERMS_AC: ${{ secrets.MID_TERMS_AC }}   # Analysis & Commentary tab AI
+        run: node scripts/enrich-manual.js
 
-      - name: Commit and push if data changed
+      - name: Commit and push if anything changed
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json status.json
+          git add analysis-manual.json status.json
           if git diff --cached --quiet; then
-            echo "No data changes — nothing to commit."
+            echo "No changes — nothing to commit."
             exit 0
           fi
-          git commit -m "chore(data): live update [skip ci]"
+          git commit -m "chore(data): AI summaries for manual analysis entries [skip ci]"
           # Rebase onto anything pushed since checkout, then push; retry on a race
           for attempt in 1 2 3; do
             if git pull --rebase origin "$GITHUB_REF_NAME" && git push; then exit 0; fi
@@ -55,6 +57,3 @@ jobs:
           done
           echo "::error::Could not push after 3 attempts"
           exit 1
-
-      - name: Fail if a primary source has been down for over 48 hours
-        run: node scripts/check-status.js polls

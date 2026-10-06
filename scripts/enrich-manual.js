@@ -34,8 +34,9 @@ const EXTRACT_CHARS = 5000;
 async function pageExtract(url) {
   try {
     const res = await fetch(url, { headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 20000, size: 3e6 });
-    if (!res.ok) { console.log(`  [page] ${url}: HTTP ${res.status}`); return null; }
     let html = await res.text();
+    console.log(`  [fetch] ${url}: HTTP ${res.status}, ${Buffer.byteLength(html)} bytes`);
+    if (!res.ok) return null;
     const article = html.match(/<article[\s\S]*?<\/article>/i);
     if (article) html = article[0];
     const text = html

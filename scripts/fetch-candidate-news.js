@@ -89,8 +89,10 @@ const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_
 async function searchGoogleNews(query) {
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
   const res = await fetch(url, { headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 15000 });
+  const body = await res.text();
+  console.log(`  [fetch] Google News ${query}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const channel = parser.parse(await res.text())?.rss?.channel || {};
+  const channel = parser.parse(body)?.rss?.channel || {};
   const raw = channel.item ? (Array.isArray(channel.item) ? channel.item : [channel.item]) : [];
   return raw.map(item => {
     const { title, publisher } = splitGoogleNewsTitle(cleanText(item.title), item.source);

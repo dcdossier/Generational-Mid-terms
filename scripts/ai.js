@@ -148,16 +148,17 @@ async function initAI(feature) {
       headers: { 'Authorization': `Bearer ${keyFor(feature)}` },
       timeout: 15000,
     }));
-    console.log(`[AI] ${feature}: models list HTTP ${res.status}`);
+    const listBody = await res.text();
+    console.log(`[AI] ${feature}: models list HTTP ${res.status}, ${Buffer.byteLength(listBody)} bytes`);
     if (!res.ok) {
-      const body = redact(await res.text()).slice(0, 160);
+      const body = redact(listBody).slice(0, 160);
       st.disabled = true;
       st.models = [];
       note(feature, { key_present: true, last_error: `models list HTTP ${res.status}: ${body}`, last_error_at: new Date().toISOString() });
       return false;
     }
     // Gemini lists ids as "models/gemini-…"; the chat endpoint takes them without the prefix
-    st.models = ((await res.json()).data || []).filter(m => m.active !== false)
+    st.models = ((JSON.parse(listBody)).data || []).filter(m => m.active !== false)
       .map(m => String(m.id).replace(/^models\//, '')).sort();
   } catch (err) {
     st.disabled = true;
@@ -231,13 +232,13 @@ async function aiExtract(feature, systemPrompt, userContent, { label = 'extract'
 
     if (res.status === 429 && attempt === 1) {
       const wait = Math.min((parseFloat(res.headers.get('retry-after')) || 10) * 1000, MAX_RETRY_WAIT_MS);
-      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: HTTP 429 — retrying once in ${Math.round(wait / 1000)}s`);
+      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: HTTP 429, ${Buffer.byteLength(body)} bytes — retrying once in ${Math.round(wait / 1000)}s`);
       await sleep(wait);
       continue;
     }
     if (!res.ok) {
       const msg = redact(body).slice(0, 160);
-      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: failed HTTP ${res.status}: ${msg}`);
+      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: failed HTTP ${res.status}, ${Buffer.byteLength(body)} bytes: ${msg}`);
       if (res.status >= 400 && res.status < 500) {
         st.disabled = true; // any 4xx: no more calls for this feature this run
         console.warn(`[AI] ${feature}: disabled for the rest of this run`);
@@ -250,11 +251,11 @@ async function aiExtract(feature, systemPrompt, userContent, { label = 'extract'
     try { content = JSON.parse(body).choices?.[0]?.message?.content || ''; } catch { /* handled below */ }
     const out = json ? parseJson(content) : content.trim();
     if (!out) {
-      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: HTTP ${res.status} but no usable reply`);
+      console.warn(`[AI] feature=${feature} model=${modelId} ${label}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes but no usable reply`);
       note(feature, { last_error: `${label}: no usable reply`, last_error_at: new Date().toISOString() });
       return null;
     }
-    console.log(`[AI] feature=${feature} model=${modelId} ${label}: success HTTP ${res.status}`);
+    console.log(`[AI] feature=${feature} model=${modelId} ${label}: success HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
     note(feature, { last_success: new Date().toISOString(), last_model: modelId });
     return out;
   }

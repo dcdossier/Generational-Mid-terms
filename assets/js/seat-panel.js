@@ -55,6 +55,11 @@
 //   "No coverage found in the last 7 days" with the time of the last check.
 //   Shared with india.html's member side panel.
 //
+// It also gets a "Polls" block from data.json's race_polls (written by
+// scripts/fetch-polls.js), and the header lists each forecaster's rating with
+// its own date, flagged when older than 14 days (uses assets/js/data-labels.js
+// when the page includes it).
+//
 // Dispatches 'seatpanel:open' / 'seatpanel:close' CustomEvents on window
 // (detail: {id}) so a host page can sync its own UI (e.g. map/list
 // highlighting, or closing its own competing detail panel) without polling.
@@ -65,6 +70,7 @@
   var BRIEFS_URL = 'assets/briefs.json';
   var ISSUES_URL = 'assets/issues.json';
   var NEWS_URL   = 'assets/candidate-news.json';
+  var DATA_URL   = 'data.json';
 
   var ABBR_TO_STATE = {
     AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
@@ -82,6 +88,7 @@
 
   var briefsPromise = null;
   var newsPromise = null;
+  var dataPromise = null;
   var issuesPromise = null;
   var dom = null;
   var isOpen = false;
@@ -153,6 +160,10 @@
 
   function loadIssues() {
     return loadJson(ISSUES_URL, function () { return issuesPromise; }, function (p) { issuesPromise = p; });
+  }
+
+  function loadData() {
+    return loadJson(DATA_URL, function () { return dataPromise; }, function (p) { dataPromise = p; });
   }
 
   function loadCandidateNews(force) {
@@ -411,6 +422,70 @@
     return details;
   }
 
+  // ── Polls (data.json race_polls) ──────────────────────────────────────────
+
+  function pollDates(p) {
+    var f = function (iso, withYear) {
+      var d = new Date(iso + 'T00:00:00Z');
+      return isNaN(d) ? '' : d.toLocaleDateString('en-GB', withYear
+        ? { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }
+        : { day: 'numeric', month: 'short', timeZone: 'UTC' });
+    };
+    if (!p.start || p.start === p.end) return f(p.end, true);
+    // "2–3 Oct 2026" within a month, "29 Sept–1 Oct 2026" across months
+    return p.start.slice(0, 7) === p.end.slice(0, 7)
+      ? String(+p.start.slice(8, 10)) + '–' + f(p.end, true)
+      : f(p.start, false) + '–' + f(p.end, true);
+  }
+
+  function candidateCell(c) {
+    return c ? escapeHtml(c.name) + ' <strong>' + escapeHtml(c.pct) + '%</strong>' : '&#8212;';
+  }
+
+  function buildPollsSection(id, data) {
+    var details = document.createElement('details');
+    details.className = 'sp-section';
+    details.setAttribute('open', '');
+    var summary = document.createElement('summary');
+    summary.textContent = 'Polls';
+    var body = document.createElement('div');
+    body.className = 'sp-section-body';
+
+    var root = data && data.race_polls;
+    var race = root && root.races && root.races[id];
+    if (!race || !race.latest || !race.latest.length) {
+      body.innerHTML = '<div class="sp-latest-empty">No polls of this matchup in the New York Times polling data.</div>';
+    } else {
+      var avg = race.average_30d;
+      var html = avg
+        ? '<div class="sp-poll-avg">30-day average: D ' + escapeHtml(avg.dem) + '% · R ' + escapeHtml(avg.rep) + '% (' +
+          (avg.margin > 0 ? 'D+' + escapeHtml(avg.margin) : avg.margin < 0 ? 'R+' + escapeHtml(-avg.margin) : 'even') +
+          ', ' + escapeHtml(avg.n_polls) + ' poll' + (avg.n_polls === 1 ? '' : 's') + ')</div>'
+        : '<div class="sp-poll-avg">No non-partisan polls in the last 30 days.</div>';
+      html += race.latest.map(function (p) {
+        var others = (p.others || []).filter(function (o) { return o.pct >= 2; });
+        return '<div class="sp-poll">' +
+          '<div class="sp-poll-meta">' + escapeHtml(p.pollster) + (p.sponsors ? ' for ' + escapeHtml(p.sponsors) : '') +
+            ' · ' + escapeHtml(pollDates(p)) +
+            (p.sample ? ' · ' + escapeHtml(p.sample.toLocaleString('en-GB')) + ' ' + escapeHtml((p.population || '').toUpperCase()) : '') +
+            (p.partisan ? ' · partisan (' + escapeHtml(p.partisan) + ')' : '') + '</div>' +
+          '<div class="sp-poll-result">' + candidateCell(p.dem) + ' · ' + candidateCell(p.rep) +
+            (others.length ? ' · ' + others.map(function (o) { return escapeHtml(o.name) + ' ' + escapeHtml(o.pct) + '%'; }).join(' · ') : '') +
+          '</div>' +
+        '</div>';
+      }).join('');
+      body.innerHTML = html;
+    }
+    var label = document.createElement('div');
+    label.className = 'dl-label';
+    if (window.DataLabels) label.innerHTML = window.DataLabels.html(race || root, { kind: 'poll' });
+    body.appendChild(label);
+
+    details.appendChild(summary);
+    details.appendChild(body);
+    return details;
+  }
+
   function loadIssuesDataFor(id) {
     var lookup = issuesLookupFor(id);
     if (!lookup) return Promise.resolve(null);
@@ -430,13 +505,16 @@
 
     d.type.textContent = type;
     setOptionalText(d.rating, opts.rating || null);
+    // The caller's rating (data.json) carries no date of its own
+    d.rating.title = opts.rating ? 'Site rating from data.json — date not recorded; see the dated forecaster ratings below' : '';
     d.status.textContent = status || '';
     d.status.style.display = status ? '' : 'none';
     d.titleEl.textContent = title;
     setOptionalText(d.incumbent, opts.incumbent || null);
     setNominee(d.dem, entry && entry.dem);
     setNominee(d.rep, entry && entry.rep);
-    d.ratings.textContent = ratings || '';
+    if (ratings && window.DataLabels) d.ratings.innerHTML = window.DataLabels.ratingsHtml(ratings);
+    else d.ratings.textContent = ratings || '';
     d.ratings.style.display = ratings ? '' : 'none';
     setOptionalText(d.note, opts.note || null);
 
@@ -456,9 +534,10 @@
     currentId = id;
     isOpen = true;
 
-    Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews()]).then(function (results) {
+    Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews(), loadData()]).then(function (results) {
       if (currentId !== id) return; // superseded by a later open() call
       render(id, results[0][id], opts, results[1]);
+      ensureDom().body.appendChild(buildPollsSection(id, results[3]));
       ensureDom().body.appendChild(buildNewsSection(id, results[0][id], results[2]));
     });
 

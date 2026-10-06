@@ -24,6 +24,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="assets/js/seat-ids.js"></script>
+<link rel="stylesheet" href="assets/css/data-labels.css">
+<script src="assets/js/data-labels.js"></script>
 <script src="assets/js/seat-panel.js"></script>
 <style>
 :root {
@@ -325,6 +327,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="ss-d-held">&#8230;</div><div class="stat-l">Currently Democrat&#8209;held seats at stake</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="ss-tossups">&#8230;</div><div class="stat-l">Toss&#8209;up seats &#8212; election outcome uncertain</div></div>
   </div>
+  <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
 
   <!-- BALANCE BAR -->
   <div class="balance-wrap">
@@ -401,7 +404,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       </tbody>
     </table>
     </div>
-    <div class="chart-note" id="senate-source-note">Source: Preliminary analyst estimates</div>
+    <div class="chart-note dl-label" id="senate-source-note" data-block="races.senate" data-kind="ratings"></div>
   </div>
 
   <!-- ── INTRAPARTY FACTIONS (Senate) ─────────────────────────────── -->
@@ -499,6 +502,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="hs-d">212</div><div class="stat-l">Current Democrat seats</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="hs-tu">&#8230;</div><div class="stat-l">Toss&#8209;up districts &#8212; either party can win</div></div>
   </div>
+  <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
 
   <!-- SEAT BALANCE -->
   <div class="balance-wrap">
@@ -548,7 +552,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
     <div class="card-sub">Full rating spectrum across all 435 House seats, on current 2026 district boundaries. The 49 individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current 2026 rating. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
     <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
-    <div class="chart-note" id="house-source-note">Source: Preliminary analyst estimates</div>
+    <div class="chart-note dl-label" id="house-source-note" data-block="races.house" data-kind="ratings"></div>
   </div>
 
   <div class="chart-card">
@@ -659,6 +663,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="gov-d-lean">&#8230;</div><div class="stat-l">Leaning or safe Democrat</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="gov-tu">&#8230;</div><div class="stat-l">Toss&#8209;up races &#8212; outcome uncertain</div></div>
   </div>
+  <div class="dl-label" data-block="races.governor" data-kind="ratings"></div>
 
   <!-- CURRENT BALANCE -->
   <div class="balance-wrap">
@@ -737,7 +742,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       </tbody>
     </table>
     </div>
-    <div class="chart-note" id="gov-source-note">Source: Ballotpedia / Cook Political Report / Sabato&#8217;s Crystal Ball</div>
+    <div class="chart-note dl-label" id="gov-source-note" data-block="races.governor" data-kind="ratings"></div>
   </div>
 
 </div>
@@ -1005,6 +1010,7 @@ async function loadData() {
 
 // ── MAIN RENDER ───────────────────────────────────────────────────────────────
 function renderAll() {
+  if (window.DataLabels) window.DataLabels.fill(DATA);
   renderSenate(DATA.races.senate);
   renderHouse(DATA.races.house);
   renderGovernor(DATA.races.governor);
@@ -1023,7 +1029,6 @@ function renderSenate(sen) {
   document.getElementById('ss-d-held').textContent     = dHeld;
   document.getElementById('ss-tossups').textContent    = rs.toss_up;
   document.getElementById('source-note').textContent   = sen.source;
-  document.getElementById('senate-source-note').textContent = 'Source: ' + sen.source;
 
   // Balance bar
   const cur = sen.current_balance;
@@ -1505,7 +1510,6 @@ function renderHouse(house) {
   document.getElementById('hs-tu').textContent = rs.toss_up;
   document.getElementById('hbal-r-label').textContent = house.current_balance.r + ' Republican';
   document.getElementById('hbal-d-label').textContent = 'Democrat ' + house.current_balance.d;
-  document.getElementById('house-source-note').textContent = 'Source: ' + house.source;
 
   buildHouseDistrictMap(house.competitive);
 
@@ -1582,7 +1586,6 @@ let govSortCol = 3, govSortDir = 1;
 let govActiveFilter = 'all';
 
 function renderGovernor(gov) {
-  document.getElementById('gov-source-note').textContent = 'Source: ' + gov.source;
   const races = gov.races;
   buildGovMap(races);
 

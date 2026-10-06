@@ -400,3 +400,28 @@
   font-style: italic;
   padding: 6px 0;
 }
+
+/* ── Polls (data.json race_polls) ───────────────────────────────────────── */
+.sp-poll-avg {
+  font: 600 13.5px var(--sp-sans);
+  color: var(--sp-navy);
+  margin-bottom: 6px;
+}
+.sp-poll {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--sp-border);
+}
+.sp-poll:last-of-type {
+  border-bottom: none;
+}
+.sp-poll-meta {
+  font: 500 10.5px var(--sp-sans);
+  color: var(--sp-ink-soft);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  margin-bottom: 2px;
+}
+.sp-poll-result {
+  font: 400 13.5px/1.5 var(--sp-sans);
+  color: var(--sp-ink);
+}

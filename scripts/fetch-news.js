@@ -415,12 +415,13 @@ async function fetchFeed(feed) {
       headers: { 'User-Agent': 'DCDossier/1.0 (+https://github.com/dcdossier/Generational-Mid-terms)' },
       timeout: 15000,
     });
+    const xml = await res.text();
+    const bytes = Buffer.byteLength(xml);
     if (!res.ok) {
-      console.warn(`[SKIP] ${feed.source}: HTTP ${res.status}`);
+      console.warn(`[SKIP] ${feed.source}: HTTP ${res.status}, ${bytes} bytes`);
       recordStatus(feed.statusName, { group: 'news', ok: false, error: `HTTP ${res.status}` });
       return [];
     }
-    const xml = await res.text();
     // processEntities off: he decodes entities later, and large feeds no longer
     // hit fast-xml-parser's entity expansion limit (Axios, Spotlight PA).
     const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_', processEntities: false });
@@ -447,7 +448,8 @@ async function fetchFeed(feed) {
       const date        = parseDate(item.pubDate || item.published || item.updated || item['dc:date']);
       return { title, url, source, feed: feed.source, date, description: description.slice(0, 280), forceTags: feed.forceTags || [] };
     }).filter(i => i.url && i.title);
-    if (!mapped.length) console.warn(`[EMPTY] ${feed.source}: HTTP ${res.status} but 0 items`);
+    if (mapped.length) console.log(`[fetch] ${feed.source}: HTTP ${res.status}, ${bytes} bytes, ${mapped.length} items`);
+    else console.warn(`[EMPTY] ${feed.source}: HTTP ${res.status}, ${bytes} bytes, 0 items`);
     recordStatus(feed.statusName, { group: 'news', ok: true, count: mapped.length });
     return mapped;
   } catch (err) {

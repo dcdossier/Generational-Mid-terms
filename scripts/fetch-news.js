@@ -285,18 +285,29 @@ const FEEDS = [
 //   +3  title has a core election term
 //   +2  title or summary names a tracked candidate/seat (assets/briefs.json) or
 //       an India-relevant member (MEMBERS in india.html)
-//   +1  summary has a campaign/polling term
-//   -5  title or summary hits the blocklist
+//   +3  … "primary" counts too, unless the title names another election year
+//       (2024, 2027, 2028, 2030) or "presidential primary": then it is -3 instead
+//   +1  summary has a campaign/polling term, or title/summary has a campaign
+//       activity term (rally, fundraising, endorsement, debate, turnout, …)
+//   -5  title or summary hits the blocklist; "crime" only when the title has
+//       no +3 term (crime/police blotters always)
 const MIN_SCORE = 3;
 
-const TITLE_TERMS_RE = /\b(mid-?terms?|2026 elections?|senate races?|house races?|governor['’]s races?|gubernatorial races?|battlegrounds?|generic ballot|redistricting|primar(y|ies)(?!\s+(care|school|source|colou?r|sector|residence|reason))|runoffs?|nominees?)\b/i;
+const TITLE_TERMS_RE = /\b(mid-?terms?|2026 elections?|senate races?|house races?|governor['’]s races?|gubernatorial races?|battlegrounds?|generic ballot|redistricting|runoffs?|nominees?)\b/i;
+// "primary" counts as a core term unless the title is about another election year
+const PRIMARY_RE = /\bprimar(y|ies)\b(?!\s+(care|school|source|colou?r|sector|residence|reason))/i;
+const OTHER_PRIMARY_RE = /\b(2024|2027|2028|2030)\b|\bpresidential primar(y|ies)\b/i;
+// +1 campaign-activity terms, matched in the title or the summary
+const ACTIVITY_TERMS_RE = /\b(campaign stops?|rally|rallies|fundraising|raised|outraises|endorsements?|endorses|debates?|ad buys?|super PACs?|early voting|turnout)\b/i;
+// "crime" is -5 only when the title has no core election term
+const CRIME_RE = /\bcrimes?\b/i;
 const SUMMARY_TERMS_RE = /\b(poll(s|ing|ster)?|campaign(s|ing)?|ballots?|candidates?|districts?|forecasts?|inside elections)\b/i;
 const SUMMARY_NAMES_RE = /\b(Cook|Sabato)\b/; // case-sensitive: not "cook" the verb
 const BLOCKLIST_RE = new RegExp([
   '\\bsports?\\b', '\\b(NFL|NBA|MLB|NHL|MLS)\\b', '\\bplayoffs?\\b', '\\bquarterback\\b', '\\btouchdowns?\\b',
   '\\bcollege athletics\\b', '\\bNCAA\\b', '\\bathletic (director|department)\\b',
   '\\bweather\\b', '\\btornado (watch|warning)\\b', '\\bheat advisory\\b', '\\bwinter storm\\b',
-  '\\bcrimes?\\b', '\\bpolice (blotter|log)\\b',
+  '\\b(crime|police) blotter\\b', '\\bpolice log\\b',
   '\\bobituar(y|ies)\\b',
   '\\brecipes?\\b',
   '\\bdaylight saving',
@@ -356,13 +367,17 @@ function scoreItem(title, summary) {
   const text = `${title} ${summary}`;
   let score = 0;
   const reasons = [];
-  const t = title.match(TITLE_TERMS_RE);
+  const core = title.match(TITLE_TERMS_RE);
+  const primary = title.match(PRIMARY_RE);
+  const otherYear = primary && title.match(OTHER_PRIMARY_RE);
+  const t = core || (primary && !otherYear ? primary : null);
   if (t) { score += 3; reasons.push(`+3 "${t[0]}"`); }
+  if (otherYear) { score -= 3; reasons.push(`-3 "${primary[0]}" with "${otherYear[0]}"`); }
   const e = text.match(ENTITY_RE);
   if (e) { score += 2; reasons.push(`+2 "${e[0]}"`); }
-  const s = summary.match(SUMMARY_TERMS_RE) || summary.match(SUMMARY_NAMES_RE);
+  const s = summary.match(SUMMARY_TERMS_RE) || summary.match(SUMMARY_NAMES_RE) || text.match(ACTIVITY_TERMS_RE);
   if (s) { score += 1; reasons.push(`+1 "${s[0]}"`); }
-  const b = text.match(BLOCKLIST_RE) || title.match(NOISE_TITLE_RE);
+  const b = text.match(BLOCKLIST_RE) || title.match(NOISE_TITLE_RE) || (!t && text.match(CRIME_RE));
   if (b) { score -= 5; reasons.push(`-5 "${b[0]}"`); }
   return { score, reasons };
 }

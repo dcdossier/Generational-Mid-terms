@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>US 2026 Mid-term Election Racebook</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link rel="stylesheet" href="assets/css/data-labels.css">
+<script src="assets/js/data-labels.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -593,6 +595,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="stat-box"><div class="stat-n" style="color:var(--blue)" id="stat-dem">&#8230;</div><div class="stat-l">Democrats not returning &#8212; bipartisan exodus</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--orange)" id="stat-seeking">&#8230;</div><div class="stat-l">Of retirees running for other public offices</div></div>
   </div>
+  <div class="dl-label" data-block="retirements" data-kind="monthly"></div>
 
   <div class="chart-card">
     <div class="card-title">Chamber breakdown &#8212; Senate vs House departures in 2026</div>
@@ -624,6 +627,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lsq" style="background:#8CB4E0"></div>Democrat &#8212; seeking office</div>
     </div>
     <div style="position:relative;height:200px"><canvas id="c-partysplit"></canvas></div>
+    <div class="dl-label" data-block="retirements" data-kind="monthly"></div>
     <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings Institution</a> (58 House members announced). Republicans include 18 subcommittee chairs and 3 committee chairs. Total departures including Senate: 72 (NPR, 29 May 2026) per <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>.</div>
   </div>
 
@@ -681,6 +685,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Post-WWII average (40)</div>
     </div>
     <div style="position:relative;height:300px"><canvas id="c-hist"></canvas></div>
+    <div class="dl-label" data-block="retirements" data-kind="monthly"></div>
     <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress, Tables 2-7 &amp; 2-8 (1946&#8211;2024). 2026: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> / NPR tracker. Notable peaks: 1966 (Vietnam), 1974&#8211;76 (Watergate/Nixon era), 1992 (bank scandal &#8212; record 72), 2018 (pre-blue wave), 2026 (institutional frustration &#8212; highest since 1992).</div>
   </div>
 
@@ -827,6 +832,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="stat-l">Trump approval trend &#8212; month over month change</div>
     </div>
   </div>
+  <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
+  <div class="dl-label" data-block="congress_approval.combined" data-kind="monthly"></div>
 
   <!-- TRUMP APPROVAL CARD -->
   <div class="chart-card">
@@ -836,6 +843,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="appr-gauge-wrap">
         <div class="appr-gauge-clip">
           <canvas id="c-trump-gauge" style="display:block;width:100%;height:240px"></canvas>
+          <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
         </div>
         <div class="appr-gauge-center">
           <div class="appr-gauge-pct" id="appr-gauge-pct">--</div>
@@ -874,6 +882,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>50% threshold</div>
     </div>
     <div style="position:relative;height:280px"><canvas id="c-trump-history"></canvas></div>
+    <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
     <div class="chart-note">Source: RealClearPolitics polling average, Gallup monthly tracking, Pew Research Center. Historical data compiled from public polling aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
   </div>
 
@@ -957,6 +966,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </div>
     </div>
     <div style="position:relative;height:200px;margin-top:10px"><canvas id="c-trump-net"></canvas></div>
+    <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
     <div class="chart-note">Net approval = approve % minus disapprove %. The horizontal zero line marks the break-even point. Sustained readings below &#8722;10 points have preceded wave elections in 2006, 2010, and 2018.</div>
   </div>
 
@@ -973,6 +983,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-title">Presidential approval vs seat change &#8212; historical regression (1990&#8211;2022)</div>
     <div class="card-sub">Each dot is a midterm. Presidential approval at the final pre-election reading (x-axis) vs the president&#8217;s party House seat change (y-axis). The regression line shows the structural relationship: lower approval predicts larger seat losses. Trump 2026 is marked in red.</div>
     <div style="position:relative;height:280px"><canvas id="c-appr-scatter"></canvas></div>
+    <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
     <div class="chart-note">OLS regression fitted to 1990&#8211;2022 completed midterms. 2002 included but flagged as post-9/11 outlier. 2026 seat change is TBD; the regression gives a structural baseline. Actual result depends on congressional approval, generic ballot, district map, and turnout model.</div>
   </div>
 
@@ -1038,6 +1049,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lsq" style="background:var(--red)"></div>Disapprove</div>
     </div>
     <div style="position:relative;height:200px"><canvas id="c-congress-history"></canvas></div>
+    <div class="dl-label" data-block="approval.congress" data-kind="monthly"></div>
     <div class="chart-note">Source: Gallup congressional approval tracking, Pew Research. The 119th Congress approval is among the lowest on record, consistent with post-2010 norms of deep institutional distrust. Seat loss correlation with congressional approval is weaker than with presidential approval but directionally consistent.</div>
   </div>
 
@@ -1065,6 +1077,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="stat-l">Democrat trend &#8212; month over month change</div>
     </div>
   </div>
+  <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
 
   <!-- BALANCE BAR CARD -->
   <div class="chart-card">
@@ -1109,6 +1122,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>50-50 split</div>
     </div>
     <div style="position:relative;height:280px"><canvas id="c-gb-trend"></canvas></div>
+    <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
     <div class="chart-note">Source: RealClearPolitics, YouGov/Economist, Quinnipiac, NBC/WSJ, Fox News polling averages. Monthly averages compiled from public aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
   </div>
 
@@ -1122,6 +1136,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="gb-thresh-chip"><div class="gb-thresh-line" style="border-color:rgba(149,149,149,.5)"></div>Even split</div>
     </div>
     <div style="position:relative;height:220px"><canvas id="c-gb-margin"></canvas></div>
+    <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
     <div class="chart-note">Margin = Democrat % minus Republican % per month. Positive territory means Democrats lead; at +3 pts Democrats historically break even in seats. At +5 pts gains become likely. Current margin and 2026 projection point are highlighted.</div>
   </div>
 
@@ -1145,6 +1160,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
         <tr><td colspan="6" style="color:var(--t4);text-align:center;padding:18px">Loading&#8230;</td></tr>
       </tbody>
     </table>
+    <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
     </div>
     <div class="chart-note">Individual polls have a margin of error of approximately 3 points. Pollsters with known Republican or Democratic house effects are noted. The RealClearPolitics average is the primary reference for this tracker.</div>
   </div>
@@ -1184,6 +1200,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-title">Generic ballot margin vs projected seat change &#8212; 2006&#8211;2026</div>
     <div class="card-sub">Each midterm plotted by Democratic ballot margin (x-axis) and resulting House seat change (y-axis). The 2026 projection is based on the current average and historical regression.</div>
     <div style="position:relative;height:300px"><canvas id="c-gb-scatter"></canvas></div>
+    <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
     <div class="chart-note">Linear regression based on six completed midterm cycles (2006&#8211;2022). The relationship is directionally consistent but noisy: a +5D margin historically produces roughly +15 to +35 Democratic seats, depending on presidential approval and redistricting. 2026 projection is illustrative, not a forecast.</div>
   </div>
 
@@ -1487,6 +1504,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="stat-l">Trend &#8212; month over month change</div>
     </div>
   </div>
+  <div class="dl-label" data-block="congress_approval.combined" data-kind="monthly"></div>
 
   <!-- COMBINED APPROVAL CARD -->
   <div class="chart-card">
@@ -1565,6 +1583,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>Post-2010 avg (22%)</div>
     </div>
     <div style="position:relative;height:260px"><canvas id="c-ca-trend"></canvas></div>
+    <div class="dl-label" data-block="approval.congress" data-kind="monthly"></div>
     <div class="chart-note">Source: Gallup congressional approval monthly tracking. Seeded from known polling ranges for the 119th Congress; live values updated by the daily fetch-polls workflow at 06:00 UTC.</div>
   </div>
 
@@ -1664,6 +1683,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="stat-box"><div class="stat-num" id="kr-stat-gov">36</div><div class="stat-label">Governor Races</div></div>
     <div class="stat-box"><div class="stat-num" id="kr-stat-flip">+4</div><div class="stat-label">D Seats Needed (Senate)</div></div>
   </div>
+  <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
+  <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
 
   <!-- Rating legend -->
   <div class="kr-legend" style="margin-top:14px">
@@ -1694,6 +1715,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="kr-proj-title">Projected seat composition &#8212; all 100 seats</div>
     <div class="kr-proj-sub">Includes the 67 seats not up in 2026 (safe) plus the 33 Class II seats rated by Cook/Sabato. Majority line at 51.</div>
     <div style="position:relative;height:72px;margin:4px 0"><canvas id="c-kr-senate"></canvas></div>
+    <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
     <div class="kr-proj-range" id="kr-sen-range"></div>
     <div class="kr-proj-summary" id="kr-sen-proj-summary"></div>
   </div>
@@ -1740,6 +1762,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="kr-proj-title">Projected seat composition &#8212; all 435 seats</div>
     <div class="kr-proj-sub">All 435 districts rated by Cook Political Report and Sabato&#8217;s Crystal Ball. Majority line at 218.</div>
     <div style="position:relative;height:72px;margin:4px 0"><canvas id="c-kr-house"></canvas></div>
+    <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
     <div class="kr-proj-range" id="kr-hou-range"></div>
     <div class="kr-proj-summary" id="kr-hou-proj-summary"></div>
   </div>
@@ -2082,6 +2105,7 @@ async function loadData() {
 
 function renderAll() {
   if (!DATA) return;
+  if (window.DataLabels) window.DataLabels.fill(DATA);
   rdData = DATA; renderStateCards(); rdUpdateScoreboard(1); renderRedistrictingExtras();
   renderApprovalStats();
   renderBallotStats();
@@ -2141,13 +2165,9 @@ function renderAll() {
   renderCharts(r);
 }
 
-// "Source: Ballotpedia, as of 2 Oct 2026" for the live retirement counts
+// "Source: Wikipedia · Data as of 5 Oct 2026" for the live retirement counts
 function retireSourceLabel(r) {
-  const name = r.source || 'Ballotpedia';
-  const d = r.as_of && /^\d{4}-\d{2}-\d{2}$/.test(r.as_of) ? new Date(r.as_of + 'T00:00:00Z') : null;
-  const date = d ? ', as of ' + d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' }) : '';
-  const link = r.source_url ? `<a href="${r.source_url}" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">${name}</a>` : name;
-  return `Source: ${link}${date}`;
+  return window.DataLabels ? window.DataLabels.html(r, { kind: 'monthly' }) : '';
 }
 
 let chartsReady = false;

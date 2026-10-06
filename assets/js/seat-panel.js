@@ -567,7 +567,7 @@
         d.panel.classList.add('sp-open');
       });
     });
-    d.panel.focus();
+    d.panel.focus({ preventScroll: true });   // never move the page behind the panel
 
     if (location.hash.slice(1) !== encodeURIComponent(id)) {
       history.pushState(null, '', '#' + encodeURIComponent(id));

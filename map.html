@@ -292,8 +292,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   color:#1A3F8A;font:400 22px/1 var(--sans);border-radius:4px}
 .seatwise-close:hover{background:rgba(26,63,138,.08)}
 .seatwise-go:focus-visible,.seatwise-close:focus-visible{outline:3px solid #1A3F8A;outline-offset:2px}
-/* the list scrolls clear of both sticky bars */
-#comp-table,#race-table,#gov-race-table{scroll-margin-top:calc(var(--subtab-h,49px) + 64px)}
 @media(max-width:768px){
   .seatwise-go{font-size:13px;min-height:44px}
   .seatwise-close{width:44px;height:44px}
@@ -883,10 +881,8 @@ function spSelectSeat(seatId, pathEl) {
   _spPathEl = pathEl || document.querySelector('path[data-seat-id="' + seatId + '"]');
   if (_spPathEl) d3.select(_spPathEl).style('stroke', '#111').style('stroke-width', '2.5px');
   _spRowEl = document.querySelector('tr[data-seat-id="' + seatId + '"]');
-  if (_spRowEl) {
-    _spRowEl.classList.add('sp-row-selected');
-    _spRowEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+  // Highlight only: the page stays where the click was made (map or list)
+  if (_spRowEl) _spRowEl.classList.add('sp-row-selected');
 }
 
 window.addEventListener('seatpanel:close', spClearHighlight);
@@ -924,10 +920,11 @@ function openSeatFromRace(kind, race, pathEl, extraOpts) {
 }
 
 // ── SEAT-WISE ENTRY (#seats, #seats-senate, #seats-governor, banner) ────────
-// Featured seat per chamber, opened by #seats and the banner. An empty string
-// means "the first Toss-up seat in that chamber's list".
+// #seats and the banner land on the chamber's map. Set OPEN_FEATURED_SEAT to
+// true to also open a featured seat's panel; FEATURED_SEAT picks it (an empty
+// string means "the first Toss-up seat in that chamber's list").
+const OPEN_FEATURED_SEAT = false;
 const FEATURED_SEAT = { house: '', senate: 'Senate-ME', governor: 'Gov-GA' };
-const SEAT_LIST_TABLE = { house: 'comp-table', senate: 'race-table', governor: 'gov-race-table' };
 
 function activeChamber() {
   const btn = document.querySelector('.subtab-btn.active');
@@ -944,7 +941,20 @@ function featuredRace(chamber) {
     list.find(race => /toss/i.test(race.rating || '')) || list[0] || null;
 }
 
-// Switches to the chamber, scrolls to its seat list and opens the featured seat.
+// Scrolls so the chamber's map (with its heading) sits just below the sticky bars
+function scrollToMap(chamber) {
+  const wrap = document.querySelector(`#subpanel-${chamber} .d3-map-wrap`);
+  if (!wrap) return;
+  const titles = [...document.querySelectorAll(`#subpanel-${chamber} .section-title`)]
+    .filter(t => t.compareDocumentPosition(wrap) & Node.DOCUMENT_POSITION_FOLLOWING);
+  const target = titles.pop() || wrap;
+  const bar = document.querySelector('.subtab-bar');
+  const banner = document.getElementById('seatwise-banner');
+  const offset = (bar ? bar.offsetHeight : 0) + (banner && !banner.hidden ? banner.offsetHeight : 0) + 12;
+  window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+}
+
+// Switches to the chamber and brings its map into view (optionally opening the featured seat).
 function openSeatwise(chamber) {
   if (!DATA || !DATA.races) return;
   chamber = chamber || activeChamber();
@@ -952,8 +962,8 @@ function openSeatwise(chamber) {
   if (btn && !btn.classList.contains('active')) goSub(chamber, btn);
   const racesTab = document.querySelector(`#subpanel-${chamber} .inner-tab`);
   if (racesTab && !racesTab.classList.contains('active')) goInner(chamber, 'races', racesTab);
-  const table = document.getElementById(SEAT_LIST_TABLE[chamber]);
-  if (table) table.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollToMap(chamber);
+  if (!OPEN_FEATURED_SEAT) return;
   const race = featuredRace(chamber);
   if (!race) return;
   // Esc from the panel returns focus to the banner when it is showing

@@ -22,233 +22,267 @@
 <style>
 :root {
   --bg: #ffffff;
-  --bg2: #fffbe2;
-  --bg3: #f5f0dc;
-  --text: #2a2a2a;
-  --text2: #4a4a4a;
-  --text3: #6b6b6b;
-  --border: #e6e0d8;
+  --beige: #F5F0DC;
+  --beige-lt: #FBF8EE;
+  --navy: #1A3F8A;
+  --navy-dk: #122C61;
+  --coral: #FF6F59;
+  --coral-dk: #E0543F;
+  --ink: #20242B;
+  --ink-soft: #5B5F66;
+  --border: #E4DEC9;
   --gold: #f1a222;
-  --gold-dk: #a8872e;
-  --navy: #620d3c;
-  --accent: #620d3c;
+  --brand: #620d3c;            /* site sub-nav accent, shared with other pages */
+  --serif: 'Times New Roman', Georgia, serif;
   --sans: 'Inter', 'Lato', ui-sans-serif, system-ui, sans-serif;
-  --serif: 'Lora', Georgia, serif;
-  --radius: 6px;
+  --card-w: 280px;
+  --gap: 16px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; }
 body {
   background: var(--bg);
-  color: var(--text);
+  color: var(--ink);
   font-family: var(--sans);
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   -webkit-font-smoothing: antialiased;
 }
 
-/* SUB-NAV */
+/* SUB-NAV (unchanged from the previous layout) */
 .sub-nav {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   padding: 0 28px;
-  gap: 0;
   position: sticky;
   top: 0;
   z-index: 100;
-  flex-shrink: 0;
 }
 .sub-tab {
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text3);
+  font: 600 15px var(--sans);
+  color: var(--brand);
   background: none;
   border: none;
-  border-bottom: 2px solid transparent;
+  border-bottom: 2px solid var(--gold);
   padding: 16px 18px;
-  cursor: pointer;
-  transition: color .12s, border-color .12s;
-  white-space: nowrap;
 }
-.sub-tab:hover { color: var(--text); }
-.sub-tab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
 .nav-spacer { flex: 1; }
-.last-updated { font-size: 13px; color: var(--text3); padding-left: 14px; white-space: nowrap; }
+.last-updated { font-size: 13px; color: var(--ink-soft); padding-left: 14px; white-space: nowrap; }
 
-/* TOOLBAR */
-.toolbar {
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 28px;
+/* PAGE */
+.ac-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 28px 56px;
+}
+.ac-intro {
+  font: 400 15px/1.6 var(--sans);
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+}
+
+/* AUTHOR FILTER */
+.ac-filter {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
+  gap: 8px;
+  margin-bottom: 28px;
 }
-.search-box {
-  font-family: var(--sans);
-  font-size: 15px;
-  color: var(--text);
+.ac-filter button {
+  font: 500 14px var(--sans);
+  color: var(--navy);
   background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 7px 14px 7px 34px;
-  width: 240px;
-  outline: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 11px center;
-  transition: border-color .12s;
-}
-.search-box:focus { border-color: var(--gold); }
-.chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.chip {
-  font-size: 16px;
-  font-weight: 500;
-  padding: 5px 14px;
-  border-radius: 20px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text2);
+  border: 1px solid var(--navy);
+  border-radius: 999px;
+  padding: 7px 16px;
   cursor: pointer;
-  transition: all .12s;
+}
+.ac-filter button:hover { background: var(--beige-lt); }
+.ac-filter button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+
+/* SECTIONS */
+.ac-section {
+  scroll-margin-top: 64px;       /* clear the sticky sub-nav when scrolled to */
+  background: var(--beige-lt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px 20px;
+  margin-bottom: 24px;
+}
+.ac-section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.ac-section-title {
+  font: 700 22px var(--serif);
+  color: var(--navy);
+}
+.ac-explore {
+  font: 600 14px var(--sans);
+  color: var(--coral-dk);
+  background: none;
+  border: none;
+  cursor: pointer;
   white-space: nowrap;
+  padding: 2px 0;
 }
-.chip:hover { border-color: #aaa; color: var(--text); }
-.chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
-.toolbar-right { margin-left: auto; display: flex; align-items: center; gap: 11px; }
-.sort-select {
-  font-family: var(--sans);
-  font-size: 16px;
-  color: var(--text2);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 6px 11px;
-  cursor: pointer;
-  outline: none;
+.ac-explore:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ac-empty {
+  font: italic 400 14px var(--sans);
+  color: var(--ink-soft);
+  padding: 10px 0;
 }
-.results-bar { font-size: 16px; color: var(--text3); padding: 11px 0 0; width: 100%; }
 
-/* PANELS */
-.panel { display: none; flex: 1; flex-direction: column; overflow: hidden; }
-.panel.active { display: flex; }
-
-/* CONTENT AREA */
-.content { flex: 1; overflow-y: auto; padding: 28px; }
-
-/* CARD GRID */
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; max-width: 1100px; }
-.card {
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 20px;
+/* CAROUSEL */
+.ac-carousel { position: relative; }
+.ac-track {
   display: flex;
-  flex-direction: column;
-  gap: 11px;
-  transition: box-shadow .15s, border-color .15s;
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 4px 2px 6px;          /* room for the focus outline */
 }
-.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); border-color: #ccc; }
-.card-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.type-badge {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  padding: 3px 10px;
-  border-radius: 4px;
+.ac-track::-webkit-scrollbar { display: none; }
+.ac-track > .ac-card {
+  flex: 0 0 var(--card-w);
+  scroll-snap-align: start;
 }
-.card-date { font-size: 13px; color: var(--text3); margin-left: auto; }
-.card-title {
-  font-family: var(--serif);
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.4;
-  text-decoration: none;
-  display: block;
-}
-.card-title:hover { color: var(--accent); }
-.card-desc { font-size: 15px; color: var(--text2); line-height: 1.6; flex: 1; }
-.card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
-.card-source {
-  font-size: 13px;
-  color: var(--text3);
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-.card-source::before {
-  content: '';
-  display: inline-block;
-  width: 6px; height: 6px;
+.ac-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: var(--gold);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--navy);
+  font: 700 18px var(--sans);
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(20, 20, 30, .15);
+  cursor: pointer;
+  z-index: 2;
 }
-.card-author { font-size: 13px; color: var(--text3); }
-.card-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
-.card-tag {
-  font: 700 10px var(--sans);
-  letter-spacing: .05em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 3px;
-  background: var(--bg3);
-  color: var(--text3);
+.ac-arrow:hover { background: var(--beige); }
+.ac-arrow.prev { left: -14px; }
+.ac-arrow.next { right: -14px; }
+.ac-arrow[hidden] { display: none; }
+
+/* EXPANDED GRID */
+.ac-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+  padding: 4px 2px 6px;
 }
 
-/* TYPE COLOURS */
-.type-newsletter { background: #FFF0E9; color: #C4470E; }
-.type-podcast    { background: #E0F7FA; color: #006064; }
-.type-research   { background: #E8F0FE; color: #1A47A0; }
-.type-op-ed      { background: #F3EEFF; color: #5B21B6; }
-.type-interview  { background: #E8F8F1; color: #065F46; }
-.type-blog       { background: #FDF6E3; color: #8A5A00; }
-.card-ai { font: 500 10px var(--sans); color: var(--text3, #888); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
-.type-media      { background: #FFE9E5; color: #B23A28; }
-
-/* TAG COLOURS */
-.tag-congress    { background: #DBEAFE; color: #1E3A8A; }
-.tag-midterms    { background: #FEF3C7; color: #92400E; }
-.tag-senate      { background: #EDE9FE; color: #4C1D95; }
-.tag-house       { background: #CCFBF1; color: #134E4A; }
-.tag-iran        { background: #FEE2E2; color: #991B1B; }
-.tag-india       { background: #FFF0E9; color: #C4470E; }
-.tag-foreignpolicy { background: #F1F5F9; color: #1E293B; }
-.tag-trump       { background: #FEE2E2; color: #7f1d1d; }
-
-/* LOADING / EMPTY STATES */
-.loading-state, .empty-state {
+/* CARD */
+.ac-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 80px 40px;
-  gap: 16px;
-  color: var(--text3);
-  flex: 1;
+  min-height: 210px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--coral);
+  border-radius: 8px;
+  padding: 14px 16px 12px;
+  color: var(--ink);
+  text-decoration: none;
+  overflow: hidden;
 }
-.loading-state { font: 400 16px var(--sans); }
-.empty-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--bg3); display: flex; align-items: center; justify-content: center; }
-.empty-state h3 { font-family: var(--serif); font-size: 18px; font-weight: 600; color: var(--text2); }
-.empty-state p { font-size: 15px; line-height: 1.6; max-width: 360px; }
+.ac-card:focus { outline: none; }
+.ac-card:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 2px;
+}
+.ac-title {
+  font: 700 17px/1.3 var(--serif);
+  color: var(--navy);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.ac-authors {
+  font: 500 13px/1.4 var(--sans);
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+.ac-meta {
+  font: 400 12.5px/1.4 var(--sans);
+  color: var(--ink-soft);
+}
+.ac-more {
+  margin-top: auto;
+  padding-top: 12px;
+  font: 600 13px var(--sans);
+  color: var(--coral-dk);
+}
+.ac-summary {
+  font: 400 13.5px/1.5 var(--sans);
+  color: var(--ink);
+}
 
-/* HIDDEN */
-.hidden { display: none !important; }
+/* Summary: an overlay on hover/focus where hovering is possible … */
+@media (hover: hover) {
+  .ac-summary {
+    position: absolute;
+    inset: 0;
+    background: var(--bg);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transition: opacity .15s;
+    pointer-events: none;
+  }
+  .ac-summary-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ac-summary .ac-more { display: block; }
+  .ac-card:hover .ac-summary,
+  .ac-card:focus-visible .ac-summary { opacity: 1; }
+  .ac-card:not(.has-summary) .ac-summary { display: none; }
+}
+/* … and two lines under the title on touch screens */
+@media (hover: none) {
+  .ac-summary { order: 1; margin-bottom: 8px; }
+  .ac-summary-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ac-summary .ac-more { display: none; }
+  .ac-title { order: 0; }
+  .ac-authors { order: 2; }
+  .ac-meta { order: 3; }
+  .ac-card > .ac-more { order: 4; }
+}
 
-@media (max-width: 600px) {
-  .toolbar { padding: 14px 16px; }
-  .content { padding: 16px; }
-  .card-grid { grid-template-columns: 1fr; }
-  .search-box { width: 100%; }
+.ac-loading { font: 400 15px var(--sans); color: var(--ink-soft); padding: 24px 0; }
+
+@media (max-width: 640px) {
+  .sub-nav { padding: 0 16px; }
+  .ac-page { padding: 18px 16px 40px; }
+  .ac-section { padding: 16px 14px 18px; }
+  .ac-section-title { font-size: 20px; }
+  /* 1.2 cards visible, so the next one peeks */
+  .ac-track > .ac-card { flex-basis: calc((100% - var(--gap)) / 1.2); }
+  .ac-grid { grid-template-columns: 1fr; }
+  .ac-arrow { display: none; }
 }
 </style>
 </head>
@@ -256,54 +290,44 @@ body {
 
 <!-- SUB-NAV -->
 <nav class="sub-nav">
-  <button class="sub-tab active" data-tab="analysis">Analysis &amp; Commentary</button>
+  <span class="sub-tab">Analysis &amp; Commentary</span>
   <div class="nav-spacer"></div>
   <span class="last-updated" id="lastUpdated"></span>
 </nav>
 
-<!-- ANALYSIS PANEL -->
-<div id="panel-analysis" class="panel active">
+<main class="ac-page">
+  <p class="ac-intro">Writing, research and media appearances on the 2026 US mid-terms by researchers at the Takshashila Institution.</p>
 
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <input type="search" class="search-box" id="analysis-search" placeholder="Search posts…" oninput="renderPosts()">
-    <div class="chips" id="type-chips">
-      <button class="chip active" data-type="all"        onclick="setType('all',this)">All</button>
-      <button class="chip"        data-type="newsletter" onclick="setType('newsletter',this)">Newsletter</button>
-      <button class="chip"        data-type="podcast"    onclick="setType('podcast',this)">Podcast</button>
-      <button class="chip"        data-type="research"   onclick="setType('research',this)">Research</button>
-      <button class="chip"        data-type="op-ed"      onclick="setType('op-ed',this)">Op-Eds</button>
-      <button class="chip"        data-type="blog"       onclick="setType('blog',this)">Blog</button>
-      <button class="chip"        data-type="media"      onclick="setType('media',this)">Media</button>
-    </div>
-    <div class="toolbar-right">
-      <select class="sort-select" id="sort-select" onchange="renderPosts()">
-        <option value="date-desc">Newest first</option>
-        <option value="date-asc">Oldest first</option>
-      </select>
-    </div>
-    <div class="results-bar" id="results-bar"></div>
+  <div class="ac-filter" role="group" aria-label="Filter by author">
+    <button type="button" data-author="all" aria-pressed="true">All</button>
+    <button type="button" data-author="abhishek" aria-pressed="false">Abhishek Kadiyala</button>
+    <button type="button" data-author="anil" aria-pressed="false">Brigadier Anil Raman</button>
   </div>
 
-  <div class="content">
-    <div id="loading-state" class="loading-state">Loading analysis &amp; commentary…</div>
-    <div id="empty-state"   class="empty-state hidden">
-      <div class="empty-icon">
-        <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </div>
-      <h3>No results</h3>
-      <p>Try a different search term or filter.</p>
-    </div>
-    <div class="card-grid" id="card-grid" style="display:none"></div>
-  </div>
-
-</div>
+  <div id="ac-sections"><p class="ac-loading">Loading analysis &amp; commentary…</p></div>
+</main>
 
 <script>
 'use strict';
 
+// ── CATEGORIES & AUTHORS ─────────────────────────────────────────────────────
+const SECTIONS = [
+  { key: 'oped',     title: 'Op-eds',             types: ['op-ed', 'blog', 'newsletter'] },
+  { key: 'research', title: 'Research Documents', types: ['research'] },
+  { key: 'media',    title: 'Media/In-News',      types: ['media', 'interview'] },
+  { key: 'podcast',  title: 'Podcasts',           types: ['podcast'] },
+];
+const CAROUSEL_SIZE = 6;
+// A card matches if its author field contains the name (co-authored pieces show under both)
+const AUTHORS = {
+  all:      null,
+  abhishek: 'Abhishek Kadiyala',
+  anil:     'Anil Raman',
+};
+
 let _allPosts = [];
-let _activeType = 'all';
+let _author = 'all';
+let _expanded = null;              // key of the one expanded section, or null
 
 // ── LOAD DATA ────────────────────────────────────────────────────────────────
 // analysis-manual.json (hand-curated) is read first, then analysis.json; they
@@ -338,7 +362,6 @@ function normaliseManual(e, i) {
     url: e.url,
     source: e.source || host,
     date: e.date || '',
-    tags: Array.isArray(e.tags) ? e.tags : [],
     author: e.author || '',
     ai_summary: !!e.ai_summary,
   };
@@ -366,105 +389,135 @@ async function loadData() {
     document.getElementById('lastUpdated').textContent =
       'Updated ' + dt.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
-  document.getElementById('loading-state').style.display = 'none';
-  document.getElementById('card-grid').style.display = '';
-  renderPosts();
+  readHash();
+  render();
 }
 
-// ── FILTER / SORT ────────────────────────────────────────────────────────────
-function setType(type, btn) {
-  _activeType = type;
-  document.querySelectorAll('#type-chips .chip').forEach(b => b.classList.toggle('active', b === btn));
-  renderPosts();
+// ── FILTERING ────────────────────────────────────────────────────────────────
+function postsFor(section, applyAuthor) {
+  const name = applyAuthor ? AUTHORS[_author] : null;
+  return _allPosts.filter(p =>
+    section.types.includes(p.type) &&
+    (!name || String(p.author || '').toLowerCase().includes(name.toLowerCase())));
 }
 
-function renderPosts() {
-  const q     = (document.getElementById('analysis-search').value || '').toLowerCase().trim();
-  const sort  = document.getElementById('sort-select').value;
-
-  let posts = _allPosts.filter(p => {
-    if (_activeType !== 'all' && p.type !== _activeType) return false;
-    if (q) {
-      const hay = ((p.title || '') + ' ' + (p.description || '') + ' ' + (p.source || '') + ' ' + (p.author || '')).toLowerCase();
-      if (!hay.includes(q)) return false;
-    }
-    return true;
-  });
-
-  if (sort === 'date-asc') {
-    posts = posts.slice().sort((a, b) => new Date(a.date) - new Date(b.date));
-  } else {
-    posts = posts.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-  }
-
-  const bar = document.getElementById('results-bar');
-  bar.textContent = posts.length === _allPosts.length
-    ? `${_allPosts.length} post${_allPosts.length !== 1 ? 's' : ''}`
-    : `${posts.length} of ${_allPosts.length} posts`;
-
-  const grid  = document.getElementById('card-grid');
-  const empty = document.getElementById('empty-state');
-
-  if (!posts.length) {
-    grid.innerHTML = '';
-    empty.classList.remove('hidden');
-    return;
-  }
-  empty.classList.add('hidden');
-  grid.innerHTML = posts.map(renderCard).join('');
+function readHash() {
+  const m = location.hash.match(/author=([a-z]+)/);
+  _author = m && AUTHORS.hasOwnProperty(m[1]) ? m[1] : 'all';
+  document.querySelectorAll('.ac-filter button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.author === _author)));
 }
 
-// ── CARD RENDERER ────────────────────────────────────────────────────────────
+function setAuthor(key) {
+  _author = key;
+  history.replaceState(null, '', key === 'all' ? location.pathname + location.search : '#author=' + key);
+  readHash();
+  render();
+}
+
+// ── RENDERING ────────────────────────────────────────────────────────────────
 function esc(s) {
-  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
 function fmtDate(iso) {
-  try {
-    const d = new Date(iso);
-    return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-  } catch (e) { return ''; }
+  const d = new Date(iso);
+  return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
-function tagClass(tag) {
-  const map = {
-    'Congress': 'tag-congress', 'Midterms': 'tag-midterms', 'Senate': 'tag-senate',
-    'House': 'tag-house', 'Iran': 'tag-iran', 'India': 'tag-india',
-    'Foreign Policy': 'tag-foreignpolicy', 'Trump': 'tag-trump',
+function cardHtml(p) {
+  const meta = [p.source, fmtDate(p.date)].filter(Boolean).join(' · ');
+  const summary = String(p.description || '').trim();
+  return `<a class="ac-card${summary ? ' has-summary' : ''}" href="${esc(p.url)}" target="_blank" rel="noopener">
+    <h3 class="ac-title">${esc(p.title)}</h3>
+    ${p.author ? `<div class="ac-authors">${esc(p.author)}</div>` : ''}
+    ${meta ? `<div class="ac-meta">${esc(meta)}</div>` : ''}
+    ${summary ? `<div class="ac-summary"><span class="ac-summary-text">${esc(summary)}</span><span class="ac-more">Read more →</span></div>` : ''}
+    <span class="ac-more" aria-hidden="true">Read more →</span>
+  </a>`;
+}
+
+function render() {
+  const root = document.getElementById('ac-sections');
+  const visible = SECTIONS.filter(s => postsFor(s, false).length);   // hide categories with no entries at all
+  if (_expanded && !visible.some(s => s.key === _expanded)) _expanded = null;
+  if (!visible.length) { root.innerHTML = '<p class="ac-empty">No entries yet</p>'; return; }
+
+  root.innerHTML = visible.map(s => {
+    const posts = postsFor(s, true);
+    const expanded = _expanded === s.key;
+    let body;
+    if (!posts.length) {
+      body = '<p class="ac-empty">No entries yet</p>';
+    } else if (expanded) {
+      body = `<div class="ac-grid" id="ac-body-${s.key}">${posts.map(cardHtml).join('')}</div>`;
+    } else {
+      body = `<div class="ac-carousel">
+        <button type="button" class="ac-arrow prev" aria-label="Previous ${esc(s.title)}" hidden>‹</button>
+        <div class="ac-track" id="ac-body-${s.key}">${posts.slice(0, CAROUSEL_SIZE).map(cardHtml).join('')}</div>
+        <button type="button" class="ac-arrow next" aria-label="Next ${esc(s.title)}" hidden>›</button>
+      </div>`;
+    }
+    const explore = posts.length
+      ? `<button type="button" class="ac-explore" data-section="${s.key}" aria-expanded="${expanded}" aria-controls="ac-body-${s.key}">${expanded ? 'Show less ↑' : 'Explore all →'}</button>`
+      : '';
+    return `<section class="ac-section" data-section="${s.key}" aria-labelledby="ac-h-${s.key}">
+      <div class="ac-section-head">
+        <h2 class="ac-section-title" id="ac-h-${s.key}">${esc(s.title)}</h2>
+        ${explore}
+      </div>
+      ${body}
+    </section>`;
+  }).join('');
+
+  root.querySelectorAll('.ac-carousel').forEach(initCarousel);
+}
+
+// ── CAROUSEL ─────────────────────────────────────────────────────────────────
+function initCarousel(el) {
+  const track = el.querySelector('.ac-track');
+  const prev = el.querySelector('.ac-arrow.prev');
+  const next = el.querySelector('.ac-arrow.next');
+  const step = () => {
+    const card = track.querySelector('.ac-card');
+    return card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(track).columnGap || 16) : track.clientWidth;
   };
-  return map[tag] || '';
+  const update = () => {
+    prev.hidden = track.scrollLeft <= 2;
+    next.hidden = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+  };
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+  track.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 }
 
-function typeLabel(type) {
-  const map = { newsletter: 'Newsletter', podcast: 'Podcast', research: 'Research', 'op-ed': 'Op-Ed', interview: 'Interview', blog: 'Blog', media: 'Media' };
-  return map[type] || 'Analysis';
-}
+// ── EVENTS ───────────────────────────────────────────────────────────────────
+document.querySelector('.ac-filter').addEventListener('click', e => {
+  const b = e.target.closest('button[data-author]');
+  if (b) setAuthor(b.dataset.author);
+});
 
-function renderCard(p) {
-  const tags = (Array.isArray(p.tags) ? p.tags : []).slice(0, 4)
-    .map(t => `<span class="card-tag ${tagClass(t)}">${esc(t)}</span>`).join('');
+document.getElementById('ac-sections').addEventListener('click', e => {
+  const b = e.target.closest('.ac-explore');
+  if (!b) return;
+  const key = b.dataset.section;
+  _expanded = _expanded === key ? null : key;      // only one section expanded at a time
+  render();
+  const sec = document.querySelector(`.ac-section[data-section="${key}"]`);
+  if (sec) {
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const btn = sec.querySelector('.ac-explore');
+    if (btn) btn.focus({ preventScroll: true });
+  }
+});
 
-  const authorLine = p.author
-    ? `<div class="card-author">By <strong style="color:var(--accent)">${esc(p.author)}</strong></div>`
-    : '';
-
-  return `<div class="card">
-    <div class="card-meta">
-      <span class="type-badge type-${esc(p.type)}">${esc(typeLabel(p.type))}</span>
-      <span class="card-date">${esc(fmtDate(p.date))}</span>
-    </div>
-    <a class="card-title" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
-    ${p.description ? `<p class="card-desc">${esc(p.description)}${p.ai_summary ? ' <span class="card-ai" title="Summary written by AI from the linked page">AI summary</span>' : ''}</p>` : ''}
-    ${tags ? `<div class="card-tags">${tags}</div>` : ''}
-    <div class="card-footer">
-      <div class="card-source">${esc(p.source)}</div>
-      ${authorLine}
-    </div>
-  </div>`;
-}
+window.addEventListener('hashchange', () => { readHash(); render(); });
 
 loadData();
 </script>
+
 <script>
 document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
 </script>

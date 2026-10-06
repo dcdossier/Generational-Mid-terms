@@ -537,6 +537,14 @@
     Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews(), loadData()]).then(function (results) {
       if (currentId !== id) return; // superseded by a later open() call
       render(id, results[0][id], opts, results[1]);
+      // The caller's rating comes from data.json races.<chamber>; give it that block's date
+      var chamber = id.indexOf('Senate-') === 0 ? 'senate' : id.indexOf('Gov-') === 0 ? 'governor' : 'house';
+      var races = results[3] && results[3].races && results[3].races[chamber];
+      var asOf = races && races.as_of && window.DataLabels ? window.DataLabels.parseAsOf(races.as_of) : null;
+      if (opts.rating && asOf) {
+        ensureDom().rating.title = 'Site rating, ratings last updated ' + asOf.text +
+          (window.DataLabels.isStale(asOf.date, 'ratings') ? ' (may be outdated)' : '') + '; dated forecaster ratings below';
+      }
       ensureDom().body.appendChild(buildPollsSection(id, results[3]));
       ensureDom().body.appendChild(buildNewsSection(id, results[0][id], results[2]));
     });

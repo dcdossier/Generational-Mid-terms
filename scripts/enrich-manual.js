@@ -4,10 +4,12 @@
 /**
  * enrich-manual.js — backup summaries for analysis-manual.json.
  *
- * For each entry whose "description" is empty, asks Groq's compound-mini model
- * (feature "ac", key MID_TERMS_AC) to read the entry's URL and write exactly
- * three neutral sentences in British English, each under 30 words, with no
- * colons or dashes. Generated text is marked "ai_summary": true.
+ * For each entry whose "description" is empty, asks the AI provider (feature
+ * "ac", key MID_TERMS_AC, provider from AI_PROVIDER) for exactly three neutral
+ * sentences in British English, each under 30 words, with no colons or dashes.
+ * Generated text is marked "ai_summary": true. With Groq, compound-mini reads
+ * the URL itself; with other providers this script fetches the page and sends
+ * only a short text extract. AI_PROVIDER=none (the default) skips all of it.
  *
  * Never touches an entry that already has a description. If reading or the
  * checks fail, the entry is left as it is and the reason is logged. Capped at
@@ -16,7 +18,8 @@
 
 const fs   = require('fs');
 const path = require('path');
-const { initAI, aiExtract } = require('./ai');
+const fetch = require('node-fetch');
+const { initAI, aiExtract, hasWebModel } = require('./ai');
 const { saveStatus } = require('./status');
 
 const MANUAL_PATH = path.resolve(__dirname, '../analysis-manual.json');
@@ -24,6 +27,28 @@ const MANUAL_PATH = path.resolve(__dirname, '../analysis-manual.json');
 const SYSTEM_PROMPT =
   'You summarise public web pages for a research website. Write in British English with a neutral tone. ' +
   'Never use colons or dashes. Reply with the summary only.';
+
+const EXTRACT_CHARS = 5000;
+
+// Short plain-text extract of a public page (article body if marked up), or null
+async function pageExtract(url) {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 20000, size: 3e6 });
+    if (!res.ok) { console.log(`  [page] ${url}: HTTP ${res.status}`); return null; }
+    let html = await res.text();
+    const article = html.match(/<article[\s\S]*?<\/article>/i);
+    if (article) html = article[0];
+    const text = html
+      .replace(/<(script|style|nav|header|footer|aside|noscript)[\s\S]*?<\/\1>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#?\w+;/g, ' ')
+      .replace(/\s+/g, ' ').trim();
+    return text.length > 200 ? text.slice(0, EXTRACT_CHARS) : null;
+  } catch (err) {
+    console.log(`  [page] ${url}: ${err.message}`);
+    return null;
+  }
+}
 
 // Returns null if the text is acceptable, otherwise the reason it isn't
 function checkSummary(text) {
@@ -49,14 +74,29 @@ async function main() {
   const todo = posts.filter(p => p && p.url && !String(p.description || '').trim());
   console.log(`[enrich-manual] ${posts.length} entries, ${todo.length} without a description`);
 
-  await initAI('ac');   // lists Groq models once per run
+  const aiOn = todo.length ? await initAI('ac') : false;   // AI_PROVIDER decides; lists models once
+  if (todo.length && !aiOn) {
+    console.log('[enrich-manual] AI is off or unavailable — entries left as they are');
+    saveStatus();
+    process.exit(0);
+  }
 
   let written = 0;
+  const rules = 'exactly three sentences, each under 30 words. British English, neutral tone, no colons, no dashes.';
   for (const p of todo) {
-    const reply = await aiExtract('ac', SYSTEM_PROMPT,
-      `Read this page and summarise it in exactly three sentences, each under 30 words. ` +
-      `British English, neutral tone, no colons, no dashes.\n\nURL: ${p.url}\nTitle: ${String(p.title || '').slice(0, 200)}`,
-      { label: `summary "${String(p.title || p.url).slice(0, 60)}"`, model: 'web', json: false, maxTokens: 300 });
+    const label = `summary "${String(p.title || p.url).slice(0, 60)}"`;
+    let reply;
+    if (hasWebModel('ac')) {
+      reply = await aiExtract('ac', SYSTEM_PROMPT,
+        `Read this page and summarise it in ${rules}\n\nURL: ${p.url}\nTitle: ${String(p.title || '').slice(0, 200)}`,
+        { label, model: 'web', json: false, maxTokens: 300 });
+    } else {
+      const extract = await pageExtract(p.url);
+      if (!extract) { console.log(`  [skip] ${p.url} — could not read the page; entry left unchanged`); continue; }
+      reply = await aiExtract('ac', SYSTEM_PROMPT,
+        `Summarise this article in ${rules}\n\nTitle: ${String(p.title || '').slice(0, 200)}\n\nArticle text (extract):\n${extract}`,
+        { label, model: 'text', json: false, maxTokens: 300 });
+    }
     if (reply === null) {
       console.log(`  [skip] ${p.url} — no AI summary (see the [AI] line above); entry left unchanged`);
       continue;

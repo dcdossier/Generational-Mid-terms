@@ -195,13 +195,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 .appr-net-ctx p{font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:6px}
 .appr-net-ctx strong{color:var(--t1)}
 /* Pollster mini-table */
-.appr-poll-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:4px}
-.appr-poll-table th{text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--t4);padding:6px 10px;border-bottom:1px solid var(--br)}
-.appr-poll-table td{padding:7px 10px;border-bottom:1px solid var(--br);color:var(--t2);vertical-align:middle}
-.appr-poll-table tr:last-child td{border-bottom:none}
-.appr-poll-approve{color:#3A8C5C;font-weight:700}.appr-poll-dis{color:#E24B4A;font-weight:700}
-.appr-poll-net{font-weight:700;text-align:right}
-.appr-poll-net.neg{color:#E24B4A}.appr-poll-net.pos{color:#3A8C5C}
 /* Presidential comparison bars */
 .appr-comp-row{display:flex;flex-direction:column;gap:10px;margin:8px 0}
 .appr-comp-item{display:flex;align-items:center;gap:10px}
@@ -672,7 +665,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="stat-box"><div class="stat-n" style="color:#9B2828">72</div><div class="stat-l">1992 previous record &#8212; bank scandal + redistricting</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--t1)">40</div><div class="stat-l">Modern average per cycle (post-WWII)</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--orange)" id="stat-2026-total">&#8230;</div><div class="stat-l">2026 &#8212; <span class="ret-src">Source: Ballotpedia</span><sup>*</sup></div></div>
-    <div class="stat-box"><div class="stat-n" style="color:var(--blue)">10%</div><div class="stat-l">Congress approval rating, Apr 2026 &#8212; near-record low (all-time Gallup low: 9%, Nov 2013)</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--blue)" id="stat-congress-appr">&#8230;</div><div class="stat-l">Congress approval, Gallup <span id="stat-congress-month">latest</span> &#8212; near-record low (all-time Gallup low: 9%, Nov 2013)</div></div>
   </div>
 
   <div class="chart-card">
@@ -995,27 +988,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div style="color:var(--t4);font-style:italic;text-align:center;padding:18px;grid-column:1/-1">Loading&#8230;</div>
     </div>
     <div class="chart-note">Selected by closest approval to current Trump reading from the historical midterm table. Result = president&#8217;s party House seat change at that midterm.</div>
-  </div>
-
-  <!-- POLLSTER SOURCES CARD -->
-  <div class="chart-card">
-    <div class="card-title">Pollster sources &#8212; recent Trump approval readings</div>
-    <div class="card-sub">Individual pollster readings that feed the aggregate. The automated workflow extracts these from Gallup, RealClearPolitics, YouGov, and Google News RSS feeds each day.</div>
-    <table class="appr-poll-table">
-      <thead>
-        <tr>
-          <th>Pollster / source</th>
-          <th>Approve</th>
-          <th>Disapprove</th>
-          <th>Net</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody id="appr-poll-tbody">
-        <tr><td colspan="5" style="color:var(--t4);font-style:italic;text-align:center;padding:16px">Loading pollster data&hellip;</td></tr>
-      </tbody>
-    </table>
-    <div class="chart-note">Individual readings are extracted by pattern-matching RSS item text. The aggregate (shown in the stat strip) is the median of all readings collected in the latest workflow run. Figures are updated twice daily at 06:00 and 18:00 UTC.</div>
   </div>
 
   <!-- CONGRESS APPROVAL CARD -->
@@ -1576,7 +1548,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- HISTORY LINE CHART -->
   <div class="chart-card">
     <div class="card-title">Congressional approval trend &#8212; January 2025 to present</div>
-    <div class="card-sub">Monthly Gallup aggregate. The 119th Congress opened at 17%, rose to a 31% peak in March 2025, then fell through the mid-teens as the shutdowns hit, bottoming at 10% in April 2026.</div>
+    <div class="card-sub" id="ca-trend-sub">Monthly Gallup readings of Congress approval since January 2025.</div>
     <div class="legend">
       <div class="li"><div class="lsq" style="background:var(--green)"></div>Approve</div>
       <div class="li"><div class="lsq" style="background:var(--red)"></div>Disapprove</div>
@@ -2106,6 +2078,7 @@ async function loadData() {
 function renderAll() {
   if (!DATA) return;
   if (window.DataLabels) window.DataLabels.fill(DATA);
+  renderLiveCongressText();
   rdData = DATA; renderStateCards(); rdUpdateScoreboard(1); renderRedistrictingExtras();
   renderApprovalStats();
   renderBallotStats();
@@ -2168,6 +2141,30 @@ function renderAll() {
 // "Source: Wikipedia · Data as of 5 Oct 2026" for the live retirement counts
 function retireSourceLabel(r) {
   return window.DataLabels ? window.DataLabels.html(r, { kind: 'monthly' }) : '';
+}
+
+// Live Congress approval figures in static text (stat box, trend description)
+function renderLiveCongressText() {
+  const c = (DATA.approval || {}).congress || {};
+  const hist = Array.isArray(c.history) ? c.history : [];
+  const longMonth = m => { const d = new Date('1 ' + m + ' UTC'); return isNaN(d) ? m : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); };
+  const asOf = c.as_of ? new Date(c.as_of + 'T00:00:00Z') : null;
+  const latestMonth = asOf && !isNaN(asOf)
+    ? asOf.toLocaleDateString('en-GB', { month: 'short', year: 'numeric', timeZone: 'UTC' })
+    : (hist.length ? hist[hist.length - 1].month : 'latest');
+  const v = document.getElementById('stat-congress-appr');
+  if (v && c.approve != null) v.textContent = c.approve + '%';
+  const m = document.getElementById('stat-congress-month');
+  if (m) m.textContent = latestMonth;
+  const sub = document.getElementById('ca-trend-sub');
+  if (sub && hist.length > 1) {
+    const first = hist[0], last = hist[hist.length - 1];
+    const peak = hist.reduce((b, h) => (h.approve > b.approve ? h : b), first);
+    const low = hist.reduce((b, h) => (h.approve < b.approve ? h : b), first);
+    sub.textContent = `Monthly Gallup readings. The 119th Congress opened at ${first.approve}% in ${longMonth(first.month)}, ` +
+      `peaked at ${peak.approve}% in ${longMonth(peak.month)} and fell to a low of ${low.approve}% in ${longMonth(low.month)}; ` +
+      `the latest reading is ${last.approve}% (${longMonth(last.month)}).`;
+  }
 }
 
 let chartsReady = false;
@@ -3009,31 +3006,7 @@ function renderApprovalStats() {
       ).join('');
     }
 
-    // ── Pollster table ───────────────────────────────────────────────────────
-    const pollsters = [
-      { name: 'Gallup (tracking)', approve: ap, disapprove: dp, date: 'May 2026' },
-      { name: 'YouGov / Economist', approve: 38, disapprove: 58, date: 'May 2026' },
-      { name: 'Quinnipiac', approve: 39, disapprove: 57, date: 'Apr 2026' },
-      { name: 'NPR / PBS / Marist', approve: 41, disapprove: 56, date: 'Apr 2026' },
-      { name: 'Reuters / Ipsos', approve: 40, disapprove: 56, date: 'Apr 2026' },
-      { name: 'ABC / Wash. Post', approve: 39, disapprove: 59, date: 'Mar 2026' },
-      { name: 'Fox News', approve: 45, disapprove: 53, date: 'Mar 2026' },
-    ];
-    const tbody = document.getElementById('appr-poll-tbody');
-    if (tbody) {
-      tbody.innerHTML = pollsters.map(p => {
-        const net = p.approve - p.disapprove;
-        const netStr = (net >= 0 ? '+' : '') + net;
-        const netCls = net < 0 ? 'neg' : 'pos';
-        return '<tr>'
-          + '<td>' + p.name + '</td>'
-          + '<td class="appr-poll-approve">' + p.approve + '%</td>'
-          + '<td class="appr-poll-dis">' + p.disapprove + '%</td>'
-          + '<td class="appr-poll-net ' + netCls + '">' + netStr + '</td>'
-          + '<td style="color:var(--t4)">' + p.date + '</td>'
-          + '</tr>';
-      }).join('');
-    }
+    // (No per-pollster Trump approval table: no live source publishes one.)
   }
 
   // ── Congress approval ───────────────────────────────────────────────────────

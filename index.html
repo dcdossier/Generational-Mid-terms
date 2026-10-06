@@ -849,7 +849,7 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- CONGRESS APPROVAL CHART -->
       <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
-      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval stood at <strong style="color:#9B2828">16%</strong> in Gallup's May 2026 reading &mdash; matching a near-record low (a separate Semafor-cited poll put it at 10% in April 2026). The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At 16%, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections. Source: <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Gallup Congress &amp; Public Approval</a>, May 2026.</p>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval stood at <strong style="color:#9B2828" class="hm-cong-val">&#8230;</strong> in Gallup's <span id="hm-cong-month">latest</span> reading<span id="hm-cong-low"></span>. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At <span class="hm-cong-val">&#8230;</span>, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections.</p>
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
@@ -876,7 +876,7 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- INFLATION CHART -->
       <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Consumer Price Index &mdash; Inflation Trend</h3>
-      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; Aug 2026. After falling to 2.3% in Apr 2025, inflation climbed as high as 4.2% in May 2026 before easing to <strong style="color:#9B2828">3.4%</strong> by Aug 2026; energy prices rose 16.3% over the year. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; <span id="hm-cpi-end">latest</span>. <span id="hm-cpi-story"></span> Energy prices rose 16.3% over the year. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
       <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
           <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#620d3c"></span>All Items CPI (YoY %)</span>
@@ -1188,6 +1188,37 @@ async function loadHomeData() {
 
   const ca = data.congress_approval || {};
   if (ca.combined) set('hm-congress', (ca.combined.approve || '—') + '%');
+
+  // Congress lede: latest Gallup reading and month, and this series' low
+  const cong = appr.congress || {};
+  const monthName = iso => { const d = new Date(String(iso) + 'T00:00:00Z'); return isNaN(d) ? null : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); };
+  const longMonth = m => { const d = new Date('1 ' + m + ' UTC'); return isNaN(d) ? m : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); };
+  if (cong.approve != null) {
+    document.querySelectorAll('.hm-cong-val').forEach(el => { el.textContent = cong.approve + '%'; });
+    set('hm-cong-month', monthName(cong.as_of) || (cong.history && cong.history.length ? longMonth(cong.history[cong.history.length - 1].month) : 'latest'));
+    const hist = Array.isArray(cong.history) ? cong.history : [];
+    if (hist.length) {
+      const low = hist.reduce((m, h) => (h.approve < m.approve ? h : m), hist[0]);
+      set('hm-cong-low', `, against a low of ${low.approve}% in ${longMonth(low.month)} for this Congress (Gallup's all-time low is 9%, November 2013)`);
+    }
+  }
+
+  // CPI lede: period end, peak and latest from data.cpi.history
+  const cpiHist = (data.cpi && Array.isArray(data.cpi.history) ? data.cpi.history : []).filter(h => typeof h.all_items === 'number');
+  if (cpiHist.length) {
+    const last = cpiHist[cpiHist.length - 1];
+    const peakIdx = cpiHist.reduce((bi, h, i) => (h.all_items >= cpiHist[bi].all_items ? i : bi), 0);
+    const peak = cpiHist[peakIdx];
+    const low = cpiHist.slice(0, peakIdx + 1).reduce((m, h) => (h.all_items < m.all_items ? h : m), cpiHist[0]);
+    set('hm-cpi-end', last.month);
+    const el = document.getElementById('hm-cpi-story');
+    if (el) {
+      const lowPart = low !== peak ? `After falling to ${low.all_items}% in ${low.month}, inflation climbed` : 'Inflation climbed';
+      el.innerHTML = last === peak
+        ? `${lowPart} to <strong style="color:#9B2828">${last.all_items}%</strong> by ${last.month}, the highest in this period.`
+        : `${lowPart} as high as ${peak.all_items}% in ${peak.month} before easing to <strong style="color:#9B2828">${last.all_items}%</strong> by ${last.month}.`;
+    }
+  }
 
   const races = data.races || {};
   const hs = races.house || {};

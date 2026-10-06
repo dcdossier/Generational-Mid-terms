@@ -62,11 +62,12 @@ function recordStatus(name, { group, primary = false, ok, count = null, error = 
 const RUN_STARTED = new Date().toISOString();
 const KEEP_IF_EMPTY = ['last_success', 'last_model', 'text_model', 'web_model', 'last_error', 'last_error_at'];
 
-// Merges a patch into status.json's ai[feature]; empty values never replace good ones.
-function recordAI(feature, patch) {
+// Merges a patch into status.json's ai[feature]; empty values never replace good
+// ones. opts.reset starts the entry afresh (e.g. after a provider change).
+function recordAI(feature, patch, opts = {}) {
   const s = load();
   s.ai = s.ai || {};
-  const next = { ...(s.ai[feature] || {}) };
+  const next = opts.reset ? {} : { ...(s.ai[feature] || {}) };
   for (const [k, v] of Object.entries(patch)) {
     if ((v === null || v === undefined) && KEEP_IF_EMPTY.includes(k)) continue;
     next[k] = v;
@@ -82,4 +83,8 @@ function saveStatus() {
   fs.writeFileSync(STATUS_PATH, JSON.stringify(s, null, 2) + '\n');
 }
 
-module.exports = { recordStatus, recordAI, saveStatus, STATUS_PATH };
+function getAI(feature) {
+  return (load().ai || {})[feature] || null;
+}
+
+module.exports = { recordStatus, recordAI, getAI, saveStatus, STATUS_PATH };

@@ -14,7 +14,8 @@
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
  * Env vars (optional — every source has a non-AI path; see ai.js):
- *  MID_TERMS_HOME — Groq key for the Home tab's AI feature (Congress approval
+ *  AI_PROVIDER    — none (default), groq, xai or gemini; see ai.js
+ *  MID_TERMS_HOME — the provider key for the Home tab's AI feature (Congress approval
  *                   backup parsing). Retirements need no AI: chamber and party
  *                   are counted straight from the source tables.
  */
@@ -576,11 +577,11 @@ function parseGallupApprovalTable(html) {
     if (headerIdx === -1) continue;
     const aCol = rows[headerIdx].findIndex(c => /^approve$/i.test(c));
     const dCol = rows[headerIdx].findIndex(c => /^disapprove$/i.test(c));
-    for (const row of rows.slice(headerIdx + 1)) {
-      const approve    = parseFloat(row[aCol]);
-      const disapprove = parseFloat(row[dCol]);
-      if (!isNaN(approve) && !isNaN(disapprove)) { found.push({ approve, disapprove, period: row[0] || '', caption }); break; }
-    }
+    // Every dated row, newest first as Gallup lists them
+    const readings = rows.slice(headerIdx + 1)
+      .map(row => ({ period: row[0] || '', approve: parseFloat(row[aCol]), disapprove: parseFloat(row[dCol]) }))
+      .filter(r => !isNaN(r.approve) && !isNaN(r.disapprove));
+    if (readings.length) found.push({ ...readings[0], caption, readings });
   }
   const main = found.find(r => /congress approval table/i.test(r.caption));
   if (main) return main;
@@ -673,7 +674,19 @@ ${text}`,
     data.approval.congress.approve    = approve;
     data.approval.congress.disapprove = disapprove;
     Object.assign(data.approval.congress, provenance);
-    if (reading) {
+    if (result.readings) {
+      // Table path: rebuild the monthly history from Gallup's own table (Jan 2025 on),
+      // replacing hand-entered months. Both Congress charts read these series.
+      const history = result.readings
+        .map(r => ({ p: parseGallupPeriod(r.period), approve: r.approve, disapprove: r.disapprove }))
+        .filter(r => r.p && r.p.end >= '2025-01-01')
+        .sort((a, b) => a.p.end.localeCompare(b.p.end))
+        .map(r => ({ month: r.p.month, approve: r.approve, disapprove: r.disapprove }));
+      data.approval.congress.history = history;
+      data.congress_approval.history = history.map(h => ({ ...h }));
+      Object.assign(data.congress_approval, { history_source: provenance.source, history_as_of: provenance.as_of });
+      console.log(`  [Gallup] Monthly history rebuilt from the table: ${history.length} readings, ${history[0]?.month} to ${history[history.length - 1]?.month}`);
+    } else if (reading) {
       upsertHistory(data.approval.congress.history, reading.month,
         { approve, disapprove }, { approve, disapprove });
     }
@@ -997,7 +1010,7 @@ async function main() {
   const start = Date.now();
   console.log('════════════════════════════════════════');
   console.log(' fetch-polls.js — live data update');
-  await initAI('home');   // lists Groq models once; AI stays optional
+  await initAI('home');   // AI_PROVIDER decides; lists the provider's models once; AI stays optional
   console.log('════════════════════════════════════════');
 
   // Load data.json

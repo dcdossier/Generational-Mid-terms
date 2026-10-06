@@ -94,7 +94,9 @@
       ? '<a href="' + esc(href) + '" target="_blank" rel="noopener" title="' + esc(full) + '">' + esc(name) + '</a>'
       : '<span title="' + esc(full) + '">' + esc(name) + '</span>';
     var asOf = parseAsOf(opts.asOfPath && opts.data ? getPath(opts.data, opts.asOfPath) : block && block.as_of);
-    var when = asOf ? 'Data as of ' + esc(asOf.text) : (kind === 'ratings' ? 'Rating date not recorded' : 'Data date not recorded');
+    var when = asOf
+      ? (kind === 'ratings' ? 'Ratings as of ' : 'Data as of ') + esc(asOf.text)
+      : (kind === 'ratings' ? 'Rating date not recorded' : 'Data date not recorded');
     var stale = asOf ? isStale(asOf.date, kind) : kind === 'ratings';
     return 'Source: ' + src + ' · ' + when + (stale ? ' ' + staleTag() : '');
   }

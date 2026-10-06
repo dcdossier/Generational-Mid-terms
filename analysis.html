@@ -210,6 +210,9 @@ body {
 .type-research   { background: #E8F0FE; color: #1A47A0; }
 .type-op-ed      { background: #F3EEFF; color: #5B21B6; }
 .type-interview  { background: #E8F8F1; color: #065F46; }
+.type-blog       { background: #FDF6E3; color: #8A5A00; }
+.card-ai { font: 500 10px var(--sans); color: var(--text3, #888); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+.type-media      { background: #FFE9E5; color: #B23A28; }
 
 /* TAG COLOURS */
 .tag-congress    { background: #DBEAFE; color: #1E3A8A; }
@@ -270,6 +273,8 @@ body {
       <button class="chip"        data-type="podcast"    onclick="setType('podcast',this)">Podcast</button>
       <button class="chip"        data-type="research"   onclick="setType('research',this)">Research</button>
       <button class="chip"        data-type="op-ed"      onclick="setType('op-ed',this)">Op-Eds</button>
+      <button class="chip"        data-type="blog"       onclick="setType('blog',this)">Blog</button>
+      <button class="chip"        data-type="media"      onclick="setType('media',this)">Media</button>
     </div>
     <div class="toolbar-right">
       <select class="sort-select" id="sort-select" onchange="renderPosts()">
@@ -301,24 +306,66 @@ let _allPosts = [];
 let _activeType = 'all';
 
 // ── LOAD DATA ────────────────────────────────────────────────────────────────
-async function loadData() {
-  const paths = ['analysis.json', './analysis.json', '../analysis.json'];
-  let data = null;
-  for (const p of paths) {
+// analysis-manual.json (hand-curated) is read first, then analysis.json; they
+// are merged by URL with the manual entry winning, and sorted newest first.
+
+async function fetchJson(name) {
+  for (const p of [name, './' + name, '../' + name]) {
     try {
       const r = await fetch(p + '?t=' + Date.now());
-      if (r.ok) { data = await r.json(); break; }
+      if (r.ok) return await r.json();
     } catch (e) { /* try next */ }
   }
+  return null;
+}
 
-  if (data && data.meta && data.meta.last_updated) {
-    const dt = new Date(data.meta.last_updated);
+// Manual entries use the input form's type names ("Op-Ed", "Research Paper",
+// "Tweet/Post"); map them to the card types used here.
+const MANUAL_TYPES = {
+  'newsletter': 'newsletter', 'op-ed': 'op-ed', 'podcast': 'podcast',
+  'research paper': 'research', 'research': 'research', 'blog': 'blog',
+  'media': 'media', 'interview': 'media', 'tweet/post': 'media', 'video': 'media',
+};
+
+function normaliseManual(e, i) {
+  let host = '';
+  try { host = new URL(e.url).hostname.replace(/^www\./, ''); } catch (err) { /* keep empty */ }
+  return {
+    id: 'manual-' + i,
+    type: MANUAL_TYPES[String(e.type || '').toLowerCase()] || String(e.type || 'research').toLowerCase(),
+    title: e.title || e.url,
+    description: e.description || '',
+    url: e.url,
+    source: e.source || host,
+    date: e.date || '',
+    tags: Array.isArray(e.tags) ? e.tags : [],
+    author: e.author || '',
+    ai_summary: !!e.ai_summary,
+  };
+}
+
+const urlKey = u => String(u || '').trim().replace(/^https?:\/\/(www\.)?/, '').replace(/[#?].*$/, '').replace(/\/$/, '').toLowerCase();
+
+async function loadData() {
+  const manual = await fetchJson('analysis-manual.json');
+  const auto   = await fetchJson('analysis.json');
+
+  const manualPosts = (Array.isArray(manual) ? manual : (manual && manual.posts) || [])
+    .filter(e => e && e.url).map(normaliseManual);
+  const autoPosts = (auto && Array.isArray(auto.posts)) ? auto.posts : [];
+
+  const byUrl = new Map();
+  for (const p of manualPosts) byUrl.set(urlKey(p.url), p);
+  for (const p of autoPosts) if (!byUrl.has(urlKey(p.url))) byUrl.set(urlKey(p.url), p);
+  const t = p => new Date(p.date).getTime() || 0;   // undated entries sort last
+  _allPosts = [...byUrl.values()].sort((a, b) => t(b) - t(a));
+
+  const stamps = [manual && manual.meta && manual.meta.last_updated, auto && auto.meta && auto.meta.last_updated].filter(Boolean);
+  if (stamps.length) {
+    const dt = new Date(stamps.sort().pop());
     document.getElementById('lastUpdated').textContent =
       'Updated ' + dt.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
   }
-
-  _allPosts = (data && Array.isArray(data.posts)) ? data.posts : [];
-
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('card-grid').style.display = '';
   renderPosts();
@@ -389,7 +436,7 @@ function tagClass(tag) {
 }
 
 function typeLabel(type) {
-  const map = { newsletter: 'Newsletter', podcast: 'Podcast', research: 'Research', 'op-ed': 'Op-Ed', interview: 'Interview' };
+  const map = { newsletter: 'Newsletter', podcast: 'Podcast', research: 'Research', 'op-ed': 'Op-Ed', interview: 'Interview', blog: 'Blog', media: 'Media' };
   return map[type] || 'Analysis';
 }
 
@@ -407,7 +454,7 @@ function renderCard(p) {
       <span class="card-date">${esc(fmtDate(p.date))}</span>
     </div>
     <a class="card-title" href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.title)}</a>
-    ${p.description ? `<p class="card-desc">${esc(p.description)}</p>` : ''}
+    ${p.description ? `<p class="card-desc">${esc(p.description)}${p.ai_summary ? ' <span class="card-ai" title="Summary written by AI from the linked page">AI summary</span>' : ''}</p>` : ''}
     ${tags ? `<div class="card-tags">${tags}</div>` : ''}
     <div class="card-footer">
       <div class="card-source">${esc(p.source)}</div>

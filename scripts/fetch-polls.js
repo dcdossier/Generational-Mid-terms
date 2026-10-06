@@ -13,9 +13,10 @@
  *  5. Wikipedia API          → retirements totals/split      (Ballotpedia fallback)
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
- * Env vars (both optional — every source has a non-AI path; see ai.js):
- *  GROQ_API_KEY      — Groq API key
- *  ANTHROPIC_API_KEY — Anthropic API key (used if Groq fails)
+ * Env vars (optional — every source has a non-AI path; see ai.js):
+ *  MID_TERMS_HOME — Groq key for the Home tab's AI feature (Congress approval
+ *                   backup parsing). Retirements need no AI: chamber and party
+ *                   are counted straight from the source tables.
  */
 
 const fs    = require('fs');
@@ -23,7 +24,7 @@ const path  = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 
-const { aiExtract, aiStatus } = require('./ai');
+const { initAI, aiExtract } = require('./ai');
 const { recordStatus, saveStatus } = require('./status');
 
 const DATA_PATH  = path.resolve(__dirname, '../data.json');
@@ -632,7 +633,7 @@ async function fetchCongressApproval(data) {
   } else {
     warn('  [Gallup] Congress Approval Table not found — trying AI backup');
     const text = stripHtml(html).slice(0, 14000);
-    result = await aiExtract(
+    result = await aiExtract('home',
       'You are a precise data extraction assistant. Extract polling numbers only. Return valid JSON.',
       `From this Gallup page tracking Congressional approval ratings, extract the most recent approve and disapprove percentages.
 Return JSON exactly: {"approve": NUMBER, "disapprove": NUMBER, "period": "YYYY Mon D-D"}
@@ -996,7 +997,7 @@ async function main() {
   const start = Date.now();
   console.log('════════════════════════════════════════');
   console.log(' fetch-polls.js — live data update');
-  console.log(`  AI keys: ${aiStatus()} (AI is optional)`);
+  await initAI('home');   // lists Groq models once; AI stays optional
   console.log('════════════════════════════════════════');
 
   // Load data.json

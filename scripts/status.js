@@ -9,6 +9,10 @@
  * A run only counts as a success if it returned at least one item. Failures and
  * empty results update last_attempt/error but never overwrite last_success or
  * item_count, so the last good values survive.
+ *
+ * status.json also holds an "ai" block, one entry per AI feature (see ai.js):
+ *   { key_present, text_model, web_model, last_success, last_model,
+ *     last_error, last_error_at, calls_this_run, run_at }
  */
 
 const fs   = require('fs');
@@ -55,6 +59,22 @@ function recordStatus(name, { group, primary = false, ok, count = null, error = 
   sources[name] = entry;
 }
 
+const RUN_STARTED = new Date().toISOString();
+const KEEP_IF_EMPTY = ['last_success', 'last_model', 'text_model', 'web_model', 'last_error', 'last_error_at'];
+
+// Merges a patch into status.json's ai[feature]; empty values never replace good ones.
+function recordAI(feature, patch) {
+  const s = load();
+  s.ai = s.ai || {};
+  const next = { ...(s.ai[feature] || {}) };
+  for (const [k, v] of Object.entries(patch)) {
+    if ((v === null || v === undefined) && KEEP_IF_EMPTY.includes(k)) continue;
+    next[k] = v;
+  }
+  next.run_at = RUN_STARTED;
+  s.ai[feature] = next;
+}
+
 function saveStatus() {
   const s = load();
   s.updated = new Date().toISOString();
@@ -62,4 +82,4 @@ function saveStatus() {
   fs.writeFileSync(STATUS_PATH, JSON.stringify(s, null, 2) + '\n');
 }
 
-module.exports = { recordStatus, saveStatus, STATUS_PATH };
+module.exports = { recordStatus, recordAI, saveStatus, STATUS_PATH };

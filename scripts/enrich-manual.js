@@ -2,18 +2,28 @@
 'use strict';
 
 /**
- * enrich-manual.js — backup summaries for analysis-manual.json.
+ * enrich-manual.js — fills gaps in analysis-manual.json, the single source for
+ * the Analysis & Commentary page ("entries", plus "posts" for safety).
  *
- * For each entry whose "description" is empty, asks the AI provider (feature
- * "ac", key MID_TERMS_AC, provider from AI_PROVIDER) for exactly three neutral
- * sentences in British English, each under 30 words, with no colons or dashes.
- * Generated text is marked "ai_summary": true. With Groq, compound-mini reads
- * the URL itself; with other providers this script fetches the page and sends
- * only a short text extract. AI_PROVIDER=none (the default) skips all of it.
+ * An entry is enriched when it has "needs_enrich": true or is missing a title,
+ * date or description. Only empty fields are filled; nothing typed by hand is
+ * ever overwritten.
  *
- * Never touches an entry that already has a description. If reading or the
- * checks fail, the entry is left as it is and the reason is logged. Capped at
- * the "ac" feature's call limit (see ai.js).
+ *   title, date   from the page's own metadata (og:title / <title>,
+ *                 article:published_time / datePublished / date meta tags).
+ *   description   exactly three neutral sentences in British English, each
+ *                 under 30 words, no colons or dashes, from the AI provider
+ *                 (feature "ac", key MID_TERMS_AC, provider from AI_PROVIDER),
+ *                 marked "ai_summary": true. With Groq, compound-mini reads the
+ *                 URL itself; other providers get a short text extract. If AI is
+ *                 off (AI_PROVIDER=none, the default) or its reply fails the
+ *                 checks, the page's own meta description is used instead,
+ *                 marked "summary_source": "page".
+ *
+ * "needs_enrich" is cleared once title, date and description are all present.
+ * Each entry gets at most MAX_ATTEMPTS tries ("enrich_attempts"), so a page
+ * that cannot be read is not fetched on every run. AI calls are capped at the
+ * "ac" feature's call limit (see ai.js).
  */
 
 const fs   = require('fs');
@@ -29,27 +39,59 @@ const SYSTEM_PROMPT =
   'Never use colons or dashes. Reply with the summary only.';
 
 const EXTRACT_CHARS = 5000;
+const MAX_ATTEMPTS = 3;
 
-// Short plain-text extract of a public page (article body if marked up), or null
-async function pageExtract(url) {
+const decode = s => String(s || '')
+  .replace(/&nbsp;/g, ' ').replace(/&quot;/g, '"').replace(/&#0?39;|&apos;|&#x27;/g, "'")
+  .replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#(\d+);/g, (m, n) => String.fromCharCode(+n))
+  .replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+
+// Content of the first <meta> whose property/name/itemprop is one of the names
+function metaTag(html, names) {
+  for (const n of names) {
+    const re = new RegExp(`<meta[^>]+(?:property|name|itemprop)=["']${n}["'][^>]*>`, 'i');
+    const tag = html.match(re);
+    const c = tag && tag[0].match(/content=["']([^"']*)["']/i);
+    if (c && c[1].trim()) return decode(c[1]);
+  }
+  return '';
+}
+
+// Fetches a public page once: its metadata plus a short plain-text extract
+async function readPage(url) {
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': 'DCDossier/2.0 (+https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 20000, size: 3e6 });
-    let html = await res.text();
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0; +https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 20000, size: 3e6 });
+    const html = await res.text();
     console.log(`  [fetch] ${url}: HTTP ${res.status}, ${Buffer.byteLength(html)} bytes`);
     if (!res.ok) return null;
+    const ld = html.match(/"datePublished"\s*:\s*"([^"]+)"/);
+    const titleTag = html.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+    const dateRaw = metaTag(html, ['article:published_time', 'datePublished', 'og:published_time', 'publish-date', 'pubdate', 'date', 'DC.date.issued', 'uploadDate'])
+      || (ld ? ld[1] : '');
+    const date = dateRaw && !isNaN(new Date(dateRaw)) ? new Date(dateRaw).toISOString() : '';
+    let body = html;
     const article = html.match(/<article[\s\S]*?<\/article>/i);
-    if (article) html = article[0];
-    const text = html
+    if (article) body = article[0];
+    const text = decode(body
       .replace(/<(script|style|nav|header|footer|aside|noscript)[\s\S]*?<\/\1>/gi, ' ')
       .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&#?\w+;/g, ' ')
-      .replace(/\s+/g, ' ').trim();
-    return text.length > 200 ? text.slice(0, EXTRACT_CHARS) : null;
+      .replace(/&#?\w+;/g, m => decode(m)));
+    return {
+      title: metaTag(html, ['og:title', 'twitter:title']) || (titleTag ? decode(titleTag[1]) : ''),
+      date,
+      description: metaTag(html, ['og:description', 'description', 'twitter:description']),
+      extract: text.length > 200 ? text.slice(0, EXTRACT_CHARS) : null,
+    };
   } catch (err) {
     console.log(`  [page] ${url}: ${err.message}`);
     return null;
   }
 }
+
+const blank = v => !String(v || '').trim();
+const hasDate = v => !blank(v) && !isNaN(new Date(v));
+const needsWork = e => e && e.url && (e.needs_enrich === true || blank(e.title) || !hasDate(e.date) || blank(e.description))
+  && (e.enrich_attempts || 0) < MAX_ATTEMPTS;
 
 // Returns null if the text is acceptable, otherwise the reason it isn't
 function checkSummary(text) {
@@ -64,6 +106,27 @@ function checkSummary(text) {
   return null;
 }
 
+async function aiSummary(p, page) {
+  const label = `summary "${String(p.title || p.url).slice(0, 60)}"`;
+  const rules = 'exactly three sentences, each under 30 words. British English, neutral tone, no colons, no dashes.';
+  let reply;
+  if (hasWebModel('ac')) {
+    reply = await aiExtract('ac', SYSTEM_PROMPT,
+      `Read this page and summarise it in ${rules}\n\nURL: ${p.url}\nTitle: ${String(p.title || '').slice(0, 200)}`,
+      { label, model: 'web', json: false, maxTokens: 300 });
+  } else {
+    if (!page || !page.extract) { console.log(`  [ai] ${p.url} — no page text to summarise`); return null; }
+    reply = await aiExtract('ac', SYSTEM_PROMPT,
+      `Summarise this article in ${rules}\n\nTitle: ${String(p.title || '').slice(0, 200)}\n\nArticle text (extract):\n${page.extract}`,
+      { label, model: 'text', json: false, maxTokens: 300 });
+  }
+  if (reply === null) return null;   // reason already logged by ai.js
+  const text = reply.replace(/\s+/g, ' ').replace(/^["'“]|["'”]$/g, '').trim();
+  const problem = checkSummary(text);
+  if (problem) { console.log(`  [reject] ${p.url} — AI summary: ${problem}`); return null; }
+  return text;
+}
+
 async function main() {
   let raw;
   try { raw = JSON.parse(fs.readFileSync(MANUAL_PATH, 'utf8')); }
@@ -71,51 +134,42 @@ async function main() {
     console.error(`[enrich-manual] Could not read analysis-manual.json: ${err.message}`);
     process.exit(1);
   }
-  const posts = Array.isArray(raw) ? raw : (raw.posts || []);
-  const todo = posts.filter(p => p && p.url && !String(p.description || '').trim());
-  console.log(`[enrich-manual] ${posts.length} entries, ${todo.length} without a description`);
+  const posts = Array.isArray(raw) ? raw : [...(raw.entries || []), ...(raw.posts || [])];
+  const todo = posts.filter(needsWork);
+  console.log(`[enrich-manual] ${posts.length} entries, ${todo.length} to enrich`);
+  if (!todo.length) { saveStatus(); process.exit(0); }
 
-  const aiOn = todo.length ? await initAI('ac') : false;   // AI_PROVIDER decides; lists models once
-  if (todo.length && !aiOn) {
-    console.log('[enrich-manual] AI is off or unavailable — entries left as they are');
-    saveStatus();
-    process.exit(0);
-  }
+  const aiOn = todo.some(p => blank(p.description)) ? await initAI('ac') : false;   // AI_PROVIDER decides
+  if (!aiOn) console.log('[enrich-manual] AI is off or unavailable; summaries fall back to the page description');
 
-  let written = 0;
-  const rules = 'exactly three sentences, each under 30 words. British English, neutral tone, no colons, no dashes.';
+  let changed = 0;
   for (const p of todo) {
-    const label = `summary "${String(p.title || p.url).slice(0, 60)}"`;
-    let reply;
-    if (hasWebModel('ac')) {
-      reply = await aiExtract('ac', SYSTEM_PROMPT,
-        `Read this page and summarise it in ${rules}\n\nURL: ${p.url}\nTitle: ${String(p.title || '').slice(0, 200)}`,
-        { label, model: 'web', json: false, maxTokens: 300 });
-    } else {
-      const extract = await pageExtract(p.url);
-      if (!extract) { console.log(`  [skip] ${p.url} — could not read the page; entry left unchanged`); continue; }
-      reply = await aiExtract('ac', SYSTEM_PROMPT,
-        `Summarise this article in ${rules}\n\nTitle: ${String(p.title || '').slice(0, 200)}\n\nArticle text (extract):\n${extract}`,
-        { label, model: 'text', json: false, maxTokens: 300 });
+    const filled = [];
+    const page = await readPage(p.url);
+    if (page) {
+      if (blank(p.title) && page.title) { p.title = page.title; filled.push('title'); }
+      if (!hasDate(p.date) && page.date) { p.date = page.date; filled.push('date'); }
     }
-    if (reply === null) {
-      console.log(`  [skip] ${p.url} — no AI summary (see the [AI] line above); entry left unchanged`);
-      continue;
+    if (blank(p.description)) {
+      const text = aiOn ? await aiSummary(p, page) : null;
+      if (text) { p.description = text; p.ai_summary = true; filled.push('AI summary'); }
+      else if (page && page.description.length >= 60) {
+        p.description = page.description; p.summary_source = 'page'; filled.push('page description');
+      }
     }
-    const text = reply.replace(/\s+/g, ' ').replace(/^["'“]|["'”]$/g, '').trim();
-    const problem = checkSummary(text);
-    if (problem) {
-      console.log(`  [reject] ${p.url} — ${problem}; entry left unchanged`);
-      continue;
-    }
-    p.description = text;
-    p.ai_summary = true;
-    written++;
-    console.log(`  [ok] ${p.url}`);
+    const done = !blank(p.title) && hasDate(p.date) && !blank(p.description);
+    if (done) { p.needs_enrich = false; delete p.enrich_attempts; }
+    else { p.needs_enrich = true; p.enrich_attempts = (p.enrich_attempts || 0) + 1; }
+    changed++;
+    const missing = ['title', 'date', 'description'].filter(k => k === 'date' ? !hasDate(p.date) : blank(p[k]));
+    console.log(`  [${done ? 'ok' : 'partial'}] ${p.url} — filled: ${filled.join(', ') || 'nothing'}${missing.length ? `; still missing: ${missing.join(', ')} (attempt ${p.enrich_attempts} of ${MAX_ATTEMPTS})` : ''}`);
   }
 
-  if (written) fs.writeFileSync(MANUAL_PATH, JSON.stringify(raw, null, 2) + '\n');
-  console.log(`[enrich-manual] Done — ${written} summaries written, ${todo.length - written} left without one`);
+  if (changed) {
+    if (!Array.isArray(raw)) { raw.meta = raw.meta || {}; raw.meta.last_updated = new Date().toISOString(); }
+    fs.writeFileSync(MANUAL_PATH, JSON.stringify(raw, null, 2) + '\n');
+  }
+  console.log(`[enrich-manual] Done — ${changed} entries updated`);
   saveStatus();
   process.exit(0);
 }

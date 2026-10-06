@@ -2,12 +2,12 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-06T20:38:06.162Z"
+    "last_updated": "2026-10-06T20:40:30.847Z"
   },
   "posts": [],
   "entries": [
     {
-      "needs_enrich": true,
+      "needs_enrich": false,
       "id": "manual-muwayf7j",
       "type": "op-ed",
       "title": "Colby’s mid-term report card, what it means for India",
@@ -15,10 +15,11 @@
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
       "date": "2026-10-05T00:00:00.000Z",
-      "description": "",
+      "description": "Elbridge A. Colby, the U.S. under Secretary of War for Policy'srecent update on the 2026 National Defense Strategy shows how Washington is converting the Trump administration’s priorities into policy",
       "tags": [],
       "added_at": "2026-10-06T06:33:19.999Z",
-      "manual": true
+      "manual": true,
+      "summary_source": "page"
     },
     {
       "id": "yt-2F0Y2gdj13UVlhNzJ5cmlqbw",

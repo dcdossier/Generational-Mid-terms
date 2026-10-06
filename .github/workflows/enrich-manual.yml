@@ -1,9 +1,13 @@
 name: Enrich Manual Analysis
 
 on:
+  # The input page commits analysis-manual.json; enrich new entries straight away
   push:
     branches: [main]
     paths: ['analysis-manual.json']
+  # Daily retry for entries still missing a title, date or summary (max 3 tries each)
+  schedule:
+    - cron: '29 5 * * *'
   workflow_dispatch:
 
 # Writes status.json like the other data workflows, so it shares their group
@@ -21,7 +25,7 @@ env:
 jobs:
   enrich:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     permissions:
       contents: write
 
@@ -43,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: npm ci --prefix scripts
 
-      - name: Summarise entries without a description
+      - name: Fill missing titles, dates and summaries
         env:
           MID_TERMS_AC: ${{ secrets.MID_TERMS_AC }}   # Analysis & Commentary tab AI
         run: node scripts/enrich-manual.js
@@ -57,7 +61,7 @@ jobs:
             echo "No changes — nothing to commit."
             exit 0
           fi
-          git commit -m "chore(data): AI summaries for manual analysis entries [skip ci]"
+          git commit -m "chore(data): enrich analysis entries [skip ci]"
           # Rebase onto anything pushed since checkout, then push; retry on a race
           for attempt in 1 2 3; do
             if git pull --rebase origin "$GITHUB_REF_NAME" && git push; then exit 0; fi

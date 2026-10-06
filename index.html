@@ -230,10 +230,12 @@ body{
 .home-desc{font:400 16px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
 /* Hero why-questions panel */
 .hero-why-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px}
+/* House / Senate / Governorships cards: three across, one column on phones (see 600px rules) */
+.chamber-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:28px}
 /* Primary action: white with dark ink text, standing out on the dark hero */
-.hero-seatwise{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;margin:0 0 14px;
-  padding:10px 16px;background:#FFFFFF;color:#20242B;font:700 14px var(--sans);text-decoration:none;border-radius:6px;white-space:nowrap;
-  box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.hero-seatwise{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;max-width:100%;box-sizing:border-box;
+  min-height:44px;margin:0 0 14px;padding:10px 14px;background:#FFFFFF;color:#20242B;font:700 14px/1.3 var(--sans);
+  text-align:center;text-decoration:none;border-radius:6px;white-space:normal;box-shadow:0 1px 0 rgba(0,0,0,.15)}
 .hero-seatwise:hover{background:#F5F0DC}
 .hero-seatwise:focus-visible{outline:3px solid #fff;outline-offset:3px}
 .hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
@@ -378,6 +380,7 @@ body{
   .home-hero-right{padding-top:16px;margin-top:12px}
   .hero-why-label{font-size:10px;margin-bottom:10px}
   .hero-seatwise{display:flex;width:100%}
+  .chamber-grid{grid-template-columns:1fr}
   /* keep the hero inside narrow screens (its content was forcing ~420px at 375px) */
   .home-body{width:100%;min-width:0;box-sizing:border-box}
   .home-hero,.home-hero-left,.home-hero-right{min-width:0;max-width:100%;box-sizing:border-box}
@@ -626,7 +629,7 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
         <!-- Right: quick context questions -->
         <div class="home-hero-right">
-          <a class="hero-seatwise" href="map.html#seats" onclick="return openSeatwise(event)">Battleground seat-wise analysis <span aria-hidden="true">&#8594;</span></a>
+          <a class="hero-seatwise" href="map.html#seats" onclick="return openSeatwise(event)">Battleground seat&#8209;wise analysis <span aria-hidden="true">&#8594;</span></a>
           <div class="hero-why-label">Quick Context</div>
           <div class="hero-why-item" id="hwi-0">
             <button class="hero-why-btn" onclick="toggleHeroWhy(0,this)">How does the American political system function? <span class="hero-why-chevron">&#9660;</span></button>
@@ -699,7 +702,7 @@ body{background:#F5F5DC;color:#1E2232}
       </div>
 
       <!-- CHAMBER BREAKDOWN GRID -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px">
+      <div class="chamber-grid">
 
         <!-- House -->
         <div class="metric-card">

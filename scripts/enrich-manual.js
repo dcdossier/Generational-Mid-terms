@@ -20,6 +20,13 @@
  *                 checks, the page's own meta description is used instead,
  *                 marked "summary_source": "page".
  *
+ *   image         every type except "research": YouTube and Spotify from their
+ *                 oEmbed thumbnail_url (YouTube falls back to i.ytimg.com),
+ *                 newsletters from the Substack feed's channel logo (one image
+ *                 for the whole publication), everything else from og:image,
+ *                 else twitter:image. An entry that already has an image (for
+ *                 example one set on the input page) is never changed.
+ *
  * "needs_enrich" is cleared once title, date and description are all present.
  * Each entry gets at most MAX_ATTEMPTS tries ("enrich_attempts"), so a page
  * that cannot be read is not fetched on every run. AI calls are capped at the
@@ -39,6 +46,11 @@ const SYSTEM_PROMPT =
   'Never use colons or dashes. Reply with the summary only.';
 
 const EXTRACT_CHARS = 5000;
+const PAGE_HEADERS = {
+  'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0 Safari/537.36',
+  'Accept': 'text/html,application/xhtml+xml',
+  'Accept-Language': 'en-GB,en;q=0.9',
+};
 const MAX_ATTEMPTS = 3;
 
 const decode = s => String(s || '')
@@ -60,7 +72,8 @@ function metaTag(html, names) {
 // Fetches a public page once: its metadata plus a short plain-text extract
 async function readPage(url) {
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0; +https://github.com/dcdossier/Generational-Mid-terms)' }, timeout: 20000, size: 3e6 });
+    // Browser-like headers: several news sites refuse requests that look automated
+    const res = await fetch(url, { headers: PAGE_HEADERS, timeout: 20000, size: 3e6 });
     const html = await res.text();
     console.log(`  [fetch] ${url}: HTTP ${res.status}, ${Buffer.byteLength(html)} bytes`);
     if (!res.ok) return null;
@@ -76,7 +89,9 @@ async function readPage(url) {
       .replace(/<(script|style|nav|header|footer|aside|noscript)[\s\S]*?<\/\1>/gi, ' ')
       .replace(/<[^>]+>/g, ' ')
       .replace(/&#?\w+;/g, m => decode(m)));
+    const img = metaTag(html, ['og:image', 'og:image:url', 'og:image:secure_url', 'twitter:image', 'twitter:image:src']);
     return {
+      image: img ? absUrl(img, res.url || url) : '',
       title: metaTag(html, ['og:title', 'twitter:title']) || (titleTag ? decode(titleTag[1]) : ''),
       date,
       description: metaTag(html, ['og:description', 'description', 'twitter:description']),
@@ -87,6 +102,72 @@ async function readPage(url) {
     return null;
   }
 }
+
+function absUrl(u, base) {
+  try { const x = new URL(u, base); return x.protocol === 'http:' || x.protocol === 'https:' ? x.href.replace(/^http:/, 'https:') : ''; }
+  catch (e) { return ''; }
+}
+
+async function getJson(url, label) {
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' }, timeout: 15000 });
+    const body = await res.text();
+    console.log(`  [fetch] ${label}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
+    return res.ok ? JSON.parse(body) : null;
+  } catch (err) { console.log(`  [fetch] ${label}: ${err.message}`); return null; }
+}
+
+function youTubeId(u) {
+  try {
+    const x = new URL(u), h = x.hostname.replace(/^(www|m)\./, '');
+    if (h === 'youtu.be') return x.pathname.slice(1).split('/')[0] || null;
+    if (h === 'youtube.com') return x.searchParams.get('v') || (x.pathname.match(/^\/(?:shorts|embed|live)\/([\w-]{6,})/) || [])[1] || null;
+  } catch (e) { /* not a URL */ }
+  return null;
+}
+
+// Channel <image><url> of a publication's RSS feed (Substack: <origin>/feed), cached per origin
+const _feedLogos = new Map();
+async function feedLogo(entryUrl) {
+  let origin;
+  try { origin = new URL(entryUrl).origin; } catch (e) { return ''; }
+  if (_feedLogos.has(origin)) return _feedLogos.get(origin);
+  let logo = '';
+  try {
+    const res = await fetch(origin + '/feed', { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' }, timeout: 15000 });
+    const xml = await res.text();
+    console.log(`  [fetch] ${origin}/feed: HTTP ${res.status}, ${Buffer.byteLength(xml)} bytes`);
+    const chan = res.ok ? xml.split(/<item[\s>]/i)[0] : '';
+    const m = chan.match(/<image>[\s\S]*?<url>\s*(?:<!\[CDATA\[)?\s*([^<\]\s]+)/i);
+    if (m) logo = absUrl(decode(m[1]), origin);
+  } catch (err) { console.log(`  [fetch] ${origin}/feed: ${err.message}`); }
+  _feedLogos.set(origin, logo);
+  return logo;
+}
+
+// Best image for an entry, or '' (pageCache avoids fetching a page twice in one run)
+async function findImage(p, pageCache) {
+  const yt = youTubeId(p.url);
+  if (yt) {
+    const o = await getJson(`https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(p.url)}`, `YouTube oEmbed ${yt}`);
+    return (o && o.thumbnail_url) || `https://i.ytimg.com/vi/${yt}/hqdefault.jpg`;
+  }
+  if (/^https?:\/\/open\.spotify\.com\//i.test(p.url)) {
+    const o = await getJson(`https://open.spotify.com/oembed?url=${encodeURIComponent(p.url)}`, 'Spotify oEmbed');
+    if (o && o.thumbnail_url) return o.thumbnail_url;
+  }
+  if (p.type === 'newsletter') {
+    const logo = await feedLogo(p.url);
+    if (logo) return logo;
+  }
+  if (!pageCache.has(p.url)) pageCache.set(p.url, await readPage(p.url));
+  const page = pageCache.get(p.url);
+  return (page && page.image) || '';
+}
+
+const MAX_IMAGE_ATTEMPTS = 3;
+const needsImage = p => p && p.url && String(p.type || '').toLowerCase() !== 'research'
+  && !String(p.image || '').trim() && (p.image_attempts || 0) < MAX_IMAGE_ATTEMPTS;
 
 const blank = v => !String(v || '').trim();
 const hasDate = v => !blank(v) && !isNaN(new Date(v));
@@ -136,8 +217,10 @@ async function main() {
   }
   const posts = Array.isArray(raw) ? raw : [...(raw.entries || []), ...(raw.posts || [])];
   const todo = posts.filter(needsWork);
-  console.log(`[enrich-manual] ${posts.length} entries, ${todo.length} to enrich`);
-  if (!todo.length) { saveStatus(); process.exit(0); }
+  const imageTodo = posts.filter(needsImage);
+  console.log(`[enrich-manual] ${posts.length} entries, ${todo.length} to enrich, ${imageTodo.length} without an image`);
+  if (!todo.length && !imageTodo.length) { saveStatus(); process.exit(0); }
+  const pageCache = new Map();
 
   const aiOn = todo.some(p => blank(p.description)) ? await initAI('ac') : false;   // AI_PROVIDER decides
   if (!aiOn) console.log('[enrich-manual] AI is off or unavailable; summaries fall back to the page description');
@@ -146,6 +229,7 @@ async function main() {
   for (const p of todo) {
     const filled = [];
     const page = await readPage(p.url);
+    pageCache.set(p.url, page);
     if (page) {
       if (blank(p.title) && page.title) { p.title = page.title; filled.push('title'); }
       if (!hasDate(p.date) && page.date) { p.date = page.date; filled.push('date'); }
@@ -163,6 +247,13 @@ async function main() {
     changed++;
     const missing = ['title', 'date', 'description'].filter(k => k === 'date' ? !hasDate(p.date) : blank(p[k]));
     console.log(`  [${done ? 'ok' : 'partial'}] ${p.url} — filled: ${filled.join(', ') || 'nothing'}${missing.length ? `; still missing: ${missing.join(', ')} (attempt ${p.enrich_attempts} of ${MAX_ATTEMPTS})` : ''}`);
+  }
+
+  for (const p of imageTodo) {
+    const img = await findImage(p, pageCache);
+    if (img) { p.image = img; delete p.image_attempts; console.log(`  [image] ${p.url} — ${img}`); }
+    else { p.image_attempts = (p.image_attempts || 0) + 1; console.log(`  [image] ${p.url} — none found (attempt ${p.image_attempts} of ${MAX_IMAGE_ATTEMPTS})`); }
+    changed++;
   }
 
   if (changed) {

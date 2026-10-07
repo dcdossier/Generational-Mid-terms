@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T08:42:50.407Z"
+    "last_updated": "2026-10-07T08:45:32.598Z"
   },
   "posts": [],
   "entries": [
@@ -147,7 +147,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 1
+      "image_attempts": 2
     },
     {
       "id": "seed-atp-1VFAsloVxSyHCH3Uw4XUZb",
@@ -185,7 +185,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 1
+      "image_attempts": 2
     },
     {
       "id": "seed-atp-4wmWyfx1HxWvqTo6P5jNYG",
@@ -334,7 +334,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 1
+      "image_attempts": 2
     },
     {
       "id": "seed-oped-firstpost-congress-pentagon",
@@ -714,7 +714,7 @@
       "manual": true,
       "needs_enrich": true,
       "enrich_attempts": 3,
-      "image_attempts": 1
+      "image_attempts": 2
     },
     {
       "id": "manual-muxjy2fr",

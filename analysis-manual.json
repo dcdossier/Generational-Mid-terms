@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:17:17.392Z"
+    "last_updated": "2026-10-07T03:22:04.554Z"
   },
   "posts": [],
   "entries": [
@@ -515,7 +515,7 @@
       "added_at": "2026-10-07T03:14:49.443Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjazmt-1",
@@ -591,21 +591,22 @@
       "manual": true,
       "needs_enrich": true,
       "summary_source": "page",
-      "enrich_attempts": 1
+      "enrich_attempts": 2
     },
     {
       "id": "manual-muxjjyc8",
       "type": "op-ed",
-      "title": "",
+      "title": "Loony Left, Radical Right & India-US",
       "url": "https://timesofindia.indiatimes.com/toi-plus/international/loony-left-radical-right-india-us/articleshow/133657314.cms",
       "author": "Abhishek Kadiyala",
       "source": "Times of India",
-      "date": "",
-      "description": "",
+      "date": "2026-08-31T15:49:00.000Z",
+      "description": "Throughout the tumultuous second Trump presidency, the 119th session of United States Congress has proven to be a relatively consistent element in India-US ties. In this session, Congress has introduced pro-India legislation, pigeonholed critical bills, prioritised India as an irreplaceable partner against China, and funded several US-India partnership initiatives, including programmes under Quad.",
       "tags": [],
       "added_at": "2026-10-07T03:21:47.672Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     }
   ]
 }

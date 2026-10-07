@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:32:41.961Z"
+    "last_updated": "2026-10-07T03:33:06.630Z"
   },
   "posts": [],
   "entries": [
@@ -635,7 +635,7 @@
       "added_at": "2026-10-07T03:31:28.580Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekk-1",
@@ -650,7 +650,7 @@
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-2",
@@ -665,7 +665,7 @@
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-3",
@@ -680,7 +680,7 @@
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-4",
@@ -695,7 +695,7 @@
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-5",
@@ -710,7 +710,7 @@
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjy2fr",
@@ -724,7 +724,8 @@
       "tags": [],
       "added_at": "2026-10-07T03:32:46.167Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     }
   ]
 }

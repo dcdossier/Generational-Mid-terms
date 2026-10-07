@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:22:04.554Z"
+    "last_updated": "2026-10-07T03:23:18.217Z"
   },
   "posts": [],
   "entries": [
@@ -591,7 +591,7 @@
       "manual": true,
       "needs_enrich": true,
       "summary_source": "page",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjjyc8",
@@ -611,16 +611,18 @@
     {
       "id": "manual-muxjlgjh",
       "type": "media",
-      "title": "",
+      "title": "- YouTube",
       "url": "https://www.youtube.com/live/Mzi2cx6Miwo",
       "author": "Abhishek Kadiyala",
       "source": "YouTube",
       "date": "",
-      "description": "",
+      "description": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
       "tags": [],
       "added_at": "2026-10-07T03:22:57.917Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "summary_source": "page",
+      "enrich_attempts": 1
     }
   ]
 }

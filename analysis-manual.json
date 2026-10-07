@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:25:20.642Z"
+    "last_updated": "2026-10-07T03:31:46.979Z"
   },
   "posts": [],
   "entries": [
@@ -622,7 +622,7 @@
       "manual": true,
       "needs_enrich": true,
       "summary_source": "page",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjo3ly",
@@ -637,91 +637,97 @@
       "added_at": "2026-10-07T03:25:01.126Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 1
+      "enrich_attempts": 2
     },
     {
       "id": "manual-muxjwekk-0",
       "type": "podcast",
-      "title": "",
+      "title": "How Is The Iran War Impacting US Midterms?",
       "url": "https://open.spotify.com/episode/0lA6JvbCSxOSbVVk8xyanw?si=-YJtua_HSk64fP4kjWEnSA",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-08-31T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.580Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjwekk-1",
       "type": "podcast",
-      "title": "",
+      "title": "4 I's of 2026 US Mid-terms",
       "url": "https://open.spotify.com/episode/7B4S7l33LZNpqmBifRbOQP?si=1xYA7JaETMKh9KVPAMPoEA",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-06-29T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjwekl-2",
       "type": "podcast",
-      "title": "",
+      "title": "The Iran Brief: US Congress and Trump",
       "url": "https://open.spotify.com/episode/1VFAsloVxSyHCH3Uw4XUZb?si=RmFqqWV2Tim6_g7u58wUJA",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-04-29T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjwekl-3",
       "type": "podcast",
-      "title": "",
+      "title": "The Iran Brief: Why Is US Congress Failing To Stop Trump On Iran?",
       "url": "https://open.spotify.com/episode/4wmWyfx1HxWvqTo6P5jNYG?si=7c8adce5ea674e08",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-04-01T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjwekl-4",
       "type": "podcast",
-      "title": "",
+      "title": "The Iran Brief: War and MAGA fissures",
       "url": "https://open.spotify.com/episode/5TA2xUQOIRtPurxcZ5k9uk?si=1f5adf15124147fa",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-03-24T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjwekl-5",
       "type": "podcast",
-      "title": "",
+      "title": "Congress and the Making of India-U.S. Relations",
       "url": "https://open.spotify.com/episode/6wzOoN41hwEUvV0W9XOTXZ?si=7Xqvp4h1RxiyagHfSWtdJQ",
       "author": "Abhishek Kadiyala",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-03-03T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:31:28.581Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     }
   ]
 }

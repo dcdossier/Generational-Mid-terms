@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:23:18.217Z"
+    "last_updated": "2026-10-07T03:25:20.642Z"
   },
   "posts": [],
   "entries": [
@@ -622,21 +622,22 @@
       "manual": true,
       "needs_enrich": true,
       "summary_source": "page",
-      "enrich_attempts": 1
+      "enrich_attempts": 2
     },
     {
       "id": "manual-muxjo3ly",
       "type": "podcast",
-      "title": "",
+      "title": "America Votes | Why should India care?",
       "url": "https://open.spotify.com/episode/5XWgiJ8aZVhseQpwAzJZsw?si=yigzbb8PSrq74Mcb0iTbxw",
       "author": "Abhishek Kadiyala and Brigadier Anil Raman",
       "source": "Spotify",
-      "date": "",
+      "date": "2026-10-07T00:00:00.000Z",
       "description": "",
       "tags": [],
       "added_at": "2026-10-07T03:25:01.126Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     }
   ]
 }

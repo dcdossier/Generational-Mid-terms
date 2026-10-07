@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-07T03:15:06.920Z"
+    "last_updated": "2026-10-07T03:17:17.392Z"
   },
   "posts": [],
   "entries": [
@@ -515,7 +515,7 @@
       "added_at": "2026-10-07T03:14:49.443Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 1
+      "enrich_attempts": 2
     },
     {
       "id": "manual-muxjazmt-1",
@@ -580,16 +580,18 @@
     {
       "id": "manual-muxjdrkz",
       "type": "op-ed",
-      "title": "",
+      "title": "The Death of Political Fearmongering: How Policy Beats Bigotry and Big Money in Michigan",
       "url": "https://takshashila.org.in/content/blogs/How-policy-beats-bigotry-and-big-money-in-michigan.html",
       "author": "Brigadier Anil Raman",
       "source": "Takshashila Institution",
       "date": "",
-      "description": "",
+      "description": "The Death of Political Fearmongering: How Policy Beats Bigotry and Big Money in Michigan",
       "tags": [],
       "added_at": "2026-10-07T03:16:58.979Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "summary_source": "page",
+      "enrich_attempts": 1
     }
   ]
 }

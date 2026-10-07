@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-06T20:40:30.847Z"
+    "last_updated": "2026-10-07T03:15:06.920Z"
   },
   "posts": [],
   "entries": [
@@ -514,63 +514,68 @@
       "tags": [],
       "added_at": "2026-10-07T03:14:49.443Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1
     },
     {
       "id": "manual-muxjazmt-1",
       "type": "op-ed",
-      "title": "",
+      "title": "The domestic drift behind Trump’s Iran deal",
       "url": "https://www.deccanherald.com/opinion/the-domestic-drift-behind-trumps-iran-deal-4045655",
       "author": "Brigadier Anil Raman",
       "source": "Deccan Herald",
-      "date": "",
-      "description": "",
+      "date": "2026-06-19T19:38:39.000Z",
+      "description": "US foreign policy: Trump's Iran agreement signals a shift in Republican foreign policy shaped by domestic politics and the America First movement overturning traditional alliance hierarchies and prioritising electoral calculations in West Asia policy.",
       "tags": [],
       "added_at": "2026-10-07T03:14:49.445Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     },
     {
       "id": "manual-muxjazmt-2",
       "type": "op-ed",
-      "title": "",
+      "title": "Trump’s Cuba Gamble Could Spiral Beyond US Control",
       "url": "https://frontline.thehindu.com/world-affairs/trump-cuba-blockade/article71027959.ece",
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-05-27T10:18:07.000Z",
+      "description": "Trump’s Cuba blockade strategy risks military escalation, refugee crises, and global backlash as Russia and China back Havana. Read the full analysis.",
       "tags": [],
       "added_at": "2026-10-07T03:14:49.445Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     },
     {
       "id": "manual-muxjazmt-3",
       "type": "op-ed",
-      "title": "",
+      "title": "‘Off with their heads’ – the purge of Republican dissenters",
       "url": "https://www.thehindu.com/opinion/op-ed/off-with-their-heads-the-purge-of-republican-dissenters/article71038572.ece",
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-05-29T18:38:00.000Z",
+      "description": "Opposition to Donald Trump carries potentially fatal political consequences",
       "tags": [],
       "added_at": "2026-10-07T03:14:49.445Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     },
     {
       "id": "manual-muxjazmt-4",
       "type": "op-ed",
-      "title": "",
+      "title": "Trump’s Dallas convention offers India a warning about US political volatility",
       "url": "https://www.deccanherald.com/opinion/trumps-dallas-convention-offers-india-a-warning-about-us-political-volatility-4150027",
       "author": "Brigadier Anil Raman",
       "source": "Deccan Herald",
-      "date": "",
-      "description": "",
+      "date": "2026-09-17T20:00:16.140Z",
+      "description": "Trump’s Dallas convention highlights rising US protectionism amid H-1B visa changes and BRICS summit. India must diversify alliances as American domestic politics grows unpredictable and mercantile, say experts.",
       "tags": [],
       "added_at": "2026-10-07T03:14:49.445Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     }
   ]
 }

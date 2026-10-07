@@ -210,6 +210,30 @@ body {
   text-decoration: none;
   overflow: hidden;
 }
+/* Images: a strip across the top (op-ed, media, podcast) or a round logo
+   beside the title (newsletter). Removed on load error, leaving the card as it
+   is without one. */
+.ac-img-strip {
+  display: block;
+  width: calc(100% + 32px);
+  max-width: none;
+  height: 100px;
+  margin: -14px -16px 12px;
+  object-fit: cover;
+  border-radius: 5px 5px 0 0;
+}
+.ac-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.ac-logo {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .ac-card:focus { outline: none; }
 .ac-card:focus-visible {
   outline: 3px solid var(--coral);
@@ -278,7 +302,8 @@ body {
     overflow: hidden;
   }
   .ac-summary .ac-more { display: none; }
-  .ac-title { order: 0; }
+  .ac-img-strip { order: -1; }
+  .ac-title, .ac-head { order: 0; }
   .ac-authors { order: 2; }
   .ac-meta { order: 3; }
   .ac-card > .ac-more { order: 4; }
@@ -392,6 +417,7 @@ function normaliseManual(e, i) {
     date: hasDate ? e.date : (e.added_at || ''),
     author: e.author || '',
     ai_summary: !!e.ai_summary,
+    image: String(e.image || '').trim(),
   };
 }
 
@@ -400,7 +426,11 @@ function normaliseManual(e, i) {
 function urlKey(u) {
   try {
     const x = new URL(String(u || '').trim());
-    [...x.searchParams.keys()].forEach(k => { if (/^(utm_|fbclid$|gclid$|ref$|ref_src$)/.test(k)) x.searchParams.delete(k); });
+    // Tracking and share parameters: Spotify/YouTube "si", Substack's referral "r"
+    const host = x.hostname.replace(/^www\./, '');
+    [...x.searchParams.keys()].forEach(k => {
+      if (/^(utm_|fbclid$|gclid$|ref$|ref_src$|si$)/.test(k) || (k === 'r' && /substack\.com$/.test(host))) x.searchParams.delete(k);
+    });
     return (x.hostname.replace(/^www\./, '') + x.pathname.replace(/\/$/, '')).toLowerCase() + x.search;
   } catch (e) {
     return String(u || '').trim().toLowerCase();
@@ -460,11 +490,21 @@ function fmtDate(iso) {
   return isNaN(d) ? '' : d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
 }
 
+// Decorative (the title describes the card); removed if it fails to load
+const STRIP_TYPES = ['op-ed', 'blog', 'media', 'interview', 'podcast'];
+function cardImg(p, cls) {
+  return `<img class="${cls}" src="${esc(p.image)}" loading="lazy" referrerpolicy="no-referrer" alt="" onerror="this.remove()">`;
+}
+
 function cardHtml(p) {
   const meta = [p.source, fmtDate(p.date)].filter(Boolean).join(' · ');
   const summary = String(p.description || '').trim();
+  const strip = p.image && STRIP_TYPES.includes(p.type);
+  const logo = p.image && p.type === 'newsletter';
+  const title = `<h3 class="ac-title">${esc(p.title)}</h3>`;
   return `<a class="ac-card${summary ? ' has-summary' : ''}" href="${esc(p.url)}" target="_blank" rel="noopener">
-    <h3 class="ac-title">${esc(p.title)}</h3>
+    ${strip ? cardImg(p, 'ac-img-strip') : ''}
+    ${logo ? `<div class="ac-head">${cardImg(p, 'ac-logo')}${title}</div>` : title}
     ${p.author ? `<div class="ac-authors">${esc(p.author)}</div>` : ''}
     ${meta ? `<div class="ac-meta">${esc(meta)}</div>` : ''}
     ${summary ? `<div class="ac-summary"><span class="ac-summary-text">${esc(summary)}</span><span class="ac-more">Read more →</span></div>` : ''}

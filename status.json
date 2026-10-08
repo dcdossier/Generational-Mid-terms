@@ -3,8 +3,8 @@
     "BLS CPI": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-07T21:35:57.855Z",
-      "last_success": "2026-10-07T21:35:57.855Z",
+      "last_attempt": "2026-10-08T06:40:13.307Z",
+      "last_success": "2026-10-08T06:40:13.307Z",
       "item_count": 21,
       "error": null,
       "failing_since": null
@@ -21,11 +21,11 @@
     "Congress approval (Gallup)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-07T21:35:58.567Z",
+      "last_attempt": "2026-10-08T06:40:14.204Z",
       "last_success": "2026-10-07T21:35:58.567Z",
       "item_count": 1,
-      "error": null,
-      "failing_since": null
+      "error": "[Congress] Could not extract approval — keeping existing values",
+      "failing_since": "2026-10-08T06:40:14.204Z"
     },
     "News feeds (all)": {
       "group": "news",
@@ -1668,8 +1668,8 @@
     "NYT polling CSVs": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-07T21:35:57.527Z",
-      "last_success": "2026-10-07T21:35:57.527Z",
+      "last_attempt": "2026-10-08T06:40:13.030Z",
+      "last_success": "2026-10-08T06:40:13.030Z",
       "item_count": 2357,
       "error": null,
       "failing_since": null
@@ -1677,8 +1677,8 @@
     "Retirements (Wikipedia)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-07T21:36:00.372Z",
-      "last_success": "2026-10-07T21:36:00.372Z",
+      "last_attempt": "2026-10-08T06:40:15.948Z",
+      "last_success": "2026-10-08T06:40:15.948Z",
       "item_count": 71,
       "error": null,
       "failing_since": null
@@ -1686,7 +1686,7 @@
     "RSS fallback: Cook Political Report": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:04.522Z",
+      "last_attempt": "2026-10-08T06:40:17.092Z",
       "last_success": null,
       "item_count": null,
       "error": "HTTP 403",
@@ -1695,7 +1695,7 @@
     "RSS fallback: Gallup": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:02.537Z",
+      "last_attempt": "2026-10-08T06:40:16.046Z",
       "last_success": null,
       "item_count": null,
       "error": "HTTP 404",
@@ -1704,8 +1704,8 @@
     "RSS fallback: GNews:Ballot": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:06.440Z",
-      "last_success": "2026-10-07T06:30:06.440Z",
+      "last_attempt": "2026-10-08T06:40:18.981Z",
+      "last_success": "2026-10-08T06:40:18.981Z",
       "item_count": 100,
       "error": null,
       "failing_since": null
@@ -1713,17 +1713,17 @@
     "RSS fallback: GNews:Congress": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:05.965Z",
-      "last_success": "2026-10-07T06:30:05.965Z",
-      "item_count": 68,
+      "last_attempt": "2026-10-08T06:40:18.557Z",
+      "last_success": "2026-10-08T06:40:18.557Z",
+      "item_count": 70,
       "error": null,
       "failing_since": null
     },
     "RSS fallback: GNews:Trump": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:05.442Z",
-      "last_success": "2026-10-07T06:30:05.442Z",
+      "last_attempt": "2026-10-08T06:40:18.070Z",
+      "last_success": "2026-10-08T06:40:18.070Z",
       "item_count": 100,
       "error": null,
       "failing_since": null
@@ -1731,8 +1731,8 @@
     "RSS fallback: Inside Elections": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:04.823Z",
-      "last_success": "2026-10-07T06:30:04.823Z",
+      "last_attempt": "2026-10-08T06:40:17.579Z",
+      "last_success": "2026-10-08T06:40:17.579Z",
       "item_count": 100,
       "error": null,
       "failing_since": null
@@ -1740,8 +1740,8 @@
     "RSS fallback: Pew Research": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:02.664Z",
-      "last_success": "2026-10-07T06:30:02.664Z",
+      "last_attempt": "2026-10-08T06:40:16.125Z",
+      "last_success": "2026-10-08T06:40:16.125Z",
       "item_count": 100,
       "error": null,
       "failing_since": null
@@ -1749,7 +1749,7 @@
     "RSS fallback: RealClearPolitics": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:04.270Z",
+      "last_attempt": "2026-10-08T06:40:16.727Z",
       "last_success": null,
       "item_count": null,
       "error": "HTTP 403",
@@ -1758,7 +1758,7 @@
     "RSS fallback: Sabato's Crystal Ball": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:04.360Z",
+      "last_attempt": "2026-10-08T06:40:17.000Z",
       "last_success": null,
       "item_count": null,
       "error": "HTTP 403",
@@ -1767,8 +1767,8 @@
     "RSS fallback: YouGov": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-07T06:30:03.972Z",
-      "last_success": "2026-10-07T06:30:03.972Z",
+      "last_attempt": "2026-10-08T06:40:16.432Z",
+      "last_success": "2026-10-08T06:40:16.432Z",
       "item_count": 200,
       "error": null,
       "failing_since": null
@@ -1776,14 +1776,14 @@
     "Trump approval (Datawrapper)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-07T21:35:58.090Z",
-      "last_success": "2026-10-07T21:35:58.090Z",
+      "last_attempt": "2026-10-08T06:40:13.395Z",
+      "last_success": "2026-10-08T06:40:13.395Z",
       "item_count": 625,
       "error": null,
       "failing_since": null
     }
   },
-  "updated": "2026-10-08T06:37:11.814Z",
+  "updated": "2026-10-08T06:40:18.985Z",
   "ai": {
     "ac": {
       "provider": "none",
@@ -1793,7 +1793,7 @@
       "run_at": "2026-10-07T04:44:35.637Z"
     },
     "home": {
-      "run_at": "2026-10-07T21:35:56.267Z",
+      "run_at": "2026-10-08T06:40:11.887Z",
       "provider": "none",
       "calls_this_run": 0,
       "status": "off",

@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-09T08:31:16.757Z"
+    "last_updated": "2026-10-09T08:41:03.924Z"
   },
   "posts": [],
   "entries": [
@@ -789,7 +789,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-1",
@@ -803,7 +805,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-3",
@@ -817,7 +821,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-4",
@@ -831,12 +837,14 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-5",
       "type": "op-ed",
-      "title": "",
+      "title": "Just a moment…",
       "url": "https://theprint.in/opinion/pakistan-military-new-structure-india-escalation-strategy/3022070",
       "author": "Brigadier Anil Raman",
       "source": "ThePrint",
@@ -845,12 +853,14 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-6",
       "type": "op-ed",
-      "title": "",
+      "title": "Just a moment…",
       "url": "https://theprint.in/opinion/pakistan-turkey-saudi-pact-diplomacy-india-military-strategy/3009197/",
       "author": "Brigadier Anil Raman",
       "source": "ThePrint",
@@ -859,21 +869,25 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsm9-7",
       "type": "op-ed",
-      "title": "",
+      "title": "OPINION | China&rsquo;s stealth air power demands an asymmetric Indian grand strategy- Moneycontrol.com",
       "url": "https://www.moneycontrol.com/news/opinion/china-s-stealth-air-power-demands-an-asymmetric-indian-grand-strategy-13984780.html",
       "author": "Brigadier Anil Raman",
       "source": "Moneycontrol",
-      "date": "",
-      "description": "",
+      "date": "2026-07-27T10:44:57.000Z",
+      "description": "China&rsquo;s total inventory already exceeds 1,900 modern fighters, while the Indian Air Force operates approximately 500 to 600 combat aircraft. Attempting to match China fighter-for-fighter is therefore a strategic dead end. India&rsquo;s comparative advantage lies elsewhere",
       "tags": [],
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page",
+      "image": "https://images.moneycontrol.com/static-mcnews/2026/04/20260421102332_chinaflagnew.png"
     },
     {
       "id": "manual-mv0ptsma-8",
@@ -887,7 +901,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-9",
@@ -901,7 +917,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-10",
@@ -915,21 +933,25 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-11",
       "type": "op-ed",
-      "title": "",
+      "title": "Pakistan Read Trump Better Than India Did",
       "url": "https://frontline.thehindu.com/news/pakistan-us-ties-india-influence/article71137534.ece",
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-06-23T14:52:56.000Z",
+      "description": "The article argues Islamabad understood Trump's transactional politics and used a global crisis to strengthen its position in Washington.",
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page",
+      "image": "https://fl-i.thgim.com/public/incoming/3velam/article71137544.ece/alternates/LANDSCAPE_1200/J.D.%20Vance%20and%20Asim%20Munir.JPG"
     },
     {
       "id": "manual-mv0ptsma-13",
@@ -943,7 +965,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-16",
@@ -957,7 +981,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-18",
@@ -971,7 +997,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-19",
@@ -985,7 +1013,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mv0ptsma-20",
@@ -999,7 +1029,9 @@
       "tags": [],
       "added_at": "2026-10-09T08:40:43.042Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     }
   ]
 }

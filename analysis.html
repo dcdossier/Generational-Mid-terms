@@ -404,8 +404,8 @@ function titleFromUrl(u, host) {
 function normaliseManual(e, i) {
   let host = '';
   try { host = new URL(e.url).hostname.replace(/^www\./, ''); } catch (err) { /* keep empty */ }
-  // Fallbacks while the enrichment job has not filled an entry in yet:
-  // title from the link, date from when the entry was added
+  // Title falls back to the link while the enrichment job has not filled it in.
+  // The date never falls back: no publication date means "Date pending".
   const hasDate = e.date && !isNaN(new Date(e.date));
   return {
     id: e.id || 'manual-' + i,
@@ -414,7 +414,7 @@ function normaliseManual(e, i) {
     description: e.description || '',
     url: e.url,
     source: e.source || host,
-    date: hasDate ? e.date : (e.added_at || ''),
+    date: hasDate ? e.date : '',
     author: e.author || '',
     ai_summary: !!e.ai_summary,
     image: String(e.image || '').trim(),
@@ -445,8 +445,14 @@ async function loadData() {
   const byUrl = new Map();
   list.filter(e => e && e.url).map(normaliseManual)
     .forEach(p => { if (!byUrl.has(urlKey(p.url))) byUrl.set(urlKey(p.url), p); });
-  const t = p => new Date(p.date).getTime() || 0;   // undated entries sort last
-  _allPosts = [...byUrl.values()].sort((a, b) => t(b) - t(a));
+  // Strictly by publication date, newest first; undated entries go last
+  // (in their original order), never placed by upload date
+  const t = p => (p.date ? new Date(p.date).getTime() : NaN);
+  _allPosts = [...byUrl.values()].map((p, i) => [p, i]).sort(([a, i], [b, j]) => {
+    const ta = t(a), tb = t(b);
+    if (isNaN(ta) || isNaN(tb)) return isNaN(ta) - isNaN(tb) || i - j;
+    return tb - ta;
+  }).map(([p]) => p);
 
   const stamps = [manual && manual.meta && manual.meta.last_updated].filter(Boolean);
   if (stamps.length) {
@@ -497,7 +503,7 @@ function cardImg(p, cls) {
 }
 
 function cardHtml(p) {
-  const meta = [p.source, fmtDate(p.date)].filter(Boolean).join(' · ');
+  const meta = [p.source, fmtDate(p.date) || 'Date pending'].filter(Boolean).join(' · ');
   const summary = String(p.description || '').trim();
   const strip = p.image && STRIP_TYPES.includes(p.type);
   const logo = p.image && p.type === 'newsletter';

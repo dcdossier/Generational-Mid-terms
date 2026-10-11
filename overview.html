@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <link rel="stylesheet" href="assets/css/data-labels.css">
 <script src="assets/js/data-labels.js"></script>
+<script src="assets/js/figures.js"></script>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -614,7 +615,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="chart-card">
     <div class="card-title">Who is leaving and why &#8212; by party (House only)</div>
-    <div class="card-sub">Grouped by party and exit reason. 63% of retiring House members are Republicans &#8212; 16% of the entire GOP conference. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
+    <div class="card-sub">Grouped by party and exit reason. <span data-fig="retire.house_r_pct">62</span>% of retiring House members are Republicans &#8212; <span data-fig="retire.house_r_share_of_conf">17</span>% of the Republican conference. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
     <div class="legend">
       <div class="li"><div class="lsq" style="background:#9B2828"></div>Republican &#8212; retiring</div>
       <div class="li"><div class="lsq" style="background:#E8A0A0"></div>Republican &#8212; seeking office</div>
@@ -623,14 +624,14 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
     <div style="position:relative;height:200px"><canvas id="c-partysplit"></canvas></div>
     <div class="dl-label" data-block="retirements" data-kind="monthly"></div>
-    <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings Institution</a> (58 House members announced). Republicans include 18 subcommittee chairs and 3 committee chairs. Total departures including Senate: 72 (NPR, 29 May 2026) per <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>.</div>
+    <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings Institution</a> (April 2026 analysis). Total departures including the Senate: <span data-fig="retire.total">71</span> per <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, <span data-fig="retire.as_of">as of latest fetch</span>.</div>
   </div>
 
   <div class="chart-card">
     <div class="card-title">Where departing members are headed &#8212; who is running for other offices</div>
-    <div class="card-sub">About <span class="ret-pct">&#8230;</span>% of all departing members pursue other offices rather than retire outright. 14 are running for governorships, including Sens. Bennet (CO) and Klobuchar (MN), who are not up for Senate re-election in 2026 and would keep their seats if they lose. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
+    <div class="card-sub">About <span class="ret-pct">&#8230;</span>% of all departing members pursue other offices rather than retire outright. <span data-fig="retire.to_governor">11</span> are running for governor and <span data-fig="retire.to_senate">16</span> for the Senate. Sens. Bennet (CO) and Klobuchar (MN), who are running for governor but are not up for Senate re-election in 2026, are not counted. Sources: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> &middot; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a></div>
     <div style="position:relative;height:240px;max-width:440px;margin:0 auto"><canvas id="c-destdough"></canvas></div>
-    <div class="chart-note">Source: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, NPR tracker. 28 of 72 announced departures (NPR, 29 May 2026) are running for other offices rather than retiring outright. Of these: 14 running for governor (incl. Bennet and Klobuchar, who are not up for Senate re-election in 2026), 13 for Senate, 1 for state AG. See also: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>.</div>
+    <div class="chart-note">Source: <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, <span data-fig="retire.as_of">as of latest fetch</span>. <span data-fig="retire.other_office">29</span> of <span data-fig="retire.total">71</span> announced departures are running for other offices rather than retiring outright: <span data-fig="retire.to_governor">11</span> for governor, <span data-fig="retire.to_senate">16</span> for the Senate and <span data-fig="retire.to_other">2</span> for other offices. See also: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>.</div>
   </div>
 
   <hr class="section-rule">
@@ -644,7 +645,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-title">Faction-wise breakdown of all retirees &#8212; Senate &amp; House</div>
     <div class="card-sub">Classified by ideological caucus and voting record. Establishment/moderate Republicans are the single largest faction departing (14 total in House, 4 in Senate). Hover any bar for detail.</div>
     <div style="position:relative;height:300px"><canvas id="c-faction"></canvas></div>
-    <div class="chart-note">Classification: Freedom Caucus rosters, New Democrat Coalition, Progressive Caucus, GovTrack ideology scores, <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>/Hill reporting. Members straddling factions classified by primary affiliation. Data per <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> (Senate: 14 total; House: 58 total, as of 29 May 2026 per NPR).</div>
+    <div class="chart-note">Classification: Freedom Caucus rosters, New Democrat Coalition, Progressive Caucus, GovTrack ideology scores, <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>/Hill reporting. Members straddling factions classified by primary affiliation. Data per <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> (Senate: <span data-fig="retire.senate">11</span>; House: <span data-fig="retire.house">60</span>; Ballotpedia, <span data-fig="retire.as_of">as of latest fetch</span>).</div>
   </div>
 
   <div class="chart-card">
@@ -657,7 +658,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lsq" style="background:#C084D0"></div>Other office</div>
     </div>
     <div style="position:relative;height:280px"><canvas id="c-factiodest"></canvas></div>
-    <div class="chart-note">Source: NPR tracker, <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, CNN analysis; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>. As of 29 May 2026 (NPR): 14 Senate and 58 House departures announced, 72 in total.</div>
+    <div class="chart-note">Source: NPR tracker, <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a>, CNN analysis; <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a>. Ballotpedia, <span data-fig="retire.as_of">as of latest fetch</span>: <span data-fig="retire.senate">11</span> Senate and <span data-fig="retire.house">60</span> House departures announced, <span data-fig="retire.total">71</span> in total.</div>
   </div>
 
   <hr class="section-rule">
@@ -667,7 +668,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="stat-box"><div class="stat-n" style="color:#9B2828">72</div><div class="stat-l">1992 previous record &#8212; bank scandal + redistricting</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--t1)">40</div><div class="stat-l">Modern average per cycle (post-WWII)</div></div>
     <div class="stat-box"><div class="stat-n" style="color:var(--orange)" id="stat-2026-total">&#8230;</div><div class="stat-l">2026 &#8212; <span class="ret-src">Source: Ballotpedia</span><sup>*</sup></div></div>
-    <div class="stat-box"><div class="stat-n" style="color:var(--blue)" id="stat-congress-appr">&#8230;</div><div class="stat-l">Congress approval, Gallup <span id="stat-congress-month">latest</span> &#8212; near-record low (all-time Gallup low: 9%, Nov 2013)</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:var(--blue)" id="stat-congress-appr">&#8230;</div><div class="stat-l">Congress approval, Gallup <span id="stat-congress-month">latest</span> &#8212; record low 9% (Nov 2013)</div></div>
   </div>
 
   <div class="chart-card">
@@ -731,7 +732,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lsq" style="background:#C084D0"></div>Other state</div>
     </div>
     <div style="position:relative;height:260px"><canvas id="c-ratio"></canvas></div>
-    <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a> Vital Statistics, OpenSecrets / <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> candidate data 2010&#8211;2026. 2026: 28 of 72 departing members seek other office (NPR, 29 May 2026) &#8776; 39%.</div>
+    <div class="chart-note">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Brookings</a> Vital Statistics, OpenSecrets / <a href="https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">Ballotpedia</a> candidate data 2010&#8211;2026. 2026: <span data-fig="retire.other_office">29</span> of <span data-fig="retire.total">71</span> departing members seek other office (<span data-fig="retire.pct_other">41</span>%; Ballotpedia, <span data-fig="retire.as_of">as of latest fetch</span>).</div>
   </div>
 
   <hr class="section-rule">
@@ -745,10 +746,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>119th Congress (2025&#8211;26)</div>
     </div>
     <div style="position:relative;height:280px"><canvas id="c-age"></canvas></div>
-    <div class="callout" style="margin-top:14px;margin-bottom:0">
-      <div class="callout-label">119th Congress &#8212; CRS R48535</div>
-      The 119th Congress (2025&#8211;26) has a <strong>median Senate age near 65</strong> and <strong>median House age of 57</strong> (AP analysis). The average (mean) age is 63.9 for Senators and 57.9 for Representatives &#8212; making it the third oldest Congress since 1789. This age factor has contributed to intra-party conflicts and prolonged institutional inertia despite clear party majorities.
-    </div>
     <div class="chart-note">Sources: CRS Report R48535 (119th Congress); Pew Research Center congressional age analyses (113th&#8211;119th); Quorum/LegiStorm historical data; Brookings Vital Statistics on Congress. Historical values (pre-2001) estimated from CRS R41545 patterns and academic sources. Senate and House median ages are as of the opening day of each Congress.</div>
   </div>
 
@@ -942,7 +939,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
         </tr>
         <tr class="appr-current">
           <td>Donald Trump &#9679;</td><td><span class="appr-pty-r">R</span></td><td>2026</td>
-          <td id="appr-table-pct">38.9%*</td><td class="appr-tbd">TBD</td><td class="appr-tbd">Election 3 Nov 2026</td>
+          <td id="appr-table-pct">&#8212;*</td><td class="appr-tbd">TBD</td><td class="appr-tbd">Election 3 Nov 2026</td>
         </tr>
       </tbody>
     </table>
@@ -1004,7 +1001,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
           <div class="appr-zone-marker" id="appr-congress-marker" style="left:16%"></div>
         </div>
         <div class="appr-zone-labels">
-          <span>10%</span><span>Historic low</span><span>Average ~22%</span><span>High</span><span>40%+</span>
+          <span>9% record low (Nov 2013)</span><span>22% modern avg</span><span>50%+</span>
         </div>
       </div>
     </div>
@@ -1175,12 +1172,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-sub">Each midterm plotted by Democratic ballot margin (x-axis) and resulting House seat change (y-axis). The 2026 projection is based on the current average and historical regression.</div>
     <div style="position:relative;height:300px"><canvas id="c-gb-scatter"></canvas></div>
     <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
-    <div class="chart-note">Linear regression based on six completed midterm cycles (2006&#8211;2022). The relationship is directionally consistent but noisy: a +5D margin historically produces roughly +15 to +35 Democratic seats, depending on presidential approval and redistricting. 2026 projection is illustrative, not a forecast.</div>
+    <div class="chart-note">Linear regression based on five completed midterm cycles (2006, 2010, 2014, 2018, 2022). The relationship is directionally consistent but noisy: a +5D margin historically produces roughly +15 to +35 Democratic seats, depending on presidential approval and redistricting. 2026 projection is illustrative, not a forecast.</div>
   </div>
 
   <!-- SEAT PROJECTION SUMMARY -->
   <div class="chart-card">
-    <div class="card-title">Seat projection from current ballot margin</div>
+    <div class="card-title">Seat projection from current ballot margin &#8212; regression of five midterms (2006&#8211;2022)</div>
     <div class="card-sub">Historical regression of ballot margin vs House seat change applied to the current average. Illustrative only &#8212; redistricting, candidate quality, and turnout modify the outcome.</div>
     <div class="gb-proj-row">
       <div class="gb-proj-big">
@@ -1203,7 +1200,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
         <span>R+10</span><span>R+5</span><span>Even</span><span>D+5</span><span>D+10</span>
       </div>
     </div>
-    <div class="chart-note">Regression based on 6 completed midterm cycles 2006&#8211;2022. One-standard-deviation range shown. The structural Republican geographic advantage means a D+3 lead is approximately equivalent to zero net seat change; a D+5 lead has historically produced +15 to +35 Democratic seats.</div>
+    <div class="chart-note">Regression of five completed midterms (2006, 2010, 2014, 2018, 2022). One-standard-deviation range shown. The structural Republican geographic advantage means a D+3 lead is approximately equivalent to zero net seat change; a D+5 lead has historically produced +15 to +35 Democratic seats.</div>
   </div>
 
   <!-- ANALOGOUS MIDTERMS COMPARISON -->
@@ -1492,8 +1489,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
           <div class="ca-zone-marker" id="ca-zone-marker" style="left:20%"></div>
         </div>
         <div class="ca-zone-labels">
-          <span>10% Historic low</span>
-          <span>22% Modern avg</span>
+          <span>9% record low (Nov 2013)</span>
+          <span>22% modern avg</span>
           <span>50%+</span>
         </div>
       </div>
@@ -1514,7 +1511,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- CHAMBER BREAKDOWN -->
   <div class="chart-card">
     <div class="card-title">Approval by chamber &#8212; Senate vs House</div>
-    <div class="card-sub">The Senate typically polls higher than the House due to its slower, more deliberative nature and longer member terms. The House's slim majority (218 R to 214 D, with 1 Independent and 2 vacancies) and repeated near-shutdowns have dragged its approval to near-record lows.</div>
+    <div class="card-sub">The Senate typically polls higher than the House due to its slower, more deliberative nature and longer member terms. The House's slim majority (<span data-fig="house.r">218</span> R to <span data-fig="house.d">214</span> D, with <span data-fig="house.i">1</span> Independent and <span data-fig="house.vacant">2</span> vacancies) and repeated near-shutdowns have kept its approval historically low.</div>
     <div class="ca-chamber-grid">
       <div class="ca-chamber-box">
         <div class="ca-chamber-name">Senate</div>
@@ -1657,6 +1654,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="stat-box"><div class="stat-num" id="kr-stat-gov">36</div><div class="stat-label">Governor Races</div></div>
     <div class="stat-box"><div class="stat-num" id="kr-stat-flip">+4</div><div class="stat-label">D Seats Needed (Senate)</div></div>
   </div>
+  <p style="font:400 12px var(--sans);color:#6B6B6B;margin:6px 0 0">Ratings and toss-up counts: <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span>.</p>
   <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
   <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
 
@@ -1681,13 +1679,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <hr class="kr-section-divider">
   <div class="kr-chamber-header">
     <div class="kr-chamber-title">U.S. Senate</div>
-    <div class="kr-chamber-sub" id="kr-sen-sub">Current: <span style="color:#C04040;font-weight:700">53R</span> / <span style="color:#1A5EA8;font-weight:700">47D</span> &mdash; 33 Class II seats up in 2026</div>
+    <div class="kr-chamber-sub" id="kr-sen-sub">Current: <span style="color:#C04040;font-weight:700">53R</span> / <span style="color:#1A5EA8;font-weight:700">47D</span> &mdash; <span data-fig="senate.up">35</span> seats up in 2026 (<span data-fig="senate.class_up">33</span> Class II + <span data-fig="senate.specials">2</span> specials)</div>
   </div>
 
   <!-- Senate seat projection chart -->
   <div class="kr-proj-card">
     <div class="kr-proj-title">Projected seat composition &#8212; all 100 seats</div>
-    <div class="kr-proj-sub">Includes the 67 seats not up in 2026 (safe) plus the 33 Class II seats rated by Cook/Sabato. Majority line at 51.</div>
+    <div class="kr-proj-sub">Includes the <span data-fig="senate.not_up">65</span> seats not up in 2026 (counted as safe for the party that holds them) plus the <span data-fig="senate.up">35</span> seats up, rated by <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span>. Toss-ups are left unassigned. Majority line at 51.</div>
     <div style="position:relative;height:72px;margin:4px 0"><canvas id="c-kr-senate"></canvas></div>
     <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
     <div class="kr-proj-range" id="kr-sen-range"></div>
@@ -1710,7 +1708,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
   </div>
 
-  <p style="font:600 12px var(--sans);color:#555;margin:10px 0 4px">33 seats up &mdash; by rating:</p>
+  <p style="font:600 12px var(--sans);color:#555;margin:10px 0 4px"><span data-fig="senate.up">35</span> seats up &mdash; by rating:</p>
   <div class="kr-ratings-strip" id="kr-sen-ratings-strip"></div>
 
   <div class="kr-path" id="kr-sen-path"></div>
@@ -1743,13 +1741,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="kr-balance-wrap">
     <div class="kr-balance-label">
-      <span id="kr-hou-r-label">R 222</span>
+      <span id="kr-hou-r-label">R 218</span>
       <span style="font:700 11px var(--sans);color:#555">Majority: 218</span>
-      <span id="kr-hou-d-label">D 213</span>
+      <span id="kr-hou-d-label">D 214</span>
     </div>
     <div class="kr-balance-bar">
-      <div class="kr-balance-r" id="kr-hou-bar-r" style="width:51%">222</div>
-      <div class="kr-balance-d" id="kr-hou-bar-d" style="width:49%">213</div>
+      <div class="kr-balance-r" id="kr-hou-bar-r" style="width:50.5%">218</div>
+      <div class="kr-balance-d" id="kr-hou-bar-d" style="width:49.5%">214</div>
     </div>
     <div class="kr-balance-majority">
       <div class="kr-majority-tick" style="left:50.1%"></div>
@@ -1777,10 +1775,10 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <hr class="kr-section-divider">
   <div class="kr-chamber-header">
     <div class="kr-chamber-title">Governor Races</div>
-    <div class="kr-chamber-sub">Current: <span style="color:#C04040;font-weight:700">26R</span> / <span style="color:#1A5EA8;font-weight:700">24D</span> &mdash; 36 seats on the ballot</div>
+    <div class="kr-chamber-sub">Current: <span style="color:#C04040;font-weight:700"><span data-fig="gov.r">26</span>R</span> / <span style="color:#1A5EA8;font-weight:700"><span data-fig="gov.d">24</span>D</span> &mdash; <span data-fig="gov.races">36</span> seats on the ballot</div>
   </div>
 
-  <p style="font:600 12px var(--sans);color:#555;margin:10px 0 4px">17 races &mdash; by rating:</p>
+  <p style="font:600 12px var(--sans);color:#555;margin:10px 0 4px"><span data-fig="gov.races">36</span> races &mdash; by rating:</p>
   <div class="kr-ratings-strip" id="kr-gov-ratings-strip"></div>
 
   <div class="kr-path" id="kr-gov-path"></div>
@@ -1898,17 +1896,17 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   </div>
 
   <h3 class="section-title" style="margin-top:24px">Swing Bloc Spotlight</h3>
-  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 12px">Bipartisan caucuses that negotiate cross-party compromise on high-stakes legislation. With a slim House majority (218 R to 214 D), these blocs often determine whether bills pass at all.</p>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 12px">Bipartisan caucuses that negotiate cross-party compromise on high-stakes legislation. With a slim House majority (<span data-fig="house.r">218</span> R to <span data-fig="house.d">214</span> D), these blocs often determine whether bills pass at all.</p>
   <div class="ft-swing-grid" id="ft-swing-cards"></div>
 
   <h3 class="section-title" style="margin-top:24px">Senate Caucuses</h3>
   <div class="ft-senate-grid">
     <div>
-      <div class="ft-col-header ft-col-r">Republican Conference &mdash; 53 seats</div>
+      <div class="ft-col-header ft-col-r">Republican Conference &mdash; <span data-fig="senate.r">53</span> seats</div>
       <table class="ft-senate-table" id="ft-senate-r"></table>
     </div>
     <div>
-      <div class="ft-col-header ft-col-d">Democratic Caucus &mdash; 47 seats</div>
+      <div class="ft-col-header ft-col-d">Democratic Caucus &mdash; <span data-fig="senate.d">47</span> seats</div>
       <table class="ft-senate-table" id="ft-senate-d"></table>
     </div>
   </div>
@@ -2041,6 +2039,13 @@ function goSub(id, btn) {
 // ── LOAD DATA.JSON AND RENDER ──
 let DATA = null;
 
+// The 2026 row of generic_ballot.historical_midterms always shows the live average
+function liveGenericBallotRow(d) {
+  const gb = d && d.generic_ballot;
+  const row = gb && (gb.historical_midterms || []).find(h => h.year === 2026);
+  if (row && gb.democrat != null && gb.republican != null) { row.democrat = gb.democrat; row.republican = gb.republican; }
+}
+
 async function loadData() {
   const paths = ['./data.json', 'data.json', '../data.json'];
   for (const p of paths) {
@@ -2048,6 +2053,7 @@ async function loadData() {
       const res = await fetch(p + '?t=' + Date.now());
       if (!res.ok) continue;
       DATA = await res.json();
+      liveGenericBallotRow(DATA);
       break;
     } catch(e) { /* try next */ }
   }
@@ -2140,7 +2146,7 @@ function renderAll() {
   renderCharts(r);
 }
 
-// "Source: Wikipedia · Data as of 5 Oct 2026" for the live retirement counts
+// "Source: Ballotpedia · Data as of 2 Oct 2026" for the live retirement counts
 function retireSourceLabel(r) {
   return window.DataLabels ? window.DataLabels.html(r, { kind: 'monthly' }) : '';
 }
@@ -2917,7 +2923,7 @@ function renderApprovalStats() {
         calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is below the 40% threshold associated with wave elections. Since 1946, presidents below 40% have averaged losses of <strong>45+ House seats</strong>. The closest modern parallels are George W. Bush (37%, 2006: \u221230 seats) and Harry Truman (33%, 1946: \u221255 seats).';
       } else if (ap < 45) {
         calloutLabel.textContent = 'Historical pattern \u2014 presidential approval and midterm seat loss';
-        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is in the danger zone. Presidents in the 40\u201344% range at their midterm have lost an average of <strong>30\u201340 House seats</strong> since 1946. The closest analogues are Obama 2014 (40%, \u221213 seats), Biden 2022 (40%, \u22129 seats), and Trump 2018 (41%, \u221241 seats).';
+        calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump\'s approval is in the danger zone. Presidents in the 40\u201344% range at their midterm have lost an average of <strong>30\u201340 House seats</strong> since 1946. The closest analogues are ' + midtermApprovalText([2014, 2022, 2018]) + '.';
       } else if (ap < 50) {
         calloutLabel.textContent = 'Historical pattern \u2014 presidential approval and midterm seat loss';
         calloutBody.innerHTML = 'At <strong>' + ap + '%</strong>, Trump is in below-average territory. Presidents in the 45\u201349% range typically lose <strong>10\u201325 House seats</strong> at their midterm. Losses are likely but a wave scenario is less probable than at sub-40% approval levels.';
@@ -2948,6 +2954,10 @@ function renderApprovalStats() {
         2014: 'Second-term drag, low D turnout', 2018: 'Anti-Trump wave',
         2022: 'Dobbs backlash offset redistricting', 2026: 'Current \u2014 election 3 Nov 2026'
       };
+      // One approval series: data.json previous_elections.midterms where it has the year
+      const peAppr = {};
+      ((DATA.previous_elections || {}).midterms || []).forEach(m => { peAppr[m.year] = m.president_approval; });
+      MIDTERM_DATA.forEach(m => { if (peAppr[m.year] != null) m.approval = peAppr[m.year]; });
       const sorted = MIDTERM_DATA.slice().sort((a, b) => Math.abs(a.approval - ap) - Math.abs(b.approval - ap));
       const top3 = sorted.slice(0, 3);
       const cur = { year: 2026, pres: 'Donald Trump', party: 'R', approval: ap, seat_change: null };
@@ -3012,31 +3022,48 @@ function renderApprovalStats() {
   }
 
   // ── Congress approval ───────────────────────────────────────────────────────
-  if (cg) {
-    const ca = cg.approve || 0, cd = cg.disapprove || 0;
+  const cgc = (DATA.congress_approval && DATA.congress_approval.combined) || cg;
+  if (cgc) {
+    const ca = cgc.approve || 0, cd = cgc.disapprove || 0;
     document.getElementById('appr-s-congress').textContent            = ca + '%';
     document.getElementById('appr-congress-big').textContent          = ca + '%';
     document.getElementById('appr-congress-val-approve').textContent    = ca + '%';
     document.getElementById('appr-congress-val-disapprove').textContent = cd + '%';
     document.getElementById('appr-congress-fill-approve').style.width    = ca + '%';
     document.getElementById('appr-congress-fill-disapprove').style.width = cd + '%';
-    // Zone marker: 10%–40% range mapped 0–100%
-    const zonePct = Math.min(100, Math.max(0, (ca - 10) / 30 * 100));
+    const zonePct = congressZonePct(ca);
     const markerEl = document.getElementById('appr-congress-marker');
     if (markerEl) markerEl.style.left = zonePct + '%';
     const ctxEl = document.getElementById('appr-congress-ctx');
     if (ctxEl) {
-      const band = ca <= 10 ? 'at an all-time low (tied with Nov 2013)'
-                 : ca < 15  ? 'near an all-time low'
-                 : ca < 20  ? 'well below the post-2010 average of 22%'
-                 : ca < 25  ? 'around the post-2010 average'
-                 : 'above average for the post-2010 era';
-      ctxEl.textContent = ca + '% approval places the 119th Congress '
-        + band + '. Net disapproval stands at ' + (cd - ca) + ' points. '
-        + 'The all-time low was 9% (Nov 2013, government shutdown). '
+      ctxEl.textContent = ca + '% approval is ' + congressBand(ca) + '. Net disapproval stands at ' + (cd - ca) + ' points. '
+        + 'The record low is 9% (Nov 2013, government shutdown). '
         + 'Congressional approval is a secondary predictor of midterm outcomes — its effect is strongest when it compounds a low presidential approval.';
     }
   }
+}
+
+// Congress approval: one description and one marker scale for every panel
+// (record low 9%, Nov 2013; modern average about 22%)
+function congressBand(v) {
+  return v <= 10 ? 'at or near the record low of 9% (Nov 2013)'
+       : v < 15  ? 'close to the record low of 9% (Nov 2013)'
+       : v < 20  ? 'well below the post-2010 average of 22%'
+       : v < 25  ? 'around the post-2010 average of 22%'
+       : 'above the post-2010 average of 22%';
+}
+function congressZonePct(v) { return Math.min(100, Math.max(0, (v - 9) / (50 - 9) * 100)); }
+
+// "Obama 2014 (42%, −13 seats), …" from data.json previous_elections.midterms
+function midtermApprovalText(years) {
+  const ms = (DATA.previous_elections || {}).midterms || [];
+  const last = n => n.split(' ').pop();
+  const parts = years.map(y => {
+    const m = ms.find(x => x.year === y); if (!m) return null;
+    const ch = m.president_party === 'D' ? m.house.d_change : m.house.r_change;
+    return last(m.president) + ' ' + y + ' (' + m.president_approval + '%, ' + (ch > 0 ? '+' : '\u2212') + Math.abs(ch) + ' seats)';
+  }).filter(Boolean);
+  return parts.length < 2 ? parts.join('') : parts.slice(0, -1).join(', ') + ', and ' + parts[parts.length - 1];
 }
 
 function renderApprovalCharts() {
@@ -3522,7 +3549,7 @@ function renderBallotStats() {
                  : projected > -5  ? 'roughly a wash — small gains or losses in either direction'
                  : projected > -20 ? 'a modest Republican net gain'
                  :                   'a large Republican wave scenario';
-      ctxEl.innerHTML = '<p>At a current <strong>' + marginStr + ' margin</strong>, the historical regression projects <strong>'
+      ctxEl.innerHTML = '<p>At a current <strong>' + marginStr + ' margin</strong>, a regression of five midterms (2006\u20132022) projects <strong>'
         + (projected >= 0 ? '+' : '') + projected + ' Democratic House seats</strong> '
         + '(one-sigma range: ' + (lo >= 0 ? '+' : '') + lo + ' to ' + (hi >= 0 ? '+' : '') + hi + '). '
         + 'This is <strong>' + zone + '</strong>.</p>'
@@ -3559,7 +3586,7 @@ function renderBallotStats() {
     };
     compGrid.innerHTML = items.map(h => {
       const isCur = h.year === 2026;
-      const hm = h.democrat - h.republican;
+      const hm = Math.round((h.democrat - h.republican) * 10) / 10;
       const hmStr = hm > 0 ? '<span style="color:var(--blue)">D+' + hm + '</span>'
                   : hm < 0 ? '<span style="color:#9B2828">R+' + Math.abs(hm) + '</span>'
                   : '<span style="color:var(--t3)">Even</span>';
@@ -3627,7 +3654,7 @@ function renderHistTable(hist) {
     2018: 'D gained majority', 2022: 'D held minority', 2026: 'Election 3 Nov 2026'
   };
   tbody.innerHTML = hist.map(h => {
-    const m = h.democrat - h.republican;
+    const m = Math.round((h.democrat - h.republican) * 10) / 10;
     const mStr = (m >= 0 ? 'D+' : 'R+') + Math.abs(m);
     const mCol = m > 0 ? 'var(--blue)' : '#9B2828';
     const dW = Math.round(h.democrat / (h.democrat + h.republican) * 100);
@@ -4327,14 +4354,12 @@ function renderCongressApprovalStats() {
   trendEl.textContent = (tn >= 0 ? '+' : '') + tn + ' pt';
   trendEl.style.color = tn > 0 ? 'var(--green)' : tn < 0 ? 'var(--red)' : 'var(--t3)';
 
-  // Zone marker: maps 10-50% range to 0-100% position
-  const pos = Math.min(100, Math.max(0, (ap - 10) / 40 * 100));
+  const pos = congressZonePct(ap);
   document.getElementById('ca-zone-marker').style.left = pos + '%';
 
   // Context sentence
-  const desc = ap <= 14 ? 'near an all-time low' : ap <= 19 ? 'in historically low territory' : ap <= 25 ? 'below the modern average of 22%' : 'around the modern average';
   document.getElementById('ca-context-sentence').textContent =
-    ap + '% approval is ' + desc + '. Disapproval stands at ' + dp + '%. ' +
+    ap + '% approval is ' + congressBand(ap) + '. Disapproval stands at ' + dp + '%. ' +
     'The net approval rating of ' + (net >= 0 ? '+' : '') + net + ' points reflects ' +
     (net < -40 ? 'deep institutional distrust across the electorate.' : net < -20 ? 'broad dissatisfaction with the governing Congress.' : 'below-average institutional confidence.');
 
@@ -5476,7 +5501,8 @@ function renderKeyRacesStats() {
   set('kr-stat-senate', senate.seats_up || 35);
   set('kr-stat-tossup', house.ratings_summary.toss_up || 22);
   set('kr-stat-gov', governor.races.length);
-  set('kr-stat-flip', '+' + (senate.path_to_majority?.d_needs_to_flip || 4));
+  const dNeed = (senate.path_to_majority?.needed || 51) - senate.current_balance.d;
+  set('kr-stat-flip', '+' + dNeed);
 
   // Senate balance bar
   const { r: sr, d: sd } = senate.current_balance;
@@ -5488,7 +5514,7 @@ function renderKeyRacesStats() {
   set('kr-sen-r-label', 'R ' + sr);
   set('kr-sen-d-label', 'D ' + sd);
   const senSubEl = document.getElementById('kr-sen-sub');
-  if (senSubEl) senSubEl.innerHTML = `Current: <span style="color:#C04040;font-weight:700">${sr}R</span> / <span style="color:#1A5EA8;font-weight:700">${sd}D</span> \u2014 ${senate.seats_up} Class II seats up in 2026`;
+  if (senSubEl) senSubEl.innerHTML = `Current: <span style="color:#C04040;font-weight:700">${sr}R</span> / <span style="color:#1A5EA8;font-weight:700">${sd}D</span> \u2014 ${senate.seats_up} seats up in 2026 (${senate.seats_up - (senate.specials || []).length} Class II + ${(senate.specials || []).length} specials)`;
 
   // House balance bar
   const { r: hr, d: hd } = house.current_balance;
@@ -5519,13 +5545,13 @@ function renderKeyRacesStats() {
     calloutBody  = `Republicans project ${houLeanR} solid/lean House seats (majority 218) and ${senSolidR} solid/likely Senate seats (majority 51). All ${hRat.toss_up} House and ${sRat.toss_up} Senate toss-ups affect the margin, not chamber control.`;
   } else if (houLeanR >= 218) {
     calloutLabel = 'House Leans Republican \u2014 Senate Contested';
-    calloutBody  = `Republicans project ${houLeanR} solid/lean House seats. The Senate is more competitive \u2014 Democrats need to hold their toss-ups and flip at least ${ptmSen?.d_needs_to_flip || 4} lean-R seats to reach 51.`;
+    calloutBody  = `Republicans project ${houLeanR} solid/lean House seats. The Senate is more competitive \u2014 Democrats need to hold their toss-ups and flip at least ${dNeed} Republican-held seats to reach 51.`;
   } else if (houLeanD >= 218) {
     calloutLabel = 'House Leans Democratic';
     calloutBody  = `Democrats project ${houLeanD} solid/lean House seats, putting a majority in reach. The ${hRat.toss_up} toss-up districts are the decisive battleground.`;
   } else {
     calloutLabel = 'House Majority Decided by Toss-ups';
-    calloutBody  = `R-leaning: ${houLeanR} seats \u2014 D-leaning: ${houLeanD} seats. The ${hRat.toss_up} toss-up districts determine the majority (need 218). Senate: Republicans project ${senSolidR} solid/likely seats \u2014 Democrats must flip ${ptmSen?.d_needs_to_flip || 4}+ lean-R seats to reach 51.`;
+    calloutBody  = `R-leaning: ${houLeanR} seats \u2014 D-leaning: ${houLeanD} seats. The ${hRat.toss_up} toss-up districts determine the majority (need 218). Senate: Republicans project ${senSolidR} solid/likely seats \u2014 Democrats must flip ${dNeed}+ Republican-held seats to reach 51.`;
   }
   set('kr-callout-label', calloutLabel);
   set('kr-callout-body',  calloutBody);
@@ -5658,22 +5684,16 @@ function renderKeyRacesCharts() {
     };
   }
 
-  function rangeHTML(ratings, solidR, solidD, label) {
-    const dMin = solidD;
-    const dTossHalf = Math.round((ratings.toss_up || 0) / 2);
-    const dExp = solidD + (ratings.lean_d || 0) + dTossHalf;
-    const dMax = solidD + (ratings.lean_d || 0) + (ratings.toss_up || 0) + (ratings.lean_r || 0);
-    const rMin = solidR;
-    const rExp = solidR + (ratings.lean_r || 0) + ((ratings.toss_up || 0) - dTossHalf);
-    const rMax = solidR + (ratings.lean_r || 0) + (ratings.toss_up || 0) + (ratings.lean_d || 0);
-    return `
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Floor</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dMin}</div></div>
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Expected</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dExp}</div></div>
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">D Ceiling</div><div class="kr-proj-range-val" style="color:#1A5EA8">${dMax}</div></div>
-      <div style="width:1px;background:var(--br);flex-shrink:0"></div>
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Floor</div><div class="kr-proj-range-val" style="color:#C04040">${rMin}</div></div>
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Expected</div><div class="kr-proj-range-val" style="color:#C04040">${rExp}</div></div>
-      <div class="kr-proj-range-item"><div class="kr-proj-range-label">R Ceiling</div><div class="kr-proj-range-val" style="color:#C04040">${rMax}</div></div>`;
+  // Floors = safe + likely; "with leans" adds lean seats; toss-ups are shown
+  // unassigned rather than split between the parties by a rule.
+  function rangeHTML(ratings, solidR, solidD) {
+    const dLean = solidD + (ratings.lean_d || 0);
+    const rLean = solidR + (ratings.lean_r || 0);
+    const item = (label, val, col) => `<div class="kr-proj-range-item"><div class="kr-proj-range-label">${label}</div><div class="kr-proj-range-val" style="color:${col}">${val}</div></div>`;
+    const sep = '<div style="width:1px;background:var(--br);flex-shrink:0"></div>';
+    return item('D Floor', solidD, '#1A5EA8') + item('D with Leans', dLean, '#1A5EA8')
+      + sep + item('Toss-ups (unassigned)', ratings.toss_up || 0, '#C9A227') + sep
+      + item('R with Leans', rLean, '#C04040') + item('R Floor', solidR, '#C04040');
   }
 
   function summaryHTML(ratings) {

@@ -42,6 +42,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <link rel="stylesheet" href="assets/css/data-labels.css">
 <script src="assets/js/data-labels.js"></script>
+<script src="assets/js/figures.js"></script>
 <style>
 :root{
   --navy:#4d0a2e;
@@ -621,9 +622,9 @@ body{background:#F5F5DC;color:#1E2232}
           </div>
           <div class="home-election-date">Tuesday, 3 November 2026</div>
           <div class="home-hero-pills">
-            <span class="home-pill">435 House seats</span>
-            <span class="home-pill">35 Senate seats</span>
-            <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">36 Governor races &#8599;</a></span>
+            <span class="home-pill"><span data-fig="house.total">435</span> House seats</span>
+            <span class="home-pill"><span data-fig="senate.up">35</span> Senate seats</span>
+            <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none"><span data-fig="gov.races">36</span> Governor races &#8599;</a></span>
             <span class="home-pill"><a href="https://www.census.gov/newsroom/facts-for-features/2026/asian-american-pacific-islander.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">5.6M Indian-Americans, alone or in combination (2024) &#8599;</a></span>
           </div>
         </div>
@@ -682,21 +683,21 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-label">Congress Approval</div>
           <div class="metric-num" id="hm-congress" style="color:#E08080">&#8212;</div>
           <div class="metric-sub">Combined House + Senate</div>
-          <span class="metric-trend mt-dn">&#8595; Record Low</span>
+          <span class="metric-trend mt-nt">Record low: 9% (Nov 2013)</span>
           <div class="dl-label" data-block="congress_approval.combined" data-kind="monthly"></div>
         </div>
         <div class="metric-card">
           <div class="metric-label">House Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favoured and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div class="metric-num" id="hm-tossups" style="color:var(--gold)">&#8212;</div>
-          <div class="metric-sub">Seats that decide control</div>
-          <span class="metric-trend mt-nt">435 seats total</span>
+          <div class="metric-sub">Seats that decide control &middot; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></div>
+          <span class="metric-trend mt-nt"><span data-fig="house.total">435</span> seats total</span>
           <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
         </div>
         <div class="metric-card">
           <div class="metric-label">Senate Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favoured and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)">7</div>
-          <div class="metric-sub">Seats in genuine contention</div>
-          <span class="metric-trend mt-nt">33+2 seats up in 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span>
+          <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)"><span data-fig="senate.tossups">7</span></div>
+          <div class="metric-sub">Seats in genuine contention &middot; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></div>
+          <span class="metric-trend mt-nt"><span data-fig="senate.split">33+2</span> seats up in 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span>
           <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
         </div>
       </div>
@@ -707,14 +708,14 @@ body{background:#F5F5DC;color:#1E2232}
         <!-- House -->
         <div class="metric-card">
           <div class="metric-label" style="color:#1E3A8A;font-size:11px;letter-spacing:.08em">&#127979; House of Representatives</div>
-          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; <span data-fig="house.total">435</span> seats total</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;218</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;214</span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="house.r">218</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;<span data-fig="house.d">214</span></span>
           </div>
-          <div style="font:400 12px var(--sans);color:#888;margin-bottom:4px">+ 1 Independent, 2 vacancies &mdash; Press Gallery, 2 Sep 2026</div>
+          <div style="font:400 12px var(--sans);color:#888;margin-bottom:4px">+ <span data-fig="house.i">1</span> Independent, <span data-fig="house.vacant">2</span> vacancies &mdash; Press Gallery, 2 Sep 2026</div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">49 <span style="font:400 15px var(--sans);color:#777">of 435</span></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="house.battleground">49</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="house.total">435</span></span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
@@ -723,11 +724,11 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-label" style="color:#4C1D95;font-size:11px;letter-spacing:.08em">&#127981; Senate</div>
           <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;53</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D+I&nbsp;47</span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="senate.r">53</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D+I&nbsp;<span data-fig="senate.d">47</span></span>
           </div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">9 <span style="font:400 15px var(--sans);color:#777">of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="senate.battleground">9</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="senate.split">33+2</span> up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
@@ -736,11 +737,11 @@ body{background:#F5F5DC;color:#1E2232}
           <div class="metric-label" style="color:#134E4A;font-size:11px;letter-spacing:.08em">&#127963; Governorships</div>
           <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;26</span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;24</span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="gov.r">26</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;<span data-fig="gov.d">24</span></span>
           </div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
-          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1">7 <span style="font:400 15px var(--sans);color:#777">of 36 races</span></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="gov.battleground">7</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="gov.races">36</span> races</span></div>
           <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
         </div>
 
@@ -789,7 +790,7 @@ body{background:#F5F5DC;color:#1E2232}
         <button class="home-section-card" onclick="switchTabByName('map')">
           <div class="hsc-icon">&#9654;</div>
           <div class="hsc-title">Election Trends</div>
-          <div class="hsc-desc">Detailed race-by-race breakdowns for the Senate, House, and Governor contests. Rating strips, balance bars, and competitive seat analysis for all 35 Senate and 36 Governor races.</div>
+          <div class="hsc-desc">Detailed race-by-race breakdowns for the Senate, House, and Governor contests. Rating strips, balance bars, and competitive seat analysis for all <span data-fig="senate.up">35</span> Senate and <span data-fig="gov.races">36</span> Governor races.</div>
           <div class="hsc-sub-tabs"><span class="hsc-tag">Senate</span><span class="hsc-tag">House</span><span class="hsc-tag">Governor</span></div>
         </button>
         <button class="home-section-card" onclick="switchTabByName('india')">
@@ -1172,7 +1173,7 @@ const TAG_COLORS = {
 };
 
 
-// "Source: Wikipedia · Data as of 5 Oct 2026" for the live retirement counts
+// "Source: Ballotpedia · Data as of 2 Oct 2026" for the live retirement counts
 function retireSourceLabel(r) {
   return window.DataLabels ? window.DataLabels.html(r, { kind: 'monthly' }) : '';
 }
@@ -1296,7 +1297,7 @@ async function loadHomeData() {
         return `<div class="forecast-card">
           <div class="forecast-chamber">${ch.label}</div>
           <div class="forecast-rating ${rc}">${esc(fd.rating||'TBD')}</div>
-          <div class="forecast-seats">Proj. ${esc(fd.projected_r||'?')} R &middot; ${esc(fd.projected_d||'?')} D</div>
+          ${fd.projected_r && fd.projected_d ? `<div class="forecast-seats">Proj. ${esc(fd.projected_r)} R &middot; ${esc(fd.projected_d)} D</div>` : ''}
           <div class="forecast-sub">${esc(fd.summary||'')}</div>
         </div>`;
       }).join('');
@@ -1312,7 +1313,7 @@ async function loadHomeData() {
       const estDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'America/New_York'});
       const istTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata',hour12:true});
       const istDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});
-      fl.textContent = `Last updated ${estDate} · ${estTime} EST / ${istTime} IST (${istDate})`;
+      fl.textContent = `Last updated ${estDate} · ${estTime} ET / ${istTime} IST (${istDate})`;
     }
   }
 

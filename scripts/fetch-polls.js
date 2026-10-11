@@ -10,7 +10,7 @@
  *  3. Nate Silver Bulletin   → approval.trump                (Datawrapper CSV direct API)
  *     Chart: datawrapper.dwcdn.net/kSCt4/ — fetches latest version, downloads CSV
  *  4. Gallup                 → congress_approval             (HTML table; AI backup)
- *  5. Wikipedia API          → retirements totals/split      (Ballotpedia fallback)
+ *  5. Ballotpedia            → retirements totals/split      (Wikipedia fallback)
  *  6. RSS feed fallbacks     → backup only if primary sources fail (regex extraction)
  *
  * Env vars (optional — every source has a non-AI path; see ai.js):
@@ -701,19 +701,20 @@ ${text}`,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 5. RETIREMENTS — Wikipedia API (Ballotpedia fallback), no AI
+// 5. RETIREMENTS — Ballotpedia (Wikipedia fallback), no AI
 // ─────────────────────────────────────────────────────────────────────────────
 //
-// Primary: the "Retirements" sections of Wikipedia's 2026 House and Senate
+// Primary: Ballotpedia's page has one table per category ("Retiring from public
+// office, 2026", "Running for governor, 2026", …) under a Senate and a House
+// heading. Every row is one member, so chamber, party, retiring-vs-other-office
+// and the office sought are counted directly from the rows, and cross-checked
+// against the page's own summary sentence. Ballotpedia counts voting members
+// only and excludes senators not up in 2026 who are running for another office.
+//
+// Fallback: the "Retirements" sections of Wikipedia's 2026 House and Senate
 // election pages, read through the MediaWiki API and counted per chamber.
 // Wikipedia's Senate table doesn't say who is running for another office, so
 // the Senate retiring/other-office split is null when Wikipedia is the source.
-//
-// Fallback: Ballotpedia's page has one table per category ("Retiring from public office,
-// 2026", "Running for governor, 2026", …) under a Senate and a House heading.
-// Every row is one member, so chamber, party and retiring-vs-other-office are
-// counted directly from the rows. Ballotpedia counts voting members only and
-// excludes senators not up in 2026 who are running for another office.
 
 const BP_RETIRE_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
 const WIKI_API = 'https://en.wikipedia.org/w/api.php?action=parse&prop=wikitext&format=json&formatversion=2';
@@ -726,7 +727,12 @@ function partyKey(text) {
 
 function emptyCounts() {
   return { total: 0, senate: 0, house: 0, republican: 0, democrat: 0, others: 0,
-           senate_retiring: 0, senate_other_office: 0, house_retiring: 0, house_other_office: 0 };
+           senate_retiring: 0, senate_other_office: 0, house_retiring: 0, house_other_office: 0,
+           senate_republican: 0, senate_democrat: 0, house_republican: 0, house_democrat: 0,
+           destinations: { governor: 0, senate: 0, attorney_general: 0, state_legislature: 0, other: 0 },
+           // House members by party and where they are headed (for the party-split chart)
+           house_by_party: { republican: { retiring: 0, governor: 0, senate: 0, other: 0 },
+                             democrat:   { retiring: 0, governor: 0, senate: 0, other: 0 } } };
 }
 
 // "Oct. 2, 2026" / "Sept. 30, 2026" → Date at UTC midnight (no timezone drift)
@@ -747,13 +753,23 @@ function parseBallotpediaRetirements(html) {
     // Only the "not seeking re-election" lists: Name | Party | Seat | Date announced
     if (!rows.length || rows[0].join('|') !== 'Name|Party|Seat|Date announced') continue;
     const retiring = /retiring from public office/i.test(caption);
+    const office = /governor|gubernatorial/i.test(caption) ? 'governor'
+      : /U\.S\. Senate/i.test(caption) ? 'senate'
+      : /attorney general/i.test(caption) ? 'attorney_general'
+      : /state legislat/i.test(caption) ? 'state_legislature' : 'other';
     for (const row of rows.slice(1)) {
       if (row.length < 3 || !row[0]) continue;
       const chamber = /congressional district/i.test(row[2]) ? 'house' : 'senate';
+      const party = partyKey(row[1]);
       counts.total++;
       counts[chamber]++;
-      counts[partyKey(row[1])]++;
+      counts[party]++;
+      if (party !== 'others') counts[`${chamber}_${party}`]++;
       counts[`${chamber}_${retiring ? 'retiring' : 'other_office'}`]++;
+      if (!retiring) counts.destinations[office]++;
+      if (chamber === 'house' && counts.house_by_party[party]) {
+        counts.house_by_party[party][retiring ? 'retiring' : (office === 'governor' || office === 'senate') ? office : 'other']++;
+      }
     }
   }
   // Cross-check against the page's own summary sentence
@@ -797,9 +813,12 @@ async function fetchWikipediaRetirements() {
     counts.total++; counts.senate++;
     counts[partyKey(shading)]++;
   }
-  // The Senate table doesn't say who is running for another office
+  // The Senate table doesn't say who is running for another office, or for what
   counts.senate_retiring = null;
   counts.senate_other_office = null;
+  counts.destinations = null;
+  counts.house_by_party = null;
+  counts.senate_republican = counts.senate_democrat = counts.house_republican = counts.house_democrat = null;
 
   // as_of: the later of the two pages' last edits — the date of the data itself
   const revs = await (await safeFetch(
@@ -817,32 +836,17 @@ function retirementsAddUp(c) {
 }
 
 async function fetchRetirements(data) {
-  console.log('[5/6] Retirements (Wikipedia election pages, Ballotpedia fallback)…');
+  console.log('[5/6] Retirements (Ballotpedia, Wikipedia fallback)…');
   let counts = null, source = null, asOf = null;
 
-  // Primary: Wikipedia API — House and Senate "Retirements" sections, counted separately
-  try {
-    const wiki = await fetchWikipediaRetirements();
-    const c = wiki.counts;
-    console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
-    const ok = retirementsAddUp(c);
-    if (ok) { counts = c; source = 'Wikipedia'; asOf = wiki.asOf; }
-    else warn(`  [Wikipedia] Counts don't add up: ${JSON.stringify(c)} — trying Ballotpedia`);
-    recordStatus('Retirements (Wikipedia)', { group: 'polls', primary: true, ok, count: ok ? c.total : 0, error: ok ? null : 'Counts did not add up' });
-  } catch (err) {
-    warn(`  [Wikipedia] Failed: ${err.message} — trying Ballotpedia`);
-    recordStatus('Retirements (Wikipedia)', { group: 'polls', primary: true, ok: false, error: err.message });
-  }
-
-  // Fallback: Ballotpedia list tables, cross-checked against its summary sentence
-  if (!counts) {
-    lastWarning = null;
+  // Primary: Ballotpedia list tables, cross-checked against its summary sentence
+  {
     let bpError = null, bpCount = 0;
     try {
       const res = await safeFetch(BP_RETIRE_URL, {
         label: 'Ballotpedia',
         minBytes: 50 * 1024, // smaller means a bot challenge or an empty page
-        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' },
+        headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15', 'Accept': 'text/html' },
       });
       const parsed = parseBallotpediaRetirements(await res.text());
       const c = parsed.counts, s = parsed.summary;
@@ -851,13 +855,30 @@ async function fetchRetirements(data) {
         counts = c; source = 'Ballotpedia'; asOf = parsed.asOf; bpCount = c.total;
       } else {
         bpError = s ? `Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})` : 'Summary sentence not found';
-        warn(`  [Ballotpedia] ${bpError}`);
+        warn(`  [Ballotpedia] ${bpError} — trying Wikipedia`);
       }
     } catch (err) {
       bpError = err.message;
-      warn(`  [Ballotpedia] Failed: ${err.message}`);
+      warn(`  [Ballotpedia] Failed: ${err.message} — trying Wikipedia`);
     }
-    recordStatus('Retirements (Ballotpedia fallback)', { group: 'polls', ok: bpCount > 0, count: bpCount, error: bpError });
+    recordStatus('Retirements (Ballotpedia)', { group: 'polls', primary: true, ok: bpCount > 0, count: bpCount, error: bpError });
+  }
+
+  // Fallback: Wikipedia API — House and Senate "Retirements" sections, counted separately
+  if (!counts) {
+    lastWarning = null;
+    try {
+      const wiki = await fetchWikipediaRetirements();
+      const c = wiki.counts;
+      console.log(`  [Wikipedia] Counted: total=${c.total} senate=${c.senate} house=${c.house} R=${c.republican} D=${c.democrat} other=${c.others}`);
+      const ok = retirementsAddUp(c);
+      if (ok) { counts = c; source = 'Wikipedia'; asOf = wiki.asOf; }
+      else warn(`  [Wikipedia] Counts don't add up: ${JSON.stringify(c)}`);
+      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok, count: ok ? c.total : 0, error: ok ? null : 'Counts did not add up' });
+    } catch (err) {
+      warn(`  [Wikipedia] Failed: ${err.message}`);
+      recordStatus('Retirements (Wikipedia fallback)', { group: 'polls', ok: false, error: err.message });
+    }
   }
 
   if (!counts || !retirementsAddUp(counts)) {
@@ -875,6 +896,25 @@ async function fetchRetirements(data) {
   r.source_url = source === 'Ballotpedia' ? BP_RETIRE_URL : 'https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections#Retirements';
   r.as_of = asOf && !isNaN(asOf) ? asOf.toISOString().slice(0, 10) : null;
   r.fetched = new Date().toISOString();
+  // Rebuild the destination doughnut and the House party-split chart from the rows
+  if (counts.destinations && counts.senate_retiring !== null) {
+    const dst = counts.destinations;
+    r.destination_doughnut = {
+      labels: ['Retiring from public life', 'Running for governor', 'Running for Senate', 'Running for other office'],
+      data: [counts.senate_retiring + counts.house_retiring, dst.governor, dst.senate, dst.attorney_general + dst.state_legislature + dst.other],
+      backgroundColor: ['#E9E9E7', '#3A8C5C', '#378ADD', '#D4931A'],
+    };
+  }
+  if (counts.house_by_party && r.party_split_chart) {
+    const hp = counts.house_by_party, keys = ['retiring', 'governor', 'senate', 'other'];
+    const ds = r.party_split_chart.datasets;
+    const row = (party, seeking) => keys.map(k => (k === 'retiring') === !seeking ? hp[party][k] : 0);
+    if (ds.length === 4) {
+      ds[0].data = row('republican', false); ds[1].data = row('republican', true);
+      ds[2].data = row('democrat', false);   ds[3].data = row('democrat', true);
+      r.party_split_chart.labels = ['Retiring outright', 'Running for governor', 'Running for Senate', 'Other office'];
+    }
+  }
   // Keep the 2026 bar of the historical chart in step with the live counts
   const bar2026 = (r.historical_chart || []).find(d => d.year === '2026');
   if (bar2026) { bar2026.house = counts.house; bar2026.senate = counts.senate; }

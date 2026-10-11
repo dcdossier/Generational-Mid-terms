@@ -26,6 +26,7 @@
 <script src="assets/js/seat-ids.js"></script>
 <link rel="stylesheet" href="assets/css/data-labels.css">
 <script src="assets/js/data-labels.js"></script>
+<script src="assets/js/figures.js"></script>
 <script src="assets/js/seat-panel.js"></script>
 <style>
 :root {
@@ -337,18 +338,18 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <div class="chamber-overview">
     <div class="ch-label">&#127981; Senate &nbsp;&mdash;&nbsp; Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
     <div class="ch-pills">
-      <span class="ch-r">R&nbsp;53</span>
-      <span class="ch-d">D+I&nbsp;47</span>
+      <span class="ch-r">R&nbsp;<span data-fig="senate.r">53</span></span>
+      <span class="ch-d">D+I&nbsp;<span data-fig="senate.d">47</span></span>
     </div>
     <div class="ch-divider"></div>
     <div class="ch-bg-block">
-      <span class="ch-bg-n">9</span>
-      <span class="ch-bg-text">battleground seats of 33+2 up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+      <span class="ch-bg-n"><span data-fig="senate.battleground">9</span></span>
+      <span class="ch-bg-text">battleground seats of <span data-fig="senate.split">33+2</span> up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
     </div>
   </div>
 
   <div class="stat-strip" id="sen-stat-strip">
-    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (33+2) <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div></div>
+    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (<span data-fig="senate.split">33+2</span>) <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div></div>
     <div class="stat-box"><div class="stat-n" style="color:#C04040" id="ss-r-held">&#8230;</div><div class="stat-l">Currently Republican&#8209;held seats at stake</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="ss-d-held">&#8230;</div><div class="stat-l">Currently Democrat&#8209;held seats at stake</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="ss-tossups">&#8230;</div><div class="stat-l">Toss&#8209;up seats &#8212; election outcome uncertain</div></div>
@@ -369,7 +370,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
     <div class="balance-footer">
       <span id="bal-proj-r" style="font-size:16px;color:var(--t4)">&#8230;</span>
-      <span style="font-size:13px;color:var(--t4)">&#9650; Projected based on current ratings (preliminary)</span>
+      <span style="font-size:13px;color:var(--t4)">&#9650; Seats not up plus safe, likely and lean seats &#183; <span id="bal-proj-tu">toss-ups unassigned</span> &#183; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></span>
       <span id="bal-proj-d" style="font-size:16px;color:var(--t4)">&#8230;</span>
     </div>
   </div>
@@ -380,8 +381,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- STATE MAP -->
   <div class="section-hdr">
     <div>
-      <div class="section-title">Senate race map &#8212; all 33+2 seats, 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
-      <div class="section-sub">All 33+2 races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
+      <div class="section-title">Senate race map &#8212; all <span data-fig="senate.split">33+2</span> seats, 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
+      <div class="section-sub">All <span data-fig="senate.split">33+2</span> races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
     </div>
   </div>
 
@@ -403,7 +404,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- DETAIL CARD -->
   <!-- FILTER ROW -->
   <div class="chart-card">
-    <div class="card-title">All 33+2 Senate races &#8212; 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
+    <div class="card-title">All <span data-fig="senate.split">33+2</span> Senate races &#8212; 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
     <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
     <div class="filter-row">
       <span class="filter-label">Filter:</span>
@@ -510,22 +511,22 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
   <!-- CHAMBER OVERVIEW -->
   <div class="chamber-overview">
-    <div class="ch-label">&#127979; House of Representatives &nbsp;&mdash;&nbsp; Term: 2 years &nbsp;|&nbsp; 435 seats total</div>
+    <div class="ch-label">&#127979; House of Representatives &nbsp;&mdash;&nbsp; Term: 2 years &nbsp;|&nbsp; <span data-fig="house.total">435</span> seats total</div>
     <div class="ch-pills">
-      <span class="ch-r">R&nbsp;217</span>
-      <span class="ch-d">D&nbsp;212</span>
+      <span class="ch-r">R&nbsp;<span data-fig="house.r">218</span></span>
+      <span class="ch-d">D&nbsp;<span data-fig="house.d">214</span></span>
     </div>
     <div class="ch-divider"></div>
     <div class="ch-bg-block">
-      <span class="ch-bg-n">42</span>
-      <span class="ch-bg-text">battleground seats of 435 &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+      <span class="ch-bg-n"><span data-fig="house.battleground">49</span></span>
+      <span class="ch-bg-text">battleground seats of <span data-fig="house.total">435</span> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
     </div>
   </div>
 
   <div class="stat-strip" id="house-stat-strip">
     <div class="stat-box"><div class="stat-n">435</div><div class="stat-l">Total House seats</div></div>
-    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="hs-r">217</div><div class="stat-l">Current Republican seats</div></div>
-    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="hs-d">212</div><div class="stat-l">Current Democrat seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="hs-r">218</div><div class="stat-l">Current Republican seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="hs-d">214</div><div class="stat-l">Current Democrat seats</div></div>
     <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="hs-tu">&#8230;</div><div class="stat-l">Toss&#8209;up districts &#8212; either party can win</div></div>
   </div>
   <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
@@ -533,23 +534,23 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- SEAT BALANCE -->
   <div class="balance-wrap">
     <div class="balance-label">
-      <span class="balance-r-label" id="hbal-r-label">217 Republican</span>
+      <span class="balance-r-label" id="hbal-r-label">218 Republican</span>
       <span style="color:var(--t4);font-size:11px">Current House balance &#8212; 218 seats needed for majority</span>
-      <span class="balance-d-label" id="hbal-d-label">Democrat 212</span>
+      <span class="balance-d-label" id="hbal-d-label">Democrat 214</span>
     </div>
     <div class="balance-bar">
-      <div class="balance-r" id="hbal-r-seg" style="width:49.9%">217R</div>
-      <div class="balance-d" id="hbal-d-seg" style="width:48.7%">212D</div>
+      <div class="balance-r" id="hbal-r-seg" style="width:50.1%">218R</div>
+      <div class="balance-d" id="hbal-d-seg" style="width:49.2%">214D</div>
       <div class="balance-mid"></div>
     </div>
-    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>razor-thin majority</strong> (5 seats vacant). Democrats need a net gain of <strong>3 seats</strong> to reclaim the majority. Historical pattern: the president&#8217;s party loses an average of 26 House seats at the first midterm.</div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>razor-thin majority</strong> (<span data-fig="house.i">1</span> independent, <span data-fig="house.vacant">2</span> vacant seats). Democrats need a net gain of <strong><span data-fig="house.d_gain_needed">4</span> seats</strong> to reclaim the majority. Historical pattern: the president&#8217;s party loses an average of 26 House seats at the first midterm.</div>
   </div>
 
   <!-- HOUSE DISTRICT MAP -->
   <div class="section-hdr" style="margin-bottom:10px">
     <div>
       <div class="section-title">House district map &#8212; all 435 districts, 2026</div>
-      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for 49 individually-tracked battleground districts (Ballotpedia 2026 battlegrounds plus Cook-rated toss-ups). Several 2026 races also run on new maps (at least CA, FL, MO, NC, OH, TX, UT, plus TN and LA redraws) — district colouring reflects the current 2026 boundaries and ratings, not prior-cycle results. Click any highlighted district for detail.</div>
+      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for <span data-fig="house.tracked">49</span> individually-tracked battleground districts (Ballotpedia 2026 battlegrounds plus Cook-rated toss-ups). Several 2026 races also run on new maps (AL, CA, FL, LA, NC, OH, TN, TX and UT; Missouri&#8217;s new map is blocked for 2026) — district colouring reflects the current 2026 boundaries and ratings, not prior-cycle results. Click any highlighted district for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -570,20 +571,20 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- COMPETITIVE RACES -->
   <div class="callout">
     <div class="callout-label">Path to the majority</div>
-    Democrats need a net gain of <strong>4 seats</strong> (214&rarr;218) to reclaim the House majority. This tracker follows <strong>49 battleground districts</strong> in 2026 &#8212; 23 Toss-up, 10 Lean D, 6 Likely D, 5 Safe D, 3 Lean R, 1 Likely R, 1 Safe R &#8212; with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
+    Democrats need a net gain of <strong><span data-fig="house.d_gain_needed">4</span> seats</strong> (<span data-fig="house.d">214</span>&rarr;<span data-fig="house.needed">218</span>) to reclaim the House majority. This tracker follows <strong><span data-fig="house.tracked">49</span> battleground districts</strong> in 2026 &#8212; <span data-fig="house.tracked_breakdown">23 Toss-up, 10 Lean D, 6 Likely D, 5 Safe D, 3 Lean R, 1 Likely R, 1 Safe R</span> &#8212; with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
   </div>
 
   <!-- SEAT DISTRIBUTION CHART -->
   <div class="chart-card">
     <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
-    <div class="card-sub">Full rating spectrum across all 435 House seats, on current 2026 district boundaries. The 49 individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current 2026 rating. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats, on current 2026 district boundaries. The <span data-fig="house.tracked">49</span> individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current 2026 rating. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
     <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
     <div class="chart-note dl-label" id="house-source-note" data-block="races.house" data-kind="ratings"></div>
   </div>
 
   <div class="chart-card">
-    <div class="card-title">49 battleground districts</div>
-    <div class="card-sub">All 49 individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
+    <div class="card-title"><span data-fig="house.tracked">49</span> battleground districts</div>
+    <div class="card-sub">All <span data-fig="house.tracked">49</span> individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
     <div class="race-table-wrap">
     <table class="race-table" id="comp-table">
       <thead>
@@ -673,13 +674,13 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <div class="chamber-overview">
     <div class="ch-label">&#127963; Governorships &nbsp;&mdash;&nbsp; Term: 4 or 2 years (state-dependent)</div>
     <div class="ch-pills">
-      <span class="ch-r">R&nbsp;26</span>
-      <span class="ch-d">D&nbsp;24</span>
+      <span class="ch-r">R&nbsp;<span data-fig="gov.r">26</span></span>
+      <span class="ch-d">D&nbsp;<span data-fig="gov.d">24</span></span>
     </div>
     <div class="ch-divider"></div>
     <div class="ch-bg-block">
-      <span class="ch-bg-n">7</span>
-      <span class="ch-bg-text">battleground races of 36 &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+      <span class="ch-bg-n"><span data-fig="gov.battleground">7</span></span>
+      <span class="ch-bg-text">battleground races of <span data-fig="gov.races">36</span> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
     </div>
   </div>
 
@@ -694,16 +695,16 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- CURRENT BALANCE -->
   <div class="balance-wrap">
     <div class="balance-label">
-      <span class="balance-r-label">26 Republican</span>
+      <span class="balance-r-label"><span data-fig="gov.r">26</span> Republican</span>
       <span style="color:var(--t4);font-size:11px">Current governor balance &#8212; all 50 states</span>
-      <span class="balance-d-label">Democrat 24</span>
+      <span class="balance-d-label">Democrat <span data-fig="gov.d">24</span></span>
     </div>
     <div class="balance-bar">
-      <div class="balance-r" style="width:52%">26R</div>
-      <div class="balance-d" style="width:48%">24D</div>
+      <div class="balance-r" id="gbal-r-seg" style="width:52%">26R</div>
+      <div class="balance-d" id="gbal-d-seg" style="width:48%">24D</div>
       <div class="balance-mid"></div>
     </div>
-    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>2-governor advantage</strong>. Of the 36 races in 2026, each party holds 18 seats up for election. Ballotpedia identifies <strong>7 battleground races</strong>.</div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong><span data-fig="gov.lead">2</span>-governor advantage</strong>. Of the <span data-fig="gov.races">36</span> races in 2026, Republicans defend <span data-fig="gov.r_up">18</span> and Democrats <span data-fig="gov.d_up">18</span>. Ballotpedia identifies <strong><span data-fig="gov.battleground">7</span> battleground races</strong>.</div>
   </div>
 
   <!-- RATING LEGEND -->
@@ -712,8 +713,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- STATE MAP -->
   <div class="section-hdr">
     <div>
-      <div class="section-title">Governor race map &#8212; all 36 states, 2026</div>
-      <div class="section-sub">All 36 states with governor races coloured by rating. Grey states have no governor race in 2026. &#9688; = open seat. Click any coloured state for detail.</div>
+      <div class="section-title">Governor race map &#8212; all <span data-fig="gov.races">36</span> states, 2026</div>
+      <div class="section-sub">All <span data-fig="gov.races">36</span> states with governor races coloured by rating. Grey states have no governor race in 2026. &#9688; = open seat. Click any coloured state for detail.</div>
     </div>
   </div>
   <div class="map-srch-wrap">
@@ -736,12 +737,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- CONTEXT -->
   <div class="callout">
     <div class="callout-label">Governor context &#8212; 2026</div>
-    36 states hold gubernatorial elections in 2026. <strong>19 are open seats</strong> due to term limits or retirements: AL, AK, CA, CO, FL, GA, IA, KS, ME, MI, MN, NM, OH, OK, RI, SC, TN, WI, and WY. The 5 toss-up races &#8212; Alaska, Georgia, Nevada, Ohio, and Wisconsin &#8212; will define the governor map.
+    <span data-fig="gov.races">36</span> states hold gubernatorial elections in 2026. <strong><span data-fig="gov.open">19</span> are open seats</strong> due to term limits, retirements or primary defeats: <span data-fig="gov.open_list">AL, AK, CA, CO, FL, GA, IA, KS, ME, MI, MN, NM, OH, OK, RI, SC, TN, WI and WY</span>. The <span data-fig="gov.tossups">5</span> toss-up races &#8212; <span data-fig="gov.tossup_list">Alaska, Georgia, Nevada, Ohio and Wisconsin</span> &#8212; will define the governor map.
   </div>
 
   <!-- FILTER + TABLE -->
   <div class="chart-card">
-    <div class="card-title">All 36 governor races &#8212; 2026</div>
+    <div class="card-title">All <span data-fig="gov.races">36</span> governor races &#8212; 2026</div>
     <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
     <div class="filter-row">
       <span class="filter-label">Filter:</span>
@@ -1158,10 +1159,12 @@ function renderSenate(sen) {
   // Projected
   const notUpR = cur.r - rHeld;
   const notUpD = cur.d - dHeld;
-  const projR = notUpR + rs.safe_r + rs.likely_r + rs.lean_r + Math.round(rs.toss_up / 2);
-  const projD = notUpD + rs.safe_d + rs.likely_d + rs.lean_d + Math.floor(rs.toss_up / 2);
-  document.getElementById('bal-proj-r').textContent = 'Proj. R: ' + projR;
-  document.getElementById('bal-proj-d').textContent = 'Proj. D: ' + projD;
+  // Seats not up + safe/likely/lean; toss-ups stay unassigned (no split rule)
+  const projR = notUpR + rs.safe_r + rs.likely_r + rs.lean_r;
+  const projD = notUpD + rs.safe_d + rs.likely_d + rs.lean_d;
+  document.getElementById('bal-proj-r').textContent = 'R ' + projR + ' incl. leans';
+  document.getElementById('bal-proj-d').textContent = 'D ' + projD + ' incl. leans';
+  document.getElementById('bal-proj-tu').textContent = rs.toss_up + ' toss-ups unassigned';
 
   // Legend
   buildLegend(rs);
@@ -1634,6 +1637,10 @@ function renderHouse(house) {
   document.getElementById('hs-tu').textContent = rs.toss_up;
   document.getElementById('hbal-r-label').textContent = house.current_balance.r + ' Republican';
   document.getElementById('hbal-d-label').textContent = 'Democrat ' + house.current_balance.d;
+  const hTot = house.total_seats || 435;
+  const hr = document.getElementById('hbal-r-seg'), hd = document.getElementById('hbal-d-seg');
+  if (hr) { hr.style.width = (house.current_balance.r / hTot * 100).toFixed(1) + '%'; hr.textContent = house.current_balance.r + 'R'; }
+  if (hd) { hd.style.width = (house.current_balance.d / hTot * 100).toFixed(1) + '%'; hd.textContent = house.current_balance.d + 'D'; }
 
   buildHouseDistrictMap(house.competitive);
 
@@ -1733,6 +1740,10 @@ function renderGovernor(gov) {
   set('gov-r-lean', rLean);
   set('gov-d-lean', dLean);
   set('gov-tu',     tu);
+  const gb = gov.current_balance || {};
+  const gr = document.getElementById('gbal-r-seg'), gd = document.getElementById('gbal-d-seg');
+  if (gr && gb.r != null) { gr.style.width = (gb.r / 50 * 100) + '%'; gr.textContent = gb.r + 'R'; }
+  if (gd && gb.d != null) { gd.style.width = (gb.d / 50 * 100) + '%'; gd.textContent = gb.d + 'D'; }
 
   renderGovTable(races, govActiveFilter, govSortCol, govSortDir);
 }

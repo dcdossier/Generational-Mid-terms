@@ -3,8 +3,8 @@
     "BLS CPI": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T20:35:08.046Z",
-      "last_success": "2026-10-11T20:35:08.046Z",
+      "last_attempt": "2026-10-11T22:11:15.935Z",
+      "last_success": "2026-10-11T22:11:15.935Z",
       "item_count": 21,
       "error": null,
       "failing_since": null
@@ -21,8 +21,8 @@
     "Congress approval (Gallup)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T20:35:13.304Z",
-      "last_success": "2026-10-11T20:35:13.304Z",
+      "last_attempt": "2026-10-11T22:11:16.515Z",
+      "last_success": "2026-10-11T22:11:16.515Z",
       "item_count": 1,
       "error": null,
       "failing_since": null
@@ -1668,9 +1668,27 @@
     "NYT polling CSVs": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T20:35:07.849Z",
-      "last_success": "2026-10-11T20:35:07.849Z",
-      "item_count": 2417,
+      "last_attempt": "2026-10-11T22:11:15.592Z",
+      "last_success": "2026-10-11T22:11:15.592Z",
+      "item_count": 2421,
+      "error": null,
+      "failing_since": null
+    },
+    "Retirements (Ballotpedia)": {
+      "group": "polls",
+      "primary": true,
+      "last_attempt": "2026-10-11T22:11:16.540Z",
+      "last_success": null,
+      "item_count": null,
+      "error": "HTTP 202 (likely a bot challenge)",
+      "failing_since": "2026-10-11T22:11:16.540Z"
+    },
+    "Retirements (Wikipedia fallback)": {
+      "group": "polls",
+      "primary": false,
+      "last_attempt": "2026-10-11T22:11:18.121Z",
+      "last_success": "2026-10-11T22:11:18.121Z",
+      "item_count": 71,
       "error": null,
       "failing_since": null
     },
@@ -1776,14 +1794,14 @@
     "Trump approval (Datawrapper)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T20:35:08.178Z",
-      "last_success": "2026-10-11T20:35:08.178Z",
+      "last_attempt": "2026-10-11T22:11:16.146Z",
+      "last_success": "2026-10-11T22:11:16.146Z",
       "item_count": 629,
       "error": null,
       "failing_since": null
     }
   },
-  "updated": "2026-10-11T21:26:50.402Z",
+  "updated": "2026-10-11T22:11:18.126Z",
   "ai": {
     "ac": {
       "provider": "none",
@@ -1793,7 +1811,7 @@
       "run_at": "2026-10-11T21:26:47.201Z"
     },
     "home": {
-      "run_at": "2026-10-11T20:35:07.432Z",
+      "run_at": "2026-10-11T22:11:14.338Z",
       "provider": "none",
       "calls_this_run": 0,
       "status": "off",

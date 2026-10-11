@@ -716,6 +716,7 @@ ${text}`,
 // Wikipedia's Senate table doesn't say who is running for another office, so
 // the Senate retiring/other-office split is null when Wikipedia is the source.
 
+const BP_KEEP_DAYS = 21; // days a Ballotpedia snapshot is kept when Ballotpedia is unreachable
 const BP_RETIRE_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
 const WIKI_API = 'https://en.wikipedia.org/w/api.php?action=parse&prop=wikitext&format=json&formatversion=2';
 
@@ -855,13 +856,24 @@ async function fetchRetirements(data) {
         counts = c; source = 'Ballotpedia'; asOf = parsed.asOf; bpCount = c.total;
       } else {
         bpError = s ? `Table counts disagree with summary (total=${s.total} senate=${s.senate} house=${s.house})` : 'Summary sentence not found';
-        warn(`  [Ballotpedia] ${bpError} — trying Wikipedia`);
+        warn(`  [Ballotpedia] ${bpError} — using the fallback rules`);
       }
     } catch (err) {
       bpError = err.message;
-      warn(`  [Ballotpedia] Failed: ${err.message} — trying Wikipedia`);
+      warn(`  [Ballotpedia] Failed: ${err.message} — using the fallback rules`);
     }
     recordStatus('Retirements (Ballotpedia)', { group: 'polls', primary: true, ok: bpCount > 0, count: bpCount, error: bpError });
+  }
+
+  // Ballotpedia blocks some networks (GitHub's runners get a bot check). Keep the
+  // last Ballotpedia counts, labelled with their own date, for up to
+  // BP_KEEP_DAYS rather than mixing in Wikipedia's coarser split; the failure
+  // is still recorded in status.json above, so the 48-hour alert sees it.
+  const bpPrev = data.retirements || {};
+  const bpAge = bpPrev.as_of ? (Date.now() - new Date(bpPrev.as_of + 'T00:00:00Z')) / 864e5 : Infinity;
+  if (!counts && bpPrev.source === 'Ballotpedia' && bpAge <= BP_KEEP_DAYS) {
+    console.log(`  [Retirements] Keeping Ballotpedia counts as of ${bpPrev.as_of} (${Math.round(bpAge)} days old; limit ${BP_KEEP_DAYS})`);
+    return bpPrev.total;
   }
 
   // Fallback: Wikipedia API — House and Senate "Retirements" sections, counted separately

@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-11T21:25:19.544Z"
+    "last_updated": "2026-10-11T21:26:50.401Z"
   },
   "posts": [],
   "entries": [
@@ -587,7 +587,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f11f1059c7b95919fb1ba99b2",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekk-0",
@@ -603,7 +603,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fdb44cec0d6fcb12e098897c3",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekk-1",
@@ -619,7 +619,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f01d7aaecc385b4e94090747b",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-2",
@@ -635,7 +635,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fbaa9f79449bc38a43e94a144",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-3",
@@ -651,7 +651,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fdeb9e5914754da1222ae5d99",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-4",
@@ -667,7 +667,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f7e1f1e2fdb5021f2cbabc487",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjwekl-5",
@@ -683,7 +683,7 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f37845d7706d3cd31251332c0",
-      "enrich_attempts": 2
+      "enrich_attempts": 3
     },
     {
       "id": "manual-muxjdrkz",
@@ -858,7 +858,7 @@
       "added_at": "2026-10-09T08:40:43.041Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 2,
+      "image_attempts": 3,
       "date_source": "wordpress-api",
       "summary_source": "page"
     },

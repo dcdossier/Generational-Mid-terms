@@ -6,8 +6,10 @@
  * the Analysis & Commentary page ("entries", plus "posts" for safety).
  *
  * Every run first tidies all entries: links are cleaned (brackets, markdown
- * links, doubled "https://") and HTML entities in titles and summaries are
- * decoded.
+ * links, doubled "https://"), HTML entities in titles and summaries are
+ * decoded, titles lose "Opinion |" prefixes and " - Site.com" suffixes, titles
+ * that are bot-check pages or bare links are cleared (so the entry is fetched
+ * again), and publication names are normalised (SOURCE_NAMES).
  *
  * An entry is enriched when it has "needs_enrich": true, a blocked-page title,
  * or is missing a title, date or description. Only empty fields are filled;
@@ -84,6 +86,31 @@ const MAX_ATTEMPTS = 3;
 // Titles of bot checks and error pages, never real article titles
 const BLOCKED_TITLE = /^\s*(just a moment|attention required|access denied|access to this page has been denied|forbidden|403 forbidden|are you a robot|security check|verify(ing)? you are (a )?human|please wait|one more step|request blocked|you have been blocked|captcha|error \d{3}|page not found|404)\b/i;
 const isBlockedTitle = t => BLOCKED_TITLE.test(String(t || ''));
+// Bot-check text anywhere in the title, or a title that is just a link
+const isBadTitle = t => /just a moment|access denied|attention required/i.test(String(t || '')) || /https?:\/\/|www\.\S+\.\w{2,}/i.test(String(t || '')) || isBlockedTitle(t);
+
+// "OPINION | Title - Moneycontrol.com" → "Title"
+function cleanTitle(t) {
+  return decode(t)
+    .replace(/^\s*opinion\s*[|:–—-]\s*/i, '')
+    .replace(/\s+[-–—|]\s*[\w.-]+\.(com|in|org|net|co\.in|co\.uk)\s*$/i, '')
+    .replace(/\s*[-–—|]+\s*$/, '')
+    .trim();
+}
+
+// One spelling per publication (case-insensitive match on the stored name)
+const SOURCE_NAMES = [
+  [/^the\s*print$|^theprint\.in$/i, 'ThePrint'],
+  [/^(the hindu|thehindu\.com|frontline|frontline\.thehindu\.com|frontline \(the hindu\))$/i, 'The Hindu'],
+  [/^money\s*control(\.com)?$/i, 'Moneycontrol'],
+  [/^ndtv(\.com| opinion)?$/i, 'NDTV'],
+  [/^(dc dossier\s*[—–,-]\s*substack|dc dossier, substack|dc dossier \(substack\)|dcdossier\.substack\.com|substack)$/i, 'Substack (DC Dossier)'],
+];
+function cleanSource(src) {
+  const t = String(src || '').trim();
+  for (const [re, name] of SOURCE_NAMES) if (re.test(t)) return name;
+  return t;
+}
 
 const decode = s => he.decode(String(s || '')).replace(/\s+/g, ' ').trim();
 
@@ -377,6 +404,15 @@ async function main() {
     for (const k of ['title', 'description']) {
       if (/&(#\d+|#x[\da-f]+|[a-z]+);/i.test(p[k] || '')) { p[k] = decode(p[k]); changed++; console.log(`  [entities] ${k} of ${p.url}`); }
     }
+    if (p.title && isBadTitle(p.title)) {
+      console.log(`  [title] cleared bad title "${p.title}" for ${p.url}`);
+      p.title = ''; p.needs_enrich = true; delete p.enrich_attempts; changed++;
+    } else if (p.title) {
+      const t = cleanTitle(p.title);
+      if (t !== p.title) { console.log(`  [title] "${p.title}" → "${t}"`); p.title = t; changed++; }
+    }
+    const src = cleanSource(p.source);
+    if (src !== (p.source || '')) { console.log(`  [source] "${p.source}" → "${src}"`); p.source = src; changed++; }
   }
 
   const todo = posts.filter(needsWork);
@@ -393,7 +429,7 @@ async function main() {
     pageCache.set(p.url, page);
     if (isBlockedTitle(p.title)) { p.title = ''; filled.push('bot-check title cleared'); }
     if (page) {
-      if (blank(p.title) && page.title) { p.title = page.title; filled.push('title'); }
+      if (blank(p.title) && page.title && !isBadTitle(page.title)) { p.title = cleanTitle(page.title); filled.push('title'); }
       if (page.via === 'wayback') p.fetched_via = 'wayback';
     }
     if (!hasDate(p.date)) {

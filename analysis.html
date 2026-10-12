@@ -390,27 +390,30 @@ const MANUAL_TYPES = {
   'media': 'media', 'interview': 'media', 'tweet/post': 'media', 'video': 'media',
 };
 
-// Readable stand-in title from the link's last path segment, e.g.
-// ".../p/26-institutional-mistrust" → "26 institutional mistrust"
-function titleFromUrl(u, host) {
-  try {
-    const seg = new URL(u).pathname.split('/').filter(Boolean).pop() || '';
-    const words = decodeURIComponent(seg).replace(/\.[a-z]{2,5}$/i, '').replace(/[-_]+/g, ' ').trim();
-    if (words && !/^\d+$/.test(words) && words.length > 3) return words.charAt(0).toUpperCase() + words.slice(1);
-  } catch (err) { /* fall through */ }
-  return host ? 'Article on ' + host : String(u || '');
+// Decodes entities, drops "Opinion |" prefixes and " - Site.com" suffixes;
+// returns '' for bot-check pages and titles that are just a link.
+function cleanTitle(t) {
+  const el = document.createElement('textarea');
+  el.innerHTML = String(t || '');
+  const s = el.value.replace(/\s+/g, ' ')
+    .replace(/^\s*opinion\s*[|:\u2013\u2014-]\s*/i, '')
+    .replace(/\s+[-\u2013\u2014|]\s*[\w.-]+\.(com|in|org|net|co\.in|co\.uk)\s*$/i, '')
+    .replace(/\s*[-\u2013\u2014|]+\s*$/, '').trim();
+  if (/just a moment|access denied|attention required/i.test(s) || /https?:\/\/|www\.\S+\.\w{2,}/i.test(s)) return '';
+  return s;
 }
+const isPublishable = p => p.title && p.date && !isNaN(new Date(p.date));
 
 function normaliseManual(e, i) {
   let host = '';
   try { host = new URL(e.url).hostname.replace(/^www\./, ''); } catch (err) { /* keep empty */ }
-  // Title falls back to the link while the enrichment job has not filled it in.
-  // The date never falls back: no publication date means "Date pending".
+  // Shown only with a real title and a publication date (see isPublishable);
+  // incomplete entries stay visible on the input page until enriched.
   const hasDate = e.date && !isNaN(new Date(e.date));
   return {
     id: e.id || 'manual-' + i,
     type: MANUAL_TYPES[String(e.type || '').toLowerCase()] || String(e.type || 'research').toLowerCase(),
-    title: String(e.title || '').trim() || titleFromUrl(e.url, host),
+    title: cleanTitle(e.title),
     description: e.description || '',
     url: e.url,
     source: e.source || host,
@@ -443,7 +446,7 @@ async function loadData() {
     : [...((manual && manual.entries) || []), ...((manual && manual.posts) || [])];
 
   const byUrl = new Map();
-  list.filter(e => e && e.url).map(normaliseManual)
+  list.filter(e => e && e.url).map(normaliseManual).filter(isPublishable)
     .forEach(p => { if (!byUrl.has(urlKey(p.url))) byUrl.set(urlKey(p.url), p); });
   // Strictly by publication date, newest first; undated entries go last
   // (in their original order), never placed by upload date
@@ -503,7 +506,7 @@ function cardImg(p, cls) {
 }
 
 function cardHtml(p) {
-  const meta = [p.source, fmtDate(p.date) || 'Date pending'].filter(Boolean).join(' · ');
+  const meta = [p.source, fmtDate(p.date)].filter(Boolean).join(' · ');
   const summary = String(p.description || '').trim();
   const strip = p.image && STRIP_TYPES.includes(p.type);
   const logo = p.image && p.type === 'newsletter';
@@ -513,8 +516,8 @@ function cardHtml(p) {
     ${logo ? `<div class="ac-head">${cardImg(p, 'ac-logo')}${title}</div>` : title}
     ${p.author ? `<div class="ac-authors">${esc(p.author)}</div>` : ''}
     ${meta ? `<div class="ac-meta">${esc(meta)}</div>` : ''}
-    ${summary ? `<div class="ac-summary"><span class="ac-summary-text">${esc(summary)}</span><span class="ac-more">Read more →</span></div>` : ''}
-    <span class="ac-more" aria-hidden="true">Read more →</span>
+    ${summary ? `<div class="ac-summary"><span class="ac-summary-text">${esc(summary)}</span><span class="ac-more" aria-hidden="true">Read more →</span></div>` : ''}
+    <span class="ac-more">Read more →</span>
   </a>`;
 }
 

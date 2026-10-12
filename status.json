@@ -3,8 +3,8 @@
     "BLS CPI": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T23:59:38.275Z",
-      "last_success": "2026-10-11T23:59:38.275Z",
+      "last_attempt": "2026-10-12T06:33:11.803Z",
+      "last_success": "2026-10-12T06:33:11.803Z",
       "item_count": 21,
       "error": null,
       "failing_since": null
@@ -21,11 +21,20 @@
     "Congress approval (Gallup)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T23:59:39.321Z",
-      "last_success": "2026-10-11T22:11:16.515Z",
+      "last_attempt": "2026-10-12T06:33:12.852Z",
+      "last_success": "2026-10-12T06:33:12.852Z",
       "item_count": 1,
-      "error": "[Congress] Could not extract approval — keeping existing values",
-      "failing_since": "2026-10-11T23:59:39.321Z"
+      "error": null,
+      "failing_since": null
+    },
+    "House control (Press Gallery)": {
+      "group": "polls",
+      "primary": true,
+      "last_attempt": "2026-10-12T06:33:13.350Z",
+      "last_success": "2026-10-12T06:33:13.350Z",
+      "item_count": 432,
+      "error": null,
+      "failing_since": null
     },
     "News feeds (all)": {
       "group": "news",
@@ -1389,8 +1398,8 @@
     "NYT polling CSVs": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T23:59:37.603Z",
-      "last_success": "2026-10-11T23:59:37.603Z",
+      "last_attempt": "2026-10-12T06:33:11.590Z",
+      "last_success": "2026-10-12T06:33:11.590Z",
       "item_count": 2421,
       "error": null,
       "failing_since": null
@@ -1398,7 +1407,7 @@
     "Retirements (Ballotpedia)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T23:59:39.368Z",
+      "last_attempt": "2026-10-12T06:33:13.016Z",
       "last_success": null,
       "item_count": null,
       "error": "HTTP 202 (likely a bot challenge)",
@@ -1515,14 +1524,14 @@
     "Trump approval (Datawrapper)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-11T23:59:38.505Z",
-      "last_success": "2026-10-11T23:59:38.505Z",
+      "last_attempt": "2026-10-12T06:33:11.896Z",
+      "last_success": "2026-10-12T06:33:11.896Z",
       "item_count": 629,
       "error": null,
       "failing_since": null
     }
   },
-  "updated": "2026-10-12T06:27:30.190Z",
+  "updated": "2026-10-12T06:33:13.355Z",
   "ai": {
     "ac": {
       "provider": "none",
@@ -1532,7 +1541,7 @@
       "run_at": "2026-10-11T21:26:47.201Z"
     },
     "home": {
-      "run_at": "2026-10-11T23:59:36.954Z",
+      "run_at": "2026-10-12T06:33:10.439Z",
       "provider": "none",
       "calls_this_run": 0,
       "status": "off",

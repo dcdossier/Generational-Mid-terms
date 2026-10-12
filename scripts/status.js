@@ -87,4 +87,11 @@ function getAI(feature) {
   return (load().ai || {})[feature] || null;
 }
 
-module.exports = { recordStatus, recordAI, getAI, saveStatus, STATUS_PATH };
+// Drops a group's entries whose name is not in `keep` (e.g. feeds removed from
+// the feed list), so retired sources do not linger as permanent failures.
+function pruneStatus(group, keep) {
+  const sources = load().sources, keepSet = new Set(keep);
+  for (const [name, v] of Object.entries(sources)) if (v.group === group && !keepSet.has(name)) delete sources[name];
+}
+
+module.exports = { recordStatus, recordAI, getAI, saveStatus, pruneStatus, STATUS_PATH };

@@ -14,7 +14,7 @@ const path = require('path');
 const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 const he = require('he');
-const { recordStatus, saveStatus } = require('./status');
+const { recordStatus, saveStatus, pruneStatus } = require('./status');
 const { COMMON_SURNAMES, candidateNames, cleanText, splitGoogleNewsTitle, loadMembers, loadBriefs, seatState, escapeRe } = require('./news-utils');
 
 const DATA_PATH = path.resolve(__dirname, '../data.json');
@@ -34,24 +34,18 @@ const FEEDS = [
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:apnews.com+congress+midterm',                       source: 'Google News: apnews.com congress midterm' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:reuters.com+congress+midterm',                      source: 'Google News: reuters.com congress midterm' },
   { url: 'https://rollcall.com/feed/',                                                                                             source: 'Roll Call' },
-  { url: 'https://ballotpedia.org/wiki/index.php?title=Special:RecentChanges&feed=rss',                                            source: 'Ballotpedia' },
   { url: 'https://www.theguardian.com/us-news/us-politics/rss',                                                                    source: 'The Guardian' },
 
   // NATIONAL POLLING
-  { url: 'https://www.realclearpolitics.com/xml/rss.xml',                                                                         source: 'RealClearPolitics' },
+  { url: 'https://www.realclearpolitics.com/index.xml',                                                                         source: 'RealClearPolitics' },
   { url: 'https://www.pewresearch.org/feed/',                                                                                      source: 'Pew Research' },
-  { url: 'https://news.gallup.com/rss/gallup_politics_rss.xml',                                                                   source: 'Gallup' },
   { url: 'https://yougov.com/en-us/rss',                                                                                          source: 'YouGov' },
-  { url: 'https://www.cookpolitical.com/feed',                                                                                     source: 'Cook Political Report' },
   { url: 'https://insideelections.com/feed/',                                                                                      source: 'Inside Elections' },
-  { url: 'https://centerforpolitics.org/crystalball/feed/',                                                                        source: "Sabato's Crystal Ball" },
-  { url: 'https://www.brookings.edu/feed/',                                                                                        source: 'Brookings' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Politico+poll+congress+senate+house+2026',               source: 'Google News: Politico poll congress senate house 2026' },
 
   // ARIZONA
   { url: 'https://azmirror.com/feed/localFeed/',                                                                                   source: 'Arizona Mirror' },
   { url: 'https://azcapitoltimes.com/feed/',                                                                                       source: 'Arizona Capitol Times' },
-  { url: 'https://www.azcentral.com/arcio/rss/',                                                                                   source: 'Arizona Republic' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Arizona+2026',                              source: 'Google News: Emerson poll Arizona 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Arizona+2026',                           source: 'Google News: Quinnipiac poll Arizona 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Arizona+2026',                              source: 'Google News: Suffolk poll Arizona 2026' },
@@ -59,7 +53,6 @@ const FEEDS = [
   // CALIFORNIA
   { url: 'https://calmatters.org/feed/',                                                                                           source: 'CalMatters' },
   { url: 'https://www.latimes.com/rss2.0.xml',                                                                                    source: 'Los Angeles Times' },
-  { url: 'https://www.sacbee.com/arcio/rss/',                                                                                     source: 'Sacramento Bee' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Berkeley+IGS+poll+California+2026',                      source: 'Google News: Berkeley IGS poll California 2026' },
   { url: 'https://www.ppic.org/feed/',                                                                                             source: 'PPIC' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+California+2026',                           source: 'Google News: Emerson poll California 2026' },
@@ -75,14 +68,12 @@ const FEEDS = [
   // FLORIDA
   { url: 'https://floridapolitics.com/feed/',                                                                                      source: 'Florida Politics' },
   { url: 'https://floridaphoenix.com/feed/localFeed/',                                                                             source: 'Florida Phoenix' },
-  { url: 'https://www.tampabay.com/feed/',                                                                                         source: 'Tampa Bay Times' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Stetson+poll+Florida+2026',                              source: 'Google News: Stetson poll Florida 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Florida+2026',                              source: 'Google News: Emerson poll Florida 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Florida+2026',                           source: 'Google News: Quinnipiac poll Florida 2026' },
 
   // GEORGIA
   { url: 'https://georgiarecorder.com/feed/localFeed/',                                                                            source: 'Georgia Recorder' },
-  { url: 'https://www.ajc.com/arcio/rss/',                                                                                        source: 'Atlanta Journal-Constitution' },
   { url: 'https://www.gpb.org/rss.xml',                                                                                           source: 'GPB News' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Georgia+2026',                              source: 'Google News: Emerson poll Georgia 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Georgia+2026',                           source: 'Google News: Quinnipiac poll Georgia 2026' },
@@ -91,7 +82,6 @@ const FEEDS = [
   // IOWA
   { url: 'https://iowacapitaldispatch.com/feed/localFeed/',                                                                        source: 'Iowa Capital Dispatch' },
   { url: 'https://iowastartingline.com/feed/',                                                                                     source: 'Iowa Starting Line' },
-  { url: 'http://www.thegazette.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                       source: 'The Gazette (IA)' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Selzer+poll+Iowa+2026',                                  source: 'Google News: Selzer poll Iowa 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Iowa+2026',                                 source: 'Google News: Emerson poll Iowa 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Iowa+2026',                              source: 'Google News: Quinnipiac poll Iowa 2026' },
@@ -115,14 +105,12 @@ const FEEDS = [
   // MONTANA
   { url: 'https://montanafreepress.org/feed/',                                                                                     source: 'Montana Free Press' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:billingsgazette.com+Montana+election+2026',         source: 'Google News: billingsgazette.com Montana election 2026' },
-  { url: 'https://www.mtpr.org/index.rss',                                                                                        source: 'Montana Public Radio' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Montana+2026',                              source: 'Google News: Emerson poll Montana 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Montana+2026',                           source: 'Google News: Quinnipiac poll Montana 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Montana+2026',                              source: 'Google News: Suffolk poll Montana 2026' },
 
   // NEBRASKA
   { url: 'https://nebraskaexaminer.com/feed/localFeed/',                                                                           source: 'Nebraska Examiner' },
-  { url: 'http://omaha.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                                source: 'Omaha World-Herald' },
   { url: 'http://journalstar.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc&k%5B%5D=%23topstory',                          source: 'Lincoln Journal Star' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Selzer+poll+Nebraska+2026',                              source: 'Google News: Selzer poll Nebraska 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Siena+poll+Nebraska+2026',                               source: 'Google News: Siena poll Nebraska 2026' },
@@ -146,7 +134,6 @@ const FEEDS = [
 
   // NEW JERSEY
   { url: 'https://njspotlightnews.org/feed/',                                                                                      source: 'NJ Spotlight News' },
-  { url: 'https://njmonitor.com/feed/',                                                                                            source: 'NJ Monitor' },
   { url: 'https://insidernj.com/feed/',                                                                                            source: 'Insider NJ' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Monmouth+poll+New+Jersey+2026',                          source: 'Google News: Monmouth poll New Jersey 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+Jersey+2026',                        source: 'Google News: Quinnipiac poll New Jersey 2026' },
@@ -161,9 +148,6 @@ const FEEDS = [
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+Mexico+2026',                        source: 'Google News: Quinnipiac poll New Mexico 2026' },
 
   // NEW YORK
-  { url: 'https://www.cityandstateny.com/rss.xml',                                                                                source: 'City & State NY' },
-  { url: 'https://nystateofpolitics.com/feed/',                                                                                    source: 'NY State of Politics' },
-  { url: 'https://www.timesunion.com/rss/',                                                                                       source: 'Times Union (Albany)' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Siena+poll+New+York+2026',                               source: 'Google News: Siena poll New York 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+New+York+2026',                          source: 'Google News: Quinnipiac poll New York 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Marist+poll+New+York+2026',                              source: 'Google News: Marist poll New York 2026' },
@@ -179,14 +163,12 @@ const FEEDS = [
   // OHIO
   { url: 'https://ohiocapitaljournal.com/feed/localFeed/',                                                                         source: 'Ohio Capital Journal' },
   { url: 'https://www.cleveland.com/arc/outboundfeeds/rss/',                                                                      source: 'Cleveland Plain Dealer' },
-  { url: 'https://www.dispatch.com/arcio/rss/',                                                                                   source: 'Columbus Dispatch' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=BGSU+poll+Ohio+2026',                                    source: 'Google News: BGSU poll Ohio 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Ohio+2026',                              source: 'Google News: Quinnipiac poll Ohio 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Baldwin+Wallace+poll+Ohio+2026',                         source: 'Google News: Baldwin Wallace poll Ohio 2026' },
 
   // PENNSYLVANIA
   { url: 'https://www.spotlightpa.org/feeds/full.xml',                                                                            source: 'Spotlight PA' },
-  { url: 'https://www.inquirer.com/arcio/rss/',                                                                                   source: 'Philadelphia Inquirer' },
   { url: 'https://www.post-gazette.com/rss',                                                                                      source: 'Pittsburgh Post-Gazette' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Franklin+Marshall+poll+Pennsylvania+2026',               source: 'Google News: Franklin Marshall poll Pennsylvania 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Pennsylvania+2026',                      source: 'Google News: Quinnipiac poll Pennsylvania 2026' },
@@ -194,7 +176,6 @@ const FEEDS = [
 
   // TEXAS
   { url: 'https://www.texastribune.org/feed/',                                                                                    source: 'Texas Tribune' },
-  { url: 'https://www.houstonchronicle.com/arcio/rss/',                                                                           source: 'Houston Chronicle' },
   { url: 'https://www.texasobserver.org/feed/',                                                                                    source: 'Texas Observer' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=UT+Texas+Politics+poll+Texas+2026',                      source: 'Google News: UT Texas Politics poll Texas 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=UT+Tyler+poll+Texas+2026',                               source: 'Google News: UT Tyler poll Texas 2026' },
@@ -202,7 +183,6 @@ const FEEDS = [
 
   // VIRGINIA
   { url: 'https://virginiamercury.com/feed/localFeed/',                                                                            source: 'Virginia Mercury' },
-  { url: 'https://richmond.com/feed/',                                                                                             source: 'Richmond Times-Dispatch' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=VPAP+Virginia+election+2026',                            source: 'Google News: VPAP Virginia election 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=CNU+Wason+poll+Virginia+2026',                           source: 'Google News: CNU Wason poll Virginia 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Virginia+2026',                             source: 'Google News: Emerson poll Virginia 2026' },
@@ -211,14 +191,12 @@ const FEEDS = [
   // WASHINGTON STATE
   { url: 'https://washingtonstatestandard.com/feed/localFeed/',                                                                    source: 'Washington State Standard' },
   { url: 'https://www.cascadepbs.org/articles/briefs/rss/',                                                                       source: 'Crosscut / Cascade PBS' },
-  { url: 'https://www.seattletimes.com/feed/',                                                                                    source: 'Seattle Times' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Elway+Research+poll+Washington+2026',                    source: 'Google News: Elway Research poll Washington 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Washington+state+2026',                     source: 'Google News: Emerson poll Washington state 2026' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Suffolk+poll+Washington+state+2026',                     source: 'Google News: Suffolk poll Washington state 2026' },
 
   // WISCONSIN
   { url: 'https://wisconsinexaminer.com/feed/localFeed/',                                                                          source: 'Wisconsin Examiner' },
-  { url: 'https://www.jsonline.com/arcio/rss/',                                                                                   source: 'Milwaukee Journal Sentinel' },
   { url: 'https://wisconsinwatch.org/feed/',                                                                                      source: 'Wisconsin Watch' },
   { url: 'https://law.marquette.edu/poll/feed/',                                                                                   source: 'Marquette Law Poll (WI)' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Wisconsin+2026',                            source: 'Google News: Emerson poll Wisconsin 2026' },
@@ -230,7 +208,6 @@ const FEEDS = [
 
   // CONNECTICUT (Chris Murphy; new state feeds per India-interest-sources.xlsx)
   { url: 'https://ctmirror.org/feed/',                                                                                                source: 'CT Mirror' },
-  { url: 'https://www.courant.com/news/politics/?widgetName=rssfeed&widgetContentId=755799&getXmlFeed=true',                          source: 'Hartford Courant – Politics' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Quinnipiac+poll+Connecticut+2026',                          source: 'Google News: Quinnipiac poll Connecticut 2026' },
 
   // ILLINOIS (Krishnamoorthi, Davis; new state feeds)
@@ -240,28 +217,22 @@ const FEEDS = [
 
   // INDIANA (André Carson; new state feeds)
   { url: 'https://indianacapitalchronicle.com/feed/',                                                                                 source: 'Indiana Capital Chronicle' },
-  { url: 'https://www.indystar.com/rss/news/politics/',                                                                               source: 'IndyStar – Politics' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Ball+State+CBER+poll+Indiana+2026',                         source: 'Google News: Ball State CBER poll Indiana 2026' },
 
   // MARYLAND (Van Hollen; new state feeds)
   { url: 'https://www.marylandmatters.org/feed/',                                                                                     source: 'Maryland Matters' },
-  { url: 'https://www.wbaltv.com/news/politics/rss.xml',                                                                              source: 'WBAL-TV Politics' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Goucher+poll+Maryland+2026',                                source: 'Google News: Goucher poll Maryland 2026' },
 
   // MASSACHUSETTS (Lynch, Markey; new state feeds)
-  { url: 'https://www.masslive.com/arc/outboundfeeds/rss/section/politics/',                                                          source: 'MassLive – Politics' },
   { url: 'https://commonwealthbeacon.org/feed/',                                                                                      source: 'CommonWealth Beacon' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=MassINC+poll+Massachusetts+2026',                           source: 'Google News: MassINC poll Massachusetts 2026' },
 
   // MINNESOTA (Omar; new state feeds)
-  { url: 'https://www.minnpost.com/rss.xml',                                                                                          source: 'MinnPost' },
-  { url: 'https://www.startribune.com/local/politics/?format=rss',                                                                    source: 'Star Tribune – Politics' },
   { url: 'https://minnesotareformer.com/feed/',                                                                                        source: 'Minnesota Reformer' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Star+Tribune+Minnesota+poll+2026',                          source: 'Google News: Star Tribune Minnesota poll 2026' },
 
   // SOUTH CAROLINA (Wilson, Graham; new state feeds)
   { url: 'https://scdailygazette.com/feed/',                                                                                          source: 'SC Daily Gazette' },
-  { url: 'https://www.postandcourier.com/politics/feed/',                                                                             source: 'Post and Courier – Politics' },
   { url: 'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Winthrop+poll+South+Carolina+2026',                         source: 'Google News: Winthrop poll South Carolina 2026' },
 
   // NEW YORK (supplemental — Meeks, Latimer)
@@ -272,11 +243,9 @@ const FEEDS = [
   { url: 'https://cardinalnews.org/feed/',                                                                                             source: 'Cardinal News' },
 
   // NEW JERSEY (supplemental — Kim, Booker)
-  { url: 'https://www.nj.com/arc/outboundfeeds/rss/section/politics/',                                                                source: 'NJ.com – Politics' },
   { url: 'https://www.monmouth.edu/polling-institute/feed/',                                                                           source: 'Monmouth Poll (NJ)' },
 
   // IDAHO (supplemental — Crapo, Risch)
-  { url: 'https://www.idahopress.com/search/?f=rss&t=article&c=news/politics&l=50&s=start_time&sd=desc',                              source: 'Idaho Press – Politics' },
 
 ];
 
@@ -592,6 +561,7 @@ async function main() {
   // Write back
   fs.writeFileSync(DATA_PATH, JSON.stringify(data, null, 2));
   console.log(`[fetch-news] Done. Added ${newCount} new items. Repository total: ${data.news.length} articles (24h window).`);
+  pruneStatus('news', ['News feeds (all)', ...FEEDS.map(f => f.statusName).filter(Boolean)]);
   saveStatus();
   process.exit(0);
 }

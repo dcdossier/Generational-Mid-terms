@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Four I's of the 2026 US Mid-terms</title>
+<link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -231,9 +232,9 @@ const L=(u,t)=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
 
 /* ---------- geometry ---------- */
 const MAIN={
-  inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top issue",anchor:[260,415]},
-  institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutional mistrust",stat:"36% top issue",anchor:[790,248]},
-  immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top issue",anchor:[1095,612]},
+  inflation:{kind:"circle",cx:450,cy:410,r:300,tone:"var(--infl)",label:"Inflation",stat:"48% top-two issue (POS, Mar 2026)",anchor:[260,415]},
+  institutions:{kind:"circle",cx:800,cy:405,r:245,tone:"var(--inst)",label:"Institutional mistrust",stat:"36% top-two issue (POS, Mar 2026)",anchor:[790,248]},
+  immigration:{kind:"circle",cx:1110,cy:480,r:170,tone:"var(--imm)",label:"Immigration",stat:"25% top-two issue (POS, Mar 2026)",anchor:[1095,612]},
   iran:{kind:"tri",pts:"410,480 895,512 645,877",tone:"var(--iran)",label:"Iran War",stat:"1% standalone",anchor:[672,762]}
 };
 const SUB=[
@@ -312,8 +313,8 @@ const SHARE=t=>`<p class="shares">Shares ground with ${t}.</p>`;
 
 const C={};
 
-C.inflation={code:"Issue I.01",title:"Inflation",stat:"48% name it their top issue",
- body:`<p>The economy, the cost of living and jobs rank as the ${L(src.dfp,"top voter priority")}, with ${L(src.pos,"48% citing inflation")} as their single top issue and jobs and the economy following at 24%. Rising healthcare and housing costs are named as a top priority by 21% and 16% respectively.</p>
+C.inflation={code:"Issue I.01",title:"Inflation",stat:"48% rank it among their top two issues (Public Opinion Strategies, 28 Feb–3 Mar 2026)",
+ body:`<p>The economy, the cost of living and jobs rank as the ${L(src.dfp,"top voter priority")}, with ${L(src.pos,"48% naming inflation")} among their top two issues (26% as their single top issue) and jobs and the economy following at 24%. Rising healthcare and housing costs are named as a top priority by 21% and 16% respectively.</p>
  <div class="deflist">
   <div><dt>CPI, Jan 2024</dt><dd>2.9%</dd></div>
   <div><dt>CPI, May 2026</dt><dd>4.2%</dd></div>
@@ -323,7 +324,7 @@ C.inflation={code:"Issue I.01",title:"Inflation",stat:"48% name it their top iss
  <p>Price growth is steepest in the ${L(src.cpiReg,"South and the Midwest")} at 3.9% and 5%. Those two regions also send the largest Republican bloc to Congress, with over 160 House members and over 40 Senators. (${L(src.cpi,"BLS series")}, ${L(src.cpiAvg,"average prices")}, ${L(src.cpiCat,"category index")}.)</p>
  <p class="take">High prices have been a constant since 2024, so this is not a war-driven spike alone. The geography of the pain and the geography of Republican representation overlap almost exactly, which may make incumbency the liability this cycle.</p>`};
 
-C.institutions={code:"Issue I.02",title:"Institutional mistrust",stat:"36% name threats to democracy",
+C.institutions={code:"Issue I.02",title:"Institutional mistrust",stat:"36% rank threats to democracy among their top two issues (Public Opinion Strategies, 28 Feb–3 Mar 2026)",
  body:`<p>The United States has leaned on institutional failsafes for stability, and confidence in them has been eroding for a decade. The 119th Congress has deepened the slide through its response, or lack of one, to successive crises.</p>
  <div class="deflist">
   <div><dt>Threats to democracy</dt><dd>36%</dd></div>
@@ -347,7 +348,7 @@ C.iran={code:"Issue I.03",title:"Iran war",stat:"1% rank war as their top concer
  ${SHARE("tariffs, on the price side, and with Congress and executive overreach on the institutional side")}
  <p class="take">The war is drawn as a wedge because almost none of its area stands alone. The memorandum has closed it as a live issue, yet the ideological split it exposed between the MAGA elite and the anti-war America First faction, and the institutional lapses it revealed, remain in play.</p>`};
 
-C.immigration={code:"Issue I.04",title:"Immigration",stat:"25% rank it among their top issues",
+C.immigration={code:"Issue I.04",title:"Immigration",stat:"25% rank it among their top two issues (Public Opinion Strategies, 28 Feb–3 Mar 2026)",
  body:`<p>Nationally, immigration works largely as an extension of institutional mistrust. Locally it stands on its own, with legal, institutional and political effects. ${L(src.pos,"25% of voters")} place immigration and border control among their top issues, behind inflation and mistrust.</p>
  <div class="deflist">
   <div><dt>ICE funding under OBBBA</dt><dd>USD 75 bn</dd></div>

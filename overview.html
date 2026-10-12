@@ -830,7 +830,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
   <!-- TRUMP APPROVAL CARD -->
   <div class="chart-card">
     <div class="card-title">Presidential approval &#8212; Donald Trump (2nd term)</div>
-    <div class="card-sub">Aggregate of major national polls. Updated daily by the automated fetch-polls workflow. Source: RealClearPolitics, Gallup, Pew Research.</div>
+    <div class="card-sub">Polling average from Nate Silver&#8217;s Silver Bulletin, read by the site&#8217;s data workflow every four hours.</div>
     <div class="appr-gauge-row">
       <div class="appr-gauge-wrap">
         <div class="appr-gauge-clip">
@@ -861,7 +861,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
         <div id="appr-trend-chip"></div>
       </div>
     </div>
-    <div class="chart-note">Aggregate sourced from RealClearPolitics, Gallup, and Pew Research RSS feeds via daily automated fetch. Numbers update automatically when the workflow runs at 06:00 UTC.</div>
+    <div class="chart-note">Source: Silver Bulletin approval average, read by the data workflow every four hours.</div>
   </div>
 
   <!-- TRUMP HISTORY CHART -->
@@ -875,7 +875,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
     <div style="position:relative;height:280px"><canvas id="c-trump-history"></canvas></div>
     <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
-    <div class="chart-note">Source: RealClearPolitics polling average, Gallup monthly tracking, Pew Research Center. Historical data compiled from public polling aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
+    <div class="chart-note">Source: Silver Bulletin approval average, monthly readings since January 2025.</div>
   </div>
 
   <!-- MIDTERM CONTEXT CALLOUT -->
@@ -944,7 +944,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </tbody>
     </table>
     </div>
-    <div class="chart-note">* Live approval figure from data.json, updated by the daily fetch-polls workflow. Historical data sourced from Gallup presidential approval archive and Cook Political Report historical seat-change records.</div>
+    <div class="chart-note">* Live Silver Bulletin approval average, read by the data workflow every four hours. Historical data sourced from Gallup presidential approval archive and Cook Political Report historical seat-change records.</div>
   </div>
 
   <!-- NET APPROVAL CARD -->
@@ -1080,7 +1080,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </div>
       <div class="gb-undecided-note" id="gb-undecided-note"></div>
     </div>
-    <div class="chart-note">Source: RealClearPolitics polling average, updated by the automated fetch-polls workflow. The generic ballot is a leading indicator of House outcomes but must be adjusted for structural Republican advantages in district geography.</div>
+    <div class="chart-note">Source: New York Times polling averages, read by the data workflow every four hours. The generic ballot is a leading indicator of House outcomes but must be adjusted for structural Republican advantages in district geography.</div>
   </div>
 
   <!-- TREND LINE CHART -->
@@ -1094,7 +1094,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
     <div style="position:relative;height:280px"><canvas id="c-gb-trend"></canvas></div>
     <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
-    <div class="chart-note">Source: RealClearPolitics, YouGov/Economist, Quinnipiac, NBC/WSJ, Fox News polling averages. Monthly averages compiled from public aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
+    <div class="chart-note">Source: New York Times polling averages, monthly readings since January 2025.</div>
   </div>
 
   <!-- D-R MARGIN TREND -->
@@ -1133,7 +1133,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </table>
     <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
     </div>
-    <div class="chart-note">Individual polls have a margin of error of approximately 3 points. Pollsters with known Republican or Democratic house effects are noted. The RealClearPolitics average is the primary reference for this tracker.</div>
+    <div class="chart-note">Individual polls have a margin of error of approximately 3 points. Polls and the average come from the New York Times polling data.</div>
   </div>
 
   <!-- HISTORICAL MIDTERM CONTEXT -->
@@ -1163,7 +1163,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       </tbody>
     </table>
     </div>
-    <div class="chart-note">Source: RealClearPolitics historical generic ballot averages, final pre-election readings. Seat change is net gain/loss for the Democratic Party. The 2022 cycle illustrates the translation penalty: Democrats led on the generic ballot but won only a narrow majority before losing the House.</div>
+    <div class="chart-note">Source: RealClearPolitics historical generic ballot averages, final pre-election readings (2006&#8211;2022); the 2026 row is the live New York Times polling average. Seat change is net gain/loss for the Democratic Party. The 2022 cycle illustrates the translation penalty: Democrats led on the generic ballot but won only a narrow majority before losing the House.</div>
   </div>
 
   <!-- SEAT PROJECTION CHART -->
@@ -1347,7 +1347,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
       <div class="li"><div class="lln-d" style="border-color:var(--t4)"></div>50% threshold</div>
     </div>
     <div style="position:relative;height:280px"><canvas id="c-fav-trend"></canvas></div>
-    <div class="chart-note">Source: Gallup monthly party favourability tracking, Pew Research, NBC/WSJ polling. Historical data compiled from public polling aggregates. Seeded from known polling ranges; live values updated by the daily fetch-polls workflow.</div>
+    <div class="chart-note">Source: Gallup monthly party favourability tracking, Pew Research, NBC/WSJ polling. Hand-maintained; these figures are not updated automatically.</div>
   </div>
 
   <!-- D-R ADVANTAGE TREND CHART -->
@@ -1555,7 +1555,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     </div>
     <div style="position:relative;height:260px"><canvas id="c-ca-trend"></canvas></div>
     <div class="dl-label" data-block="approval.congress" data-kind="monthly"></div>
-    <div class="chart-note">Source: Gallup congressional approval monthly tracking. Seeded from known polling ranges for the 119th Congress; live values updated by the daily fetch-polls workflow at 06:00 UTC.</div>
+    <div class="chart-note">Source: Gallup congressional approval monthly tracking. Seeded from known polling ranges for the 119th Congress; live values read from Gallup by the data workflow every four hours.</div>
   </div>
 
   <!-- KEY EVENTS TIMELINE -->
@@ -1815,7 +1815,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
     <div class="card-title">Generic Ballot: Democrat vs Republican (1994&ndash;2022)</div>
     <div class="card-sub">Final pre-election generic congressional ballot average. The party leading the generic ballot by 3+ points almost always wins the House popular vote.</div>
     <div style="position:relative;height:200px"><canvas id="c-pe-ballot"></canvas></div>
-    <div class="chart-note">Source: RealClearPolitics / FiveThirtyEight historical aggregates. 2026 point is live poll average.</div>
+    <div class="chart-note">Source: RealClearPolitics / FiveThirtyEight historical aggregates (1994&#8211;2022). The 2026 point is the live New York Times polling average.</div>
   </div>
 
   <div class="card" style="margin-top:16px">
@@ -3502,7 +3502,7 @@ function renderBallotStats() {
           + (margin >= 5 ? 'is in the range that has historically produced net House gains.'
            : margin >= 3 ? 'is at the structural break-even threshold — small net gains or losses are equally likely.'
            : 'is below the break-even threshold; Democrats would likely need a further shift to net seat gains.')
-          + ' Source: RCP average.';
+          + ' Source: New York Times polling average.';
       } else if (margin < 0) {
         calloutParent.innerHTML = '<div class="callout-label">Generic ballot translation rule — structural Republican advantage</div>'
           + 'Republicans currently lead the generic ballot by <strong>R+' + absM + '</strong>. '
@@ -3620,7 +3620,7 @@ function renderBallotStats() {
        : margin >= 3 ? 'break-even territory; small gains or losses are equally plausible.'
        : margin >= 0 ? 'territory below the structural threshold. Further movement toward Democrats is needed for net gains.'
        : 'negative territory; Republicans would be favoured to gain House seats on this margin alone.')
-      + ' (Source: RCP aggregate, live via fetch-polls workflow.)';
+      + ' (Source: New York Times polling averages.)';
   }
 }
 

@@ -1760,8 +1760,8 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:14px
 
   <div class="kr-path" id="kr-hou-path"></div>
 
-  <h3 class="section-title" style="margin-top:18px;margin-bottom:6px">Competitive House Districts</h3>
-  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 8px">The <span data-fig="house.tracked">49</span> most competitive House districts. Toss-ups are the decisive seats for House control.</p>
+  <h3 class="section-title" style="margin-top:18px;margin-bottom:6px">Toss-up and Lean House Districts</h3>
+  <p style="font:400 13px var(--sans);color:#6B6B6B;margin:0 0 8px">The <span data-fig="house.toss_lean">33</span> tracked districts rated Toss-up or Lean, sorted Lean R, Toss-up, Lean D. Toss-ups are the decisive seats for House control. PVI: Cook Partisan Voting Index (2025).</p>
   <div style="overflow-x:auto">
     <table class="kr-table" id="kr-house-table">
       <thead><tr>
@@ -5462,9 +5462,10 @@ const RATING_MAP = {
   'Safe D':   { cls: 'kr-chip-safe-d',   seg: 'kr-seg-safe-d',   key: 'safe_d' },
 };
 
-function ratingChip(rating) {
+function ratingChip(rating, source) {
   const r = RATING_MAP[rating] || {};
-  return `<span class="kr-chip ${r.cls || ''}">${rating}</span>`;
+  return `<span class="kr-chip ${r.cls || ''}">${rating}</span>`
+    + (source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${source}</div>` : '');
 }
 
 function partyCell(party) {
@@ -5576,7 +5577,7 @@ function renderKeyRacesStats() {
       </td>
       <td style="font:500 13px var(--sans);color:#444;white-space:nowrap">${race.incumbent}</td>
       <td>${partyCell(race.party)}</td>
-      <td>${ratingChip(race.rating)}</td>
+      <td>${ratingChip(race.rating, race.rating_source)}</td>
       <td class="kr-note">${race.note || ''}</td>
     </tr>`).join('');
   }
@@ -5591,10 +5592,10 @@ function renderKeyRacesStats() {
   // House competitive table
   const houTbody = document.getElementById('kr-house-tbody');
   if (houTbody) {
-    const sortedH = [...(house.competitive || [])].sort((a,b) => {
-      const order = ['Lean R','Toss-up','Lean D'];
-      return order.indexOf(a.rating) - order.indexOf(b.rating);
-    });
+    const order = ['Lean R','Toss-up','Lean D'];
+    const sortedH = (house.competitive || [])
+      .filter(r => order.includes(r.rating))
+      .sort((a,b) => order.indexOf(a.rating) - order.indexOf(b.rating) || a.district.localeCompare(b.district));
     houTbody.innerHTML = sortedH.map(r => `<tr>
       <td>
         <div class="kr-state">${r.district}${r.open ? '<span class="kr-open-badge">OPEN</span>' : ''}</div>
@@ -5603,7 +5604,7 @@ function renderKeyRacesStats() {
       <td style="font:400 12px var(--sans);color:#666">${r.challenger || ''}</td>
       <td>${partyCell(r.party)}</td>
       <td><span class="kr-pvp">${r.pvp || ''}</span></td>
-      <td>${ratingChip(r.rating)}</td>
+      <td>${ratingChip(r.rating, r.rating_source)}</td>
       <td class="kr-note">${r.note || ''}</td>
     </tr>`).join('');
   }
@@ -5631,7 +5632,7 @@ function renderKeyRacesStats() {
       <div class="kr-gov-card ${r.rating === 'Toss-up' ? 'kr-gov-card-open' : ''}">
         <div class="kr-gov-state">${r.state}${r.open ? '<span class="kr-open-badge">OPEN</span>' : ''}</div>
         <div class="kr-gov-incumbent"><span class="${r.party === 'R' ? 'kr-party-r' : 'kr-party-d'}">${r.party}</span> — ${r.incumbent}</div>
-        ${ratingChip(r.rating)}
+        ${ratingChip(r.rating, r.rating_source)}
         ${r.note ? `<div class="kr-note" style="margin-top:6px">${r.note}</div>` : ''}
       </div>`).join('');
   }

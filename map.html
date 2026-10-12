@@ -176,6 +176,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 .pvp-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-size:13px;font-weight:700}
 .pvp-pill.R{background:#FBEAEA;color:#7a1c1c}
 .pvp-pill.D{background:#EEF4FB;color:#1A3F8A}
+.pvp-pill.E{background:#F1F1EF;color:#555}
 
 /* ── GOV GRID ── */
 .gov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:18px}
@@ -584,7 +585,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
   <div class="chart-card">
     <div class="card-title"><span data-fig="house.tracked">49</span> battleground districts</div>
-    <div class="card-sub">All <span data-fig="house.tracked">49</span> individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVP = 2024 presidential vote margin in the district. Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
+    <div class="card-sub">All <span data-fig="house.tracked">49</span> individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVI = Cook Partisan Voting Index (2025). Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
     <div class="race-table-wrap">
     <table class="race-table" id="comp-table">
       <thead>
@@ -593,7 +594,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
           <th onclick="sortCompTable(1)">Incumbent</th>
           <th onclick="sortCompTable(2)">Party</th>
           <th onclick="sortCompTable(3)">Rating</th>
-          <th onclick="sortCompTable(4)">PVP (2024)</th>
+          <th onclick="sortCompTable(4)">Cook PVI (2025)</th>
         </tr>
       </thead>
       <tbody id="comp-tbody">
@@ -601,7 +602,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       </tbody>
     </table>
     </div>
-    <div class="chart-note">Source: Cook Political Report, Inside Elections. PVP = 2024 presidential vote performance in district. Positive R = district voted more Republican than national average.</div>
+    <div class="chart-note">Ratings: <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span>; where a badge follows a single rater, the rater and date are shown beneath it. PVI: Cook Partisan Voting Index (2025), how much more Republican (R+) or Democratic (D+) the district voted than the nation in 2020 and 2024.</div>
   </div>
 
   <!-- ── INTRAPARTY FACTIONS (House) ──────────────────────────────── -->
@@ -913,7 +914,7 @@ function openSeatFromRace(kind, race, pathEl, extraOpts) {
   } else {
     id = toSeatId('house', race.district);
     incumbentLine = race.incumbent;
-    note = 'Presidential Vote Performance (2024): ' + race.pvp;
+    note = 'Cook PVI (2025): ' + race.pvp;
   }
   if (!id) return;
   spSelectSeat(id, pathEl);
@@ -1357,7 +1358,7 @@ function buildSenateMap(races) {
       .style('stroke-width', '0.5px')
       .on('mousemove', function(event, d) {
         const r = _senRaceByState[d.properties.NAME];
-        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.rating_source ? ' (' + r.rating_source + ')' : ''}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
         else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No Senate race in 2026</span>`);
       })
       .on('mouseleave', hideTip)
@@ -1462,7 +1463,7 @@ function renderTable(races, filter, col, dir) {
       <td><span class="state-link">${r.state}</span></td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party === 'R' ? 'R' : 'D'}</span></td>
-      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
       <td>${r.open ? '<span style="color:var(--orange);font-weight:600">Open</span>' : '&#8212;'}</td>
     </tr>`;
   }).join('');
@@ -1529,7 +1530,7 @@ function buildHouseDistrictMap(competitive) {
       .on('mousemove', function(event, d) {
         const k = d.properties.state + '_' + d.properties.district;
         const r = _houseRaceByKey[k];
-        if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span><br>PVP: ${r.pvp}`);
+        if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span>${r.rating_source ? ' (' + r.rating_source + ')' : ''}<br>Cook PVI: ${r.pvp}`);
         else {
           const dDists = D_DISTRICTS[d.properties.state] || [];
           const isD = dDists.includes(d.properties.district);
@@ -1602,7 +1603,7 @@ function buildGovMap(races) {
       .style('stroke-width', '0.5px')
       .on('mousemove', function(event, d) {
         const r = _govRaceByState[d.properties.NAME];
-        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.rating_source ? ' (' + r.rating_source + ')' : ''}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
         else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No governor race in 2026</span>`);
       })
       .on('mouseleave', hideTip)
@@ -1691,14 +1692,14 @@ function renderCompTable(races) {
   const tbody = document.getElementById('comp-tbody');
   tbody.innerHTML = sorted.map(r => {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
-    const pvpR = r.pvp.startsWith('R');
+    const pvpCls = String(r.pvp).startsWith('R') ? 'R' : String(r.pvp).startsWith('D') ? 'D' : 'E';
     const seatId = toSeatId('house', r.district);
     return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${seatId}" onclick="clickCompTableRow('${r.district}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td style="font-weight:600">${r.district}</td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
-      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
-      <td><span class="pvp-pill ${pvpR ? 'R' : 'D'}">${r.pvp}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
+      <td><span class="pvp-pill ${pvpCls}">${r.pvp}</span></td>
     </tr>`;
   }).join('');
 }
@@ -1768,7 +1769,7 @@ function renderGovTable(races, filter, col, dir) {
       <td style="font-weight:600">${r.state}</td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
-      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
       <td>${r.open ? '<span class="badge-open" style="font-size:11px;padding:2px 7px">Open</span>' : '&#8212;'}</td>
     </tr>`;
   }).join('');

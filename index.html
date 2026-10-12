@@ -341,7 +341,8 @@ body{
 .freshness-dot{width:5px;height:5px;border-radius:50%;background:#5EBD8A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
 @keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
 @keyframes why-flash{0%,100%{background:#FFFFFF}50%{background:#fffbe2}}
-@media(max-width:600px){.site-footer-sources{display:none}.site-footer-inner{padding:6px 16px}}
+@media(max-width:600px){.site-footer-sources,.site-footer-logos{display:none}.site-footer-inner{padding:6px 12px;flex-wrap:nowrap}.home-freshness{max-width:100%;min-width:0}#home-freshness-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fresh-long{display:none}}
+@media(min-width:601px){.fresh-short{display:none}}
 
 /* ── COUNTDOWN: never wrap ─────────────────────────────────────────────── */
 .countdown-timer{white-space:nowrap}
@@ -528,13 +529,13 @@ body{background:#F5F5DC;color:#1E2232}
   <div class="nd-scroll">
 
     <!-- Home -->
-    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'Through this section you will get an understanding of the importance of the mid-terms and foundational information on the current 2026 mid-term elections.')" onmouseleave="ndHideTip()" onclick="ndGo('home')">
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'Through this section you will get an understanding of the importance of the midterms and foundational information on the current 2026 midterm elections.')" onmouseleave="ndHideTip()" onclick="ndGo('home')">
       &#8962; Home
     </button>
-    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section explains the US electoral process in the context of 2026 mid-terms')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','overview')">
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section explains the US electoral process in the context of the 2026 midterms')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','overview')">
       Overview
     </button>
-    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Curated from a select list of local and national news outlets, this section tracks the latest developments in the lead up to the 2026 mid-term elections')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','news')">
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Curated from a select list of local and national news outlets, this section tracks the latest developments in the lead-up to the 2026 midterm elections')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','news')">
       Latest Developments
     </button>
     <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section tells the data story of these elections with charts, graphs and math.')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','data')">
@@ -551,7 +552,7 @@ body{background:#F5F5DC;color:#1E2232}
     <div class="nd-divider"></div>
 
     <!-- India's Interest -->
-    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section explains what aspects of the 2026 mid-terms can impact India — from legislative priorities and trade policy to the role of the Indian diaspora and legislators shaping the US-India relationship.')" onmouseleave="ndHideTip()" onclick="ndGo('india')">
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section explains what aspects of the 2026 midterms can affect India — from legislative priorities and trade policy to the role of the Indian diaspora and legislators shaping the US-India relationship.')" onmouseleave="ndHideTip()" onclick="ndGo('india')">
       India's Interest
     </button>
     <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Key issues of India\'s interest being debated in the US Congress and how their outcome can shape India-US relations.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','stakes')">
@@ -567,7 +568,7 @@ body{background:#F5F5DC;color:#1E2232}
     <div class="nd-divider"></div>
 
     <!-- Analysis & Commentary -->
-    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section records our analytical writings, commentary and long-form explainers on the 2026 mid-term elections and related issues.')" onmouseleave="ndHideTip()" onclick="ndGo('analysis')">
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section records our analytical writings, commentary and long-form explainers on the 2026 midterm elections and related issues.')" onmouseleave="ndHideTip()" onclick="ndGo('analysis')">
       Analysis &amp; Commentary
     </button>
 
@@ -640,7 +641,7 @@ body{background:#F5F5DC;color:#1E2232}
             </div>
           </div>
           <div class="hero-why-item" id="hwi-1">
-            <button class="hero-why-btn" onclick="toggleHeroWhy(1,this)">Why do the mid-terms matter? <span class="hero-why-chevron">&#9660;</span></button>
+            <button class="hero-why-btn" onclick="toggleHeroWhy(1,this)">Why do the midterms matter? <span class="hero-why-chevron">&#9660;</span></button>
             <div class="hero-why-body">
               <p class="hero-why-text">The 2026 midterms will decide who controls Congress. Congress controls laws, budgets, and oversight of the President. The results will shape US policy on trade, immigration, and foreign affairs. This includes policies that directly affect India.</p>
               <button class="hero-why-rm" onclick="goToTellMeWhy(1)">Read More &#8594;</button>
@@ -707,11 +708,11 @@ body{background:#F5F5DC;color:#1E2232}
 
         <!-- House -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#1E3A8A;font-size:11px;letter-spacing:.08em">&#127979; House of Representatives</div>
+          <div class="metric-label" style="color:#1E3A8A;font-size:11px;letter-spacing:.08em">House of Representatives</div>
           <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; <span data-fig="house.total">435</span> seats total</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="house.r">218</span></span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;<span data-fig="house.d">214</span></span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="house.r">218</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats&nbsp;<span data-fig="house.d">214</span></span>
           </div>
           <div style="font:400 12px var(--sans);color:#888;margin-bottom:4px">+ <span data-fig="house.i">1</span> Independent, <span data-fig="house.vacant">2</span> vacancies &mdash; <span data-fig="house.balance_source">House Press Gallery, 2 Sep 2026</span></div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
@@ -721,11 +722,11 @@ body{background:#F5F5DC;color:#1E2232}
 
         <!-- Senate -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#4C1D95;font-size:11px;letter-spacing:.08em">&#127981; Senate</div>
+          <div class="metric-label" style="color:#4C1D95;font-size:11px;letter-spacing:.08em">Senate</div>
           <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="senate.r">53</span></span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D+I&nbsp;<span data-fig="senate.d">47</span></span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="senate.r">53</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats and Independents&nbsp;<span data-fig="senate.d">47</span></span>
           </div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="senate.battleground">9</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="senate.split">33+2</span> up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
@@ -734,11 +735,11 @@ body{background:#F5F5DC;color:#1E2232}
 
         <!-- Governor -->
         <div class="metric-card">
-          <div class="metric-label" style="color:#134E4A;font-size:11px;letter-spacing:.08em">&#127963; Governorships</div>
+          <div class="metric-label" style="color:#134E4A;font-size:11px;letter-spacing:.08em">Governorships</div>
           <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
           <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
-            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">R&nbsp;<span data-fig="gov.r">26</span></span>
-            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">D&nbsp;<span data-fig="gov.d">24</span></span>
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="gov.r">26</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats&nbsp;<span data-fig="gov.d">24</span></span>
           </div>
           <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
           <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="gov.battleground">7</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="gov.races">36</span> races</span></div>
@@ -764,7 +765,7 @@ body{background:#F5F5DC;color:#1E2232}
 
         <details id="why-detail-1" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
           <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
-            Why do the mid-terms matter? <span style="font-size:16px;color:#620d3c">&#9660;</span>
+            Why do the midterms matter? <span style="font-size:16px;color:#620d3c">&#9660;</span>
           </summary>
           <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
             <p>Since the election of Donald Trump in 2024 for his second term, American citizens have been experiencing extreme changes in their day to day lives. Issues of inflation, immigration, foreign wars, tariffs, healthcare, state rights, and widening socio-economic divisions have emerged as a key issue as a result of these changes. The outcome of these elections would decide the direction the US will take on these issues in the coming years and the remaining period of President Trump&rsquo;s tenure. This direction would impact not only the US but also countries around the world, including India.</p>
@@ -777,12 +778,17 @@ body{background:#F5F5DC;color:#1E2232}
             Why is 2026 significant? <span style="font-size:16px;color:#620d3c">&#9660;</span>
           </summary>
           <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
-            <p>The lead-up to the 2026 mid-terms has been a tumultuous path for US citizens. It began with the liberation day tariffs that disrupted vital supply chain networks of small scale businesses and led to inflation across sectors. This was followed by the DOGE-era downsizing of the federal workforce &mdash; about 317,000 federal employees left service in 2025, though only around 24,000 of those separations were involuntary; most left through deferred resignation, buyouts, or attrition. DOGE also led to the closure of several government programs that impacted the daily lives of US citizens. Following this came the Epstein files scandal that worsened an already declining public trust in the government and institutions. This also came in the period that saw three separate FY2026 funding lapses &mdash; 43 days (1 Oct&ndash;12 Nov 2025), 3 days (31 Jan&ndash;2 Feb 2026), and a record 76-day lapse affecting most of DHS beginning 14 Feb 2026 &mdash; the longest of which was the longest shutdown in recorded history, though the three were not continuous. This was in the context of the Trump administration&rsquo;s massive cuts to the government healthcare programs. Following this came the issues of immigration and ICE raids that further weakened public trust in federal use of force, and led to massive popular backlash and demonstrations against the agency. The last major development came with the US military interventions in Venezuela and Iran that worsened the overall inflation rates amidst spikes in energy prices.</p>
-            <p style="margin-top:12px">Each of these developments has weakened the President politically, but his current hold over the 119th Congress ensures that his actions do not face any legislative guardrails and that his official appointments are processed comfortably. However, the results of this mid-term could severely impact his political standing. In case of a defeat his best case scenario would be the one where he would emerge as the &ldquo;lame-duck&rdquo; president who will not be able to bring major policy changes for the rest of his term. His worst case would be getting impeached and potentially investigated for allegations of corruption. Thereby, 2026 could prove to be a critical year for President Trump&rsquo;s political survival.</p>
+            <p>The lead-up to the 2026 midterms has been a tumultuous path for US citizens. It began with the liberation day tariffs that disrupted vital supply chain networks of small scale businesses and led to inflation across sectors. This was followed by the DOGE-era downsizing of the federal workforce &mdash; about 317,000 federal employees left service in 2025, though only around 24,000 of those separations were involuntary; most left through deferred resignation, buyouts, or attrition. DOGE also led to the closure of several government programs that impacted the daily lives of US citizens. Following this came the Epstein files scandal that worsened an already declining public trust in the government and institutions. This also came in the period that saw three separate FY2026 funding lapses &mdash; 43 days (1 Oct&ndash;12 Nov 2025), 3 days (31 Jan&ndash;2 Feb 2026), and a record 76-day lapse affecting most of DHS beginning 14 Feb 2026 &mdash; the longest of which was the longest shutdown in recorded history, though the three were not continuous. This was in the context of the Trump administration&rsquo;s massive cuts to the government healthcare programs. Following this came the issues of immigration and ICE raids that further weakened public trust in federal use of force, and led to massive popular backlash and demonstrations against the agency. The last major development came with the US military interventions in Venezuela and Iran that worsened the overall inflation rates amidst spikes in energy prices.</p>
+            <p style="margin-top:12px">Each of these developments has weakened the President politically, but his current hold over the 119th Congress ensures that his actions do not face any legislative guardrails and that his official appointments are processed comfortably. However, the results of this midterm could severely impact his political standing. In case of a defeat his best case scenario would be the one where he would emerge as the &ldquo;lame-duck&rdquo; president who will not be able to bring major policy changes for the rest of his term. His worst case would be getting impeached and potentially investigated for allegations of corruption. Thereby, 2026 could prove to be a critical year for President Trump&rsquo;s political survival.</p>
           </div>
         </details>
 
       </div>
+
+      <!-- FORECASTER CONSENSUS (filled from data.json meta.forecaster_consensus) -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Forecaster consensus</h3>
+      <div id="home-forecast-bars" class="hfb-wrap"></div>
+      <div class="dl-label" data-block="meta.forecaster_consensus" data-kind="ratings" style="margin:-4px 0 22px"></div>
 
       <!-- SECTION CARDS -->
       <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
@@ -802,8 +808,8 @@ body{background:#F5F5DC;color:#1E2232}
         <button class="home-section-card" onclick="switchTabByName('analysis')">
           <div class="hsc-icon"><img src="assets/mag.jpeg" alt="Analysis" style="height:22px;width:auto;vertical-align:middle;object-fit:contain"></div>
           <div class="hsc-title">Analysis &amp; Commentary</div>
-          <div class="hsc-desc">Curated analysis from Cook Political Report, Sabato&rsquo;s Crystal Ball, Brookings, Pew Research, and leading political commentators.</div>
-          <div class="hsc-sub-tabs"><span class="hsc-tag">Forecaster Consensus</span><span class="hsc-tag">Research</span><span class="hsc-tag">Commentary</span></div>
+          <div class="hsc-desc">Op-eds, newsletters, research, media appearances and podcasts on the 2026 midterms by researchers at the Takshashila Institution.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Op-eds</span><span class="hsc-tag">Newsletters</span><span class="hsc-tag">Podcasts</span></div>
         </button>
       </div>
 
@@ -886,7 +892,7 @@ body{background:#F5F5DC;color:#1E2232}
         </div>
         <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
         <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024). 2026 figures &mdash; <span class="hm-retire-src">Source: Ballotpedia</span>.<sup>*</sup></div>
-        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:4px"><sup>*</sup> Senators who are not up for re-election in 2026 but are running for another office mid-term (such as Bennet and Klobuchar, both running for governor) are not counted.</div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:4px"><sup>*</sup> Senators who are not up for re-election in 2026 but are running for another office during their term (such as Bennet and Klobuchar, both running for governor) are not counted.</div>
       </div>
 
       <!-- INFLATION CHART -->
@@ -1021,6 +1027,9 @@ function openSeatwise(e) {
   frame.focus();
   return false;
 }
+
+// index.html#seats (e.g. from map.html opened on its own) opens the seat-wise view in the frame
+window.addEventListener('load', () => { if (location.hash === '#seats') { history.replaceState(null, '', location.pathname + location.search); openSeatwise(); } });
 
 function switchTabByName(name) {
   const btn = document.querySelector(`.nav-tab[onclick*="'${name}'"]`);
@@ -1216,7 +1225,7 @@ async function loadHomeData() {
     const net = trump.net != null ? trump.net : (trump.approve && trump.disapprove ? parseFloat((trump.approve - trump.disapprove).toFixed(1)) : null);
     if (net != null) {
       const netEl = document.getElementById('hm-trump-net');
-      if (netEl) { netEl.textContent = (net > 0 ? '+' : '') + net + '%'; netEl.style.color = net >= 0 ? '#5EBD8A' : '#E08080'; }
+      if (netEl) { netEl.textContent = (net > 0 ? '+' : net < 0 ? '\u2212' : '') + Math.abs(net) + ' points'; netEl.style.color = net >= 0 ? '#5EBD8A' : '#E08080'; }
       set('hm-trump-net-sub', `${net > 0 ? 'More approve than disapprove' : 'More disapprove than approve'}`);
       const ntrend = document.getElementById('hm-trump-net-trend');
       if (ntrend) { ntrend.textContent = net >= 0 ? '↑ Positive' : '↓ Negative'; ntrend.className = 'metric-trend ' + (net >= 0 ? 'mt-up' : 'mt-dn'); }
@@ -1313,7 +1322,7 @@ async function loadHomeData() {
       const estDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'America/New_York'});
       const istTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata',hour12:true});
       const istDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});
-      fl.textContent = `Last updated ${estDate} · ${estTime} ET / ${istTime} IST (${istDate})`;
+      fl.innerHTML = `<span class="fresh-long">Last updated ${estDate} · ${estTime} ET / ${istTime} IST (${istDate})</span><span class="fresh-short">Updated ${estDate}, ${estTime} ET</span>`;
     }
   }
 

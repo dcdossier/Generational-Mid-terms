@@ -957,7 +957,7 @@ body {
         <tr>
           <th>Issue</th>
           <th class="rep-h">Republican majority</th>
-          <th class="dem-h">Democrat majority</th>
+          <th class="dem-h">Democratic majority</th>
         </tr>
       </thead>
       <tbody>
@@ -1128,7 +1128,7 @@ body {
           <button class="map-zoom-btn reset" onclick="presenceZoomReset()">&#8859;</button>
         </div>
       </div>
-      <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Blue = Democrat district. All six Indian-American members are Democrats.</p>
+      <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Blue = Democratic-held district. All six Indian-American members are Democrats.</p>
     </div>
 
     <div class="member-grid">
@@ -1707,7 +1707,7 @@ function openSidePanel(memberId) {
   const tierColor = TIER_COLORS[m.tier];
   body.innerHTML = `
     <div class="sp-name">${m.name}</div>
-    <div class="sp-meta">${m.party==='R'?'Republican':'Democrat'} &middot; ${m.chamber} &middot; ${m.seat}</div>
+    <div class="sp-meta">${m.party==='R'?'Republican':'Democratic'} &middot; ${m.chamber} &middot; ${m.seat}</div>
     <span class="sp-tier-badge" style="background:${tierColor}">Tier ${m.tier} &mdash; ${TIER_LABELS[m.tier]}</span>
 
     <div class="sp-section-label">Role &amp; Position</div>
@@ -2082,7 +2082,7 @@ function loadHouseMap() {
         tooltip.style.left = (event.clientX + 12) + 'px';
         tooltip.style.top  = (event.clientY - 28) + 'px';
         tooltip.innerHTML = m
-          ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'Republican':'Democrat'}<br>${TIER_LABELS[m.tier]}`
+          ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'Republican':'Democratic'}<br>${TIER_LABELS[m.tier]}`
           : `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ' At-Large'}</strong><br><em>Not tracked</em>`;
       })
       .on('mouseleave', () => { tooltip.style.display = 'none'; })
@@ -2354,7 +2354,7 @@ new Chart(document.getElementById('c-ia-alignment'), {
     labels: ['2008', '2012', '2016', '2020', '2022', '2024', '2026\n(proj.)'],
     datasets: [
       {
-        label: 'Democrat-leaning (%)',
+        label: 'Democratic-leaning (%)',
         data: [78, 76, 72, 70, 68, 66, 64],
         borderColor: '#1A3F8A',
         backgroundColor: 'rgba(26,63,138,.08)',

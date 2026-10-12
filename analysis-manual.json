@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-11T21:26:50.401Z"
+    "last_updated": "2026-10-12T04:28:03.827Z"
   },
   "posts": [],
   "entries": [
@@ -27,7 +27,7 @@
       "type": "podcast",
       "title": "All Things Policy | How Is The Iran War Impacting US Midterms?",
       "url": "https://www.youtube.com/watch?v=wQYa72yrijo",
-      "author": "",
+      "author": "Abhishek Kadiyala",
       "source": "All Things Policy — Takshashila Institution (YouTube)",
       "date": "2026-08-31T02:30:26.000Z",
       "description": "In this episode of All Things Policy, Vanshika Saraf and Abhishek Kadiyala examine what the war on Iran means for the November 2026 midterm elections in the U.S. The joint U.S. and Israeli strikes that began on 28 February 2026 have not become a campaign issue in their own right, with only 4 per cent of Americans naming foreign policy as their top concern by July. The conversation applies a test drawn from Iraq in 2002 and Afghanistan in 2010, which is that American wars seldom rank as voter priorities yet often worsen the issues that do. The episode works through the evidence, including inflation at 4.2 per cent, petrol at USD 4.65 a gallon, record-low congressional approval of 10 per cent, and the repeated collapse of War Powers Resolution votes. The argument advanced is that the war rea",
@@ -39,7 +39,8 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image": "https://i.ytimg.com/vi/wQYa72yrijo/hqdefault.jpg"
+      "image": "https://i.ytimg.com/vi/wQYa72yrijo/hqdefault.jpg",
+      "alt_url": "https://open.spotify.com/episode/0lA6JvbCSxOSbVVk8xyanw"
     },
     {
       "id": "rss-aXN0cnVzdC10aGUtc2Vjb25k",
@@ -47,7 +48,7 @@
       "title": "#26 Institutional Mistrust: The Second 'i'",
       "url": "https://dcdossier.substack.com/p/26-institutional-mistrust-the-second",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-07-27T03:31:00.000Z",
       "description": "The second of the four 'i'ssues that could determine the fate of 2026 US mid-terms.",
       "tags": [
@@ -64,7 +65,7 @@
       "title": "#25 Inflation: The First 'i'",
       "url": "https://dcdossier.substack.com/p/25-the-first-i-of-inflation",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-07-20T03:30:43.000Z",
       "description": "The first of the four 'i'ssues that could influence the US mid-terms.",
       "tags": [
@@ -81,7 +82,7 @@
       "title": "#23 Gerrymandering and the New Rules of US Politics",
       "url": "https://dcdossier.substack.com/p/23-gerrymandering-and-the-new-rules",
       "author": "Brigadier Anil Raman",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-05-23T12:25:54.000Z",
       "description": "The Supreme Court’s Louisiana v. Callais decision weakens protections against electoral maps that dilute minority voting power, making it harder to challenge districts through intent-based rather than outcome-based standards. The piece analyses how both parties increasingly treat redistricting as a partisan tool, drawing comparisons to India’s independent delimitation system.",
       "tags": [
@@ -212,7 +213,7 @@
       "title": "#19 The “March-uary” of Iran War Bills",
       "url": "https://dcdossier.substack.com/p/the-march-uary-of-iran-war-bills",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-03-28T20:01:10.000Z",
       "description": "How and why has the Congress failed to stop Trump’s war in Iran",
       "tags": [
@@ -242,7 +243,8 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image": "https://i.ytimg.com/vi/2HZsdyLKkvQ/hqdefault.jpg"
+      "image": "https://i.ytimg.com/vi/2HZsdyLKkvQ/hqdefault.jpg",
+      "alt_url": "https://open.spotify.com/episode/5TA2xUQOIRtPurxcZ5k9uk"
     },
     {
       "id": "seed-oped-toi-troops-iran",
@@ -262,24 +264,6 @@
       "manual": true,
       "needs_enrich": false,
       "image": "https://static.toiimg.com/thumb/msid-129734621,width-1280,height-720,imgsize-35572,resizemode-6,overlay-toi_sw,pt-32,y_pad-600/photo.jpg"
-    },
-    {
-      "id": "seed-atp-5TA2xUQOIRtPurxcZ5k9uk",
-      "type": "podcast",
-      "title": "All Things Policy — US Congress, War Powers & Iran",
-      "url": "https://open.spotify.com/episode/5TA2xUQOIRtPurxcZ5k9uk",
-      "author": "Abhishek Kadiyala & Brigadier Anil Raman",
-      "source": "All Things Policy — Takshashila Institution",
-      "date": "2026-03-15T00:00:00.000Z",
-      "description": "An episode of All Things Policy examining the US Congress's role and response in the context of military action, war powers, and the legislative dynamics of the current Congress.",
-      "tags": [
-        "Congress",
-        "War Powers"
-      ],
-      "added_at": "2026-10-06T20:38:06.162Z",
-      "manual": true,
-      "needs_enrich": false,
-      "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f7e1f1e2fdb5021f2cbabc487"
     },
     {
       "id": "seed-oped-hindu-system-bends",
@@ -305,7 +289,7 @@
       "title": "#18 Why and How Has Congress Responded Differently to Venezuela, Greenland, and Iran?",
       "url": "https://dcdossier.substack.com/p/why-and-how-has-congress-responded",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-02-22T06:42:16.000Z",
       "description": "Dossier in Brief: comparing the legislative responses to three distinct foreign policy crises and what the divergence reveals about congressional incentives.",
       "tags": [
@@ -360,7 +344,7 @@
       "title": "#13 DC Dossier 2025 Recap",
       "url": "https://dcdossier.substack.com/p/dc-dossier-2025-recap",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-01-01T19:41:36.000Z",
       "description": "A year-end review of how the 119th Congress engaged with India-related legislation, hearings, and bilateral policy debates across 2025.",
       "tags": [
@@ -377,7 +361,7 @@
       "title": "#11 Partisan Divides and Strategic Expectations",
       "url": "https://dcdossier.substack.com/p/partisan-divides-and-strategic-expectations",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2025-12-20T00:12:47.000Z",
       "description": "Key takeaways from the House hearing on the US–India strategic partnership, analysing how partisan lines shaped members’ priorities and the divergence between Democratic and Republican expectations of the relationship.",
       "tags": [
@@ -395,7 +379,7 @@
       "title": "#10 End of the Shutdown. Who Won and Lost",
       "url": "https://dcdossier.substack.com/p/end-of-the-shutdown-who-won-and-lost",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2025-12-10T09:14:17.000Z",
       "description": "Analysing the end of the longest government shutdown in United States history — which members and factions gained leverage, which lost it, and what the resolution signals for the 119th Congress’s governing capacity.",
       "tags": [
@@ -412,7 +396,7 @@
       "title": "#9 Trump’s Economic Policies Devastate His Base, Fuel Democratic Rout, and Imperil Midterms",
       "url": "https://dcdossier.substack.com/p/trumps-economic-policies-devastate",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2025-11-15T10:30:29.000Z",
       "description": "How the Trump administration’s economic policies — tariffs, spending cuts, and fiscal pressure — have translated into a Democratic sweep in off-cycle elections and what the trend implies for the 2026 midterms.",
       "tags": [
@@ -429,7 +413,7 @@
       "title": "#5 Understanding US Government Shutdown",
       "url": "https://dcdossier.substack.com/p/understanding-us-government-shutdown",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2025-10-09T13:35:57.000Z",
       "description": "DCD Brief: the causes, key legislative flashpoints, and likely duration of the 2025 US government shutdown — and what it reveals about dysfunction in the 119th Congress.",
       "tags": [
@@ -465,7 +449,7 @@
       "title": "#4 Democracy First: The House’s Consensus on Pakistan Policy",
       "url": "https://dcdossier.substack.com/p/democracy-first-the-houses-consensus",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2025-09-18T04:59:38.000Z",
       "description": "How does the 119th US House of Representatives view Pakistan? An analysis of bipartisan consensus — and its limits — on democracy conditionality, military aid, and human rights benchmarks in House engagement with Islamabad.",
       "tags": [
@@ -475,23 +459,6 @@
       "manual": true,
       "needs_enrich": false,
       "image": "https://substackcdn.com/image/fetch/$s_!iWHh!,w_256,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4ad9db-1480-48de-ab85-0be86aa3390b_500x500.png"
-    },
-    {
-      "id": "rss-EI1UzFocFJtUktRbk0b2M9NQ",
-      "type": "podcast",
-      "title": "New draft resolution aims to make crypto deregulation part of the Republican platform for next Congress - The Block",
-      "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxNUTFHaGNSVnUwRzY5S3d1S1V3NzVjTFYwZE1kZnRIU1V6SS1VWTNPUjd3SURLeFhQMGFucTRoTEQySzZSNFZlenpuY0d1cWp1OE1LTFo1SU9UMHdRY3JTV2t3eERUMGdFUE5XNjR0WGVEQmxUX1FLSnh4U1M3ZnJ4UU15WWczcmExd21QQVZwaGctSWpWU0pHb1hwSXZiQXNnYl80c2JtRlhBcVlLaF83d1dIQ0ZFTDlzZC1pS0M5RVZiWHVRVE1hakFEVDJuVkJiUFhWcVc5b3hVel94VGRQV0dDQ1BkbXdOQTB5S1hpRmRKQnM?oc=5",
-      "author": "",
-      "source": "All Things Policy (Google News)",
-      "date": "2022-02-23T08:00:00.000Z",
-      "description": "New draft resolution aims to make crypto deregulation part of the Republican platform for next Congress The Block",
-      "tags": [
-        "Congress"
-      ],
-      "added_at": "2026-10-06T20:38:06.162Z",
-      "manual": true,
-      "needs_enrich": false,
-      "image": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300"
     },
     {
       "id": "manual-muxjazmt-1",
@@ -590,22 +557,6 @@
       "enrich_attempts": 3
     },
     {
-      "id": "manual-muxjwekk-0",
-      "type": "podcast",
-      "title": "How Is The Iran War Impacting US Midterms?",
-      "url": "https://open.spotify.com/episode/0lA6JvbCSxOSbVVk8xyanw?si=-YJtua_HSk64fP4kjWEnSA",
-      "author": "Abhishek Kadiyala",
-      "source": "Spotify",
-      "date": "2026-08-31T00:00:00.000Z",
-      "description": "",
-      "tags": [],
-      "added_at": "2026-10-07T03:31:28.580Z",
-      "manual": true,
-      "needs_enrich": true,
-      "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fdb44cec0d6fcb12e098897c3",
-      "enrich_attempts": 3
-    },
-    {
       "id": "manual-muxjwekk-1",
       "type": "podcast",
       "title": "4 I's of 2026 US Mid-terms",
@@ -619,54 +570,6 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f01d7aaecc385b4e94090747b",
-      "enrich_attempts": 3
-    },
-    {
-      "id": "manual-muxjwekl-2",
-      "type": "podcast",
-      "title": "The Iran Brief: US Congress and Trump",
-      "url": "https://open.spotify.com/episode/1VFAsloVxSyHCH3Uw4XUZb?si=RmFqqWV2Tim6_g7u58wUJA",
-      "author": "Abhishek Kadiyala",
-      "source": "Spotify",
-      "date": "2026-04-29T00:00:00.000Z",
-      "description": "",
-      "tags": [],
-      "added_at": "2026-10-07T03:31:28.581Z",
-      "manual": true,
-      "needs_enrich": true,
-      "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fbaa9f79449bc38a43e94a144",
-      "enrich_attempts": 3
-    },
-    {
-      "id": "manual-muxjwekl-3",
-      "type": "podcast",
-      "title": "The Iran Brief: Why Is US Congress Failing To Stop Trump On Iran?",
-      "url": "https://open.spotify.com/episode/4wmWyfx1HxWvqTo6P5jNYG?si=7c8adce5ea674e08",
-      "author": "Abhishek Kadiyala",
-      "source": "Spotify",
-      "date": "2026-04-01T00:00:00.000Z",
-      "description": "",
-      "tags": [],
-      "added_at": "2026-10-07T03:31:28.581Z",
-      "manual": true,
-      "needs_enrich": true,
-      "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fdeb9e5914754da1222ae5d99",
-      "enrich_attempts": 3
-    },
-    {
-      "id": "manual-muxjwekl-4",
-      "type": "podcast",
-      "title": "The Iran Brief: War and MAGA fissures",
-      "url": "https://open.spotify.com/episode/5TA2xUQOIRtPurxcZ5k9uk?si=1f5adf15124147fa",
-      "author": "Abhishek Kadiyala",
-      "source": "Spotify",
-      "date": "2026-03-24T00:00:00.000Z",
-      "description": "",
-      "tags": [],
-      "added_at": "2026-10-07T03:31:28.581Z",
-      "manual": true,
-      "needs_enrich": true,
-      "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f7e1f1e2fdb5021f2cbabc487",
       "enrich_attempts": 3
     },
     {
@@ -703,7 +606,7 @@
     {
       "id": "manual-muxjazmq-0",
       "type": "op-ed",
-      "title": "Opinion | By Trump, For Trump: Inside The Murky Election Crisis America Is Sleepwalking Into",
+      "title": "By Trump, For Trump: Inside The Murky Election Crisis America Is Sleepwalking Into",
       "url": "https://www.ndtv.com/opinion/america-is-sleepwalking-into-its-next-election-crisis-trump-is-leading-the-way-11753767",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -722,7 +625,7 @@
       "title": "#28 Iran war: the third ‘I’",
       "url": "https://dcdossier.substack.com/p/28-iran-war-the-third-i?r=6dwou7&utm_campaign=post&utm_medium=web",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier, Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-09-11T00:00:00.000Z",
       "description": "The third of the four 'i'ssues that could determine the fate of 2026 US mid-terms.",
       "tags": [],
@@ -738,7 +641,7 @@
       "title": "#21 A Generational Mid-term?",
       "url": "https://dcdossier.substack.com/p/21-a-generational-mid-term",
       "author": "Abhishek Kadiyala",
-      "source": "DC Dossier — Substack",
+      "source": "Substack (DC Dossier)",
       "date": "2026-05-10T00:00:00.000Z",
       "description": "At least one in eight members of Congress is departing ahead of the 2026 midterms — the highest retirement rate since 1992. The piece examines the three forces driving the exodus: institutional frustration with a gridlocked Congress, deepening partisan polarisation that makes legislating increasingly thankless, and a declining appeal of federal service relative to state-level or private-sector alternatives.",
       "tags": [],
@@ -780,7 +683,7 @@
     {
       "id": "manual-mv0ptsm9-0",
       "type": "op-ed",
-      "title": "Opinion | Hegseth Is Overhauling America's War Machine. Why India Should Be Watching Closely",
+      "title": "Hegseth Is Overhauling America's War Machine. Why India Should Be Watching Closely",
       "url": "https://www.ndtv.com/opinion/hegseth-is-overhauling-americas-war-machine-why-india-should-keep-a-close-eye-12140789",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -797,7 +700,7 @@
     {
       "id": "manual-mv0ptsm9-1",
       "type": "op-ed",
-      "title": "Opinion | Trump-Xi Meet: What China Can Give America, And What India Could Lose",
+      "title": "Trump-Xi Meet: What China Can Give America, And What India Could Lose",
       "url": "https://www.ndtv.com/opinion/trump-xi-meet-what-china-can-give-america-and-what-india-could-lose-12079705",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -814,7 +717,7 @@
     {
       "id": "manual-mv0ptsm9-3",
       "type": "op-ed",
-      "title": "Opinion | US Has Institutionally Weaponised India's Russia Oil Dependence. Can New Delhi Cope?",
+      "title": "US Has Institutionally Weaponised India's Russia Oil Dependence. Can New Delhi Cope?",
       "url": "https://www.ndtv.com/opinion/us-has-weaponised-indias-russia-oil-dependence-now-what-12059199",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -831,7 +734,7 @@
     {
       "id": "manual-mv0ptsm9-4",
       "type": "op-ed",
-      "title": "Opinion | China To Pak To America, The Growing Dilemmas Of The 'General'",
+      "title": "China To Pak To America, The Growing Dilemmas Of The 'General'",
       "url": "https://www.ndtv.com/opinion/china-to-pak-to-america-the-growing-dilemmas-of-the-general-11974163",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -846,59 +749,9 @@
       "image": "https://c.ndtvimg.com/2026-08/f4m9g72k_us-army_625x300_05_August_26.png?im=FitAndFill,algorithm=dnn,width=1600,height=900"
     },
     {
-      "id": "manual-mv0ptsm9-5",
-      "type": "op-ed",
-      "title": "How Pakistan’s new military structure could challenge India’s escalation strategy",
-      "url": "https://theprint.in/opinion/pakistan-military-new-structure-india-escalation-strategy/3022070",
-      "author": "Brigadier Anil Raman",
-      "source": "ThePrint",
-      "date": "2026-08-22T07:42:16.000Z",
-      "description": "Pakistan has restructured its military since Operation Sindoor. The changes could test India’s Dynamic Response Strategy and its ability to act quickly.",
-      "tags": [],
-      "added_at": "2026-10-09T08:40:43.041Z",
-      "manual": true,
-      "needs_enrich": false,
-      "image_attempts": 3,
-      "date_source": "wordpress-api",
-      "summary_source": "page"
-    },
-    {
-      "id": "manual-mv0ptsm9-6",
-      "type": "op-ed",
-      "title": "Pakistan, Turkey, Saudi pact is not diplomacy alone. It affects India's military strategy",
-      "url": "https://theprint.in/opinion/pakistan-turkey-saudi-pact-diplomacy-india-military-strategy/3009197/",
-      "author": "Brigadier Anil Raman",
-      "source": "ThePrint",
-      "date": "2026-08-08T08:46:48.000Z",
-      "description": "A critical consequence is that Pakistani leadership may now price an escalation cheaper than earlier. This raises the likelihood of a crisis rather than a single campaign.",
-      "tags": [],
-      "added_at": "2026-10-09T08:40:43.041Z",
-      "manual": true,
-      "needs_enrich": false,
-      "date_source": "json-ld",
-      "summary_source": "page",
-      "image": "https://staticprintenglish.theprint.in/wp-content/uploads/2026/08/turkey-pakistan-saudi-arabia.jpg"
-    },
-    {
-      "id": "manual-mv0ptsm9-7",
-      "type": "op-ed",
-      "title": "OPINION | China’s stealth air power demands an asymmetric Indian grand strategy- Moneycontrol.com",
-      "url": "https://www.moneycontrol.com/news/opinion/china-s-stealth-air-power-demands-an-asymmetric-indian-grand-strategy-13984780.html",
-      "author": "Brigadier Anil Raman",
-      "source": "Moneycontrol",
-      "date": "2026-07-27T10:44:57.000Z",
-      "description": "China’s total inventory already exceeds 1,900 modern fighters, while the Indian Air Force operates approximately 500 to 600 combat aircraft. Attempting to match China fighter-for-fighter is therefore a strategic dead end. India’s comparative advantage lies elsewhere",
-      "tags": [],
-      "added_at": "2026-10-09T08:40:43.041Z",
-      "manual": true,
-      "needs_enrich": false,
-      "summary_source": "page",
-      "image": "https://images.moneycontrol.com/static-mcnews/2026/04/20260421102332_chinaflagnew.png"
-    },
-    {
       "id": "manual-mv0ptsma-8",
       "type": "op-ed",
-      "title": "Opinion | A New US-Israel Defence Bill Has Opened An Unexpected Door For India",
+      "title": "A New US-Israel Defence Bill Has Opened An Unexpected Door For India",
       "url": "https://www.ndtv.com/opinion/is-us-really-integrating-its-military-with-israel-the-real-story-matters-to-india-11811277",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -915,7 +768,7 @@
     {
       "id": "manual-mv0ptsma-9",
       "type": "op-ed",
-      "title": "Opinion | Why A Post By A Senior US Defence Official About 'Allies' Should Worry India",
+      "title": "Why A Post By A Senior US Defence Official About 'Allies' Should Worry India",
       "url": "https://www.ndtv.com/opinion/why-a-post-by-a-senior-us-defence-official-about-allies-should-worry-india-11778463",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -932,7 +785,7 @@
     {
       "id": "manual-mv0ptsma-10",
       "type": "op-ed",
-      "title": "Opinion | America, Trump, And The Politics Of Belonging In A Connected World",
+      "title": "America, Trump, And The Politics Of Belonging In A Connected World",
       "url": "https://www.ndtv.com/opinion/sterilise-foreign-women-americas-citizenship-debate-is-getting-uglier-11737679",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -965,7 +818,7 @@
     {
       "id": "manual-mv0ptsma-13",
       "type": "op-ed",
-      "title": "Opinion | How A Photograph in Delhi Says Something Important About Trump's America",
+      "title": "How A Photograph in Delhi Says Something Important About Trump's America",
       "url": "https://www.ndtv.com/opinion/how-a-photograph-in-delhi-can-tell-you-a-lot-about-trumps-america-11607924",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -982,7 +835,7 @@
     {
       "id": "manual-mv0ptsma-16",
       "type": "op-ed",
-      "title": "Opinion | Rubio Is In India, But Trump's America Just Launched Its Sharpest Attack On Indian Immigrants",
+      "title": "Rubio Is In India, But Trump's America Just Launched Its Sharpest Attack On Indian Immigrants",
       "url": "https://www.ndtv.com/opinion/rubio-visits-india-as-trump-administration-declares-its-sharpest-attack-on-indian-immigrants-11536458",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
@@ -1019,7 +872,7 @@
       "title": "US-China 'Managed Competition' Can Ensure Predictability For India || The Gist",
       "url": "https://www.youtube.com/watch?v=ocpgg723TOs",
       "author": "Brigadier Anil Raman",
-      "source": "(https",
+      "source": "StratNewsGlobal (YouTube)",
       "date": "2026-05-17T13:30:06.000Z",
       "description": "\"This competition is going to be there for the long term. Yet we need to find ways in which this competition can be managed, where we can manage escalation a...",
       "tags": [],
@@ -1036,7 +889,7 @@
       "title": "Iran, Trump, and the Crisis of Nuclear Deterrence",
       "url": "https://frontline.thehindu.com/world-affairs/iran-nuclear-crisis/article70924731.ece",
       "author": "Brigadier Anil Raman",
-      "source": "(https",
+      "source": "The Hindu",
       "date": "2026-05-13T05:10:17.000Z",
       "description": "Trump’s Iran war and the collapse of arms control may trigger a global nuclear race. How US policy reshaped deterrence and proliferation in 2026.",
       "tags": [],
@@ -1046,6 +899,66 @@
       "date_source": "meta",
       "summary_source": "page",
       "image": "https://fl-i.thgim.com/public/incoming/9ncc5h/article70924816.ece/alternates/LANDSCAPE_1200/Trump.jpg"
+    },
+    {
+      "tags": [],
+      "added_at": "2026-10-12T04:27:57.369Z",
+      "manual": true,
+      "needs_enrich": false,
+      "id": "restored-22",
+      "type": "newsletter",
+      "title": "#22 Why are Hegseth's purges different?",
+      "url": "https://dcdossier.substack.com/p/why-are-hegseths-purges-different",
+      "author": "Abhishek Kadiyala",
+      "source": "Substack (DC Dossier)",
+      "date": "2026-05-15T05:31:25.559Z",
+      "description": "Secretary of Defense Pete Hegseth’s removal of 21 senior military officials reflects personal power consolidation rather than ideological realignment. The author argues these actions undermine institutional military independence — and with midterm elections approaching, the gap between the stated rationale and actual logic may prove a political liability.",
+      "image": "https://substackcdn.com/image/fetch/$s_!iWHh!,w_256,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4ad9db-1480-48de-ab85-0be86aa3390b_500x500.png"
+    },
+    {
+      "tags": [],
+      "added_at": "2026-10-12T04:27:57.369Z",
+      "manual": true,
+      "needs_enrich": false,
+      "id": "restored-24",
+      "type": "newsletter",
+      "title": "#24 Why A Post By A Senior US Defence Official About 'Allies' Should Worry India",
+      "url": "https://dcdossier.substack.com/p/24-why-a-post-by-a-senior-us-defence",
+      "author": "Brigadier Anil Raman",
+      "source": "Substack (DC Dossier)",
+      "date": "2026-07-18T11:30:30.711Z",
+      "description": "Colby's post frames what could become a thorny question in India-US relations.",
+      "image": "https://substackcdn.com/image/fetch/$s_!iWHh!,w_256,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4ad9db-1480-48de-ab85-0be86aa3390b_500x500.png"
+    },
+    {
+      "tags": [],
+      "added_at": "2026-10-12T04:27:57.369Z",
+      "manual": true,
+      "needs_enrich": false,
+      "id": "restored-27",
+      "type": "newsletter",
+      "title": "#27 Why does the US care about FCRA?",
+      "url": "https://dcdossier.substack.com/p/27-why-does-the-us-care-about-fcra",
+      "author": "Abhishek Kadiyala",
+      "source": "Substack (DC Dossier)",
+      "date": "2026-08-05T10:39:47.210Z",
+      "description": "The money, politics and constraints behind US criticism of FCRA.",
+      "image": "https://substackcdn.com/image/fetch/$s_!iWHh!,w_256,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fea4ad9db-1480-48de-ab85-0be86aa3390b_500x500.png"
+    },
+    {
+      "tags": [],
+      "added_at": "2026-10-12T04:27:57.369Z",
+      "manual": true,
+      "needs_enrich": false,
+      "id": "yt-2F0Y2gdj1IUUV1b3J3M0JZVQ",
+      "type": "podcast",
+      "title": "All Things Policy | FCRA: A Potential US-India Irritant?",
+      "url": "https://www.youtube.com/watch?v=HQEuorw3BYU",
+      "author": "",
+      "source": "All Things Policy — Takshashila Institution (YouTube)",
+      "date": "2026-08-17T02:30:09.000Z",
+      "description": "In this episode of the All Things Policy podcast, Kavya Rai and Abhishek Kadiyala examine India's 2026 amendments to the Foreign Contribution Regulation Act and why a domestic funding law has drawn attention in Washington. The conversation frames the issue as a collision between Indian regulatory sovereignty and the rising force of religious-freedom politics in the United States. It traces the money at stake, from American donors to Indian recipients, and situates the debate within USCIRF hearings, Congressional interest, and the evangelical turn in US politics. The episode argues that while the executive has shown limited appetite for action, having moved only against Nigeria, the FCRA question retains real nuisance value as a Congressional and electoral lever. It ultimately asks whether ",
+      "image": "https://i.ytimg.com/vi/HQEuorw3BYU/hqdefault.jpg"
     }
   ]
 }

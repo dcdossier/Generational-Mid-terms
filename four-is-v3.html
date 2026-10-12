@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Four I's of the 2026 US Mid-terms</title>
+<title>The Four I's of the 2026 US Midterms</title>
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,7 +144,7 @@ svg#viz.dragging{cursor:grabbing}
 <div class="wrap">
 
   <header class="masthead">
-    <h1>The Four &#8216;I&#8217;s of the 2026 US mid-term elections</h1>
+    <h1>The Four &#8216;I&#8217;s of the 2026 US midterm elections</h1>
     <p class="hint">Four shapes, four concerns. Hover a shape to open its sub-issues,<br>hover a shaded band to name the shared ground, click anything to read the analysis.</p>
   </header>
 
@@ -164,7 +164,7 @@ svg#viz.dragging{cursor:grabbing}
     </div>
 
     <svg id="viz" viewBox="100 70 1230 860" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="vt vd">
-      <title id="vt">The four I's of the 2026 US mid-terms</title>
+      <title id="vt">The four I's of the 2026 US midterms</title>
       <desc id="vd">A Venn-style issue map. Inflation, institutional mistrust and immigration are circles. The Iran war is a wedge, because its electoral weight sits mostly inside the other issues.</desc>
       <defs>
         <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
@@ -815,7 +815,7 @@ function exportPng(showAll){
       ctx.fillStyle="#ffffff";ctx.fillRect(0,0,W,H);
       ctx.fillStyle="#620d3c";ctx.font="bold 52px Georgia,serif";
       ctx.textAlign="center";ctx.textBaseline="middle";
-      ctx.fillText("The Four \u2018I\u2019s of the 2026 US Mid-term Elections",W/2,TITLE_H/2);
+      ctx.fillText("The Four \u2018I\u2019s of the 2026 US Midterm Elections",W/2,TITLE_H/2);
       ctx.drawImage(svgImg,0,TITLE_H);
       URL.revokeObjectURL(svgUrl);
       const lh=60,ly=H-lh-20;let lx=W-20;
@@ -858,7 +858,7 @@ function exportPng(showAll){
         ctx.fillText("Three-issue overlap",LX+LP+PW+14,RY);
         ctx.restore();
       }
-            const fname=showAll?"All-Issues-2026-Mid-terms.png":"Major-Issues-2026-Mid-terms.png";
+            const fname=showAll?"All-Issues-2026-Midterms.png":"Major-Issues-2026-Midterms.png";
       cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);
         a.download=fname;a.click();});
     }).catch(()=>alert("PNG export failed in this browser. Use a screenshot instead."));

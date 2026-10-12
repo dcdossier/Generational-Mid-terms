@@ -937,6 +937,42 @@ async function fetchRetirements(data) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// HOUSE CONTROL — House Press Gallery party breakdown, no AI
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// "218 Republicans 214 Democrats 1 Independent 2* Vacancies" plus the page's
+// own article:modified_time, which is the date of the data. Values are kept
+// unless all four numbers parse and add up to 435.
+
+const PRESS_GALLERY_URL = 'https://pressgallery.house.gov/member-data/party-breakdown';
+
+async function fetchHouseBalance(data) {
+  const res = await safeFetch(PRESS_GALLERY_URL, {
+    label: 'House Press Gallery',
+    headers: { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15', 'Accept': 'text/html' },
+  });
+  const html = await res.text();
+  const text = stripHtml(html).replace(/\s+/g, ' ');
+  const num = re => { const m = text.match(re); return m ? +m[1] : null; };
+  const r = num(/(\d{3}) Republicans/), d = num(/(\d{3}) Democrats/);
+  const i = num(/(\d+) Independents?/) ?? 0, v = num(/(\d+)\*? Vacanc/) ?? 0;
+  if (r === null || d === null || r + d + i + v !== 435) {
+    warn(`  [Press Gallery] Could not read a breakdown that adds up to 435 (R=${r} D=${d} I=${i} V=${v}) — keeping old values`);
+    return 0;
+  }
+  const mod = (html.match(/article:modified_time" content="([^"]+)"/) || [])[1];
+  const h = data.races.house;
+  const prev = h.current_balance || {};
+  h.current_balance = { ...prev, r, d, i, vacant: v };
+  h.balance_source = 'House Press Gallery';
+  h.balance_source_url = PRESS_GALLERY_URL;
+  if (mod && !isNaN(new Date(mod))) h.balance_as_of = new Date(mod).toISOString().slice(0, 10);
+  const changed = prev.r !== r || prev.d !== d || prev.i !== i || prev.vacant !== v;
+  console.log(`  House control [Press Gallery, as of ${h.balance_as_of}]: R ${r}, D ${d}, I ${i}, vacant ${v}${changed ? ' (changed)' : ''}`);
+  return r + d;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // 6. RSS FALLBACK — supplemental signals for any fields not yet updated
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -1089,6 +1125,7 @@ async function main() {
   const trumpOk   = await track('Trump approval (Datawrapper)', fetchTrumpApproval, data);
   const congressOk= await track('Congress approval (Gallup)', fetchCongressApproval, data);
   const retireOk  = (await fetchRetirements(data)) > 0; // records its own status
+  const houseOk   = await track('House control (Press Gallery)', fetchHouseBalance, data);
 
   // RSS fallback for any primary sources that failed
   await fetchRSSFallback(data, !trumpOk, !congressOk);
@@ -1102,7 +1139,7 @@ async function main() {
 
   const elapsed = ((Date.now() - start) / 1000).toFixed(1);
   console.log('════════════════════════════════════════');
-  console.log(`  Results: NYT=${nytOk?'✓':'✗'}  CPI=${cpiOk?'✓':'✗'}  Trump=${trumpOk?'✓':'✗'}  Congress=${congressOk?'✓':'✗'}  Retirements=${retireOk?'✓':'✗'}`);
+  console.log(`  Results: NYT=${nytOk?'✓':'✗'}  CPI=${cpiOk?'✓':'✗'}  Trump=${trumpOk?'✓':'✗'}  Congress=${congressOk?'✓':'✗'}  Retirements=${retireOk?'✓':'✗'}  House=${houseOk?'✓':'✗'}`);
   console.log(`  data.json written. Elapsed: ${elapsed}s`);
   console.log('════════════════════════════════════════');
   saveStatus();

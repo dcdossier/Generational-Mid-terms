@@ -68,6 +68,11 @@
     'house.tossups':    function (d) { return get(hou(d), 'ratings_summary.toss_up'); },
     'house.battleground': function (d) { return get(d, 'battlegrounds.house'); },
     'house.tracked':    function (d) { return (hou(d).competitive || []).length; },
+    'house.toss_lean':  function (d) { return count(hou(d).competitive, function (r) { return /^(Toss-up|Lean [DR])$/.test(r.rating); }); },
+    'house.balance_source': function (d) {
+      var h = hou(d); return (h.balance_source || 'House Press Gallery') + (h.balance_as_of ? ', ' + fmtDate(h.balance_as_of) : '');
+    },
+    'house.pvi_source': function () { return 'Cook PVI (2025)'; },
     'house.tracked_breakdown': function (d) {
       var c = {}; (hou(d).competitive || []).forEach(function (r) { c[r.rating] = (c[r.rating] || 0) + 1; });
       return RATING_ORDER.filter(function (k) { return c[k]; }).map(function (k) { return c[k] + ' ' + k; }).join(', ');

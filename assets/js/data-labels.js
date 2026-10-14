@@ -9,15 +9,14 @@
 //
 //   data-block       dot path to a block carrying source / as_of / fetched
 //                    (written by scripts/fetch-polls.js)
-//   data-kind        "poll" (stale after 14 days), "monthly" (45 days) or
-//                    "ratings" (14 days) -- see STALE_DAYS
+//   data-kind        "poll", "monthly" or "ratings" (sets the wording;
+//                    isStale() uses STALE_DAYS but no tag is shown)
 //   data-asof-path   optional: read as_of from this path instead
 //   data-source      optional: source name when the block has none
 //   data-href        optional: link for the source name
 //
-// A block without a usable as_of shows "Data date not recorded"; blocks of
-// kind "ratings" without one are also tagged "May be outdated", since an
-// undated rating can't be shown to be current.
+// A block without a usable as_of shows "Data date not recorded". No
+// "May be outdated" tag is shown; the date itself tells the reader.
 
 (function () {
   'use strict';
@@ -74,10 +73,6 @@
     return !!date && (Date.now() - date.getTime()) > (STALE_DAYS[kind] || 14) * DAY_MS;
   }
 
-  function staleTag() {
-    return '<span class="dl-stale">May be outdated</span>';
-  }
-
   // "Gallup, Congress and the Public (news.gallup.com/poll/1600)" → "Gallup, Congress and the Public"
   function shortSource(s) {
     return String(s || '').replace(/\s*\([^)]*\)\s*$/, '').trim();
@@ -97,8 +92,7 @@
     var when = asOf
       ? (kind === 'ratings' ? 'Ratings as of ' : 'Data as of ') + esc(asOf.text)
       : (kind === 'ratings' ? 'Rating date not recorded' : 'Data date not recorded');
-    var stale = asOf ? isStale(asOf.date, kind) : kind === 'ratings';
-    return 'Source: ' + src + ' · ' + when + (stale ? ' ' + staleTag() : '');
+    return 'Source: ' + src + ' · ' + when;
   }
 
   function fill(data, root) {
@@ -157,15 +151,14 @@
     });
   }
 
-  // <ul> of forecaster ratings, each with its own date and a stale tag
+  // <ul> of forecaster ratings, each with its own date
   function ratingsHtml(str) {
     var rows = parseRatings(str);
     if (!rows.length) return '';
     return '<ul class="dl-ratings">' + rows.map(function (r) {
       if (r.text) return '<li>' + esc(r.text) + '</li>';
       return '<li><strong>' + esc(r.forecaster) + '</strong> ' + esc(r.rating) +
-        ' <span class="dl-rating-date">(' + esc(r.dateText) + (r.note ? '; ' + esc(r.note) : '') + ')</span>' +
-        (isStale(r.date, 'ratings') ? ' ' + staleTag() : '') + '</li>';
+        ' <span class="dl-rating-date">(' + esc(r.dateText) + (r.note ? '; ' + esc(r.note) : '') + ')</span></li>';
     }).join('') + '</ul>';
   }
 
@@ -176,6 +169,5 @@
     parseAsOf: parseAsOf,
     parseRatings: parseRatings,
     ratingsHtml: ratingsHtml,
-    staleTag: staleTag,
   };
 })();

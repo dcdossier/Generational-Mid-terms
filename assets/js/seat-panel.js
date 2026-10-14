@@ -553,7 +553,7 @@
       var asOf = races && races.as_of && window.DataLabels ? window.DataLabels.parseAsOf(races.as_of) : null;
       if (opts.rating && asOf) {
         ensureDom().rating.title = 'Site rating, ratings last updated ' + asOf.text +
-          (window.DataLabels.isStale(asOf.date, 'ratings') ? ' (may be outdated)' : '') + '; dated forecaster ratings below';
+          '; dated forecaster ratings below';
       }
       ensureDom().body.appendChild(buildPollsSection(id, results[3]));
       ensureDom().body.appendChild(buildNewsSection(id, results[0][id], results[2]));

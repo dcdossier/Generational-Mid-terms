@@ -1,8 +1,7 @@
 /* assets/css/data-labels.css
  *
  * "Source: X · Data as of DATE" labels (assets/js/data-labels.js), shared by
- * index.html, overview.html, map.html and india.html. Coral "May be outdated"
- * tag per the site palette (CLAUDE.md).
+ * index.html, overview.html, map.html and india.html.
  */
 
 .dl-label {
@@ -18,20 +17,6 @@
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
-}
-.dl-stale {
-  display: inline-block;
-  font: 600 10px/1.4 var(--sans, 'Inter', 'Lato', system-ui, sans-serif);
-  font-style: normal;
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  color: #FFFFFF;
-  background: #FF6F59;
-  border-radius: 3px;
-  padding: 1px 6px;
-  margin-left: 4px;
-  vertical-align: 1px;
-  white-space: nowrap;
 }
 .dl-ratings {
   list-style: none;

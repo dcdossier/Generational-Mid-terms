@@ -26,7 +26,7 @@ const fetch = require('node-fetch');
 const { XMLParser } = require('fast-xml-parser');
 
 const { initAI, aiExtract } = require('./ai');
-const { recordStatus, saveStatus } = require('./status');
+const { recordStatus, saveStatus, pruneStatus } = require('./status');
 
 const DATA_PATH  = path.resolve(__dirname, '../data.json');
 
@@ -716,7 +716,7 @@ ${text}`,
 // Wikipedia's Senate table doesn't say who is running for another office, so
 // the Senate retiring/other-office split is null when Wikipedia is the source.
 
-const BP_KEEP_DAYS = 21; // days a Ballotpedia snapshot is kept when Ballotpedia is unreachable
+const BP_KEEP_DAYS = 21; // days a Ballotpedia snapshot is kept after its last successful read
 const BP_RETIRE_URL = 'https://ballotpedia.org/List_of_U.S._Congress_incumbents_who_are_not_running_for_re-election_in_2026';
 const WIKI_API = 'https://en.wikipedia.org/w/api.php?action=parse&prop=wikitext&format=json&formatversion=2';
 
@@ -836,6 +836,13 @@ function retirementsAddUp(c) {
     && c.republican + c.democrat + c.others === c.total;
 }
 
+// Primary health entry for retirements: OK while the published counts come from
+// a source this run (Ballotpedia or Wikipedia) or from a kept Ballotpedia
+// snapshot no older than BP_KEEP_DAYS. check-status.js alerts on this one.
+function recordRetirementHealth(total, error) {
+  recordStatus('Retirement counts', { group: 'polls', primary: true, ok: total > 0, count: total || 0, error });
+}
+
 async function fetchRetirements(data) {
   console.log('[5/6] Retirements (Ballotpedia, Wikipedia fallback)…');
   let counts = null, source = null, asOf = null;
@@ -862,17 +869,23 @@ async function fetchRetirements(data) {
       bpError = err.message;
       warn(`  [Ballotpedia] Failed: ${err.message} — using the fallback rules`);
     }
-    recordStatus('Retirements (Ballotpedia)', { group: 'polls', primary: true, ok: bpCount > 0, count: bpCount, error: bpError });
+    // Secondary: GitHub's runners always get Ballotpedia's bot check, so this
+    // attempt alone must not trip the 48-hour alert (see "Retirement counts")
+    recordStatus('Retirements (Ballotpedia)', { group: 'polls', ok: bpCount > 0, count: bpCount, error: bpError });
   }
 
   // Ballotpedia blocks some networks (GitHub's runners get a bot check). Keep the
   // last Ballotpedia counts, labelled with their own date, for up to
   // BP_KEEP_DAYS rather than mixing in Wikipedia's coarser split; the failure
   // is still recorded in status.json above, so the 48-hour alert sees it.
+  // Age is measured from the last successful Ballotpedia read (ballotpedia_checked),
+  // not the page's own "as of" date, which can stand still while the list is unchanged
   const bpPrev = data.retirements || {};
-  const bpAge = bpPrev.as_of ? (Date.now() - new Date(bpPrev.as_of + 'T00:00:00Z')) / 864e5 : Infinity;
+  const bpChecked = bpPrev.ballotpedia_checked || (bpPrev.as_of && bpPrev.as_of + 'T00:00:00Z');
+  const bpAge = bpChecked ? (Date.now() - new Date(bpChecked)) / 864e5 : Infinity;
   if (!counts && bpPrev.source === 'Ballotpedia' && bpAge <= BP_KEEP_DAYS) {
-    console.log(`  [Retirements] Keeping Ballotpedia counts as of ${bpPrev.as_of} (${Math.round(bpAge)} days old; limit ${BP_KEEP_DAYS})`);
+    console.log(`  [Retirements] Keeping Ballotpedia counts as of ${bpPrev.as_of}, last confirmed ${String(bpChecked).slice(0, 10)} (${Math.round(bpAge)} days ago; limit ${BP_KEEP_DAYS})`);
+    recordRetirementHealth(bpPrev.total, null);
     return bpPrev.total;
   }
 
@@ -896,6 +909,7 @@ async function fetchRetirements(data) {
   if (!counts || !retirementsAddUp(counts)) {
     if (counts) warn(`  [Retirements] Counts don't add up — keeping old values: ${JSON.stringify(counts)}`);
     else warn('  [Retirements] No source succeeded — keeping old values');
+    recordRetirementHealth(0, `No usable source; published counts are ${bpPrev.as_of ? `as of ${bpPrev.as_of}` : 'undated'}`);
     return 0;
   }
 
@@ -908,6 +922,7 @@ async function fetchRetirements(data) {
   r.source_url = source === 'Ballotpedia' ? BP_RETIRE_URL : 'https://en.wikipedia.org/wiki/2026_United_States_House_of_Representatives_elections#Retirements';
   r.as_of = asOf && !isNaN(asOf) ? asOf.toISOString().slice(0, 10) : null;
   r.fetched = new Date().toISOString();
+  if (source === 'Ballotpedia') r.ballotpedia_checked = r.fetched;
   // Rebuild the destination doughnut and the House party-split chart from the rows
   if (counts.destinations && counts.senate_retiring !== null) {
     const dst = counts.destinations;
@@ -931,6 +946,7 @@ async function fetchRetirements(data) {
   const bar2026 = (r.historical_chart || []).find(d => d.year === '2026');
   if (bar2026) { bar2026.house = counts.house; bar2026.senate = counts.senate; }
 
+  recordRetirementHealth(counts.total, null);
   const changed = prev !== counts.total ? ` (was ${prev})` : '';
   console.log(`  Retirements [${source}, as of ${r.as_of}]: ${counts.total} total${changed} — Senate ${counts.senate}, House ${counts.house}; R ${counts.republican}, D ${counts.democrat}, other ${counts.others}`);
   return counts.total;
@@ -977,12 +993,9 @@ async function fetchHouseBalance(data) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const RSS_FEEDS = [
-  { url: 'https://news.gallup.com/rss/gallup_politics_rss.xml',                                               source: 'Gallup' },
   { url: 'https://www.pewresearch.org/feed/',                                                                   source: 'Pew Research' },
   { url: 'https://yougov.com/en-us/rss',                                                                       source: 'YouGov' },
-  { url: 'https://www.realclearpolitics.com/xml/rss.xml',                                                      source: 'RealClearPolitics' },
-  { url: 'https://centerforpolitics.org/crystalball/feed/',                                                     source: "Sabato's Crystal Ball" },
-  { url: 'https://www.cookpolitical.com/feed',                                                                  source: 'Cook Political Report' },
+  { url: 'https://www.realclearpolitics.com/index.xml',                                                        source: 'RealClearPolitics' },
   { url: 'https://insideelections.com/feed/',                                                                   source: 'Inside Elections' },
   { url: 'https://news.google.com/rss/search?q=Trump+approval+rating+poll+2026&hl=en-US&gl=US&ceid=US:en',     source: 'GNews:Trump',    hints: ['trump'] },
   { url: 'https://news.google.com/rss/search?q=congressional+approval+rating+Gallup+2026&hl=en-US&gl=US&ceid=US:en', source: 'GNews:Congress', hints: ['congress'] },
@@ -1129,6 +1142,13 @@ async function main() {
 
   // RSS fallback for any primary sources that failed
   await fetchRSSFallback(data, !trumpOk, !congressOk);
+
+  // Drop status entries for sources this script no longer uses
+  pruneStatus('polls', [
+    'NYT polling CSVs', 'BLS CPI', 'Trump approval (Datawrapper)', 'Congress approval (Gallup)', 'House control (Press Gallery)',
+    'Retirement counts', 'Retirements (Ballotpedia)', 'Retirements (Wikipedia fallback)',
+    ...RSS_FEEDS.map(f => `RSS fallback: ${f.source}`),
+  ]);
 
   // Stamp last_updated
   data.meta = data.meta || {};

@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-12T04:28:03.827Z"
+    "last_updated": "2026-10-16T04:57:13.122Z"
   },
   "posts": [],
   "entries": [
@@ -963,16 +963,20 @@
     {
       "id": "manual-mvahsisf",
       "type": "podcast",
-      "title": "",
+      "title": "- YouTube",
       "url": "https://youtu.be/jK4kDfVXIas?si=J8dsWQhbhtqOgbZ4",
       "author": "Brigadier Anil Raman",
       "source": "YouTube",
       "date": "",
-      "description": "",
+      "description": "Enjoy the videos and music that you love, upload original content and share it all with friends, family and the world on YouTube.",
       "tags": [],
       "added_at": "2026-10-16T04:53:28.479Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "summary_source": "page",
+      "enrich_attempts": 1,
+      "image": "https://i.ytimg.com/vi/jK4kDfVXIas/hqdefault.jpg"
     }
   ]
 }

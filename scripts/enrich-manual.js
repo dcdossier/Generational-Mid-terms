@@ -15,6 +15,14 @@
  * or is missing a title, date or description. Only empty fields are filled;
  * nothing typed by hand (a date included) is ever overwritten.
  *
+ *   substack      any Substack link is read from Substack's JSON API first:
+ *                   substack.com/@x/note/p-<id>, substack.com/home/post/p-<id>,
+ *                   open.substack.com/... p-<id>  →  substack.com/api/v1/posts/by-id/<id>
+ *                   <pub>.substack.com/p/<slug> or a custom domain /p/<slug>
+ *                                                 →  https://<host>/api/v1/posts/<slug>
+ *                 It gives the title, post_date, subtitle (the summary), cover_image
+ *                 and canonical_url. Note and app links are replaced by the
+ *                 canonical post link; the link as pasted is kept in "source_url".
  *   fetching      the page is read with browser-like headers, then with a plain
  *                 browser User-Agent, then from the Wayback Machine. A response
  *                 that is a bot check ("Just a moment…", "Attention Required",
@@ -52,9 +60,15 @@
  *                 example one set on the input page) is never changed.
  *
  * "needs_enrich" is cleared once title, date and description are all present.
- * Each entry gets at most MAX_ATTEMPTS tries ("enrich_attempts"), so a page
- * that cannot be read is not fetched on every run. AI calls are capped at the
- * "ac" feature's call limit (see ai.js).
+ * Tracking parameters (utm_*, r, s, triedRedirect) are removed from every link.
+ *
+ * Retries: a failed entry is tried again 6 hours later, then every 24 hours
+ * ("next_try_at"), up to MAX_ATTEMPTS tries ("enrich_attempts"); images follow
+ * the same rule ("image_attempts", "next_image_try_at"). The exact reason for
+ * every failure (HTTP status, bot check, timeout) is logged and kept in
+ * "last_error". After MAX_ATTEMPTS failed tries an entry still missing its title
+ * or date is marked "needs_manual": true and left for the input page.
+ * AI calls are capped at the "ac" feature's call limit (see ai.js).
  */
 
 const fs   = require('fs');
@@ -64,7 +78,8 @@ const he = require('he');
 const { initAI, aiExtract, hasWebModel } = require('./ai');
 const { saveStatus } = require('./status');
 
-const MANUAL_PATH = path.resolve(__dirname, '../analysis-manual.json');
+// ENRICH_FILE lets a test run work on a copy
+const MANUAL_PATH = path.resolve(process.env.ENRICH_FILE || path.resolve(__dirname, '../analysis-manual.json'));
 
 const SYSTEM_PROMPT =
   'You summarise public web pages for a research website. Write in British English with a neutral tone. ' +
@@ -81,13 +96,15 @@ const PLAIN_HEADERS = {
   'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15',
   'Accept': 'text/html',
 };
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 5;
+const RETRY_HOURS = [6, 24];      // after the 1st failure wait 6 h, after later ones 24 h
+const IN_ACTIONS = !!process.env.GITHUB_ACTIONS;
 
 // Titles of bot checks and error pages, never real article titles
 const BLOCKED_TITLE = /^\s*(just a moment|attention required|access denied|access to this page has been denied|forbidden|403 forbidden|are you a robot|security check|verify(ing)? you are (a )?human|please wait|one more step|request blocked|you have been blocked|captcha|error \d{3}|page not found|404)\b/i;
 const isBlockedTitle = t => BLOCKED_TITLE.test(String(t || ''));
 // Bot-check text anywhere in the title, or a title that is just a link
-const isBadTitle = t => /just a moment|access denied|attention required/i.test(String(t || '')) || /https?:\/\/|www\.\S+\.\w{2,}/i.test(String(t || '')) || isBlockedTitle(t);
+const isBadTitle = t => /^\s*substack\s*$/i.test(String(t || '')) || /just a moment|access denied|attention required/i.test(String(t || '')) || /https?:\/\/|www\.\S+\.\w{2,}/i.test(String(t || '')) || isBlockedTitle(t);
 
 // "OPINION | Title - Moneycontrol.com" → "Title"
 function cleanTitle(t) {
@@ -136,16 +153,27 @@ function cleanUrl(u) {
   if (schemes.length) s = s.slice(schemes[schemes.length - 1].index);
   s = s.replace(/^(https?):?\/\//i, (m, p) => p.toLowerCase() + '://');
   if (!/^https?:\/\//i.test(s) && /^[\w-]+(\.[\w-]+)+\//.test(s)) s = 'https://' + s;
-  try { return new URL(s).href; } catch (e) { return String(u || '').trim(); }
+  try { return stripTracking(new URL(s).href); } catch (e) { return String(u || '').trim(); }
+}
+
+// Removes utm_*, r, s and triedRedirect (Substack shares add r= and s=)
+function stripTracking(u) {
+  try {
+    const x = new URL(u);
+    [...x.searchParams.keys()].forEach(k => { if (/^utm_/i.test(k) || ['r', 's', 'triedRedirect'].includes(k)) x.searchParams.delete(k); });
+    return x.href;
+  } catch (e) { return u; }
 }
 
 // A usable publication date: a real date from 2000 up to yesterday (UTC)
-function validDate(v) {
+// (upToNow: a trusted API date, which may be today)
+function validDate(v, upToNow) {
   if (!v) return '';
   const d = new Date(String(v).trim());
   if (isNaN(d)) return '';
-  const today = new Date(); today.setUTCHours(0, 0, 0, 0);
-  return d.getUTCFullYear() >= 2000 && d < today ? d.toISOString() : '';
+  const limit = new Date();
+  if (upToNow) limit.setUTCMinutes(limit.getUTCMinutes() + 5); else limit.setUTCHours(0, 0, 0, 0);
+  return d.getUTCFullYear() >= 2000 && d < limit ? d.toISOString() : '';
 }
 
 // JSON-LD datePublished: parsed from every ld+json block, then a plain search
@@ -201,14 +229,29 @@ async function spotifyDate(url) {
   return validDate(raw);
 }
 
+// Why fetches failed while working on the current entry ("HTTP 403", "timeout" …)
+let failures = [];
+function noteFailure(label, reason) {
+  failures.push(`${label}: ${reason}`);
+}
+function errReason(err) {
+  if (err.type === 'request-timeout' || /timeout/i.test(err.message)) return 'timeout';
+  if (err.type === 'max-size') return 'too large';
+  return `network error (${err.code || err.message})`;
+}
+
 async function getText(url, headers, label) {
+  label = label || url;
   try {
     const res = await fetch(url, { headers, timeout: 25000, size: 4e6 });
     const body = await res.text();
-    console.log(`  [fetch] ${label || url}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
+    console.log(`  [fetch] ${label}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
+    if (!res.ok) noteFailure(label, `HTTP ${res.status}`);
     return res.ok ? body : null;
   } catch (err) {
-    console.log(`  [fetch] ${label || url}: ${err.message}`);
+    const why = errReason(err);
+    console.log(`  [fetch] ${label}: ${why} (${err.message})`);
+    noteFailure(label, why);
     return null;
   }
 }
@@ -227,6 +270,7 @@ async function fetchHtml(url) {
     const title = (html.match(/<title[^>]*>([\s\S]*?)<\/title>/i) || [])[1];
     if (isBlockedTitle(decode(title)) || /challenge-platform|cf-chl-|_Incapsula_Resource|px-captcha/.test(html.slice(0, 20000)) && html.length < 30000) {
       console.log(`  [blocked] ${t.via} ${url}: bot check ("${decode(title).slice(0, 40)}")`);
+      noteFailure(`${t.via} ${url}`, `bot check ("${decode(title).slice(0, 40)}")`);
       continue;
     }
     return { html, via: t.via };
@@ -283,13 +327,58 @@ function absUrl(u, base) {
   catch (e) { return ''; }
 }
 
-async function getJson(url, label) {
+async function getJson(url, label, headers) {
   try {
-    const res = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' }, timeout: 15000 });
+    const res = await fetch(url, { headers: headers || { 'User-Agent': 'Mozilla/5.0 (compatible; DCDossier/2.0)' }, timeout: 15000 });
     const body = await res.text();
     console.log(`  [fetch] ${label}: HTTP ${res.status}, ${Buffer.byteLength(body)} bytes`);
-    return res.ok ? JSON.parse(body) : null;
-  } catch (err) { console.log(`  [fetch] ${label}: ${err.message}`); return null; }
+    if (!res.ok) { noteFailure(label, `HTTP ${res.status}`); return null; }
+    try { return JSON.parse(body); }
+    catch (e) { noteFailure(label, /<html|<!doctype/i.test(body.slice(0, 500)) ? 'HTML instead of JSON (bot check or not an API)' : 'invalid JSON'); return null; }
+  } catch (err) {
+    const why = errReason(err);
+    console.log(`  [fetch] ${label}: ${why} (${err.message})`);
+    noteFailure(label, why);
+    return null;
+  }
+}
+
+/* ── Substack ── */
+
+// API address for a Substack link, or null
+function substackApi(u) {
+  let x;
+  try { x = new URL(u); } catch (e) { return null; }
+  const host = x.hostname.toLowerCase(), p = x.pathname;
+  const id = (p.match(/(?:^|\/)p-(\d+)(?:\/|$)/) || [])[1];
+  if (id && /(^|\.)substack\.com$/.test(host)) return `https://substack.com/api/v1/posts/by-id/${id}`;
+  const pub = p.match(/^\/pub\/([\w-]+)\/p\/([\w-]+)/);
+  if (host === 'open.substack.com' && pub) return `https://${pub[1]}.substack.com/api/v1/posts/${pub[2]}`;
+  const slug = (p.match(/^\/p\/([\w-]+)\/?$/) || [])[1];
+  if (slug) return `https://${host}/api/v1/posts/${slug}`;   // <pub>.substack.com or a custom domain
+  return null;
+}
+// Note, app and share links that should be replaced by the post's own link
+const isSubstackAppLink = u => !!substackApi(u) && /^https?:\/\/(open\.)?substack\.com\/(@[^/]+\/note\/|home\/post\/|app-link\/|pub\/[^/]+\/p\/|.*\bp-\d+)/i.test(String(u || ''));
+
+// { title, date, description, image, canonical, publication } from Substack's API, or null
+async function substackPost(u) {
+  const api = substackApi(u);
+  if (!api) return null;
+  const j = await getJson(api, `substack-api ${api}`, { 'User-Agent': PAGE_HEADERS['User-Agent'], Accept: 'application/json' });
+  const post = j && (j.post || j);
+  if (!post || !post.title || !post.post_date) {
+    if (j) noteFailure(`substack-api ${api}`, 'reply has no title or post_date');
+    return null;
+  }
+  return {
+    title: decode(post.title),
+    date: validDate(post.post_date, true),
+    description: decode(post.subtitle || post.description || ''),
+    image: absUrl(post.cover_image || '', 'https://substack.com/'),
+    canonical: post.canonical_url ? stripTracking(post.canonical_url) : '',
+    publication: decode((j.publication && j.publication.name) || ''),
+  };
 }
 
 function youTubeId(u) {
@@ -340,14 +429,23 @@ async function findImage(p, pageCache) {
   return (page && page.image) || '';
 }
 
-const MAX_IMAGE_ATTEMPTS = 3;
+const NOW = Date.now();
+const due = at => !at || isNaN(new Date(at)) || new Date(at).getTime() <= NOW;
+// After a failed try: next try in 6 h, then every 24 h; returns the time or '' when out of tries
+function nextTry(attempts) {
+  if (attempts >= MAX_ATTEMPTS) return '';
+  const h = RETRY_HOURS[Math.min(attempts, RETRY_HOURS.length) - 1];
+  return new Date(NOW + h * 3600e3).toISOString();
+}
+
 const needsImage = p => p && p.url && String(p.type || '').toLowerCase() !== 'research'
-  && !String(p.image || '').trim() && (p.image_attempts || 0) < MAX_IMAGE_ATTEMPTS;
+  && !String(p.image || '').trim() && (p.image_attempts || 0) < MAX_ATTEMPTS && due(p.next_image_try_at);
 
 const blank = v => !String(v || '').trim();
 const hasDate = v => !blank(v) && !isNaN(new Date(v));
-const needsWork = e => e && e.url && (e.needs_enrich === true || blank(e.title) || isBlockedTitle(e.title) || !hasDate(e.date) || blank(e.description))
-  && (e.enrich_attempts || 0) < MAX_ATTEMPTS;
+const needsWork = e => e && e.url && !e.needs_manual
+  && (e.needs_enrich === true || blank(e.title) || isBlockedTitle(e.title) || !hasDate(e.date) || blank(e.description) || isSubstackAppLink(e.url))
+  && (e.enrich_attempts || 0) < MAX_ATTEMPTS && due(e.next_try_at);
 
 // Returns null if the text is acceptable, otherwise the reason it isn't
 function checkSummary(text) {
@@ -398,8 +496,10 @@ async function main() {
     if (!p || !p.url) continue;
     const url = cleanUrl(p.url);
     if (url !== p.url) {
+      // A Substack note or app link is replaced later; keep it exactly as pasted
+      if (!p.source_url && isSubstackAppLink(url)) p.source_url = p.url;
       console.log(`  [url] ${p.url} → ${url}`);
-      p.url = url; delete p.image_attempts; delete p.enrich_attempts; changed++;
+      p.url = url; ['image_attempts', 'enrich_attempts', 'next_try_at', 'next_image_try_at', 'needs_manual'].forEach(k => delete p[k]); changed++;
     }
     for (const k of ['title', 'description']) {
       if (/&(#\d+|#x[\da-f]+|[a-z]+);/i.test(p[k] || '')) { p[k] = decode(p[k]); changed++; console.log(`  [entities] ${k} of ${p.url}`); }
@@ -425,7 +525,26 @@ async function main() {
 
   for (const p of todo) {
     const filled = [];
-    const page = await readPage(p.url);
+    failures = [];
+    let page = null;
+    // Substack: the JSON API first, then the page as for any other site
+    const sub = await substackPost(p.url);
+    if (sub) {
+      page = { via: 'substack-api', title: sub.title, published: sub.date ? { date: sub.date, source: 'substack-api' } : null,
+               description: sub.description, image: sub.image, extract: null, substack: true };
+      if (sub.canonical && sub.canonical !== p.url) {
+        if (!p.source_url) p.source_url = p.url;
+        console.log(`  [url] ${p.url} → ${sub.canonical} (canonical post link)`);
+        p.url = sub.canonical; filled.push('canonical link');
+      }
+      if (sub.publication && (blank(p.source) || /^(open\.)?substack\.com$/i.test(p.source))) { p.source = sub.publication; filled.push('publication'); }
+      if (sub.image && blank(p.image)) { p.image = sub.image; delete p.image_attempts; delete p.next_image_try_at; filled.push('image (cover_image)'); }
+    } else if (isSubstackAppLink(p.url)) {
+      // Note and app pages are an app shell (title "Substack", Substack's logo): nothing to read
+      console.log(`  [skip] ${p.url}: Substack app link, the API gave nothing and the page has no post details`);
+    } else {
+      page = await readPage(p.url);
+    }
     pageCache.set(p.url, page);
     if (isBlockedTitle(p.title)) { p.title = ''; filled.push('bot-check title cleared'); }
     if (page) {
@@ -441,24 +560,51 @@ async function main() {
       else { p.date = ''; p.date_missing = true; }
     } else delete p.date_missing;
     if (blank(p.description)) {
-      const text = aiOn ? await aiSummary(p, page) : null;
-      if (text) { p.description = text; p.ai_summary = true; filled.push('AI summary'); }
+      const text = aiOn && !(page && page.substack && page.description) ? await aiSummary(p, page) : null;
+      if (page && page.substack && page.description) {
+        p.description = page.description; p.summary_source = 'substack'; filled.push('subtitle');
+      } else if (text) { p.description = text; p.ai_summary = true; filled.push('AI summary'); }
       else if (page && page.description.length >= 60) {
         p.description = page.description; p.summary_source = 'page'; filled.push('page description');
       }
     }
     const done = !blank(p.title) && hasDate(p.date) && !blank(p.description);
-    if (done) { p.needs_enrich = false; delete p.enrich_attempts; }
-    else { p.needs_enrich = true; p.enrich_attempts = (p.enrich_attempts || 0) + 1; }
-    changed++;
     const missing = ['title', 'date', 'description'].filter(k => k === 'date' ? !hasDate(p.date) : blank(p[k]));
-    console.log(`  [${done ? 'ok' : 'partial'}] ${p.url} — ${page ? 'read ' + page.via : 'could not be read'}; filled: ${filled.join(', ') || 'nothing'}${missing.length ? `; still missing: ${missing.join(', ')} (attempt ${p.enrich_attempts} of ${MAX_ATTEMPTS})` : ''}`);
+    if (done) {
+      p.needs_enrich = false;
+      ['enrich_attempts', 'next_try_at', 'last_error', 'needs_manual', 'date_missing'].forEach(k => delete p[k]);
+    } else {
+      p.needs_enrich = true;
+      p.enrich_attempts = (p.enrich_attempts || 0) + 1;
+      const reason = failures.length ? failures.join('; ') : (page ? `page read (${page.via}) but no ${missing.join(' or ')} on it` : 'no response');
+      p.last_error = reason.slice(0, 500);
+      const next = nextTry(p.enrich_attempts);
+      if (next) p.next_try_at = next;
+      else {
+        delete p.next_try_at;
+        if (blank(p.title) || !hasDate(p.date)) p.needs_manual = true;   // hidden on the site: needs a person
+      }
+      const msg = `${p.url} — still missing ${missing.join(', ')} after try ${p.enrich_attempts} of ${MAX_ATTEMPTS}. Reason: ${reason}. ` +
+        (next ? `Next try ${next}.` : p.needs_manual ? 'Marked needs_manual.' : 'No more tries.');
+      console.log(`  [fail] ${msg}`);
+      if (IN_ACTIONS) console.log(`::warning title=Enrichment failed::${msg.replace(/[\r\n]+/g, ' ')}`);
+    }
+    changed++;
+    console.log(`  [${done ? 'ok' : 'partial'}] ${p.url} — ${page ? 'read ' + page.via : 'could not be read'}; filled: ${filled.join(', ') || 'nothing'}`);
   }
 
   for (const p of imageTodo) {
+    if (!blank(p.image)) continue;   // filled from the Substack API above
+    if (isSubstackAppLink(p.url)) continue;   // wait for the post link; the app page has only Substack's logo
+    failures = [];
     const img = await findImage(p, pageCache);
-    if (img) { p.image = img; delete p.image_attempts; console.log(`  [image] ${p.url} — ${img}`); }
-    else { p.image_attempts = (p.image_attempts || 0) + 1; console.log(`  [image] ${p.url} — none found (attempt ${p.image_attempts} of ${MAX_IMAGE_ATTEMPTS})`); }
+    if (img) { p.image = img; delete p.image_attempts; delete p.next_image_try_at; console.log(`  [image] ${p.url} — ${img}`); }
+    else {
+      p.image_attempts = (p.image_attempts || 0) + 1;
+      const next = nextTry(p.image_attempts);
+      if (next) p.next_image_try_at = next; else delete p.next_image_try_at;
+      console.log(`  [image] ${p.url} — none found (try ${p.image_attempts} of ${MAX_ATTEMPTS})${failures.length ? '. Reason: ' + failures.join('; ') : ''}${next ? '. Next try ' + next : ''}`);
+    }
     changed++;
   }
 

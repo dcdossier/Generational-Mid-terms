@@ -5,9 +5,11 @@ on:
   push:
     branches: [main]
     paths: ['analysis-manual.json']
-  # Daily retry for entries still missing a title, date or summary (max 3 tries each)
+  # Retries for entries still missing a title, date or summary: each failed entry
+  # waits 6 hours, then 24 hours, between tries (5 tries, see enrich-manual.js).
+  # Runs every 2 hours; a run with nothing due exits without committing.
   schedule:
-    - cron: '29 5 * * *'
+    - cron: '29 */2 * * *'
   workflow_dispatch:
 
 # Writes status.json like the other data workflows, so it shares their group

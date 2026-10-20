@@ -225,6 +225,7 @@ body {
   .institution-block { flex-direction: column; gap: 16px; }
 }
 </style>
+<link rel="stylesheet" href="comments.css?v=2">
 </head>
 <body>
 <div class="page-wrap">
@@ -293,5 +294,10 @@ body {
 <script>
 document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
 </script>
+
+<!-- ── COMMENTS AND CONTACT ── -->
+<section data-comments="about" aria-label="Comments"></section>
+<footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
+<script src="comments.js?v=2" defer></script>
 </body>
 </html>

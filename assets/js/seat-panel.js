@@ -57,6 +57,14 @@
 //   "No coverage found in the last 7 days" with the time of the last check.
 //   Shared with india.html's member side panel.
 //
+// Every seat (House, Senate and Governor) also gets a "<State> Issues (n)"
+// section after the seat brief: one tile per state topic, from
+// assets/state-issue-topics.json (the topic and scope of every issues.json
+// item, same keys and order) and, when present, the full Drive issue briefs in
+// assets/state-issues.json (written by the Racebook Sync script). Tapping a tile
+// opens its brief, the seats that raised it and its sources. A host page can
+// call setSeatOpener(fn) so the tiles' seat links open with its own context.
+//
 // It also gets a "Polls" block from data.json's race_polls (written by
 // scripts/fetch-polls.js), and the header lists each forecaster's rating with
 // its own date, flagged when older than 14 days (uses assets/js/data-labels.js
@@ -73,6 +81,8 @@
   var ISSUES_URL = 'assets/issues.json';
   var NEWS_URL   = 'assets/candidate-news.json';
   var DATA_URL   = 'data.json';
+  var TOPICS_URL = 'assets/state-issue-topics.json';
+  var STATE_BRIEFS_URL = 'assets/state-issues.json';
 
   var ABBR_TO_STATE = {
     AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
@@ -92,6 +102,10 @@
   var newsPromise = null;
   var dataPromise = null;
   var issuesPromise = null;
+  var topicsPromise = null;
+  var stateBriefsPromise = null;
+  var seatOpener = null;
+  var tileSeq = 0;
   var dom = null;
   var isOpen = false;
   var currentId = null;
@@ -162,6 +176,20 @@
 
   function loadIssues() {
     return loadJson(ISSUES_URL, function () { return issuesPromise; }, function (p) { issuesPromise = p; });
+  }
+
+  function loadStateTopics() {
+    return loadJson(TOPICS_URL, function () { return topicsPromise; }, function (p) { topicsPromise = p; });
+  }
+
+  // Optional file: a missing state-issues.json just means tiles without full briefs.
+  function loadStateBriefs() {
+    if (!stateBriefsPromise) {
+      stateBriefsPromise = fetch(STATE_BRIEFS_URL)
+        .then(function (r) { return r.ok ? r.json() : {}; })
+        .catch(function () { return {}; });
+    }
+    return stateBriefsPromise;
   }
 
   function loadData() {
@@ -312,6 +340,170 @@
     return details;
   }
 
+  // ── State issues section (state-issue-topics.json + state-issues.json) ──
+
+  var SCOPE_LABEL = { fed: 'Federal', federal: 'Federal', state: 'State', mixed: 'Mixed' };
+
+  function scopeLabel(s) {
+    return SCOPE_LABEL[String(s || '').toLowerCase()] || null;
+  }
+
+  function stateAbbrOf(id) {
+    var m = id.match(/^(?:Senate|Gov)-([A-Z]{2})$/) || id.match(/^([A-Z]{2})-(?:\d{2}|AL)$/);
+    return m ? m[1] : null;
+  }
+
+  function seatSortKey(seat) {
+    var m = seat.match(/^[A-Z]{2}-(\d{2}|AL)$/);
+    return m ? '1' + (m[1] === 'AL' ? '00' : m[1]) : '0' + seat;
+  }
+
+  // -> [{topic, scope, brief, items: [{seat, iss}]}] for the seat's state, in
+  // the order this seat type shows them; [] if the state has no topics.
+  function stateTopicsFor(id, issuesRoot, topicsRoot, briefsRoot) {
+    var abbr = stateAbbrOf(id), name = abbr && ABBR_TO_STATE[abbr];
+    if (!name || !topicsRoot) return [];
+    var groups = {}, keys = [];
+    function group(topic) {
+      var k = topic.toLowerCase();
+      if (!groups[k]) { groups[k] = { topic: topic, scopes: {}, items: [] }; keys.push(k); }
+      return groups[k];
+    }
+    function addAll(seat, maps, issues) {
+      (maps || []).forEach(function (m, i) {
+        if (!m || !m.topic) return;
+        var g = group(m.topic), sc = scopeLabel(m.scope);
+        if (sc) g.scopes[sc] = true;
+        if (issues && issues[i]) g.items.push({ seat: seat, iss: issues[i] });
+      });
+    }
+    var issues = issuesRoot || {};
+    addAll('Senate-' + abbr, topicsRoot.senate && topicsRoot.senate[name], issues.senate && issues.senate[name]);
+    Object.keys(topicsRoot.house || {}).forEach(function (k) {
+      if (k.indexOf(abbr + '-') === 0) addAll(k, topicsRoot.house[k], issues.house && issues.house[k]);
+    });
+    var briefs = (briefsRoot && briefsRoot[abbr]) || {};
+    var briefByKey = {};
+    Object.keys(briefs).forEach(function (t) { briefByKey[t.toLowerCase()] = briefs[t]; });
+
+    var rank = id.indexOf('Gov-') === 0 ? { State: 0, Mixed: 1, Federal: 2 } : { Federal: 0, Mixed: 1, State: 2 };
+    return keys.map(function (k) {
+      var g = groups[k], brief = briefByKey[k] || null;
+      var scopes = Object.keys(g.scopes);
+      var scope = (brief && scopeLabel(brief.scope)) || (scopes.length === 1 ? scopes[0] : 'Mixed');
+      g.items.sort(function (a, b) { return seatSortKey(a.seat) < seatSortKey(b.seat) ? -1 : seatSortKey(a.seat) > seatSortKey(b.seat) ? 1 : 0; });
+      return { topic: g.topic, scope: scope, brief: brief, items: g.items };
+    }).sort(function (a, b) {
+      return (rank[a.scope] - rank[b.scope]) || a.topic.localeCompare(b.topic);
+    });
+  }
+
+  function openLinkedSeat(seat, mode) {
+    if (seatOpener) seatOpener(seat, { mode: mode });
+    else open(seat, { mode: mode });
+  }
+
+  function topicDetailHtml(t, id) {
+    var b = t.brief, html = '';
+    if (b && b.subtitle) html += '<p class="sp-si-sub">' + escapeHtml(b.subtitle) + '</p>';
+    if (b && b.sections && b.sections.length) {
+      b.sections.forEach(function (s) {
+        html += '<h4 class="sp-si-h">' + escapeHtml(s.heading) + '</h4><div class="sp-si-text">' + s.html + '</div>';   // sanitised by the sync script
+      });
+    } else {
+      html += '<p class="sp-si-none">Full brief coming soon.</p>';
+    }
+    if (t.items.length) {
+      html += '<h4 class="sp-si-h">Raised in these seats</h4>' + t.items.map(function (it) {
+        var iss = it.iss, mine = it.seat === id;
+        var seatTag = mine
+          ? '<span class="sp-si-this">This seat</span>'
+          : '<button type="button" class="sp-si-seat" data-seat="' + escapeHtml(it.seat) + '">' + escapeHtml(it.seat) + '</button>';
+        var src = iss.su
+          ? '<a class="sp-si-src" href="' + escapeHtml(iss.su) + '" target="_blank" rel="noopener">' + escapeHtml(iss.sl || iss.su) + '</a>'
+          : (iss.sl ? '<span class="sp-si-src">' + escapeHtml(iss.sl) + '</span>' : '');
+        return '<div class="sp-si-item' + (mine ? ' sp-si-mine' : '') + '">' +
+          '<div class="sp-issue-title">' + escapeHtml(iss.t || '') + '</div>' +
+          '<div class="sp-issue-desc">' + escapeHtml(iss.d || '') + '</div>' +
+          '<div class="sp-si-foot">' + seatTag + src + '</div>' +
+        '</div>';
+      }).join('');
+    }
+    var sources = (b && b.sources) || [];
+    if (sources.length) {
+      html += '<details class="sp-si-sources"><summary>Sources (' + sources.length + ')</summary><ol>' +
+        sources.map(function (s) {
+          return '<li><a href="' + escapeHtml(s.url) + '" target="_blank" rel="noopener">' +
+            '<span class="sp-si-srclabel">' + escapeHtml(s.label || s.url) + '</span>' +
+            '<span class="sp-si-srcurl">' + escapeHtml(s.url) + '</span></a></li>';
+        }).join('') + '</ol></details>';
+    }
+    return html;
+  }
+
+  function buildStateIssuesSection(id, topics, mode) {
+    var abbr = stateAbbrOf(id);
+    var details = document.createElement('details');
+    details.className = 'sp-section sp-state-issues';
+    details.setAttribute('open', '');   // the tiles are compact; the briefs open one at a time
+    var summary = document.createElement('summary');
+    summary.textContent = ABBR_TO_STATE[abbr] + ' Issues (' + topics.length + ')';
+    var body = document.createElement('div');
+    body.className = 'sp-section-body';
+    var grid = document.createElement('div');
+    grid.className = 'sp-si-grid';
+    var openTile = null, openDetail = null;
+
+    function collapse() {
+      if (!openTile) return;
+      openTile.setAttribute('aria-expanded', 'false');
+      openDetail.remove();
+      openTile = openDetail = null;
+    }
+
+    topics.forEach(function (t) {
+      var tile = document.createElement('button');
+      tile.type = 'button';
+      tile.className = 'sp-si-tile';
+      tile.id = 'sp-si-tile-' + (++tileSeq);
+      tile.setAttribute('aria-expanded', 'false');
+      tile.innerHTML = '<span class="sp-si-name">' + escapeHtml(t.topic) + '</span>' +
+        '<span class="sp-si-scope sp-si-scope-' + t.scope.toLowerCase() + '">' + escapeHtml(t.scope) + '</span>';
+      tile.addEventListener('click', function () {
+        var wasOpen = openTile === tile;
+        collapse();
+        if (wasOpen) return;
+        var detail = document.createElement('div');
+        detail.className = 'sp-si-detail';
+        detail.id = tile.id + '-detail';
+        detail.setAttribute('role', 'region');
+        detail.setAttribute('aria-labelledby', tile.id);
+        detail.innerHTML = topicDetailHtml(t, id);
+        tile.setAttribute('aria-controls', detail.id);
+        tile.setAttribute('aria-expanded', 'true');
+        tile.after(detail);
+        openTile = tile;
+        openDetail = detail;
+        if (tile.scrollIntoView) tile.scrollIntoView({ block: 'nearest' });
+      });
+      grid.appendChild(tile);
+    });
+
+    // Seat links open that seat's panel. stopPropagation: the document-level
+    // click-outside listener must not close the panel this click just opened.
+    grid.addEventListener('click', function (e) {
+      var btn = e.target.closest && e.target.closest('.sp-si-seat');
+      if (!btn) return;
+      e.stopPropagation();
+      openLinkedSeat(btn.getAttribute('data-seat'), mode);
+    });
+
+    body.appendChild(grid);
+    details.appendChild(summary);
+    details.appendChild(body);
+    return details;
+  }
+
   // ── body builder (shared by the panel's own #sp-body and renderBriefInto) ──
 
   // "India" mode always shows a callout, even with nothing to say -- the
@@ -333,7 +525,7 @@
   // Renders India callout (if mode is 'india') + the 5 brief sections (or a
   // "coming soon" placeholder) + Key Issues, into targetEl. Used both for
   // the panel's own body and for embedding (renderBriefInto).
-  function buildBody(targetEl, id, entry, opts, issuesData) {
+  function buildBody(targetEl, id, entry, opts, issuesData, stateTopics) {
     var mode = opts.mode;
     targetEl.innerHTML = '';
 
@@ -366,6 +558,10 @@
 
     if (issuesData && issuesData.length) {
       targetEl.appendChild(buildIssuesSection(issuesData));
+    }
+
+    if (stateTopics && stateTopics.length) {
+      targetEl.appendChild(buildStateIssuesSection(id, stateTopics, mode));
     }
   }
 
@@ -502,9 +698,15 @@
     });
   }
 
+  function loadStateTopicsFor(id) {
+    return Promise.all([loadIssues(), loadStateTopics(), loadStateBriefs()]).then(function (r) {
+      return stateTopicsFor(id, r[0], r[1], r[2]);
+    });
+  }
+
   // ── render (the panel's own header + body) ──────────────────────────────
 
-  function render(id, entry, opts, issuesData) {
+  function render(id, entry, opts, issuesData, stateTopics) {
     var d = ensureDom();
     var type = (entry && entry.type) || fallbackType(id);
     var title = (entry && entry.title) || fallbackTitle(id);
@@ -526,7 +728,7 @@
     d.ratings.style.display = ratings ? '' : 'none';
     setOptionalText(d.note, opts.note || null);
 
-    buildBody(d.body, id, entry, opts, issuesData);
+    buildBody(d.body, id, entry, opts, issuesData, stateTopics);
   }
 
   // ── public API ───────────────────────────────────────────────────────────
@@ -544,9 +746,9 @@
     currentId = id;
     isOpen = true;
 
-    Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews(), loadData()]).then(function (results) {
+    Promise.all([loadBriefs(), loadIssuesDataFor(id), loadCandidateNews(), loadData(), loadStateTopicsFor(id)]).then(function (results) {
       if (currentId !== id) return; // superseded by a later open() call
-      render(id, results[0][id], opts, results[1]);
+      render(id, results[0][id], opts, results[1], results[4]);
       // The caller's rating comes from data.json races.<chamber>; give it that block's date
       var chamber = id.indexOf('Senate-') === 0 ? 'senate' : id.indexOf('Gov-') === 0 ? 'governor' : 'house';
       var races = results[3] && results[3].races && results[3].races[chamber];
@@ -611,10 +813,10 @@
     opts = opts || {};
     if (opts.mode !== 'india') opts.mode = 'default';
 
-    return Promise.all([loadBriefs(), loadIssuesDataFor(id)]).then(function (results) {
+    return Promise.all([loadBriefs(), loadIssuesDataFor(id), loadStateTopicsFor(id)]).then(function (results) {
       var entry = results[0][id];
       if (!entry) return false;
-      buildBody(containerEl, id, entry, opts, results[1]);
+      buildBody(containerEl, id, entry, opts, results[1], results[2]);
       return true;
     });
   }
@@ -638,5 +840,8 @@
     renderBriefInto: renderBriefInto,
     loadCandidateNews: loadCandidateNews,
     renderNewsList: renderNewsList,
+    // fn(id, {mode}) opens a seat from a state-issue tile's seat link, so the
+    // host can pass its own context (rating, incumbent); null restores open().
+    setSeatOpener: function (fn) { seatOpener = typeof fn === 'function' ? fn : null; },
   };
 })();

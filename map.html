@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/seat-panel.css">
+<link rel="stylesheet" href="assets/css/seat-panel.css?v=20261020b">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="assets/js/seat-ids.js"></script>
@@ -31,7 +31,7 @@
 // Opened outside the site frame (e.g. a shared map.html#seats link): show it inside index.html so the main menu stays
 if (window.top === window.self && location.hash === '#seats') location.replace('index.html#seats');
 </script>
-<script src="assets/js/seat-panel.js"></script>
+<script src="assets/js/seat-panel.js?v=20261020b"></script>
 <style>
 :root {
   --bg:#FFFFFF; --bg-s:#F7F7F7; --bg-h:#F2F2F2;
@@ -925,6 +925,17 @@ function openSeatFromRace(kind, race, pathEl, extraOpts) {
   spSelectSeat(id, pathEl);
   window.SeatPanel.open(id, Object.assign({ mode: 'default', rating: race.rating, incumbent: incumbentLine, note: note }, extraOpts));
 }
+
+// Seat links inside the panel's state-issue tiles open with the same context
+// as a map click; seats not in data.json open the bare brief.
+window.SeatPanel.setSeatOpener((id, opts) => {
+  const r = DATA && DATA.races;
+  const kind = id.startsWith('Senate-') ? 'senate' : id.startsWith('Gov-') ? 'governor' : 'house';
+  const list = !r ? [] : kind === 'house' ? r.house.competitive : r[kind].races;
+  const race = (list || []).find(x => toSeatId(kind, kind === 'house' ? x.district : x.state) === id);
+  if (race) openSeatFromRace(kind, race);
+  else window.SeatPanel.open(id, opts);
+});
 
 // ── SEAT-WISE ENTRY (#seats, #seats-senate, #seats-governor, banner) ────────
 // #seats, the home "Seat-wise analysis" button and the banner land on the

@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-16T05:00:27.557Z"
+    "last_updated": "2026-10-20T06:26:54.356Z"
   },
   "posts": [],
   "entries": [
@@ -987,7 +987,10 @@
       "tags": [],
       "added_at": "2026-10-20T06:26:35.073Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mvgavo3o-1",
@@ -1001,7 +1004,10 @@
       "tags": [],
       "added_at": "2026-10-20T06:26:35.076Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mvgavo3o-2",
@@ -1015,7 +1021,10 @@
       "tags": [],
       "added_at": "2026-10-20T06:26:35.076Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     },
     {
       "id": "manual-mvgavo3o-3",
@@ -1029,7 +1038,10 @@
       "tags": [],
       "added_at": "2026-10-20T06:26:35.076Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "enrich_attempts": 1,
+      "image_attempts": 1
     }
   ]
 }

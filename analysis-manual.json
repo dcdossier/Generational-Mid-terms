@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-20T12:08:26.555521Z"
+    "last_updated": "2026-10-20T12:14:20.432Z"
   },
   "posts": [],
   "entries": [
@@ -148,7 +148,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 3
+      "image": "https://c.ndtvimg.com/2026-03/6vuiv7pg_us-visa_625x300_05_March_26.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=738"
     },
     {
       "id": "seed-atp-1VFAsloVxSyHCH3Uw4XUZb",
@@ -186,7 +186,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 3
+      "image": "https://c.ndtvimg.com/2026-04/kdbpguuk_trump-mojtaba_625x300_07_April_26.png?im=FitAndFill,algorithm=dnn,width=1200,height=738"
     },
     {
       "id": "seed-atp-4wmWyfx1HxWvqTo6P5jNYG",
@@ -318,7 +318,7 @@
       "added_at": "2026-10-06T20:38:06.162Z",
       "manual": true,
       "needs_enrich": false,
-      "image_attempts": 3
+      "image": "https://c.ndtvimg.com/2025-03/n8sqn4to_trump-iran-_625x300_31_March_25.jpg?im=FitAndFill,algorithm=dnn,width=1200,height=738"
     },
     {
       "id": "seed-oped-firstpost-congress-pentagon",
@@ -554,7 +554,9 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f11f1059c7b95919fb1ba99b2",
-      "enrich_attempts": 3
+      "enrich_attempts": 4,
+      "last_error": "page read (direct) but no description on it",
+      "next_try_at": "2026-10-21T12:14:18.325Z"
     },
     {
       "id": "manual-muxjwekk-1",
@@ -570,7 +572,9 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f01d7aaecc385b4e94090747b",
-      "enrich_attempts": 3
+      "enrich_attempts": 4,
+      "last_error": "page read (direct) but no description on it",
+      "next_try_at": "2026-10-21T12:14:18.325Z"
     },
     {
       "id": "manual-muxjwekl-5",
@@ -586,7 +590,9 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f37845d7706d3cd31251332c0",
-      "enrich_attempts": 3
+      "enrich_attempts": 4,
+      "last_error": "page read (direct) but no description on it",
+      "next_try_at": "2026-10-21T12:14:18.325Z"
     },
     {
       "id": "manual-muxjdrkz",
@@ -623,7 +629,7 @@
       "id": "manual-muxjy2fr",
       "type": "newsletter",
       "title": "#28 Iran war: the third ‘I’",
-      "url": "https://dcdossier.substack.com/p/28-iran-war-the-third-i?r=6dwou7&utm_campaign=post&utm_medium=web",
+      "url": "https://dcdossier.substack.com/p/28-iran-war-the-third-i",
       "author": "Abhishek Kadiyala",
       "source": "Substack (DC Dossier)",
       "date": "2026-09-11T00:00:00.000Z",

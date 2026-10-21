@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-20T12:14:20.432Z"
+    "last_updated": "2026-10-21T14:01:59.210Z"
   },
   "posts": [],
   "entries": [
@@ -554,9 +554,8 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1f11f1059c7b95919fb1ba99b2",
-      "enrich_attempts": 4,
-      "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-10-21T12:14:18.325Z"
+      "enrich_attempts": 5,
+      "last_error": "page read (direct) but no description on it"
     },
     {
       "id": "manual-muxjwekk-1",
@@ -572,9 +571,8 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f01d7aaecc385b4e94090747b",
-      "enrich_attempts": 4,
-      "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-10-21T12:14:18.325Z"
+      "enrich_attempts": 5,
+      "last_error": "page read (direct) but no description on it"
     },
     {
       "id": "manual-muxjwekl-5",
@@ -590,9 +588,8 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f37845d7706d3cd31251332c0",
-      "enrich_attempts": 4,
-      "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-10-21T12:14:18.325Z"
+      "enrich_attempts": 5,
+      "last_error": "page read (direct) but no description on it"
     },
     {
       "id": "manual-muxjdrkz",

@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-21T14:01:59.210Z"
+    "last_updated": "2026-10-22T06:25:51.544Z"
   },
   "posts": [],
   "entries": [
@@ -1053,16 +1053,19 @@
     {
       "id": "manual-mvj5pzsa",
       "type": "op-ed",
-      "title": "",
+      "title": "U.S. midterms — Donald Trump’s test, India’s stakes",
       "url": "https://www.thehindu.com/opinion/op-ed/us-midterms-donald-trumps-test-indias-stakes/article71593689.ece",
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-10-16T18:38:00.000Z",
+      "description": "Midterms usually serve as a verdict on the President, and President Donald Trump has made the election on November 3, 2026 about himself",
       "tags": [],
       "added_at": "2026-10-22T06:25:30.730Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://th-i.thgim.com/public/incoming/hf0hje/article71593695.ece/alternates/LANDSCAPE_1200/2300265934.jpg"
     }
   ]
 }

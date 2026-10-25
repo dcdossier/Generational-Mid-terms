@@ -3,11 +3,11 @@
     "BLS CPI": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:03.409Z",
-      "last_success": "2026-10-24T12:55:50.225Z",
+      "last_attempt": "2026-10-25T19:16:37.639Z",
+      "last_success": "2026-10-25T19:16:37.639Z",
       "item_count": 22,
-      "error": "[BLS] CPI fetch failed: HTTP 503",
-      "failing_since": "2026-10-24T19:01:20.383Z"
+      "error": null,
+      "failing_since": null
     },
     "Candidate news (Google News)": {
       "group": "candidates",
@@ -21,8 +21,8 @@
     "Congress approval (Gallup)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:04.736Z",
-      "last_success": "2026-10-25T13:22:04.736Z",
+      "last_attempt": "2026-10-25T19:16:38.232Z",
+      "last_success": "2026-10-25T19:16:38.232Z",
       "item_count": 1,
       "error": null,
       "failing_since": null
@@ -30,8 +30,8 @@
     "House control (Press Gallery)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:05.599Z",
-      "last_success": "2026-10-25T13:22:05.599Z",
+      "last_attempt": "2026-10-25T19:16:38.761Z",
+      "last_success": "2026-10-25T19:16:38.761Z",
       "item_count": 432,
       "error": null,
       "failing_since": null
@@ -1398,17 +1398,17 @@
     "NYT polling CSVs": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:02.228Z",
-      "last_success": "2026-10-25T13:22:02.228Z",
-      "item_count": 2718,
+      "last_attempt": "2026-10-25T19:16:37.304Z",
+      "last_success": "2026-10-25T19:16:37.304Z",
+      "item_count": 2723,
       "error": null,
       "failing_since": null
     },
     "Retirement counts": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:05.064Z",
-      "last_success": "2026-10-25T13:22:05.064Z",
+      "last_attempt": "2026-10-25T19:16:38.421Z",
+      "last_success": "2026-10-25T19:16:38.421Z",
       "item_count": 71,
       "error": null,
       "failing_since": null
@@ -1416,7 +1416,7 @@
     "Retirements (Ballotpedia)": {
       "group": "polls",
       "primary": false,
-      "last_attempt": "2026-10-25T13:22:05.064Z",
+      "last_attempt": "2026-10-25T19:16:38.421Z",
       "last_success": "2026-10-15T03:15:13.691Z",
       "item_count": 71,
       "error": "HTTP 202 (likely a bot challenge)",
@@ -1488,14 +1488,14 @@
     "Trump approval (Datawrapper)": {
       "group": "polls",
       "primary": true,
-      "last_attempt": "2026-10-25T13:22:03.557Z",
-      "last_success": "2026-10-25T13:22:03.557Z",
+      "last_attempt": "2026-10-25T19:16:37.817Z",
+      "last_success": "2026-10-25T19:16:37.817Z",
       "item_count": 643,
       "error": null,
       "failing_since": null
     }
   },
-  "updated": "2026-10-25T19:01:35.594Z",
+  "updated": "2026-10-25T19:16:38.764Z",
   "ai": {
     "ac": {
       "provider": "none",
@@ -1505,7 +1505,7 @@
       "run_at": "2026-10-22T06:25:51.238Z"
     },
     "home": {
-      "run_at": "2026-10-25T13:22:01.156Z",
+      "run_at": "2026-10-25T19:16:36.465Z",
       "provider": "none",
       "calls_this_run": 0,
       "status": "off",

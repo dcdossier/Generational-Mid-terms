@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-27T07:12:12.215Z"
+    "last_updated": "2026-10-27T07:16:23.018Z"
   },
   "posts": [],
   "entries": [
@@ -1087,72 +1087,88 @@
     {
       "id": "manual-mvqcq7v8-0",
       "type": "op-ed",
-      "title": "",
+      "title": "US Midterm Polls What they mean for Trump, India and Manipur’s neighbourhood",
       "url": "https://www.thesangaiexpress.com/Encyc/2026/10/26/brig-anil-raman-retd-on-3-november-halfway-through-donald-trumps-second-term-americans-go-to-the-polls-in-the-.html",
       "author": "Brigadier Anil Raman",
       "source": "thesangaiexpress.com",
-      "date": "",
-      "description": "",
+      "date": "2026-10-26T00:00:00.000Z",
+      "description": "Brig. Anil Raman (Retd.) On 3 November, halfway through Donald Trump’s second term, Americans go to the polls in the midterm elections. All 435 seats in the House of Representatives, the American equivalent of our Lok Sabha, are being contested, alo",
       "tags": [],
       "added_at": "2026-10-27T07:16:01.748Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "url",
+      "summary_source": "page",
+      "image_attempts": 1,
+      "next_image_try_at": "2026-10-27T13:16:18.885Z"
     },
     {
       "id": "manual-mvqcq7v9-1",
       "type": "op-ed",
-      "title": "",
+      "title": "US midterm polls: What they mean for Trump, China and Ladakh - The Tribune",
       "url": "https://www.tribuneindia.com/news/usa-news/us-midterm-polls-what-they-mean-for-trump-china-and-ladakh/",
       "author": "Brigadier Anil Raman",
       "source": "tribuneindia.com",
-      "date": "",
-      "description": "",
+      "date": "2026-10-25T14:46:27.000Z",
+      "description": "All 435 seats in the House of Representatives, the lower chamber of Congress, are being contested, along with 35 of the 100 seats in the Senate, the upper chamber",
       "tags": [],
       "added_at": "2026-10-27T07:16:01.749Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://www.tribuneindia.com/sortd-service/imaginary/v22-01/jpg/large/high?url=dGhldHJpYnVuZS1zb3J0ZC1wcm8tcHJvZC1zb3J0ZC9tZWRpYWUzNGE2NGMwLWQwODQtMTFmMS05N2QyLTcxMzIwNTZiZTJjZS5qcGc="
     },
     {
       "id": "manual-mvqcq7v9-2",
       "type": "op-ed",
-      "title": "",
+      "title": "American voter’s long wait: How 2026 midterms put Trump’s mandate to the test",
       "url": "https://www.theweek.in/magazine/theweek/more/2026/10/24/american-voters-long-wait-how-2026-midterms-put-trumps-mandate-to-the-test.html",
       "author": "Brigadier Anil Raman",
       "source": "theweek.in",
-      "date": "",
-      "description": "",
+      "date": "2026-10-25T03:43:01.000Z",
+      "description": "The US grew richer after the Cold War, but millions were left behind. On November 3, they will judge whether Trump has delivered on his promise to change the system",
       "tags": [],
       "added_at": "2026-10-27T07:16:01.749Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://img.theweek.in/content/dam/week/en/archive/magazine/theweek/more/images/2026/10/24/20-President-Donald-Trump.jpg"
     },
     {
       "id": "manual-mvqcq7v9-3",
       "type": "op-ed",
-      "title": "",
+      "title": "U.S. midterms — Republicans face growing Blue wave",
       "url": "https://www.thehindu.com/opinion/op-ed/us-midterms-republicans-face-growing-blue-wave/article71617170.ece",
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-10-23T19:06:00.000Z",
+      "description": "With days left for the U.S. midterm elections on November 3, talk of a Democratic wave has shifted from opinion polls to voting reality",
       "tags": [],
       "added_at": "2026-10-27T07:16:01.749Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://th-i.thgim.com/public/incoming/l4rqo0/article71617697.ece/alternates/LANDSCAPE_1200/AP10_23_2026_000357B.jpg"
     },
     {
       "id": "manual-mvqcq7v9-4",
       "type": "op-ed",
-      "title": "",
+      "title": "A Jolt For Trump? How The US May Be Staring At A 'Blue' Wave",
       "url": "https://www.ndtv.com/opinion/a-jolt-for-trump-how-the-us-may-be-staring-at-a-blue-wave-12219256",
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
-      "date": "",
-      "description": "",
+      "date": "2026-10-22T08:13:24.000Z",
+      "description": "Evidence now points firmly to a Democratic majority in the House. The only real surprise is the Senate",
       "tags": [],
       "added_at": "2026-10-27T07:16:01.749Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://i.ndtvimg.com/i/2017-05/donald-trump-dejected-reuters_650x400_71495256830.jpg?im=FitAndFill,algorithm=dnn,width=1600,height=900"
     }
   ]
 }

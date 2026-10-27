@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-22T06:25:51.544Z"
+    "last_updated": "2026-10-27T07:12:12.215Z"
   },
   "posts": [],
   "entries": [
@@ -1070,16 +1070,19 @@
     {
       "id": "manual-mvqckvsl",
       "type": "op-ed",
-      "title": "",
+      "title": "U.S. immigration restrictions may outlast Trump",
       "url": "https://www.thehindu.com/opinion/op-ed/us-immigration-restrictions-may-outlast-trump/article71624115.ece",
       "author": "Abhishek Kadiyala",
       "source": "The Hindu",
-      "date": "",
-      "description": "",
+      "date": "2026-10-25T18:38:00.000Z",
+      "description": "It is tempting to read policy changes in the second term of the Trump administration as its product alone, but they reflect deeper political interests that are likely to survive post-Trump",
       "tags": [],
       "added_at": "2026-10-27T07:11:52.821Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://th-i.thgim.com/public/incoming/gm2ip2/article71624117.ece/alternates/LANDSCAPE_1200/Trump_94159.jpg"
     }
   ]
 }

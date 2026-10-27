@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-27T07:22:49.832Z"
+    "last_updated": "2026-10-27T14:48:52.713Z"
   },
   "posts": [],
   "entries": [
@@ -1099,8 +1099,8 @@
       "needs_enrich": false,
       "date_source": "url",
       "summary_source": "page",
-      "image_attempts": 1,
-      "next_image_try_at": "2026-10-27T13:16:18.885Z"
+      "image_attempts": 2,
+      "next_image_try_at": "2026-10-28T14:48:52.021Z"
     },
     {
       "id": "manual-mvqcq7v9-1",
@@ -1185,9 +1185,9 @@
       "needs_enrich": true,
       "date_source": "spotify",
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f7247fff5cac0a248c01a002e",
-      "enrich_attempts": 1,
+      "enrich_attempts": 2,
       "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-10-27T13:21:35.386Z"
+      "next_try_at": "2026-10-28T14:48:52.021Z"
     },
     {
       "id": "manual-mvqcsc6e-2",
@@ -1204,9 +1204,9 @@
       "needs_enrich": true,
       "date_source": "spotify",
       "image": "https://image-cdn-ak.spotifycdn.com/image/ab67656300005f1fffde630b4ef65df9fff956cb",
-      "enrich_attempts": 1,
+      "enrich_attempts": 2,
       "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-10-27T13:22:49.671Z"
+      "next_try_at": "2026-10-28T14:48:52.021Z"
     }
   ]
 }

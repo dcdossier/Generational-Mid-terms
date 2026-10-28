@@ -1,6 +1,6 @@
 {
   "meta": {
-    "last_updated": "2026-10-27T20:58:48.110Z",
+    "last_updated": "2026-10-28T06:18:45.909Z",
     "election_date": "2026-11-03",
     "forecaster_consensus": {
       "as_of": "2026-10-05",
@@ -1146,7 +1146,7 @@
       "net": -23.4,
       "source": "Nate Silver Bulletin",
       "as_of": "2026-10-27",
-      "fetched": "2026-10-27T20:58:46.853Z"
+      "fetched": "2026-10-28T06:18:42.643Z"
     },
     "congress": {
       "approve": 16,
@@ -1274,11 +1274,11 @@
     }
   },
   "generic_ballot": {
-    "democrat": 49.8,
-    "republican": 42,
-    "trend_d": 0,
+    "democrat": 49.9,
+    "republican": 42.1,
+    "trend_d": 0.1,
     "trend_r": 0.1,
-    "undecided": 8.2,
+    "undecided": 8,
     "history": [
       {
         "month": "Jan 2025",
@@ -1387,11 +1387,21 @@
       },
       {
         "month": "Oct 2026",
-        "democrat": 49.8,
-        "republican": 42
+        "democrat": 49.9,
+        "republican": 42.1
       }
     ],
     "pollsters": [
+      {
+        "name": "HarrisX/Harris Poll (Harvard CAPS)",
+        "democrat": 52,
+        "republican": 48,
+        "date": "26 Oct 2026",
+        "start": "2026-10-24",
+        "end": "2026-10-26",
+        "sample": null,
+        "population": "lv"
+      },
       {
         "name": "YouGov (Economist)",
         "democrat": 50,
@@ -1481,16 +1491,6 @@
         "end": "2026-10-19",
         "sample": 3494,
         "population": "lv"
-      },
-      {
-        "name": "Hart Research Associates/Public Opinion Strategies (CNBC)",
-        "democrat": 52,
-        "republican": 45,
-        "date": "18 Oct 2026",
-        "start": "2026-10-14",
-        "end": "2026-10-18",
-        "sample": 1000,
-        "population": "rv"
       }
     ],
     "historical_midterms": [
@@ -1539,7 +1539,7 @@
     ],
     "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
     "as_of": "2026-10-26",
-    "fetched": "2026-10-27T20:58:46.193Z"
+    "fetched": "2026-10-28T06:18:41.788Z"
   },
   "factions": {
     "house": {
@@ -7631,21 +7631,21 @@
     ],
     "current": 3.7,
     "month": "Sep 2026",
-    "updated": "2026-10-27",
+    "updated": "2026-10-28",
     "as_of": "2026-09",
-    "fetched": "2026-10-27T20:58:46.801Z"
+    "fetched": "2026-10-28T06:18:42.560Z"
   },
   "race_polls": {
     "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
     "as_of": "2026-10-27",
-    "fetched": "2026-10-27T20:58:46.193Z",
+    "fetched": "2026-10-28T06:18:41.788Z",
     "races": {
       "AK-AL": {
         "office": "House",
         "state": "AK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 15,
         "latest": [
           {
@@ -7807,7 +7807,7 @@
         "state": "AL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-31",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -7872,7 +7872,7 @@
         "state": "AR",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -7943,7 +7943,7 @@
         "state": "AZ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-01",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -7978,7 +7978,7 @@
         "state": "AZ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -8055,7 +8055,7 @@
         "state": "AZ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-06-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -8120,7 +8120,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-06",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -8173,7 +8173,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8205,7 +8205,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-19",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -8279,7 +8279,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-06-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8308,7 +8308,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-24",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -8382,7 +8382,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -8456,7 +8456,7 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -8545,7 +8545,7 @@
         "state": "CO",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -8628,7 +8628,7 @@
         "state": "CO",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-24",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8663,7 +8663,7 @@
         "state": "CO",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -8763,7 +8763,7 @@
         "state": "CT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-01",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8792,7 +8792,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-26",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8821,7 +8821,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-05-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8850,7 +8850,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-18",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8879,7 +8879,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-15",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -8926,7 +8926,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-30",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -8955,7 +8955,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-15",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -9068,7 +9068,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -9103,7 +9103,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-02",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -9150,7 +9150,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -9179,7 +9179,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -9226,7 +9226,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-27",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -9291,7 +9291,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -9338,7 +9338,7 @@
         "state": "GA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-07",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -9367,7 +9367,7 @@
         "state": "GA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -9414,7 +9414,7 @@
         "state": "AK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -9576,7 +9576,7 @@
         "state": "AL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-17",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -9683,7 +9683,7 @@
         "state": "AR",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -9748,7 +9748,7 @@
         "state": "AZ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 17,
         "latest": [
           {
@@ -9899,8 +9899,8 @@
         "state": "CA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-24",
-        "fetched": "2026-10-27T20:58:46.193Z",
-        "n_polls": 15,
+        "fetched": "2026-10-28T06:18:41.788Z",
+        "n_polls": 16,
         "latest": [
           {
             "pollster": "SurveyUSA",
@@ -9917,6 +9917,24 @@
             "rep": {
               "name": "Steve Hilton",
               "pct": 32
+            },
+            "others": []
+          },
+          {
+            "pollster": "Public Policy Institute of California",
+            "sponsors": null,
+            "start": "2026-10-16",
+            "end": "2026-10-22",
+            "sample": 1086,
+            "population": "lv",
+            "partisan": null,
+            "dem": {
+              "name": "Xavier Becerra",
+              "pct": 61
+            },
+            "rep": {
+              "name": "Steve Hilton",
+              "pct": 37
             },
             "others": []
           },
@@ -9973,30 +9991,12 @@
               "pct": 37.2
             },
             "others": []
-          },
-          {
-            "pollster": "TrueDot",
-            "sponsors": "Politico | UC Berkeley Citrin Center for Public Opinion Research",
-            "start": "2026-10-09",
-            "end": "2026-10-14",
-            "sample": 909,
-            "population": "lv",
-            "partisan": null,
-            "dem": {
-              "name": "Xavier Becerra",
-              "pct": 55
-            },
-            "rep": {
-              "name": "Steve Hilton",
-              "pct": 35
-            },
-            "others": []
           }
         ],
         "average_30d": {
-          "dem": 54.1,
-          "rep": 37,
-          "margin": 17.1,
+          "dem": 58.2,
+          "rep": 36.6,
+          "margin": 21.6,
           "n_polls": 7,
           "window_days": 30
         }
@@ -10006,7 +10006,7 @@
         "state": "CT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 10,
         "latest": [
           {
@@ -10113,7 +10113,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 25,
         "latest": [
           {
@@ -10226,7 +10226,7 @@
         "state": "GA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 15,
         "latest": [
           {
@@ -10333,7 +10333,7 @@
         "state": "IA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 22,
         "latest": [
           {
@@ -10428,10 +10428,10 @@
           }
         ],
         "average_30d": {
-          "dem": 51.2,
+          "dem": 51,
           "rep": 43.9,
-          "margin": 7.3,
-          "n_polls": 10,
+          "margin": 7.1,
+          "n_polls": 9,
           "window_days": 30
         }
       },
@@ -10440,7 +10440,7 @@
         "state": "IL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -10517,7 +10517,7 @@
         "state": "KS",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -10624,7 +10624,7 @@
         "state": "MA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-18",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -10749,7 +10749,7 @@
         "state": "MD",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-27",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -10807,7 +10807,7 @@
         "state": "ME",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 18,
         "latest": [
           {
@@ -10944,7 +10944,7 @@
         "state": "MI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 35,
         "latest": [
           {
@@ -11055,10 +11055,10 @@
           }
         ],
         "average_30d": {
-          "dem": 50,
-          "rep": 43.9,
-          "margin": 6.1,
-          "n_polls": 6,
+          "dem": 49.4,
+          "rep": 43.8,
+          "margin": 5.6,
+          "n_polls": 5,
           "window_days": 30
         }
       },
@@ -11067,7 +11067,7 @@
         "state": "MN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -11186,7 +11186,7 @@
         "state": "NE",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 12,
         "latest": [
           {
@@ -11337,7 +11337,7 @@
         "state": "NH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 13,
         "latest": [
           {
@@ -11450,7 +11450,7 @@
         "state": "NM",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -11557,7 +11557,7 @@
         "state": "NV",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 12,
         "latest": [
           {
@@ -11670,7 +11670,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 30,
         "latest": [
           {
@@ -11777,7 +11777,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 31,
         "latest": [
           {
@@ -11896,7 +11896,7 @@
         "state": "OK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -11925,7 +11925,7 @@
         "state": "OR",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-04",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 6,
         "latest": [
           {
@@ -12056,7 +12056,7 @@
         "state": "PA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 22,
         "latest": [
           {
@@ -12175,7 +12175,7 @@
         "state": "RI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -12342,9 +12342,38 @@
         "state": "SC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
-        "n_polls": 5,
+        "fetched": "2026-10-28T06:18:41.788Z",
+        "n_polls": 6,
         "latest": [
+          {
+            "pollster": "The Citadel School of Humanities and Social Sciences",
+            "sponsors": null,
+            "start": "2026-10-14",
+            "end": "2026-10-25",
+            "sample": 890,
+            "population": "lv",
+            "partisan": null,
+            "dem": {
+              "name": "Jermaine Johnson",
+              "pct": 31
+            },
+            "rep": {
+              "name": "Alan Wilson",
+              "pct": 42
+            },
+            "others": [
+              {
+                "name": "Walid Hakim",
+                "party": "GRE",
+                "pct": 0
+              },
+              {
+                "name": "Michael Addison",
+                "party": "UCP",
+                "pct": 0
+              }
+            ]
+          },
           {
             "pollster": "Targoz Market Research",
             "sponsors": "South Carolina Policy Council",
@@ -12449,31 +12478,13 @@
               "pct": 48
             },
             "others": []
-          },
-          {
-            "pollster": "Public Policy Polling",
-            "sponsors": null,
-            "start": "2026-07-16",
-            "end": "2026-07-17",
-            "sample": 577,
-            "population": "rv",
-            "partisan": "DEM",
-            "dem": {
-              "name": "Jermaine Johnson",
-              "pct": 37
-            },
-            "rep": {
-              "name": "Alan Wilson",
-              "pct": 45
-            },
-            "others": []
           }
         ],
         "average_30d": {
-          "dem": 41,
-          "rep": 51,
-          "margin": -10,
-          "n_polls": 1,
+          "dem": 36,
+          "rep": 46.5,
+          "margin": -10.5,
+          "n_polls": 2,
           "window_days": 30
         }
       },
@@ -12482,7 +12493,7 @@
         "state": "SD",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -12571,7 +12582,7 @@
         "state": "TN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -12706,7 +12717,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 50,
         "latest": [
           {
@@ -12813,10 +12824,10 @@
           }
         ],
         "average_30d": {
-          "dem": 47,
-          "rep": 49.2,
-          "margin": -2.2,
-          "n_polls": 17,
+          "dem": 47.1,
+          "rep": 49.1,
+          "margin": -2,
+          "n_polls": 15,
           "window_days": 30
         }
       },
@@ -12825,7 +12836,7 @@
         "state": "VT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -12946,7 +12957,7 @@
         "state": "WI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -13047,7 +13058,7 @@
         "state": "IA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -13100,7 +13111,7 @@
         "state": "IA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -13171,7 +13182,7 @@
         "state": "IA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-03-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13200,7 +13211,7 @@
         "state": "ID",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -13293,7 +13304,7 @@
         "state": "ID",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13338,7 +13349,7 @@
         "state": "IL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-03",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13378,7 +13389,7 @@
         "state": "IN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -13449,7 +13460,7 @@
         "state": "KS",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13478,7 +13489,7 @@
         "state": "KY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 9,
         "latest": [
           {
@@ -13601,7 +13612,7 @@
         "state": "MD",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-27",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13630,7 +13641,7 @@
         "state": "ME",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13659,7 +13670,7 @@
         "state": "ME",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -13760,7 +13771,7 @@
         "state": "MI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -13843,7 +13854,7 @@
         "state": "MI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -13896,7 +13907,7 @@
         "state": "MI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -13925,7 +13936,7 @@
         "state": "MN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -14032,7 +14043,7 @@
         "state": "MN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14079,7 +14090,7 @@
         "state": "MO",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14132,7 +14143,7 @@
         "state": "MT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -14257,7 +14268,7 @@
         "state": "MT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-07",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14297,7 +14308,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-08",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -14410,7 +14421,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-02",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14439,7 +14450,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14474,7 +14485,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14521,7 +14532,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-03-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14550,7 +14561,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14585,7 +14596,7 @@
         "state": "NE",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -14653,7 +14664,7 @@
         "state": "NE",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-05",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14706,7 +14717,7 @@
         "state": "NH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14759,7 +14770,7 @@
         "state": "NH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 9,
         "latest": [
           {
@@ -14872,7 +14883,7 @@
         "state": "NJ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-10",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14901,7 +14912,7 @@
         "state": "NJ",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -14954,7 +14965,7 @@
         "state": "NM",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -14989,7 +15000,7 @@
         "state": "NM",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -15060,7 +15071,7 @@
         "state": "NM",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -15095,7 +15106,7 @@
         "state": "NV",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -15172,7 +15183,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2025-12-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -15201,7 +15212,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-30",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -15290,7 +15301,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-30",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -15319,7 +15330,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -15432,7 +15443,7 @@
         "state": "NY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -15461,7 +15472,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -15544,7 +15555,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-10",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -15591,7 +15602,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -15644,7 +15655,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -15721,7 +15732,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-12",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -15798,7 +15809,7 @@
         "state": "OK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -15827,7 +15838,7 @@
         "state": "PA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 7,
         "latest": [
           {
@@ -15934,7 +15945,7 @@
         "state": "PA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -16005,7 +16016,7 @@
         "state": "PA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -16112,7 +16123,7 @@
         "state": "PA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 6,
         "latest": [
           {
@@ -16219,7 +16230,7 @@
         "state": "RI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -16284,7 +16295,7 @@
         "state": "RI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -16337,7 +16348,7 @@
         "state": "SC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -16443,7 +16454,7 @@
         "state": "SC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-07-28",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -16472,7 +16483,7 @@
         "state": "SD",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -16525,7 +16536,7 @@
         "state": "AK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 24,
         "latest": [
           {
@@ -16676,7 +16687,7 @@
         "state": "AL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-17",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -16765,7 +16776,7 @@
         "state": "AR",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 6,
         "latest": [
           {
@@ -16896,7 +16907,7 @@
         "state": "FL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-27",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 30,
         "latest": [
           {
@@ -17015,7 +17026,7 @@
         "state": "GA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 15,
         "latest": [
           {
@@ -17122,7 +17133,7 @@
         "state": "IA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 31,
         "latest": [
           {
@@ -17247,10 +17258,10 @@
           }
         ],
         "average_30d": {
-          "dem": 46.4,
-          "rep": 46.2,
-          "margin": 0.2,
-          "n_polls": 12,
+          "dem": 46.2,
+          "rep": 46.1,
+          "margin": 0.1,
+          "n_polls": 11,
           "window_days": 30
         }
       },
@@ -17259,7 +17270,7 @@
         "state": "ID",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 6,
         "latest": [
           {
@@ -17410,7 +17421,7 @@
         "state": "IL",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -17463,7 +17474,7 @@
         "state": "KS",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-14",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 12,
         "latest": [
           {
@@ -17594,7 +17605,7 @@
         "state": "KY",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-27",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -17623,7 +17634,7 @@
         "state": "LA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-19",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -17670,7 +17681,7 @@
         "state": "MA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-18",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 14,
         "latest": [
           {
@@ -17822,7 +17833,7 @@
         "state": "ME",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 24,
         "latest": [
           {
@@ -17929,7 +17940,7 @@
         "state": "MI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 43,
         "latest": [
           {
@@ -18061,10 +18072,10 @@
           }
         ],
         "average_30d": {
-          "dem": 48.7,
-          "rep": 46.7,
+          "dem": 48.5,
+          "rep": 46.5,
           "margin": 2,
-          "n_polls": 9,
+          "n_polls": 8,
           "window_days": 30
         }
       },
@@ -18073,7 +18084,7 @@
         "state": "MN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-15",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 14,
         "latest": [
           {
@@ -18213,7 +18224,7 @@
         "state": "MS",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -18317,7 +18328,7 @@
         "state": "MT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-18",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 15,
         "latest": [
           {
@@ -18479,7 +18490,7 @@
         "state": "NC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 47,
         "latest": [
           {
@@ -18619,7 +18630,7 @@
         "state": "NH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 20,
         "latest": [
           {
@@ -18738,7 +18749,7 @@
         "state": "NM",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-09",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -18809,7 +18820,7 @@
         "state": "OH",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 37,
         "latest": [
           {
@@ -18949,7 +18960,7 @@
         "state": "OK",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-06",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -18994,7 +19005,7 @@
         "state": "RI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-11",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 6,
         "latest": [
           {
@@ -19125,9 +19136,43 @@
         "state": "SC",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
-        "n_polls": 12,
+        "fetched": "2026-10-28T06:18:41.788Z",
+        "n_polls": 13,
         "latest": [
+          {
+            "pollster": "The Citadel School of Humanities and Social Sciences",
+            "sponsors": null,
+            "start": "2026-10-14",
+            "end": "2026-10-25",
+            "sample": 890,
+            "population": "lv",
+            "partisan": null,
+            "dem": {
+              "name": "Annie Andrews",
+              "pct": 39
+            },
+            "rep": {
+              "name": "Darline Graham",
+              "pct": 42
+            },
+            "others": [
+              {
+                "name": "Ralph Norman",
+                "party": "REP",
+                "pct": 2
+              },
+              {
+                "name": "Mark Hackett",
+                "party": "CON",
+                "pct": 1
+              },
+              {
+                "name": "Kasie Whitener",
+                "party": "LIB",
+                "pct": 1
+              }
+            ]
+          },
           {
             "pollster": "Targoz Market Research",
             "sponsors": "South Carolina Policy Council",
@@ -19232,31 +19277,13 @@
                 "pct": 2
               }
             ]
-          },
-          {
-            "pollster": "Trafalgar Group",
-            "sponsors": null,
-            "start": "2026-09-23",
-            "end": "2026-09-25",
-            "sample": 1087,
-            "population": "lv",
-            "partisan": "REP",
-            "dem": {
-              "name": "Annie Andrews",
-              "pct": 42.3
-            },
-            "rep": {
-              "name": "Darline Graham",
-              "pct": 43.4
-            },
-            "others": []
           }
         ],
         "average_30d": {
-          "dem": 45.4,
-          "rep": 46.4,
-          "margin": -1,
-          "n_polls": 2,
+          "dem": 43.5,
+          "rep": 45.1,
+          "margin": -1.6,
+          "n_polls": 3,
           "window_days": 30
         }
       },
@@ -19265,7 +19292,7 @@
         "state": "SD",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 12,
         "latest": [
           {
@@ -19381,7 +19408,7 @@
         "state": "TN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-08-26",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -19416,7 +19443,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 57,
         "latest": [
           {
@@ -19523,10 +19550,10 @@
           }
         ],
         "average_30d": {
-          "dem": 49.1,
-          "rep": 46.4,
-          "margin": 2.7,
-          "n_polls": 19,
+          "dem": 49.2,
+          "rep": 46.3,
+          "margin": 2.9,
+          "n_polls": 17,
           "window_days": 30
         }
       },
@@ -19535,7 +19562,7 @@
         "state": "TN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-01",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -19611,7 +19638,7 @@
         "state": "TN",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-03",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -19640,7 +19667,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-04",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -19669,7 +19696,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -19740,7 +19767,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-22",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -19769,7 +19796,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-16",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -19876,7 +19903,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-07",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -19905,7 +19932,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-13",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -19976,7 +20003,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-19",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -20087,7 +20114,7 @@
         "state": "TX",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-19",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -20176,7 +20203,7 @@
         "state": "UT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-10",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -20216,7 +20243,7 @@
         "state": "UT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-24",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -20261,7 +20288,7 @@
         "state": "UT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-15",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -20311,7 +20338,7 @@
         "state": "UT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-17",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -20351,7 +20378,7 @@
         "state": "VA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -20445,20 +20472,14 @@
             "others": []
           }
         ],
-        "average_30d": {
-          "dem": 50,
-          "rep": 46,
-          "margin": 4,
-          "n_polls": 1,
-          "window_days": 30
-        }
+        "average_30d": null
       },
       "VA-02": {
         "office": "House",
         "state": "VA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-10",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 2,
         "latest": [
           {
@@ -20511,7 +20532,7 @@
         "state": "VA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-28",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -20575,20 +20596,14 @@
             "others": []
           }
         ],
-        "average_30d": {
-          "dem": 45,
-          "rep": 51,
-          "margin": -6,
-          "n_polls": 1,
-          "window_days": 30
-        }
+        "average_30d": null
       },
       "VA-06": {
         "office": "House",
         "state": "VA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-30",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {
@@ -20623,7 +20638,7 @@
         "state": "VT",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -20760,7 +20775,7 @@
         "state": "WA",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-10-21",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 4,
         "latest": [
           {
@@ -20843,7 +20858,7 @@
         "state": "WI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-09-23",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 3,
         "latest": [
           {
@@ -20908,7 +20923,7 @@
         "state": "WI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-06-25",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 5,
         "latest": [
           {
@@ -21009,7 +21024,7 @@
         "state": "WI",
         "source": "New York Times polling averages data (nytimes.com/newsgraphics/polls)",
         "as_of": "2026-03-20",
-        "fetched": "2026-10-27T20:58:46.193Z",
+        "fetched": "2026-10-28T06:18:41.788Z",
         "n_polls": 1,
         "latest": [
           {

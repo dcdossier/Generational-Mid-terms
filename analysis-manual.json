@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-10-28T03:44:59.219Z"
+    "last_updated": "2026-10-28T03:45:49.983Z"
   },
   "posts": [],
   "entries": [
@@ -1235,12 +1235,15 @@
       "url": "https://www.livehindustan.com/blog/nazariya/hindustan-nazariya-column-26-october-2026-201792949151486.html",
       "author": "Brigadier Anil Raman",
       "source": "Live Hindustan",
-      "date": "",
-      "description": "",
+      "date": "2026-10-25T17:30:56.000Z",
+      "description": "अमेरिका के लोग राष्ट्रपति डोनाल्ड ट्रंप के दूसरे कार्यकाल के ठीक बीचोबीच अमेरिकी कांग्रेस के निचले सदन, यानी ‘हाउस ऑफ रिप्रेजेंटेटिव्स’ की सभी 435 सीटों और 100 सदस्यों वाले उच्च सदन ‘सीनेट’ की लगभग एक तिहाई, यानी 35 सीटों…, Nazariya Hindi News - Hindustan",
       "tags": [],
       "added_at": "2026-10-28T03:45:33.166Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://www.livehindustan.com/lh-img/smart/img/smart/2026/10/25/1600x900/logo/ANIL_RAMAN_1792949406825_u1bm_1792949421206_MeE9_08cc55bb-7f9d-4c34-8d6b-ac0bfe6753f1_QlcX.jpg"
     }
   ]
 }

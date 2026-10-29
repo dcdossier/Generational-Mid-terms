@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "title": "2026 Midterms Seat Projections (29 Oct 2026)",
+    "updated": "2026-10-29",
+    "source_file": "2026 Midterms Seat Projections (29 Oct 2026).xlsx",
+    "note": "Projected seats are Seats now + Change (min/max). The source column \"Projected seats (min)\" is not used; its header is wrong for House. Governors have no two-thirds rule, so those cells are null. The socialstudiesforkids.com link uses http because the site does not answer over https. The Ballotpedia URL is rejoined at its comma (\",_2026\"), which had split it across two cells."
+  },
+  "rows": [
+    {
+      "chamber": "House",
+      "party": "Democrats",
+      "total_seats": 435,
+      "seats_now": 214,
+      "projected_min": 230,
+      "projected_max": 238,
+      "change_min": 16,
+      "change_max": 24,
+      "majority_needed": 218,
+      "two_thirds_needed": 290,
+      "short_of_two_thirds_at_max": 52,
+      "two_thirds_note": null,
+      "notes": "Range from Poliwave (230) and Decision Desk HQ (238). Pollsmax (229.1) excluded from the range."
+    },
+    {
+      "chamber": "Senate",
+      "party": "Democrats",
+      "total_seats": 100,
+      "seats_now": 47,
+      "projected_min": 51,
+      "projected_max": 51,
+      "change_min": 4,
+      "change_max": 4,
+      "majority_needed": 51,
+      "two_thirds_needed": 67,
+      "short_of_two_thirds_at_max": 16,
+      "two_thirds_note": null,
+      "notes": "Majority is 51 or 50 plus Vice President tie-break; seats now inferred from net 4 needed for majority"
+    },
+    {
+      "chamber": "Governors",
+      "party": "Democrats",
+      "total_seats": 50,
+      "seats_now": 24,
+      "projected_min": 25,
+      "projected_max": 28,
+      "change_min": 1,
+      "change_max": 4,
+      "majority_needed": 26,
+      "two_thirds_needed": null,
+      "short_of_two_thirds_at_max": null,
+      "two_thirds_note": "No legal two-thirds rule for governors",
+      "notes": "Min from Pollsmax (25.4); max implied by DDHQ favouring Democrats in 22 of 36 races (18 now held). No legal two-thirds rule for governors"
+    },
+    {
+      "chamber": "Governors",
+      "party": "Republicans",
+      "total_seats": 50,
+      "seats_now": 26,
+      "projected_min": 22,
+      "projected_max": 25,
+      "change_min": -4,
+      "change_max": -1,
+      "majority_needed": 26,
+      "two_thirds_needed": null,
+      "short_of_two_thirds_at_max": null,
+      "two_thirds_note": "No legal two-thirds rule for governors",
+      "notes": "Mirror of Democratic range"
+    }
+  ],
+  "models": [
+    {
+      "forecast": "Decision Desk HQ",
+      "race": "House",
+      "democrats": 238,
+      "republicans": 197,
+      "date": "2026-10-27",
+      "url": "https://votes.decisiondeskhq.com/forecast/2026/house"
+    },
+    {
+      "forecast": "Poliwave",
+      "race": "House",
+      "democrats": 230,
+      "republicans": 205,
+      "date": "2026-10-28",
+      "url": "https://www.poliwave.com/us/fed/projection"
+    },
+    {
+      "forecast": "Pollsmax",
+      "race": "House",
+      "democrats": 229.1,
+      "republicans": 205.9,
+      "date": "2026-10-28",
+      "url": "https://www.pollsmax.com/2026-us-house/"
+    },
+    {
+      "forecast": "Decision Desk HQ",
+      "race": "Senate",
+      "democrats": 51,
+      "republicans": 49,
+      "date": "2026-10-27",
+      "url": "https://votes.decisiondeskhq.com/forecast/2026/senate"
+    },
+    {
+      "forecast": "Poliwave",
+      "race": "Senate",
+      "democrats": 51,
+      "republicans": 49,
+      "date": "2026-10-28",
+      "url": "https://www.poliwave.com/us/fed/projection"
+    },
+    {
+      "forecast": "Pollsmax",
+      "race": "Governors",
+      "democrats": 25.4,
+      "republicans": 24.6,
+      "date": "2026-10-20",
+      "url": "https://www.pollsmax.com/governor/"
+    },
+    {
+      "forecast": "Decision Desk HQ",
+      "race": "Governors",
+      "democrats": "22 of 36 races favoured",
+      "republicans": null,
+      "date": "2026-10-27",
+      "url": "https://votes.decisiondeskhq.com/forecast/2026/governor"
+    }
+  ],
+  "other_sources": [
+    {
+      "item": "Current House makeup (218 R / 214 D / 1 independent / 2 vacant)",
+      "url": "https://www.aljazeera.com/news/2026/10/26/us-midterm-elections-2026-in-maps-and-charts"
+    },
+    {
+      "item": "Democrats need net 4 Senate seats",
+      "url": "https://ballotpedia.org/United_States_Congress_elections,_2026"
+    },
+    {
+      "item": "Current governors (26 R / 24 D)",
+      "url": "https://www.pollsmax.com/governor/"
+    },
+    {
+      "item": "Governor races up: 18 D held, 18 R held",
+      "url": "https://nolabels.org/the-latest/could-democrats-win-a-majority-of-governorships-in-2026/"
+    },
+    {
+      "item": "Two-thirds is 290 in House and 67 in Senate (veto override)",
+      "url": "http://socialstudiesforkids.com/articles/government/presidentialveto.htm"
+    },
+    {
+      "item": "Two-thirds counts members voting; 290 only when all 435 vote",
+      "url": "https://gravitee.io/corpus/gen-1817/list-of-united-states-presidential-vetoes/veto-override-attempts.html"
+    }
+  ]
+}

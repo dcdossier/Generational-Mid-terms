@@ -484,6 +484,63 @@ body{background:#F5F5DC;color:#1E2232}
 
 /* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
 
+/* SEAT PROJECTIONS (assets/seat-projections.json) */
+.spj{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 22px 16px;margin-bottom:28px;min-width:0}
+.spj-title{font:700 20px var(--serif);color:#620d3c;line-height:1.3;margin-bottom:4px}
+.spj-sub{font:400 14px/1.55 var(--sans);color:#6B6B6B;margin-bottom:14px}
+.spj-table{width:100%;border-collapse:collapse;font:400 14px var(--sans);color:#1E2232}
+.spj-table th{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:#6B6B6B;text-align:left;padding:8px 10px;border-bottom:2px solid #E8E8E0;vertical-align:bottom;line-height:1.35}
+.spj-table td{padding:4px 10px;border-bottom:1px solid #EFEDE6;vertical-align:middle}
+.spj-table tbody tr:last-child td{border-bottom:none}
+.spj-table .num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.spj-table th.num{text-align:right;white-space:normal}
+.spj-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.spj-proj{font-weight:700}
+.spj-chamber{font-weight:600;white-space:nowrap}
+.spj-party{display:inline-block;font:700 13px var(--sans);padding:3px 12px;border-radius:20px;white-space:nowrap}
+.spj-party[data-m]{display:none}
+.spj-d{background:#E3ECFE;color:#1A2F7A}
+.spj-r{background:#FDE8E8;color:#7A1A1A}
+.spj-pos{color:#1A6B3A}.spj-neg{color:#9B2020}
+/* (i) buttons: the visible dot stays 16px, the tap area is 44px */
+.info-btn.spj-i{width:44px;height:44px;margin:0 -12px 0 -8px;background:none;border-radius:0;vertical-align:middle}
+.info-btn.spj-i::before{content:'i';display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans)}
+.info-btn.spj-i:hover{background:none}.info-btn.spj-i:hover::before{background:#620d3c;color:#fff}
+.info-btn.spj-na{width:auto;height:44px;min-width:44px;margin:0 -6px 0 0;padding:0 6px;background:none;border-radius:4px;color:#6B6B6B;font:400 14px var(--sans);text-decoration:underline dotted;text-underline-offset:3px}
+.info-btn.spj-na:hover{background:#F5F5DC;color:#620d3c}
+.spj-more{margin-top:12px;border-top:1px solid #E8E8E0}
+.spj-more>summary{min-height:44px;display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px var(--sans);color:#620d3c;user-select:none}
+.spj-more>summary::-webkit-details-marker{display:none}
+.spj-more>summary::before{content:'\25B8';font-size:12px;transition:transform .15s}
+.spj-more[open]>summary::before{transform:rotate(90deg)}
+.spj-h4{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin:10px 0 6px}
+.spj-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:6px}
+.spj-models{min-width:560px}
+.spj-models td:first-child,.spj-models th:first-child{position:sticky;left:0;background:#fff;z-index:1}
+.spj a{color:#620d3c;text-decoration:underline;text-underline-offset:2px}
+.spj-link{display:inline-flex;align-items:center;min-height:44px}
+.spj-src{list-style:none;margin:0;padding:0}
+.spj-src li{border-bottom:1px solid #EFEDE6}
+.spj-src li:last-child{border-bottom:none}
+.spj-src a{display:block;min-height:44px;padding:12px 0;font:400 14px/1.45 var(--sans)}
+.spj-err{font:400 14px var(--sans);color:#6B6B6B;font-style:italic}
+/* phones: one card per row */
+@media(max-width:640px){
+  .spj{padding:16px 14px 10px;margin-bottom:18px}
+  .spj-title{font-size:17px}
+  .spj-sub{font-size:13px}
+  .spj-main thead{display:none}
+  .spj-main,.spj-main tbody{display:block}
+  .spj-main tr{display:grid;grid-template-columns:1fr auto;column-gap:0;border:1px solid #E8E8E0;border-radius:9px;padding:6px 12px 8px;margin-bottom:10px}
+  .spj-main td{display:contents}
+  .spj-main td.spj-head{display:flex;align-items:center;gap:8px;grid-column:1/-1;border-bottom:1px solid #EFEDE6;padding:2px 0 6px;margin-bottom:4px}
+  .spj-main td.spj-head+td{display:none}
+  .spj-main .spj-party[data-m]{display:inline-block}
+  .spj-main td.spj-head .spj-i{margin-left:auto;margin-right:-12px}
+  .spj-main td[data-label]::before{content:attr(data-label);font:500 13px var(--sans);color:#6B6B6B;padding:6px 0;border-bottom:1px solid #F3F1EA;display:flex;align-items:center;min-height:32px}
+  .spj-main td[data-label]>.spj-v{text-align:right;padding:6px 0;border-bottom:1px solid #F3F1EA;display:flex;align-items:center;justify-content:flex-end;min-height:32px;padding-left:10px;font-variant-numeric:tabular-nums lining-nums}
+  .spj-main tr>td:last-child::before,.spj-main tr>td:last-child>.spj-v{border-bottom:none}
+}
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
 </head>
@@ -660,6 +717,13 @@ body{background:#F5F5DC;color:#1E2232}
           </div>
         </div>
       </div>
+
+      <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
+      <section class="spj" id="seat-projections" aria-labelledby="spj-title">
+        <h2 class="spj-title" id="spj-title">2026 Midterms Seat Projections (29 Oct 2026)</h2>
+        <p class="spj-sub">Projected Democratic and Republican seats against majority and two-thirds thresholds. Updated 29 Oct 2026.</p>
+        <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
+      </section>
 
       <!-- LIVE METRICS -->
       <div class="home-metrics">
@@ -1687,6 +1751,74 @@ function renderHomeNews() {
 }
 
 loadHomeData();
+loadSeatProjections();
+
+// ── SEAT PROJECTIONS TABLE ──────────────────────────────────────────────────
+async function loadSeatProjections() {
+  const box = document.getElementById('spj-body');
+  if (!box) return;
+  const e = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let d;
+  try {
+    const r = await fetch('assets/seat-projections.json?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    d = await r.json();
+  } catch (err) {
+    box.innerHTML = '<p class="spj-err">Seat projections are unavailable right now.</p>';
+    return;
+  }
+  const MINUS = '−', DASH = '–';
+  const sign = n => n > 0 ? '+' + n : n < 0 ? MINUS + Math.abs(n) : '0';
+  const range = (a, b, f) => a === b ? f(a) : f(a) + (f === String ? DASH : ' to ') + f(b);
+  const tone = (a, b) => a > 0 && b > 0 ? 'spj-pos' : a < 0 && b < 0 ? 'spj-neg' : '';
+  const date = iso => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+  const link = (url, text) => `<a class="spj-link" href="${e(url)}" target="_blank" rel="noopener">${e(text)}</a>`;
+  const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (_) { return url; } };
+  const cell = (label, inner, cls) => `<td class="num${cls ? ' ' + cls : ''}" data-label="${e(label)}"><span class="spj-v">${inner}</span></td>`;
+  const na = tip => `<button type="button" class="info-btn spj-na" data-tip="${e(tip)}" aria-label="Not applicable: ${e(tip)}">n/a</button>`;
+
+  const rows = d.rows.map(r => {
+    const party = /^Dem/.test(r.party) ? 'spj-d' : 'spj-r';
+    const twoThirds = r.two_thirds_needed == null ? na(r.two_thirds_note) : r.two_thirds_needed;
+    const short = r.short_of_two_thirds_at_max == null ? na(r.two_thirds_note) : r.short_of_two_thirds_at_max;
+    return `<tr>
+      <td class="spj-head spj-chamber">${e(r.chamber)}<span class="spj-party ${party}" data-m="1">${e(r.party)}</span><button type="button" class="info-btn spj-i" data-tip="${e(r.notes)}" aria-label="Notes on ${e(r.chamber)} ${e(r.party)}"></button></td>
+      <td><span class="spj-party ${party}">${e(r.party)}</span></td>
+      ${cell('Seats now', r.seats_now)}
+      ${cell('Projected seats', range(r.projected_min, r.projected_max, String), 'spj-proj')}
+      ${cell('Change', range(r.change_min, r.change_max, sign), tone(r.change_min, r.change_max))}
+      ${cell('Majority needed', r.majority_needed)}
+      ${cell('Two-thirds needed', twoThirds)}
+      ${cell('Short of two-thirds (at max)', short)}
+    </tr>`;
+  }).join('');
+
+  const models = d.models.map(m => `<tr>
+      <td>${e(m.forecast)}</td><td>${e(m.race)}</td>
+      <td class="num">${e(m.democrats ?? '—')}</td><td class="num">${e(m.republicans ?? '—')}</td>
+      <td class="num">${e(date(m.date))}</td><td>${link(m.url, host(m.url))}</td></tr>`).join('');
+
+  const others = d.other_sources.map(o => `<li><a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.item)} <span aria-hidden="true">&#8599;</span></a></li>`).join('');
+
+  box.innerHTML = `
+    <div class="spj-wrap"><table class="spj-table spj-main">
+      <thead><tr>
+        <th>Chamber</th><th>Party</th><th class="num">Seats now</th><th class="num">Projected seats</th><th class="num">Change</th>
+        <th class="num">Majority needed</th><th class="num">Two-thirds needed</th><th class="num">Short of two-thirds (at max)</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+    <details class="spj-more">
+      <summary>Model detail and sources</summary>
+      <h4 class="spj-h4">Model detail</h4>
+      <div class="spj-scroll"><table class="spj-table spj-models">
+        <thead><tr><th>Forecast</th><th>Race</th><th class="num">Democrats</th><th class="num">Republicans</th><th class="num">Date</th><th>Source</th></tr></thead>
+        <tbody>${models}</tbody>
+      </table></div>
+      <h4 class="spj-h4">Other sources</h4>
+      <ul class="spj-src">${others}</ul>
+    </details>`;
+}
 
 
 // ── INFO TOOLTIP ─────────────────────────────────────────────────────────────

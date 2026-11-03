@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T06:10:29.558Z"
+    "last_updated": "2026-11-03T12:12:14.144Z"
   },
   "posts": [],
   "entries": [
@@ -1253,9 +1253,9 @@
       "manual": true,
       "needs_enrich": true,
       "image": "https://takshashila.org.in/assets/images/og-card-default.png",
-      "enrich_attempts": 1,
+      "enrich_attempts": 2,
       "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-11-03T10:06:44.461Z"
+      "next_try_at": "2026-11-04T12:12:12.960Z"
     },
     {
       "id": "manual-mw05zcm9-1",
@@ -1365,9 +1365,9 @@
       "added_at": "2026-11-03T04:19:15.267Z",
       "manual": true,
       "needs_enrich": true,
-      "enrich_attempts": 1,
+      "enrich_attempts": 2,
       "last_error": "page read (direct) but no description on it",
-      "next_try_at": "2026-11-03T10:19:31.107Z",
+      "next_try_at": "2026-11-04T12:12:12.960Z",
       "image": "https://image-cdn-fa.spotifycdn.com/image/ab67656300005f1f234479d125c3f441d5040f5e"
     },
     {

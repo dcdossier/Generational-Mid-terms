@@ -22,7 +22,11 @@
   var ST = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming' };
   var ABBR = {}; Object.keys(ST).forEach(function (k) { ABBR[ST[k]] = k; });
 
-  var state = { meta: null, chambers: [], races: [], holders: {}, current: null, live: false, loaded: false, error: null, demo: DEMO };
+  // Same not-up seats as supabase/live.sql, so the bars are right before the tables answer.
+  var SEED_CHAMBERS = [['senate', 'D', 34], ['senate', 'R', 31], ['gov', 'D', 6], ['gov', 'R', 8]].map(function (x) {
+    return { chamber: x[0], party: x[1], won: 0, leading: 0, not_up: x[2] };
+  });
+  var state = { meta: null, chambers: SEED_CHAMBERS.slice(), races: [], holders: {}, current: null, live: false, loaded: false, error: null, demo: DEMO };
   var mounts = [];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
@@ -65,7 +69,7 @@
       rest('live_chamber?select=*'),
       rest('live_races?select=*&order=featured_order.asc.nullslast,race_id.asc')
     ]).then(function (res) {
-      state.meta = res[0][0] || null; state.chambers = res[1]; state.races = res[2];
+      state.meta = res[0][0] || null; state.chambers = res[1].length ? res[1] : SEED_CHAMBERS.slice(); state.races = res[2];
       state.loaded = true; state.error = null;
     }).catch(function (e) { state.error = e.message; });
   }

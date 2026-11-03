@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:05:08.224Z"
+    "last_updated": "2026-11-03T04:06:03.056Z"
   },
   "posts": [],
   "entries": [
@@ -1286,11 +1286,12 @@
       "author": "Abhishek Kadiyala",
       "source": "Takshashila Institution",
       "date": "2026-10-28T00:00:00.000Z",
-      "description": "",
+      "description": "Inflation, institutional mistrust, the Iran war and immigration are the four issues shaping voter choices in the 2026 United States midterm elections. Voters are found to trust Democrats more on the first three, while the Republican edge on immigration has narrowed and is now contested.",
       "tags": [],
       "added_at": "2026-11-03T04:05:41.513Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page"
     }
   ]
 }

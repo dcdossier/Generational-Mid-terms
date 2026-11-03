@@ -1011,10 +1011,25 @@ function openSeatwise(chamber) {
 function handleSeatsHash() {
   const m = location.hash.match(/^#seats(?:-(house|senate|governor))?$/i);
   if (m) openSeatwise((m[1] || 'house').toLowerCase());
+  const one = location.hash.match(/^#seat=([A-Za-z]{2}-(?:\d{2}|AL)|Senate-[A-Za-z]{2}|Gov-[A-Za-z]{2})$/);
+  if (one) openSeatById(one[1]);
+}
+
+// Opens one seat's panel (home page battleground boxes): switches to its chamber,
+// then opens it with the same context as a map click.
+function openSeatById(id) {
+  if (!DATA || !DATA.races) return;
+  const chamber = id.startsWith('Senate-') ? 'senate' : id.startsWith('Gov-') ? 'governor' : 'house';
+  const btn = [...document.querySelectorAll('.subtab-btn')].find(b => b.textContent.toLowerCase().includes(chamber));
+  if (btn && !btn.classList.contains('active')) goSub(chamber, btn);
+  const r = DATA.races, list = chamber === 'house' ? r.house.competitive : r[chamber].races;
+  const race = (list || []).find(x => toSeatId(chamber, chamber === 'house' ? x.district : x.state) === id);
+  if (race) openSeatFromRace(chamber, race, document.querySelector(`path[data-seat-id="${id}"]`) || null);
+  else window.SeatPanel.open(id, {});
 }
 
 // Shell page (index.html) entry point when this page is already loaded in its iframe
-window.SeatwiseEntry = { open: openSeatwise };
+window.SeatwiseEntry = { open: openSeatwise, openSeat: openSeatById };
 
 (function initSeatwiseBanner() {
   const banner = document.getElementById('seatwise-banner');

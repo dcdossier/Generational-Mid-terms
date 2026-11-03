@@ -4,8 +4,10 @@
  * anon key (SELECT only; see supabase/live.sql). Changes arrive over Realtime
  * within seconds; a full re-read every 5 minutes is the backup if the socket
  * drops. Any element with data-live-results becomes a results panel.
- * ?demo=1 fills the panel with made-up figures, locally, for testing.
- * Arithmetic lives in live-math.js.
+ * ?demo=1 fills the panel with made-up figures, locally, for testing; add
+ * &stage=pre, early, majority or final to see each stage (default: mid-count).
+ * Arithmetic lives in live-math.js. Other components (live-strip.js, balance.js)
+ * listen for the "racebook:live" event, sent on every change and once a minute.
  */
 (function () {
   'use strict';
@@ -15,11 +17,12 @@
   var LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js';
   var POLL_MS = 5 * 60 * 1000;
   var DEMO = /[?&]demo=1\b/.test(location.search);
+  var STAGE = (/[?&]stage=(pre|early|mid|majority|final)\b/.exec(location.search) || [])[1] || 'mid';
 
   var ST = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming' };
   var ABBR = {}; Object.keys(ST).forEach(function (k) { ABBR[ST[k]] = k; });
 
-  var state = { meta: null, chambers: [], races: [], holders: {}, live: false, loaded: false, error: null };
+  var state = { meta: null, chambers: [], races: [], holders: {}, current: null, live: false, loaded: false, error: null, demo: DEMO };
   var mounts = [];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
@@ -41,6 +44,9 @@
     return fetch('data.json?t=' + Math.floor(Date.now() / 600000)).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       var h = {}, races = d && d.races;
       if (!races) return h;
+      // The 119th Congress as it stands, shown before polls close.
+      var hb = races.house && races.house.current_balance || {}, sb = races.senate && races.senate.current_balance || {};
+      state.current = { house: { D: hb.d || 0, R: hb.r || 0, I: hb.i || 0, vacant: hb.vacant || 0 }, senate: { D: sb.d || 0, R: sb.r || 0, I: 0 } };
       (races.senate && races.senate.races || []).forEach(function (r) { if (r.code) h['Senate-' + r.code] = r.party; });
       (races.governor && races.governor.races || []).forEach(function (r) { var a = ABBR[r.state]; if (a) h['Gov-' + a] = r.party; });
       (races.house && races.house.competitive || []).forEach(function (r) { if (r.district) h[r.district] = r.party; });
@@ -101,18 +107,26 @@
   }
 
   // ── demo data (?demo=1): made up, never sent anywhere ─────────────────────
+  // [house D won, lead, R won, lead], [senate …], [gov …] for each demo stage
+  var DEMO_STAGES = {
+    pre:      [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]],
+    early:    [[38, 22, 41, 19], [3, 5, 6, 4], [4, 6, 5, 4]],
+    mid:      [[168, 41, 141, 38], [11, 4, 13, 3], [15, 4, 11, 3]],
+    majority: [[221, 9, 186, 7], [18, 1, 14, 1], [20, 1, 13, 1]],
+    final:    [[226, 2, 199, 1], [19, 0, 15, 0], [21, 0, 14, 0]]
+  };
   function demoState() {
-    var now = new Date().toISOString();
-    state.meta = { status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', counting_started: '2026-11-03T23:00:00Z', last_update: now,
-      turnout_pct: 48.6, turnout_source: 'Demo figure', turnout_updated: now, notes: 'Demo data: these figures are made up.' };
-    state.chambers = [
-      { chamber: 'house', party: 'D', won: 168, leading: 41, not_up: 0 }, { chamber: 'house', party: 'R', won: 141, leading: 38, not_up: 0 },
-      { chamber: 'house', party: 'I', won: 0, leading: 0, not_up: 0 },
-      { chamber: 'senate', party: 'D', won: 11, leading: 4, not_up: 34 }, { chamber: 'senate', party: 'R', won: 13, leading: 3, not_up: 31 },
-      { chamber: 'senate', party: 'I', won: 0, leading: 0, not_up: 0 },
-      { chamber: 'gov', party: 'D', won: 15, leading: 4, not_up: 6 }, { chamber: 'gov', party: 'R', won: 11, leading: 3, not_up: 8 },
-      { chamber: 'gov', party: 'I', won: 0, leading: 0, not_up: 0 }
-    ];
+    var now = new Date(), iso = now.toISOString(), pre = STAGE === 'pre';
+    var close = pre ? new Date(now.getTime() + (3 * 60 + 12) * 60000).toISOString() : '2026-11-03T23:00:00Z';
+    state.meta = { status: pre ? 'pre' : STAGE === 'final' ? 'final' : 'counting', polls_first_close: close, counting_started: pre ? null : new Date(now.getTime() - (2 * 60 + 35) * 60000).toISOString(),
+      last_update: iso, turnout_pct: pre ? null : 48.6, turnout_source: 'Demo figure', turnout_updated: iso, notes: 'Demo data: these figures are made up.' };
+    var g = DEMO_STAGES[STAGE], NU = { house: [0, 0], senate: [34, 31], gov: [6, 8] };
+    state.chambers = [];
+    ['house', 'senate', 'gov'].forEach(function (c, i) {
+      state.chambers.push({ chamber: c, party: 'D', won: g[i][0], leading: g[i][1], not_up: NU[c][0], source: 'Demo' });
+      state.chambers.push({ chamber: c, party: 'R', won: g[i][2], leading: g[i][3], not_up: NU[c][1], source: 'Demo' });
+      state.chambers.push({ chamber: c, party: 'I', won: 0, leading: 0, not_up: 0, source: 'Demo' });
+    });
     var R = function (id, o, cd, cr, d, r, c, call, win) {
       return { race_id: id, featured: true, featured_order: o, cand_d: cd, cand_r: cr, pct_d: d, pct_r: r, pct_counted: c,
         leader: null, winner: win || null, called_by: call || null, called_at: call ? now : null,
@@ -130,11 +144,12 @@
       R('CA-22', 9, 'Randy Villegas', 'David G. Valadao', 50.3, 49.7, 41)
     ];
     state.holders = Object.assign({ 'Senate-NC': 'R', 'Senate-TX': 'R', 'Senate-ME': 'R', 'Senate-OH': 'R', 'Senate-KS': 'R', 'Gov-NV': 'R', 'PA-07': 'R', 'NY-17': 'R', 'CA-22': 'R' }, state.holders);
+    if (pre) state.races.forEach(function (r) { r.pct_d = r.pct_r = r.pct_counted = null; r.called_by = r.winner = null; });
     state.loaded = true; state.live = true;
   }
   function demoTick() {   // nudge one race so updates can be seen arriving
     var r = state.races[Math.floor(Math.random() * state.races.length)];
-    if (r.called_by) return;
+    if (r.called_by || r.pct_d == null) return;
     var sw = (Math.random() - 0.5) * 0.8;
     r.pct_d = Math.max(0, Math.min(100, +(r.pct_d + sw).toFixed(1)));
     r.pct_r = Math.max(0, Math.min(100, +(r.pct_r - sw).toFixed(1)));
@@ -145,7 +160,7 @@
 
   // ── rendering ──────────────────────────────────────────────────────────────
   function hasData() {
-    if (DEMO) return true;
+    if (DEMO) return window.LiveMath.phase(state.meta) !== 'pre';
     if (!state.loaded || !state.meta) return false;
     if (state.meta.status !== 'pre') return true;
     return state.chambers.some(function (c) { return c.won || c.leading; }) || state.races.some(function (r) { return r.pct_counted || r.called_by; });
@@ -252,12 +267,14 @@
       el.innerHTML = html(fresh);
     });
     if (fresh) { clearTimeout(renderPending); renderPending = setTimeout(function () { mounts.forEach(function (el) { var t = el.querySelector('.lv-fresh'); if (t) t.classList.remove('lv-fresh'); }); }, 2500); }
-    document.dispatchEvent(new CustomEvent('racebook:live', { detail: state }));
+    emit();
   }
+  function emit() { document.dispatchEvent(new CustomEvent('racebook:live', { detail: state })); }
 
   function init() {
     mounts = [].slice.call(document.querySelectorAll('[data-live-results]'));
-    if (!mounts.length) return;
+    if (!document.querySelector('[data-live-results], [data-live-strip], [data-live-balance]')) return;
+    setInterval(emit, 30000);   // countdowns and the automatic switch at first poll close
     mounts.forEach(function (el) { el.hidden = true; el.classList.add('lv'); el.setAttribute('aria-live', 'polite'); });
     loadHolders().then(function (h) {
       state.holders = h;
@@ -268,6 +285,7 @@
     });
   }
 
-  window.RacebookLive = { state: state, refresh: function () { return readAll().then(render); } };
+  window.RacebookLive = { state: state, ready: false, refresh: function () { return readAll().then(render); } };
+  document.addEventListener('racebook:live', function () { window.RacebookLive.ready = true; });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

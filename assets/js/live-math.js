@@ -92,6 +92,30 @@
     return d > rr ? 'D' : 'R';
   }
 
-  root.LiveMath = { house: house, senate: senate, gov: gov, flips: flips, winnerOf: winnerOf, leaderOf: leaderOf, need: need };
+  // 'pre' until the first polls close (or the desk starts counting early), then
+  // 'counting' automatically; 'final' only when the desk says so.
+  var FIRST_CLOSE = '2026-11-03T23:00:00Z';
+  function phase(meta, now) {
+    var st = meta && meta.status, close = new Date((meta && meta.polls_first_close) || FIRST_CLOSE).getTime();
+    now = now == null ? Date.now() : now;
+    if (st === 'final') return 'final';
+    if (st === 'counting') return 'counting';
+    return now < close ? 'pre' : 'counting';
+  }
+
+  // Races called so far, per chamber (won by any party), out of 435 + 35 + 36.
+  var RACES_UP = { house: 435, senate: 35, gov: 36 };
+  function called(rows) {
+    var out = { house: 0, senate: 0, gov: 0 };
+    (rows || []).forEach(function (r) { if (out[r.chamber] != null) out[r.chamber] += num(r.won); });
+    Object.keys(out).forEach(function (k) { out[k] = Math.min(out[k], RACES_UP[k]); });
+    out.total = out.house + out.senate + out.gov;
+    out.up = RACES_UP.house + RACES_UP.senate + RACES_UP.gov;
+    out.counting = out.up - out.total;
+    return out;
+  }
+
+  root.LiveMath = { house: house, senate: senate, gov: gov, flips: flips, winnerOf: winnerOf, leaderOf: leaderOf, need: need,
+                    phase: phase, called: called, RACES_UP: RACES_UP, FIRST_CLOSE: FIRST_CLOSE };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.LiveMath;
 })(typeof window !== 'undefined' ? window : this);

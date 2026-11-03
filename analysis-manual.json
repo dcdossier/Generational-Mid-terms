@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-01T06:37:29.268Z"
+    "last_updated": "2026-11-03T04:05:08.224Z"
   },
   "posts": [],
   "entries": [
@@ -1242,7 +1242,7 @@
     {
       "id": "manual-mw05zcm5-0",
       "type": "newsletter",
-      "title": "",
+      "title": "What Do the Four ’I’s of US Midterms Mean for India",
       "url": "https://takshashila.org.in/content/blogs/4i-india.html",
       "author": "Abhishek Kadiyala",
       "source": "Takshashila Institution",
@@ -1251,21 +1251,32 @@
       "tags": [],
       "added_at": "2026-11-03T04:04:52.253Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "enrich_attempts": 1,
+      "last_error": "page read (direct) but no date or description on it",
+      "next_try_at": "2026-11-03T10:05:06.666Z",
+      "image": "https://takshashila.org.in/assets/images/og-card-default.png"
     },
     {
       "id": "manual-mw05zcm9-1",
       "type": "newsletter",
-      "title": "",
+      "title": "Democratic Congress: Do’s and Can’ts",
       "url": "https://takshashila.org.in/content/blogs/Congress-do-cant.html",
       "author": "Abhishek Kadiyala",
       "source": "Takshashila Institution",
       "date": "",
-      "description": "",
+      "description": "Congressional options for Democrats and their meaning for India-US ties",
       "tags": [],
       "added_at": "2026-11-03T04:04:52.257Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "summary_source": "page",
+      "enrich_attempts": 1,
+      "last_error": "page read (direct) but no date on it",
+      "next_try_at": "2026-11-03T10:05:06.666Z",
+      "image": "https://takshashila.org.in/assets/images/og-card-default.png"
     }
   ]
 }

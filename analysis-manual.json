@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:06:03.056Z"
+    "last_updated": "2026-11-03T04:06:45.534Z"
   },
   "posts": [],
   "entries": [
@@ -1252,7 +1252,10 @@
       "added_at": "2026-11-03T04:04:52.253Z",
       "manual": true,
       "needs_enrich": true,
-      "image": "https://takshashila.org.in/assets/images/og-card-default.png"
+      "image": "https://takshashila.org.in/assets/images/og-card-default.png",
+      "enrich_attempts": 1,
+      "last_error": "page read (direct) but no description on it",
+      "next_try_at": "2026-11-03T10:06:44.461Z"
     },
     {
       "id": "manual-mw05zcm9-1",

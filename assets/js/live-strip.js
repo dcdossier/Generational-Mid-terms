@@ -2,6 +2,9 @@
  * Before the first polls close: a countdown, ticking every minute.
  * While counting: elapsed time, races called by chamber, and the last update.
  * Final: a short note. Data comes from live.js ("racebook:live" events).
+ * Under it, a refresh line: "Auto-updates every 5 min · next check in m:ss ·
+ * last checked … · last change …", ticking every second, and an amber
+ * "Updates delayed" badge when the Results Desk's last push is over 12 minutes old.
  */
 (function () {
   'use strict';
@@ -48,10 +51,36 @@
       parts.join('<span class="ls-sep" aria-hidden="true">&middot;</span>') + '</div>';
   }
 
-  var mounts = [];
+  var STALE_MS = 12 * 60 * 1000;
+  function istTime(t, secs) {
+    var d = new Date(t); if (!t || isNaN(d)) return '';
+    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: secs ? '2-digit' : undefined, timeZone: 'Asia/Kolkata' }) + ' IST';
+  }
+  function mmss(ms) { ms = Math.max(0, ms); var m = Math.floor(ms / 60000), s = Math.floor(ms % 60000 / 1000); return m + ':' + (s < 10 ? '0' : '') + s; }
+  function refreshHtml(st) {
+    var m = st.meta || {}, now = Date.now(), ph = window.LiveMath.phase(m, now);
+    var every = Math.round((st.pollMs || 300000) / 60000);
+    var parts = ['Auto-updates every ' + every + ' min'];
+    if (st.nextPollAt) parts.push('next check in <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
+    if (st.lastCheckedAt) parts.push('last checked ' + istTime(st.lastCheckedAt, true) + (st.lastCheckOk === false ? ' <span class="ls-warn">(could not reach the results service; retrying)</span>' : ''));
+    if (m.last_update) parts.push('last change ' + istTime(m.last_update) + ' (' + esc(sourceOf(st)) + ')');
+    var stale = ph !== 'pre' && m.last_push && now - new Date(m.last_push).getTime() > STALE_MS;
+    return (stale ? '<span class="ls-delay" role="status">Updates delayed. Last data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
+      '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';
+  }
+
+  var mounts = [], lastSt = null;
   function render(st) {
     if (!window.LiveMath) return;
-    mounts.forEach(function (el) { el.innerHTML = html(st || (window.RacebookLive && window.RacebookLive.state) || {}); el.hidden = false; });
+    lastSt = st || (window.RacebookLive && window.RacebookLive.state) || {};
+    mounts.forEach(function (el) {
+      el.innerHTML = '<div class="ls-top">' + html(lastSt) + '</div><div class="ls-refresh">' + refreshHtml(lastSt) + '</div>';
+      el.hidden = false;
+    });
+  }
+  function tick() {   // the countdown, every second, without redrawing the strip
+    if (!window.LiveMath || !lastSt) return;
+    mounts.forEach(function (el) { var r = el.querySelector('.ls-refresh'); if (r) r.innerHTML = refreshHtml(lastSt); });
   }
 
   function init() {
@@ -61,6 +90,7 @@
     mounts.forEach(function (el) { el.classList.add('ls'); el.setAttribute('aria-label', 'Election status'); });
     if (!/[?&]demo=1\b/.test(location.search)) render({});   // the countdown needs no data
     document.addEventListener('racebook:live', function (e) { render(e.detail); });
+    setInterval(tick, 1000);
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

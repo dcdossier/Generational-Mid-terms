@@ -115,7 +115,46 @@
     return out;
   }
 
+  function chamberOf(id) { return /^Senate-/.test(id) ? 'senate' : /^Gov-/.test(id) ? 'gov' : 'house'; }
+
+  // Gains and losses for one chamber. holders: {race_id: party before the election}
+  // (live-baseline.json: notional_party in redrawn states, else the 119th holder).
+  //   gained  called races a party won from another party
+  //   lost    called races a party held and another party won
+  //   net     gained - lost
+  //   leadGain / leadLoss  uncalled races where the leader differs from the holder
+  // Per-race calls win; with none in this chamber, the desk's quick-entry
+  // gained/lost on live_chamber is used instead (basis 'desk').
+  function gains(chamber, races, holders, chamberRows) {
+    var z = function () { return { gained: 0, lost: 0, net: 0, leadGain: 0, leadLoss: 0 }; };
+    var out = { D: z(), R: z(), I: z(), basis: null, calledRaces: 0 };
+    (races || []).forEach(function (r) {
+      if (chamberOf(r.race_id) !== chamber) return;
+      var was = holders && holders[r.race_id];
+      if (!was || !out[was]) return;
+      var w = winnerOf(r);
+      if (w) {
+        out.calledRaces++;
+        if (w !== was && out[w]) { out[w].gained++; out[was].lost++; }
+        return;
+      }
+      var l = leaderOf(r);
+      if (l && l !== was && out[l]) { out[l].leadGain++; out[was].leadLoss++; }
+    });
+    if (out.calledRaces) out.basis = 'races';
+    else {
+      (chamberRows || []).forEach(function (c) {
+        if (c.chamber !== chamber || !out[c.party]) return;
+        if (c.gained == null && c.lost == null) return;
+        out.basis = 'desk';
+        out[c.party].gained = num(c.gained); out[c.party].lost = num(c.lost);
+      });
+    }
+    ['D', 'R', 'I'].forEach(function (p) { out[p].net = out[p].gained - out[p].lost; });
+    return out;
+  }
+
   root.LiveMath = { house: house, senate: senate, gov: gov, flips: flips, winnerOf: winnerOf, leaderOf: leaderOf, need: need,
-                    phase: phase, called: called, RACES_UP: RACES_UP, FIRST_CLOSE: FIRST_CLOSE };
+                    phase: phase, called: called, gains: gains, chamberOf: chamberOf, RACES_UP: RACES_UP, FIRST_CLOSE: FIRST_CLOSE };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.LiveMath;
 })(typeof window !== 'undefined' ? window : this);

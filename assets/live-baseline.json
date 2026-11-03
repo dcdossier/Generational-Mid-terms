@@ -1,0 +1,2807 @@
+{
+ "_about": "Party holding each seat before the 2026 election, built from archive/119 by scripts/build_live_baseline.py. House: 119th Congress holders; vacancies use the last holder's party. In redrawn states notional_party is the party expected under the new map; flips use it when set, otherwise the 119th holder. Edit a notional_party by hand and set notional_source to \"hand\" to keep it on the next build.",
+ "source": "archive/119 (snapshot 6dfe737)",
+ "redrawn_states": [
+  "AL",
+  "CA",
+  "FL",
+  "LA",
+  "NC",
+  "OH",
+  "TN",
+  "TX",
+  "UT"
+ ],
+ "footnote": "In redrawn states, gains and losses compare with the new district's expected party.",
+ "counts": {
+  "house": {
+   "R": 219,
+   "D": 215,
+   "I": 1
+  },
+  "house_vacant": [
+   "FL-20",
+   "TX-23"
+  ],
+  "house_redrawn": 173,
+  "house_notional_set": 29,
+  "senate_up": {
+   "R": 22,
+   "D": 13
+  },
+  "gov_up": {
+   "R": 18,
+   "D": 18
+  }
+ },
+ "notional_blank": [
+  "AL-01",
+  "AL-03",
+  "AL-04",
+  "AL-05",
+  "AL-06",
+  "AL-07",
+  "CA-01",
+  "CA-02",
+  "CA-03",
+  "CA-05",
+  "CA-06",
+  "CA-07",
+  "CA-08",
+  "CA-09",
+  "CA-10",
+  "CA-12",
+  "CA-14",
+  "CA-15",
+  "CA-16",
+  "CA-17",
+  "CA-18",
+  "CA-19",
+  "CA-20",
+  "CA-21",
+  "CA-23",
+  "CA-24",
+  "CA-25",
+  "CA-26",
+  "CA-27",
+  "CA-28",
+  "CA-29",
+  "CA-30",
+  "CA-31",
+  "CA-32",
+  "CA-33",
+  "CA-34",
+  "CA-35",
+  "CA-36",
+  "CA-37",
+  "CA-38",
+  "CA-39",
+  "CA-42",
+  "CA-43",
+  "CA-44",
+  "CA-46",
+  "CA-47",
+  "CA-49",
+  "CA-50",
+  "CA-51",
+  "CA-52",
+  "FL-01",
+  "FL-02",
+  "FL-03",
+  "FL-04",
+  "FL-05",
+  "FL-06",
+  "FL-08",
+  "FL-10",
+  "FL-11",
+  "FL-12",
+  "FL-15",
+  "FL-16",
+  "FL-17",
+  "FL-18",
+  "FL-19",
+  "FL-21",
+  "FL-24",
+  "FL-26",
+  "FL-28",
+  "LA-01",
+  "LA-02",
+  "LA-03",
+  "LA-04",
+  "LA-05",
+  "LA-06",
+  "NC-02",
+  "NC-03",
+  "NC-04",
+  "NC-05",
+  "NC-06",
+  "NC-07",
+  "NC-08",
+  "NC-09",
+  "NC-10",
+  "NC-12",
+  "NC-13",
+  "NC-14",
+  "OH-01",
+  "OH-02",
+  "OH-03",
+  "OH-04",
+  "OH-05",
+  "OH-06",
+  "OH-08",
+  "OH-11",
+  "OH-12",
+  "OH-13",
+  "OH-14",
+  "TN-01",
+  "TN-02",
+  "TN-03",
+  "TN-04",
+  "TN-05",
+  "TN-06",
+  "TN-07",
+  "TN-08",
+  "TN-09",
+  "TX-01",
+  "TX-02",
+  "TX-03",
+  "TX-04",
+  "TX-05",
+  "TX-06",
+  "TX-07",
+  "TX-08",
+  "TX-09",
+  "TX-10",
+  "TX-11",
+  "TX-12",
+  "TX-13",
+  "TX-14",
+  "TX-16",
+  "TX-17",
+  "TX-18",
+  "TX-19",
+  "TX-20",
+  "TX-21",
+  "TX-22",
+  "TX-24",
+  "TX-25",
+  "TX-26",
+  "TX-27",
+  "TX-29",
+  "TX-30",
+  "TX-31",
+  "TX-32",
+  "TX-33",
+  "TX-36",
+  "TX-37",
+  "TX-38",
+  "UT-01",
+  "UT-02",
+  "UT-03",
+  "UT-04"
+ ],
+ "house": {
+  "AK-AL": {
+   "holder": "R",
+   "member": "Nicholas J. Begich III"
+  },
+  "AL-01": {
+   "holder": "R",
+   "member": "Barry Moore",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AL-02": {
+   "holder": "D",
+   "member": "Shomari Figures",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+7 (data.json)"
+  },
+  "AL-03": {
+   "holder": "R",
+   "member": "Mike Rogers",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AL-04": {
+   "holder": "R",
+   "member": "Robert B. Aderholt",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AL-05": {
+   "holder": "R",
+   "member": "Dale W. Strong",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AL-06": {
+   "holder": "R",
+   "member": "Gary J. Palmer",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AL-07": {
+   "holder": "D",
+   "member": "Terri A. Sewell",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "AR-01": {
+   "holder": "R",
+   "member": "Eric A. \"Rick\" Crawford"
+  },
+  "AR-02": {
+   "holder": "R",
+   "member": "J. French Hill"
+  },
+  "AR-03": {
+   "holder": "R",
+   "member": "Steve Womack"
+  },
+  "AR-04": {
+   "holder": "R",
+   "member": "Bruce Westerman"
+  },
+  "AZ-01": {
+   "holder": "R",
+   "member": "David Schweikert"
+  },
+  "AZ-02": {
+   "holder": "R",
+   "member": "Elijah Crane"
+  },
+  "AZ-03": {
+   "holder": "D",
+   "member": "Yassamin Ansari"
+  },
+  "AZ-04": {
+   "holder": "D",
+   "member": "Greg Stanton"
+  },
+  "AZ-05": {
+   "holder": "R",
+   "member": "Andy Biggs"
+  },
+  "AZ-06": {
+   "holder": "R",
+   "member": "Juan Ciscomani"
+  },
+  "AZ-07": {
+   "holder": "D",
+   "member": "Adelita S. Grijalva"
+  },
+  "AZ-08": {
+   "holder": "R",
+   "member": "Abraham J. Hamadeh"
+  },
+  "AZ-09": {
+   "holder": "R",
+   "member": "Paul A. Gosar"
+  },
+  "CA-01": {
+   "holder": "R",
+   "member": "James Gallagher",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-02": {
+   "holder": "D",
+   "member": "Jared Huffman",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-03": {
+   "holder": "I",
+   "member": "Kevin Kiley",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-04": {
+   "holder": "D",
+   "member": "Mike Thompson",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+8 (data.json)"
+  },
+  "CA-05": {
+   "holder": "R",
+   "member": "Tom McClintock",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-06": {
+   "holder": "D",
+   "member": "Ami Bera",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-07": {
+   "holder": "D",
+   "member": "Doris O. Matsui",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-08": {
+   "holder": "D",
+   "member": "John Garamendi",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-09": {
+   "holder": "D",
+   "member": "Josh Harder",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-10": {
+   "holder": "D",
+   "member": "Mark DeSaulnier",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-11": {
+   "holder": "D",
+   "member": "Nancy Pelosi",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+36 (data.json)"
+  },
+  "CA-12": {
+   "holder": "D",
+   "member": "Lateefah Simon",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-13": {
+   "holder": "D",
+   "member": "Adam Gray",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+2 (data.json)"
+  },
+  "CA-14": {
+   "holder": "D",
+   "member": "Aisha Wahab",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-15": {
+   "holder": "D",
+   "member": "Kevin Mullin",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-16": {
+   "holder": "D",
+   "member": "Sam T. Liccardo",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-17": {
+   "holder": "D",
+   "member": "Ro Khanna",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-18": {
+   "holder": "D",
+   "member": "Zoe Lofgren",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-19": {
+   "holder": "D",
+   "member": "Jimmy Panetta",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-20": {
+   "holder": "R",
+   "member": "Vince Fong",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-21": {
+   "holder": "D",
+   "member": "Jim Costa",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-22": {
+   "holder": "R",
+   "member": "David G. Valadao",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+1 (data.json)"
+  },
+  "CA-23": {
+   "holder": "R",
+   "member": "Jay Obernolte",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-24": {
+   "holder": "D",
+   "member": "Salud O. Carbajal",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-25": {
+   "holder": "D",
+   "member": "Raul Ruiz",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-26": {
+   "holder": "D",
+   "member": "Julia Brownley",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-27": {
+   "holder": "D",
+   "member": "George Whitesides",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-28": {
+   "holder": "D",
+   "member": "Judy Chu",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-29": {
+   "holder": "D",
+   "member": "Luz M. Rivas",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-30": {
+   "holder": "D",
+   "member": "Laura Friedman",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-31": {
+   "holder": "D",
+   "member": "Gilbert Ray Cisneros, Jr.",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-32": {
+   "holder": "D",
+   "member": "Brad Sherman",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-33": {
+   "holder": "D",
+   "member": "Pete Aguilar",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-34": {
+   "holder": "D",
+   "member": "Jimmy Gomez",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-35": {
+   "holder": "D",
+   "member": "Norma J. Torres",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-36": {
+   "holder": "D",
+   "member": "Ted Lieu",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-37": {
+   "holder": "D",
+   "member": "Sydney Kamlager-Dove",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-38": {
+   "holder": "D",
+   "member": "Linda T. Sánchez",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-39": {
+   "holder": "D",
+   "member": "Mark Takano",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-40": {
+   "holder": "R",
+   "member": "Young Kim",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+6 (data.json)"
+  },
+  "CA-41": {
+   "holder": "R",
+   "member": "Ken Calvert",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+9 (data.json)"
+  },
+  "CA-42": {
+   "holder": "D",
+   "member": "Robert Garcia",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-43": {
+   "holder": "D",
+   "member": "Maxine Waters",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-44": {
+   "holder": "D",
+   "member": "Nanette Diaz Barragán",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-45": {
+   "holder": "D",
+   "member": "Derek Tran",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+3 (data.json)"
+  },
+  "CA-46": {
+   "holder": "D",
+   "member": "J. Luis Correa",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-47": {
+   "holder": "D",
+   "member": "Dave Min",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-48": {
+   "holder": "R",
+   "member": "Darrell Issa",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+2 (data.json)"
+  },
+  "CA-49": {
+   "holder": "D",
+   "member": "Mike Levin",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-50": {
+   "holder": "D",
+   "member": "Scott H. Peters",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-51": {
+   "holder": "D",
+   "member": "Sara Jacobs",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CA-52": {
+   "holder": "D",
+   "member": "Juan Vargas",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "CO-01": {
+   "holder": "D",
+   "member": "Diana DeGette"
+  },
+  "CO-02": {
+   "holder": "D",
+   "member": "Joe Neguse"
+  },
+  "CO-03": {
+   "holder": "R",
+   "member": "Jeff Hurd"
+  },
+  "CO-04": {
+   "holder": "R",
+   "member": "Lauren Boebert"
+  },
+  "CO-05": {
+   "holder": "R",
+   "member": "Jeff Crank"
+  },
+  "CO-06": {
+   "holder": "D",
+   "member": "Jason Crow"
+  },
+  "CO-07": {
+   "holder": "D",
+   "member": "Brittany Pettersen"
+  },
+  "CO-08": {
+   "holder": "R",
+   "member": "Gabe Evans"
+  },
+  "CT-01": {
+   "holder": "D",
+   "member": "John B. Larson"
+  },
+  "CT-02": {
+   "holder": "D",
+   "member": "Joe Courtney"
+  },
+  "CT-03": {
+   "holder": "D",
+   "member": "Rosa L. DeLauro"
+  },
+  "CT-04": {
+   "holder": "D",
+   "member": "James A. Himes"
+  },
+  "CT-05": {
+   "holder": "D",
+   "member": "Jahana Hayes"
+  },
+  "DE-AL": {
+   "holder": "D",
+   "member": "Sarah McBride"
+  },
+  "FL-01": {
+   "holder": "R",
+   "member": "Jimmy Patronis",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-02": {
+   "holder": "R",
+   "member": "Neal P. Dunn",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-03": {
+   "holder": "R",
+   "member": "Kat Cammack",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-04": {
+   "holder": "R",
+   "member": "Aaron Bean",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-05": {
+   "holder": "R",
+   "member": "John H. Rutherford",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-06": {
+   "holder": "R",
+   "member": "Randy Fine",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-07": {
+   "holder": "R",
+   "member": "Cory Mills",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "FL-08": {
+   "holder": "R",
+   "member": "Mike Haridopolos",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-09": {
+   "holder": "D",
+   "member": "Darren Soto",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+8 (data.json)"
+  },
+  "FL-10": {
+   "holder": "D",
+   "member": "Maxwell Frost",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-11": {
+   "holder": "R",
+   "member": "Daniel Webster",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-12": {
+   "holder": "R",
+   "member": "Gus M. Bilirakis",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-13": {
+   "holder": "R",
+   "member": "Anna Paulina Luna",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+6 (data.json)"
+  },
+  "FL-14": {
+   "holder": "D",
+   "member": "Kathy Castor",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+4 (data.json)"
+  },
+  "FL-15": {
+   "holder": "R",
+   "member": "Laurel M. Lee",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-16": {
+   "holder": "R",
+   "member": "Vern Buchanan",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-17": {
+   "holder": "R",
+   "member": "W. Gregory Steube",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-18": {
+   "holder": "R",
+   "member": "Scott Franklin",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-19": {
+   "holder": "R",
+   "member": "Byron Donalds",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-20": {
+   "holder": "D",
+   "vacant": true,
+   "last_holder": "Sheila Cherfilus-McCormick",
+   "vacancy_note": "resigned 21 Apr 2026",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+20 (data.json)"
+  },
+  "FL-21": {
+   "holder": "R",
+   "member": "Brian J. Mast",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-22": {
+   "holder": "D",
+   "member": "Lois Frankel",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+4 (data.json)"
+  },
+  "FL-23": {
+   "holder": "D",
+   "member": "Jared Moskowitz",
+   "redrawn": true,
+   "notional_party": "D",
+   "notional_source": "Cook PVI D+9 (data.json)"
+  },
+  "FL-24": {
+   "holder": "D",
+   "member": "Frederica S. Wilson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-25": {
+   "holder": "D",
+   "member": "Debbie Wasserman Schultz",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+3 (data.json)"
+  },
+  "FL-26": {
+   "holder": "R",
+   "member": "Mario Diaz-Balart",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "FL-27": {
+   "holder": "R",
+   "member": "Maria Elvira Salazar",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+6 (data.json)"
+  },
+  "FL-28": {
+   "holder": "R",
+   "member": "Carlos A. Gimenez",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "GA-01": {
+   "holder": "R",
+   "member": "Earl L. \"Buddy\" Carter"
+  },
+  "GA-02": {
+   "holder": "D",
+   "member": "Sanford D. Bishop, Jr."
+  },
+  "GA-03": {
+   "holder": "R",
+   "member": "Brian Jack"
+  },
+  "GA-04": {
+   "holder": "D",
+   "member": "Henry C. \"Hank\" Johnson, Jr."
+  },
+  "GA-05": {
+   "holder": "D",
+   "member": "Nikema Williams"
+  },
+  "GA-06": {
+   "holder": "D",
+   "member": "Lucy McBath"
+  },
+  "GA-07": {
+   "holder": "R",
+   "member": "Richard McCormick"
+  },
+  "GA-08": {
+   "holder": "R",
+   "member": "Austin Scott"
+  },
+  "GA-09": {
+   "holder": "R",
+   "member": "Andrew S. Clyde"
+  },
+  "GA-10": {
+   "holder": "R",
+   "member": "Mike Collins"
+  },
+  "GA-11": {
+   "holder": "R",
+   "member": "Barry Loudermilk"
+  },
+  "GA-12": {
+   "holder": "R",
+   "member": "Rick W. Allen"
+  },
+  "GA-13": {
+   "holder": "D",
+   "member": "Everton Blair Jr."
+  },
+  "GA-14": {
+   "holder": "R",
+   "member": "Clay Fuller"
+  },
+  "HI-01": {
+   "holder": "D",
+   "member": "Ed Case"
+  },
+  "HI-02": {
+   "holder": "D",
+   "member": "Jill N. Tokuda"
+  },
+  "IA-01": {
+   "holder": "R",
+   "member": "Mariannette Miller-Meeks"
+  },
+  "IA-02": {
+   "holder": "R",
+   "member": "Ashley Hinson"
+  },
+  "IA-03": {
+   "holder": "R",
+   "member": "Zachary Nunn"
+  },
+  "IA-04": {
+   "holder": "R",
+   "member": "Randy Feenstra"
+  },
+  "ID-01": {
+   "holder": "R",
+   "member": "Russ Fulcher"
+  },
+  "ID-02": {
+   "holder": "R",
+   "member": "Michael K. Simpson"
+  },
+  "IL-01": {
+   "holder": "D",
+   "member": "Jonathan L. Jackson"
+  },
+  "IL-02": {
+   "holder": "D",
+   "member": "Robin L. Kelly"
+  },
+  "IL-03": {
+   "holder": "D",
+   "member": "Delia C. Ramirez"
+  },
+  "IL-04": {
+   "holder": "D",
+   "member": "Jesús G. \"Chuy\" García"
+  },
+  "IL-05": {
+   "holder": "D",
+   "member": "Mike Quigley"
+  },
+  "IL-06": {
+   "holder": "D",
+   "member": "Sean Casten"
+  },
+  "IL-07": {
+   "holder": "D",
+   "member": "Danny K. Davis"
+  },
+  "IL-08": {
+   "holder": "D",
+   "member": "Raja Krishnamoorthi"
+  },
+  "IL-09": {
+   "holder": "D",
+   "member": "Janice D. Schakowsky"
+  },
+  "IL-10": {
+   "holder": "D",
+   "member": "Bradley Scott Schneider"
+  },
+  "IL-11": {
+   "holder": "D",
+   "member": "Bill Foster"
+  },
+  "IL-12": {
+   "holder": "R",
+   "member": "Mike Bost"
+  },
+  "IL-13": {
+   "holder": "D",
+   "member": "Nikki Budzinski"
+  },
+  "IL-14": {
+   "holder": "D",
+   "member": "Lauren Underwood"
+  },
+  "IL-15": {
+   "holder": "R",
+   "member": "Mary E. Miller"
+  },
+  "IL-16": {
+   "holder": "R",
+   "member": "Darin LaHood"
+  },
+  "IL-17": {
+   "holder": "D",
+   "member": "Eric Sorensen"
+  },
+  "IN-01": {
+   "holder": "D",
+   "member": "Frank J. Mrvan"
+  },
+  "IN-02": {
+   "holder": "R",
+   "member": "Rudy Yakym III"
+  },
+  "IN-03": {
+   "holder": "R",
+   "member": "Marlin A. Stutzman"
+  },
+  "IN-04": {
+   "holder": "R",
+   "member": "James R. Baird"
+  },
+  "IN-05": {
+   "holder": "R",
+   "member": "Victoria Spartz"
+  },
+  "IN-06": {
+   "holder": "R",
+   "member": "Jefferson Shreve"
+  },
+  "IN-07": {
+   "holder": "D",
+   "member": "André Carson"
+  },
+  "IN-08": {
+   "holder": "R",
+   "member": "Mark B. Messmer"
+  },
+  "IN-09": {
+   "holder": "R",
+   "member": "Erin Houchin"
+  },
+  "KS-01": {
+   "holder": "R",
+   "member": "Tracey Mann"
+  },
+  "KS-02": {
+   "holder": "R",
+   "member": "Derek Schmidt"
+  },
+  "KS-03": {
+   "holder": "D",
+   "member": "Sharice Davids"
+  },
+  "KS-04": {
+   "holder": "R",
+   "member": "Ron Estes"
+  },
+  "KY-01": {
+   "holder": "R",
+   "member": "James Comer"
+  },
+  "KY-02": {
+   "holder": "R",
+   "member": "Brett Guthrie"
+  },
+  "KY-03": {
+   "holder": "D",
+   "member": "Morgan McGarvey"
+  },
+  "KY-04": {
+   "holder": "R",
+   "member": "Thomas Massie"
+  },
+  "KY-05": {
+   "holder": "R",
+   "member": "Harold Rogers"
+  },
+  "KY-06": {
+   "holder": "R",
+   "member": "Andy Barr"
+  },
+  "LA-01": {
+   "holder": "R",
+   "member": "Steve Scalise",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "LA-02": {
+   "holder": "D",
+   "member": "Troy A. Carter",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "LA-03": {
+   "holder": "R",
+   "member": "Clay Higgins",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "LA-04": {
+   "holder": "R",
+   "member": "Mike Johnson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "LA-05": {
+   "holder": "R",
+   "member": "Julia Letlow",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "LA-06": {
+   "holder": "D",
+   "member": "Cleo Fields",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "MA-01": {
+   "holder": "D",
+   "member": "Richard E. Neal"
+  },
+  "MA-02": {
+   "holder": "D",
+   "member": "James P. McGovern"
+  },
+  "MA-03": {
+   "holder": "D",
+   "member": "Lori Trahan"
+  },
+  "MA-04": {
+   "holder": "D",
+   "member": "Jake Auchincloss"
+  },
+  "MA-05": {
+   "holder": "D",
+   "member": "Katherine M. Clark"
+  },
+  "MA-06": {
+   "holder": "D",
+   "member": "Seth Moulton"
+  },
+  "MA-07": {
+   "holder": "D",
+   "member": "Ayanna Pressley"
+  },
+  "MA-08": {
+   "holder": "D",
+   "member": "Stephen F. Lynch"
+  },
+  "MA-09": {
+   "holder": "D",
+   "member": "William R. Keating"
+  },
+  "MD-01": {
+   "holder": "R",
+   "member": "Andy Harris"
+  },
+  "MD-02": {
+   "holder": "D",
+   "member": "Johnny Olszewski, Jr."
+  },
+  "MD-03": {
+   "holder": "D",
+   "member": "Sarah Elfreth"
+  },
+  "MD-04": {
+   "holder": "D",
+   "member": "Glenn Ivey"
+  },
+  "MD-05": {
+   "holder": "D",
+   "member": "Steny H. Hoyer"
+  },
+  "MD-06": {
+   "holder": "D",
+   "member": "April McClain Delaney"
+  },
+  "MD-07": {
+   "holder": "D",
+   "member": "Kweisi Mfume"
+  },
+  "MD-08": {
+   "holder": "D",
+   "member": "Jamie Raskin"
+  },
+  "ME-01": {
+   "holder": "D",
+   "member": "Chellie Pingree"
+  },
+  "ME-02": {
+   "holder": "D",
+   "member": "Jared F. Golden"
+  },
+  "MI-01": {
+   "holder": "R",
+   "member": "Jack Bergman"
+  },
+  "MI-02": {
+   "holder": "R",
+   "member": "John R. Moolenaar"
+  },
+  "MI-03": {
+   "holder": "D",
+   "member": "Hillary J. Scholten"
+  },
+  "MI-04": {
+   "holder": "R",
+   "member": "Bill Huizenga"
+  },
+  "MI-05": {
+   "holder": "R",
+   "member": "Tim Walberg"
+  },
+  "MI-06": {
+   "holder": "D",
+   "member": "Debbie Dingell"
+  },
+  "MI-07": {
+   "holder": "R",
+   "member": "Tom Barrett"
+  },
+  "MI-08": {
+   "holder": "D",
+   "member": "Kristen McDonald Rivet"
+  },
+  "MI-09": {
+   "holder": "R",
+   "member": "Lisa C. McClain"
+  },
+  "MI-10": {
+   "holder": "R",
+   "member": "John James"
+  },
+  "MI-11": {
+   "holder": "D",
+   "member": "Haley M. Stevens"
+  },
+  "MI-12": {
+   "holder": "D",
+   "member": "Rashida Tlaib"
+  },
+  "MI-13": {
+   "holder": "D",
+   "member": "Shri Thanedar"
+  },
+  "MN-01": {
+   "holder": "R",
+   "member": "Brad Finstad"
+  },
+  "MN-02": {
+   "holder": "D",
+   "member": "Angie Craig"
+  },
+  "MN-03": {
+   "holder": "D",
+   "member": "Kelly Morrison"
+  },
+  "MN-04": {
+   "holder": "D",
+   "member": "Betty McCollum"
+  },
+  "MN-05": {
+   "holder": "D",
+   "member": "Ilhan Omar"
+  },
+  "MN-06": {
+   "holder": "R",
+   "member": "Tom Emmer"
+  },
+  "MN-07": {
+   "holder": "R",
+   "member": "Michelle Fischbach"
+  },
+  "MN-08": {
+   "holder": "R",
+   "member": "Pete Stauber"
+  },
+  "MO-01": {
+   "holder": "D",
+   "member": "Wesley Bell"
+  },
+  "MO-02": {
+   "holder": "R",
+   "member": "Ann Wagner"
+  },
+  "MO-03": {
+   "holder": "R",
+   "member": "Robert F. Onder, Jr."
+  },
+  "MO-04": {
+   "holder": "R",
+   "member": "Mark Alford"
+  },
+  "MO-05": {
+   "holder": "D",
+   "member": "Emanuel Cleaver"
+  },
+  "MO-06": {
+   "holder": "R",
+   "member": "Sam Graves"
+  },
+  "MO-07": {
+   "holder": "R",
+   "member": "Eric Burlison"
+  },
+  "MO-08": {
+   "holder": "R",
+   "member": "Jason Smith"
+  },
+  "MS-01": {
+   "holder": "R",
+   "member": "Trent Kelly"
+  },
+  "MS-02": {
+   "holder": "D",
+   "member": "Bennie G. Thompson"
+  },
+  "MS-03": {
+   "holder": "R",
+   "member": "Michael Guest"
+  },
+  "MS-04": {
+   "holder": "R",
+   "member": "Mike Ezell"
+  },
+  "MT-01": {
+   "holder": "R",
+   "member": "Ryan K. Zinke"
+  },
+  "MT-02": {
+   "holder": "R",
+   "member": "Troy Downing"
+  },
+  "NC-01": {
+   "holder": "D",
+   "member": "Donald G. Davis",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "NC-02": {
+   "holder": "D",
+   "member": "Deborah K. Ross",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-03": {
+   "holder": "R",
+   "member": "Gregory F. Murphy",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-04": {
+   "holder": "D",
+   "member": "Valerie P. Foushee",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-05": {
+   "holder": "R",
+   "member": "Virginia Foxx",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-06": {
+   "holder": "R",
+   "member": "Addison P. McDowell",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-07": {
+   "holder": "R",
+   "member": "David Rouzer",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-08": {
+   "holder": "R",
+   "member": "Mark Harris",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-09": {
+   "holder": "R",
+   "member": "Richard Hudson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-10": {
+   "holder": "R",
+   "member": "Pat Harrigan",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-11": {
+   "holder": "R",
+   "member": "Chuck Edwards",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "NC-12": {
+   "holder": "D",
+   "member": "Alma S. Adams",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-13": {
+   "holder": "R",
+   "member": "Brad Knott",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "NC-14": {
+   "holder": "R",
+   "member": "Tim Moore",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "ND-AL": {
+   "holder": "R",
+   "member": "Julie Fedorchak"
+  },
+  "NE-01": {
+   "holder": "R",
+   "member": "Mike Flood"
+  },
+  "NE-02": {
+   "holder": "R",
+   "member": "Don Bacon"
+  },
+  "NE-03": {
+   "holder": "R",
+   "member": "Adrian Smith"
+  },
+  "NH-01": {
+   "holder": "D",
+   "member": "Chris Pappas"
+  },
+  "NH-02": {
+   "holder": "D",
+   "member": "Maggie Goodlander"
+  },
+  "NJ-01": {
+   "holder": "D",
+   "member": "Donald Norcross"
+  },
+  "NJ-02": {
+   "holder": "R",
+   "member": "Jefferson Van Drew"
+  },
+  "NJ-03": {
+   "holder": "D",
+   "member": "Herbert C. Conaway, Jr."
+  },
+  "NJ-04": {
+   "holder": "R",
+   "member": "Christopher H. Smith"
+  },
+  "NJ-05": {
+   "holder": "D",
+   "member": "Josh Gottheimer"
+  },
+  "NJ-06": {
+   "holder": "D",
+   "member": "Frank Pallone, Jr."
+  },
+  "NJ-07": {
+   "holder": "R",
+   "member": "Thomas H. Kean, Jr."
+  },
+  "NJ-08": {
+   "holder": "D",
+   "member": "Robert Menendez"
+  },
+  "NJ-09": {
+   "holder": "D",
+   "member": "Nellie Pou"
+  },
+  "NJ-10": {
+   "holder": "D",
+   "member": "LaMonica McIver"
+  },
+  "NJ-11": {
+   "holder": "D",
+   "member": "Analilia Mejia"
+  },
+  "NJ-12": {
+   "holder": "D",
+   "member": "Bonnie Watson Coleman"
+  },
+  "NM-01": {
+   "holder": "D",
+   "member": "Melanie A. Stansbury"
+  },
+  "NM-02": {
+   "holder": "D",
+   "member": "Gabe Vasquez"
+  },
+  "NM-03": {
+   "holder": "D",
+   "member": "Teresa Leger Fernandez"
+  },
+  "NV-01": {
+   "holder": "D",
+   "member": "Dina Titus"
+  },
+  "NV-02": {
+   "holder": "R",
+   "member": "Mark E. Amodei"
+  },
+  "NV-03": {
+   "holder": "D",
+   "member": "Susie Lee"
+  },
+  "NV-04": {
+   "holder": "D",
+   "member": "Steven Horsford"
+  },
+  "NY-01": {
+   "holder": "R",
+   "member": "Nick LaLota"
+  },
+  "NY-02": {
+   "holder": "R",
+   "member": "Andrew R. Garbarino"
+  },
+  "NY-03": {
+   "holder": "D",
+   "member": "Thomas R. Suozzi"
+  },
+  "NY-04": {
+   "holder": "D",
+   "member": "Laura Gillen"
+  },
+  "NY-05": {
+   "holder": "D",
+   "member": "Gregory W. Meeks"
+  },
+  "NY-06": {
+   "holder": "D",
+   "member": "Grace Meng"
+  },
+  "NY-07": {
+   "holder": "D",
+   "member": "Nydia M. Velázquez"
+  },
+  "NY-08": {
+   "holder": "D",
+   "member": "Hakeem S. Jeffries"
+  },
+  "NY-09": {
+   "holder": "D",
+   "member": "Yvette D. Clarke"
+  },
+  "NY-10": {
+   "holder": "D",
+   "member": "Daniel S. Goldman"
+  },
+  "NY-11": {
+   "holder": "R",
+   "member": "Nicole Malliotakis"
+  },
+  "NY-12": {
+   "holder": "D",
+   "member": "Jerrold Nadler"
+  },
+  "NY-13": {
+   "holder": "D",
+   "member": "Adriano Espaillat"
+  },
+  "NY-14": {
+   "holder": "D",
+   "member": "Alexandria Ocasio-Cortez"
+  },
+  "NY-15": {
+   "holder": "D",
+   "member": "Ritchie Torres"
+  },
+  "NY-16": {
+   "holder": "D",
+   "member": "George Latimer"
+  },
+  "NY-17": {
+   "holder": "R",
+   "member": "Michael Lawler"
+  },
+  "NY-18": {
+   "holder": "D",
+   "member": "Patrick Ryan"
+  },
+  "NY-19": {
+   "holder": "D",
+   "member": "Josh Riley"
+  },
+  "NY-20": {
+   "holder": "D",
+   "member": "Paul Tonko"
+  },
+  "NY-21": {
+   "holder": "R",
+   "member": "Elise M. Stefanik"
+  },
+  "NY-22": {
+   "holder": "D",
+   "member": "John W. Mannion"
+  },
+  "NY-23": {
+   "holder": "R",
+   "member": "Nicholas A. Langworthy"
+  },
+  "NY-24": {
+   "holder": "R",
+   "member": "Claudia Tenney"
+  },
+  "NY-25": {
+   "holder": "D",
+   "member": "Joseph D. Morelle"
+  },
+  "NY-26": {
+   "holder": "D",
+   "member": "Timothy M. Kennedy"
+  },
+  "OH-01": {
+   "holder": "D",
+   "member": "Greg Landsman",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-02": {
+   "holder": "R",
+   "member": "David J. Taylor",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-03": {
+   "holder": "D",
+   "member": "Joyce Beatty",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-04": {
+   "holder": "R",
+   "member": "Jim Jordan",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-05": {
+   "holder": "R",
+   "member": "Robert E. Latta",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-06": {
+   "holder": "R",
+   "member": "Michael A. Rulli",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-07": {
+   "holder": "R",
+   "member": "Max L. Miller",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "OH-08": {
+   "holder": "R",
+   "member": "Warren Davidson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-09": {
+   "holder": "D",
+   "member": "Marcy Kaptur",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "OH-10": {
+   "holder": "R",
+   "member": "Michael R. Turner",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+4 (data.json)"
+  },
+  "OH-11": {
+   "holder": "D",
+   "member": "Shontel M. Brown",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-12": {
+   "holder": "R",
+   "member": "Troy Balderson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-13": {
+   "holder": "D",
+   "member": "Emilia Strong Sykes",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-14": {
+   "holder": "R",
+   "member": "David P. Joyce",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "OH-15": {
+   "holder": "R",
+   "member": "Mike Carey",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+5 (data.json)"
+  },
+  "OK-01": {
+   "holder": "R",
+   "member": "Kevin Hern"
+  },
+  "OK-02": {
+   "holder": "R",
+   "member": "Josh Brecheen"
+  },
+  "OK-03": {
+   "holder": "R",
+   "member": "Frank D. Lucas"
+  },
+  "OK-04": {
+   "holder": "R",
+   "member": "Tom Cole"
+  },
+  "OK-05": {
+   "holder": "R",
+   "member": "Stephanie I. Bice"
+  },
+  "OR-01": {
+   "holder": "D",
+   "member": "Suzanne Bonamici"
+  },
+  "OR-02": {
+   "holder": "R",
+   "member": "Cliff Bentz"
+  },
+  "OR-03": {
+   "holder": "D",
+   "member": "Maxine Dexter"
+  },
+  "OR-04": {
+   "holder": "D",
+   "member": "Val T. Hoyle"
+  },
+  "OR-05": {
+   "holder": "D",
+   "member": "Janelle S. Bynum"
+  },
+  "OR-06": {
+   "holder": "D",
+   "member": "Andrea Salinas"
+  },
+  "PA-01": {
+   "holder": "R",
+   "member": "Brian K. Fitzpatrick"
+  },
+  "PA-02": {
+   "holder": "D",
+   "member": "Brendan F. Boyle"
+  },
+  "PA-03": {
+   "holder": "D",
+   "member": "Dwight Evans"
+  },
+  "PA-04": {
+   "holder": "D",
+   "member": "Madeleine Dean"
+  },
+  "PA-05": {
+   "holder": "D",
+   "member": "Mary Gay Scanlon"
+  },
+  "PA-06": {
+   "holder": "D",
+   "member": "Chrissy Houlahan"
+  },
+  "PA-07": {
+   "holder": "R",
+   "member": "Ryan Mackenzie"
+  },
+  "PA-08": {
+   "holder": "R",
+   "member": "Robert P. Bresnahan, Jr."
+  },
+  "PA-09": {
+   "holder": "R",
+   "member": "Daniel Meuser"
+  },
+  "PA-10": {
+   "holder": "R",
+   "member": "Scott Perry"
+  },
+  "PA-11": {
+   "holder": "R",
+   "member": "Lloyd Smucker"
+  },
+  "PA-12": {
+   "holder": "D",
+   "member": "Summer L. Lee"
+  },
+  "PA-13": {
+   "holder": "R",
+   "member": "John Joyce"
+  },
+  "PA-14": {
+   "holder": "R",
+   "member": "Guy Reschenthaler"
+  },
+  "PA-15": {
+   "holder": "R",
+   "member": "Glenn Thompson"
+  },
+  "PA-16": {
+   "holder": "R",
+   "member": "Mike Kelly"
+  },
+  "PA-17": {
+   "holder": "D",
+   "member": "Christopher R. Deluzio"
+  },
+  "RI-01": {
+   "holder": "D",
+   "member": "Gabe Amo"
+  },
+  "RI-02": {
+   "holder": "D",
+   "member": "Seth Magaziner"
+  },
+  "SC-01": {
+   "holder": "R",
+   "member": "Nancy Mace"
+  },
+  "SC-02": {
+   "holder": "R",
+   "member": "Joe Wilson"
+  },
+  "SC-03": {
+   "holder": "R",
+   "member": "Sheri Biggs"
+  },
+  "SC-04": {
+   "holder": "R",
+   "member": "William R. Timmons IV"
+  },
+  "SC-05": {
+   "holder": "R",
+   "member": "Ralph Norman"
+  },
+  "SC-06": {
+   "holder": "D",
+   "member": "James E. Clyburn"
+  },
+  "SC-07": {
+   "holder": "R",
+   "member": "Russell Fry"
+  },
+  "SD-AL": {
+   "holder": "R",
+   "member": "Dusty Johnson"
+  },
+  "TN-01": {
+   "holder": "R",
+   "member": "Diana Harshbarger",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-02": {
+   "holder": "R",
+   "member": "Tim Burchett",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-03": {
+   "holder": "R",
+   "member": "Charles J. \"Chuck\" Fleischmann",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-04": {
+   "holder": "R",
+   "member": "Scott DesJarlais",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-05": {
+   "holder": "R",
+   "member": "Andrew Ogles",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-06": {
+   "holder": "R",
+   "member": "John W. Rose",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-07": {
+   "holder": "R",
+   "member": "Matt Van Epps",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-08": {
+   "holder": "R",
+   "member": "David Kustoff",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TN-09": {
+   "holder": "D",
+   "member": "Steve Cohen",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-01": {
+   "holder": "R",
+   "member": "Nathaniel Moran",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-02": {
+   "holder": "R",
+   "member": "Dan Crenshaw",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-03": {
+   "holder": "R",
+   "member": "Keith Self",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-04": {
+   "holder": "R",
+   "member": "Pat Fallon",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-05": {
+   "holder": "R",
+   "member": "Lance Gooden",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-06": {
+   "holder": "R",
+   "member": "Jake Ellzey",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-07": {
+   "holder": "D",
+   "member": "Lizzie Fletcher",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-08": {
+   "holder": "R",
+   "member": "Morgan Luttrell",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-09": {
+   "holder": "D",
+   "member": "Al Green",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-10": {
+   "holder": "R",
+   "member": "Michael T. McCaul",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-11": {
+   "holder": "R",
+   "member": "August Pfluger",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-12": {
+   "holder": "R",
+   "member": "Craig A. Goldman",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-13": {
+   "holder": "R",
+   "member": "Ronny Jackson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-14": {
+   "holder": "R",
+   "member": "Randy K. Weber, Sr.",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-15": {
+   "holder": "R",
+   "member": "Monica De La Cruz",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+7 (data.json)"
+  },
+  "TX-16": {
+   "holder": "D",
+   "member": "Veronica Escobar",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-17": {
+   "holder": "R",
+   "member": "Pete Sessions",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-18": {
+   "holder": "D",
+   "member": "Christian D. Menefee",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-19": {
+   "holder": "R",
+   "member": "Jodey C. Arrington",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-20": {
+   "holder": "D",
+   "member": "Joaquin Castro",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-21": {
+   "holder": "R",
+   "member": "Chip Roy",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-22": {
+   "holder": "R",
+   "member": "Troy E. Nehls",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-23": {
+   "holder": "R",
+   "vacant": true,
+   "last_holder": "Tony Gonzales",
+   "vacancy_note": "resigned 14 Apr 2026",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+7 (data.json)"
+  },
+  "TX-24": {
+   "holder": "R",
+   "member": "Beth Van Duyne",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-25": {
+   "holder": "R",
+   "member": "Roger Williams",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-26": {
+   "holder": "R",
+   "member": "Brandon Gill",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-27": {
+   "holder": "R",
+   "member": "Michael Cloud",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-28": {
+   "holder": "D",
+   "member": "Henry Cuellar",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+3 (data.json)"
+  },
+  "TX-29": {
+   "holder": "D",
+   "member": "Sylvia R. Garcia",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-30": {
+   "holder": "D",
+   "member": "Jasmine Crockett",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-31": {
+   "holder": "R",
+   "member": "John R. Carter",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-32": {
+   "holder": "D",
+   "member": "Julie Johnson",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-33": {
+   "holder": "D",
+   "member": "Marc A. Veasey",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-34": {
+   "holder": "D",
+   "member": "Vicente Gonzalez",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+3 (data.json)"
+  },
+  "TX-35": {
+   "holder": "D",
+   "member": "Greg Casar",
+   "redrawn": true,
+   "notional_party": "R",
+   "notional_source": "Cook PVI R+4 (data.json)"
+  },
+  "TX-36": {
+   "holder": "R",
+   "member": "Brian Babin",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-37": {
+   "holder": "D",
+   "member": "Lloyd Doggett",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "TX-38": {
+   "holder": "R",
+   "member": "Wesley Hunt",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "UT-01": {
+   "holder": "R",
+   "member": "Blake D. Moore",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "UT-02": {
+   "holder": "R",
+   "member": "Celeste Maloy",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "UT-03": {
+   "holder": "R",
+   "member": "Mike Kennedy",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "UT-04": {
+   "holder": "R",
+   "member": "Burgess Owens",
+   "redrawn": true,
+   "notional_party": null,
+   "notional_source": null
+  },
+  "VA-01": {
+   "holder": "R",
+   "member": "Robert J. Wittman"
+  },
+  "VA-02": {
+   "holder": "R",
+   "member": "Jennifer A. Kiggans"
+  },
+  "VA-03": {
+   "holder": "D",
+   "member": "Robert C. \"Bobby\" Scott"
+  },
+  "VA-04": {
+   "holder": "D",
+   "member": "Jennifer L. McClellan"
+  },
+  "VA-05": {
+   "holder": "R",
+   "member": "John J. McGuire III"
+  },
+  "VA-06": {
+   "holder": "R",
+   "member": "Ben Cline"
+  },
+  "VA-07": {
+   "holder": "D",
+   "member": "Eugene Simon Vindman"
+  },
+  "VA-08": {
+   "holder": "D",
+   "member": "Donald S. Beyer, Jr."
+  },
+  "VA-09": {
+   "holder": "R",
+   "member": "H. Morgan Griffith"
+  },
+  "VA-10": {
+   "holder": "D",
+   "member": "Suhas Subramanyam"
+  },
+  "VA-11": {
+   "holder": "D",
+   "member": "James R. Walkinshaw"
+  },
+  "VT-AL": {
+   "holder": "D",
+   "member": "Becca Balint"
+  },
+  "WA-01": {
+   "holder": "D",
+   "member": "Suzan K. DelBene"
+  },
+  "WA-02": {
+   "holder": "D",
+   "member": "Rick Larsen"
+  },
+  "WA-03": {
+   "holder": "D",
+   "member": "Marie Gluesenkamp Perez"
+  },
+  "WA-04": {
+   "holder": "R",
+   "member": "Dan Newhouse"
+  },
+  "WA-05": {
+   "holder": "R",
+   "member": "Michael Baumgartner"
+  },
+  "WA-06": {
+   "holder": "D",
+   "member": "Emily Randall"
+  },
+  "WA-07": {
+   "holder": "D",
+   "member": "Pramila Jayapal"
+  },
+  "WA-08": {
+   "holder": "D",
+   "member": "Kim Schrier"
+  },
+  "WA-09": {
+   "holder": "D",
+   "member": "Adam Smith"
+  },
+  "WA-10": {
+   "holder": "D",
+   "member": "Marilyn Strickland"
+  },
+  "WI-01": {
+   "holder": "R",
+   "member": "Bryan Steil"
+  },
+  "WI-02": {
+   "holder": "D",
+   "member": "Mark Pocan"
+  },
+  "WI-03": {
+   "holder": "R",
+   "member": "Derrick Van Orden"
+  },
+  "WI-04": {
+   "holder": "D",
+   "member": "Gwen Moore"
+  },
+  "WI-05": {
+   "holder": "R",
+   "member": "Scott Fitzgerald"
+  },
+  "WI-06": {
+   "holder": "R",
+   "member": "Glenn Grothman"
+  },
+  "WI-07": {
+   "holder": "R",
+   "member": "Thomas P. Tiffany"
+  },
+  "WI-08": {
+   "holder": "R",
+   "member": "Tony Wied"
+  },
+  "WV-01": {
+   "holder": "R",
+   "member": "Carol D. Miller"
+  },
+  "WV-02": {
+   "holder": "R",
+   "member": "Riley M. Moore"
+  },
+  "WY-AL": {
+   "holder": "R",
+   "member": "Harriet M. Hageman"
+  }
+ },
+ "senate": {
+  "Senate-AL": {
+   "holder": "R",
+   "incumbent": "Open seat (Tuberville running for governor)",
+   "state": "Alabama"
+  },
+  "Senate-AK": {
+   "holder": "R",
+   "incumbent": "Dan Sullivan",
+   "state": "Alaska"
+  },
+  "Senate-AR": {
+   "holder": "R",
+   "incumbent": "Tom Cotton",
+   "state": "Arkansas"
+  },
+  "Senate-CO": {
+   "holder": "D",
+   "incumbent": "John Hickenlooper",
+   "state": "Colorado"
+  },
+  "Senate-DE": {
+   "holder": "D",
+   "incumbent": "Chris Coons",
+   "state": "Delaware"
+  },
+  "Senate-GA": {
+   "holder": "D",
+   "incumbent": "Jon Ossoff",
+   "state": "Georgia"
+  },
+  "Senate-ID": {
+   "holder": "R",
+   "incumbent": "Jim Risch",
+   "state": "Idaho"
+  },
+  "Senate-IL": {
+   "holder": "D",
+   "incumbent": "Dick Durbin",
+   "state": "Illinois"
+  },
+  "Senate-IA": {
+   "holder": "R",
+   "incumbent": "Open seat (Ernst retiring)",
+   "state": "Iowa"
+  },
+  "Senate-KS": {
+   "holder": "R",
+   "incumbent": "Roger Marshall",
+   "state": "Kansas"
+  },
+  "Senate-KY": {
+   "holder": "R",
+   "incumbent": "Mitch McConnell",
+   "state": "Kentucky"
+  },
+  "Senate-LA": {
+   "holder": "R",
+   "incumbent": "Open seat (Cassidy not seeking re-election)",
+   "state": "Louisiana"
+  },
+  "Senate-ME": {
+   "holder": "R",
+   "incumbent": "Susan Collins",
+   "state": "Maine"
+  },
+  "Senate-MA": {
+   "holder": "D",
+   "incumbent": "Ed Markey",
+   "state": "Massachusetts"
+  },
+  "Senate-MI": {
+   "holder": "D",
+   "incumbent": "Open seat (Peters retiring)",
+   "state": "Michigan"
+  },
+  "Senate-MN": {
+   "holder": "D",
+   "incumbent": "Open seat (Smith retiring)",
+   "state": "Minnesota"
+  },
+  "Senate-MS": {
+   "holder": "R",
+   "incumbent": "Cindy Hyde-Smith",
+   "state": "Mississippi"
+  },
+  "Senate-MT": {
+   "holder": "R",
+   "incumbent": "Open seat (Daines retiring)",
+   "state": "Montana"
+  },
+  "Senate-NE": {
+   "holder": "R",
+   "incumbent": "Pete Ricketts",
+   "state": "Nebraska"
+  },
+  "Senate-NH": {
+   "holder": "D",
+   "incumbent": "Jeanne Shaheen",
+   "state": "New Hampshire"
+  },
+  "Senate-NJ": {
+   "holder": "D",
+   "incumbent": "Cory Booker",
+   "state": "New Jersey"
+  },
+  "Senate-NM": {
+   "holder": "D",
+   "incumbent": "Ben Ray Luján",
+   "state": "New Mexico"
+  },
+  "Senate-NC": {
+   "holder": "R",
+   "incumbent": "Open seat (Tillis retiring)",
+   "state": "North Carolina"
+  },
+  "Senate-OK": {
+   "holder": "R",
+   "incumbent": "Alan Armstrong (appointed)",
+   "state": "Oklahoma"
+  },
+  "Senate-OR": {
+   "holder": "D",
+   "incumbent": "Jeff Merkley",
+   "state": "Oregon"
+  },
+  "Senate-RI": {
+   "holder": "D",
+   "incumbent": "Jack Reed",
+   "state": "Rhode Island"
+  },
+  "Senate-SC": {
+   "holder": "R",
+   "incumbent": "Darline Graham Nordone (appointed)",
+   "state": "South Carolina"
+  },
+  "Senate-SD": {
+   "holder": "R",
+   "incumbent": "Mike Rounds",
+   "state": "South Dakota"
+  },
+  "Senate-TN": {
+   "holder": "R",
+   "incumbent": "Bill Hagerty",
+   "state": "Tennessee"
+  },
+  "Senate-TX": {
+   "holder": "R",
+   "incumbent": "Open seat (Cornyn not seeking re-election)",
+   "state": "Texas"
+  },
+  "Senate-VA": {
+   "holder": "D",
+   "incumbent": "Mark Warner",
+   "state": "Virginia"
+  },
+  "Senate-WV": {
+   "holder": "R",
+   "incumbent": "Shelley Capito",
+   "state": "West Virginia"
+  },
+  "Senate-WY": {
+   "holder": "R",
+   "incumbent": "Open seat (Lummis retiring)",
+   "state": "Wyoming"
+  },
+  "Senate-FL": {
+   "holder": "R",
+   "incumbent": "Ashley Moody",
+   "state": "Florida"
+  },
+  "Senate-OH": {
+   "holder": "R",
+   "incumbent": "Jon Husted",
+   "state": "Ohio"
+  }
+ },
+ "gov": {
+  "Gov-AL": {
+   "holder": "R",
+   "incumbent": "Open (Kay Ivey — TL)",
+   "state": "Alabama"
+  },
+  "Gov-AK": {
+   "holder": "R",
+   "incumbent": "Open (Mike Dunleavy — TL)",
+   "state": "Alaska"
+  },
+  "Gov-AZ": {
+   "holder": "D",
+   "incumbent": "Katie Hobbs",
+   "state": "Arizona"
+  },
+  "Gov-AR": {
+   "holder": "R",
+   "incumbent": "Sarah Huckabee Sanders",
+   "state": "Arkansas"
+  },
+  "Gov-CA": {
+   "holder": "D",
+   "incumbent": "Open (Gavin Newsom — TL)",
+   "state": "California"
+  },
+  "Gov-CO": {
+   "holder": "D",
+   "incumbent": "Open (Jared Polis — TL)",
+   "state": "Colorado"
+  },
+  "Gov-CT": {
+   "holder": "D",
+   "incumbent": "Ned Lamont",
+   "state": "Connecticut"
+  },
+  "Gov-FL": {
+   "holder": "R",
+   "incumbent": "Open (Ron DeSantis — TL)",
+   "state": "Florida"
+  },
+  "Gov-GA": {
+   "holder": "R",
+   "incumbent": "Open (Brian Kemp — TL)",
+   "state": "Georgia"
+  },
+  "Gov-HI": {
+   "holder": "D",
+   "incumbent": "Josh Green",
+   "state": "Hawaii"
+  },
+  "Gov-ID": {
+   "holder": "R",
+   "incumbent": "Brad Little",
+   "state": "Idaho"
+  },
+  "Gov-IL": {
+   "holder": "D",
+   "incumbent": "JB Pritzker",
+   "state": "Illinois"
+  },
+  "Gov-IA": {
+   "holder": "R",
+   "incumbent": "Open (Kim Reynolds — retiring)",
+   "state": "Iowa"
+  },
+  "Gov-KS": {
+   "holder": "D",
+   "incumbent": "Open (Laura Kelly — TL)",
+   "state": "Kansas"
+  },
+  "Gov-ME": {
+   "holder": "D",
+   "incumbent": "Open (Janet Mills — TL)",
+   "state": "Maine"
+  },
+  "Gov-MD": {
+   "holder": "D",
+   "incumbent": "Wes Moore",
+   "state": "Maryland"
+  },
+  "Gov-MA": {
+   "holder": "D",
+   "incumbent": "Maura Healey",
+   "state": "Massachusetts"
+  },
+  "Gov-MI": {
+   "holder": "D",
+   "incumbent": "Open (Gretchen Whitmer — TL)",
+   "state": "Michigan"
+  },
+  "Gov-MN": {
+   "holder": "D",
+   "incumbent": "Open (Tim Walz ended re-election bid, 5 Jan 2026)",
+   "state": "Minnesota"
+  },
+  "Gov-NE": {
+   "holder": "R",
+   "incumbent": "Jim Pillen",
+   "state": "Nebraska"
+  },
+  "Gov-NV": {
+   "holder": "R",
+   "incumbent": "Joe Lombardo",
+   "state": "Nevada"
+  },
+  "Gov-NH": {
+   "holder": "R",
+   "incumbent": "Kelly Ayotte",
+   "state": "New Hampshire"
+  },
+  "Gov-NM": {
+   "holder": "D",
+   "incumbent": "Open (MLG — TL)",
+   "state": "New Mexico"
+  },
+  "Gov-NY": {
+   "holder": "D",
+   "incumbent": "Kathy Hochul",
+   "state": "New York"
+  },
+  "Gov-OH": {
+   "holder": "R",
+   "incumbent": "Open (Mike DeWine — TL)",
+   "state": "Ohio"
+  },
+  "Gov-OK": {
+   "holder": "R",
+   "incumbent": "Open (Kevin Stitt — TL)",
+   "state": "Oklahoma"
+  },
+  "Gov-OR": {
+   "holder": "D",
+   "incumbent": "Tina Kotek",
+   "state": "Oregon"
+  },
+  "Gov-PA": {
+   "holder": "D",
+   "incumbent": "Josh Shapiro",
+   "state": "Pennsylvania"
+  },
+  "Gov-RI": {
+   "holder": "D",
+   "incumbent": "Open seat (McKee not renominated)",
+   "state": "Rhode Island"
+  },
+  "Gov-SC": {
+   "holder": "R",
+   "incumbent": "Open (Henry McMaster — TL)",
+   "state": "South Carolina"
+  },
+  "Gov-SD": {
+   "holder": "R",
+   "incumbent": "Larry Rhoden",
+   "state": "South Dakota"
+  },
+  "Gov-TN": {
+   "holder": "R",
+   "incumbent": "Open (Bill Lee — TL)",
+   "state": "Tennessee"
+  },
+  "Gov-TX": {
+   "holder": "R",
+   "incumbent": "Greg Abbott",
+   "state": "Texas"
+  },
+  "Gov-VT": {
+   "holder": "R",
+   "incumbent": "Phil Scott",
+   "state": "Vermont"
+  },
+  "Gov-WI": {
+   "holder": "D",
+   "incumbent": "Open (Tony Evers — not running)",
+   "state": "Wisconsin"
+  },
+  "Gov-WY": {
+   "holder": "R",
+   "incumbent": "Open (Mark Gordon — TL)",
+   "state": "Wyoming"
+  }
+ }
+}

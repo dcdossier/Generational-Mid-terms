@@ -18,6 +18,8 @@ create table if not exists public.live_meta (
   notes             text
 );
 insert into public.live_meta (id) values (1) on conflict (id) do nothing;
+-- last_push: set by every Results Desk run, even when nothing changed (site watchdog).
+alter table public.live_meta add column if not exists last_push timestamptz;
 
 -- ── live_chamber: seats won and leading per chamber and party ───────────────
 -- not_up: seats not on the ballot this year. Senate D 34 includes the two
@@ -37,9 +39,14 @@ insert into public.live_chamber (chamber, party, not_up) values
   ('senate', 'D', 34), ('senate', 'R', 31), ('senate', 'I', 0),
   ('gov',    'D', 6),  ('gov',    'R', 8),  ('gov',    'I', 0)
 on conflict (chamber, party) do update set not_up = excluded.not_up;
+-- Quick-entry pickups typed from AP's list; per-race calls win when present.
+alter table public.live_chamber add column if not exists gained integer check (gained is null or gained >= 0);
+alter table public.live_chamber add column if not exists lost   integer check (lost   is null or lost   >= 0);
 
--- ── live_races: featured races ──────────────────────────────────────────────
+-- ── live_races: featured races and per-race calls ───────────────────────────
 -- race_id uses the site's canonical ids: "PA-07", "Senate-NC", "Gov-NV".
+-- Featured rows carry vote shares; the House/Senate/Gov calls tabs add a row for
+-- every race with just winner, leader and called_by (featured = false).
 -- winner is the party a race was called for (needed for flips); leader is
 -- whoever is ahead in the count.
 create table if not exists public.live_races (
@@ -77,6 +84,24 @@ create trigger live_chamber_touch before update on public.live_chamber
 drop trigger if exists live_races_touch on public.live_races;
 create trigger live_races_touch before update on public.live_races
   for each row execute function public.live_touch();
+
+-- called_at: stamped when a race is first called, cleared if the call is withdrawn.
+create or replace function public.live_called_at() returns trigger
+language plpgsql as $$
+begin
+  if new.called_by is null then
+    new.called_at := null;
+  elsif tg_op = 'INSERT' or old.called_by is null then
+    new.called_at := coalesce(new.called_at, now());
+  else
+    new.called_at := coalesce(new.called_at, old.called_at, now());
+  end if;
+  return new;
+end $$;
+
+drop trigger if exists live_races_called on public.live_races;
+create trigger live_races_called before insert or update on public.live_races
+  for each row execute function public.live_called_at();
 
 -- ── Row level security: public read, no public writes ───────────────────────
 alter table public.live_meta    enable row level security;

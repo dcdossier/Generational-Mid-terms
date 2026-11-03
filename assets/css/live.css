@@ -255,3 +255,28 @@
   .bg-credits ul { columns: 1; }
 }
 @media (prefers-reduced-motion: reduce) { .bg-box, .bg-count-bar span { transition: none; } }
+
+/* ── Refresh line under the status strip, Senate/Gov not-up, gains (Prompt 46) ── */
+.ls-refresh { margin-top: 8px; padding-top: 7px; border-top: 1px solid rgba(245,240,232,.14); font-size: 12px; color: rgba(245,240,232,.75);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.ls-refresh .ls-n { color: #fff; }
+.ls-count { display: inline-block; min-width: 2.6em; font-variant-numeric: tabular-nums; }
+.ls-warn { color: #F7C060; }
+.ls-delay { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 20px; background: #F59E0B; color: #3d1d00; font: 700 12px var(--sans, sans-serif); }
+.ls-delay::before { content: '!'; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: #3d1d00; color: #F59E0B; font-size: 10px; }
+.bl-summ { margin: 0 0 4px; font-size: 12px; color: #6B6B6B; }
+.bl-nu-t { font: 700 11px var(--sans, sans-serif); pointer-events: none; }
+.bl-gain { display: block; margin-top: 6px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.bl-gain small { font-weight: 400; color: #6B6B6B; }
+.bl-glead { display: block; font-size: 11px; color: #7A7A7A; font-variant-numeric: tabular-nums; }
+.bl-lg-nu-d { background: rgba(26,47,122,.35); }
+.bl-lg-nu-r { background: rgba(122,26,26,.35); }
+.bl-qwrap { display: inline-flex; align-items: center; }
+.bl-qgain { margin-left: 10px; padding-left: 12px; border-left: 1px solid #E8E8E0; }
+.bl-qgain .bl-q { margin-left: -4px; }
+.bl-foot { margin: 8px 0 0; font-size: 12px; color: #6B6B6B; font-style: italic; }
+@media (max-width: 600px) {
+  .ls-refresh { display: block; }
+  .ls-refresh .ls-delay { margin-bottom: 5px; }
+  .bl-qgain { margin-left: 0; padding-left: 0; border-left: 0; }
+}

@@ -9,11 +9,11 @@
 (function () {
   'use strict';
 
-  var CONFIG_URL = 'assets/live-config.json?v=20261104';
+  var CONFIG_URL = 'assets/live-config.json?v=20261104d';
   var ST = { AK:'Alaska',AZ:'Arizona',CA:'California',CO:'Colorado',FL:'Florida',GA:'Georgia',IA:'Iowa',KS:'Kansas',KY:'Kentucky',ME:'Maine',MI:'Michigan',MN:'Minnesota',MT:'Montana',NC:'North Carolina',NE:'Nebraska',NH:'New Hampshire',NV:'Nevada',NY:'New York',OH:'Ohio',PA:'Pennsylvania',SC:'South Carolina',TX:'Texas',VA:'Virginia',WI:'Wisconsin' };
   var PARTY = { D: 'Democrat', R: 'Republican', I: 'Independent' };
 
-  var cfg = null, mounts = [], prevLeader = {}, lastState = null, demoRows = null;
+  var cfg = null, mounts = [], prevLeader = {}, lastState = null;
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
   function num(v) { if (v === null || v === undefined || v === '') return null; v = Number(v); return isFinite(v) ? v : null; }
@@ -32,7 +32,7 @@
 
   // The live row for a race, with shares as numbers.
   function rowFor(st, id) {
-    var list = (demoRows || (st && st.races) || []);
+    var list = (st && st.races) || [];
     for (var i = 0; i < list.length; i++) if (list[i].race_id === id) return list[i];
     return null;
   }
@@ -139,29 +139,7 @@
     setTimeout(function () { box.classList.remove(cls); }, reduced() ? 4000 : 1400);
   }
 
-  // ── ?demo=1: made-up results for these races, with occasional lead changes ──
-  var STAGE = (/[?&]stage=(pre|early|mid|majority|final)\b/.exec(location.search) || [])[1] || 'mid';
-  function makeDemo() {
-    if (STAGE === 'pre') { demoRows = []; return; }
-    var seed = 7, rnd = function () { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
-    var base = { early: 18, mid: 55, majority: 88, final: 97 }[STAGE];
-    demoRows = cfg.senate.concat(cfg.house).map(function (r, i) {
-      var d = 47 + rnd() * 6, rr = 100 - d - 1 - rnd() * 2;
-      var counted = Math.min(99, Math.round(base + (rnd() - 0.5) * 20));
-      var call = (STAGE === 'majority' || STAGE === 'final') && Math.abs(d - rr) > 2.2 ? 'AP' : null;
-      return { race_id: r.race_id, pct_d: +d.toFixed(1), pct_r: +rr.toFixed(1), pct_counted: counted, called_by: call, winner: call ? (d > rr ? 'D' : 'R') : null,
-        source: 'Demo', other_sources: i % 4 === 0 ? [{ name: 'State results feed (demo)', pct_d: +(d - 0.3).toFixed(1), pct_r: +(rr + 0.3).toFixed(1), pct_counted: counted - 2, at: new Date().toISOString() }] : [] };
-    });
-  }
-  function demoTick() {
-    var open = demoRows.filter(function (r) { return !r.called_by; });
-    if (!open.length) return;
-    var r = open[Math.floor(Math.random() * open.length)];
-    var gap = r.pct_d - r.pct_r, sw = gap > 0 ? -(0.4 + Math.random() * 1.6) : (0.4 + Math.random() * 1.6);   // pull towards a tie, sometimes past it
-    r.pct_d = +(r.pct_d + sw / 2).toFixed(1); r.pct_r = +(r.pct_r - sw / 2).toFixed(1);
-    r.pct_counted = Math.min(99, r.pct_counted + 1);
-    update(lastState || { demo: true });
-  }
+  // ?demo=1 rows come from live.js, so the boxes agree with the bars and the strip.
 
   function init() {
     mounts = [].slice.call(document.querySelectorAll('[data-live-battleground]'));
@@ -169,9 +147,7 @@
     fetch(CONFIG_URL).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (c) {
       cfg = c;
       mounts.forEach(function (el) { el.classList.add('bg'); build(el); el.hidden = false; });
-      var demo = /[?&]demo=1\b/.test(location.search);
-      if (demo) { makeDemo(); if (STAGE !== 'pre') setInterval(demoTick, 3500); }
-      update(window.RacebookLive && window.RacebookLive.ready ? window.RacebookLive.state : (lastState || { demo: demo }));
+      update(window.RacebookLive && window.RacebookLive.ready ? window.RacebookLive.state : (lastState || { demo: /[?&]demo=1\b/.test(location.search) }));
     }).catch(function () { mounts.forEach(function (el) { el.hidden = true; }); });
     document.addEventListener('racebook:live', function (e) { lastState = e.detail; update(e.detail); });
   }

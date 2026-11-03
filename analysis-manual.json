@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:12:48.913Z"
+    "last_updated": "2026-11-03T04:13:46.284Z"
   },
   "posts": [],
   "entries": [
@@ -1312,11 +1312,13 @@
       "author": "Brigadier Anil Raman",
       "source": "The Hindu",
       "date": "2026-11-02T00:00:00.000Z",
-      "description": "",
+      "description": "How U.S. midterms test election integrity, certification delays, and officials' resolve amid legal challenges and postelection scrutiny.",
       "tags": [],
       "added_at": "2026-11-03T04:13:26.680Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page",
+      "image": "https://th-i.thgim.com/public/incoming/ugcmnj/article71654212.ece/alternates/LANDSCAPE_1200/2026-11-01T154039Z_1400771202_RC22FOA1UZN6_RTRMADP_3_USA-TRUMP-ELECTION.JPG"
     }
   ]
 }

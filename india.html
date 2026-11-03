@@ -1245,7 +1245,7 @@ body {
           <td>2.5%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:100%"></div></div></td>
           <td><span class="competitiveness comp-safe-d">Safe D</span></td>
-          <td>No Senate race in 2026; multiple competitive House seats (CA-13, CA-22, CA-48 rated Toss-up)</td>
+          <td>No Senate race in 2026; CA-22 rated Toss-up, CA-48 Lean D and CA-13 Likely D</td>
         </tr>
         <tr>
           <td><span class="state-name">Texas</span></td>
@@ -1253,7 +1253,7 @@ body {
           <td>1.5%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:45%"></div></div></td>
           <td><span class="competitiveness comp-lean-r">Lean R</span></td>
-          <td>Several suburban Houston and Dallas House seats rated Toss-up or Lean</td>
+          <td>Open Senate seat rated Lean D; TX-35 rated Toss-up and South Texas seats TX-15, TX-28 and TX-34 Lean D</td>
         </tr>
         <tr>
           <td><span class="state-name">New Jersey</span></td>
@@ -1269,7 +1269,7 @@ body {
           <td>2.1%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:44%"></div></div></td>
           <td><span class="competitiveness comp-lean-d">Lean D</span></td>
-          <td>Multiple Long Island and suburban NY competitive House races</td>
+          <td>NY-17 rated Toss-up; Long Island seats NY-03 (Lean D) and NY-04 (Likely D)</td>
         </tr>
         <tr>
           <td><span class="state-name">Illinois</span></td>
@@ -1293,7 +1293,7 @@ body {
           <td>1.8%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:16%"></div></div></td>
           <td><span class="competitiveness comp-lean-d">Lean D</span></td>
-          <td>VA-10 (Subramanyam incumbent); VA-07 competitive</td>
+          <td>VA-10 (Subramanyam incumbent); VA-01 rated Toss-up and VA-02 Lean D</td>
         </tr>
         <tr>
           <td><span class="state-name">Michigan</span></td>
@@ -1301,7 +1301,7 @@ body {
           <td>0.9%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:10%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>Open Senate seat rated Toss-up; MI-13: Thanedar lost the 4 August primary to Donavan McKinney</td>
+          <td>Open Senate seat rated Lean D; MI-13: Thanedar lost the 4 August primary to Donavan McKinney</td>
         </tr>
         <tr>
           <td><span class="state-name">Pennsylvania</span></td>
@@ -1309,7 +1309,7 @@ body {
           <td>0.7%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:9%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>No Senate race in 2026; multiple suburban Philly House seats competitive</td>
+          <td>No Senate race in 2026; PA-01 rated Toss-up; PA-07, PA-08 and PA-10 Lean D</td>
         </tr>
         <tr>
           <td><span class="state-name">Wisconsin</span></td>
@@ -1317,7 +1317,7 @@ body {
           <td>0.7%</td>
           <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:4%"></div></div></td>
           <td><span class="competitiveness comp-swing">Swing</span></td>
-          <td>No Senate race in 2026; open Governor's race rated Toss-up; community concentrated in Madison and Milwaukee suburbs</td>
+          <td>No Senate race in 2026; open Governor's race rated Lean D; community concentrated in Madison and Milwaukee suburbs</td>
         </tr>
       </tbody>
     </table>
@@ -1868,51 +1868,51 @@ function influenceZoomReset()      { _influenceZoom?.reset(); }
 
 // ── INFLUENCE MAP DATA ───────────────────────────────────────────────────────
 const IA_STATE_DATA = {
-  'California':     { pop:960000, pct:2.5,  comp:'safe-d',  outlook:'Safe D — no Senate race in 2026; multiple competitive House seats' },
-  'Texas':          { pop:430000, pct:1.5,  comp:'lean-r',  outlook:'Lean R — suburban Houston/Dallas House seats rated Toss-up' },
+  'California':     { pop:960000, pct:2.5,  comp:'safe-d',  outlook:'Safe D — no Senate race in 2026; CA-22 rated Toss-up, CA-48 Lean D' },
+  'Texas':          { pop:430000, pct:1.5,  comp:'lean-r',  outlook:'Lean R — open Senate seat rated Lean D; TX-35 rated Toss-up' },
   'New Jersey':     { pop:390000, pct:4.4,  comp:'swing',   outlook:'Swing — NJ-07 Lean D, NJ-11 Solid D; Senate (Booker) Solid D' },
-  'New York':       { pop:418000, pct:2.1,  comp:'lean-d',  outlook:'Lean D — multiple Long Island & suburban NY competitive House races' },
+  'New York':       { pop:418000, pct:2.1,  comp:'lean-d',  outlook:'Lean D — NY-17 rated Toss-up; Long Island seats Lean or Likely D' },
   'Illinois':       { pop:215000, pct:1.7,  comp:'safe-d',  outlook:'Safe D — open Senate seat (Krishnamoorthi lost the primary); IL-08 now open' },
-  'Virginia':       { pop:155000, pct:1.8,  comp:'lean-d',  outlook:'Lean D — VA-10 (Subramanyam incumbent); VA-07 competitive' },
-  'Georgia':        { pop:115000, pct:1.1,  comp:'swing',   outlook:'Swing — Senate (Ossoff) rated Likely D' },
+  'Virginia':       { pop:155000, pct:1.8,  comp:'lean-d',  outlook:'Lean D — VA-10 (Subramanyam incumbent); VA-01 rated Toss-up' },
+  'Georgia':        { pop:115000, pct:1.1,  comp:'swing',   outlook:'Swing — Senate (Ossoff) rated Likely D; open Governor race Lean D' },
   'Florida':        { pop:100000, pct:0.47, comp:'lean-r',  outlook:'Lean R — several competitive suburban House seats' },
-  'Michigan':       { pop:95000,  pct:0.9,  comp:'swing',   outlook:'Swing — open Senate seat rated Toss-up; Thanedar lost the MI-13 primary to Donavan McKinney' },
-  'Pennsylvania':   { pop:90000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; suburban Philly House seats competitive' },
+  'Michigan':       { pop:95000,  pct:0.9,  comp:'swing',   outlook:'Swing — open Senate seat rated Lean D; Thanedar lost the MI-13 primary to Donavan McKinney' },
+  'Pennsylvania':   { pop:90000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; PA-01 rated Toss-up, three seats Lean D' },
   'Maryland':       { pop:90000,  pct:1.5,  comp:'safe-d',  outlook:'Safe D — no competitive statewide races' },
   'Washington':     { pop:90000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — Jayapal incumbent WA-07' },
   'Massachusetts':  { pop:80000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — no competitive races expected' },
-  'North Carolina': { pop:75000,  pct:0.72, comp:'swing',   outlook:'Swing — Senate competitive; NC-13/14 rated Toss-up' },
-  'Ohio':           { pop:65000,  pct:0.56, comp:'lean-r',  outlook:'Lean R — competitive House seats in Columbus/Cleveland suburbs' },
-  'Arizona':        { pop:60000,  pct:0.83, comp:'swing',   outlook:'Swing — AZ-01, AZ-06 competitive House races' },
+  'North Carolina': { pop:75000,  pct:0.72, comp:'swing',   outlook:'Swing — open Senate seat rated Likely D; NC-01 and NC-11 Lean D' },
+  'Ohio':           { pop:65000,  pct:0.56, comp:'lean-r',  outlook:'Lean R — Senate special (Husted) and open Governor race rated Lean D' },
+  'Arizona':        { pop:60000,  pct:0.83, comp:'swing',   outlook:'Swing — AZ-01 and AZ-06 rated Lean D; Governor (Hobbs) Likely D' },
   'Connecticut':    { pop:55000,  pct:1.55, comp:'lean-d',  outlook:'Lean D — CT-05 potentially competitive' },
-  'Colorado':       { pop:55000,  pct:0.96, comp:'lean-d',  outlook:'Lean D — Bennet Senate seat; no competitive statewide races' },
-  'Minnesota':      { pop:50000,  pct:0.9,  comp:'lean-d',  outlook:'Lean D — Klobuchar Senate seat; MN-03 potentially competitive' },
+  'Colorado':       { pop:55000,  pct:0.96, comp:'lean-d',  outlook:'Lean D — Senate (Hickenlooper) Safe D; CO-05 rated Toss-up, CO-08 Lean D' },
+  'Minnesota':      { pop:50000,  pct:0.9,  comp:'lean-d',  outlook:'Lean D — open Senate seat (Smith retiring) rated Lean D' },
   'Indiana':        { pop:45000,  pct:0.66, comp:'safe-r',  outlook:'Safe R — strong Republican state' },
-  'Nevada':         { pop:40000,  pct:1.3,  comp:'swing',   outlook:'Swing — NV-01 and NV-03 competitive House races; Indian-American community in Las Vegas suburbs' },
-  'Wisconsin':      { pop:40000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; open Governor race rated Toss-up; community in Madison/Milwaukee suburbs' },
+  'Nevada':         { pop:40000,  pct:1.3,  comp:'swing',   outlook:'Swing — Governor (Lombardo) rated Toss-up; NV-02 Lean R; Indian-American community in Las Vegas suburbs' },
+  'Wisconsin':      { pop:40000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; open Governor race rated Lean D; community in Madison/Milwaukee suburbs' },
   'Oregon':         { pop:40000,  pct:0.95, comp:'lean-d',  outlook:'Lean D — Merkley Senate seat; OR-05 potentially competitive' },
   'Missouri':       { pop:40000,  pct:0.65, comp:'safe-r',  outlook:'Safe R — no competitive races' },
   'Tennessee':      { pop:35000,  pct:0.51, comp:'safe-r',  outlook:'Safe R — no competitive races' },
   'Delaware':       { pop:25000,  pct:2.57, comp:'safe-d',  outlook:'Safe D — no competitive races' },
-  'Kansas':         { pop:25000,  pct:0.86, comp:'lean-r',  outlook:'Lean R — no competitive statewide races' },
-  'Oklahoma':       { pop:25000,  pct:0.63, comp:'safe-r',  outlook:'Safe R — Lankford Senate seat' },
-  'South Carolina': { pop:25000,  pct:0.49, comp:'lean-r',  outlook:'Lean R — Joe Wilson (SC-02) incumbent' },
-  'Utah':           { pop:20000,  pct:0.63, comp:'lean-r',  outlook:'Lean R — Lee Senate seat; no competitive races' },
-  'Kentucky':       { pop:20000,  pct:0.45, comp:'safe-r',  outlook:'Safe R — Paul Senate seat' },
+  'Kansas':         { pop:25000,  pct:0.86, comp:'lean-r',  outlook:'Lean R — Senate (Marshall) rated Toss-up; Governor race Lean R' },
+  'Oklahoma':       { pop:25000,  pct:0.63, comp:'safe-r',  outlook:'Safe R — Senate seat (Alan Armstrong, appointed) Safe R' },
+  'South Carolina': { pop:25000,  pct:0.49, comp:'lean-r',  outlook:'Lean R — Senate seat (Darline Graham Nordone, appointed) rated Lean R; open SC-01 Lean R' },
+  'Utah':           { pop:20000,  pct:0.63, comp:'lean-r',  outlook:'Lean R — no Senate race in 2026; no competitive races' },
+  'Kentucky':       { pop:20000,  pct:0.45, comp:'safe-r',  outlook:'Safe R — open Senate seat (McConnell retiring) Safe R; KY-06 rated Toss-up' },
   'Hawaii':         { pop:20000,  pct:1.41, comp:'safe-d',  outlook:'Safe D — Tokuda HI-02 incumbent' },
-  'Louisiana':      { pop:15000,  pct:0.32, comp:'safe-r',  outlook:'Safe R — open Senate seat (Cassidy not seeking re-election)' },
+  'Louisiana':      { pop:15000,  pct:0.32, comp:'safe-r',  outlook:'Safe R — open Senate seat (Cassidy not seeking re-election) rated Likely R' },
   'Iowa':           { pop:15000,  pct:0.48, comp:'swing',   outlook:'Swing — open Senate seat (Ernst retiring) rated Toss-up; Indian-American community in Des Moines suburbs' },
-  'Nebraska':       { pop:15000,  pct:0.77, comp:'safe-r',  outlook:'Safe R — Ricketts Senate seat (2026 is his first full-term election)' },
+  'Nebraska':       { pop:15000,  pct:0.77, comp:'safe-r',  outlook:'Safe R — Senate (Ricketts) rated Lean R; first full-term election' },
   'Rhode Island':   { pop:15000,  pct:1.42, comp:'safe-d',  outlook:'Safe D — no competitive races' },
-  'New Hampshire':  { pop:12000,  pct:0.89, comp:'swing',   outlook:'Swing — Senate seat rated Toss-up; NH-01 competitive' },
+  'New Hampshire':  { pop:12000,  pct:0.89, comp:'swing',   outlook:'Swing — Senate seat rated Lean D; NH-01 Likely D' },
   'Idaho':          { pop:8000,   pct:0.45, comp:'safe-r',  outlook:'Safe R — Risch is seeking re-election' },
   'Mississippi':    { pop:8000,   pct:0.27, comp:'safe-r',  outlook:'Safe R — no competitive federal races' },
   'New Mexico':     { pop:10000,  pct:0.48, comp:'safe-d',  outlook:'Safe D — Luján Senate seat' },
   'Arkansas':       { pop:10000,  pct:0.33, comp:'safe-r',  outlook:'Safe R — no competitive races' },
   'West Virginia':  { pop:6000,   pct:0.33, comp:'safe-r',  outlook:'Safe R — Capito Senate seat' },
-  'Maine':          { pop:6000,   pct:0.44, comp:'lean-d',  outlook:'Lean D — King Senate seat; ME-02 competitive House race' },
-  'Vermont':        { pop:5000,   pct:0.80, comp:'safe-d',  outlook:'Safe D — Sanders Senate seat' },
-  'North Dakota':   { pop:5000,   pct:0.65, comp:'safe-r',  outlook:'Safe R — Cramer Senate seat' },
+  'Maine':          { pop:6000,   pct:0.44, comp:'lean-d',  outlook:'Lean D — Senate (Collins) rated Toss-up; open ME-02 Lean R' },
+  'Vermont':        { pop:5000,   pct:0.80, comp:'safe-d',  outlook:'Safe D — no Senate race in 2026' },
+  'North Dakota':   { pop:5000,   pct:0.65, comp:'safe-r',  outlook:'Safe R — no Senate race in 2026' },
   'South Dakota':   { pop:5000,   pct:0.56, comp:'safe-r',  outlook:'Safe R — Rounds Senate seat' },
   'Alaska':         { pop:5000,   pct:0.68, comp:'lean-r',  outlook:'Lean R — Sullivan Senate seat (not up 2026)' },
   'Montana':        { pop:3000,   pct:0.28, comp:'lean-r',  outlook:'Lean R — Daines Senate seat (not up 2026)' },

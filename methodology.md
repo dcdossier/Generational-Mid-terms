@@ -14,7 +14,7 @@ Several states redrew their congressional maps before 2026. Where a state uses a
 
 ## Race ratings
 
-Ratings come from three independent forecasters: the Cook Political Report, Sabato's Crystal Ball and Inside Elections. We use their seven-point scale, from Solid Democratic to Solid Republican. Ratings are reviewed by our team and updated by hand, and each chamber shows the date of its latest review. Ratings older than 14 days are flagged.
+Ratings come from three independent forecasters: the Cook Political Report, Sabato's Crystal Ball and Inside Elections. We use their seven-point scale, from Solid Democratic to Solid Republican. Each race shows all three ratings, and our composite is the middle one of the three (Inside Elections' "Tilt" counts as Lean). Seats that none of the three rates competitive count as safe for the party their Cook Partisan Voting Index favours. Ratings are reviewed by our team and updated by hand, and each chamber shows the date of its latest review. Ratings older than 14 days are flagged.
 
 ## Polling
 

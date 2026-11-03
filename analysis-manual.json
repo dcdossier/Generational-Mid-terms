@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:13:46.284Z"
+    "last_updated": "2026-11-03T04:14:59.794Z"
   },
   "posts": [],
   "entries": [
@@ -1323,30 +1323,39 @@
     {
       "id": "manual-mw06brno-0",
       "type": "op-ed",
-      "title": "",
+      "title": "अमेरिकी मध्यावधि चुनाव: ट्रंप की नीतियां और यूपी के निर्यातकों पर प्रभाव",
       "url": "https://bulandsandesh.com/desh/news/ama-ra-ka-madha-ya-vadha-ca-na-va-ta-ra-pa-ka-na-ta-ya-aura-ya-pa-ka-na-ra-ya-taka-para-pa-rabha-va",
       "author": "Brigadier Anil Raman",
       "source": "bulandsandesh.com",
       "date": "",
-      "description": "",
+      "description": "अमेरिकी मध्यावधि चुनाव: ट्रंप की नीतियां और यूपी के निर्यातकों पर प्रभाव",
       "tags": [],
       "added_at": "2026-11-03T04:14:31.620Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": true,
+      "date_missing": true,
+      "summary_source": "page",
+      "enrich_attempts": 1,
+      "last_error": "page read (direct) but no date on it",
+      "next_try_at": "2026-11-03T10:14:58.360Z",
+      "image": "https://bulandsandesh.com/uploads/blog/bf05e792956d40d0cf3388601a59cdf0.jpg"
     },
     {
       "id": "manual-mw06brnp-1",
       "type": "op-ed",
-      "title": "",
+      "title": "अमेरिकी मध्यावधि चुनाव से ट्रंप की नीतियों और यूपी के निर्यातकों पर नजर - Citizen Voice",
       "url": "https://www.citizenvoice.in/us-midterm-elections-put-an-eye-on-trumps-policies-and-up-exporters/",
       "author": "Brigadier Anil Raman",
       "source": "citizenvoice.in",
-      "date": "",
-      "description": "",
+      "date": "2026-10-29T07:50:04.000Z",
+      "description": "अमेरिका में 3 नवंबर को होने वाले मध्यावधि चुनाव राष्ट्रपति डोनाल्ड ट्रंप की नीतियों और भारत-अमेरिका व्यापार संबंधों की दिशा तय करने में अहम भूमिका निभा सकते हैं। इन चुनावों में प्रतिनिधि सभा की सभी 435 सीटों और सीनेट की 100 में से 35 सीटों पर मतदान होना है। चुनाव परिणामों का असर न केवल ट्रंप की घरेलू राजनीतिक स्थिति पर पड़ेगा, बल्कि",
       "tags": [],
       "added_at": "2026-11-03T04:14:31.621Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "date_source": "json-ld",
+      "summary_source": "page",
+      "image": "https://www.citizenvoice.in/wp-content/uploads/2026/10/IMG_20261029_131449.jpg"
     }
   ]
 }

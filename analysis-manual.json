@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:06:45.534Z"
+    "last_updated": "2026-11-03T04:12:48.913Z"
   },
   "posts": [],
   "entries": [
@@ -1296,11 +1296,13 @@
       "author": "Brigadier Anil Raman",
       "source": "NDTV",
       "date": "2026-11-02T00:00:00.000Z",
-      "description": "",
+      "description": "America does not have a central election authority that centrally undertakes these critical functions. Each of the 50 states sets its own election laws.",
       "tags": [],
       "added_at": "2026-11-03T04:12:33.238Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page",
+      "image": "https://c.ndtvimg.com/2024-11/r92i04ro_donald-trump_625x300_07_November_24.jpeg?im=FitAndFill,algorithm=dnn,width=1600,height=900"
     }
   ]
 }

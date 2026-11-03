@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="archive-guard.js"></script>
+<meta name="robots" content="noindex">
+<!-- build:1784626335 -->
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US 2026 Mid-term Election Observer (Archived, 119th Congress)</title>
+<meta name="description" content="Track the 2026 US midterm elections from an Indian perspective — House, Senate, and Governor races, approval ratings, India-US relations, and the Indian diaspora in Congress.">
+<meta name="keywords" content="2026 US midterms, US midterm elections 2026, US India relations, Indian diaspora Congress, House Senate elections 2026, Takshashila Institution">
+<meta name="author" content="Takshashila Institution Geostrategy Programme">
+<meta property="og:title" content="US 2026 Mid-term Election Observer — Takshashila Institution">
+<meta property="og:description" content="Track the 2026 US midterm elections from an Indian perspective — House, Senate, and Governor races, approval ratings, India-US relations, and the Indian diaspora in Congress.">
+<meta property="og:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<meta property="og:url" content="https://dcdossier.github.io/Generational-Mid-terms/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="US 2026 Mid-term Election Observer — Takshashila Institution">
+<meta name="twitter:description" content="Track the 2026 US midterm elections from an Indian perspective — House, Senate, and Governor races, approval ratings, India-US relations, and the Indian diaspora in Congress.">
+<meta name="twitter:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "US 2026 Mid-term Election Observer",
+  "description": "Track the 2026 US midterm elections from an Indian perspective — House, Senate, and Governor races, approval ratings, India-US relations, and the Indian diaspora in Congress.",
+  "url": "https://dcdossier.github.io/Generational-Mid-terms/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Takshashila Institution",
+    "url": "https://takshashila.org.in/"
+  },
+  "author": [
+    {"@type": "Person", "name": "Abhishek Kadiyala"},
+    {"@type": "Person", "name": "Brigadier Anil Raman"}
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="assets/css/data-labels.css">
+<script src="assets/js/data-labels.js"></script>
+<script src="assets/js/figures.js"></script>
+<style>
+:root{
+  --navy:#4d0a2e;
+  --navy-mid:#620d3c;
+  --navy-light:#7a1050;
+  --gold:#f1a222;
+  --gold-light:#f7c060;
+  --beige:#fffbe2;
+  --white:#ffffff;
+  --t-muted:rgba(255,251,226,0.65);
+  --br:rgba(241,162,34,0.18);
+  --sans:'Inter','Lato',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Lora',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{
+  background:var(--navy);
+  color:var(--beige);
+  font-family:var(--sans);
+  font-size:16px;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* HEADER */
+.header{
+  background:var(--navy);
+  border-bottom:1px solid var(--br);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 32px;
+  height:60px;
+  flex-shrink:0;
+  position:relative;
+  z-index:200;
+}
+.header-left{display:flex;align-items:center;gap:16px}
+.header-logo{height:52px;width:auto;object-fit:contain;vertical-align:middle;padding:0;margin:0}
+.header-title{font-family:var(--serif);font-size:17px;font-weight:700;color:#620d3c;letter-spacing:.01em;line-height:1.2}
+.header-sub{font-size:13px;color:var(--t-muted);letter-spacing:.04em;margin-top:2px}
+.header-right{text-align:right}
+.countdown-label{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:4px}
+.countdown-timer{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--gold-light);letter-spacing:.02em}
+.countdown-sub{font-size:11px;color:var(--t-muted);margin-top:2px}
+
+/* NAV TABS */
+.nav-bar{
+  background:var(--navy-mid);
+  border-bottom:1px solid var(--br);
+  display:flex;
+  align-items:stretch;
+  flex-shrink:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+  position:relative;
+  z-index:190;
+}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-tab{
+  font-family:var(--sans);
+  font-size:15px;
+  font-weight:500;
+  color:var(--t-muted);
+  background:none;
+  border:none;
+  border-bottom:2px solid transparent;
+  padding:16px 24px;
+  cursor:pointer;
+  transition:color .12s,border-color .12s,background .12s;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.nav-tab:hover{color:var(--beige);background:var(--navy-light)}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
+
+/* IFRAME CONTAINER */
+.frame-wrap{
+  flex:1;
+  overflow:hidden;
+  position:relative;
+}
+.tab-frame{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:none;
+  display:none;
+  background:#ffffff;
+}
+.tab-frame.active{display:block}
+
+/* LOADING INDICATOR */
+.frame-loading{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--navy);
+  flex-direction:column;
+  gap:16px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .2s;
+}
+.frame-loading.visible{opacity:1}
+.spinner{
+  width:32px;height:32px;border-radius:50%;
+  border:3px solid var(--br);
+  border-top-color:var(--gold);
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:15px;color:var(--t-muted);font-family:var(--serif);font-style:italic}
+
+/* TICKER */
+.ticker-wrap{background:var(--navy-mid);border-bottom:1px solid var(--br);height:30px;overflow:hidden;display:flex;align-items:center;gap:0;flex-shrink:0}
+.ticker-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--gold);padding:0 16px;flex-shrink:0;border-right:1px solid var(--br);height:100%;display:flex;align-items:center;white-space:nowrap}
+.ticker-scroll{flex:1;overflow:hidden;position:relative}
+.ticker-inner{display:flex;align-items:center;gap:0;white-space:nowrap;animation:ticker-move 60s linear infinite;will-change:transform}
+.ticker-inner:hover{animation-play-state:paused}
+.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 32px;font:400 13px var(--sans);color:var(--t-muted)}
+.ticker-item a{color:var(--beige);text-decoration:none;transition:color .12s}
+.ticker-item a:hover{color:var(--gold)}
+.ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.5;flex-shrink:0}
+.ticker-analysis-tag{font:700 8px var(--sans);text-transform:uppercase;letter-spacing:.08em;background:var(--gold);color:var(--navy);padding:1px 6px;border-radius:3px;flex-shrink:0}
+@keyframes ticker-move{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HOME PANEL */
+.panel-home{position:absolute;inset:0;overflow:hidden;background:var(--navy);display:none;flex-direction:column;scrollbar-width:thin;scrollbar-color:var(--br) transparent}
+.panel-home.active{display:flex}
+/* HOME SUB-NAV */
+.home-subnav{display:flex;align-items:center;border-bottom:1px solid var(--br);padding:0 20px;background:var(--navy-mid);flex-shrink:0}
+.home-sub-tab{font:500 14px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:14px 16px;cursor:pointer;transition:color .12s,border-color .12s;white-space:nowrap}
+.home-sub-tab:hover{color:var(--beige)}
+.home-sub-tab.active{color:var(--gold);border-bottom-color:var(--gold);font-weight:600}
+.home-subnav-upd{font:400 11px var(--sans);color:var(--t-muted);margin-left:auto}
+.home-subpanel{display:none;flex:1;overflow-y:auto}
+.home-subpanel.active{display:flex;flex-direction:column}
+/* FULL NEWS PANEL (light theme) */
+.hn-panel-wrap{background:#f8f7f2;min-height:100%}
+.hn-full-toolbar{background:#f0ede6;border-bottom:1px solid #dedad0;padding:16px 28px;display:flex;flex-wrap:wrap;align-items:center;gap:14px;position:sticky;top:0;z-index:5}
+.hn-full-search{font:400 15px var(--sans);color:#2a2a2a;background:#fff;border:1px solid #ccc;border-radius:6px;padding:7px 14px 7px 34px;width:240px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' stroke='%236b6b6b' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:11px center;transition:border-color .12s}
+.hn-full-search:focus{border-color:#8a6a00}
+.hn-full-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.hn-full-chip{font:500 14px var(--sans);padding:5px 14px;border-radius:20px;border:1px solid #ccc;background:#fff;color:#444;cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-full-chip:hover{border-color:#8a6a00;color:#222}
+.hn-full-chip.active{background:#1A2B45;color:#fff;border-color:#1A2B45}
+.hn-full-sort{margin-left:auto;font:400 14px var(--sans);color:#444;background:#fff;border:1px solid #ccc;border-radius:6px;padding:6px 11px;cursor:pointer;outline:none}
+.hn-full-content{padding:20px 28px}
+.hn-results-bar{font:400 14px var(--sans);color:#6b6b6b;padding:4px 0 16px}
+.hn-news-list{display:flex;flex-direction:column;gap:0}
+.hn-news-item{padding:20px 0;border-bottom:1px solid #e0ddd6;display:flex;flex-direction:column;gap:8px}
+.hn-news-item:last-child{border-bottom:none}
+.hn-news-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hn-news-source{font:700 13px var(--sans);color:#6b6b6b;text-transform:uppercase;letter-spacing:.06em}
+.hn-news-date{font:400 13px var(--sans);color:#9b9b9b;margin-left:auto}
+.hn-news-title{font:600 16px Georgia,'Lora',serif;color:#2a2a2a;line-height:1.4;text-decoration:none}
+.hn-news-title:hover{color:#8a6a00}
+.hn-news-desc{font:400 15px var(--sans);color:#4a4a4a;line-height:1.6}
+.hn-news-tags{display:flex;gap:6px;flex-wrap:wrap}
+.hn-tag{font:700 11px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:3px}
+.hn-tag-major{background:#FEE2E2;color:#991B1B}
+.hn-tag-senate{background:#DBEAFE;color:#1E3A8A}
+.hn-tag-house{background:#EDE9FE;color:#4C1D95}
+.hn-tag-federal{background:#F1F5F9;color:#1E293B}
+.hn-tag-gov{background:#CCFBF1;color:#134E4A}
+.hn-tag-primary{background:#FEF3C7;color:#92400E}
+.hn-tag-redistricting{background:#ECFDF5;color:#065F46}
+.hn-tag-polling{background:#F5F3FF;color:#4C1D95}
+.hn-tag-economy{background:#FFF7ED;color:#9A3412}
+.home-body{max-width:1040px;margin:0 auto;padding:36px 32px 60px}
+
+/* HOME HERO */
+.home-hero{background:linear-gradient(135deg,var(--navy-light) 0%,#3d0824 100%);border:1px solid var(--br);border-radius:14px;padding:36px 40px;margin-bottom:28px;position:relative;overflow:hidden;display:flex;gap:36px;align-items:flex-start}
+.home-hero::before{content:'';position:absolute;right:-60px;top:-60px;width:260px;height:260px;border-radius:50%;background:rgba(241,162,34,.06);pointer-events:none}
+.home-hero::after{content:'';position:absolute;right:40px;bottom:-80px;width:180px;height:180px;border-radius:50%;background:rgba(241,162,34,.04);pointer-events:none}
+.home-hero-left{flex:1;min-width:0;position:relative;z-index:1}
+.home-hero-right{flex-shrink:0;width:210px;position:relative;z-index:1;border-left:1px solid rgba(241,162,34,.2);padding-left:28px}
+.home-eyebrow{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:11px}
+.home-h1{font:700 28px var(--serif);color:var(--beige);line-height:1.25;margin-bottom:11px}
+.home-desc{font:400 16px var(--sans);color:var(--t-muted);line-height:1.7;margin-bottom:24px}
+/* Hero why-questions panel */
+.hero-why-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:var(--gold);margin-bottom:14px}
+/* House / Senate / Governorships cards: three across, one column on phones (see 600px rules) */
+.chamber-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:28px}
+/* Primary action: white with dark ink text, standing out on the dark hero */
+.hero-seatwise{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;max-width:100%;box-sizing:border-box;
+  min-height:44px;margin:0 0 14px;padding:10px 14px;background:#FFFFFF;color:#20242B;font:700 14px/1.3 var(--sans);
+  text-align:center;text-decoration:none;border-radius:6px;white-space:normal;box-shadow:0 1px 0 rgba(0,0,0,.15)}
+.hero-seatwise:hover{background:#F5F0DC}
+.hero-seatwise:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.hero-why-item{border-bottom:1px solid rgba(255,255,255,.07)}
+.hero-why-item:last-of-type{border-bottom:none}
+.hero-why-btn{width:100%;background:none;border:none;text-align:left;cursor:pointer;color:rgba(245,240,232,.65);font:500 13px/1.5 var(--sans);padding:11px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;transition:color .12s}
+.hero-why-btn:hover,.hero-why-btn.open{color:var(--gold)}
+.hero-why-chevron{flex-shrink:0;font-size:10px;margin-top:2px;transition:transform .2s}
+.hero-why-item.open .hero-why-chevron{transform:rotate(180deg)}
+.hero-why-body{max-height:0;overflow:hidden;transition:max-height .28s ease}
+.hero-why-item.open .hero-why-body{max-height:600px}
+.hero-why-text{font:400 13px/1.7 var(--sans);color:rgba(245,240,232,.55);padding:0 0 11px}
+.hero-why-rm{font:600 11px var(--sans);color:var(--gold);background:none;border:none;cursor:pointer;padding:0 0 11px;text-decoration:underline;display:block}
+@media(max-width:700px){.home-hero{flex-direction:column}.home-hero-right{width:100%;border-left:none;border-top:1px solid rgba(241,162,34,.2);padding-left:0;padding-top:20px;margin-top:4px}}
+.home-big-countdown{display:flex;align-items:baseline;gap:8px;margin-bottom:4px}
+.home-days{font:700 64px var(--serif);color:var(--gold);line-height:1;letter-spacing:-.02em}
+.home-days-label{font:400 16px var(--sans);color:var(--t-muted)}
+.home-election-date{font:500 12px var(--sans);color:var(--t-muted);letter-spacing:.04em}
+.home-hero-pills{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.home-pill{font:600 15px var(--sans);padding:5px 16px;border-radius:20px;background:rgba(241,162,34,.1);color:var(--gold);border:1px solid rgba(241,162,34,.25)}
+
+/* LIVE METRICS */
+.home-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:760px){.home-metrics{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.home-metrics{grid-template-columns:1fr 1fr}}
+.metric-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:18px 20px}
+.metric-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.metric-num{font:700 32px var(--serif);line-height:1;letter-spacing:-.02em}
+.metric-sub{font:400 13px var(--sans);color:var(--t-muted);margin-top:4px;line-height:1.4}
+.metric-trend{font:600 13px var(--sans);display:inline-block;padding:1px 6px;border-radius:8px;margin-top:6px}
+.mt-up{background:rgba(58,140,92,.2);color:#5EBD8A}
+.mt-dn{background:rgba(192,64,64,.2);color:#E08080}
+.mt-nt{background:rgba(241,162,34,.15);color:var(--gold)}
+
+/* FORECAST STRIP */
+.home-forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:600px){.home-forecast{grid-template-columns:1fr}}
+.hfb-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:14px}
+@media(max-width:600px){.hfb-wrap{grid-template-columns:1fr}}
+.hfb-card{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:18px 20px}
+.hfb-label{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin-bottom:11px}
+.hfb-bar-wrap{display:flex;height:11px;border-radius:5px;overflow:hidden;background:#E8E8E0;margin-bottom:8px}
+.hfb-bar-d{background:#4c8de0;height:100%}
+.hfb-bar-r{background:#E05555;height:100%}
+.hfb-leg{font:500 13px var(--sans);margin-bottom:8px}
+.hfb-text{font:400 15px var(--sans);color:#1E2232;margin-bottom:4px;line-height:1.45}
+.hfb-note{font:400 13px var(--sans);color:#888;font-style:italic}
+.forecast-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:18px 20px}
+.forecast-chamber{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:var(--t-muted);margin-bottom:8px}
+.forecast-rating{font:700 16px var(--sans);padding:4px 11px;border-radius:6px;display:inline-block;margin-bottom:8px}
+.fr-likely-r{background:rgba(192,64,64,.25);color:#FF9090}
+.fr-lean-r{background:rgba(224,128,112,.25);color:#FFBB99}
+.fr-tossup{background:rgba(241,162,34,.25);color:#FFD97D}
+.forecast-seats{font:400 14px var(--sans);color:rgba(240,232,214,.7);margin-bottom:4px}
+.forecast-sub{font:400 13px var(--sans);color:var(--t-muted);line-height:1.45}
+
+/* LIVE NEWS FEED */
+.hn-toolbar{display:flex;flex-wrap:wrap;gap:11px;align-items:center;margin-bottom:14px}
+.hn-search{font:400 14px var(--sans);color:var(--beige);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:6px 11px 6px 30px;width:200px;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' fill='none' stroke='%239a9a8a' stroke-width='2' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:10px center}
+.hn-search:focus{border-color:var(--gold)}
+.hn-chips{display:flex;flex-wrap:wrap;gap:5px}
+.hn-chip{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;padding:4px 11px;border-radius:20px;border:1px solid var(--br);background:transparent;color:var(--t-muted);cursor:pointer;transition:all .12s;white-space:nowrap}
+.hn-chip:hover{border-color:var(--gold);color:var(--beige)}
+.hn-chip.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.hn-sort{font:400 13px var(--sans);color:var(--t-muted);background:var(--navy-mid);border:1px solid var(--br);border-radius:6px;padding:5px 8px;cursor:pointer;outline:none;margin-left:auto}
+.home-news-list{display:flex;flex-direction:column;gap:0;margin-bottom:28px}
+.home-news-item{border-bottom:1px solid var(--br);padding:16px 0;display:flex;align-items:flex-start;gap:16px}
+.home-news-item:last-child{border-bottom:none}
+.home-news-source{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.07em;color:var(--gold);width:100px;flex-shrink:0;padding-top:2px}
+.home-news-body{flex:1}
+.home-news-title{font:500 15px var(--sans);color:var(--beige);line-height:1.45;text-decoration:none;display:block;transition:color .12s}
+.home-news-title:hover{color:var(--gold)}
+.home-news-age{font:400 11px var(--sans);color:var(--t-muted);margin-top:3px}
+.home-news-tag{display:inline-block;font:700 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
+
+/* SECTION CARDS */
+.home-sections{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
+@media(max-width:760px){.home-sections{grid-template-columns:1fr}}
+.home-section-card{background:var(--navy-mid);border:1px solid var(--br);border-radius:11px;padding:20px 22px;cursor:pointer;transition:border-color .15s,background .15s;text-align:left;display:flex;flex-direction:column;gap:8px}
+.home-section-card:hover{border-color:var(--gold);background:var(--navy-light)}
+.hsc-icon{font-size:22px;line-height:1}
+.hsc-title{font:700 16px var(--serif);color:var(--gold)}
+.hsc-desc{font:400 14px var(--sans);color:var(--t-muted);line-height:1.55}
+.hsc-sub-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.hsc-tag{font:500 11px var(--sans);background:rgba(241,162,34,.1);color:var(--gold);padding:1px 7px;border-radius:8px;border:1px solid rgba(241,162,34,.2)}
+
+/* CHART WRAPPERS */
+.chart-wrap{position:relative;height:240px}
+.chart-wrap-lg{position:relative;height:280px}
+.chart-wrap-sm{position:relative;height:220px}
+@media(max-width:600px){
+  .chart-wrap{height:180px}
+  .chart-wrap-lg{height:200px}
+  .chart-wrap-sm{height:160px}
+}
+
+/* GLOBAL FOOTER */
+.site-footer{flex-shrink:0;background:#FFFFFF;border-top:1px solid #E8E8E0;z-index:180;position:relative}
+.site-footer-inner{display:flex;align-items:center;gap:16px;padding:7px 24px;flex-wrap:wrap}
+.site-footer-sources{font:400 11px var(--sans);color:#6B6B6B;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.site-footer-logos{display:flex;align-items:center;gap:16px;flex-shrink:0}
+.site-footer-contact{font:400 12px var(--sans);color:#6B6B6B;flex-shrink:0;white-space:nowrap}
+.site-footer-contact a{color:#1A3F8A}
+.issues-comments{padding:0 16px;background:#F5F5DC}
+.home-freshness{display:inline-flex;align-items:center;gap:5px;background:rgba(241,162,34,.08);border:1px solid #E8E8E0;border-radius:20px;padding:3px 11px;flex-shrink:0;font:400 11px var(--sans);color:#6B6B6B}
+.freshness-dot{width:5px;height:5px;border-radius:50%;background:#5EBD8A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite}
+@keyframes pulse-dot{0%,100%{opacity:1}50%{opacity:.4}}
+@keyframes why-flash{0%,100%{background:#FFFFFF}50%{background:#fffbe2}}
+@media(max-width:600px){.site-footer-sources,.site-footer-logos{display:none}.site-footer-inner{padding:6px 12px;flex-wrap:nowrap}.home-freshness{max-width:100%;min-width:0;flex:0 1 auto}.site-footer-contact .fc-lbl{display:none}.site-footer-contact{font-size:11px;margin-left:auto}#home-freshness-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fresh-long{display:none}}
+@media(min-width:601px){.fresh-short{display:none}}
+
+/* ── COUNTDOWN: never wrap ─────────────────────────────────────────────── */
+.countdown-timer{white-space:nowrap}
+
+@media(max-width:700px){
+  /* Drawer overlays on mobile instead of pushing (300px push = off-screen) */
+  .page-shell.drawer-open{margin-left:0}
+  .nd-overlay.mobile-visible{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200}
+}
+
+@media(max-width:600px){
+  /* Header: safe-area for iPhone notch/Dynamic Island + breathing room */
+  .header{padding:0 14px;padding-top:max(10px,env(safe-area-inset-top));height:auto;min-height:54px}
+  .header-logo{height:34px}
+  .header-title{font-size:14px}
+  .header-sub{display:none}
+  .countdown-label{font-size:10px;margin-bottom:2px}
+  .countdown-timer{font-size:14px;letter-spacing:0}
+  .countdown-sub{display:none}
+  /* Nav tabs: compact so all tabs fit without hard cut-off */
+  .nav-tab{padding:11px 10px;font-size:13px;white-space:nowrap}
+  .nav-burger{padding:11px 12px}
+  /* Ticker */
+  .ticker-wrap{height:26px}
+  .ticker-label{font-size:8px;padding:0 11px}
+  .ticker-item{font-size:11px;padding:0 20px}
+  /* Hero */
+  .home-body{padding:16px 14px 40px}
+  .home-hero{padding:20px 18px;margin-bottom:18px;gap:0;border-radius:10px}
+  .home-h1{font-size:19px;margin-bottom:8px}
+  .home-desc{font-size:14px;margin-bottom:14px;line-height:1.6}
+  .home-days{font-size:38px}
+  .home-days-label{font-size:13px}
+  .home-hero-pills{gap:6px;margin-top:14px;flex-wrap:wrap}
+  .home-pill{font-size:12px;padding:4px 10px}
+  /* Quick context right panel (stacked below hero text on mobile) */
+  .home-hero-right{padding-top:16px;margin-top:12px}
+  .hero-why-label{font-size:10px;margin-bottom:10px}
+  .hero-seatwise{display:flex;width:100%}
+  .chamber-grid{grid-template-columns:1fr}
+  /* keep the hero inside narrow screens (its content was forcing ~420px at 375px) */
+  .home-body{width:100%;min-width:0;box-sizing:border-box}
+  .home-hero,.home-hero-left,.home-hero-right{min-width:0;max-width:100%;box-sizing:border-box}
+  .hero-why-btn{font-size:12px;padding:9px 0}
+  .hero-why-text{font-size:12px;line-height:1.65}
+  .hero-why-rm{font-size:11px}
+  /* Metrics */
+  .home-metrics{grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+  .metric-card{padding:14px}
+  .metric-num{font-size:24px}
+  .metric-sub{font-size:12px}
+  /* Forecast */
+  .home-forecast{margin-bottom:18px}
+  .hfb-card{padding:14px}
+  .hfb-text{font-size:13px}
+  /* News */
+  .home-news-source{width:68px;font-size:8px}
+  .home-news-item{gap:10px;padding:13px 0}
+  .home-news-title{font-size:14px}
+  /* Section cards */
+  .home-sections{gap:10px;margin-bottom:18px}
+  .home-section-card{padding:14px}
+  .hsc-title{font-size:15px}
+  .hsc-desc{font-size:12px}
+  /* Tell me why accordions */
+  .home-sub-tab{font-size:13px;padding:11px 13px}
+}
+
+/* ── Colour overrides ── */
+body{background:#F5F5DC;color:#1E2232}
+.header{background:#FFFFFF;border-bottom-color:#E8E8E0}
+.header-sub{color:#6B6B6B}
+.countdown-label,.countdown-sub{color:#6B6B6B}
+.countdown-timer{color:var(--gold)}
+.panel-home{background:#F5F5DC;scrollbar-color:#E8E8E0 transparent}
+.metric-card{background:#FFFFFF;border-color:#E8E8E0}
+.metric-label,.metric-sub{color:#6B6B6B}
+.forecast-card{background:#FFFFFF;border-color:#E8E8E0}
+.forecast-chamber,.forecast-sub{color:#6B6B6B}
+.forecast-seats{color:#4a4a4a}
+.home-section-card{background:#FFFFFF;border-color:#E8E8E0}
+.home-section-card:hover{background:#F5F5DC;border-color:var(--gold)}
+.hsc-desc{color:#6B6B6B}
+.home-news-title{color:#1E2232}
+.home-news-item{border-bottom-color:#E8E8E0}
+.home-news-age{color:#6B6B6B}
+.tab-frame{background:#F5F5DC}
+.fr-likely-r{background:#FDE8E8;color:#7A1A1A}
+.fr-lean-r{background:#FEF0EE;color:#9B2828}
+.fr-tossup{background:#FEF3C7;color:#7A4A00}
+.fr-lean-d{background:#EEF3FE;color:#1A3A8A}
+.fr-likely-d{background:#E3ECFE;color:#1A2F7A}
+.mt-up{background:rgba(58,140,92,.15);color:#1A6B3A}
+.mt-dn{background:rgba(192,64,64,.15);color:#9B2020}
+.hsc-title{color:#620d3c}
+.metric-num{color:#1E2232}
+/* INFO ICON + TOOLTIP */
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans);cursor:pointer;vertical-align:middle;margin-left:5px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
+.info-btn:hover{background:#620d3c;color:#fff}
+.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 14px var(--sans);line-height:1.65;padding:13px 16px;border-radius:8px;max-width:270px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
+.info-tooltip.visible{display:block}
+
+/* ── HAMBURGER MENU ─────────────────────────────────────────── */
+.nav-burger{display:flex;align-items:center;justify-content:center;border:none;background:none;cursor:pointer;flex-shrink:0;border-radius:0;transition:background .12s;padding:16px 16px;border-bottom:2px solid transparent;margin-right:0}
+.nav-burger:hover{background:rgba(241,162,34,.12)}
+.nav-burger svg{display:block}
+.nd-overlay{display:none}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;width:300px;background:#1E2232;z-index:1201;transform:translateX(-100%);transition:transform .25s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden;box-shadow:4px 0 24px rgba(0,0,0,.18)}
+.nav-drawer.open{transform:translateX(0)}
+.page-shell{flex:1;display:flex;flex-direction:column;overflow:hidden;transition:margin-left .25s cubic-bezier(.4,0,.2,1)}
+.page-shell.drawer-open{margin-left:300px}
+/* WHY QUESTIONS BAR */
+.nav-area{position:relative;flex-shrink:0;z-index:400}
+.why-tab{font:500 14px var(--sans);color:var(--t-muted);background:none;border:none;border-bottom:2px solid transparent;padding:16px 16px;cursor:pointer;transition:color .12s,border-color .12s,background .12s;white-space:nowrap;flex-shrink:0}
+.why-tab:hover{color:var(--beige);background:var(--navy-light)}
+.why-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--navy-light)}
+.why-dropdown{position:absolute;top:100%;left:0;width:320px;background:#fff;border:1px solid #E8E8E0;border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.14);opacity:0;transform:translateY(-4px);pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:399}
+.why-dropdown.open{opacity:1;transform:translateY(0);pointer-events:all}
+.why-dropdown-inner{padding:16px 18px 16px}
+.why-summary{font:400 14px/1.75 var(--sans);color:#3a3a3a}
+.why-read-more{font:600 13px var(--sans);color:#620d3c;background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;margin-left:4px;vertical-align:baseline}
+.why-read-more:hover{color:#8B1A4A}
+.nd-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(241,162,34,.18);flex-shrink:0}
+.nd-header-title{font:700 15px var(--sans);color:#f5f0e8;letter-spacing:.05em;text-transform:uppercase}
+.nd-close{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border:none;background:none;cursor:pointer;color:#9a9a8a;border-radius:4px;transition:background .12s,color .12s;font-size:18px;line-height:1}
+.nd-close:hover{background:rgba(255,255,255,.08);color:#f5f0e8}
+.nd-scroll{flex:1;overflow-y:auto;padding:11px 0 20px}
+.nd-item{display:flex;align-items:center;gap:11px;width:100%;border:none;background:none;cursor:pointer;text-align:left;padding:13px 22px;font-family:var(--sans);transition:background .12s;position:relative}
+.nd-item.nd-main{font:600 15px var(--sans);color:#f5f0e8;border-left:3px solid transparent}
+.nd-item.nd-main:hover,.nd-item.nd-main.active{background:rgba(241,162,34,.1);border-left-color:var(--gold);color:var(--gold)}
+.nd-item.nd-sub{font:400 14px var(--sans);color:rgba(245,240,232,.65);padding-left:38px;border-left:3px solid transparent}
+.nd-item.nd-sub:hover{background:rgba(255,255,255,.04);color:#f5f0e8}
+.nd-divider{height:1px;background:rgba(241,162,34,.12);margin:8px 20px}
+.nd-tip-popup{position:fixed;background:#111827;color:#f5f0e8;font:400 14px var(--sans);line-height:1.6;padding:11px 16px;border-radius:8px;max-width:260px;z-index:1300;box-shadow:0 4px 20px rgba(0,0,0,.4);pointer-events:none;display:none}
+.nd-tip-popup.visible{display:block}
+
+/* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
+
+/* SEAT PROJECTIONS (assets/seat-projections.json) */
+.spj{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 22px 16px;margin-bottom:28px;min-width:0}
+.spj-title{font:700 20px var(--serif);color:#620d3c;line-height:1.3;margin-bottom:4px}
+.spj-sub{font:400 14px/1.55 var(--sans);color:#6B6B6B;margin-bottom:14px}
+.spj-table{width:100%;border-collapse:collapse;font:400 14px var(--sans);color:#1E2232}
+.spj-table th{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:#6B6B6B;text-align:left;padding:8px 10px;border-bottom:2px solid #E8E8E0;vertical-align:bottom;line-height:1.35}
+.spj-table td{padding:4px 10px;border-bottom:1px solid #EFEDE6;vertical-align:middle}
+.spj-table tbody tr:last-child td{border-bottom:none}
+.spj-table .num{text-align:right;font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.spj-table th.num{text-align:right;white-space:normal}
+.spj-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.spj-proj{font-weight:700}
+.spj-chamber{font-weight:600;white-space:nowrap}
+.spj-party{display:inline-block;font:700 13px var(--sans);padding:3px 12px;border-radius:20px;white-space:nowrap}
+.spj-party[data-m]{display:none}
+.spj-d{background:#E3ECFE;color:#1A2F7A}
+.spj-r{background:#FDE8E8;color:#7A1A1A}
+.spj-pos{color:#1A6B3A}.spj-neg{color:#9B2020}
+/* (i) buttons: the visible dot stays 16px, the tap area is 44px */
+.info-btn.spj-i{width:44px;height:44px;margin:0 -12px 0 -8px;background:none;border-radius:0;vertical-align:middle}
+.info-btn.spj-i::before{content:'i';display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans)}
+.info-btn.spj-i:hover{background:none}.info-btn.spj-i:hover::before{background:#620d3c;color:#fff}
+.info-btn.spj-na{width:auto;height:44px;min-width:44px;margin:0 -6px 0 0;padding:0 6px;background:none;border-radius:4px;color:#6B6B6B;font:400 14px var(--sans);text-decoration:underline dotted;text-underline-offset:3px}
+.info-btn.spj-na:hover{background:#F5F5DC;color:#620d3c}
+.spj-more{margin-top:12px;border-top:1px solid #E8E8E0}
+.spj-more>summary{min-height:44px;display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px var(--sans);color:#620d3c;user-select:none}
+.spj-more>summary::-webkit-details-marker{display:none}
+.spj-more>summary::before{content:'\25B8';font-size:12px;transition:transform .15s}
+.spj-more[open]>summary::before{transform:rotate(90deg)}
+.spj-h4{font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555;margin:10px 0 6px}
+.spj-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:6px}
+.spj-models{min-width:560px}
+.spj-models td:first-child,.spj-models th:first-child{position:sticky;left:0;background:#fff;z-index:1}
+.spj a{color:#620d3c;text-decoration:underline;text-underline-offset:2px}
+.spj-link{display:inline-flex;align-items:center;min-height:44px}
+.spj-src{list-style:none;margin:0;padding:0}
+.spj-src li{border-bottom:1px solid #EFEDE6}
+.spj-src li:last-child{border-bottom:none}
+.spj-src a{display:block;min-height:44px;padding:12px 0;font:400 14px/1.45 var(--sans)}
+.spj-err{font:400 14px var(--sans);color:#6B6B6B;font-style:italic}
+/* phones: one card per row */
+@media(max-width:640px){
+  .spj{padding:16px 14px 10px;margin-bottom:18px}
+  .spj-title{font-size:17px}
+  .spj-sub{font-size:13px}
+  .spj-main thead{display:none}
+  .spj-main,.spj-main tbody{display:block}
+  .spj-main tr{display:grid;grid-template-columns:1fr auto;column-gap:0;border:1px solid #E8E8E0;border-radius:9px;padding:6px 12px 8px;margin-bottom:10px}
+  .spj-main td{display:contents}
+  .spj-main td.spj-head{display:flex;align-items:center;gap:8px;grid-column:1/-1;border-bottom:1px solid #EFEDE6;padding:2px 0 6px;margin-bottom:4px}
+  .spj-main td.spj-head+td{display:none}
+  .spj-main .spj-party[data-m]{display:inline-block}
+  .spj-main td.spj-head .spj-i{margin-left:auto;margin-right:-12px}
+  .spj-main td[data-label]::before{content:attr(data-label);font:500 13px var(--sans);color:#6B6B6B;padding:6px 0;border-bottom:1px solid #F3F1EA;display:flex;align-items:center;min-height:32px}
+  .spj-main td[data-label]>.spj-v{text-align:right;padding:6px 0;border-bottom:1px solid #F3F1EA;display:flex;align-items:center;justify-content:flex-end;min-height:32px;padding-left:10px;font-variant-numeric:tabular-nums lining-nums}
+  .spj-main tr>td:last-child::before,.spj-main tr>td:last-child>.spj-v{border-bottom:none}
+}
+</style>
+<style id="arch-style">.arch-banner{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;padding:8px 16px;background:#1E2232;color:#F5F0E8;font:600 14px/1.4 Inter,Lato,system-ui,sans-serif;text-align:center}.arch-banner a{color:#F7C060;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;min-height:32px}.arch-in-frame .arch-banner{display:none}</style>
+</head>
+<body>
+<div class="arch-banner" role="note"><span>Archived: 119th Congress (2025–2027), snapshot 3 Nov 2026. Read-only; figures are as they stood before polls closed.</span><a href="../">All archives</a><a href="../../" target="_top">Live site</a></div>
+
+<div class="page-shell" id="page-shell">
+
+<header class="header">
+  <div class="header-left">
+    <a href="https://takshashila.org.in/" target="_blank" rel="noopener" style="display:inline-flex;padding:0;line-height:0"><img src="assets/Mid-term-logo.png" class="header-logo" alt="US 2026 Mid-term Election Observer" style="padding:0;margin:0;display:block"></a>
+    <div>
+      <div class="header-title">US 2026 Mid-term Election Observer</div>
+      <div class="header-sub">By researchers of the Geostrategy Programme of the Takshashila Institution</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="countdown-label">Election Day</div>
+    <div class="countdown-timer" id="countdown-timer">Loading&#8230;</div>
+    <div class="countdown-sub">3 November 2026</div>
+  </div>
+</header>
+
+<div class="nav-area">
+<nav class="nav-bar">
+  <button class="nav-burger" onclick="toggleNavDrawer()" aria-label="Open navigation menu">
+    <svg width="18" height="14" viewBox="0 0 18 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="0" width="18" height="2" rx="1" fill="#f1a222"/>
+      <rect y="6" width="18" height="2" rx="1" fill="#f1a222"/>
+      <rect y="12" width="18" height="2" rx="1" fill="#f1a222"/>
+    </svg>
+  </button>
+  <button class="nav-tab active" onclick="switchTab('home',this)">&#8962; Home</button>
+  <button class="nav-tab" onclick="switchTab('map',this)">Election Trends</button>
+  <button class="nav-tab" onclick="switchTab('india',this)">India's Interest</button>
+  <button class="nav-tab" onclick="switchTab('analysis',this)">Analysis &amp; Commentary</button>
+  <button class="nav-tab" onclick="switchTab('about',this)">About Us</button>
+</nav>
+</div><!-- /nav-area -->
+
+<!-- ── Navigation Drawer ── -->
+<div class="nd-overlay" id="nd-overlay" onclick="closeNavDrawer()"></div>
+<div class="nav-drawer" id="nav-drawer">
+  <div class="nd-header">
+    <span class="nd-header-title">Navigate</span>
+    <button class="nd-close" onclick="closeNavDrawer()" aria-label="Close menu">&#215;</button>
+  </div>
+  <div class="nd-scroll">
+
+    <!-- Home -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'Through this section you will get an understanding of the importance of the midterms and foundational information on the current 2026 midterm elections.')" onmouseleave="ndHideTip()" onclick="ndGo('home')">
+      &#8962; Home
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section explains the US electoral process in the context of the 2026 midterms')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','overview')">
+      Overview
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Curated from a select list of local and national news outlets, this section tracks the latest developments in the lead-up to the 2026 midterm elections')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','news')">
+      Latest Developments
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This section tells the data story of these elections with charts, graphs and math.')" onmouseleave="ndHideTip()" onclick="ndGoSub('home','data')">
+      Data Indicators
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- Election Trends -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section tracks key battleground and toss-up races, maps the competitive landscape across House, Senate, and Governor contests, and aggregates approval ratings, the generic ballot, and forecasting models.')" onmouseleave="ndHideTip()" onclick="ndGo('map')">
+      Election Trends
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- India's Interest -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section explains what aspects of the 2026 midterms can affect India — from legislative priorities and trade policy to the role of the Indian diaspora and legislators shaping the US-India relationship.')" onmouseleave="ndHideTip()" onclick="ndGo('india')">
+      India's Interest
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Key issues of India\'s interest being debated in the US Congress and how their outcome can shape India-US relations.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','stakes')">
+      Policy &amp; Stakes
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'Explains how Indian diaspora impacts US politics and the political profile of Indian-Americans in and around Congress.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','presence')">
+      Indian Diaspora
+    </button>
+    <button class="nd-item nd-sub" onmouseenter="ndShowTip(this,'This records the developments in ~40 races that we have identified as India-relevant — either because of an Indian-American candidate, or because of an incumbent\'s track record on India-relevant legislation.')" onmouseleave="ndHideTip()" onclick="ndGoSub('india','interest')">
+      India-Relevant Races
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- Analysis & Commentary -->
+    <button class="nd-item nd-main" onmouseenter="ndShowTip(this,'This section records our analytical writings, commentary and long-form explainers on the 2026 midterm elections and related issues.')" onmouseleave="ndHideTip()" onclick="ndGo('analysis')">
+      Analysis &amp; Commentary
+    </button>
+
+    <div class="nd-divider"></div>
+
+    <!-- About Us -->
+    <button class="nd-item nd-main" onclick="ndGo('about')">
+      About Us
+    </button>
+
+  </div>
+</div>
+<div class="nd-tip-popup" id="nd-tip-popup"></div>
+
+
+<div class="ticker-wrap">
+  <div class="ticker-label">&#9642; Latest</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner" id="ticker-inner">
+      <div class="ticker-item"><span class="ticker-dot"></span><span>Loading headlines&#8230;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="frame-wrap">
+  <!-- HOME PANEL (native, not iframe) -->
+  <div class="panel-home active" id="panel-home">
+
+    <!-- HOME SUB-NAV -->
+    <nav class="home-subnav">
+      <button class="home-sub-tab active" data-subtab="overview" onclick="switchHomeTab('overview',this)">Overview</button>
+      <button class="home-sub-tab" data-subtab="news" onclick="switchHomeTab('news',this)">Latest Updates</button>
+      <button class="home-sub-tab" data-subtab="data" onclick="switchHomeTab('data',this)">Data Indicators</button>
+      <button class="home-sub-tab" data-subtab="issues" onclick="switchHomeTab('issues',this)">Issues</button>
+      <span class="home-subnav-upd" id="home-subnav-updated"></span>
+    </nav>
+
+    <!-- OVERVIEW SUB-PANEL -->
+    <div class="home-subpanel active" id="home-subpanel-overview">
+    <div class="home-body">
+
+      <!-- HERO -->
+      <div class="home-hero">
+        <!-- Left: headline + countdown -->
+        <div class="home-hero-left">
+          <div class="home-eyebrow">Geostrategy Programme &mdash; Takshashila Institution</div>
+          <h1 class="home-h1">US 2026 Mid-term Election Observer</h1>
+          <p class="home-desc">By researchers of the Geostrategy Programme of the Takshashila Institution. Tracking the 2026 US House, Senate, and Governor elections &mdash; approval ratings, generic ballot, key races, redistricting, and the factors that will shape the next Congress.</p>
+          <div class="home-big-countdown">
+            <div class="home-days" id="home-days">&#8212;</div>
+            <div class="home-days-label">days until Election Day</div>
+          </div>
+          <div class="home-election-date">Tuesday, 3 November 2026</div>
+          <div class="home-hero-pills">
+            <span class="home-pill"><span data-fig="house.total">435</span> House seats</span>
+            <span class="home-pill"><span data-fig="senate.up">35</span> Senate seats</span>
+            <span class="home-pill"><a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:inherit;text-decoration:none"><span data-fig="gov.races">36</span> Governor races &#8599;</a></span>
+            <span class="home-pill"><a href="https://www.census.gov/newsroom/facts-for-features/2026/asian-american-pacific-islander.html" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">5.6M Indian-Americans, alone or in combination (2024) &#8599;</a></span>
+          </div>
+        </div>
+        <!-- Right: quick context questions -->
+        <div class="home-hero-right">
+          <a class="hero-seatwise" href="map.html#seats" onclick="return openSeatwise(event)">Battleground seat&#8209;wise analysis <span aria-hidden="true">&#8594;</span></a>
+          <div class="hero-why-label">Quick Context</div>
+          <div class="hero-why-item" id="hwi-0">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(0,this)">How does the American political system function? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">The US government has three branches: the Presidency, Congress, and the Supreme Court. Congress has two chambers. The House has 435 members elected every two years. The Senate has 100 members elected every six years. This year, while all 435 House members are heading for elections, 35 out of 100 Senators are also going to face elections.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(0)">Read More &#8594;</button>
+            </div>
+          </div>
+          <div class="hero-why-item" id="hwi-1">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(1,this)">Why do the midterms matter? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">The 2026 midterms will decide who controls Congress. Congress controls laws, budgets, and oversight of the President. The results will shape US policy on trade, immigration, and foreign affairs. This includes policies that directly affect India.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(1)">Read More &#8594;</button>
+            </div>
+          </div>
+          <div class="hero-why-item" id="hwi-2">
+            <button class="hero-why-btn" onclick="toggleHeroWhy(2,this)">Why is 2026 significant? <span class="hero-why-chevron">&#9660;</span></button>
+            <div class="hero-why-body">
+              <p class="hero-why-text">Trump's second term has been controversial. Tariff hikes, federal job cuts, and government shutdowns have hurt his popularity. His approval ratings are falling. The midterms could cost Republicans their majority in Congress, thereby stalling the administration's legislative agenda for the rest of Trump's term.</p>
+              <button class="hero-why-rm" onclick="goToTellMeWhy(2)">Read More &#8594;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
+      <section class="spj" id="seat-projections" aria-labelledby="spj-title">
+        <h2 class="spj-title" id="spj-title">2026 Midterms Seat Projections (29 Oct 2026)</h2>
+        <p class="spj-sub">Projected party majority seats against majority and two-thirds thresholds. Updated 29 Oct 2026.</p>
+        <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
+      </section>
+
+      <!-- LIVE METRICS -->
+      <div class="home-metrics">
+        <div class="metric-card">
+          <div class="metric-label">Generic Ballot Margin <button class="info-btn" data-tip="The generic ballot measures the overall party preference of voters rather than support for a specific candidate in their respective seat.">i</button></div>
+          <div class="metric-num" id="hm-ballot" style="color:var(--gold)">&#8212;</div>
+          <div class="metric-sub" id="hm-ballot-sub">D vs R polling average</div>
+          <span class="metric-trend mt-nt" id="hm-ballot-trend"></span>
+          <div class="dl-label" data-block="generic_ballot" data-kind="poll"></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Trump Approval / Disapproval</div>
+          <div class="metric-num" id="hm-trump" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub" id="hm-trump-sub">Approve / Disapprove</div>
+          <span class="metric-trend" id="hm-trump-trend"></span>
+          <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Trump Net Approval <button class="info-btn" data-tip="Net approval = Approve% minus Disapprove%. A negative number means more Americans disapprove than approve of the President's job performance.">i</button></div>
+          <div class="metric-num" id="hm-trump-net" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub" id="hm-trump-net-sub">Approve minus Disapprove</div>
+          <span class="metric-trend mt-dn" id="hm-trump-net-trend"></span>
+          <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Congress Approval</div>
+          <div class="metric-num" id="hm-congress" style="color:#E08080">&#8212;</div>
+          <div class="metric-sub">Combined House + Senate</div>
+          <span class="metric-trend mt-nt">Record low: 9% (Nov 2013)</span>
+          <div class="dl-label" data-block="congress_approval.combined" data-kind="monthly"></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">House Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favoured and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div class="metric-num" id="hm-tossups" style="color:var(--gold)">&#8212;</div>
+          <div class="metric-sub">Seats that decide control &middot; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></div>
+          <span class="metric-trend mt-nt"><span data-fig="house.total">435</span> seats total</span>
+          <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Senate Toss-ups <button class="info-btn" data-tip="Toss-up seats are highly competitive seats where neither side is clearly favoured and have equal chances of winning. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div class="metric-num" id="hm-senate-tossups" style="color:var(--gold)"><span data-fig="senate.tossups">7</span></div>
+          <div class="metric-sub">Seats in genuine contention &middot; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></div>
+          <span class="metric-trend mt-nt"><span data-fig="senate.split">33+2</span> seats up in 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span>
+          <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
+        </div>
+      </div>
+
+      <!-- CHAMBER BREAKDOWN GRID -->
+      <div class="chamber-grid">
+
+        <!-- House -->
+        <div class="metric-card">
+          <div class="metric-label" style="color:#1E3A8A;font-size:11px;letter-spacing:.08em">House of Representatives</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 2 years &nbsp;|&nbsp; <span data-fig="house.total">435</span> seats total</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="house.r">218</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats&nbsp;<span data-fig="house.d">214</span></span>
+          </div>
+          <div style="font:400 12px var(--sans);color:#888;margin-bottom:4px">+ <span data-fig="house.i">1</span> Independent, <span data-fig="house.vacant">2</span> vacancies &mdash; <span data-fig="house.balance_source">House Press Gallery, 2 Sep 2026</span></div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="house.battleground">49</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="house.total">435</span></span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
+        </div>
+
+        <!-- Senate -->
+        <div class="metric-card">
+          <div class="metric-label" style="color:#4C1D95;font-size:11px;letter-spacing:.08em">Senate</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="senate.r">53</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats and Independents&nbsp;<span data-fig="senate.d">47</span></span>
+          </div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground seats 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="senate.battleground">9</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="senate.split">33+2</span> up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
+        </div>
+
+        <!-- Governor -->
+        <div class="metric-card">
+          <div class="metric-label" style="color:#134E4A;font-size:11px;letter-spacing:.08em">Governorships</div>
+          <div style="font:700 13px var(--sans);color:#777;margin:6px 0 2px">Term: 4 or 2 years (state-dependent)</div>
+          <div style="display:flex;gap:6px;margin:11px 0 6px;flex-wrap:wrap">
+            <span style="background:#FDE8E8;color:#7A1A1A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Republicans&nbsp;<span data-fig="gov.r">26</span></span>
+            <span style="background:#E3ECFE;color:#1A2F7A;font:700 14px var(--sans);padding:4px 14px;border-radius:20px">Democrats&nbsp;<span data-fig="gov.d">24</span></span>
+          </div>
+          <div style="font:500 13px var(--sans);color:#555;margin-top:11px;margin-bottom:2px">Battleground races 2026 <button class="info-btn" data-tip="Battleground seats are electorally important competitive seats that could influence the overall outcome of the election. Note that while all toss-up seats are battleground seats, not all battleground seats are toss-ups.">i</button></div>
+          <div style="font:700 28px var(--serif);color:#620d3c;line-height:1.1"><span data-fig="gov.battleground">7</span> <span style="font:400 15px var(--sans);color:#777">of <span data-fig="gov.races">36</span> races</span></div>
+          <div style="font:400 13px var(--sans);color:#6B6B6B;margin-top:8px">Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Ballotpedia</a></div>
+        </div>
+
+      </div>
+
+      <!-- TELL ME WHY ACCORDION -->
+      <h3 id="tell-me-why" style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:12px">Tell me why</h3>
+      <div style="margin-bottom:28px;display:flex;flex-direction:column;gap:8px">
+
+        <details id="why-detail-0" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            US Political Process <span style="font-size:16px;color:#620d3c">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
+            <p>The United States has a three branched, bicameral, federal system of governance. This means that at the National level, there is the Federal government consisting of the Presidency, with a 4-year term, acting as the executive branch. Then there is the Judicial branch consisting of the Supreme Court with indefinite terms. There is the bicameral legislature consisting of the House of Representatives with 435 members with 2-year terms and the Senate with 100 members of 6 year terms. While the House of Representatives represents districts within each state, the Senate elects 2 members representing the whole state.</p>
+            <p style="margin-top:12px">The federal form of government in the US means that the States have a strong set of rights and responsibilities in the United States governing process that can also override the authority of the Federal government at times. This is what makes Governorships and State legislature election results an important development in the US political canvas.</p>
+            <p style="margin-top:12px">This federal spirit is also visible in elections which is run in a decentralised way, with no single national body in charge. Each state sets its own election laws through its legislature, and a statewide official (usually the Secretary of State) oversees the process. The hands-on work, like setting up polling booths, printing ballots, and counting votes, is handled by county and local election officials across roughly 10,000 jurisdictions nationwide consisting of officials, and volunteers. District maps are drawn by state legislatures (or independent commissions in some states) based on Census data, and winners are certified first by local officials, then by the state, and in presidential races, finally by the governor. At the federal level, two bodies play limited but distinct roles. The Election Assistance Commission sets voluntary standards for running elections and distributes funding to states. The Federal Election Commission enforces campaign finance laws, regulating how money is raised and spent by candidates and political parties. Midterm elections, held two years into a presidential term, follow the exact same process, just without a presidential race on the ballot.</p>
+          </div>
+        </details>
+
+        <details id="why-detail-1" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Why do the midterms matter? <span style="font-size:16px;color:#620d3c">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
+            <p>Since the election of Donald Trump in 2024 for his second term, American citizens have been experiencing extreme changes in their day to day lives. Issues of inflation, immigration, foreign wars, tariffs, healthcare, state rights, and widening socio-economic divisions have emerged as a key issue as a result of these changes. The outcome of these elections would decide the direction the US will take on these issues in the coming years and the remaining period of President Trump&rsquo;s tenure. This direction would impact not only the US but also countries around the world, including India.</p>
+            <p style="margin-top:12px">The US is among India&rsquo;s most important strategic, technological and economic partners in the 21st Century. Any changes in their foreign policy would gravely impact India as seen in the case of tariffs, Iran war, and US engagement with Pakistan and China. Similarly, the issue of immigration is also an important issue for the future of Indian Americans and Indian immigration to the US. Issues of healthcare, state rights and political polarisation among others are also issues that might not directly impact India, but have the potential to create lasting political changes in the US that in turn could redefine India-US ties.</p>
+          </div>
+        </details>
+
+        <details id="why-detail-2" style="border:1px solid #E0DDD6;border-radius:11px;overflow:hidden">
+          <summary style="padding:16px 20px;cursor:pointer;font:600 16px var(--serif);color:#1E2232;background:#FFFFFF;user-select:none;list-style:none;display:flex;justify-content:space-between;align-items:center">
+            Why is 2026 significant? <span style="font-size:16px;color:#620d3c">&#9660;</span>
+          </summary>
+          <div style="padding:18px 20px 20px;background:#FAFAF8;border-top:1px solid #E0DDD6;font:400 15px/1.8 var(--sans);color:#3a3a3a">
+            <p>The lead-up to the 2026 midterms has been a tumultuous path for US citizens. It began with the liberation day tariffs that disrupted vital supply chain networks of small scale businesses and led to inflation across sectors. This was followed by the DOGE-era downsizing of the federal workforce &mdash; about 317,000 federal employees left service in 2025, though only around 24,000 of those separations were involuntary; most left through deferred resignation, buyouts, or attrition. DOGE also led to the closure of several government programs that impacted the daily lives of US citizens. Following this came the Epstein files scandal that worsened an already declining public trust in the government and institutions. This also came in the period that saw three separate FY2026 funding lapses &mdash; 43 days (1 Oct&ndash;12 Nov 2025), 3 days (31 Jan&ndash;2 Feb 2026), and a record 76-day lapse affecting most of DHS beginning 14 Feb 2026 &mdash; the longest of which was the longest shutdown in recorded history, though the three were not continuous. This was in the context of the Trump administration&rsquo;s massive cuts to the government healthcare programs. Following this came the issues of immigration and ICE raids that further weakened public trust in federal use of force, and led to massive popular backlash and demonstrations against the agency. The last major development came with the US military interventions in Venezuela and Iran that worsened the overall inflation rates amidst spikes in energy prices.</p>
+            <p style="margin-top:12px">Each of these developments has weakened the President politically, but his current hold over the 119th Congress ensures that his actions do not face any legislative guardrails and that his official appointments are processed comfortably. However, the results of this midterm could severely impact his political standing. In case of a defeat his best case scenario would be the one where he would emerge as the &ldquo;lame-duck&rdquo; president who will not be able to bring major policy changes for the rest of his term. His worst case would be getting impeached and potentially investigated for allegations of corruption. Thereby, 2026 could prove to be a critical year for President Trump&rsquo;s political survival.</p>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- FORECASTER CONSENSUS (filled from data.json meta.forecaster_consensus) -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Forecaster consensus</h3>
+      <div id="home-forecast-bars" class="hfb-wrap"></div>
+      <div class="dl-label" data-block="meta.forecaster_consensus" data-kind="ratings" style="margin:-4px 0 22px"></div>
+
+      <!-- SECTION CARDS -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:10px">Explore</h3>
+      <div class="home-sections">
+        <button class="home-section-card" onclick="switchTabByName('map')">
+          <div class="hsc-icon">&#9654;</div>
+          <div class="hsc-title">Election Trends</div>
+          <div class="hsc-desc">Detailed race-by-race breakdowns for the Senate, House, and Governor contests. Rating strips, balance bars, and competitive seat analysis for all <span data-fig="senate.up">35</span> Senate and <span data-fig="gov.races">36</span> Governor races.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Senate</span><span class="hsc-tag">House</span><span class="hsc-tag">Governor</span></div>
+        </button>
+        <button class="home-section-card" onclick="switchTabByName('india')">
+          <div class="hsc-icon"><img src="assets/ashokt.png" alt="Ashoka Chakra" style="height:22px;width:auto;vertical-align:middle;object-fit:contain"></div>
+          <div class="hsc-title">India&rsquo;s Interest</div>
+          <div class="hsc-desc">How the 2026 midterms affect H-1B policy, trade, defence co-production, and the Quad. Indian-American electoral presence — including the six Indian-American members of Congress, among them Raja Krishnamoorthi, who lost the 17 March Illinois Senate primary.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">H-1B Tracker</span><span class="hsc-tag">Senate Watch</span><span class="hsc-tag">Community</span></div>
+        </button>
+        <button class="home-section-card" onclick="switchTabByName('analysis')">
+          <div class="hsc-icon"><img src="assets/mag.jpeg" alt="Analysis" style="height:22px;width:auto;vertical-align:middle;object-fit:contain"></div>
+          <div class="hsc-title">Analysis &amp; Commentary</div>
+          <div class="hsc-desc">Op-eds, newsletters, research, media appearances and podcasts on the 2026 midterms by researchers at the Takshashila Institution.</div>
+          <div class="hsc-sub-tabs"><span class="hsc-tag">Op-eds</span><span class="hsc-tag">Newsletters</span><span class="hsc-tag">Podcasts</span></div>
+        </button>
+      </div>
+    </div><!-- /home-body -->
+    </div><!-- /home-subpanel-overview -->
+
+    <!-- NEWS SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-news">
+      <div class="hn-panel-wrap">
+        <div class="hn-full-toolbar">
+          <input type="search" class="hn-full-search" id="home-news-search" placeholder="Search headlines..." oninput="renderHomeNews()">
+          <div class="hn-full-chips" id="home-news-chips">
+            <button class="hn-full-chip active" data-tag="All" onclick="setHomeNewsFilter('All',this)">All</button>
+            <button class="hn-full-chip" data-tag="Major Update" onclick="setHomeNewsFilter('Major Update',this)">Major Update</button>
+            <button class="hn-full-chip" data-tag="Senate" onclick="setHomeNewsFilter('Senate',this)">Senate</button>
+            <button class="hn-full-chip" data-tag="House" onclick="setHomeNewsFilter('House',this)">House</button>
+            <button class="hn-full-chip" data-tag="Federal" onclick="setHomeNewsFilter('Federal',this)">Federal</button>
+            <button class="hn-full-chip" data-tag="Governorship" onclick="setHomeNewsFilter('Governorship',this)">Governorship</button>
+            <button class="hn-full-chip" data-tag="Primary" onclick="setHomeNewsFilter('Primary',this)">Primary</button>
+            <button class="hn-full-chip" data-tag="Redistricting" onclick="setHomeNewsFilter('Redistricting',this)">Redistricting</button>
+            <button class="hn-full-chip" data-tag="Polling" onclick="setHomeNewsFilter('Polling',this)">Polling</button>
+          </div>
+          <select class="hn-full-sort" id="home-news-sort" onchange="renderHomeNews()">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+          </select>
+        </div>
+        <div class="hn-full-content">
+          <div id="home-news-bar" class="hn-results-bar" style="display:none"></div>
+          <div class="hn-news-list" id="home-news-list">
+            <div style="color:#6b6b6b;font:400 15px var(--sans);padding:40px 0 0;text-align:center">Loading&hellip;</div>
+          </div>
+          <div id="home-news-empty" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 16px var(--sans)">
+            No news items yet &mdash; the live feed fetches from 150+ RSS sources every hour via GitHub Actions.
+          </div>
+          <div id="home-news-no-results" style="display:none;padding:60px 0;text-align:center;color:#6b6b6b;font:400 16px var(--sans)">
+            No results &mdash; try a different search term or clear the filter.
+          </div>
+        </div>
+      </div>
+    </div><!-- /home-subpanel-news -->
+
+    <!-- DATA INDICATORS SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-data">
+    <div class="home-body">
+
+      <!-- TRUMP APPROVAL CHART -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Trump Approval Rating</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Monthly tracking of Trump job approval and disapproval, Jan 2025 &ndash; present. Current approval stands at <strong style="color:#9B2828" id="home-trump-approve-txt">—</strong> &mdash; well below the historical average for a second-term president at this point. Disapproval is at <strong style="color:#9B2828" id="home-trump-disapprove-txt">—</strong>. Source: <a href="https://www.natesilver.net/p/trump-approval-ratings-nate-silver-bulletin" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Nate Silver Bulletin</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div class="chart-wrap"><canvas id="c-home-trump-approval"></canvas></div>
+        <div class="dl-label" data-block="approval.trump" data-kind="poll"></div>
+      </div>
+
+      <!-- CONGRESS APPROVAL CHART -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Congressional Approval Rating</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Congress approval stood at <strong style="color:#9B2828" class="hm-cong-val">&#8230;</strong> in Gallup's <span id="hm-cong-month">latest</span> reading<span id="hm-cong-low"></span>. The historical midterm pattern shows low congressional approval strongly predicts seat losses for the president&rsquo;s party. At <span class="hm-cong-val">&#8230;</span>, this cycle mirrors 2010 (21%) and 2014 (16%) &mdash; both wave elections.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#378ADD"></span>Approve</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#E24B4A"></span>Disapprove</span>
+        </div>
+        <div class="chart-wrap-sm"><canvas id="c-home-congress-approval"></canvas></div>
+        <div class="dl-label" data-block="approval.congress" data-kind="monthly"></div>
+      </div>
+
+      <!-- RETIREMENTS CHART -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">History of Congressional Retirements</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">2026 is the largest combined House+Senate retirement wave since 1992. <strong style="color:#9B2828"><span id="hm-retire-total">&#8230;</span> members</strong> (<span id="hm-retire-chambers">&#8230;</span>) have announced they will not seek re-election, <span id="hm-retire-record">close to</span> the post-WWII record of 72 set in 1992 (65 House + 7 Senate, driven by the banking scandal and redistricting) &mdash; reflecting historic institutional frustration. For the House alone, 1992's 65 remains the modern record. Younger Republicans are leaving at the lowest average tenure (5 terms) in four decades. <span class="hm-retire-src">Source: Ballotpedia</span>.<sup>*</sup> Historical data: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">Brookings</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#378ADD"></span>House</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#B5D4F4"></span>Senate</span>
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:14px;border-radius:2px;background:#E24B4A"></span>2026</span>
+          <span style="font:400 13px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; post-WWII avg (40)</span>
+        </div>
+        <div class="chart-wrap-lg"><canvas id="c-home-retirements"></canvas></div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:10px">Source: <a href="https://www.brookings.edu/articles/house-retirement-wave-signals-deep-institutional-frustration/" target="_blank" rel="noopener" style="color:#555;text-decoration:underline">Brookings Institution</a> Vital Statistics on Congress (1946&ndash;2024). 2026 figures &mdash; <span class="hm-retire-src">Source: Ballotpedia</span>.<sup>*</sup></div>
+        <div style="font:400 13px var(--sans);color:#888;font-style:italic;margin-top:4px"><sup>*</sup> Senators who are not up for re-election in 2026 but are running for another office during their term (such as Bennet and Klobuchar, both running for governor) are not counted.</div>
+      </div>
+
+      <!-- INFLATION CHART -->
+      <h3 style="font:700 13px var(--sans);text-transform:uppercase;letter-spacing:.1em;color:#555555;margin-bottom:6px">Consumer Price Index &mdash; Inflation Trend</h3>
+      <p style="font:400 14px var(--sans);color:#6B6B6B;line-height:1.6;margin-bottom:12px">Year-over-year % change in the All Items Consumer Price Index, Jan 2025 &ndash; <span id="hm-cpi-end">latest</span>. <span id="hm-cpi-story"></span> Energy prices rose 16.3% over the year. Oct 2025 data is absent due to a lapse in federal appropriations. Inflation is consistently a top-three voter concern and a key driver of midterm outcomes. Source: <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category-line-chart.htm" target="_blank" rel="noopener" style="color:#620d3c;text-decoration:underline">BLS Consumer Price Index by Category</a>.</p>
+      <div style="background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 20px 16px;margin-bottom:28px">
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px">
+          <span style="display:inline-flex;align-items:center;gap:5px;font:500 13px var(--sans);color:#6B6B6B"><span style="display:inline-block;width:14px;height:3px;border-radius:2px;background:#620d3c"></span>All Items CPI (YoY %)</span>
+          <span style="font:400 13px var(--sans);color:#888;font-style:italic">&#x2500;&#x2500; Fed 2% target &nbsp;&nbsp; &#9675; Oct 2025 estimated (govt. shutdown)</span>
+        </div>
+        <div class="chart-wrap"><canvas id="c-home-cpi"></canvas></div>
+        <div class="dl-label" data-block="cpi" data-kind="monthly"></div>
+      </div>
+    </div><!-- /home-body data -->
+    </div><!-- /home-subpanel-data -->
+
+    <!-- ISSUES / FOUR I'S SUB-PANEL -->
+    <div class="home-subpanel" id="home-subpanel-issues">
+      <iframe src="four-is-v3.html" allow="fullscreen" allowfullscreen style="width:100%;height:100%;flex:0 0 auto;border:none;display:block;min-height:480px" title="Issues that Matter — The Four I's"></iframe>
+    </div><!-- /home-subpanel-issues -->
+
+
+  </div>
+  <!-- /HOME PANEL -->
+
+  <div class="frame-loading" id="frame-loading">
+    <div class="spinner"></div>
+    <div class="loading-text">Loading&#8230;</div>
+  </div>
+  <iframe class="tab-frame" id="frame-overview" src="" data-src="overview.html?v=20261020" title="Field Overview"></iframe>
+  <iframe class="tab-frame" id="frame-map" src="" data-src="map.html?v=20261020b" title="Election Trends"></iframe>
+  <iframe class="tab-frame" id="frame-india" src="" data-src="india.html?v=20261020b" title="India's Interest"></iframe>
+  <iframe class="tab-frame" id="frame-analysis" src="" data-src="analysis.html?v=20261020" title="Analysis & Commentary"></iframe>
+  <iframe class="tab-frame" id="frame-about" src="" data-src="about.html?v=20261020" title="About Us"></iframe>
+</div>
+
+<!-- ── GLOBAL FOOTER ── -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="home-freshness">
+      <div class="freshness-dot"></div>
+      <span id="home-freshness-label">Data current</span>
+    </div>
+    <div class="site-footer-sources">&copy; The Takshashila Institution, 2026</div>
+    <div class="site-footer-contact"><span class="fc-lbl">Contact: </span><a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></div>
+    <div class="site-footer-logos">
+      <a href="https://takshashila.org.in/" target="_blank" rel="noopener">
+        <img src="assets/download.jpeg" alt="Takshashila Institution" style="height:32px;width:auto;object-fit:contain;vertical-align:middle;opacity:.8;transition:opacity .15s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.8">
+      </a>
+      <a href="https://dcdossier.substack.com/" target="_blank" rel="noopener">
+        <img src="assets/dcd-logo-small.webp" alt="DC Dossier" style="height:32px;width:auto;object-fit:contain;vertical-align:middle;opacity:.8;transition:opacity .15s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.8">
+      </a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /page-shell -->
+<script>
+'use strict';
+const ELECTION_DATE = new Date('2026-11-03T00:00:00');
+window._dataCharts = [];
+
+// ── COUNTDOWN ──────────────────────────────────────────────────────────────────
+function updateCountdown() {
+  const now = new Date();
+  const diff = ELECTION_DATE - now;
+  if (diff <= 0) {
+    document.getElementById('countdown-timer').textContent = 'Election Day';
+    const hd = document.getElementById('home-days');
+    if (hd) hd.textContent = '0';
+    return;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('countdown-timer').textContent = `${days}d ${hours}h ${mins}m`;
+  const hd = document.getElementById('home-days');
+  if (hd) hd.textContent = days;
+}
+updateCountdown();
+setInterval(updateCountdown, 30000);
+
+// ── TAB SWITCHING ──────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+
+  // Hide home panel and all iframes
+  document.getElementById('panel-home').classList.remove('active');
+  document.querySelectorAll('.tab-frame').forEach(f => f.classList.remove('active'));
+
+  if (name === 'home') {
+    document.getElementById('panel-home').classList.add('active');
+    return;
+  }
+
+  const frame = document.getElementById('frame-' + name);
+  if (!frame) return;
+  frame.classList.add('active');
+
+  // Lazy-load on first visit
+  if (!frame.src || frame.src === window.location.href) {
+    const lazySrc = frame.getAttribute('data-src') || frame.dataset.src;
+    if (lazySrc) {
+      const loader = document.getElementById('frame-loading');
+      loader.classList.add('visible');
+      frame.src = lazySrc;
+      frame.onload = () => loader.classList.remove('visible');
+    }
+  }
+}
+
+// "Seat-wise analysis →": open Election Trends inside this page with #seats.
+// Modified clicks (new tab/window) follow the link to map.html#seats instead.
+function openSeatwise(e) {
+  if (e && (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button > 0)) return true;
+  if (e) e.preventDefault();
+  const frame = document.getElementById('frame-map');
+  const loaded = frame.src && frame.src !== window.location.href;
+  if (!loaded) {
+    // First visit: load the iframe with the hash; map.html handles it once its data is in
+    const base = (frame.getAttribute('data-src') || 'map.html').replace(/#.*$/, '');
+    frame.setAttribute('data-src', base + '#seats');
+    switchTabByName('map');
+    frame.setAttribute('data-src', base);
+  } else {
+    switchTabByName('map');
+    try { frame.contentWindow.SeatwiseEntry.open('house'); }
+    catch (err) { frame.contentWindow.location.hash = 'seats'; }
+  }
+  frame.focus();
+  return false;
+}
+
+// index.html#seats (e.g. from map.html opened on its own) opens the seat-wise view in the frame
+window.addEventListener('load', () => { if (location.hash === '#seats') { history.replaceState(null, '', location.pathname + location.search); openSeatwise(); } });
+
+function switchTabByName(name) {
+  const btn = document.querySelector(`.nav-tab[onclick*="'${name}'"]`);
+  switchTab(name, btn);
+}
+
+// ── HAMBURGER DRAWER ────────────────────────────────────────────────────────
+
+// ── HERO WHY-QUESTIONS (inline accordion) ─────────────────────────────────
+function toggleHeroWhy(idx, btn) {
+  for (let i = 0; i < 3; i++) {
+    const item = document.getElementById('hwi-' + i);
+    const b = item.querySelector('.hero-why-btn');
+    if (i === idx) {
+      const opening = !item.classList.contains('open');
+      item.classList.toggle('open', opening);
+      b.classList.toggle('open', opening);
+    } else {
+      item.classList.remove('open');
+      item.querySelector('.hero-why-btn').classList.remove('open');
+    }
+  }
+}
+
+function goToTellMeWhy(idx) {
+  // Collapse the hero why item
+  const hwi = document.getElementById('hwi-' + idx);
+  if (hwi) {
+    hwi.classList.remove('open');
+    hwi.querySelector('.hero-why-btn').classList.remove('open');
+  }
+  // Navigate to home / overview (safety for future placement)
+  switchTabByName('home');
+  const subBtn = document.querySelector('.home-sub-tab[data-subtab="overview"]');
+  if (subBtn) switchHomeTab('overview', subBtn);
+
+  // Step 1 — scroll to accordion
+  setTimeout(() => {
+    const target = document.getElementById('why-detail-' + idx);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // Step 2 — wait for scroll, then flash
+    setTimeout(() => {
+      const detail  = document.getElementById('why-detail-' + idx);
+      if (!detail) return;
+      const summary = detail.querySelector('summary');
+      if (!summary) return;
+      summary.style.animation = 'why-flash 400ms ease 2';
+
+      // Step 3 — open after flash
+      summary.addEventListener('animationend', function onEnd() {
+        summary.removeEventListener('animationend', onEnd);
+        summary.style.animation = '';
+        for (let i = 0; i < 3; i++) {
+          const d = document.getElementById('why-detail-' + i);
+          if (d) d.open = (i === idx);
+        }
+        setTimeout(() => {
+          const d = document.getElementById('why-detail-' + idx);
+          if (d) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+      });
+    }, 250);
+  }, 200);
+}
+
+function toggleNavDrawer() {
+  const drawer = document.getElementById('nav-drawer');
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) { closeNavDrawer(); } else {
+    drawer.classList.add('open');
+    document.getElementById('page-shell').classList.add('drawer-open');
+    // On mobile: show overlay instead of pushing content off-screen
+    if (window.innerWidth <= 700) document.getElementById('nd-overlay').classList.add('mobile-visible');
+  }
+}
+function closeNavDrawer() {
+  document.getElementById('nav-drawer').classList.remove('open');
+  document.getElementById('page-shell').classList.remove('drawer-open');
+  document.getElementById('nd-overlay').classList.remove('mobile-visible');
+  ndHideTip();
+}
+function ndGo(tab) {
+  switchTabByName(tab);
+}
+function ndGoSub(tab, subtab) {
+  switchTabByName(tab);
+  if (tab === 'home') {
+    // Small delay to ensure panel is visible before switching sub-tab
+    setTimeout(() => {
+      const btn = document.querySelector(`.home-sub-tab[data-subtab="${subtab}"]`);
+      if (btn) switchHomeTab(subtab, btn);
+    }, 80);
+  } else if (tab === 'india') {
+    // Wait for iframe to load, then postMessage
+    const frame = document.getElementById('frame-india');
+    const sendMsg = () => frame.contentWindow.postMessage({type:'ndSwitchTab', tab: subtab}, '*');
+    if (frame.src && frame.src !== window.location.href) {
+      setTimeout(sendMsg, 300);
+    } else {
+      frame.addEventListener('load', () => setTimeout(sendMsg, 100), {once: true});
+    }
+  }
+}
+// Tooltip for drawer items
+const _ndTip = document.getElementById('nd-tip-popup');
+function ndShowTip(el, text) {
+  _ndTip.textContent = text;
+  _ndTip.classList.add('visible');
+  const r = el.getBoundingClientRect();
+  let left = r.right + 10;
+  if (left + 270 > window.innerWidth) left = r.left - 280;
+  if (left < 8) left = 8;
+  let top = r.top;
+  if (top + _ndTip.offsetHeight > window.innerHeight - 10) top = window.innerHeight - _ndTip.offsetHeight - 10;
+  _ndTip.style.left = left + 'px';
+  _ndTip.style.top = Math.max(8, top) + 'px';
+}
+function ndHideTip() { _ndTip.classList.remove('visible'); }
+
+// ── DATA FETCH ─────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+// Decode HTML entities from RSS titles (e.g. &#8216; → ', &amp; → &) then re-escape for safe HTML insertion
+const _entityDecoder = document.createElement('textarea');
+function decodeTitle(s) {
+  _entityDecoder.innerHTML = String(s || '');
+  return _entityDecoder.value;
+}
+function escTitle(s) { return esc(decodeTitle(s)); }
+
+function relAge(d) {
+  const diff = Date.now() - new Date(d).getTime();
+  const m = Math.floor(diff / 60000);
+  if (m < 60) return m + 'm ago';
+  const h = Math.floor(m / 60);
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h / 24) + 'd ago';
+}
+
+const TAG_COLORS = {
+  'Major Update':'#FEE2E2:#991B1B',
+  'Senate':'#DBEAFE:#1E3A8A',
+  'House':'#EDE9FE:#4C1D95',
+  'Redistricting':'#ECFDF5:#065F46',
+  'Federal':'#F1F5F9:#1E293B',
+  'Governorship':'#CCFBF1:#134E4A',
+  'Primary':'#FEF3C7:#92400E',
+};
+
+
+// "Source: Ballotpedia · Data as of 2 Oct 2026" for the live retirement counts
+function retireSourceLabel(r) {
+  return window.DataLabels ? window.DataLabels.html(r, { kind: 'monthly' }) : '';
+}
+
+async function loadHomeData() {
+  try {
+  let data = null;
+  for (const p of ['data.json','./data.json','../data.json']) {
+    try {
+      const r = await fetch(p + '?t=' + Date.now());
+      if (r.ok) { data = await r.json(); break; }
+    } catch(e) { /* try next */ }
+  }
+  if (!data) { console.warn('loadHomeData: data.json unavailable'); return; }
+  if (window.DataLabels) window.DataLabels.fill(data);
+
+  // Live metrics
+  const set = (id, v) => { const el = document.getElementById(id); if(el) el.textContent = v; };
+
+  // Generic ballot from data.json (scripts/fetch-polls.js averages the NYT CSV)
+  const gb = data.generic_ballot || {};
+  const d = gb.democrat || 0, rep = gb.republican || 0;
+  if (d || rep) {
+    const margin = d - rep;
+    set('hm-ballot', (margin > 0 ? 'D+' : 'R+') + Math.abs(margin).toFixed(1));
+    set('hm-ballot-sub', `D ${d}%  vs  R ${rep}%`);
+    const btrend = document.getElementById('hm-ballot-trend');
+    if (btrend) { btrend.textContent = margin > 0 ? '↑ Dem leading' : '↑ GOP leading'; btrend.className = 'metric-trend ' + (margin > 0 ? 'mt-up' : 'mt-dn'); }
+  }
+
+  const appr = data.approval || {};
+  const trump = appr.trump || {};
+  if (trump.approve) {
+    set('hm-trump', trump.approve + '%');
+    set('hm-trump-sub', `Approve ${trump.approve}% · Disapprove ${trump.disapprove || '—'}%`);
+    const ttrend = document.getElementById('hm-trump-trend');
+    if (ttrend) { ttrend.textContent = '↓ Below average'; ttrend.className = 'metric-trend mt-dn'; }
+
+    // Net approval card
+    const net = trump.net != null ? trump.net : (trump.approve && trump.disapprove ? parseFloat((trump.approve - trump.disapprove).toFixed(1)) : null);
+    if (net != null) {
+      const netEl = document.getElementById('hm-trump-net');
+      if (netEl) { netEl.textContent = (net > 0 ? '+' : net < 0 ? '\u2212' : '') + Math.abs(net) + ' points'; netEl.style.color = net >= 0 ? '#5EBD8A' : '#E08080'; }
+      set('hm-trump-net-sub', `${net > 0 ? 'More approve than disapprove' : 'More disapprove than approve'}`);
+      const ntrend = document.getElementById('hm-trump-net-trend');
+      if (ntrend) { ntrend.textContent = net >= 0 ? '↑ Positive' : '↓ Negative'; ntrend.className = 'metric-trend ' + (net >= 0 ? 'mt-up' : 'mt-dn'); }
+    }
+  }
+
+  const ca = data.congress_approval || {};
+  if (ca.combined) set('hm-congress', (ca.combined.approve || '—') + '%');
+
+  // Congress lede: latest Gallup reading and month, and this series' low
+  const cong = appr.congress || {};
+  const monthName = iso => { const d = new Date(String(iso) + 'T00:00:00Z'); return isNaN(d) ? null : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); };
+  const longMonth = m => { const d = new Date('1 ' + m + ' UTC'); return isNaN(d) ? m : d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric', timeZone: 'UTC' }); };
+  if (cong.approve != null) {
+    document.querySelectorAll('.hm-cong-val').forEach(el => { el.textContent = cong.approve + '%'; });
+    set('hm-cong-month', monthName(cong.as_of) || (cong.history && cong.history.length ? longMonth(cong.history[cong.history.length - 1].month) : 'latest'));
+    const hist = Array.isArray(cong.history) ? cong.history : [];
+    if (hist.length) {
+      const low = hist.reduce((m, h) => (h.approve < m.approve ? h : m), hist[0]);
+      set('hm-cong-low', `, against a low of ${low.approve}% in ${longMonth(low.month)} for this Congress (Gallup's all-time low is 9%, November 2013)`);
+    }
+  }
+
+  // CPI lede: period end, peak and latest from data.cpi.history
+  const cpiHist = (data.cpi && Array.isArray(data.cpi.history) ? data.cpi.history : []).filter(h => typeof h.all_items === 'number');
+  if (cpiHist.length) {
+    const last = cpiHist[cpiHist.length - 1];
+    const peakIdx = cpiHist.reduce((bi, h, i) => (h.all_items >= cpiHist[bi].all_items ? i : bi), 0);
+    const peak = cpiHist[peakIdx];
+    const low = cpiHist.slice(0, peakIdx + 1).reduce((m, h) => (h.all_items < m.all_items ? h : m), cpiHist[0]);
+    set('hm-cpi-end', last.month);
+    const el = document.getElementById('hm-cpi-story');
+    if (el) {
+      const lowPart = low !== peak ? `After falling to ${low.all_items}% in ${low.month}, inflation climbed` : 'Inflation climbed';
+      el.innerHTML = last === peak
+        ? `${lowPart} to <strong style="color:#9B2828">${last.all_items}%</strong> by ${last.month}, the highest in this period.`
+        : `${lowPart} as high as ${peak.all_items}% in ${peak.month} before easing to <strong style="color:#9B2828">${last.all_items}%</strong> by ${last.month}.`;
+    }
+  }
+
+  const races = data.races || {};
+  const hs = races.house || {};
+  if (hs.ratings_summary) set('hm-tossups', hs.ratings_summary.toss_up || '—');
+
+  const ss = races.senate || {};
+  if (ss.ratings_summary) set('hm-senate-tossups', ss.ratings_summary.toss_up ?? 7);
+
+  // Retirements — live from Ballotpedia via fetch-polls.js
+  const ret = data.retirements || {};
+  if (ret.total) {
+    set('hm-retire-total', ret.total);
+    set('hm-retire-chambers', `${ret.house ?? '—'} House + ${ret.senate ?? '—'} Senate`);
+    set('hm-retire-record', ret.total > 72 ? 'breaking' : ret.total === 72 ? 'tying' : `${72 - ret.total} short of`);
+    document.querySelectorAll('.hm-retire-src').forEach(el => { el.innerHTML = retireSourceLabel(ret); });
+  }
+
+  // CPI — update chart description with latest month
+  const cpi = data.cpi || {};
+  const cpiDesc = document.getElementById('hm-cpi-desc');
+  if (cpiDesc && cpi.current && cpi.month) {
+    cpiDesc.textContent = `Year-over-year % change, Jan 2025 – ${cpi.month}. Latest: ${cpi.current}%.`;
+  }
+
+  // Forecaster consensus from meta
+  const fc = data.meta && data.meta.forecaster_consensus;
+  if (fc) {
+    const ratingClass = { 'lean-r':'fr-lean-r', 'likely-r':'fr-likely-r', 'tossup':'fr-tossup', 'lean-d':'fr-lean-d', 'likely-d':'fr-likely-d' };
+    const chambers = [
+      { key:'house', label:'U.S. House', data:fc.house },
+      { key:'senate', label:'U.S. Senate', data:fc.senate },
+      { key:'governors', label:'Governors', data:fc.governors },
+    ];
+    const fg = document.getElementById('home-forecast-bars');
+    if (fg) {
+      fg.innerHTML = chambers.map(ch => {
+        const fd = ch.data || {};
+        const rc = ratingClass[fd.rating_class] || 'fr-tossup';
+        return `<div class="forecast-card">
+          <div class="forecast-chamber">${ch.label}</div>
+          <div class="forecast-rating ${rc}">${esc(fd.rating||'TBD')}</div>
+          ${fd.projected_r && fd.projected_d ? `<div class="forecast-seats">Proj. ${esc(fd.projected_r)} R &middot; ${esc(fd.projected_d)} D</div>` : ''}
+          <div class="forecast-sub">${esc(fd.summary||'')}</div>
+        </div>`;
+      }).join('');
+    }
+  }
+
+  // Freshness
+  if (data.meta && data.meta.last_updated) {
+    const dt = new Date(data.meta.last_updated);
+    const fl = document.getElementById('home-freshness-label');
+    if (fl) {
+      const estTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'America/New_York',hour12:true});
+      const estDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'America/New_York'});
+      const istTime = dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata',hour12:true});
+      const istDate = dt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric',timeZone:'Asia/Kolkata'});
+      fl.innerHTML = `<span class="fresh-long">Last updated ${estDate} · ${estTime} ET / ${istTime} IST (${istDate})</span><span class="fresh-short">Updated ${estDate}, ${estTime} ET</span>`;
+    }
+  }
+
+  // News — store full array, render with filters
+  _allHomeNews = Array.isArray(data.news) ? data.news : [];
+  renderHomeNews();
+
+  // Also load analysis-manual.json for ticker (fire-and-forget; ticker rebuilt when ready)
+  loadAnalysisTicker(_allHomeNews);
+
+  // ── Helper: safe afterDraw line at a given Y value ───────────────────────
+  function drawRefLine(c, yVal, color, dash, label, labelColor) {
+    try {
+      const ca = c.chartArea; if (!ca) return;
+      const { ctx } = c; const yp = c.scales.y.getPixelForValue(yVal);
+      ctx.save(); ctx.setLineDash(dash || [4,3]); ctx.strokeStyle = color; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(ca.left, yp); ctx.lineTo(ca.right, yp); ctx.stroke();
+      if (label) { ctx.fillStyle = labelColor || color; ctx.font = '10px Inter,sans-serif'; ctx.setLineDash([]); ctx.fillText(label, ca.right + 4, yp + 4); }
+      ctx.restore();
+    } catch(e) { /* skip decorative element */ }
+  }
+
+  // Trump approval chart
+  try {
+    const trumpHist = trump.history || [];
+    const trumpCvs = document.getElementById('c-home-trump-approval');
+    if (trumpHist.length && trumpCvs) {
+      Chart.defaults.font.family = "'Inter','Lato',ui-sans-serif,sans-serif";
+      Chart.defaults.color = '#6B6B6B';
+      const tLabels = trumpHist.map(d => d.month);
+      const tApprove = trumpHist.map(d => d.approve);
+      const tDisapprove = trumpHist.map(d => d.disapprove);
+      const apTxt = document.getElementById('home-trump-approve-txt');
+      const disTxt = document.getElementById('home-trump-disapprove-txt');
+      if (apTxt && trump.approve) apTxt.textContent = trump.approve + '%';
+      if (disTxt && trump.disapprove) disTxt.textContent = trump.disapprove + '%';
+      window._dataCharts.push(new Chart(trumpCvs, {
+        type: 'line',
+        data: { labels: tLabels, datasets: [
+          { label: 'Approve', data: tApprove, borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+          { label: 'Disapprove', data: tDisapprove, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: i => i[0].label, label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 30, max: 70, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%' } }
+          }
+        },
+        plugins: [{ id: 'gap50', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
+      }));
+    }
+  } catch(e) { console.error('Trump chart error:', e); }
+
+  // Congressional approval chart
+  try {
+    const caHistory = ca.history || [];
+    const caCvs = document.getElementById('c-home-congress-approval');
+    if (caHistory.length && caCvs) {
+      const caMonths      = caHistory.map(row => row.month);
+      const caApproval    = caHistory.map(row => row.approve);
+      const caDisapproval = caHistory.map(row => row.disapprove);
+      window._dataCharts.push(new Chart(caCvs, {
+        type: 'line',
+        data: { labels: caMonths, datasets: [
+          { label: 'Approve',    data: caApproval,    borderColor: '#378ADD', backgroundColor: 'rgba(55,138,221,0.07)', pointBackgroundColor: '#378ADD', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true },
+          { label: 'Disapprove', data: caDisapproval, borderColor: '#E24B4A', backgroundColor: 'rgba(226,75,74,0.07)', pointBackgroundColor: '#E24B4A', pointRadius: 4, pointBorderColor: '#fff', pointBorderWidth: 1.5, borderWidth: 2, tension: 0.35, fill: true }
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { title: ctx => ctx[0].label, label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 0, max: 100, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 20 } }
+          }
+        },
+        plugins: [{ id: 'caRef', afterDraw(c) { drawRefLine(c, 50, 'rgba(100,100,100,0.3)', [4,3], '50%', '#aaa'); } }]
+      }));
+    }
+  } catch(e) { console.error('Congress approval chart error:', e); }
+
+  // CPI inflation chart
+  try {
+    const cpiData = (data.cpi || {}).history || [];
+    const cpiCvs  = document.getElementById('c-home-cpi');
+    if (cpiData.length && cpiCvs) {
+      const cpiMonths    = cpiData.map(row => row.month);
+      const cpiAll       = cpiData.map(row => row.all_items);
+      const cpiEstimated = cpiData.map(row => row.estimated || false);
+      const octIdx       = cpiMonths.indexOf('Oct 2025');
+      window._dataCharts.push(new Chart(cpiCvs, {
+        type: 'line',
+        data: { labels: cpiMonths, datasets: [{
+          label: 'All Items CPI (YoY %)',
+          data: cpiAll,
+          borderColor: '#620d3c',
+          backgroundColor: 'rgba(88,24,69,0.08)',
+          pointBackgroundColor: cpiEstimated.map(e => e ? '#fff' : '#620d3c'),
+          pointBorderColor:     cpiEstimated.map(e => e ? '#620d3c' : '#fff'),
+          pointBorderWidth:     cpiEstimated.map(e => e ? 2 : 1.5),
+          pointRadius:          cpiEstimated.map(e => e ? 5 : 4),
+          borderWidth: 2.5, tension: 0.3, fill: true, spanGaps: true,
+          segment: {
+            borderDash:  ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? [6, 4] : undefined,
+            borderColor: ctx => (ctx.p0DataIndex === octIdx - 1 || ctx.p0DataIndex === octIdx) ? 'rgba(88,24,69,0.45)' : '#620d3c'
+          }
+        }]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              title: ctx => ctx[0].label,
+              label: ctx => cpiEstimated[ctx.dataIndex] ? ' CPI: ~' + ctx.raw + '% (estimated \u2014 govt. shutdown)' : ' CPI: ' + ctx.raw + '%'
+            }}
+          },
+          scales: {
+            x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45 } },
+            y: { min: 1, max: 5, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', callback: v => v + '%', stepSize: 1 } }
+          }
+        },
+        plugins: [
+          { id: 'cpiTarget', afterDraw(ch) { drawRefLine(ch, 2, 'rgba(88,24,69,0.4)', [5,4], 'Fed target 2%', '#620d3c'); } },
+          { id: 'cpiShutdown', afterDraw(ch) {
+              try {
+                if (octIdx < 0 || !ch.chartArea) return;
+                const { ctx, chartArea: { top, bottom } } = ch;
+                const xp = ch.scales.x.getPixelForValue(octIdx);
+                const yp = ch.scales.y.getPixelForValue(cpiAll[octIdx]);
+                ctx.save();
+                ctx.setLineDash([3,3]); ctx.strokeStyle = 'rgba(88,24,69,0.25)'; ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(xp, top); ctx.lineTo(xp, bottom); ctx.stroke();
+                const txt = 'No-data: Govt. Shutdown';
+                ctx.font = '500 10px Inter,sans-serif'; ctx.setLineDash([]);
+                const tw = ctx.measureText(txt).width;
+                const bx = Math.min(xp - tw / 2 - 4, ch.width - tw - 12);
+                const by = top + 6;
+                ctx.fillStyle = 'rgba(255,255,255,0.88)'; ctx.fillRect(bx, by, tw + 8, 14);
+                ctx.fillStyle = '#620d3c'; ctx.textAlign = 'left'; ctx.fillText(txt, bx + 4, by + 10);
+                ctx.restore();
+              } catch(e) { /* skip decorative */ }
+          }}
+        ]
+      }));
+    }
+  } catch(e) { console.error('CPI chart error:', e); }
+
+  // Congressional retirements chart
+  try {
+    const hcData = (data.retirements || {}).historical_chart || [];
+    const cvs = document.getElementById('c-home-retirements');
+    if (hcData.length && cvs) {
+      Chart.defaults.font.family = "'Inter','Lato',ui-sans-serif,sans-serif";
+      Chart.defaults.color = '#6B6B6B';
+      const hYrs = hcData.map(d => d.year);
+      const hH   = hcData.map(d => d.house);
+      const hS   = hcData.map(d => d.senate);
+      const hT   = hcData.map(d => d.house + d.senate);
+      const hAvg = 40;
+      window._dataCharts.push(new Chart(cvs, {
+        type: 'bar',
+        data: { labels: hYrs, datasets: [
+          { label: 'House',  data: hH, backgroundColor: hYrs.map(y => y === '2026' ? '#E24B4A' : '#378ADD'), stack: 's', borderSkipped: false, borderRadius: { topLeft: 1, topRight: 1 } },
+          { label: 'Senate', data: hS, backgroundColor: hYrs.map(y => y === '2026' ? '#F9A89D' : '#B5D4F4'), stack: 's', borderSkipped: false },
+        ]},
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              title: i => `${i[0].label} election`,
+              afterBody: i => [`Total: ${hT[i[0].dataIndex]}  ·  Post-WWII avg: ${hAvg}`]
+            }}
+          },
+          scales: {
+            x: { stacked: true, grid: { display: false }, border: { display: false }, ticks: { font: { size: 10 }, color: '#6B6B6B', maxRotation: 45, autoSkip: false, callback: (_, i) => i % 2 === 0 ? hYrs[i] : '' } },
+            y: { stacked: true, max: 88, grid: { color: 'rgba(0,0,0,0.06)' }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B', stepSize: 20 } }
+          }
+        },
+        plugins: [
+          { id: 'avg', afterDraw(c) { drawRefLine(c, hAvg, 'rgba(100,100,100,.35)', [5,4], 'avg 40', '#999'); } },
+          { id: 'lbl', afterDraw(c) {
+            try {
+              const { ctx } = c;
+              [['1992','Record 72','#7a1c1c'],['2026', hT[hYrs.indexOf('2026')] > 72 ? 'New record →' : hT[hYrs.indexOf('2026')] === 72 ? 'Ties record →' : 'Near record →','#E24B4A'],['1974','Watergate','#888']].forEach(([yr,lbl,col]) => {
+                const i = hYrs.indexOf(yr); if (i < 0) return;
+                const xp = c.scales.x.getPixelForValue(i);
+                const yp = c.scales.y.getPixelForValue(hT[i]) - 8;
+                ctx.save(); ctx.font = '500 11px Inter,sans-serif'; ctx.fillStyle = col; ctx.textAlign = yr === '2026' ? 'right' : 'center'; ctx.fillText(lbl, yr === '2026' ? xp + 6 : xp, yp); ctx.restore();
+              });
+            } catch(e) { /* skip decorative labels */ }
+          }}
+        ]
+      }));
+    }
+  } catch(e) { console.error('Retirements chart error:', e); }
+
+  } catch(e) { console.error('loadHomeData critical error:', e); }
+}
+
+// ── ANALYSIS TICKER ───────────────────────────────────────────────────────────
+// Fetches analysis-manual.json (analysis.json is a frozen backup, not read),
+// merges with news items, rebuilds ticker with Analysis badges
+async function loadAnalysisTicker(newsItems) {
+  const TICKER_MAX = 80;
+  const ANALYSIS_MAX = 12; // reserve up to 12 slots for analysis posts
+
+  // Build news portion (keep newest, leave room for analysis posts). Same
+  // relevance floor as the news feed (scripts/fetch-news.js MIN_SCORE = 3),
+  // and no letters, editorials or opinion pieces.
+  const TICKER_MIN_SCORE = 3;
+  const TICKER_BLOCK = /\bletters?\b|opinion:|op-ed|editorial|\|\s*opinion/i;
+  const newsSlice = [...(newsItems || [])]
+    .filter(item => (typeof item.score !== 'number' || item.score >= TICKER_MIN_SCORE) && !TICKER_BLOCK.test(decodeTitle(item.title || '')))
+    .sort((a, b) => new Date(b.date||0) - new Date(a.date||0))
+    .slice(0, TICKER_MAX - ANALYSIS_MAX);
+
+  // Load analysis-manual.json ("entries", plus "posts" for safety); untitled entries are skipped
+  let analysisPosts = [];
+  for (const p of ['analysis-manual.json', './analysis-manual.json', '../analysis-manual.json']) {
+    try {
+      const r = await fetch(p + '?t=' + Date.now());
+      if (r.ok) {
+        const d = await r.json();
+        analysisPosts = [...(d.entries || []), ...(d.posts || [])]
+          // Same rule as the Analysis page: only entries with a real title and a publication date
+          .filter(x => x && x.url && x.title && x.date && !isNaN(new Date(x.date))
+            && !/just a moment|access denied|attention required|https?:\/\//i.test(x.title))
+          .map(x => ({ ...x, title: String(x.title).replace(/^\s*opinion\s*[|:–—-]\s*/i, '') }));
+        break;
+      }
+    } catch(e) { /* try next */ }
+  }
+
+  const analysisSlice = [...analysisPosts]
+    .sort((a, b) => new Date(b.date||0) - new Date(a.date||0))
+    .slice(0, ANALYSIS_MAX);
+
+  const ti = document.getElementById('ticker-inner');
+  if (!ti) return;
+
+  const newsHtml = newsSlice.map(item =>
+    `<div class="ticker-item"><span class="ticker-dot"></span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:11px">${escTitle(item.title)}</a></div>`
+  ).join('');
+
+  const analysisHtml = analysisSlice.map(item =>
+    `<div class="ticker-item"><span class="ticker-dot" style="background:var(--gold);opacity:1"></span><span class="ticker-analysis-tag">Analysis</span><a class="home-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener" style="font-size:13px;margin-left:4px">${escTitle(item.title)}</a></div>`
+  ).join('');
+
+  const combined = newsHtml + analysisHtml;
+  ti.innerHTML = combined + combined;
+  const totalItems = newsSlice.length + analysisSlice.length;
+  ti.style.animationDuration = Math.max(60, totalItems * 2.5) + 's';
+}
+
+// ── HOME SUB-TAB SWITCHING ───────────────────────────────────────────────────
+function switchHomeTab(name, btn) {
+  document.querySelectorAll('.home-sub-tab').forEach(b => b.classList.toggle('active', b.dataset.subtab === name));
+  document.querySelectorAll('.home-subpanel').forEach(p => p.classList.toggle('active', p.id === 'home-subpanel-' + name));
+  // Resize data charts after the panel becomes visible so Chart.js can recalculate dimensions
+  if (name === 'data' && window._dataCharts && window._dataCharts.length) {
+    requestAnimationFrame(() => window._dataCharts.forEach(c => { try { c && c.resize(); } catch(e) {} }));
+  }
+}
+
+// ── LIVE NEWS FEED ──────────────────────────────────────────────────────────
+const HN_TAG_CLASS = {
+  'Major Update':'hn-tag-major', 'Senate':'hn-tag-senate', 'House':'hn-tag-house',
+  'Federal':'hn-tag-federal', 'Governorship':'hn-tag-gov', 'Primary':'hn-tag-primary',
+  'Redistricting':'hn-tag-redistricting', 'Polling':'hn-tag-polling', 'Economy':'hn-tag-economy',
+};
+
+let _allHomeNews = [];
+let _homeNewsFilter = 'All';
+
+function setHomeNewsFilter(tag, btn) {
+  _homeNewsFilter = tag;
+  document.querySelectorAll('.hn-full-chip').forEach(c => c.classList.toggle('active', c.dataset.tag === tag));
+  renderHomeNews();
+}
+
+function renderHomeNews() {
+  const q = (document.getElementById('home-news-search')?.value || '').toLowerCase();
+  const sort = document.getElementById('home-news-sort')?.value || 'newest';
+  const bar = document.getElementById('home-news-bar');
+  const nl = document.getElementById('home-news-list');
+  const emptyEl = document.getElementById('home-news-empty');
+  const noResEl = document.getElementById('home-news-no-results');
+  if (!nl) return;
+
+  let items = _allHomeNews.filter(item => {
+    if (_homeNewsFilter !== 'All') {
+      const tags = Array.isArray(item.tags) ? item.tags : [];
+      if (!tags.includes(_homeNewsFilter)) return false;
+    }
+    if (q) {
+      const hay = (decodeTitle(item.title) + ' ' + (item.source||'') + ' ' + decodeTitle(item.description)).toLowerCase();
+      if (!hay.includes(q)) return false;
+    }
+    return true;
+  });
+
+  items.sort((a, b) => {
+    const da = new Date(a.date||0), db = new Date(b.date||0);
+    return sort === 'oldest' ? da - db : db - da;
+  });
+
+  // Empty states
+  if (emptyEl) emptyEl.style.display = _allHomeNews.length === 0 ? 'block' : 'none';
+  if (noResEl) noResEl.style.display = (_allHomeNews.length > 0 && items.length === 0) ? 'block' : 'none';
+
+  if (items.length === 0) {
+    nl.innerHTML = '';
+    if (bar) bar.style.display = 'none';
+    return;
+  }
+
+  nl.innerHTML = items.map(item => {
+    const tags = Array.isArray(item.tags) ? item.tags : [];
+    const tagsHtml = tags.map(t =>
+      `<span class="hn-tag ${HN_TAG_CLASS[t] || 'hn-tag-federal'}">${esc(t)}</span>`
+    ).join('');
+    const dateStr = item.date ? relAge(item.date) : '';
+    return `<div class="hn-news-item">
+      <div class="hn-news-top">
+        <span class="hn-news-source">${esc(item.source||'')}</span>
+        ${dateStr ? `<span class="hn-news-date">${dateStr}</span>` : ''}
+      </div>
+      <a class="hn-news-title" href="${esc(item.url||'#')}" target="_blank" rel="noopener">${escTitle(item.title||'Untitled')}</a>
+      ${item.description ? `<p class="hn-news-desc">${esc(item.description)}</p>` : ''}
+      ${tagsHtml ? `<div class="hn-news-tags">${tagsHtml}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  if (bar) {
+    bar.textContent = items.length + ' item' + (items.length !== 1 ? 's' : '') +
+      (_homeNewsFilter !== 'All' ? ' · ' + _homeNewsFilter : '') +
+      (q ? ' matching "' + q + '"' : '');
+    bar.style.display = 'block';
+  }
+}
+
+loadHomeData();
+loadSeatProjections();
+
+// ── SEAT PROJECTIONS TABLE ──────────────────────────────────────────────────
+async function loadSeatProjections() {
+  const box = document.getElementById('spj-body');
+  if (!box) return;
+  const e = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let d;
+  try {
+    const r = await fetch('assets/seat-projections.json?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    d = await r.json();
+  } catch (err) {
+    box.innerHTML = '<p class="spj-err">Seat projections are unavailable right now.</p>';
+    return;
+  }
+  const MINUS = '−', DASH = '–';
+  const sign = n => n > 0 ? '+' + n : n < 0 ? MINUS + Math.abs(n) : '0';
+  const range = (a, b, f) => a === b ? f(a) : f(a) + (f === String ? DASH : ' to ') + f(b);
+  const tone = (a, b) => a > 0 && b > 0 ? 'spj-pos' : a < 0 && b < 0 ? 'spj-neg' : '';
+  const date = iso => new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', {day:'numeric', month:'short', year:'numeric'});
+  const link = (url, text) => `<a class="spj-link" href="${e(url)}" target="_blank" rel="noopener">${e(text)}</a>`;
+  const host = url => { try { return new URL(url).hostname.replace(/^www\./, ''); } catch (_) { return url; } };
+  const cell = (label, inner, cls) => `<td class="num${cls ? ' ' + cls : ''}" data-label="${e(label)}"><span class="spj-v">${inner}</span></td>`;
+  const na = tip => `<button type="button" class="info-btn spj-na" data-tip="${e(tip)}" aria-label="Not applicable: ${e(tip)}">n/a</button>`;
+
+  const rows = d.rows.map(r => {
+    const party = /^Dem/.test(r.party) ? 'spj-d' : 'spj-r';
+    const twoThirds = r.two_thirds_needed == null ? na(r.two_thirds_note) : r.two_thirds_needed;
+    const short = r.short_of_two_thirds_at_max == null ? na(r.two_thirds_note) : r.short_of_two_thirds_at_max;
+    return `<tr>
+      <td class="spj-head spj-chamber">${e(r.chamber)}<span class="spj-party ${party}" data-m="1">${e(r.party)}</span><button type="button" class="info-btn spj-i" data-tip="${e(r.notes)}" aria-label="Notes on ${e(r.chamber)} ${e(r.party)}"></button></td>
+      <td><span class="spj-party ${party}">${e(r.party)}</span></td>
+      ${cell('Seats now', r.seats_now)}
+      ${cell('Projected seats', range(r.projected_min, r.projected_max, String), 'spj-proj')}
+      ${cell('Change', range(r.change_min, r.change_max, sign), tone(r.change_min, r.change_max))}
+      ${cell('Majority needed', r.majority_needed)}
+      ${cell('Two-thirds needed', twoThirds)}
+      ${cell('Short of two-thirds (at max)', short)}
+    </tr>`;
+  }).join('');
+
+  const models = d.models.map(m => `<tr>
+      <td>${e(m.forecast)}</td><td>${e(m.race)}</td>
+      <td class="num">${e(m.democrats ?? '—')}</td><td class="num">${e(m.republicans ?? '—')}</td>
+      <td class="num">${e(date(m.date))}</td><td>${link(m.url, host(m.url))}</td></tr>`).join('');
+
+  const others = d.other_sources.map(o => `<li><a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.item)} <span aria-hidden="true">&#8599;</span></a></li>`).join('');
+
+  box.innerHTML = `
+    <div class="spj-wrap"><table class="spj-table spj-main">
+      <thead><tr>
+        <th>Chamber</th><th>Projected majority party</th><th class="num">Seats now</th><th class="num">Projected seats</th><th class="num">Change</th>
+        <th class="num">Majority needed</th><th class="num">Two-thirds needed</th><th class="num">Short of two-thirds (at max)</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>
+    <details class="spj-more">
+      <summary>Model detail and sources</summary>
+      <h4 class="spj-h4">Model detail</h4>
+      <div class="spj-scroll"><table class="spj-table spj-models">
+        <thead><tr><th>Forecast</th><th>Race</th><th class="num">Democrats</th><th class="num">Republicans</th><th class="num">Date</th><th>Source</th></tr></thead>
+        <tbody>${models}</tbody>
+      </table></div>
+      <h4 class="spj-h4">Other sources</h4>
+      <ul class="spj-src">${others}</ul>
+    </details>`;
+}
+
+
+// ── INFO TOOLTIP ─────────────────────────────────────────────────────────────
+(function(){
+  const tip = document.createElement('div');
+  tip.className = 'info-tooltip';
+  tip.id = 'info-tooltip';
+  document.body.appendChild(tip);
+  let active = null;
+
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.info-btn');
+    if (btn) {
+      e.stopPropagation();
+      if (active === btn && tip.classList.contains('visible')) {
+        tip.classList.remove('visible'); active = null; return;
+      }
+      active = btn;
+      tip.textContent = btn.dataset.tip;
+      tip.classList.add('visible');
+      const r = btn.getBoundingClientRect();
+      const w = 270;
+      let left = Math.min(r.left, window.innerWidth - w - 10);
+      if (left < 10) left = 10;
+      tip.style.left = left + 'px';
+      tip.style.top  = (r.bottom + 7) + 'px';
+    } else {
+      tip.classList.remove('visible'); active = null;
+    }
+  });
+})();
+</script>
+<script>
+document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
+</script>
+
+
+<script>
+(function(){
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats \u2014 a spectrum of how likely a seat is to change hands.';
+
+  /* --- CSS --- */
+  var st = document.createElement('style');
+  st.textContent =
+    '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:4px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;padding:0;box-sizing:border-box}' +
+    '.dti-btn:hover{background:#c98a10}' +
+    '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}' +
+    '#dti-box.on{display:block}';
+  document.head.appendChild(st);
+
+  /* --- tooltip box --- */
+  if(document.getElementById('dti-box')) return;
+  var box = document.createElement('div');
+  box.id = 'dti-box';
+  box.innerHTML = CONTENT;
+  document.body.appendChild(box);
+
+  /* --- nearest block-level ancestor (span included per design) --- */
+  var BLOCKS = {DIV:1,P:1,LI:1,SPAN:1,TD:1,TH:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,
+    BLOCKQUOTE:1,DT:1,DD:1,SECTION:1,ARTICLE:1,HEADER:1,FOOTER:1,MAIN:1,ASIDE:1,
+    DETAILS:1,SUMMARY:1,FIGCAPTION:1,LABEL:1,CAPTION:1};
+  var SKIP  = {SCRIPT:1,STYLE:1,CODE:1,PRE:1,TEXTAREA:1,INPUT:1,NOSCRIPT:1,BUTTON:1};
+
+  function nearestBlock(node){
+    var el = node.nodeType===3 ? node.parentElement : node;
+    while(el){ if(BLOCKS[el.nodeName]) return el; el=el.parentElement; }
+    return null;
+  }
+
+  function makeBtn(){
+    var b=document.createElement('button');
+    b.type='button'; b.className='dti-btn';
+    b.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+    b.textContent='i';
+    return b;
+  }
+
+  function inject(root){
+    /* 1. Walk text nodes, collect unique block ancestors */
+    var seen = [];
+    var seenSet = typeof Set!=='undefined' ? new Set() : null;
+    var walker = document.createTreeWalker(root, 1|4 /* ELEMENT|TEXT */, {
+      acceptNode: function(n){
+        if(n.nodeType===1){
+          if(SKIP[n.nodeName]) return 3; /* FILTER_SKIP subtree */
+          if(n.classList && n.classList.contains('dti-btn')) return 2; /* FILTER_REJECT */
+          return 1;
+        }
+        /* text node */
+        return /battleground|toss-up/i.test(n.nodeValue) ? 1 : 3;
+      }
+    });
+    var n;
+    while((n=walker.nextNode())){
+      if(n.nodeType!==3) continue;
+      var block = nearestBlock(n);
+      if(!block) continue;
+      /* deduplicate */
+      if(seenSet){ if(seenSet.has(block)) continue; seenSet.add(block); }
+      else { if(seen.indexOf(block)!==-1) continue; seen.push(block); }
+      /* 2. Append icon at end of block if not already there */
+      if(!block.querySelector('.dti-btn')){
+        block.appendChild(makeBtn());
+      }
+    }
+  }
+
+  /* --- click handler --- */
+  var active=null;
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest ? e.target.closest('.dti-btn') : null;
+    if(btn){
+      e.stopImmediatePropagation();
+      if(active===btn&&box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      active=btn;
+      box.classList.add('on');
+      var r=btn.getBoundingClientRect(),w=300;
+      var left=r.left+r.width/2-w/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-w-8));
+      var top=r.bottom+8;
+      if(top+210>window.innerHeight) top=r.top-210-8;
+      if(top<8) top=r.bottom+8;
+      box.style.left=left+'px'; box.style.top=top+'px';
+    }else{
+      box.classList.remove('on');active=null;
+    }
+  });
+
+  /* --- run --- */
+  function run(){
+    inject(document.body);
+    setTimeout(function(){inject(document.body);},2000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+
+<script>
+// ── ISSUES PANEL INTERACTIONS ────────────────────────────────────────────────
+(function () {
+'use strict';
+
+var DETAIL = {
+  inflation:{
+    tag:'I.01 \u2014 Inflation', tagBg:'rgba(241,162,34,.18)', tagColor:'#c37f0a', tagBorder:'rgba(241,162,34,.35)',
+    title:'Inflation', stat:'48%', statL:'rank inflation among their top two issues (Public Opinion Strategies poll, 28 Feb\u20133 Mar 2026)',
+    html:'<p><strong>Baseline:</strong> US inflation rose from 2.9% (Jan 2024) to 4.2% by May 2026. Energy was the sharpest spike \u2014 gasoline from $3.15 (Dec 2024) to $4.65 by May 2026; overall energy up <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>. Republicans are most exposed: highest inflation is in the <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-region.htm" target="_blank" rel="noopener">South (3.9%) and Midwest (5%)</a> \u2014 together over 160 House members and 40 GOP Senators.</p><p><strong>OBBBA &amp; ACA:</strong> The One Big Beautiful Bill Act (Jul 2025) cut over <a href="https://www.americanprogress.org/article/1-trillion-in-medicaid-cuts-1-trillion-in-tax-giveaways-for-the-richest-1-percent-the-one-big-beautiful-bills-budget-math/" target="_blank" rel="noopener">$1 trillion</a> from federal healthcare; <a href="https://www.aha.org/news/headline/2025-06-04-cbo-report-finds-nearly-11-million-could-become-uninsured-if-reconciliation-bill-enacted" target="_blank" rel="noopener">11 million</a> at risk of losing coverage. ACA premiums rose <a href="https://www.cnbc.com/2026/05/19/aca-enrollment-2026.html" target="_blank" rel="noopener">58%</a> since January 2026; only <a href="https://news.gallup.com/poll/710942/adults-ability-afford-healthcare-five-year-low.aspx" target="_blank" rel="noopener">49%</a> can consistently afford healthcare.</p><p><strong>Tariffs:</strong> Despite limited direct inflationary impact in economic analysis, 7 in 10 Americans believe <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">Trump\'s tariffs drove up prices</a> \u2014 including 64% of Republicans. Congressional approval collapsed to a record <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a> by April 2026.</p>'
+  },
+  mistrust:{
+    tag:'I.02 \u2014 Institutional Mistrust', tagBg:'rgba(255,255,255,.07)', tagColor:'#e8b4ce', tagBorder:'rgba(255,255,255,.18)',
+    title:'Institutional Mistrust', stat:'36%', statL:'rank threats to democracy among their top two issues (Public Opinion Strategies poll, 28 Feb\u20133 Mar 2026)',
+    html:'<p><strong>The erosion:</strong> By May 2026, <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">80%</a> of voters disapprove of Congress; Supreme Court approval fell to <a href="https://news.gallup.com/poll/1597/confidence-institutions.aspx" target="_blank" rel="noopener">27%</a>; <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">36%</a> rank threats to democracy among their top two issues. Corruption (13%) and political violence/extremism (12%) compound this.</p><p><strong>Epstein files:</strong> <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">65%</a> believe the government is deliberately withholding Epstein information; <a href="https://www.ipsos.com/sites/default/files/ct/news/documents/2026-02/Reuters%20Ipsos%20Core%20Political%20Topline%20February%202026_1.pdf" target="_blank" rel="noopener">77%</a> say the files lowered their trust in leaders. Congressional efforts to release them were overshadowed by two record government shutdowns in the same period.</p><p><strong>Systemic failures:</strong> Courts resisted tariff and ICE excesses; the administration found workarounds each time. <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">61%</a> of Americans believe Trump wins at the Supreme Court \u201calmost always or most of the time\u201d. Only <a href="https://wc.washu.edu/party-place-and-pocketbooks-what-shapes-americans-trust-political-institutions" target="_blank" rel="noopener">32%</a> trust Congress versus 56% who trust local government.</p>'
+  },
+  iran:{
+    tag:'I.03 \u2014 Iran War', tagBg:'rgba(193,98,10,.2)', tagColor:'#f7aa6d', tagBorder:'rgba(193,98,10,.38)',
+    title:'Iran War', stat:'~1%', statL:'cite war as direct concern \u2014 structural spillover is decisive',
+    html:'<p><strong>Direct vs. indirect:</strong> Only ~1% of voters cited war and foreign conflict as their top concern in February 2026. The war\'s electoral power is structural. US-Israel strikes on Iran began 28 February 2026; a Memorandum of Understanding was subsequently signed, but consequences remain active.</p><p><strong>Economic spillover:</strong> <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a> believe the war worsened cost of living; <a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> say energy spikes directly hurt their household finances. Gasoline rose from $3.15 to $4.65, turning a geopolitical decision into a domestic economic grievance.</p><p><strong>Reputation &amp; security:</strong> <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">72%</a> say the war worsened US international standing; <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">65%</a> say it worsened national security. The <a href="https://www.dni.gov/files/ODNI/documents/assessments/ATA-2026-Unclassified-Report.pdf" target="_blank" rel="noopener">2026 DNI Threat Assessment</a> highlights elevated Islamist terrorism risk as a consequence.</p><p><strong>Intra-Republican fracture:</strong> The war exposed a faultline between MAGA and the anti-war America First faction, while AIPAC\'s repeated blocking of the War Powers Resolution has become a source of bipartisan public concern.</p>'
+  },
+  immigration:{
+    tag:'I.04 \u2014 Immigration', tagBg:'rgba(140,34,82,.18)', tagColor:'#f0a8c8', tagBorder:'rgba(140,34,82,.36)',
+    title:'Immigration', stat:'25%', statL:'rank it among their top two issues (Public Opinion Strategies poll, 28 Feb\u20133 Mar 2026)',
+    html:'<p><strong>National picture:</strong> As of March 2026, <a href="https://pos.org/wp-content/uploads/2026/03/2026-Midterm-Elections-Overview.pdf" target="_blank" rel="noopener">25%</a> of voters rank immigration among their top two issues. In January 2026, <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">12%</a> named it the single most important issue \u2014 second only to inflation.</p><p><strong>ICE expansion:</strong> Via OBBBA, Congress allocated <a href="https://www.budget.senate.gov/ranking-member/newsroom/press/republicans-ice-cbp-70-billion-funding-bill-sit-on-95-billion-previous-funding-bill" target="_blank" rel="noopener">$75 billion</a> to ICE ($45B detention, $30B processing); ICE is targeting <a href="https://www.washingtontimes.com/news/2026/apr/15/ice-sets-1-million-deportation-target-2026-2027/" target="_blank" rel="noopener">one million deportations</a> annually. By January 2026, <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63%</a> disapprove of ICE\'s actions.</p><p><strong>Institutional dimension:</strong> Courts challenged deportation orders; the administration found workarounds each time. National Guard deployment targeting sanctuary cities drew <a href="https://www.axios.com/2025/10/08/trump-military-deployment-criticism-polls-october" target="_blank" rel="noopener">49%</a> opposition. At the national level, immigration functions primarily as an extension of institutional mistrust rather than a standalone border concern.</p>'
+  }
+};
+
+var OV_DETAIL = {
+  obbba:{
+    name:'OV.01 \u2014 OBBBA &amp; Congressional Inaction',
+    html:'<p>The One Big Beautiful Bill Act is the single piece of legislation most directly responsible for compounding inflation and institutional mistrust. Its $1T in Medicaid cuts drove healthcare premiums up 58% since January 2026; its $75B ICE funding allocation empowered aggressive deportation; and its passage preceded two of the longest government shutdowns in US history \u2014 all within 18 months.</p><p>Congress is blamed for both the economic harm (healthcare costs, ACA subsidies lapse) and the institutional harm (shutdowns, executive empowerment). Congressional approval collapsed to a record <a href="https://news.gallup.com/poll/1600/congress-public.aspx" target="_blank" rel="noopener">10%</a> by April 2026.</p>'
+  },
+  energy:{
+    name:'OV.02 \u2014 Energy &amp; Cost-of-Living Spiral',
+    html:'<p>The Iran war, beginning 28 February 2026, triggered an immediate energy shock. Gasoline rose from $3.15 (December 2024) to $4.65 by May 2026; overall energy prices spiked <a href="https://www.bls.gov/charts/consumer-price-index/consumer-price-index-by-category.htm" target="_blank" rel="noopener">23.5%</a>. For <a href="https://www.ipsos.com/en-us/two-thirds-say-rising-gas-prices-have-affected-their-household-finances" target="_blank" rel="noopener">64%</a> of Americans, this directly worsened household finances; for <a href="https://globalaffairs.org/research/public-opinion-survey/americans-say-iran-war-bad-united-states" target="_blank" rel="noopener">86%</a>, it worsened perceptions of cost of living overall.</p><p>The political danger is that it converts geopolitical decision-making into domestic economic grievance. Republicans, whose voter base in the South and Midwest already faces the highest regional inflation, are most exposed to this compounding effect.</p>'
+  },
+  wpr:{
+    name:'OV.03 \u2014 War Powers &amp; Checks on Executive',
+    html:'<p>The War Powers Resolution (WPR) is the legislative mechanism that would have required congressional approval for continued US military operations in Iran. Congress\'s failure to pass it is the defining institutional failure of the 119th Congress \u2014 leaving the executive\'s Iran decisions visibly unchecked.</p><p>This sits alongside a broader pattern: courts pushed back on tariffs and ICE excesses, only for the administration to find legally permissible workarounds each time. The institutional machinery of checks and balances was activated \u2014 and seen to fail \u2014 across all three branches. This is why <a href="https://today.marquette.edu/2026/06/new-marquette-law-school-national-survey-finds-61-think-trump-wins-almost-always-or-most-of-the-time-at-the-supreme-court/" target="_blank" rel="noopener">61%</a> believe Trump wins at the Supreme Court \u201calmost always or most of the time\u201d, even when formal rulings go against him.</p>'
+  },
+  ice:{
+    name:'OV.04 \u2014 ICE, Courts &amp; Congressional Funding',
+    html:'<p>Congress \u2014 via OBBBA \u2014 provided $75B in ICE funding; the executive deployed it aggressively; courts issued restraining orders; the administration found legal workarounds. The result: <a href="https://www.nytimes.com/interactive/2026/01/26/polls/times-siena-national-poll-crosstabs.html" target="_blank" rel="noopener">63%</a> disapprove of ICE\'s conduct, and 58% disapprove of the overall immigration record, but the policies continue.</p><p>What voters are observing is not immigration enforcement alone. They are watching an institution (Congress) fund an action (ICE expansion) that a majority opposes; another institution (courts) attempting to limit it; and the executive finding its way around both. It is a live demonstration of institutional dysfunction \u2014 which is why immigration, at the national level, reads primarily as an extension of institutional mistrust.</p>'
+  }
+};
+
+function showPanel(h) {
+  document.getElementById('sv-default').style.display = 'none';
+  document.getElementById('sv-detail').style.display = 'block';
+  document.getElementById('sv-detail-inner').innerHTML = h;
+  var p = document.getElementById('sv-detail-inner');
+  if (p) p.scrollTop = 0;
+}
+
+window.svSelect = function(key) {
+  var d = DETAIL[key]; if (!d) return;
+  showPanel(
+    '<button class="sv-det-back" onclick="svShowDefault()">\u2190 Overview</button>'+
+    '<span class="sv-det-tag" style="background:'+d.tagBg+';color:'+d.tagColor+';border:1px solid '+d.tagBorder+'">'+d.tag+'</span>'+
+    '<div class="sv-det-h">'+d.title+'</div>'+
+    '<div class="sv-det-stat">'+d.stat+'</div>'+
+    '<span class="sv-det-stat-l">'+d.statL+'</span>'+
+    '<div class="sv-det-body">'+d.html+'</div>'
+  );
+};
+
+window.svOv = function(key) {
+  var d = OV_DETAIL[key]; if (!d) return;
+  showPanel(
+    '<button class="sv-det-back" onclick="svShowDefault()">\u2190 Overview</button>'+
+    '<div class="sv-det-h" style="margin-bottom:10px">'+d.name+'</div>'+
+    '<div class="sv-det-body">'+d.html+'</div>'
+  );
+};
+
+window.svShowDefault = function() {
+  document.getElementById('sv-default').style.display = 'block';
+  document.getElementById('sv-detail').style.display = 'none';
+  document.getElementById('sv-detail-inner').innerHTML = '';
+};
+
+}());
+</script>
+
+</body>
+</html>

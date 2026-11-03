@@ -1,0 +1,36 @@
+{
+  "_about": "Cross-check of the archived site's member data (assets/factions119.json) against unitedstates/congress-legislators. The archived site data is left exactly as it was; differences are listed here.",
+  "source": "https://unitedstates.github.io/congress-legislators/legislators-current.json",
+  "dataset_commit": {
+    "sha": "753b363e003312525174006e93932b11022ee078",
+    "date": "2026-10-05T14:08:50Z"
+  },
+  "site_file": "assets/factions119.json",
+  "site_counts": {
+    "house_seats_listed": 433,
+    "senate_states_listed": 50
+  },
+  "dataset_counts": {
+    "house": {
+      "R": 218,
+      "D": 214,
+      "I": 1
+    },
+    "house_seats_filled": 433,
+    "senate": {
+      "D": 45,
+      "I": 2,
+      "R": 53
+    },
+    "senate_seats_filled": 100
+  },
+  "issues": [
+    {
+      "chamber": "senate",
+      "seat": "Senate-SC",
+      "issue": "senator on site not in dataset",
+      "site": "Lindsey Graham",
+      "dataset": "Darline Graham"
+    }
+  ]
+}

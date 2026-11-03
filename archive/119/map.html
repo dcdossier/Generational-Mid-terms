@@ -1,0 +1,2191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="archive-guard.js"></script>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Election Trends — US 2026 Mid-term Election Observer (Archived, 119th Congress)</title>
+<meta name="description" content="Interactive maps and seat ratings for all 435 House districts, 35 Senate seats, and 36 Governor races in the 2026 US midterm elections. Toss-ups, battlegrounds, and competitive races tracked live.">
+<meta name="keywords" content="2026 US midterms map, House Senate battleground races, toss-up seats 2026, US election ratings, Cook Political Report, Sabato Crystal Ball">
+<meta name="author" content="Takshashila Institution Geostrategy Programme">
+<meta property="og:title" content="Election Trends — US 2026 Mid-term Election Observer">
+<meta property="og:description" content="Interactive maps and seat ratings for all 435 House districts, 35 Senate seats, and 36 Governor races in the 2026 US midterms.">
+<meta property="og:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<meta property="og:url" content="https://dcdossier.github.io/Generational-Mid-terms/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Election Trends — US 2026 Mid-term Election Observer">
+<meta name="twitter:description" content="Interactive maps and seat ratings for all 435 House districts, 35 Senate seats, and 36 Governor races in the 2026 US midterms.">
+<meta name="twitter:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/seat-panel.css?v=20261020b">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="assets/js/seat-ids.js"></script>
+<link rel="stylesheet" href="assets/css/data-labels.css">
+<script src="assets/js/data-labels.js"></script>
+<script src="assets/js/figures.js"></script>
+<script>
+// Opened outside the site frame (e.g. a shared map.html#seats link): show it inside index.html so the main menu stays
+if (window.top === window.self && location.hash === '#seats') location.replace('index.html#seats');
+</script>
+<script src="assets/js/seat-panel.js?v=20261020b"></script>
+<style>
+:root {
+  --bg:#FFFFFF; --bg-s:#F7F7F7; --bg-h:#F2F2F2;
+  --br:#E9E9E7; --br-md:#D4D4D0;
+  --t1:#191919; --t2:#292929; --t3:#6B6B6B; --t4:#959595;
+  --orange:#FF6719; --orange-p:#FFF0E9;
+  --red:#E24B4A; --blue:#378ADD; --green:#3A8C5C; --yellow:#D4931A;
+  --sans:'Inter','Lato',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Lora',Georgia,serif;
+  /* Rating palette */
+  --sr-bg:#7a1c1c; --sr-tx:#fff;
+  --lr-bg:#C04040; --lr-tx:#fff;
+  --er-bg:#E8A0A0; --er-tx:#4a0000;
+  --tu-bg:#D4931A; --tu-tx:#fff;
+  --ed-bg:#8CB4E0; --ed-tx:#001a3d;
+  --ld-bg:#378ADD; --ld-tx:#fff;
+  --sd-bg:#1A3F8A; --sd-tx:#fff;
+  --nr-bg:#E9E9E7; --nr-tx:#959595;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
+
+/* ── SUBTAB BAR ── */
+.subtab-bar{position:sticky;top:0;z-index:190;background:var(--bg);border-bottom:1px solid var(--br)}
+.subtab-inner{display:flex;overflow-x:auto;scrollbar-width:none;padding:0 28px;align-items:center;justify-content:space-between}
+.subtab-inner::-webkit-scrollbar{display:none}
+.subtab-left{display:flex}
+.subtab-btn{flex-shrink:0;font-family:var(--sans);font-size:15px;font-weight:500;color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;padding:15px 16px;cursor:pointer;margin-bottom:-1px;transition:color .12s,border-color .12s;white-space:nowrap}
+.subtab-btn:hover{color:var(--t1)}
+.subtab-btn.active{color:var(--t1);border-bottom-color:var(--t1)}
+.source-note{font-size:11px;color:var(--t4);padding:0 4px;flex-shrink:0;white-space:nowrap;max-width:260px;overflow:hidden;text-overflow:ellipsis}
+
+/* ── PANELS ── */
+.subpanel{display:none}.subpanel.active{display:block}
+.panel-inner{max-width:900px;margin:0 auto;padding:32px 28px 72px}
+
+/* ── STAT STRIP ── */
+.stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:24px}
+.stat-box{border:1px solid var(--br);border-radius:6px;padding:16px 16px}
+.stat-n{font-family:var(--serif);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1;margin-bottom:5px}
+.stat-l{font-size:16px;color:var(--t3);line-height:1.45}
+
+/* ── SECTION HEADER ── */
+.section-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:11px}
+.section-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1)}
+.section-sub{font-size:16px;color:var(--t3);margin-top:2px;margin-bottom:16px;line-height:1.5}
+
+/* ── SENATE BALANCE BAR ── */
+.balance-wrap{background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px 20px;margin-bottom:20px}
+.balance-label{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--t4);margin-bottom:11px;display:flex;justify-content:space-between}
+.balance-bar{display:flex;height:28px;border-radius:4px;overflow:hidden;position:relative}
+.balance-r{background:var(--sr-bg);display:flex;align-items:center;justify-content:flex-start;padding-left:11px;transition:width .6s ease;color:#fff;font-size:16px;font-weight:700}
+.balance-d{background:var(--sd-bg);display:flex;align-items:center;justify-content:flex-end;padding-right:11px;transition:width .6s ease;color:#fff;font-size:16px;font-weight:700}
+.balance-mid{position:absolute;left:50%;top:0;bottom:0;width:2px;background:#fff;transform:translateX(-50%);z-index:2}
+.balance-mid::after{content:'50';position:absolute;top:32px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--t4);white-space:nowrap}
+.balance-footer{display:flex;justify-content:space-between;margin-top:11px;font-size:14px}
+.balance-r-label{color:var(--sr-bg);font-weight:600}
+.balance-d-label{color:var(--sd-bg);font-weight:600}
+.balance-note{font-size:13px;color:var(--t4);text-align:center;margin-top:6px}
+
+/* ── RATING LEGEND ── */
+.rating-legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.rating-chip{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;padding:4px 11px;border-radius:20px;cursor:pointer;transition:opacity .12s;border:2px solid transparent}
+.rating-chip.dimmed{opacity:.35}
+.rating-chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+
+/* ── STATE TILE MAP ── */
+.map-wrap{overflow-x:auto;padding-bottom:8px;margin-bottom:20px}
+
+/* ── RACE DETAIL CARD ── */
+/* Row highlighted in a seat list while SeatPanel is open for that seat. */
+.race-table tbody tr.sp-row-selected{background:var(--bg-h)}
+.race-table tbody tr[tabindex]:focus-visible{outline:2px solid var(--t1);outline-offset:-2px}
+.detail-card{background:var(--bg-s);border:1px solid var(--br-md);border-radius:8px;padding:20px 22px;margin-bottom:20px;display:none}
+.detail-card.visible{display:block}
+.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:14px;flex-wrap:wrap}
+.detail-state{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--t1)}
+.detail-incumbent{font-size:16px;color:var(--t3);margin-top:2px}
+.detail-right{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.detail-rating-badge{font-size:15px;font-weight:700;padding:6px 16px;border-radius:4px;color:#fff;white-space:nowrap}
+.detail-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.badge-party{font-size:13px;font-weight:600;padding:3px 10px;border-radius:3px}
+.badge-open{font-size:13px;font-weight:600;padding:3px 10px;border-radius:3px;background:var(--orange-p);color:var(--orange)}
+.detail-note{font-size:15px;color:var(--t2);line-height:1.65;border-top:1px solid var(--br);padding-top:14px}
+.detail-close{background:none;border:none;cursor:pointer;color:var(--t4);font-size:18px;line-height:1;padding:2px;margin-top:-2px;transition:color .1s}
+.detail-close:hover{color:var(--t1)}
+
+/* ── ISSUES PANEL ── */
+.issues-panel{border-top:1px solid var(--br);margin-top:14px;padding-top:12px;display:none}
+.issues-panel.has-issues{display:block}
+.issues-toggle{display:flex;align-items:center;gap:7px;background:none;border:none;cursor:pointer;padding:0;color:var(--t1);font:600 14px var(--sans);width:100%;text-align:left}
+.issues-toggle-label{font:600 14px var(--sans);color:#620d3c}
+.issues-toggle-count{font:400 13px var(--sans);color:var(--t3)}
+.issues-toggle-arrow{font-size:10px;color:var(--t4);transition:transform .18s;margin-left:auto;flex-shrink:0}
+.issues-body{display:none;margin-top:10px;flex-direction:column;gap:10px}
+.issues-body.open{display:flex}
+.issue-item{border:1px solid var(--br);border-left:3px solid #f1a222;border-radius:4px;padding:12px 14px;background:#fff}
+.issue-title{font:600 14px var(--sans);color:var(--t1);margin-bottom:5px}
+.issue-desc{font:400 14px/1.65 var(--sans);color:var(--t2);margin-bottom:8px}
+.issue-footer{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.issue-rel{font:500 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;background:var(--bg-h);border:1px solid var(--br);border-radius:20px;padding:2px 10px;color:var(--t3);flex-shrink:0;white-space:nowrap;margin-top:2px}
+.issue-src{font:400 13px var(--sans)}
+.issue-src a{color:#620d3c;text-decoration:none}
+.issue-src a:hover{text-decoration:underline}
+
+/* ── RACE TABLE ── */
+.chart-card{border:1px solid var(--br);border-radius:6px;padding:22px 22px 16px;margin-bottom:18px}
+.card-title{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--t1);margin-bottom:3px}
+.card-sub{font-size:16px;color:var(--t3);margin-bottom:16px;line-height:1.5}
+.chart-note{font-size:13px;color:var(--t4);margin-top:14px;line-height:1.5;border-top:1px solid var(--br);padding-top:11px}
+
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.filter-btn{font-size:13px;font-weight:600;padding:4px 13px;border-radius:20px;border:1.5px solid var(--br-md);background:none;cursor:pointer;color:var(--t3);transition:all .12s}
+.filter-btn:hover{border-color:var(--t3);color:var(--t2)}
+.filter-btn.active{border-color:var(--t1);background:var(--t1);color:#fff}
+.filter-label{font-size:16px;color:var(--t4);margin-right:4px}
+
+.race-table-wrap{overflow-x:auto}
+.race-table{width:100%;border-collapse:collapse;font-size:15px}
+.race-table th{text-align:left;font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--t4);padding:8px 11px;border-bottom:2px solid var(--br);cursor:pointer;user-select:none;white-space:nowrap}
+.race-table th:hover{color:var(--t2)}
+.race-table th.sorted-asc::after{content:' ↑'}
+.race-table th.sorted-desc::after{content:' ↓'}
+.race-table td{padding:10px 11px;border-bottom:1px solid var(--br);vertical-align:middle}
+.race-table tr:last-child td{border-bottom:none}
+.race-table tr:hover td{background:var(--bg-s)}
+.race-table tr.open-seat td:first-child::before{content:'◈ ';font-size:10px;color:var(--orange);vertical-align:middle}
+
+.rating-pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:14px;font-size:13px;font-weight:700;white-space:nowrap}
+.party-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-size:13px;font-weight:700}
+.party-pill.R{background:#FBEAEA;color:#7a1c1c}
+.party-pill.D{background:#EEF4FB;color:#1A3F8A}
+.state-link{font-weight:600;color:var(--t1);cursor:pointer;text-decoration:none}
+.state-link:hover{text-decoration:underline}
+
+/* ── SEAT VISUALISER ── */
+.seat-vis-wrap{margin-bottom:20px}
+.seat-vis-bar{display:flex;height:36px;border-radius:5px;overflow:hidden;gap:2px}
+.sv-seg{flex:1;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;transition:flex .5s ease;cursor:default;position:relative}
+.sv-seg[title]:hover::after{content:attr(title);position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);background:var(--t1);color:#fff;font-size:13px;padding:5px 11px;border-radius:4px;white-space:nowrap;z-index:20;font-family:var(--sans)}
+.majority-line{position:relative;margin-top:4px;height:18px}
+.majority-line::before{content:'';position:absolute;left:50%;top:0;width:2px;height:8px;background:var(--br-md);transform:translateX(-50%)}
+.majority-line::after{content:'Majority: 218 seats';position:absolute;left:50%;top:11px;transform:translateX(-50%);font-size:11px;color:var(--t4);white-space:nowrap}
+
+/* ── COMPETITIVE RACE TABLE ── */
+.pvp-pill{display:inline-block;padding:2px 7px;border-radius:3px;font-size:13px;font-weight:700}
+.pvp-pill.R{background:#FBEAEA;color:#7a1c1c}
+.pvp-pill.D{background:#EEF4FB;color:#1A3F8A}
+.pvp-pill.E{background:#F1F1EF;color:#555}
+
+/* ── GOV GRID ── */
+.gov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:18px}
+.gov-card{border:1px solid var(--br);border-radius:6px;padding:16px 18px}
+.gov-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.gov-state{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--t1)}
+.gov-incumbent{font-size:16px;color:var(--t3);margin-top:1px}
+.gov-note{font-size:16px;color:var(--t2);line-height:1.5}
+.gov-open-badge{display:inline-block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;padding:2px 7px;border-radius:3px;background:var(--orange-p);color:var(--orange);margin-top:4px}
+
+/* ── CALLOUT ── */
+.callout{background:var(--bg-s);border:1px solid var(--br);border-left:3px solid var(--orange);border-radius:6px;padding:16px 18px;margin-bottom:18px;font-size:15px;color:var(--t2);line-height:1.6}
+.callout-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--orange);margin-bottom:5px}
+.section-rule{border:none;border-top:1px solid var(--br);margin:28px 0 18px}
+
+/* ── CHAMBER OVERVIEW BANNER ── */
+.chamber-overview{display:flex;align-items:center;flex-wrap:wrap;gap:11px 20px;background:var(--bg-s);border:1px solid var(--br);border-radius:6px;padding:16px 20px;margin-bottom:20px}
+.ch-label{font:600 13px var(--sans);text-transform:uppercase;letter-spacing:.09em;color:var(--t4);flex-shrink:0;width:100%}
+.ch-pills{display:flex;gap:7px;align-items:center;flex-shrink:0}
+.ch-r{background:#FBEAEA;color:#7a1c1c;font:700 14px var(--sans);padding:4px 15px;border-radius:20px}
+.ch-d{background:#EEF4FB;color:#1A3F8A;font:700 14px var(--sans);padding:4px 15px;border-radius:20px}
+.ch-divider{width:1px;height:24px;background:var(--br-md);flex-shrink:0}
+.ch-bg-block{display:flex;align-items:baseline;gap:5px}
+.ch-bg-n{font:700 22px var(--serif);color:#620d3c;line-height:1}
+.ch-bg-text{font:400 14px var(--sans);color:var(--t3)}
+.ch-src{font:400 13px var(--sans);color:var(--t4);margin-left:auto}
+.ch-src a{color:#620d3c;text-decoration:underline}
+@media(max-width:700px){.ch-src{margin-left:0}.ch-divider{display:none}}
+
+/* ── D3 CHOROPLETH MAPS ── */
+.d3-map-wrap{background:#f0f4f8;border:1px solid var(--br);border-radius:6px;overflow:hidden;margin-bottom:16px;position:relative}
+.d3-map-wrap svg{display:block;width:100%;height:auto}
+.map-tip{position:fixed;background:var(--t1);color:#fff;font:400 14px var(--sans);padding:8px 14px;border-radius:5px;pointer-events:none;z-index:400;max-width:240px;line-height:1.5;display:none}
+.s-path,.d-path{stroke:#fff;cursor:default;transition:opacity .12s}
+.s-path.clickable,.d-path.clickable{cursor:pointer}
+.map-srch-wrap{display:flex;align-items:center;gap:11px;margin-bottom:16px;flex-wrap:wrap}
+.map-srch{font:400 15px var(--sans);color:var(--t1);background:var(--bg-s);border:1px solid var(--br-md);border-radius:4px;padding:7px 14px;width:280px;outline:none;transition:border-color .1s}
+.map-srch:focus{border-color:#444}
+.map-srch-ct{font:400 13px var(--sans);color:var(--t4)}
+
+/* ── ZOOM CONTROLS ── */
+.d3-map-wrap{position:relative}
+.map-zoom-ctrl{position:absolute;top:11px;right:11px;display:flex;flex-direction:column;gap:3px;z-index:10}
+.map-zoom-btn{width:30px;height:30px;background:rgba(255,255,255,.95);border:1px solid var(--br-md);border-radius:5px;cursor:pointer;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;color:var(--t2);box-shadow:0 1px 4px rgba(0,0,0,.13);transition:box-shadow .1s,background .1s;line-height:1;padding:0;user-select:none}
+.map-zoom-btn:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.map-zoom-btn.reset{font-size:15px}
+.map-hint{font:400 13px var(--sans);color:var(--t4);margin-bottom:6px}
+
+/* ── MAP LOADING ── */
+.map-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:400 15px var(--sans);color:var(--t4);background:#f0f4f8;border-radius:6px;pointer-events:none;transition:opacity .3s}
+.map-loading.done{opacity:0;pointer-events:none}
+@media(max-width:700px){
+  .stat-strip{grid-template-columns:1fr 1fr}
+  .panel-inner{padding:20px 16px 60px}
+  .subtab-inner{padding:0 14px}
+
+  .gov-grid{grid-template-columns:1fr}
+  .source-note{display:none}
+}
+/* ── INFO TOOLTIP ── */
+.info-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#d8d4cc;color:#555;font:700 10px var(--sans);cursor:pointer;vertical-align:middle;margin-left:4px;border:none;line-height:1;flex-shrink:0;transition:background .12s,color .12s}
+.info-btn:hover{background:#620d3c;color:#fff}
+.info-tooltip{position:fixed;background:#1E2232;color:#f5f0e8;font:400 14px var(--sans);line-height:1.65;padding:13px 16px;border-radius:8px;max-width:310px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,.22);display:none;pointer-events:none}
+.info-tooltip.visible{display:block}
+
+/* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
+
+
+
+/* ── FACTION TRACKER ─────────────────────────────────────────────── */
+.section-eyebrow{font:600 11px var(--sans);text-transform:uppercase;letter-spacing:.12em;color:#f1a222;margin-bottom:5px}
+.faction-section{margin-top:0}
+.faction-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.faction-sel{font:500 14px var(--sans);border:1.5px solid var(--br-md);border-radius:8px;padding:9px 36px 9px 14px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B6B6B'/%3E%3C/svg%3E") no-repeat right 12px center;cursor:pointer;color:var(--t1);min-width:280px;-webkit-appearance:none;appearance:none}
+.faction-chips{display:flex;gap:7px;flex-wrap:wrap}
+.faction-chip{display:inline-flex;align-items:center;gap:5px;font:600 11px var(--sans);color:#fff;padding:4px 11px;border-radius:12px;white-space:nowrap;letter-spacing:.04em;cursor:pointer;transition:opacity .12s;opacity:.5}
+.faction-chip.active{opacity:1;box-shadow:0 0 0 2px rgba(0,0,0,.18)}
+.faction-table-search{font:400 14px var(--sans);border:1.5px solid var(--br);border-radius:8px;padding:8px 14px;width:100%;max-width:360px;background:#fff;color:var(--t1);margin-bottom:10px}
+.faction-table-search:focus{outline:none;border-color:var(--br-md)}
+/* methodology */
+.meth-section{margin-top:48px;border-top:1px solid var(--br);padding:28px 0 8px}
+.meth-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;cursor:pointer;padding:0;text-align:left;gap:12px}
+.meth-toggle-title{font:600 16px var(--serif);color:var(--t1)}
+.meth-arrow{font-size:18px;color:var(--t3);transition:transform .2s;flex-shrink:0}
+.meth-body{display:none;margin-top:18px;padding:20px 24px;background:#fafaf8;border:1px solid var(--br);border-radius:8px}
+.meth-body.open{display:block}
+.meth-body h4{font:700 14px var(--serif);color:#620d3c;margin:18px 0 6px}
+.meth-body h4:first-child{margin-top:0}
+.meth-body ul{margin:0 0 0 18px;padding:0}
+.meth-body ul li{font:400 13px/1.85 var(--sans);color:var(--t2)}
+.meth-sources{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}
+.meth-src{font:500 12px var(--sans);color:#620d3c;border:1px solid #e6e0d8;border-radius:20px;padding:4px 13px;text-decoration:none;transition:background .12s}
+.meth-src:hover{background:#fffbe2}
+
+/* ── INNER SUBTABS (Races / Intraparty Factions) ─────────────────── */
+.inner-tab-bar{border-bottom:1px solid var(--br);background:var(--bg);display:flex;gap:0;padding:0 28px}
+.inner-tab{font:500 14px var(--sans);color:var(--t3);background:none;border:none;border-bottom:2px solid transparent;padding:11px 18px;cursor:pointer;margin-bottom:-1px;transition:color .12s,border-color .12s;white-space:nowrap}
+.inner-tab:hover{color:var(--t1)}
+.inner-tab.active{color:#620d3c;border-bottom-color:#620d3c;font-weight:600}
+.inner-panel{display:none}
+.inner-panel.active{display:block}
+@media(max-width:560px){.inner-tab-bar{padding:0 12px}.inner-tab{padding:10px 12px;font-size:13px}}
+
+/* ── SEAT-WISE BANNER ─────────────────────────────────────────────── */
+/* Sticky just below the chamber bar (its height is set in --subtab-h by JS).
+   z-index sits under the chamber bar (190), tooltips (400+) and the seat panel (900). */
+.seatwise-banner{position:sticky;top:var(--subtab-h,49px);z-index:180;display:flex;align-items:center;gap:8px;
+  background:#F5F0DC;border-bottom:1px solid #E4DEC9;border-left:4px solid #FF6F59;
+  padding:6px max(12px,env(safe-area-inset-right)) 6px max(12px,env(safe-area-inset-left))}
+.seatwise-banner[hidden]{display:none}
+.seatwise-go{flex:1;text-align:left;background:none;border:none;cursor:pointer;color:#1A3F8A;
+  font:600 14px/1.4 var(--sans);padding:6px 4px;white-space:normal;min-height:36px;border-radius:4px}
+.seatwise-go:hover{text-decoration:underline;text-underline-offset:3px}
+.seatwise-close{flex:0 0 auto;width:36px;height:36px;border:none;background:none;cursor:pointer;
+  color:#1A3F8A;font:400 22px/1 var(--sans);border-radius:4px}
+.seatwise-close:hover{background:rgba(26,63,138,.08)}
+.seatwise-go:focus-visible,.seatwise-close:focus-visible{outline:3px solid #1A3F8A;outline-offset:2px}
+@media(max-width:768px){
+  .seatwise-go{font-size:13px;min-height:44px}
+  .seatwise-close{width:44px;height:44px}
+  /* the seat panel is full-screen here: hide the banner while it is open */
+  body.sp-is-open .seatwise-banner{display:none}
+}
+</style>
+<style id="arch-style">.arch-banner{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;padding:8px 16px;background:#1E2232;color:#F5F0E8;font:600 14px/1.4 Inter,Lato,system-ui,sans-serif;text-align:center}.arch-banner a{color:#F7C060;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;min-height:32px}.arch-in-frame .arch-banner{display:none}</style>
+</head>
+<body>
+<div class="arch-banner" role="note"><span>Archived: 119th Congress (2025–2027), snapshot 3 Nov 2026. Read-only; figures are as they stood before polls closed.</span><a href="../">All archives</a><a href="../../" target="_top">Live site</a></div>
+
+<div class="subtab-bar">
+  <div class="subtab-inner">
+    <div class="subtab-left">
+      <button class="subtab-btn active" onclick="goSub('house',this)">House</button>
+      <button class="subtab-btn" onclick="goSub('senate',this)">Senate</button>
+      <button class="subtab-btn" onclick="goSub('governor',this)">Governor</button>
+    </div>
+    <span class="source-note" id="source-note">Loading&#8230;</span>
+  </div>
+</div>
+
+<div class="seatwise-banner" id="seatwise-banner" role="region" aria-label="Seat-wise analysis">
+  <button type="button" class="seatwise-go" id="seatwise-go">Click any battleground seat on the map or in the list for detailed seat-wise analysis <span aria-hidden="true">&#8594;</span></button>
+  <button type="button" class="seatwise-close" id="seatwise-close" aria-label="Hide this tip">&times;</button>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SENATE PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel" id="subpanel-senate">
+
+  <!-- ── INNER SUBTAB BAR ───────────────────── -->
+  <div class="inner-tab-bar">
+    <button class="inner-tab active" onclick="goInner('senate','races',this)">Races &amp; Ratings</button>
+    <button class="inner-tab" onclick="goInner('senate','factions',this)">Intraparty Factions</button>
+  </div>
+
+  <!-- ── RACES INNER PANEL ──────────────────── -->
+  <div class="inner-panel active" id="senate-inner-races">
+  <div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">Senate &nbsp;&mdash;&nbsp; Term: 6 years &nbsp;|&nbsp; 100 seats total</div>
+    <div class="ch-pills">
+      <span class="ch-r">Republicans&nbsp;<span data-fig="senate.r">53</span></span>
+      <span class="ch-d">Democrats and Independents&nbsp;<span data-fig="senate.d">47</span></span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n"><span data-fig="senate.battleground">9</span></span>
+      <span class="ch-bg-text">battleground seats of <span data-fig="senate.split">33+2</span> up <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._Senate_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
+
+  <div class="stat-strip" id="sen-stat-strip">
+    <div class="stat-box"><div class="stat-n" id="ss-seats-up">&#8230;</div><div class="stat-l">Senate seats up (<span data-fig="senate.split">33+2</span>) <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="ss-r-held">&#8230;</div><div class="stat-l">Currently Republican&#8209;held seats at stake</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="ss-d-held">&#8230;</div><div class="stat-l">Currently Democrat&#8209;held seats at stake</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="ss-tossups">&#8230;</div><div class="stat-l">Toss&#8209;up seats &#8212; election outcome uncertain</div></div>
+  </div>
+  <div class="dl-label" data-block="races.senate" data-kind="ratings"></div>
+
+  <!-- BALANCE BAR -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label" id="bal-r-label">&#8230; Republicans</span>
+      <span style="color:var(--t4);font-size:11px">Current Senate balance &#8212; 100 seats total</span>
+      <span class="balance-d-label" id="bal-d-label">Democrats and Independents &#8230;</span>
+    </div>
+    <div class="balance-bar" id="balance-bar">
+      <div class="balance-r" id="bal-r-seg" style="width:53%">53</div>
+      <div class="balance-d" id="bal-d-seg" style="width:47%">47</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-footer">
+      <span id="bal-proj-r" style="font-size:16px;color:var(--t4)">&#8230;</span>
+      <span style="font-size:13px;color:var(--t4)">&#9650; Seats not up plus safe, likely and lean seats &#183; <span id="bal-proj-tu">toss-ups unassigned</span> &#183; <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span></span>
+      <span id="bal-proj-d" style="font-size:16px;color:var(--t4)">&#8230;</span>
+    </div>
+  </div>
+
+  <!-- RATING LEGEND -->
+  <div class="rating-legend" id="rating-legend"></div>
+
+  <!-- STATE MAP -->
+  <div class="section-hdr">
+    <div>
+      <div class="section-title">Senate race map &#8212; all <span data-fig="senate.split">33+2</span> seats, 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
+      <div class="section-sub">All <span data-fig="senate.split">33+2</span> races shown with full rating spectrum &#8212; Safe R through Safe D. Click any coloured state for race detail. Grey states have no Senate race in 2026. &#9688; = open seat (no incumbent running).</div>
+    </div>
+  </div>
+
+  <div class="map-srch-wrap">
+    <input type="search" id="sen-map-srch" class="map-srch" placeholder="Search by state, incumbent, or party&hellip;" oninput="searchSenMap(this.value)">
+    <span class="map-srch-ct" id="sen-srch-ct"></span>
+  </div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a state for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap">
+    <svg id="senate-svg" viewBox="0 0 960 580" style="max-height:500px;cursor:grab"></svg>
+    <div class="map-loading" id="senate-loading">Loading map&hellip;</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="senZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="senZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="senZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
+
+  <!-- DETAIL CARD -->
+  <!-- FILTER ROW -->
+  <div class="chart-card">
+    <div class="card-title">All <span data-fig="senate.split">33+2</span> Senate races &#8212; 2026 <button class="info-btn" data-tip="While the 33 seats are up for an end-of-tenure election, two special elections arise from the vacancies created by Marco Rubio (Florida) and JD Vance (Ohio) when they joined the Trump administration to become the Secretary of State and the Vice-President respectively.">i</button></div>
+    <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
+    <div class="filter-row">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" onclick="filterTable('all',this)">All races</button>
+      <button class="filter-btn" onclick="filterTable('Toss-up',this)">Toss-up</button>
+      <button class="filter-btn" onclick="filterTable('Lean',this)">Lean R / Lean D</button>
+      <button class="filter-btn" onclick="filterTable('Likely',this)">Likely R / Likely D</button>
+      <button class="filter-btn" onclick="filterTable('Safe',this)">Safe R / Safe D</button>
+      <button class="filter-btn" onclick="filterTable('open',this)">Open seats</button>
+    </div>
+    <div class="race-table-wrap">
+    <table class="race-table" id="race-table">
+      <thead>
+        <tr>
+          <th onclick="sortTable(0)">State</th>
+          <th onclick="sortTable(1)">Incumbent</th>
+          <th onclick="sortTable(2)">Party</th>
+          <th onclick="sortTable(3)">Rating</th>
+          <th onclick="sortTable(4)">Open?</th>
+        </tr>
+      </thead>
+      <tbody id="race-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note dl-label" id="senate-source-note" data-block="races.senate" data-kind="ratings"></div>
+  </div>
+
+  <!-- ── INTRAPARTY FACTIONS (Senate) ─────────────────────────────── -->
+  </div></div>
+
+  <!-- ── FACTIONS INNER PANEL ───────────────── -->
+  <div class="inner-panel" id="senate-inner-factions">
+  <div class="panel-inner">
+  <div class="faction-section" id="senate-faction-section">
+    <div class="section-hdr" style="margin-bottom:14px">
+      <div>
+        <div class="section-eyebrow">119th Congress</div>
+        <div class="section-title">Intraparty Factions — Senate</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to filter the map and table, or view all factions at once.</div>
+      </div>
+    </div>
+
+    <div class="faction-controls">
+      <select class="faction-sel" id="senate-faction-sel" onchange="renderSenateFaction(this.value)">
+        <option value="ALL" selected>All Factions &mdash; 100 members</option>
+        <option value="MD">Moderate Democrats (MD) &mdash; 24 members</option>
+        <option value="PD">Progressive Democrats (PD) &mdash; 22 members</option>
+        <option value="MR">MAGA Republicans (MR) &mdash; 25 members</option>
+        <option value="AR">America First Republicans (AR) &mdash; 9 members</option>
+        <option value="TR">Traditional Republicans (TR) &mdash; 19 members</option>
+      </select>
+      <div class="faction-chips">
+        <span class="faction-chip" style="background:#7393B3" onclick="document.getElementById('senate-faction-sel').value='MD';renderSenateFaction('MD')">&#9632; MD</span>
+        <span class="faction-chip" style="background:#0096FF" onclick="document.getElementById('senate-faction-sel').value='PD';renderSenateFaction('PD')">&#9632; PD</span>
+        <span class="faction-chip" style="background:#800000" onclick="document.getElementById('senate-faction-sel').value='MR';renderSenateFaction('MR')">&#9632; MR</span>
+        <span class="faction-chip" style="background:#DC143C" onclick="document.getElementById('senate-faction-sel').value='AR';renderSenateFaction('AR')">&#9632; AR</span>
+        <span class="faction-chip" style="background:#986868" onclick="document.getElementById('senate-faction-sel').value='TR';renderSenateFaction('TR')">&#9632; TR</span>
+      </div>
+    </div>
+
+    <div class="d3-map-wrap" style="margin-bottom:18px">
+      <svg id="senate-faction-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+      <div class="map-loading" id="senate-faction-loading">Select a faction to load map&hellip;</div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="senateFactionZoomBy(1.5)" title="Zoom in">+</button>
+        <button class="map-zoom-btn" onclick="senateFactionZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+        <button class="map-zoom-btn reset" onclick="senateFactionZoomReset()" title="Reset">&#8634;</button>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-title" id="senate-faction-card-title">All Senate Factions &mdash; 100 members</div>
+      <input class="faction-table-search" type="search" placeholder="Search by name or state&hellip;" oninput="filterFactionTable('senate',this.value)">
+      <div class="race-table-wrap">
+      <table class="race-table" id="senate-faction-table">
+        <thead id="senate-faction-thead"><tr><th>Faction</th><th>Member</th><th>State</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <tbody id="senate-faction-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+  </div></div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     HOUSE PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel active" id="subpanel-house">
+
+  <!-- ── INNER SUBTAB BAR ───────────────────── -->
+  <div class="inner-tab-bar">
+    <button class="inner-tab active" onclick="goInner('house','races',this)">Races &amp; Ratings</button>
+    <button class="inner-tab" onclick="goInner('house','factions',this)">Intraparty Factions</button>
+  </div>
+
+  <!-- ── RACES INNER PANEL ──────────────────── -->
+  <div class="inner-panel active" id="house-inner-races">
+  <div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">House of Representatives &nbsp;&mdash;&nbsp; Term: 2 years &nbsp;|&nbsp; <span data-fig="house.total">435</span> seats total</div>
+    <div class="ch-pills">
+      <span class="ch-r">Republicans&nbsp;<span data-fig="house.r">218</span></span>
+      <span class="ch-d">Democrats&nbsp;<span data-fig="house.d">214</span></span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n"><span data-fig="house.battleground">49</span></span>
+      <span class="ch-bg-text">battleground seats of <span data-fig="house.total">435</span> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/U.S._House_battlegrounds,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
+
+  <div class="stat-strip" id="house-stat-strip">
+    <div class="stat-box"><div class="stat-n">435</div><div class="stat-l">Total House seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="hs-r">218</div><div class="stat-l">Current Republican seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="hs-d">214</div><div class="stat-l">Current Democratic seats</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="hs-tu">&#8230;</div><div class="stat-l">Toss&#8209;up districts &#8212; either party can win</div></div>
+  </div>
+  <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
+
+  <!-- SEAT BALANCE -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label" id="hbal-r-label">218 Republicans</span>
+      <span style="color:var(--t4);font-size:11px">Current House balance &#8212; 218 seats needed for majority</span>
+      <span class="balance-d-label" id="hbal-d-label">Democrats 214</span>
+    </div>
+    <div class="balance-bar">
+      <div class="balance-r" id="hbal-r-seg" style="width:50.1%">218R</div>
+      <div class="balance-d" id="hbal-d-seg" style="width:49.2%">214D</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong>razor-thin majority</strong> (<span data-fig="house.i">1</span> independent, <span data-fig="house.vacant">2</span> vacant seats). Democrats need a net gain of <strong><span data-fig="house.d_gain_needed">4</span> seats</strong> to reclaim the majority. Historical pattern: the president&#8217;s party loses an average of 26 House seats at the first midterm.</div>
+  </div>
+
+  <!-- HOUSE DISTRICT MAP -->
+  <div class="section-hdr" style="margin-bottom:10px">
+    <div>
+      <div class="section-title">House district map &#8212; all 435 districts, 2026</div>
+      <div class="section-sub">All 435 districts shown &#8212; <span style="color:#7a1c1c;font-weight:600">&#9632;</span> Safe R (maroon), <span style="color:#1A3F8A;font-weight:600">&#9632;</span> Safe D (dark blue), <span style="color:#D4931A;font-weight:600">&#9632;</span> Toss-up (yellow), with full rating spectrum for <span data-fig="house.tracked">49</span> individually-tracked battleground districts (Ballotpedia 2026 battlegrounds plus Cook-rated toss-ups). Several 2026 races also run on new maps (AL, CA, FL, LA, NC, OH, TN, TX and UT; Missouri&#8217;s new map is blocked for 2026) — district colouring reflects the current 2026 boundaries and ratings, not prior-cycle results. Click any highlighted district for detail.</div>
+    </div>
+  </div>
+  <div class="map-srch-wrap">
+    <input type="search" id="house-map-srch" class="map-srch" placeholder="Search by district, incumbent, or party&hellip;" oninput="searchHouseMap(this.value)">
+    <span class="map-srch-ct" id="house-srch-ct"></span>
+  </div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a highlighted district for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap" style="margin-bottom:20px">
+    <svg id="house-svg" viewBox="0 0 960 580" style="max-height:500px;cursor:grab"></svg>
+    <div class="map-loading" id="house-loading">Loading district map (10 MB&hellip;)</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="houseZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="houseZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="houseZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE RACES -->
+  <div class="callout">
+    <div class="callout-label">Path to the majority</div>
+    Democrats need a net gain of <strong><span data-fig="house.d_gain_needed">4</span> seats</strong> (<span data-fig="house.d">214</span>&rarr;<span data-fig="house.needed">218</span>) to reclaim the House majority. This tracker follows <strong><span data-fig="house.tracked">49</span> battleground districts</strong> in 2026 &#8212; <span data-fig="house.tracked_breakdown">23 Toss-up, 10 Lean D, 6 Likely D, 5 Safe D, 3 Lean R, 1 Likely R, 1 Safe R</span> &#8212; with several open seats creating additional volatility. Historical first-midterm headwinds and Trump&#8217;s high disapproval ratings favour Democratic gains, though Hispanic voter realignment in Texas and Florida complicates the picture.
+  </div>
+
+  <!-- SEAT DISTRIBUTION CHART -->
+  <div class="chart-card">
+    <div class="card-title">Seat ratings distribution &#8212; all 435 districts</div>
+    <div class="card-sub">Full rating spectrum across all 435 House seats, on current 2026 district boundaries. The <span data-fig="house.tracked">49</span> individually-tracked battleground districts show exact rating colours on the map; all other seats are coloured Safe R or Safe D by current 2026 rating. Source: Ballotpedia U.S. House Battlegrounds 2026, Cook Political Report, Inside Elections, Sabato's Crystal Ball.</div>
+    <div style="position:relative;height:80px"><canvas id="c-house-ratings"></canvas></div>
+    <div class="chart-note dl-label" id="house-source-note" data-block="races.house" data-kind="ratings"></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="card-title"><span data-fig="house.tracked">49</span> battleground districts</div>
+    <div class="card-sub">All <span data-fig="house.tracked">49</span> individually-tracked 2026 House battlegrounds, including Likely D, Lean D, Toss-up, Lean R, and Likely R. PVI = Cook Partisan Voting Index (2025). Ratings from Cook Political Report (primary), Inside Elections, and Sabato&#8217;s Crystal Ball.</div>
+    <div class="race-table-wrap">
+    <table class="race-table" id="comp-table">
+      <thead>
+        <tr>
+          <th onclick="sortCompTable(0)">District</th>
+          <th onclick="sortCompTable(1)">Incumbent</th>
+          <th onclick="sortCompTable(2)">Party</th>
+          <th onclick="sortCompTable(3)">Rating</th>
+          <th onclick="sortCompTable(4)">Cook PVI (2025)</th>
+        </tr>
+      </thead>
+      <tbody id="comp-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note">Ratings: <span data-fig="ratings.rater">our composite of Cook, Inside Elections and Sabato</span>; where a badge follows a single rater, the rater and date are shown beneath it. PVI: Cook Partisan Voting Index (2025), how much more Republican (R+) or Democratic (D+) the district voted than the nation in 2020 and 2024.</div>
+  </div>
+
+  <!-- ── INTRAPARTY FACTIONS (House) ──────────────────────────────── -->
+  </div></div>
+
+  <!-- ── FACTIONS INNER PANEL ───────────────── -->
+  <div class="inner-panel" id="house-inner-factions">
+  <div class="panel-inner">
+  <div class="faction-section" id="house-faction-section">
+    <div class="section-hdr" style="margin-bottom:14px">
+      <div>
+        <div class="section-eyebrow">119th Congress</div>
+        <div class="section-title">Intraparty Factions — House</div>
+        <div class="section-sub">Member assignments based on caucus memberships, voting record, endorsements, and broader public-ideological identity. Select a faction from the dropdown to filter the map and table, or view all factions at once.</div>
+      </div>
+    </div>
+
+    <div class="faction-controls">
+      <select class="faction-sel" id="house-faction-sel" onchange="renderHouseFaction(this.value)">
+        <option value="ALL" selected>All Factions &mdash; 433 members</option>
+        <option value="MD">Moderate Democrats (MD) &mdash; 128 members</option>
+        <option value="PD">Progressive Democrats (PD) &mdash; 84 members</option>
+        <option value="MR">MAGA Republicans (MR) &mdash; 140 members</option>
+        <option value="AR">America First Republicans (AR) &mdash; 39 members</option>
+        <option value="TR">Traditional Republicans (TR) &mdash; 39 members</option>
+      </select>
+      <div class="faction-chips">
+        <span class="faction-chip" style="background:#7393B3" onclick="document.getElementById('house-faction-sel').value='MD';renderHouseFaction('MD')">&#9632; MD</span>
+        <span class="faction-chip" style="background:#0096FF" onclick="document.getElementById('house-faction-sel').value='PD';renderHouseFaction('PD')">&#9632; PD</span>
+        <span class="faction-chip" style="background:#800000" onclick="document.getElementById('house-faction-sel').value='MR';renderHouseFaction('MR')">&#9632; MR</span>
+        <span class="faction-chip" style="background:#DC143C" onclick="document.getElementById('house-faction-sel').value='AR';renderHouseFaction('AR')">&#9632; AR</span>
+        <span class="faction-chip" style="background:#986868" onclick="document.getElementById('house-faction-sel').value='TR';renderHouseFaction('TR')">&#9632; TR</span>
+      </div>
+    </div>
+
+    <div class="d3-map-wrap" style="margin-bottom:18px">
+      <svg id="house-faction-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+      <div class="map-loading" id="house-faction-loading">Select a faction to load map&hellip;</div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="houseFactionZoomBy(1.5)" title="Zoom in">+</button>
+        <button class="map-zoom-btn" onclick="houseFactionZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+        <button class="map-zoom-btn reset" onclick="houseFactionZoomReset()" title="Reset">&#8634;</button>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="card-title" id="house-faction-card-title">All House Factions &mdash; 433 members</div>
+      <input class="faction-table-search" type="search" placeholder="Search by name or district&hellip;" oninput="filterFactionTable('house',this.value)">
+      <div class="race-table-wrap">
+      <table class="race-table" id="house-faction-table">
+        <thead id="house-faction-thead"><tr><th>Faction</th><th>Member</th><th>District</th><th>Caucus Type</th><th>Score</th><th>Wing</th></tr></thead>
+        <tbody id="house-faction-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">Loading&hellip;</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+  </div></div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════
+     GOVERNOR PANEL
+══════════════════════════════════════════════ -->
+<div class="subpanel" id="subpanel-governor">
+<div class="panel-inner">
+
+  <!-- CHAMBER OVERVIEW -->
+  <div class="chamber-overview">
+    <div class="ch-label">Governorships &nbsp;&mdash;&nbsp; Term: 4 or 2 years (state-dependent)</div>
+    <div class="ch-pills">
+      <span class="ch-r">Republicans&nbsp;<span data-fig="gov.r">26</span></span>
+      <span class="ch-d">Democrats&nbsp;<span data-fig="gov.d">24</span></span>
+    </div>
+    <div class="ch-divider"></div>
+    <div class="ch-bg-block">
+      <span class="ch-bg-n"><span data-fig="gov.battleground">7</span></span>
+      <span class="ch-bg-text">battleground races of <span data-fig="gov.races">36</span> &nbsp;&middot;&nbsp; Source: <a href="https://ballotpedia.org/Gubernatorial_elections,_2026" target="_blank" rel="noopener">Ballotpedia</a></span>
+    </div>
+  </div>
+
+  <div class="stat-strip" id="gov-stat-strip">
+    <div class="stat-box"><div class="stat-n" id="gov-total">36</div><div class="stat-l">Governor races in 2026</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#C04040" id="gov-r-lean">&#8230;</div><div class="stat-l">Leaning or safe Republican</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#378ADD" id="gov-d-lean">&#8230;</div><div class="stat-l">Leaning or safe Democrat</div></div>
+    <div class="stat-box"><div class="stat-n" style="color:#D4931A" id="gov-tu">&#8230;</div><div class="stat-l">Toss&#8209;up races &#8212; outcome uncertain</div></div>
+  </div>
+  <div class="dl-label" data-block="races.governor" data-kind="ratings"></div>
+
+  <!-- CURRENT BALANCE -->
+  <div class="balance-wrap">
+    <div class="balance-label">
+      <span class="balance-r-label"><span data-fig="gov.r">26</span> Republicans</span>
+      <span style="color:var(--t4);font-size:11px">Current governor balance &#8212; all 50 states</span>
+      <span class="balance-d-label">Democrats <span data-fig="gov.d">24</span></span>
+    </div>
+    <div class="balance-bar">
+      <div class="balance-r" id="gbal-r-seg" style="width:52%">26R</div>
+      <div class="balance-d" id="gbal-d-seg" style="width:48%">24D</div>
+      <div class="balance-mid"></div>
+    </div>
+    <div class="balance-note" style="margin-top:10px">Republicans hold a <strong><span data-fig="gov.lead">2</span>-governor advantage</strong>. Of the <span data-fig="gov.races">36</span> races in 2026, Republicans defend <span data-fig="gov.r_up">18</span> and Democrats <span data-fig="gov.d_up">18</span>. Ballotpedia identifies <strong><span data-fig="gov.battleground">7</span> battleground races</strong>.</div>
+  </div>
+
+  <!-- RATING LEGEND -->
+  <div class="rating-legend" id="gov-rating-legend"></div>
+
+  <!-- STATE MAP -->
+  <div class="section-hdr">
+    <div>
+      <div class="section-title">Governor race map &#8212; all <span data-fig="gov.races">36</span> states, 2026</div>
+      <div class="section-sub">All <span data-fig="gov.races">36</span> states with governor races coloured by rating. Grey states have no governor race in 2026. &#9688; = open seat. Click any coloured state for detail.</div>
+    </div>
+  </div>
+  <div class="map-srch-wrap">
+    <input type="search" id="gov-map-srch" class="map-srch" placeholder="Search by state, incumbent, or party&hellip;" oninput="searchGovMap(this.value)">
+    <span class="map-srch-ct" id="gov-srch-ct"></span>
+  </div>
+  <div class="map-hint">Scroll / pinch to zoom &nbsp;&middot;&nbsp; Click a state for detail &nbsp;&middot;&nbsp; Drag to pan</div>
+  <div class="d3-map-wrap">
+    <svg id="gov-svg" viewBox="0 0 960 580" style="max-height:460px;cursor:grab"></svg>
+    <div class="map-loading" id="gov-loading">Loading map&hellip;</div>
+    <div class="map-zoom-ctrl">
+      <button class="map-zoom-btn" onclick="govZoomBy(1.5)" title="Zoom in">+</button>
+      <button class="map-zoom-btn" onclick="govZoomBy(1/1.5)" title="Zoom out">&#8722;</button>
+      <button class="map-zoom-btn reset" onclick="govZoomReset()" title="Reset view">&#8634;</button>
+    </div>
+  </div>
+
+  <!-- DETAIL CARD -->
+
+  <!-- CONTEXT -->
+  <div class="callout">
+    <div class="callout-label">Governor context &#8212; 2026</div>
+    <span data-fig="gov.races">36</span> states hold gubernatorial elections in 2026. <strong><span data-fig="gov.open">19</span> are open seats</strong> due to term limits, retirements or primary defeats: <span data-fig="gov.open_list">AL, AK, CA, CO, FL, GA, IA, KS, ME, MI, MN, NM, OH, OK, RI, SC, TN, WI and WY</span>. The <span data-fig="gov.tossups">5</span> toss-up races &#8212; <span data-fig="gov.tossup_list">Alaska, Georgia, Nevada, Ohio and Wisconsin</span> &#8212; will define the governor map.
+  </div>
+
+  <!-- FILTER + TABLE -->
+  <div class="chart-card">
+    <div class="card-title">All <span data-fig="gov.races">36</span> governor races &#8212; 2026</div>
+    <div class="card-sub">Click column headers to sort. Filter by rating category below.</div>
+    <div class="filter-row">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn gov-filter active" onclick="filterGovTable('all',this)">All races</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Toss-up',this)">Toss-up</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Lean',this)">Lean R / Lean D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Likely',this)">Likely R / Likely D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('Safe',this)">Safe R / Safe D</button>
+      <button class="filter-btn gov-filter" onclick="filterGovTable('open',this)">Open seats</button>
+    </div>
+    <div class="race-table-wrap">
+    <table class="race-table" id="gov-race-table">
+      <thead>
+        <tr>
+          <th onclick="sortGovTable(0)">State</th>
+          <th onclick="sortGovTable(1)">Incumbent / Open</th>
+          <th onclick="sortGovTable(2)">Party</th>
+          <th onclick="sortGovTable(3)">Rating</th>
+          <th onclick="sortGovTable(4)">Open?</th>
+        </tr>
+      </thead>
+      <tbody id="gov-race-tbody">
+        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="chart-note dl-label" id="gov-source-note" data-block="races.governor" data-kind="ratings"></div>
+  </div>
+
+</div>
+</div>
+
+
+<!-- ── METHODOLOGY ──────────────────────────────────────────────────────────── -->
+<div class="panel-inner" style="max-width:900px;margin:0 auto;padding:0 28px 40px">
+  <div class="meth-section">
+    <button class="meth-toggle" onclick="toggleMeth(this)" aria-expanded="false">
+      <span class="meth-toggle-title">Faction Methodology &amp; Sources</span>
+      <span class="meth-arrow">&#9660;</span>
+    </button>
+    <div class="meth-body" id="meth-body">
+      <p style="font:400 14px/1.8 var(--sans);color:var(--t2);margin-bottom:14px">Members of Congress have been assigned to specific factions based on their caucus memberships, voting record, endorsements by leaders and broader public-ideological identity. On policy stances and political alignments, each of these factions is also determined based on the following points:</p>
+
+      <h4>Traditional Republican / Establishment</h4>
+      <ul>
+        <li>Supports free trade and international alliances (like NATO)</li>
+        <li>Comfortable with corporate business interests and Wall Street</li>
+        <li>Prefers working within party leadership, not against it</li>
+        <li>Cautious about picking public fights with party leaders</li>
+        <li>Often has long ties to donor networks and business groups</li>
+        <li>Skeptical of isolationism</li>
+        <li>Oftentimes pro-Trump; criticism is private</li>
+      </ul>
+
+      <h4>MAGA Republican</h4>
+      <ul>
+        <li>Strongly and publicly loyal to Trump personally</li>
+        <li>Prioritises immigration crackdowns and border security</li>
+        <li>Distrusts mainstream media and federal agencies (FBI, DOJ)</li>
+        <li>Willing to challenge own party leadership publicly</li>
+        <li>Focuses on culture-war issues (schools, gender, &ldquo;woke&rdquo; topics)</li>
+        <li>Frequently uses combative, us-vs-them language</li>
+      </ul>
+
+      <h4>America First Republican</h4>
+      <ul>
+        <li>Generally Trump-aligned, but distinguished from MAGA by an explicit non-interventionist foreign-policy emphasis</li>
+        <li>Sceptical of foreign wars and overseas military spending</li>
+        <li>Wants less U.S. involvement in international conflicts (like Ukraine)</li>
+        <li>Focuses on domestic manufacturing and jobs over global trade deals</li>
+        <li>Often overlaps with MAGA but stresses non-interventionism specifically</li>
+        <li>Wary of multinational institutions (UN, NATO funding)</li>
+        <li>Prioritises &ldquo;America&rsquo;s interests first&rdquo; framing on trade and foreign policy</li>
+      </ul>
+
+      <h4>Moderate Democrat</h4>
+      <ul>
+        <li>Willing to work across the aisle with Republicans</li>
+        <li>Cautious about big government spending programmes</li>
+        <li>Supports incremental reforms, not sweeping overhauls</li>
+        <li>Represents swing districts, so avoids far-left labels</li>
+        <li>Less likely to support defunding police or Medicare for All</li>
+        <li>Focuses on pragmatic, &ldquo;get things done&rdquo; messaging</li>
+      </ul>
+
+      <h4>Progressive Democrat</h4>
+      <ul>
+        <li>Limited willingness to work across the aisle</li>
+        <li>Supports bold structural change (Medicare for All, Green New Deal)</li>
+        <li>Comfortable being vocal against corporate influence in politics</li>
+        <li>Prioritises racial and economic justice issues strongly</li>
+        <li>Often represents safe, deep-blue districts</li>
+        <li>Willing to criticise own party leadership publicly</li>
+        <li>Focuses on systemic reform over incremental fixes</li>
+      </ul>
+
+      <div class="meth-sources">
+        <a class="meth-src" href="https://americansforprosperity.org/national-scorecard/#/" target="_blank" rel="noopener">AFP National Scorecard (Traditional Republicans)</a>
+        <a class="meth-src" href="https://heritageaction.com/scorecard" target="_blank" rel="noopener">Heritage Action Scorecard (MAGA Republicans)</a>
+        <a class="meth-src" href="https://progressivepunch.org/scores.htm?house=senate#progvsbench" target="_blank" rel="noopener">Progressive Punch &mdash; Senate</a>
+        <a class="meth-src" href="https://progressivepunch.org/scores.htm?x=20&amp;y=6&amp;house=house&amp;party=&amp;sort=crucial-current&amp;order=down#progvsbench" target="_blank" rel="noopener">Progressive Punch &mdash; House</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="map-tip" id="map-tip"></div>
+<script>
+Chart.defaults.font.family = "'DM Sans',ui-sans-serif,sans-serif";
+Chart.defaults.color = '#6B6B6B';
+Chart.defaults.plugins.legend.display = false;
+
+// ── SEAT PANEL INTEGRATION ──────────────────────────────────────────────────
+// Clicking a seat (map shape or list row) opens window.SeatPanel for that
+// canonical ID and highlights both the shape and the row. The highlight is
+// shared across all three chambers since only one seat can be open at once.
+// Clearing happens on 'seatpanel:close', which fires however the panel was
+// closed (X, Esc, outside click, or switching to a different seat entirely
+// closing first) -- so this file never needs to know which close path fired.
+let _spPathEl = null;
+let _spRowEl = null;
+
+function spClearHighlight() {
+  if (_spPathEl) {
+    const w = _spPathEl.classList.contains('d-path') ? '0.3px' : '0.5px';
+    d3.select(_spPathEl).style('stroke', '#fff').style('stroke-width', w);
+    _spPathEl = null;
+  }
+  if (_spRowEl) {
+    _spRowEl.classList.remove('sp-row-selected');
+    _spRowEl = null;
+  }
+}
+
+function spSelectSeat(seatId, pathEl) {
+  spClearHighlight();
+  _spPathEl = pathEl || document.querySelector('path[data-seat-id="' + seatId + '"]');
+  if (_spPathEl) d3.select(_spPathEl).style('stroke', '#111').style('stroke-width', '2.5px');
+  _spRowEl = document.querySelector('tr[data-seat-id="' + seatId + '"]');
+  // Highlight only: the page stays where the click was made (map or list)
+  if (_spRowEl) _spRowEl.classList.add('sp-row-selected');
+}
+
+window.addEventListener('seatpanel:close', spClearHighlight);
+
+// Opens SeatPanel for a race object from any of the three chambers, passing
+// through the same rating/incumbent/note context the old inline detail
+// cards used to show. 'kind' is 'senate' | 'house' | 'governor'.
+// Some data.json incumbent strings for open seats are already fully
+// self-descriptive (e.g. "Open seat (Cornyn not seeking re-election)",
+// "Open (Kay Ivey — TL)"); others are still a bare name (e.g. "Dick
+// Durbin") or an "(appointed)" note. Only prefix "Open seat —" when the
+// string doesn't already say "Open", so it's never duplicated.
+function openSeatIncumbentLine(incumbent) {
+  return /^open\b/i.test(incumbent) ? incumbent : `Open seat — ${incumbent}`;
+}
+
+function openSeatFromRace(kind, race, pathEl, extraOpts) {
+  let id, incumbentLine, note;
+  if (kind === 'senate') {
+    id = toSeatId('senate', race.state);
+    incumbentLine = race.open ? openSeatIncumbentLine(race.incumbent) : `${race.incumbent} (incumbent)`;
+    note = race.note;
+  } else if (kind === 'governor') {
+    id = toSeatId('governor', race.state);
+    incumbentLine = race.open ? openSeatIncumbentLine(race.incumbent) : `${race.incumbent} (incumbent)`;
+    note = race.note;
+  } else {
+    id = toSeatId('house', race.district);
+    incumbentLine = race.incumbent;
+    note = 'Cook PVI (2025): ' + race.pvp;
+  }
+  if (!id) return;
+  spSelectSeat(id, pathEl);
+  window.SeatPanel.open(id, Object.assign({ mode: 'default', rating: race.rating, incumbent: incumbentLine, note: note }, extraOpts));
+}
+
+// Seat links inside the panel's state-issue tiles open with the same context
+// as a map click; seats not in data.json open the bare brief.
+window.SeatPanel.setSeatOpener((id, opts) => {
+  const r = DATA && DATA.races;
+  const kind = id.startsWith('Senate-') ? 'senate' : id.startsWith('Gov-') ? 'governor' : 'house';
+  const list = !r ? [] : kind === 'house' ? r.house.competitive : r[kind].races;
+  const race = (list || []).find(x => toSeatId(kind, kind === 'house' ? x.district : x.state) === id);
+  if (race) openSeatFromRace(kind, race);
+  else window.SeatPanel.open(id, opts);
+});
+
+// ── SEAT-WISE ENTRY (#seats, #seats-senate, #seats-governor, banner) ────────
+// #seats, the home "Seat-wise analysis" button and the banner land on the
+// chamber's map and open the featured seat's panel beside it. FEATURED_SEAT
+// picks the seat (an empty string means "the first Toss-up seat in that
+// chamber's list"); set OPEN_FEATURED_SEAT to false to show the map alone.
+const OPEN_FEATURED_SEAT = true;
+const FEATURED_SEAT = { house: '', senate: 'Senate-ME', governor: 'Gov-GA' };
+
+function activeChamber() {
+  const btn = document.querySelector('.subtab-btn.active');
+  const t = btn ? btn.textContent.toLowerCase() : '';
+  return t.includes('senate') ? 'senate' : t.includes('governor') ? 'governor' : 'house';
+}
+
+function featuredRace(chamber) {
+  const r = DATA && DATA.races && DATA.races[chamber];
+  const list = r ? (chamber === 'house' ? r.competitive : r.races) || [] : [];
+  const idOf = race => toSeatId(chamber, chamber === 'house' ? race.district : race.state);
+  const want = FEATURED_SEAT[chamber];
+  return (want && list.find(race => idOf(race) === want)) ||
+    list.find(race => /toss/i.test(race.rating || '')) || list[0] || null;
+}
+
+// Scrolls so the chamber's map (with its heading) sits just below the sticky bars
+function scrollToMap(chamber) {
+  const wrap = document.querySelector(`#subpanel-${chamber} .d3-map-wrap`);
+  if (!wrap) return;
+  const titles = [...document.querySelectorAll(`#subpanel-${chamber} .section-title`)]
+    .filter(t => t.compareDocumentPosition(wrap) & Node.DOCUMENT_POSITION_FOLLOWING);
+  const target = titles.pop() || wrap;
+  const bar = document.querySelector('.subtab-bar');
+  const banner = document.getElementById('seatwise-banner');
+  const offset = (bar ? bar.offsetHeight : 0) + (banner && !banner.hidden ? banner.offsetHeight : 0) + 12;
+  window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+}
+
+// Switches to the chamber and brings its map into view (optionally opening the featured seat).
+function openSeatwise(chamber) {
+  if (!DATA || !DATA.races) return;
+  chamber = chamber || activeChamber();
+  const btn = [...document.querySelectorAll('.subtab-btn')].find(b => b.textContent.toLowerCase().includes(chamber));
+  if (btn && !btn.classList.contains('active')) goSub(chamber, btn);
+  const racesTab = document.querySelector(`#subpanel-${chamber} .inner-tab`);
+  if (racesTab && !racesTab.classList.contains('active')) goInner(chamber, 'races', racesTab);
+  scrollToMap(chamber);
+  if (!OPEN_FEATURED_SEAT) return;
+  const scrolledAt = Date.now();
+  const race = featuredRace(chamber);
+  if (!race) return;
+  // Esc from the panel returns focus to the banner when it is showing
+  const go = document.getElementById('seatwise-go');
+  const returnFocus = go && !document.getElementById('seatwise-banner').hidden ? go : null;
+  // Open once the map has drawn the seat's shape (so it can be outlined), after
+  // the scroll settles; give up waiting after about 4 s and open anyway.
+  const id = toSeatId(chamber, chamber === 'house' ? race.district : race.state);
+  const started = Date.now();
+  (function openWhenDrawn() {
+    const drawn = document.querySelector(`path[data-seat-id="${id}"]`);
+    if ((!drawn && Date.now() - started < 4000) || Date.now() - scrolledAt < 450) { setTimeout(openWhenDrawn, 150); return; }
+    openSeatFromRace(chamber, race, drawn || null, returnFocus ? { returnFocus } : {});
+  })();
+}
+
+function handleSeatsHash() {
+  const m = location.hash.match(/^#seats(?:-(house|senate|governor))?$/i);
+  if (m) openSeatwise((m[1] || 'house').toLowerCase());
+}
+
+// Shell page (index.html) entry point when this page is already loaded in its iframe
+window.SeatwiseEntry = { open: openSeatwise };
+
+(function initSeatwiseBanner() {
+  const banner = document.getElementById('seatwise-banner');
+  const setSubtabHeight = () => {
+    const bar = document.querySelector('.subtab-bar');
+    if (bar) document.documentElement.style.setProperty('--subtab-h', bar.offsetHeight + 'px');
+  };
+  setSubtabHeight();
+  window.addEventListener('resize', setSubtabHeight);
+  // Clear the session flag older versions set, so a banner closed earlier comes back
+  try { sessionStorage.removeItem('seatwiseBannerHidden'); } catch (e) { /* storage unavailable */ }
+  document.getElementById('seatwise-go').addEventListener('click', () => openSeatwise());
+  document.getElementById('seatwise-close').addEventListener('click', () => {
+    banner.hidden = true;   // until the page is next loaded
+  });
+  window.addEventListener('seatpanel:open', () => document.body.classList.add('sp-is-open'));
+  window.addEventListener('seatpanel:close', () => document.body.classList.remove('sp-is-open'));
+  window.addEventListener('hashchange', handleSeatsHash);
+})();
+
+function goInner(chamber, tab, btn) {
+  const sec = document.getElementById('subpanel-' + chamber);
+  sec.querySelectorAll('.inner-tab').forEach(b => b.classList.remove('active'));
+  sec.querySelectorAll('.inner-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(chamber + '-inner-' + tab).classList.add('active');
+  if (tab === 'factions') {
+    const sel = document.getElementById(chamber + '-faction-sel');
+    const code = sel ? sel.value : 'ALL';
+    if (chamber === 'house') renderHouseFaction(code);
+    else renderSenateFaction(code);
+  }
+}
+
+// ── SUB-TAB NAV ──────────────────────────────────────────────────────────────
+function goSub(id, btn) {
+  document.querySelectorAll('.subpanel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.subtab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('subpanel-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── RATING CONFIG ─────────────────────────────────────────────────────────────
+const RC = {
+  'Safe R':   { bg: '#7a1c1c', tx: '#fff',    border: '#5a0a0a', short: 'SR',  order: 0 },
+  'Likely R': { bg: '#C04040', tx: '#fff',    border: '#9a2020', short: 'LR',  order: 1 },
+  'Lean R':   { bg: '#E8A0A0', tx: '#4a0000', border: '#c87070', short: 'R+',  order: 2 },
+  'Toss-up':  { bg: '#D4931A', tx: '#fff',    border: '#a06800', short: 'TU',  order: 3 },
+  'Lean D':   { bg: '#8CB4E0', tx: '#001a3d', border: '#5890c8', short: 'D+',  order: 4 },
+  'Likely D': { bg: '#378ADD', tx: '#fff',    border: '#1a5aaa', short: 'LD',  order: 5 },
+  'Safe D':   { bg: '#1A3F8A', tx: '#fff',    border: '#0d2460', short: 'SD',  order: 6 },
+};
+
+// ── DEMOCRAT-HELD HOUSE DISTRICTS (119th Congress) ───────────────────────────
+// Keys = full state name (matches GeoJSON), values = array of D-held district numbers
+// At-large states use district 0. Competitive districts are overridden by _houseRaceByKey.
+const D_DISTRICTS = {
+  'Delaware': [0], 'Vermont': [0],
+  'Connecticut': [1,2,3,4,5],
+  'Hawaii': [1,2],
+  'Massachusetts': [1,2,3,4,5,6,7,8,9],
+  'Rhode Island': [1,2],
+  'Alabama': [2,7],
+  'Arizona': [3,4,7],
+  'California': [2,4,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,24,25,26,28,29,30,31,32,33,34,35,36,37,38,39,42,43,44,46,47,49,50,51,52],
+  'Colorado': [1,2,6,7,8],
+  'Florida': [9,10,14,20,22,23,25],
+  'Georgia': [4,5,13],
+  'Illinois': [1,2,3,4,5,6,7,8,9,10,11,13,14,17],
+  'Indiana': [1,7],
+  'Louisiana': [2,6],
+  'Maine': [1,2],
+  'Maryland': [2,3,4,5,6,7,8],
+  'Michigan': [3,6,8,11,12,13],
+  'Minnesota': [2,3,4,5],
+  'Missouri': [1,5],
+  'Nevada': [1,3,4],
+  'New Hampshire': [1,2],
+  'New Jersey': [1,3,5,6,8,9,10,11,12],
+  'New Mexico': [1,2,3],
+  'New York': [3,5,6,7,8,9,10,12,13,14,15,16,18,19,20,25,26],
+  'North Carolina': [1,4,12],
+  'Ohio': [3,9,11,13],
+  'Oregon': [1,3,4,6],
+  'Pennsylvania': [2,3,4,5,6,7,8,12,17],
+  'South Carolina': [6],
+  'Tennessee': [9],
+  'Texas': [7,9,16,18,20,28,29,30,32,33,34,35,37],
+  'Virginia': [3,4,7,8,10,11],
+  'Washington': [1,2,3,6,7,8,9,10],
+  'Wisconsin': [2,4],
+};
+
+// ── STATE ABBREVIATION → FULL NAME ───────────────────────────────────────────
+const ABBR_TO_STATE = {
+  AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',
+  CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',
+  HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',
+  KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',
+  MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',
+  MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',
+  NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',
+  OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',
+  SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',
+  VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming',
+  DC:'District of Columbia'
+};
+
+// ── STATE GRID POSITIONS (col 1-12, row 1-7) ──────────────────────────────────
+const GRID = {
+  AK:{c:1,r:1},                                                                                  ME:{c:12,r:1},
+  WA:{c:2,r:2},MT:{c:3,r:2},ND:{c:4,r:2},MN:{c:5,r:2},WI:{c:6,r:2},MI:{c:7,r:2},             VT:{c:11,r:2},NH:{c:12,r:2},
+  OR:{c:2,r:3},ID:{c:3,r:3},WY:{c:4,r:3},SD:{c:5,r:3},IA:{c:6,r:3},IN:{c:7,r:3},OH:{c:8,r:3},PA:{c:9,r:3},NY:{c:10,r:3},MA:{c:11,r:3},CT:{c:12,r:3},
+  CA:{c:2,r:4},NV:{c:3,r:4},CO:{c:4,r:4},NE:{c:5,r:4},MO:{c:6,r:4},KY:{c:7,r:4},WV:{c:8,r:4},VA:{c:9,r:4},NJ:{c:10,r:4},RI:{c:11,r:4},DE:{c:12,r:4},
+              AZ:{c:3,r:5},NM:{c:4,r:5},KS:{c:5,r:5},AR:{c:6,r:5},TN:{c:7,r:5},NC:{c:8,r:5},MD:{c:9,r:5},
+  HI:{c:1,r:6},             OK:{c:5,r:6},LA:{c:6,r:6},MS:{c:7,r:6},AL:{c:8,r:6},SC:{c:9,r:6},GA:{c:10,r:6},
+                                          TX:{c:5,r:7},                                          FL:{c:10,r:7},
+};
+
+// ── LOAD DATA ─────────────────────────────────────────────────────────────────
+let DATA = null;
+
+async function loadData() {
+  for (const path of ['data.json', '../data.json', './data.json']) {
+    try {
+      const res = await fetch(path + '?v=' + Date.now());
+      if (res.ok) { DATA = await res.json(); break; }
+    } catch(_) {}
+  }
+  if (DATA && DATA.races) { renderAll(); handleSeatsHash(); }
+  else document.querySelectorAll('[id$="-tbody"],[id$="-grid"]').forEach(el => { el.innerHTML = '<tr><td colspan="5" style="color:var(--t4);text-align:center;padding:24px">Could not load data.json</td></tr>'; });
+}
+
+// ── MAIN RENDER ───────────────────────────────────────────────────────────────
+function renderAll() {
+  if (window.DataLabels) window.DataLabels.fill(DATA);
+  renderSenate(DATA.races.senate);
+  renderHouse(DATA.races.house);
+  renderGovernor(DATA.races.governor);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SENATE
+// ─────────────────────────────────────────────────────────────────────────────
+function renderSenate(sen) {
+  // Stat strip
+  const rs = sen.ratings_summary;
+  const rHeld = sen.races.filter(r => r.party === 'R').length;
+  const dHeld = sen.races.filter(r => r.party === 'D').length;
+  document.getElementById('ss-seats-up').textContent   = sen.seats_up;
+  document.getElementById('ss-r-held').textContent     = rHeld;
+  document.getElementById('ss-d-held').textContent     = dHeld;
+  document.getElementById('ss-tossups').textContent    = rs.toss_up;
+  document.getElementById('source-note').textContent   = sen.source;
+
+  // Balance bar
+  const cur = sen.current_balance;
+  const rPct = (cur.r / 100 * 100).toFixed(1);
+  const dPct = (cur.d / 100 * 100).toFixed(1);
+  document.getElementById('bal-r-seg').style.width = rPct + '%';
+  document.getElementById('bal-r-seg').textContent = cur.r;
+  document.getElementById('bal-d-seg').style.width = dPct + '%';
+  document.getElementById('bal-d-seg').textContent = cur.d;
+  document.getElementById('bal-r-label').textContent = cur.r + ' Republicans';
+  document.getElementById('bal-d-label').textContent = 'Democrats and Independents ' + cur.d;
+
+  // Projected
+  const notUpR = cur.r - rHeld;
+  const notUpD = cur.d - dHeld;
+  // Seats not up + safe/likely/lean; toss-ups stay unassigned (no split rule)
+  const projR = notUpR + rs.safe_r + rs.likely_r + rs.lean_r;
+  const projD = notUpD + rs.safe_d + rs.likely_d + rs.lean_d;
+  document.getElementById('bal-proj-r').textContent = 'R ' + projR + ' incl. leans';
+  document.getElementById('bal-proj-d').textContent = 'D ' + projD + ' incl. leans';
+  document.getElementById('bal-proj-tu').textContent = rs.toss_up + ' toss-ups unassigned';
+
+  // Legend
+  buildLegend(rs);
+
+  // Map
+  buildSenateMap(sen.races);
+
+  // Table
+  buildSenateTable(sen.races);
+}
+
+let activeFilter = 'all';
+let sortCol = 0, sortDir = 1;
+
+function buildLegend(rs) {
+  const wrap = document.getElementById('rating-legend');
+  const entries = [
+    ['Safe R',   rs.safe_r],
+    ['Likely R', rs.likely_r],
+    ['Lean R',   rs.lean_r],
+    ['Toss-up',  rs.toss_up],
+    ['Lean D',   rs.lean_d],
+    ['Likely D', rs.likely_d],
+    ['Safe D',   rs.safe_d],
+  ];
+  wrap.innerHTML = entries.map(([label, count]) => {
+    const c = RC[label];
+    return `<div class="rating-chip" data-rating="${label}" onclick="toggleLegendFilter('${label}',this)" style="background:${c.bg};color:${c.tx}">
+      <span>${label}</span><span style="opacity:.7;font-size:10px">${count}</span>
+    </div>`;
+  }).join('');
+}
+
+let legendFilter = null;
+function toggleLegendFilter(rating, chip) {
+  if (legendFilter === rating) {
+    legendFilter = null;
+    document.querySelectorAll('.rating-chip').forEach(c => c.classList.remove('dimmed'));
+  } else {
+    legendFilter = rating;
+    document.querySelectorAll('.rating-chip').forEach(c => {
+      c.classList.toggle('dimmed', c.dataset.rating !== rating);
+    });
+  }
+  highlightMapByRating(legendFilter);
+  if (legendFilter) filterTable(legendFilter.includes('Toss') ? 'Toss-up' : legendFilter.split(' ')[0], null);
+  else filterTable('all', null);
+}
+
+// ── SHARED GEOJSON CACHE ─────────────────────────────────────────────────────
+let _statesGeo = null;
+let _districtsGeo = null;
+let _statesWaiters = [];
+let _districtsWaiters = [];
+let _statesFetching = false;
+let _districtsFetching = false;
+
+function fetchStatesGeo(cb) {
+  if (_statesGeo) { cb(_statesGeo); return; }
+  _statesWaiters.push(cb);
+  if (_statesFetching) return;
+  _statesFetching = true;
+  fetch('assets/us-states.json').then(r=>r.json()).then(gj=>{
+    _statesGeo=gj; _statesWaiters.forEach(fn=>fn(gj)); _statesWaiters=[];
+  }).catch(()=>{ console.error('Failed to load us-states.json'); });
+}
+
+let _senateGeo=null, _senateGeoWaiters=[], _senateGeoFetching=false;
+function fetchSenateGeo(cb) {
+  if (_senateGeo) { cb(_senateGeo); return; }
+  _senateGeoWaiters.push(cb);
+  if (_senateGeoFetching) return;
+  _senateGeoFetching = true;
+  fetch('assets/senate.json').then(r=>r.json()).then(gj=>{
+    _senateGeo=gj; _senateGeoWaiters.forEach(fn=>fn(gj)); _senateGeoWaiters=[];
+  }).catch(()=>{ console.error('Failed to load senate.json'); });
+}
+
+function fetchDistrictsGeo(cb) {
+  if (_districtsGeo) { cb(_districtsGeo); return; }
+  _districtsWaiters.push(cb);
+  if (_districtsFetching) return;
+  _districtsFetching = true;
+
+  function onFail(e) {
+    console.error('Failed to load district boundaries (2026 and 119 files)', e);
+    _districtsFetching = false;
+    const ld = document.getElementById('house-loading');
+    if (ld) ld.textContent = 'Map unavailable \u2014 district boundary data could not be fetched.';
+  }
+
+  const timer = setTimeout(() => { if (!_districtsGeo) onFail(new Error('timeout')); }, 40000);
+
+  // 2026 district boundaries; the 119th Congress file is the fallback
+  function getDistricts() {
+    return fetch('assets/districts2026.geojson?v=1')
+      .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .catch(e => {
+        console.warn('districts2026.geojson unavailable, using districts119.geojson', e);
+        return fetch('assets/districts119.geojson?v=1')
+          .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+      });
+  }
+
+  function attempt(tries) {
+    getDistricts()
+      .then(gj => {
+        clearTimeout(timer);
+        _districtsGeo = gj;
+        _districtsWaiters.forEach(fn => fn(gj));
+        _districtsWaiters = [];
+      })
+      .catch(e => {
+        if (tries > 1) { setTimeout(() => attempt(tries - 1), 3000); }
+        else { clearTimeout(timer); onFail(e); }
+      });
+  }
+  attempt(3);
+}
+
+// ── TOOLTIP ──────────────────────────────────────────────────────────────────
+const mapTip = document.getElementById('map-tip');
+function showTip(e,html){ mapTip.innerHTML=html; mapTip.style.display='block'; moveTip(e); }
+function moveTip(e){ mapTip.style.left=(e.clientX+14)+'px'; mapTip.style.top=(e.clientY-36)+'px'; }
+function hideTip(){ mapTip.style.display='none'; }
+
+// ── ZOOM CONTROLLERS ─────────────────────────────────────────────────────────
+let _senZoom = null, _houseZoom = null, _govZoom = null;
+
+function makeZoom(svgSel, onZoom) {
+  const z = d3.zoom().scaleExtent([1, 12]).on('zoom', e => {
+    onZoom(e.transform);
+    svgSel.style('cursor', e.transform.k > 1 ? 'grabbing' : 'grab');
+  });
+  svgSel.call(z).on('dblclick.zoom', null);
+  return {
+    zoomBy: f => svgSel.transition().duration(350).call(z.scaleBy, f),
+    reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
+  };
+}
+
+function senZoomBy(f)  { _senZoom?.zoomBy(f); }
+function senZoomReset(){ _senZoom?.reset(); }
+function houseZoomBy(f)  { _houseZoom?.zoomBy(f); }
+function houseZoomReset(){ _houseZoom?.reset(); }
+function govZoomBy(f)  { _govZoom?.zoomBy(f); }
+function govZoomReset(){ _govZoom?.reset(); }
+
+// ── SENATE CHOROPLETH ────────────────────────────────────────────────────────
+let _senSel = null;
+let _senRaceByState = {};
+let _senG = null;
+
+function highlightMapByRating(rating) {
+  if (!_senSel) return;
+  _senSel.each(function(d) {
+    const r = _senRaceByState[d.properties.NAME];
+    d3.select(this).attr('opacity', !rating || (r && r.rating === rating) ? 1 : 0.2);
+  });
+}
+
+function buildSenateMap(races) {
+  _senRaceByState = {};
+  races.forEach(r => { _senRaceByState[r.state] = r; });
+
+  const svgEl = d3.select('#senate-svg');
+  svgEl.selectAll('*').remove();
+  _senG = svgEl.append('g');
+
+  _senZoom = makeZoom(svgEl, t => _senG.attr('transform', t));
+
+  fetchSenateGeo(gj => {
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+    const pathGen = d3.geoPath().projection(proj);
+
+    _senSel = _senG.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('class', d => 's-path' + (_senRaceByState[d.properties.NAME] ? ' clickable' : ''))
+      .attr('data-seat-id', d => {
+        const r = _senRaceByState[d.properties.NAME];
+        return r ? toSeatId('senate', r.state) : null;
+      })
+      .attr('d', d => pathGen(d) || '')
+      .style('fill', d => {
+        const r = _senRaceByState[d.properties.NAME];
+        return r ? (RC[r.rating] || {bg:'#D8D8D4'}).bg : '#D8D8D4';
+      })
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.5px')
+      .on('mousemove', function(event, d) {
+        const r = _senRaceByState[d.properties.NAME];
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.rating_source ? ' (' + r.rating_source + ')' : ''}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No Senate race in 2026</span>`);
+      })
+      .on('mouseleave', hideTip)
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const r = _senRaceByState[d.properties.NAME];
+        if (!r) return;
+        openSeatFromRace('senate', r, this);
+      });
+
+    // State abbreviation labels for races only
+    _senG.selectAll('text')
+      .data(gj.features.filter(d => _senRaceByState[d.properties.NAME]))
+      .join('text')
+      .attr('text-anchor', 'middle')
+      .attr('dy', '0.35em')
+      .attr('pointer-events', 'none')
+      .style('font', '600 10px "DM Sans",sans-serif')
+      .style('fill', d => {
+        const r = _senRaceByState[d.properties.NAME];
+        return (RC[r.rating] || {tx:'#fff'}).tx;
+      })
+      .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
+      .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
+      .text(d => {
+        const abbr = Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.NAME);
+        return abbr || '';
+      });
+
+    // Hide loading overlay
+    const ld = document.getElementById('senate-loading');
+    if (ld) ld.classList.add('done');
+  });
+}
+
+
+function searchSenMap(q) {
+  if (!_senSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _senSel.each(function(d) {
+    const r = _senRaceByState[d.properties.NAME];
+    let match = !ql;
+    if (ql) match = d.properties.NAME.toLowerCase().includes(ql) ||
+      (r && (r.incumbent.toLowerCase().includes(ql) || r.party.toLowerCase().includes(ql) ||
+             (r.party==='R'?'republican':'democrat').includes(ql)));
+    d3.select(this).attr('opacity', match ? 1 : ql ? 0.15 : 1);
+    if (match && r) ct++;
+  });
+  document.getElementById('sen-srch-ct').textContent = ql ? ct+' match'+(ct!==1?'es':'') : '';
+}
+
+// Table
+function buildSenateTable(races) {
+  renderTable(races, activeFilter, sortCol, sortDir);
+}
+
+function filterTable(filter, btn) {
+  activeFilter = filter;
+  if (btn) {
+    document.querySelectorAll('#subpanel-senate .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderTable(DATA.races.senate.races, filter, sortCol, sortDir);
+}
+
+function sortTable(col) {
+  if (sortCol === col) sortDir = -sortDir;
+  else { sortCol = col; sortDir = 1; }
+  document.querySelectorAll('.race-table th').forEach((th, i) => {
+    th.classList.toggle('sorted-asc',  i === col && sortDir === 1);
+    th.classList.toggle('sorted-desc', i === col && sortDir === -1);
+  });
+  renderTable(DATA.races.senate.races, activeFilter, sortCol, sortDir);
+}
+
+function renderTable(races, filter, col, dir) {
+  let filtered = races.filter(r => {
+    if (filter === 'all')    return true;
+    if (filter === 'open')   return r.open;
+    if (filter === 'Toss-up') return r.rating === 'Toss-up';
+    return r.rating.includes(filter);
+  });
+
+  const keys = ['state','incumbent','party','rating','open'];
+  filtered = [...filtered].sort((a,b) => {
+    let av = a[keys[col]], bv = b[keys[col]];
+    if (col === 3) { av = RC[av] ? RC[av].order : 99; bv = RC[bv] ? RC[bv].order : 99; }
+    if (typeof av === 'boolean') { av = av ? 1 : 0; bv = bv ? 1 : 0; }
+    if (av < bv) return -dir; if (av > bv) return dir; return 0;
+  });
+
+  const tbody = document.getElementById('race-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t4);padding:18px">No races match this filter.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML = filtered.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    return `<tr class="${r.open ? 'open-seat' : ''}" style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('senate', r.state)}" onclick="clickTableRow('${r.code}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+      <td><span class="state-link">${r.state}</span></td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party === 'R' ? 'R' : 'D'}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
+      <td>${r.open ? '<span style="color:var(--orange);font-weight:600">Open</span>' : '&#8212;'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function clickTableRow(code, event) {
+  if (event) event.stopPropagation();
+  const race = DATA.races.senate.races.find(r => r.code === code);
+  if (race) openSeatFromRace('senate', race);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HOUSE
+// ─────────────────────────────────────────────────────────────────────────────
+let houseChartBuilt = false;
+
+// ── HOUSE DISTRICT MAP ───────────────────────────────────────────────────────
+let _houseSel = null;
+let _houseRaceByKey = {};
+
+function districtKey(codeStr) {
+  const m = codeStr.match(/^([A-Z]{2})-(\d+)/);
+  if (!m) return null;
+  const st = ABBR_TO_STATE[m[1]];
+  return st ? st + '_' + parseInt(m[2]) : null;
+}
+
+function buildHouseDistrictMap(competitive) {
+  _houseRaceByKey = {};
+  competitive.forEach(r => { const k = districtKey(r.district); if (k) _houseRaceByKey[k] = r; });
+
+  const svgEl = d3.select('#house-svg');
+  svgEl.selectAll('*').remove();
+  const g = svgEl.append('g');
+
+  _houseZoom = makeZoom(svgEl, t => g.attr('transform', t));
+
+  fetchDistrictsGeo(gj => {
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+    const pathGen = d3.geoPath().projection(proj);
+
+    _houseSel = g.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('class', d => {
+        const k = d.properties.state + '_' + d.properties.district;
+        return 'd-path' + (_houseRaceByKey[k] ? ' clickable' : '');
+      })
+      .attr('data-seat-id', d => {
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        return r ? toSeatId('house', r.district) : null;
+      })
+      .attr('d', d => pathGen(d) || '')
+      .style('fill', d => {
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        if (r) return (RC[r.rating] || {bg:'#D0D0CE'}).bg;
+        const dDists = D_DISTRICTS[d.properties.state] || [];
+        return dDists.includes(d.properties.district) ? '#1A3F8A' : '#7a1c1c';
+      })
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.3px')
+      .on('mousemove', function(event, d) {
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        if (r) showTip(event, `<strong>${r.district}</strong><br>${r.rating}<br><span style="opacity:.85">${r.incumbent} (${r.party})</span>${r.rating_source ? ' (' + r.rating_source + ')' : ''}<br>Cook PVI: ${r.pvp}`);
+        else {
+          const dDists = D_DISTRICTS[d.properties.state] || [];
+          const isD = dDists.includes(d.properties.district);
+          const distLabel = d.properties.district > 0 ? d.properties.district : 'AL';
+          showTip(event, `<strong>${d.properties.state}-${distLabel}</strong><br><span style="opacity:.7">${isD ? 'Safe D' : 'Safe R'} \u2014 not individually rated</span>`);
+        }
+      })
+      .on('mouseleave', hideTip)
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const k = d.properties.state + '_' + d.properties.district;
+        const r = _houseRaceByKey[k];
+        if (r) openSeatFromRace('house', r, this);
+      });
+
+    const ld = document.getElementById('house-loading');
+    if (ld) ld.classList.add('done');
+  });
+}
+
+function searchHouseMap(q) {
+  if (!_houseSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _houseSel.each(function(d) {
+    const k = d.properties.state + '_' + d.properties.district;
+    const r = _houseRaceByKey[k];
+    let match = !ql;
+    if (ql) match = d.properties.state.toLowerCase().includes(ql) ||
+      String(d.properties.district).includes(ql) ||
+      (r && (r.district.toLowerCase().includes(ql) || r.incumbent.toLowerCase().includes(ql) ||
+             (r.party==='R'?'republican':'democrat').includes(ql)));
+    d3.select(this).attr('opacity', match ? 1 : ql ? 0.1 : 1);
+    if (match && r) ct++;
+  });
+  document.getElementById('house-srch-ct').textContent = ql ? ct+' competitive match'+(ct!==1?'es':'') : '';
+}
+
+// ── GOVERNOR MAP ──────────────────────────────────────────────────────────────
+let _govRaceByState = {};
+
+function buildGovMap(races) {
+  _govRaceByState = {};
+  races.forEach(r => { _govRaceByState[r.state] = r; });
+
+  const svgEl = d3.select('#gov-svg');
+  svgEl.selectAll('*').remove();
+  const g = svgEl.append('g');
+
+  _govZoom = makeZoom(svgEl, t => g.attr('transform', t));
+
+  fetchSenateGeo(gj => {
+    const proj    = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+    const pathGen = d3.geoPath().projection(proj);
+
+    _govSel = g.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('class', d => 's-path' + (_govRaceByState[d.properties.NAME] ? ' clickable' : ''))
+      .attr('data-seat-id', d => {
+        const r = _govRaceByState[d.properties.NAME];
+        return r ? toSeatId('governor', r.state) : null;
+      })
+      .attr('d', d => pathGen(d) || '')
+      .style('fill', d => {
+        const r = _govRaceByState[d.properties.NAME];
+        return r ? (RC[r.rating] || { bg: '#D8D8D4' }).bg : '#D8D8D4';
+      })
+      .style('stroke', '#fff')
+      .style('stroke-width', '0.5px')
+      .on('mousemove', function(event, d) {
+        const r = _govRaceByState[d.properties.NAME];
+        if (r) showTip(event, `<strong>${r.state}</strong><br>${r.rating}${r.rating_source ? ' (' + r.rating_source + ')' : ''}${r.open ? ' &middot; Open seat' : ''}<br><span style="opacity:.8">${r.incumbent}</span>`);
+        else   showTip(event, `<strong>${d.properties.NAME}</strong><br><span style="opacity:.7">No governor race in 2026</span>`);
+      })
+      .on('mouseleave', hideTip)
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const r = _govRaceByState[d.properties.NAME];
+        if (!r) return;
+        openSeatFromRace('governor', r, this);
+      });
+
+    // State abbreviation labels for race states
+    g.selectAll('text')
+      .data(gj.features.filter(d => _govRaceByState[d.properties.NAME]))
+      .join('text')
+      .attr('text-anchor', 'middle').attr('dy', '0.35em')
+      .attr('pointer-events', 'none')
+      .style('font', '600 10px "DM Sans",sans-serif')
+      .style('fill', d => (RC[_govRaceByState[d.properties.NAME].rating] || { tx: '#fff' }).tx)
+      .attr('x', d => { const c = pathGen.centroid(d); return c[0] || 0; })
+      .attr('y', d => { const c = pathGen.centroid(d); return c[1] || 0; })
+      .text(d => Object.keys(ABBR_TO_STATE).find(k => ABBR_TO_STATE[k] === d.properties.NAME) || '');
+
+    const ld = document.getElementById('gov-loading');
+    if (ld) ld.classList.add('done');
+  });
+}
+
+function renderHouse(house) {
+  const rs = house.ratings_summary;
+  document.getElementById('hs-r').textContent  = house.current_balance.r;
+  document.getElementById('hs-d').textContent  = house.current_balance.d;
+  document.getElementById('hs-tu').textContent = rs.toss_up;
+  document.getElementById('hbal-r-label').textContent = house.current_balance.r + ' Republicans';
+  document.getElementById('hbal-d-label').textContent = 'Democrats ' + house.current_balance.d;
+  const hTot = house.total_seats || 435;
+  const hr = document.getElementById('hbal-r-seg'), hd = document.getElementById('hbal-d-seg');
+  if (hr) { hr.style.width = (house.current_balance.r / hTot * 100).toFixed(1) + '%'; hr.textContent = house.current_balance.r + 'R'; }
+  if (hd) { hd.style.width = (house.current_balance.d / hTot * 100).toFixed(1) + '%'; hd.textContent = house.current_balance.d + 'D'; }
+
+  buildHouseDistrictMap(house.competitive);
+
+  if (!houseChartBuilt) {
+    houseChartBuilt = true;
+    new Chart(document.getElementById('c-house-ratings'), {
+      type: 'bar',
+      data: {
+        labels: ['Safe R','Likely R','Lean R','Toss-up','Lean D','Likely D','Safe D'],
+        datasets: [{
+          data: [rs.safe_r, rs.likely_r, rs.lean_r, rs.toss_up, rs.lean_d, rs.likely_d, rs.safe_d],
+          backgroundColor: ['#7a1c1c','#C04040','#E8A0A0','#D4931A','#8CB4E0','#378ADD','#1A3F8A'],
+          borderSkipped: false,
+          borderRadius: { topLeft: 3, topRight: 3 },
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { tooltip: { callbacks: { label: ctx => ` ${ctx.raw} seats` } } },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 } } },
+          y: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 12 }, color: ['#7a1c1c','#C04040','#8a5050','#8a6010','#335080','#1a5aaa','#1A3F8A'] } }
+        }
+      }
+    });
+  }
+
+  renderCompTable(house.competitive);
+}
+
+let compSortCol = 0, compSortDir = 1;
+function sortCompTable(col) {
+  if (compSortCol === col) compSortDir = -compSortDir;
+  else { compSortCol = col; compSortDir = 1; }
+  renderCompTable(DATA.races.house.competitive);
+}
+
+function renderCompTable(races) {
+  const keys = ['district','incumbent','party','rating','pvp'];
+  const sorted = [...races].sort((a,b) => {
+    let av = a[keys[compSortCol]], bv = b[keys[compSortCol]];
+    if (compSortCol === 3) { av = RC[av] ? RC[av].order : 99; bv = RC[bv] ? RC[bv].order : 99; }
+    if (av < bv) return -compSortDir; if (av > bv) return compSortDir; return 0;
+  });
+
+  const tbody = document.getElementById('comp-tbody');
+  tbody.innerHTML = sorted.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    const pvpCls = String(r.pvp).startsWith('R') ? 'R' : String(r.pvp).startsWith('D') ? 'D' : 'E';
+    const seatId = toSeatId('house', r.district);
+    return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${seatId}" onclick="clickCompTableRow('${r.district}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+      <td style="font-weight:600">${r.district}</td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
+      <td><span class="pvp-pill ${pvpCls}">${r.pvp}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function clickCompTableRow(district, event) {
+  if (event) event.stopPropagation();
+  const race = DATA.races.house.competitive.find(r => r.district === district);
+  if (race) openSeatFromRace('house', race);
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// GOVERNOR
+// ─────────────────────────────────────────────────────────────────────────────
+let _govSel = null;
+let govSortCol = 3, govSortDir = 1;
+let govActiveFilter = 'all';
+
+function renderGovernor(gov) {
+  const races = gov.races;
+  buildGovMap(races);
+
+  // Rating legend (reuse senate legend element style)
+  const leg = document.getElementById('gov-rating-legend');
+  if (leg) {
+    leg.innerHTML = Object.entries(RC).map(([label, cfg]) =>
+      `<div class="legend-item"><span class="legend-dot" style="background:${cfg.bg}"></span>${label}</div>`
+    ).join('');
+  }
+
+  // Stats
+  let rLean = 0, dLean = 0, tu = 0;
+  races.forEach(r => {
+    if (r.rating === 'Toss-up') tu++;
+    else if (r.rating.includes('R')) rLean++;
+    else if (r.rating.includes('D')) dLean++;
+  });
+  const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+  set('gov-total',  races.length);
+  set('gov-r-lean', rLean);
+  set('gov-d-lean', dLean);
+  set('gov-tu',     tu);
+  const gb = gov.current_balance || {};
+  const gr = document.getElementById('gbal-r-seg'), gd = document.getElementById('gbal-d-seg');
+  if (gr && gb.r != null) { gr.style.width = (gb.r / 50 * 100) + '%'; gr.textContent = gb.r + 'R'; }
+  if (gd && gb.d != null) { gd.style.width = (gb.d / 50 * 100) + '%'; gd.textContent = gb.d + 'D'; }
+
+  renderGovTable(races, govActiveFilter, govSortCol, govSortDir);
+}
+
+function renderGovTable(races, filter, col, dir) {
+  const filtered = races.filter(r => {
+    if (filter === 'all')    return true;
+    if (filter === 'open')   return r.open;
+    return r.rating.startsWith(filter);
+  });
+  const keys = ['state', 'incumbent', 'party', 'rating', 'open'];
+  const sorted = [...filtered].sort((a, b) => {
+    let av = a[keys[col]], bv = b[keys[col]];
+    if (col === 3) { av = RC[av]?.order ?? 99; bv = RC[bv]?.order ?? 99; }
+    if (col === 4) { av = a.open ? 0 : 1;      bv = b.open ? 0 : 1; }
+    if (av < bv) return -dir; if (av > bv) return dir; return 0;
+  });
+  const tbody = document.getElementById('gov-race-tbody');
+  tbody.innerHTML = sorted.map(r => {
+    const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
+    return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('governor', r.state)}" onclick="clickGovTableRow('${r.state.replace(/'/g, "\\'")}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
+      <td style="font-weight:600">${r.state}</td>
+      <td>${r.incumbent}</td>
+      <td><span class="party-pill ${r.party}">${r.party}</span></td>
+      <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
+      <td>${r.open ? '<span class="badge-open" style="font-size:11px;padding:2px 7px">Open</span>' : '&#8212;'}</td>
+    </tr>`;
+  }).join('');
+}
+
+function clickGovTableRow(state, event) {
+  if (event) event.stopPropagation();
+  const race = DATA.races.governor.races.find(r => r.state === state);
+  if (race) openSeatFromRace('governor', race);
+}
+
+function sortGovTable(col) {
+  if (govSortCol === col) govSortDir = -govSortDir;
+  else { govSortCol = col; govSortDir = 1; }
+  renderGovTable(DATA.races.governor.races, govActiveFilter, govSortCol, govSortDir);
+}
+
+function filterGovTable(filter, btn) {
+  govActiveFilter = filter;
+  if (btn) {
+    document.querySelectorAll('.gov-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderGovTable(DATA.races.governor.races, govActiveFilter, govSortCol, govSortDir);
+}
+
+function searchGovMap(q) {
+  if (!_govSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _govSel.each(function(d) {
+    const r = _govRaceByState[d.properties.NAME];
+    let match = !ql;
+    if (ql) match = d.properties.NAME.toLowerCase().includes(ql) ||
+      (r && (r.incumbent.toLowerCase().includes(ql) ||
+             r.rating.toLowerCase().includes(ql) ||
+             (r.party === 'R' ? 'republican' : 'democrat').includes(ql)));
+    d3.select(this).attr('opacity', match ? 1 : ql ? 0.15 : 1);
+    if (match && r) ct++;
+  });
+  document.getElementById('gov-srch-ct').textContent = ql ? ct + ' match' + (ct !== 1 ? 'es' : '') : '';
+}
+
+
+// ── FACTION TRACKER ──────────────────────────────────────────────────────────
+const FACTION_COLORS = {MD:'#7393B3',PD:'#0096FF',MR:'#800000',AR:'#DC143C',TR:'#986868',IND:'#888888'};
+const FACTION_NAMES  = {
+  MD:'Moderate Democrats',PD:'Progressive Democrats',
+  MR:'MAGA Republicans',AR:'America First Republicans',TR:'Traditional Republicans',IND:'Independent'
+};
+const FACTION_ORDER = ['MR','AR','TR','MD','PD','IND'];
+
+let _factionData=null,_factionFetching=false,_factionWaiters=[];
+let _hFacZoom=null,_sFacZoom=null;
+
+function fetchFactionData(cb){
+  if(_factionData){cb(_factionData);return;}
+  _factionWaiters.push(cb);
+  if(_factionFetching)return;
+  _factionFetching=true;
+  fetch('assets/factions119.json?v=1')
+    .then(r=>r.json())
+    .then(d=>{_factionData=d;_factionWaiters.forEach(fn=>fn(d));_factionWaiters=[];})
+    .catch(e=>console.error('faction data load failed',e));
+}
+
+function updateFactionChips(chamber,code){
+  document.querySelectorAll('#'+chamber+'-faction-section .faction-chip').forEach(c=>{
+    const ccode=c.textContent.trim().replace(/[^A-Z]/g,'');
+    c.classList.toggle('active', code!=='ALL' && ccode===code);
+  });
+}
+
+function renderHouseFaction(code){
+  updateFactionChips('house',code);
+  const ld=document.getElementById('house-faction-loading');
+  if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
+  fetchFactionData(data=>{
+    if(code==='ALL'){
+      const total=Object.values(data.factions.house).reduce((s,a)=>s+a.length,0);
+      document.getElementById('house-faction-card-title').textContent='All House Factions — '+total+' members';
+      drawHouseFactionMap('ALL',data.houseMap);
+      populateFactionTable('house','ALL',data.factions.house);
+    } else {
+      const members=data.factions.house[code]||[];
+      document.getElementById('house-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' House members';
+      drawHouseFactionMap(code,data.houseMap);
+      populateFactionTable('house',code,members);
+    }
+  });
+}
+
+function renderSenateFaction(code){
+  updateFactionChips('senate',code);
+  const ld=document.getElementById('senate-faction-loading');
+  if(ld){ld.style.display='block';ld.textContent='Loading faction map…';}
+  fetchFactionData(data=>{
+    if(code==='ALL'){
+      const total=Object.values(data.factions.senate).reduce((s,a)=>s+a.length,0);
+      document.getElementById('senate-faction-card-title').textContent='All Senate Factions — '+total+' members';
+      drawSenateFactionMap('ALL',data.senateMap);
+      populateFactionTable('senate','ALL',data.factions.senate);
+    } else {
+      const members=data.factions.senate[code]||[];
+      document.getElementById('senate-faction-card-title').textContent=FACTION_NAMES[code]+' — '+members.length+' Senate members';
+      drawSenateFactionMap(code,data.senateMap);
+      populateFactionTable('senate',code,members);
+    }
+  });
+}
+
+function drawHouseFactionMap(code,houseMap){
+  const svgEl=d3.select('#house-faction-svg');
+  svgEl.selectAll('*').remove();
+  const g=svgEl.append('g');
+  _hFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
+  fetchDistrictsGeo(gj=>{
+    const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const pg=d3.geoPath().projection(proj);
+    const ld=document.getElementById('house-faction-loading');
+    if(ld)ld.style.display='none';
+    g.selectAll('path').data(gj.features).join('path')
+      .attr('d',d=>pg(d)||'')
+      .style('fill',d=>{
+        const key=d.properties.state+'|'+d.properties.district;
+        const m=houseMap[key];
+        if(!m) return '#D8D8D4';
+        if(code==='ALL') return FACTION_COLORS[m.code]||'#D8D8D4';
+        return m.code===code ? FACTION_COLORS[code] : '#D8D8D4';
+      })
+      .style('stroke','#fff').style('stroke-width','0.3px')
+      .on('mousemove',function(event,d){
+        const key=d.properties.state+'|'+d.properties.district;
+        const m=houseMap[key];
+        const distLabel=d.properties.state+' '+(d.properties.district||'AL');
+        if(m && (code==='ALL' || m.code===code)){
+          showTip(event,'<strong>'+m.name+'</strong><br>'+m.seat
+            +(code==='ALL'?' · <span style="color:'+FACTION_COLORS[m.code]+'">'+m.code+'</span>':' · '+FACTION_NAMES[code]));
+        } else {
+          showTip(event,'<strong>'+distLabel+'</strong><br><span style="opacity:.7">'+(m?m.code+' — not selected':'No data')+'</span>');
+        }
+      })
+      .on('mouseleave',hideTip);
+  });
+}
+
+function drawSenateFactionMap(code,senateMap){
+  const svgEl=d3.select('#senate-faction-svg');
+  svgEl.selectAll('*').remove();
+  const defs=svgEl.append('defs');
+  const g=svgEl.append('g');
+  _sFacZoom=makeZoom(svgEl,t=>g.attr('transform',t));
+
+  // Pre-build split gradients for ALL mode (states with two different factions)
+  if(code==='ALL'){
+    Object.entries(senateMap).forEach(([state,senators])=>{
+      if(senators.length===2 && senators[0].code!==senators[1].code){
+        const id='sg-'+state.replace(/[^a-zA-Z]/g,'-');
+        const gr=defs.append('linearGradient').attr('id',id)
+          .attr('x1','0%').attr('y1','0%').attr('x2','100%').attr('y2','0%');
+        gr.append('stop').attr('offset','50%').attr('stop-color',FACTION_COLORS[senators[0].code]||'#D8D8D4');
+        gr.append('stop').attr('offset','50%').attr('stop-color',FACTION_COLORS[senators[1].code]||'#D8D8D4');
+      }
+    });
+  }
+
+  fetchSenateGeo(gj=>{
+    const proj=d3.geoAlbersUsa().translate([480,300]).scale(1070);
+    const pg=d3.geoPath().projection(proj);
+    const ld=document.getElementById('senate-faction-loading');
+    if(ld)ld.style.display='none';
+    g.selectAll('path').data(gj.features).join('path')
+      .attr('d',d=>pg(d)||'')
+      .style('fill',d=>{
+        const senators=senateMap[d.properties.NAME]||[];
+        if(!senators.length) return '#D8D8D4';
+        if(code==='ALL'){
+          if(senators.length===1) return FACTION_COLORS[senators[0].code]||'#D8D8D4';
+          if(senators[0].code===senators[1].code) return FACTION_COLORS[senators[0].code]||'#D8D8D4';
+          return 'url(#sg-'+d.properties.NAME.replace(/[^a-zA-Z]/g,'-')+')';
+        }
+        return senators.some(s=>s.code===code) ? FACTION_COLORS[code] : '#D8D8D4';
+      })
+      .style('stroke','#fff').style('stroke-width','0.5px')
+      .on('mousemove',function(event,d){
+        const senators=senateMap[d.properties.NAME]||[];
+        if(code==='ALL'){
+          const lines=senators.map(s=>'<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:'+FACTION_COLORS[s.code]+';margin-right:4px;vertical-align:middle"></span>'+escH(s.name)+' ('+s.code+')').join('<br>');
+          showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+lines);
+        } else {
+          const matching=senators.filter(s=>s.code===code);
+          if(matching.length){
+            showTip(event,'<strong>'+d.properties.NAME+'</strong><br>'+matching.map(s=>s.name).join(', ')+'<br><span style="opacity:.8">'+FACTION_NAMES[code]+'</span>');
+          } else {
+            showTip(event,'<strong>'+d.properties.NAME+'</strong><br><span style="opacity:.7">No '+FACTION_NAMES[code]+' senator</span>');
+          }
+        }
+      })
+      .on('mouseleave',hideTip);
+  });
+}
+
+function populateFactionTable(chamber,code,membersOrMap){
+  const tbody=document.getElementById(chamber+'-faction-tbody');
+  if(!tbody)return;
+  const isAll=code==='ALL';
+
+  // Build flat list
+  let rows;
+  if(isAll){
+    rows=[];
+    FACTION_ORDER.forEach(fc=>{
+      (membersOrMap[fc]||[]).forEach(m=>rows.push({...m,_fc:fc}));
+    });
+  } else {
+    rows=membersOrMap.map(m=>({...m,_fc:code}));
+  }
+
+  if(!rows.length){
+    tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:24px;color:var(--t4)">No members found.</td></tr>';
+    return;
+  }
+
+  tbody.innerHTML=rows.map(m=>{
+    const fc=m._fc;
+    const badge='<span style="display:inline-flex;align-items:center;gap:4px;font:600 11px var(--sans);color:#fff;background:'+FACTION_COLORS[fc]+';border-radius:10px;padding:2px 8px">'+fc+'</span>';
+    const caucusShort=m.c.split('•')[0].trim().split('(')[0].trim();
+    const scoreShort=m.e.length>90?m.e.substring(0,90)+'…':m.e;
+    const wingShort=m.w.split('(')[0].trim();
+    return '<tr>'
+      +'<td>'+badge+'</td>'
+      +'<td><strong>'+escH(m.n)+'</strong></td>'
+      +'<td>'+escH(m.s)+'</td>'
+      +'<td style="font-size:12px">'+escH(caucusShort)+'</td>'
+      +'<td style="font-size:12px;color:var(--t3)">'+escH(scoreShort)+'</td>'
+      +'<td style="font-size:12px">'+escH(wingShort)+'</td></tr>';
+  }).join('');
+}
+
+function escH(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function filterFactionTable(chamber,query){
+  const q=(query||'').toLowerCase();
+  document.querySelectorAll('#'+chamber+'-faction-tbody tr').forEach(row=>{
+    row.style.display=(!q||row.textContent.toLowerCase().includes(q))?'':'none';
+  });
+}
+
+function houseFactionZoomBy(f){_hFacZoom&&_hFacZoom.zoomBy(f);}
+function houseFactionZoomReset(){_hFacZoom&&_hFacZoom.reset();}
+function senateFactionZoomBy(f){_sFacZoom&&_sFacZoom.zoomBy(f);}
+function senateFactionZoomReset(){_sFacZoom&&_sFacZoom.reset();}
+
+function toggleMeth(btn){
+  const body=document.getElementById('meth-body');
+  const open=body.classList.toggle('open');
+  btn.querySelector('.meth-arrow').style.transform=open?'rotate(180deg)':'';
+  btn.setAttribute('aria-expanded',open);
+}
+
+// Pre-fetch faction data on load so the first tab click is instant
+window.addEventListener('load', function(){ fetchFactionData(function(){}); });
+
+// ── BOOT ─────────────────────────────────────────────────────────────────────
+loadData();
+
+// ── INFO TOOLTIP HANDLER ─────────────────────────────────────────────────────
+(function(){
+  const tip = document.createElement('div');
+  tip.className = 'info-tooltip';
+  document.body.appendChild(tip);
+  let active = null;
+  document.addEventListener('click', function(e){
+    const btn = e.target.closest('.info-btn');
+    if (btn) {
+      e.stopPropagation();
+      if (active === btn && tip.classList.contains('visible')) { tip.classList.remove('visible'); active = null; return; }
+      active = btn;
+      tip.textContent = btn.dataset.tip;
+      tip.classList.add('visible');
+      const r = btn.getBoundingClientRect();
+      const w = 310;
+      let left = Math.min(r.left, window.innerWidth - w - 10);
+      if (left < 10) left = 10;
+      tip.style.left = left + 'px';
+      tip.style.top = (r.bottom + 7) + 'px';
+    } else { tip.classList.remove('visible'); active = null; }
+  });
+})();
+</script>
+<script>
+document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
+</script>
+
+
+<script>
+(function(){
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats \u2014 a spectrum of how likely a seat is to change hands.';
+
+  /* --- CSS --- */
+  var st = document.createElement('style');
+  st.textContent =
+    '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:4px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;padding:0;box-sizing:border-box}' +
+    '.dti-btn:hover{background:#c98a10}' +
+    '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}' +
+    '#dti-box.on{display:block}';
+  document.head.appendChild(st);
+
+  /* --- tooltip box --- */
+  if(document.getElementById('dti-box')) return;
+  var box = document.createElement('div');
+  box.id = 'dti-box';
+  box.innerHTML = CONTENT;
+  document.body.appendChild(box);
+
+  /* --- nearest block-level ancestor (span included per design) --- */
+  var BLOCKS = {DIV:1,P:1,LI:1,SPAN:1,TD:1,TH:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,
+    BLOCKQUOTE:1,DT:1,DD:1,SECTION:1,ARTICLE:1,HEADER:1,FOOTER:1,MAIN:1,ASIDE:1,
+    DETAILS:1,SUMMARY:1,FIGCAPTION:1,LABEL:1,CAPTION:1};
+  var SKIP  = {SCRIPT:1,STYLE:1,CODE:1,PRE:1,TEXTAREA:1,INPUT:1,NOSCRIPT:1,BUTTON:1};
+
+  function nearestBlock(node){
+    var el = node.nodeType===3 ? node.parentElement : node;
+    while(el){ if(BLOCKS[el.nodeName]) return el; el=el.parentElement; }
+    return null;
+  }
+
+  function makeBtn(){
+    var b=document.createElement('button');
+    b.type='button'; b.className='dti-btn';
+    b.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+    b.textContent='i';
+    return b;
+  }
+
+  function inject(root){
+    /* 1. Walk text nodes, collect unique block ancestors */
+    var seen = [];
+    var seenSet = typeof Set!=='undefined' ? new Set() : null;
+    var walker = document.createTreeWalker(root, 1|4 /* ELEMENT|TEXT */, {
+      acceptNode: function(n){
+        if(n.nodeType===1){
+          if(SKIP[n.nodeName]) return 3; /* FILTER_SKIP subtree */
+          if(n.classList && n.classList.contains('dti-btn')) return 2; /* FILTER_REJECT */
+          return 1;
+        }
+        /* text node */
+        return /battleground|toss-up/i.test(n.nodeValue) ? 1 : 3;
+      }
+    });
+    var n;
+    while((n=walker.nextNode())){
+      if(n.nodeType!==3) continue;
+      var block = nearestBlock(n);
+      if(!block) continue;
+      /* deduplicate */
+      if(seenSet){ if(seenSet.has(block)) continue; seenSet.add(block); }
+      else { if(seen.indexOf(block)!==-1) continue; seen.push(block); }
+      /* 2. Append icon at end of block if not already there */
+      if(!block.querySelector('.dti-btn')){
+        block.appendChild(makeBtn());
+      }
+    }
+  }
+
+  /* --- click handler --- */
+  var active=null;
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest ? e.target.closest('.dti-btn') : null;
+    if(btn){
+      e.stopImmediatePropagation();
+      if(active===btn&&box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      active=btn;
+      box.classList.add('on');
+      var r=btn.getBoundingClientRect(),w=300;
+      var left=r.left+r.width/2-w/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-w-8));
+      var top=r.bottom+8;
+      if(top+210>window.innerHeight) top=r.top-210-8;
+      if(top<8) top=r.bottom+8;
+      box.style.left=left+'px'; box.style.top=top+'px';
+    }else{
+      box.classList.remove('on');active=null;
+    }
+  });
+
+  /* --- run --- */
+  function run(){
+    inject(document.body);
+    setTimeout(function(){inject(document.body);},2000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+
+<!-- ── COMMENTS AND CONTACT ── -->
+<footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
+</body>
+</html>

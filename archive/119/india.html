@@ -1,0 +1,2666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="archive-guard.js"></script>
+<meta name="robots" content="noindex">
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India's Interest — US 2026 Mid-term Election Observer (Archived, 119th Congress)</title>
+<meta name="description" content="How the 2026 US midterm elections affect India — key policy stakes, the Indian diaspora in Congress, and ~40 India-relevant races involving Indian-American candidates and pro-India legislators.">
+<meta name="keywords" content="Indian diaspora US Congress 2026, India US relations midterms, Indian American politicians, US India policy 2026, Takshashila geostrategy">
+<meta name="author" content="Takshashila Institution Geostrategy Programme">
+<meta property="og:title" content="India's Interest — US 2026 Mid-term Election Observer">
+<meta property="og:description" content="How the 2026 US midterms affect India — policy stakes, the Indian diaspora in Congress, and India-relevant races.">
+<meta property="og:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<meta property="og:url" content="https://dcdossier.github.io/Generational-Mid-terms/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="India's Interest — US 2026 Mid-term Election Observer">
+<meta name="twitter:description" content="How the 2026 US midterms affect India — policy stakes, the Indian diaspora in Congress, and India-relevant races.">
+<meta name="twitter:image" content="https://dcdossier.github.io/Generational-Mid-terms/assets/Mid-term-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/seat-panel.css?v=20261020b">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="assets/js/seat-ids.js"></script>
+<link rel="stylesheet" href="assets/css/data-labels.css">
+<script src="assets/js/data-labels.js"></script>
+<script src="assets/js/seat-panel.js?v=20261020b"></script>
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #fffbe2;
+  --bg3: #f5f0dc;
+  --text: #2a2a2a;
+  --text2: #4a4a4a;
+  --text3: #6b6b6b;
+  --border: #e6e0d8;
+  --gold: #f1a222;
+  --navy: #620d3c;
+  --accent: #620d3c;
+  --saffron: #e8832a;
+  --saffron-lt: #FFF3E8;
+  --green-in: #138808;
+  --green-lt: #EAF6EA;
+  --sans: 'Inter', 'Lato', ui-sans-serif, system-ui, sans-serif;
+  --serif: 'Lora', Georgia, serif;
+  --radius: 6px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* SUB-NAV */
+.sub-nav {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  flex-shrink: 0;
+}
+.sub-tab {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  white-space: nowrap;
+}
+.sub-tab:hover { color: var(--text); }
+.sub-tab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.nav-spacer { flex: 1; }
+.flag-strip {
+  display: flex;
+  gap: 0;
+  height: 4px;
+  width: 32px;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-left: 16px;
+}
+.flag-strip span { flex: 1; display: block; }
+
+/* PANELS */
+.panel { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+.panel.active { display: flex; }
+
+/* PAGE BODY */
+.page-body { max-width: 900px; margin: 0 auto; padding: 36px 28px 60px; width: 100%; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a3f8a 100%);
+  color: #fff;
+  border-radius: 11px;
+  padding: 36px 40px;
+  margin-bottom: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -30px; top: -30px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(241,162,34,.10);
+}
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.hero p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.80);
+  max-width: 620px;
+}
+.hero-stats {
+  display: flex;
+  gap: 32px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hstat { display: flex; flex-direction: column; gap: 4px; }
+.hstat-num {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.hstat-label { font-size: 13px; color: rgba(255,255,255,.60); text-transform: uppercase; letter-spacing: .06em; }
+
+/* SECTION HEADERS */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 18px;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 11px;
+}
+.section-header h2 {
+  font-family: var(--serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-header .section-sub { font-size: 16px; color: var(--text3); }
+.section { margin-bottom: 44px; }
+
+/* POLICY CARDS */
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+.policy-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  transition: box-shadow .15s;
+}
+.policy-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.policy-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.policy-card h3 { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--text); }
+.policy-card p { font-size: 12.5px; color: var(--text2); line-height: 1.6; flex: 1; }
+.policy-status {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 3px 10px;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+.status-bipartisan { background: #E8F4FE; color: #1A5276; }
+.status-contested  { background: #FEF3C7; color: #92400E; }
+.status-critical   { background: #FEE2E2; color: #991B1B; }
+.status-watch      { background: #F3EEFF; color: #5B21B6; }
+
+/* PARTY COMPARE */
+.compare-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.compare-table th {
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  border-bottom: 2px solid var(--border);
+}
+.compare-table th:first-child { color: var(--text3); width: 30%; }
+.compare-table th.rep-h { color: #9a1c1c; }
+.compare-table th.dem-h { color: #1A3F8A; }
+.compare-table td {
+  padding: 14px 16px;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+.compare-table td:first-child { font-weight: 600; color: var(--text2); font-size: 12.5px; }
+.compare-table tr:last-child td { border-bottom: none; }
+.compare-table tr:hover td { background: var(--bg2); }
+.rep-cell { color: #6b1a1a; }
+.dem-cell { color: #1a3050; }
+.bipartisan-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  background: #E8F4FE;
+  color: #1A5276;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+/* CONGRESS MEMBERS */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.member-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.member-name { font-family: var(--serif); font-size: 16px; font-weight: 600; color: var(--text); }
+.member-seat { font-size: 16px; color: var(--text3); }
+.member-pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+.pill {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.pill-d { background: #DBEAFE; color: #1E3A8A; }
+.pill-r { background: #FEE2E2; color: #9A1C1C; }
+.pill-house { background: #F3EEFF; color: #4C1D95; }
+.pill-senate { background: #CCFBF1; color: #134E4A; }
+.pill-gov { background: #FEF3C7; color: #92400E; }
+.member-note { font-size: 13px; color: var(--text3); line-height: 1.5; margin-top: 4px; }
+
+/* INFLUENCE TABLE */
+.influence-table { width: 100%; border-collapse: collapse; font-size: 15px; }
+.influence-table th {
+  background: var(--bg2);
+  padding: 11px 16px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+}
+.influence-table td {
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.influence-table tr:last-child td { border-bottom: none; }
+.influence-table tr:hover td { background: var(--bg2); }
+.pop-bar-wrap { width: 120px; background: var(--bg3); border-radius: 4px; height: 8px; overflow: hidden; }
+.pop-bar { height: 8px; border-radius: 4px; background: var(--saffron); }
+.state-name { font-weight: 600; color: var(--text); }
+.competitiveness {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.comp-swing    { background: #FEF3C7; color: #92400E; }
+.comp-lean-d   { background: #DBEAFE; color: #1E3A8A; }
+.comp-lean-r   { background: #FEE2E2; color: #9A1C1C; }
+.comp-safe-d   { background: #1A3F8A; color: #fff; }
+.comp-safe-r   { background: #7a1c1c; color: #fff; }
+
+/* INFLUENCE MAP VIEW TOGGLE */
+.influence-view-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.itog {
+  padding: 5px 16px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font: 600 13px var(--sans);
+  cursor: pointer;
+  background: var(--bg2);
+  color: var(--text2);
+  transition: background .15s, color .15s, border-color .15s;
+}
+.itog.active, .itog:hover { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+.influence-map-wrap { position: relative; background: var(--bg2); border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+#influence-legend {
+  position: absolute; bottom: 14px; left: 14px;
+  background: rgba(255,255,255,.93); border-radius: 6px; padding: 8px 14px;
+  font: 400 11px var(--sans); color: var(--text2); line-height: 1.9;
+  box-shadow: 0 1px 4px rgba(0,0,0,.08);
+}
+.ileg-row { display: flex; align-items: center; gap: 6px; }
+.ileg-swatch { width: 14px; height: 14px; border-radius: 50%; flex-shrink: 0; }
+
+/* CALLOUT BOX */
+.callout {
+  background: var(--saffron-lt);
+  border-left: 3px solid var(--saffron);
+  border-radius: 0 6px 6px 0;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text2);
+}
+.callout strong { color: var(--text); }
+
+/* COMMITTEES */
+.committee-list { display: flex; flex-direction: column; gap: 14px; }
+.committee-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  padding: 16px 16px;
+  background: var(--bg2);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.committee-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+.committee-body { display: flex; flex-direction: column; gap: 4px; }
+.committee-name { font-weight: 600; font-size: 13.5px; color: var(--text); }
+.committee-why { font-size: 12.5px; color: var(--text2); line-height: 1.5; }
+.committee-chamber {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text3);
+  margin-top: 2px;
+}
+
+/* CURRENT POLICY */
+.cpolicy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+
+/* MAP CONTROLS */
+.map-ctrl { display:flex;align-items:center;gap:11px;margin-bottom:14px;flex-wrap:wrap; }
+.map-ctrl-search {
+  font: 400 15px var(--sans); color: var(--text);
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 7px 14px;
+  width: 230px; outline: none;
+}
+.map-ctrl-search:focus { border-color: var(--accent); }
+.map-ctrl-count { font: 400 13px var(--sans); color: var(--text3); }
+.tier-chips { display:flex; gap:5px; flex-wrap:wrap; }
+.tier-chip {
+  font: 600 11px var(--sans); padding: 4px 11px; border-radius: 20px;
+  border: 1.5px solid var(--border); background: var(--bg2);
+  color: var(--text2); cursor: pointer; transition: opacity .12s, border-color .12s;
+}
+.tier-chip.active { border-color: transparent; opacity: 1; }
+.tier-chip:not(.active) { opacity: 0.45; }
+/* Presence map section */
+.presence-map-section { margin-bottom: 28px; }
+@media(max-width:600px){ .cpolicy-grid { grid-template-columns: 1fr; } }
+.cpolicy-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.cpolicy-label { font: 700 11px var(--sans); text-transform: uppercase; letter-spacing: .07em; color: var(--saffron); margin-bottom: 6px; }
+.cpolicy-title { font: 600 16px var(--sans); color: var(--navy); margin-bottom: 6px; }
+.cpolicy-text { font: 400 14px var(--sans); color: var(--text2); line-height: 1.55; }
+.cpolicy-status { display: inline-block; font: 700 11px var(--sans); padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+
+/* ALIGNMENT */
+.align-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
+@media(max-width:600px){ .align-grid { grid-template-columns: 1fr; } }
+.align-card { border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+.align-pct { font: 700 36px var(--sans); line-height: 1; }
+.align-label { font: 400 14px var(--sans); color: var(--text3); margin: 2px 0 11px; }
+.align-bar { height: 11px; border-radius: 5px; margin-bottom: 6px; }
+.align-sub { font: 400 13px var(--sans); color: var(--text3); line-height: 1.5; }
+.align-trend { display: inline-block; font: 600 11px var(--sans); padding: 2px 7px; border-radius: 11px; margin-top: 6px; }
+.trend-up { background: #D1FAE5; color: #065F46; }
+.trend-down { background: #FEE2E2; color: #991B1B; }
+.trend-stable { background: #F3F4F6; color: #555; }
+.align-gen-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 11px; margin-top: 16px; }
+.align-gen-card { background: var(--bg2); border-radius: 8px; padding: 16px; text-align: center; }
+.align-gen-pct { font: 700 24px var(--sans); }
+.align-gen-label { font: 400 13px var(--sans); color: var(--text3); margin-top: 3px; }
+
+/* KEY VOTES */
+.vote-table { width: 100%; border-collapse: collapse; font: 400 15px var(--sans); }
+.vote-table th { font: 700 13px var(--sans); color: var(--text3); text-transform: uppercase; letter-spacing: .06em; padding: 8px 14px; border-bottom: 2px solid var(--border); background: var(--bg2); text-align: left; }
+.vote-table td { padding: 11px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.vote-table tr:hover td { background: var(--bg2); }
+.vote-y { color: var(--green-in); font-weight: 700; }
+.vote-n { color: #991B1B; font-weight: 700; }
+.vote-abs { color: var(--text3); }
+.vote-bill { font: 600 15px var(--sans); color: var(--text); }
+.vote-desc { font: 400 13px var(--sans); color: var(--text3); margin-top: 2px; }
+
+/* ── INDIA-RELEVANT RACES PANEL ── */
+/* Inner sub-nav */
+.inner-subnav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.inner-tab {
+  font: 500 14px var(--sans);
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  white-space: nowrap;
+}
+.inner-tab:hover { color: var(--text); }
+.inner-tab.active { color: var(--navy); border-bottom-color: var(--accent); font-weight: 600; }
+.inner-panel { display: none; }
+.inner-panel.active { display: block; }
+
+/* Map container */
+.map-wrap {
+  position: relative;
+  background: #f0f4f8;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.map-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.map-wrap path {
+  cursor: pointer;
+  stroke: #fff;
+  stroke-width: 0.5px;
+  transition: opacity .15s;
+}
+.map-wrap path:hover { opacity: 0.75; stroke-width: 1.5px; stroke: #fff; }
+.map-loading {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #f0f4f8;
+  font: 400 15px var(--sans);
+  color: var(--text3);
+  z-index: 5;
+}
+
+/* Tier legend */
+.tier-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin: 11px 0 24px;
+}
+.tier-dot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font: 400 13px var(--sans);
+  color: var(--text2);
+}
+.tier-dot-swatch {
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* Map tooltip */
+.map-tooltip {
+  position: fixed;
+  background: var(--navy);
+  color: #fff;
+  font: 400 14px var(--sans);
+  padding: 8px 14px;
+  border-radius: 6px;
+  pointer-events: none;
+  z-index: 200;
+  max-width: 220px;
+  line-height: 1.5;
+  display: none;
+}
+
+/* Side panel */
+.india-sidepanel {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: 360px;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  z-index: 300;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .25s ease;
+  display: flex;
+  flex-direction: column;
+}
+.india-sidepanel.open { transform: translateX(0); }
+.sidepanel-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg2);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.sidepanel-close {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 4px 11px;
+  font: 500 14px var(--sans);
+  cursor: pointer;
+  color: var(--text3);
+}
+.sidepanel-close:hover { background: var(--bg3); }
+.sidepanel-body { padding: 20px; flex: 1; }
+.sp-name { font: 700 20px var(--serif); color: var(--navy); margin-bottom: 4px; }
+.sp-meta { font: 400 14px var(--sans); color: var(--text3); margin-bottom: 16px; }
+.sp-tier-badge {
+  display: inline-block;
+  font: 700 11px var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 4px 14px;
+  border-radius: 4px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.sp-section-label {
+  font: 700 11px var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: var(--text3);
+  margin: 16px 0 6px;
+}
+.sp-text {
+  font: 400 12.5px var(--sans);
+  color: var(--text2);
+  line-height: 1.65;
+}
+.sp-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0;
+}
+.sp-bullets li {
+  font: 400 14px var(--sans);
+  color: var(--text2);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+.sp-bullets li::before { content: "\25B8"; color: var(--saffron); flex-shrink: 0; }
+.sp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font: 500 13px var(--sans);
+  color: var(--accent);
+  text-decoration: none;
+  padding: 4px 0;
+}
+.sp-link:hover { text-decoration: underline; }
+.sp-links-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 8px; }
+/* Decorative dimming only -- pointer-events stays "none" even when open,
+   so a click elsewhere (e.g. a different seat on the map) reaches its own
+   handler instead of being swallowed by a full-viewport scrim. Click-
+   outside-closes is handled in JS via a document-level listener, same
+   pattern as assets/js/seat-panel.js's own overlay. */
+.india-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.2);
+  z-index: 299;
+  display: none;
+  pointer-events: none;
+}
+.india-overlay.open { display: block; }
+
+/* Member roster table */
+.roster-wrap { overflow-x: auto; }
+.roster-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: 400 14px var(--sans);
+  min-width: 640px;
+}
+.roster-table th {
+  background: var(--bg2);
+  padding: 10px 14px;
+  text-align: left;
+  font: 700 11px var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text3);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.roster-table td {
+  padding: 11px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.roster-table tr:hover td { background: var(--bg2); }
+.roster-table tr.sp-row-selected td { background: var(--bg3); }
+.roster-table tr[tabindex]:focus-visible { outline: 2px solid var(--navy); outline-offset: -2px; }
+.roster-table tr:last-child td { border-bottom: none; }
+.roster-name { font: 600 12.5px var(--sans); color: var(--navy); }
+.roster-tier {
+  display: inline-block;
+  font: 700 10px var(--sans);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: #fff;
+  white-space: nowrap;
+}
+.up-yes { color: var(--green-in); font-weight: 700; }
+.up-no  { color: var(--text3); }
+
+@media (max-width: 600px) {
+  .hero { padding: 24px 20px; }
+  .hero h1 { font-size: 20px; }
+  .page-body { padding: 20px 16px 48px; }
+  .policy-grid { grid-template-columns: 1fr; }
+  .member-grid { grid-template-columns: 1fr 1fr; }
+  .compare-table { font-size: 16px; }
+  .compare-table td, .compare-table th { padding: 10px 11px; }
+  .india-sidepanel { width: 100%; }
+  .map-wrap { min-height: 220px !important; }
+  .inner-subnav { overflow-x: auto; }
+  .inner-tab { padding: 11px 16px; font-size: 13px; }
+  .roster-wrap { -webkit-overflow-scrolling: touch; }
+  .roster-table { min-width: 520px; }
+  .tier-legend { gap: 6px; }
+  .tier-dot { font-size: 11px; }
+  .sub-nav { overflow-x: auto; padding: 0 14px; }
+  .sub-tab { padding: 14px 16px; font-size: 16px; }
+  .news-grid { grid-template-columns: 1fr; }
+}
+/* ── MAP ZOOM CONTROLS ── */
+.map-zoom-ctrl {
+  position: absolute;
+  top: 11px;
+  right: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 10;
+}
+.map-zoom-btn {
+  width: 28px;
+  height: 28px;
+  background: rgba(255,255,255,.95);
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  font: 600 16px sans-serif;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+}
+.map-zoom-btn:hover { background: #f3f4f6; }
+.map-zoom-btn.reset { font-size: 16px; }
+/* ── INTEREST PANEL SUB-NAV ── */
+.interest-subnav {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 24px;
+}
+.interest-subtab {
+  font: 500 14px var(--sans);
+  color: var(--text3);
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  padding: 11px 18px;
+  cursor: pointer;
+  transition: color .12s, border-color .12s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.interest-subtab:hover { color: var(--text); }
+.interest-subtab.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+.interest-subpanel { display: none; }
+.interest-subpanel.active { display: block; }
+.interest-news-badge {
+  font: 700 11px var(--sans);
+  background: var(--saffron);
+  color: #fff;
+  border-radius: 11px;
+  padding: 1px 7px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* ── MEMBER NEWS PANEL ── */
+.mn-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.mn-search {
+  font: 400 14px var(--sans);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 6px 11px;
+  width: 220px;
+  color: var(--text);
+  background: var(--bg);
+}
+.mn-search:focus { outline: none; border-color: var(--accent); }
+.mn-tier-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.mn-chip {
+  font: 500 11px var(--sans);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 3px 11px;
+  cursor: pointer;
+  background: var(--bg);
+  color: var(--text3);
+  transition: all .12s;
+}
+.mn-chip:hover { background: var(--bg2); }
+.mn-chip.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+.mn-count { font: 400 13px var(--sans); color: var(--text3); margin-left: auto; white-space: nowrap; }
+.mn-refresh {
+  font: 500 13px var(--sans);
+  color: var(--navy);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 11px;
+  cursor: pointer;
+}
+.mn-refresh:hover { background: var(--bg2); }
+.mn-list { display: flex; flex-direction: column; }
+.mn-article {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mn-article:first-child { border-top: 1px solid var(--border); }
+.mn-article-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.mn-article-source {
+  font: 500 11px var(--sans);
+  color: var(--text3);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.mn-article-member {
+  font: 600 11px var(--sans);
+  color: #fff;
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+.mn-article-title {
+  font: 600 13.5px var(--serif);
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.4;
+}
+.mn-article-title:hover { color: var(--accent); }
+.mn-article-date { font: 400 11px var(--sans); color: var(--text3); }
+.mn-empty { font: 400 15px var(--sans); color: var(--text3); padding: 24px 0; text-align: center; }
+
+/* ── SIDE PANEL NEWS ── */
+.sp-news-list { display: flex; flex-direction: column; margin-top: 4px; }
+
+/* ── DEFINITION TOOLTIP ─────────────────────────────────────── */
+
+
+</style>
+<style id="arch-style">.arch-banner{position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 14px;padding:8px 16px;background:#1E2232;color:#F5F0E8;font:600 14px/1.4 Inter,Lato,system-ui,sans-serif;text-align:center}.arch-banner a{color:#F7C060;text-decoration:underline;text-underline-offset:2px;display:inline-flex;align-items:center;min-height:32px}.arch-in-frame .arch-banner{display:none}</style>
+</head>
+<body>
+<div class="arch-banner" role="note"><span>Archived: 119th Congress (2025–2027), snapshot 3 Nov 2026. Read-only; figures are as they stood before polls closed.</span><a href="../">All archives</a><a href="../../" target="_top">Live site</a></div>
+
+<!-- SUB-NAV -->
+<nav class="sub-nav">
+  <button class="sub-tab active" data-tab="stakes" onclick="switchTab('stakes')">Policy &amp; Stakes</button>
+  <button class="sub-tab" data-tab="presence" onclick="switchTab('presence')">Indian Diaspora</button>
+  <button class="sub-tab" data-tab="interest" onclick="switchTab('interest')">India-Relevant Races</button>
+  <div class="nav-spacer"></div>
+  <div class="flag-strip" title="India">
+    <span style="background:#FF9933"></span>
+    <span style="background:#ffffff;border-top:1px solid #e2e5ea;border-bottom:1px solid #e2e5ea"></span>
+    <span style="background:#138808"></span>
+  </div>
+</nav>
+
+<!-- PANEL: POLICY & STAKES -->
+<div id="panel-stakes" class="panel active">
+<div class="page-body">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">2026 US Midterms &mdash; India's Angle</div>
+    <h1>Why November 2026 Matters for India</h1>
+    <p>The November 2026 election decides the 120th Congress, which shapes trade policy, high-skilled immigration rules, defence co-production agreements, and America's Indo-Pacific posture. The party that holds the House and Senate will chair every committee that touches the bilateral relationship.</p>
+    <div class="hero-stats">
+      <div class="hstat">
+        <span class="hstat-num">5.6M</span>
+        <span class="hstat-label">Asian Indian Americans, alone or in combination (2024)</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">6</span>
+        <span class="hstat-label">Indian-American members of Congress</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">$129B</span>
+        <span class="hstat-label">India-US two-way goods trade (2024)</span>
+      </div>
+      <div class="hstat">
+        <span class="hstat-num">39</span>
+        <span class="hstat-label">India-active members tracked</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLICY STAKES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Key Policy Areas at Stake</h2>
+      <span class="section-sub">How congressional control shapes the bilateral relationship</span>
+    </div>
+    <div class="policy-grid">
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#FFF3E8"><img src="assets/flight.png" alt="Aviation" style="width:22px;height:22px;object-fit:contain"></div>
+        <h3>Aviation &amp; People-to-People Connectivity</h3>
+        <p>Direct air connectivity between the US and India has expanded under Open Skies agreements. Congressional support for bilateral aviation accords, visa facilitation, and diaspora mobility shapes the depth of people-to-people ties between the two democracies.</p>
+        <span class="policy-status status-bipartisan">Bipartisan</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#EAF6EA">&#9652;</div>
+        <h3>Trade &amp; GSP Restoration</h3>
+        <p>India's GSP beneficiary status was terminated effective 5 June 2019; the programme itself lapsed for all countries at the end of 2020. Renewed reciprocal trade tensions and tariff negotiations hinge on which party controls the House Ways and Means Committee.</p>
+        <span class="policy-status status-contested">Contested</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#E8F4FE">&#9670;</div>
+        <h3>Defence Co-production &amp; ITAR</h3>
+        <p>The INDUS-X initiative, GE jet engine transfer, and future co-production deals require congressional notifications and ITAR waiver approvals. Armed Services Committee chairs in both chambers hold significant influence over the pace of these agreements.</p>
+        <span class="policy-status status-bipartisan">Bipartisan</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#F3EEFF">&#9642;</div>
+        <h3>Semiconductors &amp; Technology</h3>
+        <p>CHIPS Act implementation, AI governance frameworks, and export control regimes for advanced chips directly affect India's semiconductor ambitions and the commercial technology relationship. The Science and Commerce committees are central.</p>
+        <span class="policy-status status-watch">Watch</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#FEE2E2">&#9711;</div>
+        <h3>China Policy &amp; the Quad</h3>
+        <p>Both parties support the Quad framework and treat India as a counterweight to China. However, the depth of security guarantees, intelligence sharing agreements, and the pace of diplomatic engagement vary by administration and congressional posture.</p>
+        <span class="policy-status status-bipartisan">Bipartisan</span>
+      </div>
+
+      <div class="policy-card">
+        <div class="policy-icon" style="background:#CCFBF1">&#9728;</div>
+        <h3>Climate &amp; Clean Energy</h3>
+        <p>The US withdrew from the International Solar Alliance and the UNFCCC in Jan 2026. Whether US-India climate finance and critical minerals supply-chain cooperation continue depends on whether the Inflation Reduction Act's international clean energy provisions survive congressional scrutiny in a divided government.</p>
+        <span class="policy-status status-contested">Contested</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PARTY COMPARISON -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Republican vs Democrat: India Policy Positions</h2>
+      <span class="section-sub">Based on platform documents, committee records, and member statements</span>
+    </div>
+    <div class="callout">
+      <strong>Note:</strong> India-US relations enjoy unusually strong bipartisan support at the strategic level. Differences are most pronounced on immigration, trade mechanisms, and climate finance rather than on the core defence and geopolitical partnership.
+    </div>
+    <div style="overflow-x:auto">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th class="rep-h">Republican majority</th>
+          <th class="dem-h">Democratic majority</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>H-1B / High-Skilled Visas</td>
+          <td class="rep-cell">Mixed: some members support H-1B expansion for tech; restrictionist wing wants lower caps and stricter enforcement. No consensus on backlog relief.</td>
+          <td class="dem-cell">Generally supportive of raising caps and clearing the employment-based backlog; several Indian-American members have introduced relief bills.</td>
+        </tr>
+        <tr>
+          <td>Trade with India</td>
+          <td class="rep-cell">Favours bilateral reciprocal deal; sceptical of multilateral frameworks. Retaliatory tariff posture could complicate GSP restoration.</td>
+          <td class="dem-cell">More open to GSP renewal and WTO-compatible frameworks, but labour and environmental standards provisions create friction.</td>
+        </tr>
+        <tr>
+          <td>Defence Partnership <span class="bipartisan-pill">Bipartisan</span></td>
+          <td class="rep-cell">Strong support for INDUS-X, arms sales, and co-production. Prioritises transactional outcomes over multilateral commitments.</td>
+          <td class="dem-cell">Supports INDUS-X and Quad framework; places greater emphasis on human rights conditionalities in arms transfer decisions.</td>
+        </tr>
+        <tr>
+          <td>Quad &amp; Indo-Pacific <span class="bipartisan-pill">Bipartisan</span></td>
+          <td class="rep-cell">Strong support. Frames Quad primarily as China-containment architecture.</td>
+          <td class="dem-cell">Strong support. Frames Quad as rules-based order initiative; values multilateral diplomatic dimension.</td>
+        </tr>
+        <tr>
+          <td>Export Controls &amp; Tech</td>
+          <td class="rep-cell">Hawkish on China-facing controls; generally supportive of expanding technology access for India as a trusted partner.</td>
+          <td class="dem-cell">Similar approach; more emphasis on multilateral coordination through Wassenaar and other regimes.</td>
+        </tr>
+        <tr>
+          <td>Climate Finance &amp; Energy</td>
+          <td class="rep-cell">Sceptical of international climate funds; may rescind IRA provisions affecting India-US clean energy cooperation.</td>
+          <td class="dem-cell">Supports US-India Climate and Clean Energy Agenda; maintains IRA international clean energy provisions.</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- KEY COMMITTEES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Committees That Matter for India</h2>
+      <span class="section-sub">Chairs are determined by which party holds the majority</span>
+    </div>
+    <div class="committee-list">
+      <div class="committee-row">
+        <div class="committee-icon">&#9878;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Foreign Relations Committee</div>
+          <div class="committee-why">Confirms ambassadors, holds hearings on India-US strategic partnership, and can block or advance bilateral agreements and arms sale notifications.</div>
+          <div class="committee-chamber">Senate</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#9670;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate &amp; House Armed Services Committees</div>
+          <div class="committee-why">Authorise defence budgets and co-production programmes. ITAR waiver notifications and INDUS-X legislative support run through these panels.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#9652;</div>
+        <div class="committee-body">
+          <div class="committee-name">House Ways and Means / Senate Finance</div>
+          <div class="committee-why">Control trade legislation including GSP renewal, tariff schedules, and bilateral trade deal fast-track authority.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#9670;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Judiciary / House Judiciary</div>
+          <div class="committee-why">Write immigration law. H-1B caps, employment-based green card backlog relief, and visa category reforms all originate here.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+      <div class="committee-row">
+        <div class="committee-icon">&#9642;</div>
+        <div class="committee-body">
+          <div class="committee-name">Senate Commerce / House Science &amp; Technology</div>
+          <div class="committee-why">Oversee CHIPS Act implementation, semiconductor export controls, AI governance, and the science &amp; technology cooperation frameworks that underpin the iCET initiative.</div>
+          <div class="committee-chamber">Senate + House</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CURRENT POLICY LANDSCAPE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Current Policy Landscape (2025&ndash;26)</h2>
+      <span class="section-sub">Live developments in US-India relations shaping the 2026 calculus</span>
+    </div>
+    <div class="cpolicy-grid">
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Trade</div>
+        <div class="cpolicy-title">Reciprocal Tariff Standoff</div>
+        <div class="cpolicy-text">Tariffs on Indian goods have moved repeatedly: a 50% rate from 27 Aug 2025 was cut in Feb 2026, the Supreme Court struck down all IEEPA tariffs on 20 Feb 2026, and a 10% Section 122 tariff applied for 150 days after that. A framework for an interim US-India trade agreement was announced on 6 Feb 2026, and the additional 25% India-specific duty was removed from 7 Feb 2026.</div>
+        <span class="cpolicy-status" style="background:#FEF3C7;color:#92400E">Active Negotiation</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Technology</div>
+        <div class="cpolicy-title">TRUST: Transforming the Relationship Utilizing Strategic Technology</div>
+        <div class="cpolicy-text">The US-India iCET framework was replaced by the TRUST initiative on 13 Feb 2025, covering quantum computing, AI, semiconductors, and space cooperation. India has reciprocated with liberalised FDI rules in chip manufacturing.</div>
+        <span class="cpolicy-status" style="background:var(--green-lt);color:var(--green-in)">Active</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Defence</div>
+        <div class="cpolicy-title">INDUS-X &amp; GE Jet Engine Deal</div>
+        <div class="cpolicy-text">The GE F414 jet engine technology transfer for India's Tejas Mk2 fighter has been through ITAR congressional notification. INDUS-X has been followed by the "INDUS Innovation" bridge (Feb 2025 joint statement). Armed Services Committees in both chambers are broadly supportive.</div>
+        <span class="cpolicy-status" style="background:#E8F4FE;color:#1A5276">Progressing</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Immigration</div>
+        <div class="cpolicy-title">H-1B &amp; EB Backlog: No Resolution in Sight</div>
+        <div class="cpolicy-text">The employment-based green card backlog for Indian nationals is widely estimated in the hundreds of thousands, with multi-decade wait times at current processing rates (see USCIS / Cato Institute analyses for current figures). The EAGLE Act (H.R. 3648) never passed the House — it was pulled in Dec 2022 amid opposition. Its predecessor, the Fairness for High-Skilled Immigrants Act, did pass the House, in July 2019 and 2011.</div>
+        <span class="cpolicy-status" style="background:#FEE2E2;color:#991B1B">Critical</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Quad</div>
+        <div class="cpolicy-title">Quad Summit &amp; Indo-Pacific Framework</div>
+        <div class="cpolicy-text">The Quad (US, India, Japan, Australia) last met at the leaders' level in Wilmington in September 2024; the India-hosted 2025 summit did not take place, and no 2026 summit has been confirmed. Congressional support for the grouping remains strong across both parties — one of few genuinely bipartisan foreign policy areas.</div>
+        <span class="cpolicy-status" style="background:var(--green-lt);color:var(--green-in)">Bipartisan</span>
+      </div>
+      <div class="cpolicy-card">
+        <div class="cpolicy-label">Climate</div>
+        <div class="cpolicy-title">US Withdrawal from Climate Commitments</div>
+        <div class="cpolicy-text">The US withdrew from the International Solar Alliance and the UNFCCC under a 7 Jan 2026 executive memorandum, cutting a channel India had leveraged for renewable energy financing. These are executive actions and would not be reversed by a Democratic House majority alone.</div>
+        <span class="cpolicy-status" style="background:#FEF3C7;color:#92400E">At Risk</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page-body -->
+</div><!-- /panel-stakes -->
+
+<!-- PANEL: INDIAN DIASPORA -->
+<div id="panel-presence" class="panel">
+<div class="page-body">
+
+  <!-- CURRENT CONGRESS -->
+  <div class="section" style="margin-top:8px">
+    <div class="section-header">
+      <h2>Indian-Americans in the 119th Congress</h2>
+      <span class="section-sub">Six members as of January 2025</span>
+    </div>
+    <div class="callout">
+      The 119th Congress seated six Indian-American members, the highest number in US history. All serve in the House. No Indian-American currently holds a Senate seat. Only one, Raja Krishnamoorthi, ran for a Senate seat in 2026, and he lost the March 2026 Illinois primary.
+    </div>
+
+    <!-- PRESENCE DISTRICT MAP -->
+    <div class="presence-map-section">
+      <div class="section-header" style="margin-bottom:10px">
+        <h2>District Map</h2>
+        <span class="section-sub">House districts represented by Indian-American members &mdash; click a district to view member detail</span>
+      </div>
+      <div class="map-ctrl">
+        <input type="search" id="presence-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterPresenceMap(this.value)">
+        <span class="map-ctrl-count" id="presence-search-count"></span>
+      </div>
+      <div class="map-wrap" id="presence-map-wrap" style="min-height:320px">
+        <div class="map-loading" id="presence-map-loading">Loading district map&hellip;</div>
+        <svg id="presence-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="presenceZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="presenceZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="presenceZoomReset()">&#8859;</button>
+        </div>
+      </div>
+      <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Blue = Democratic-held district. All six Indian-American members are Democrats.</p>
+    </div>
+
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-name">Ami Bera</div>
+        <div class="member-seat">California 3rd District (new map; previously 6th)</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Longest-serving Indian-American in Congress. Internist and former Sacramento County Chief Medical Officer. Sits on Foreign Affairs and Science committees. <a href="https://bera.house.gov/news" style="color:var(--accent);font-size:10px">bera.house.gov</a></div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Ro Khanna</div>
+        <div class="member-seat">California 17th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Silicon Valley progressive. Khanna is running for re-election to the House. Became Ranking Member of the House Select Committee on the CCP in Jan 2026, succeeding Krishnamoorthi. Strong advocate for domestic semiconductor manufacturing and immigration reform. Co-Chair, Congressional India Caucus. <a href="https://khanna.house.gov/media" style="color:var(--accent);font-size:10px">khanna.house.gov</a></div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Pramila Jayapal</div>
+        <div class="member-seat">Washington 7th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Chair Emerita of the Congressional Progressive Caucus (Greg Casar chairs the CPC in the 119th Congress). Immigrant rights advocate. First Indian-American woman elected to the House. <a href="https://jayapal.house.gov/category/news/" style="color:var(--accent);font-size:10px">jayapal.house.gov</a></div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Raja Krishnamoorthi</div>
+        <div class="member-seat">Illinois 8th District &mdash; seat now OPEN</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Ran for the open Illinois Senate seat to succeed Dick Durbin but lost the 17 March 2026 Democratic primary to Juliana Stratton (39.7%&ndash;33.3%); IL-08 is now an open seat. Coined the term "Samosa Caucus." <a href="https://krishnamoorthi.house.gov/media" style="color:var(--accent);font-size:10px">krishnamoorthi.house.gov</a></div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Suhas Subramanyam</div>
+        <div class="member-seat">Virginia 10th District</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Freshman elected in 2024. First Indian-American to represent Virginia and the East Coast in Congress. Took oath on Bhagavad Gita. <a href="https://subramanyam.house.gov/media" style="color:var(--accent);font-size:10px">subramanyam.house.gov</a></div>
+      </div>
+      <div class="member-card">
+        <div class="member-name">Shri Thanedar</div>
+        <div class="member-seat">Michigan 13th District &mdash; seat now OPEN</div>
+        <div class="member-pills">
+          <span class="pill pill-d">Democrat</span>
+          <span class="pill pill-house">House</span>
+        </div>
+        <div class="member-note">Entrepreneur and chemist, born in Belgaum, Karnataka. Lost the 4 August 2026 Democratic primary for MI-13 to Donavan McKinney. Sponsor of H.Res.69 Celebrating Hindu Americans and condemning Hinduphobia. <a href="https://thanedar.house.gov/media" style="color:var(--accent);font-size:10px">thanedar.house.gov</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFLUENCE MAP -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Indian-American Voter Influence by State</h2>
+      <span class="section-sub">States where the community is large enough to influence competitive races</span>
+    </div>
+    <div class="callout">
+      Indian-Americans vote at <strong>higher-than-average rates</strong> and are concentrated in suburban districts that have become the most competitive battlegrounds in modern US elections. In several swing states, the community exceeds the margin of victory in recent Senate and presidential races.
+    </div>
+
+    <!-- View toggle -->
+    <div class="influence-view-bar">
+      <button class="itog active" onclick="setInfluenceView('combined',this)">Combined</button>
+      <button class="itog" onclick="setInfluenceView('bubble',this)">Bubble Only</button>
+      <button class="itog" onclick="setInfluenceView('table',this)">Table</button>
+    </div>
+
+    <!-- Two-layer map -->
+    <div class="influence-map-wrap map-wrap" id="influence-map-wrap" style="min-height:340px">
+      <div class="map-loading" id="influence-map-loading">Loading influence map&hellip;</div>
+      <svg id="influence-map-svg" viewBox="0 0 960 580" style="cursor:grab;width:100%"></svg>
+      <div id="influence-legend">
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#FFF3E8;border:1px solid #ddd"></span> &lt;0.5% Indian-American share</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#F7B96A"></span> 0.5&ndash;1.5%</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#E8832A"></span> 1.5&ndash;2.5%</div>
+        <div class="ileg-row"><span class="ileg-swatch" style="background:#B85900"></span> &gt;2.5%</div>
+        <div class="ileg-row" style="margin-top:4px"><span class="ileg-swatch" style="background:rgba(232,131,42,.4);border:1px solid #E8832A"></span> Circle = Indian-American population size</div>
+      </div>
+      <div class="map-zoom-ctrl">
+        <button class="map-zoom-btn" onclick="influenceZoomBy(1.5)">+</button>
+        <button class="map-zoom-btn" onclick="influenceZoomBy(1/1.5)">&minus;</button>
+        <button class="map-zoom-btn reset" onclick="influenceZoomReset()">&#8859;</button>
+      </div>
+    </div>
+
+    <!-- Table (hidden by default, shown via toggle) -->
+    <div id="influence-table-wrap" style="display:none;overflow-x:auto;margin-top:16px">
+    <table class="influence-table">
+      <thead>
+        <tr>
+          <th>State</th>
+          <th>Est. Population</th>
+          <th>Share of State</th>
+          <th>Relative Size</th>
+          <th>2026 Competitiveness</th>
+          <th>Key Races</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="state-name">California</span></td>
+          <td>~960,000</td>
+          <td>2.5%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:100%"></div></div></td>
+          <td><span class="competitiveness comp-safe-d">Safe D</span></td>
+          <td>No Senate race in 2026; CA-22 rated Toss-up, CA-48 Lean D and CA-13 Likely D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Texas</span></td>
+          <td>~430,000</td>
+          <td>1.5%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:45%"></div></div></td>
+          <td><span class="competitiveness comp-lean-r">Lean R</span></td>
+          <td>Open Senate seat rated Lean D; TX-35 rated Toss-up and South Texas seats TX-15, TX-28 and TX-34 Lean D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">New Jersey</span></td>
+          <td>~390,000</td>
+          <td>4.4%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:41%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>NJ-07 rated Lean D, NJ-11 Solid D; Senate seat (Booker) Solid D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">New York</span></td>
+          <td>~418,000</td>
+          <td>2.1%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:44%"></div></div></td>
+          <td><span class="competitiveness comp-lean-d">Lean D</span></td>
+          <td>NY-17 rated Toss-up; Long Island seats NY-03 (Lean D) and NY-04 (Likely D)</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Illinois</span></td>
+          <td>~215,000</td>
+          <td>1.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:22%"></div></div></td>
+          <td><span class="competitiveness comp-safe-d">Safe D</span></td>
+          <td>Open Senate seat (Krishnamoorthi lost the Mar 2026 primary to Stratton); IL-08 now open</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Georgia</span></td>
+          <td>~115,000</td>
+          <td>1.1%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:12%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Senate seat (Ossoff) rated Likely D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Virginia</span></td>
+          <td>~155,000</td>
+          <td>1.8%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:16%"></div></div></td>
+          <td><span class="competitiveness comp-lean-d">Lean D</span></td>
+          <td>VA-10 (Subramanyam incumbent); VA-01 rated Toss-up and VA-02 Lean D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Michigan</span></td>
+          <td>~95,000</td>
+          <td>0.9%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:10%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>Open Senate seat rated Lean D; MI-13: Thanedar lost the 4 August primary to Donavan McKinney</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Pennsylvania</span></td>
+          <td>~90,000</td>
+          <td>0.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:9%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>No Senate race in 2026; PA-01 rated Toss-up; PA-07, PA-08 and PA-10 Lean D</td>
+        </tr>
+        <tr>
+          <td><span class="state-name">Wisconsin</span></td>
+          <td>~40,000</td>
+          <td>0.7%</td>
+          <td><div class="pop-bar-wrap"><div class="pop-bar" style="width:4%"></div></div></td>
+          <td><span class="competitiveness comp-swing">Swing</span></td>
+          <td>No Senate race in 2026; open Governor's race rated Lean D; community concentrated in Madison and Milwaukee suburbs</td>
+        </tr>
+      </tbody>
+    </table>
+    </div><!-- /influence-table-wrap -->
+  </div>
+
+  <!-- COMMUNITY POLITICAL ALIGNMENT -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Community Political Alignment</h2>
+      <span class="section-sub">How Indian-Americans vote and party trends heading into 2026</span>
+    </div>
+    <div class="callout">
+      Indian-Americans have historically been among the most Democratic-leaning immigrant communities, but a visible rightward shift among younger and higher-income segments is reshaping electoral dynamics. The community's vote is no longer monolithic.
+    </div>
+    <div class="align-grid">
+      <div class="align-card">
+        <div class="align-pct" style="color:#1A3F8A">~66%</div>
+        <div class="align-label">Identify as or lean Democrat</div>
+        <div class="align-bar" style="background:linear-gradient(90deg,#1A3F8A 66%,#E8E8E8 66%);border-radius:5px;height:10px"></div>
+        <div class="align-sub">Down from ~72% in 2020. Driven by younger voters and economic concerns. Still the highest Democratic-lean of any major immigrant group.</div>
+        <span class="align-trend trend-down">&#8595; Trending R among under-40s</span>
+      </div>
+      <div class="align-card">
+        <div class="align-pct" style="color:#9A1C1C">~26%</div>
+        <div class="align-label">Identify as or lean Republican</div>
+        <div class="align-bar" style="background:linear-gradient(90deg,#9A1C1C 26%,#E8E8E8 26%);border-radius:5px;height:10px"></div>
+        <div class="align-sub">Up from ~18% in 2016. Growth concentrated among business owners, Hindu nationalists, and those prioritising H-1B expansion.</div>
+        <span class="align-trend trend-up">&#8593; Growing 2&ndash;3 pts per cycle</span>
+      </div>
+    </div>
+    <p style="font:700 15px var(--sans);color:var(--text2);margin:20px 0 8px">By generation &amp; income:</p>
+    <div class="align-gen-grid">
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#1A3F8A">74%</div>
+        <div class="align-gen-label">1st-gen immigrants &rarr; Democrat</div>
+      </div>
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#555">58%</div>
+        <div class="align-gen-label">2nd-gen &rarr; Democrat (vs 36% R)</div>
+      </div>
+      <div class="align-gen-card">
+        <div class="align-gen-pct" style="color:#555">62%</div>
+        <div class="align-gen-label">Income &gt;$150K &rarr; Democrat</div>
+      </div>
+    </div>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:10px">Source: <a href="https://carnegieendowment.org" style="color:var(--accent)">Carnegie Endowment for International Peace</a>, <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>, 2024 Asian American Voter Survey.</p>
+
+    <p style="font:700 15px var(--sans);color:var(--text2);margin:20px 0 10px">Party alignment trend &mdash; 2008 to 2026 projected:</p>
+    <div style="position:relative;height:220px">
+      <canvas id="c-ia-alignment"></canvas>
+    </div>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Source: <a href="https://aapidata.com" style="color:var(--accent)">AAPI Data</a>; Asian American Voter Survey. Percentages exclude undecided or no-lean responses. 2026 data point is a trend projection based on the 2-point-per-cycle rightward shift observed since 2012.</p>
+  </div>
+
+  <!-- KEY VOTES OF INDIAN-AMERICAN MEMBERS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Key Votes: Indian-American Members in the 119th Congress</h2>
+      <span class="section-sub">How Indian-American members voted on legislation directly relevant to India and the community</span>
+    </div>
+    <div style="overflow-x:auto">
+    <table class="vote-table">
+      <thead>
+        <tr>
+          <th>Bill / Vote</th>
+          <th>Bera</th>
+          <th>Khanna</th>
+          <th>Jayapal</th>
+          <th>Krishnamoorthi</th>
+          <th>Subramanyam</th>
+          <th>Thanedar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="vote-bill">National Defense Authorization Act FY2026</div>
+            <div class="vote-desc">Includes INDUS-X language and GE engine transfer notification provisions</div>
+          </td>
+          <td class="vote-y">Yea</td><td class="vote-n">Nay</td><td class="vote-n">Nay</td><td class="vote-y">Yea</td><td class="vote-y">Yea</td><td class="vote-n">Nay</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="vote-bill">Continuing Resolution (FY2026 govt funding)</div>
+            <div class="vote-desc">Stop-gap funding bill with no immigration or trade provisions</div>
+          </td>
+          <td class="vote-n">Nay</td><td class="vote-n">Nay</td><td class="vote-n">Nay</td><td class="vote-n">Nay</td><td class="vote-n">Nay</td><td class="vote-n">Nay</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    <p style="font:400 13px var(--sans);color:var(--text3);margin-top:8px">Nay votes on NDAA reflect concerns about defence spending levels, not opposition to US-India provisions specifically.</p>
+  </div>
+
+</div><!-- /page-body -->
+</div><!-- /panel-presence -->
+
+
+<!-- PANEL: INDIA-RELEVANT RACES -->
+<div id="panel-interest" class="panel">
+<div class="page-body">
+
+  <div class="hero" style="margin-bottom:28px">
+    <div class="hero-eyebrow">119th Congress &mdash; India-Active Member Roster</div>
+    <h1>India-Relevant Races</h1>
+    <p>39 members of Congress tracked for their bearing on US-India relations: committee leadership, legislative sponsorship, and publicly stated positions on India policy. Sources: <a href="https://huizenga.house.gov/news/" style="color:var(--gold)">member office newsrooms</a> and our research roster.</p>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-num">8</span><span class="hstat-label">Tier 1 Largely Supportive</span></div>
+      <div class="hstat"><span class="hstat-num">12</span><span class="hstat-label">Tier 2 Moderate</span></div>
+      <div class="hstat"><span class="hstat-num">6</span><span class="hstat-label">Tier 3 Critical</span></div>
+      <div class="hstat"><span class="hstat-num">7</span><span class="hstat-label">Tier 4 Pakistan Caucus</span></div>
+      <div class="hstat"><span class="hstat-num">6</span><span class="hstat-label">Tier 5 Anti-Pak Military</span></div>
+    </div>
+  </div>
+
+  <!-- Interest top-level sub-nav -->
+  <nav class="interest-subnav">
+    <button class="interest-subtab active" onclick="switchInterestTab('roster',this)">Maps &amp; Roster</button>
+    <button class="interest-subtab" onclick="switchInterestTab('news',this)">Member News <span id="interest-news-badge" class="interest-news-badge" style="display:none"></span></button>
+  </nav>
+
+  <!-- MAPS & ROSTER sub-panel -->
+  <div id="interest-subpanel-roster" class="interest-subpanel active">
+
+    <!-- Inner sub-nav -->
+    <div class="inner-subnav">
+      <button class="inner-tab active" onclick="switchInner('house-map')">House Map</button>
+      <button class="inner-tab" onclick="switchInner('senate-map')">Senate Map</button>
+    </div>
+
+    <!-- HOUSE MAP -->
+    <div id="inner-house-map" class="inner-panel active">
+      <div class="map-ctrl">
+        <input type="search" id="interest-house-search" class="map-ctrl-search" placeholder="Search by name, party, or seat&hellip;" oninput="filterInterestHouseMap(this.value)">
+        <span class="map-ctrl-count" id="interest-house-count"></span>
+        <div class="tier-chips" style="margin-left:auto">
+          <button class="tier-chip active" onclick="setInterestHouseTier('all',this)">All Tiers</button>
+          <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestHouseTier(1,this)">T1 Supportive</button>
+          <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestHouseTier(2,this)">T2 Moderate</button>
+          <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestHouseTier(3,this)">T3 Critical</button>
+          <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestHouseTier(4,this)">T4 Pak-Support</button>
+          <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestHouseTier(5,this)">T5 Pak-Oppose</button>
+        </div>
+      </div>
+      <div class="map-wrap" style="min-height:360px">
+        <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
+        <svg id="house-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="houseInterestZoomReset()">&#8859;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENATE MAP -->
+    <div id="inner-senate-map" class="inner-panel">
+      <div class="map-ctrl">
+        <input type="search" id="interest-senate-search" class="map-ctrl-search" placeholder="Search by name, party, or state&hellip;" oninput="filterInterestSenateMap(this.value)">
+        <span class="map-ctrl-count" id="interest-senate-count"></span>
+        <div class="tier-chips" style="margin-left:auto">
+          <button class="tier-chip active" onclick="setInterestSenateTier('all',this)">All Tiers</button>
+          <button class="tier-chip" style="background:#166534;color:#fff;border-color:#166534" onclick="setInterestSenateTier(1,this)">T1 Supportive</button>
+          <button class="tier-chip" style="background:#4a9a6a;color:#fff;border-color:#4a9a6a" onclick="setInterestSenateTier(2,this)">T2 Moderate</button>
+          <button class="tier-chip" style="background:#9333ea;color:#fff;border-color:#9333ea" onclick="setInterestSenateTier(3,this)">T3 Critical</button>
+          <button class="tier-chip" style="background:#5b21b6;color:#fff;border-color:#5b21b6" onclick="setInterestSenateTier(4,this)">T4 Pak-Support</button>
+          <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestSenateTier(5,this)">T5 Pak-Oppose</button>
+        </div>
+      </div>
+      <div class="map-wrap" style="min-height:360px">
+        <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
+        <svg id="senate-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
+        <div class="map-zoom-ctrl">
+          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1.5)">+</button>
+          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1/1.5)">&minus;</button>
+          <button class="map-zoom-btn reset" onclick="senateInterestZoomReset()">&#8859;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="tier-legend">
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#166534"></div> Tier 1 &mdash; Largely Supportive</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#4a9a6a"></div> Tier 2 &mdash; Moderate</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#9333ea"></div> Tier 3 &mdash; Critical</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#5b21b6"></div> Tier 4 &mdash; Active Pakistan Support</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#1d4ed8"></div> Tier 5 &mdash; Active Pakistan Opposition</div>
+      <div class="tier-dot"><div class="tier-dot-swatch" style="background:#d1d5db"></div> Untracked</div>
+    </div>
+
+    <!-- MEMBER ROSTER TABLE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Full Member Roster</h2>
+        <span class="section-sub">Tiered by India stance &middot; ranked within tier by institutional weight &middot; 119th Congress</span>
+      </div>
+      <div class="callout">
+        <strong>Source:</strong> All positions sourced from member office newsrooms, official statements, and committee records compiled in our research roster. Click any member row to view detailed stance breakdown.
+      </div>
+      <div class="roster-wrap">
+      <table class="roster-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Member</th>
+            <th>Party</th>
+            <th>Chamber</th>
+            <th>State / Seat</th>
+            <th>Tier</th>
+            <th>Role</th>
+            <th>Up 2026?</th>
+            <th>Source</th>
+          </tr>
+        </thead>
+        <tbody id="roster-tbody">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+  </div><!-- /interest-subpanel-roster -->
+
+  <!-- MEMBER NEWS sub-panel -->
+  <div id="interest-subpanel-news" class="interest-subpanel">
+    <div class="callout" style="margin-bottom:16px">
+      Recent Google News coverage of the 39 tracked India-Relevant members: articles from the last 7 days that name the member, up to six each. Click any member row in the roster to see their news in their profile.
+    </div>
+    <div class="mn-toolbar">
+      <input type="search" class="mn-search" id="mn-search" placeholder="Search member or keyword&hellip;" oninput="filterMemberNewsPanel(this.value)">
+      <div class="mn-tier-chips">
+        <button class="mn-chip active" onclick="setMnTierFilter('all',this)">All Tiers</button>
+        <button class="mn-chip" style="border-color:#166534;color:#166534" onclick="setMnTierFilter(1,this)">T1 Supportive</button>
+        <button class="mn-chip" style="border-color:#4a9a6a;color:#4a9a6a" onclick="setMnTierFilter(2,this)">T2 Moderate</button>
+        <button class="mn-chip" style="border-color:#9333ea;color:#9333ea" onclick="setMnTierFilter(3,this)">T3 Critical</button>
+        <button class="mn-chip" style="border-color:#5b21b6;color:#5b21b6" onclick="setMnTierFilter(4,this)">T4 Pak-Support</button>
+        <button class="mn-chip" style="border-color:#1d4ed8;color:#1d4ed8" onclick="setMnTierFilter(5,this)">T5 Pak-Oppose</button>
+      </div>
+      <span class="mn-count" id="mn-count"></span>
+      <button class="mn-refresh" onclick="loadMemberNews(true)">&#8635; Refresh</button>
+    </div>
+    <div id="mn-loading" style="font:400 15px var(--sans);color:var(--text3);padding:24px 0">Loading member news&hellip;</div>
+    <div id="mn-list" class="mn-list" style="display:none"></div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Source: Google News, searched for each member by name every 6 hours. <span id="mn-checked"></span></p>
+  </div><!-- /interest-subpanel-news -->
+
+</div><!-- /page-body -->
+</div><!-- /panel-interest -->
+
+<!-- SIDE PANEL -->
+<div class="india-sidepanel" id="india-sidepanel">
+  <div class="sidepanel-header">
+    <span style="font:700 15px var(--sans);color:var(--navy)">Member Detail</span>
+    <button class="sidepanel-close" onclick="closeSidePanel()">Close &times;</button>
+  </div>
+  <div class="sidepanel-body" id="sidepanel-body"></div>
+</div>
+<div class="india-overlay" id="india-overlay"></div>
+
+<!-- MAP TOOLTIP -->
+<div class="map-tooltip" id="map-tooltip"></div>
+
+<script>
+// ── TAB SWITCHING ──────────────────────────────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.sub-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+  if (name === 'interest' && !houseMapLoaded) { loadHouseMap(); }
+  if (name === 'presence' && !presenceMapLoaded) { loadPresenceMap(); }
+  if (name === 'presence' && !influenceMapLoaded) { loadInfluenceMap(); }
+}
+
+// ── postMessage listener (for hamburger nav from parent) ────────────────────
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'ndSwitchTab') { switchTab(e.data.tab); }
+});
+
+function switchInner(name) {
+  document.querySelectorAll('.inner-tab').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase().replace(/\s+/g,'-') === name || (name==='house-map' && b.textContent.includes('House')) || (name==='senate-map' && b.textContent.includes('Senate'))));
+  document.querySelectorAll('.inner-panel').forEach(p => p.classList.toggle('active', p.id === 'inner-' + name));
+  if (name === 'senate-map' && !senateMapLoaded) { loadSenateMap(); }
+}
+
+// ── MEMBER DATA ─────────────────────────────────────────────────────────────
+const TIER_COLORS = { 1:'#166534', 2:'#4a9a6a', 3:'#9333ea', 4:'#5b21b6', 5:'#1d4ed8', 0:'#d1d5db' };
+const TIER_LABELS = { 1:'Largely Supportive', 2:'Moderate', 3:'Critical', 4:'Active Pakistan Support', 5:'Active Pakistan Opposition' };
+
+const MEMBERS = [
+  // TIER 1 — LARGELY SUPPORTIVE
+  { id:1, name:'Jim Risch', party:'R', chamber:'Senate', state:'Idaho', seat:'Class II — At-Large', district:null, tier:1, up2026:true, role:'SFRC Chair (Full Committee); Ex Officio, Near East/South Asia Subcommittee', stance:'Pro-trade; co-sponsored US-India Strategic Security Dialogue (S.Amdt.3608); chaired Ambassador to India nomination hearing; welcomes India-Pakistan ceasefire as US win', pakistan:'Neutral', bills:'S.Amdt.3608 — US-India Strategic Security Dialogue & Nuclear Liability Rules', notes:'Gatekeeper for ALL South Asia legislation & nominations in Senate. Running in May 2026 primary (ID).', source:'https://www.risch.senate.gov/newsroom/', polling:'https://www.boisestate.edu/sps/boise-state-public-policy-survey/', news:'https://idahocapitalsun.com/feed/' },
+  { id:2, name:'Ted Cruz', party:'R', chamber:'Senate', state:'Texas', seat:'Class I — At-Large', district:null, tier:1, up2026:false, role:'Member, Near East/South Asia/Counterterrorism Subcommittee', stance:'Pro-high-skill immigration; defends religious pluralism; explicitly supportive of Modi/Hindu nationalism; skeptical of Pakistan; pro-trade, anti-tariff; urges India to distance from Russia (pragmatic)', pakistan:'Skeptical', bills:null, notes:'Re-elected Nov 2024; next term ends Jan 2031. NOT up in 2026.', source:'https://www.cruz.senate.gov/newsroom', polling:'https://texaspolitics.utexas.edu/polling', news:'https://feeds.texastribune.org/texastribune/politics' },
+  { id:3, name:'Dave McCormick', party:'R', chamber:'Senate', state:'Pennsylvania', seat:'Class I — At-Large', district:null, tier:1, up2026:false, role:'Member, Near East/South Asia/Counterterrorism Subcommittee', stance:'Pro-high-skill immigration; positive framing on Modi; strongly India-leaning on Pakistan; pro-free trade; strategic concern on India-Russia', pakistan:'Strongly India-leaning', bills:null, notes:'Elected Nov 2024; term ends Jan 2031. NOT up in 2026. Record still developing.', source:'https://www.davemccormickpa.com/news/', polling:'https://www.muhlenberg.edu/aboutus/polling/', news:'https://www.penncapital-star.com/feed/' },
+  { id:4, name:'Bill Huizenga', party:'R', chamber:'House', state:'Michigan', seat:'MI-4', district:4, tier:1, up2026:true, role:'Chair, House Foreign Affairs South & Central Asia Subcommittee', stance:'Neutral-positive on immigrants/Hinduism; supportive on Modi/Hindu nationalism; avoids Muslim & Sikh rights; skeptical of Pakistan; lead sponsor of Pakistan sanctions legislation; pro-trade', pakistan:'Skeptical', bills:'Lead sponsor — Pakistan sanctions legislation', notes:'CoS: Alec Daman.', source:'https://huizenga.house.gov/news/', polling:'https://www.epicmra.com', news:'https://www.bridgemi.com/rss.xml' },
+  { id:5, name:'Brian Mast', party:'R', chamber:'House', state:'Florida', seat:'FL-21', district:21, tier:1, up2026:true, role:'Chair, House Foreign Affairs Committee (Full Committee)', stance:'Presided over India-related hearings including Dec 2025 US-India Strategic Partnership hearing; full committee authority over all South & Central Asia subcommittee output', pakistan:null, bills:null, notes:'Gatekeeper equivalent to Risch on House side.', source:'https://mast.house.gov/press-releases', polling:'https://www.fau.edu/business/centers/bepi/polls/', news:'https://floridapolitics.com/feed/' },
+  // TIER 2 — MODERATE
+  { id:6, name:'Ro Khanna', party:'D', chamber:'House', state:'California', seat:'CA-17', district:17, tier:2, up2026:true, role:'Samosa Caucus; Co-Chair, Congressional India Caucus', stance:'Very strong on immigrants/anti-discrimination; cultural pluralism on Hinduism; publicly critical of Modi; frequently raises domestic disturbance concerns; strong on Muslim & Sikh rights; de-escalation on India-Pak; pro-trade; strongly opposed Trump tariffs; critical on India-Russia; explicit India strategic supporter', pakistan:'De-escalation, balanced', bills:'Strong supporter of strategic value of India; explicit India strategic value advocacy', notes:'India Caucus co-chairmanship is his most direct India institutional credential.', source:'https://khanna.house.gov/media', polling:'https://igs.berkeley.edu/research/berkeley-igs-poll', news:'https://calmatters.org/feed/' },
+  { id:7, name:'Raja Krishnamoorthi', party:'D', chamber:'House', state:'Illinois', seat:'IL-8', district:8, tier:2, up2026:false, role:"Samosa Caucus", stance:"Strong on immigrants; identity + pluralism on Hinduism; indirect/cautious criticism of Modi; values-based concern on domestic disturbances; civil-rights framing on Muslim & Sikh rights; balanced on Pakistan; pro-trade; opposed Trump tariffs; critical on India-Russia; strong India strategic supporter", pakistan:'Balanced', bills:"Coined 'Samosa Caucus' (2018). First Indian-American ranking member of a full committee.", notes:'Running for IL Senate seat (2026).', source:'https://krishnamoorthi.house.gov/media', polling:'https://paulsimoninstitute.siu.edu/polls/index.php', news:'https://capitolnewsillinois.com/feed/' },
+  { id:8, name:'Ami Bera', party:'D', chamber:'House', state:'California', seat:'CA-3', district:3, tier:2, up2026:true, role:'House Foreign Affairs South & Central Asia Subcommittee; Samosa Caucus', stance:'Very strong on immigrants; neutral on Hinduism; careful on Modi; acknowledges domestic disturbances; balanced on Muslim & Sikh rights; balanced on Pakistan; pro-trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced', bills:null, notes:'Longest-serving Indian-American in Congress (since 2013). Senior HFAC & Intelligence Committee member.', source:'https://bera.house.gov/news', polling:'https://igs.berkeley.edu/research/berkeley-igs-poll', news:'https://www.sacbee.com/news/politics-government/?widgetName=rssfeed&widgetContentId=712661&getXmlFeed=true' },
+  { id:9, name:'Jacky Rosen', party:'D', chamber:'Senate', state:'Nevada', seat:'Class I — At-Large', district:null, tier:2, up2026:false, role:'Member, Near East/South Asia/Counterterrorism Subcommittee', stance:'Strongly supportive on immigrants; neutral on Hinduism; careful/indirect criticism of Modi; raises democracy concerns on domestic disturbances; supports monitoring Muslim & Sikh rights; balanced on Pakistan; pro-engagement on trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced', bills:null, notes:'Up for reelection Nov 2026 (NV). CoS: Dara Postar Cohen. FP Advisor: Liz Leibowitz.', source:'https://www.rosen.senate.gov/category/press_release/', polling:'https://thenevadaindependent.com/tag/poll', news:'https://thenevadaindependent.com/feed/' },
+  { id:10, name:'Tim Kaine', party:'D', chamber:'Senate', state:'Virginia', seat:'Class I — At-Large', district:null, tier:2, up2026:false, role:'Member, Near East/South Asia/Counterterrorism Subcommittee', stance:'Supportive on immigrants; neutral on Hinduism; mild criticism of Modi; raises concerns on domestic disturbances; general human-rights framing on Muslim & Sikh rights; balanced on Pakistan; pro-trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced', bills:null, notes:'Up for reelection Nov 2026 (VA). Competitive race expected.', source:'https://www.kaine.senate.gov/news', polling:'https://cnu.edu/wasoncenter/surveys/', news:'https://www.virginiamercury.com/feed/' },
+  { id:11, name:'Cory Booker', party:'D', chamber:'Senate', state:'New Jersey', seat:'Class II — At-Large', district:null, tier:2, up2026:true, role:'Member, SFRC', stance:'Strongly supportive on immigrants; neutral on Hinduism; mixed on Modi; raises domestic disturbance concerns; supports civil-rights focus on Muslim & Sikh rights; balanced on Pakistan; pro-engagement on trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced', bills:null, notes:'Up for reelection Nov 2026 (NJ). Rated Lean D. Large Indian-American constituency in NJ.', source:'https://www.booker.senate.gov/news', polling:'https://www.monmouth.edu/polling-institute/', news:'https://www.njspotlightnews.org/feed/' },
+  { id:12, name:'Shri Thanedar', party:'D', chamber:'House', state:'Michigan', seat:'MI-13', district:13, tier:2, up2026:false, role:'Samosa Caucus', stance:"Very strong on immigrants/anti-discrimination; cultural pride + pluralism on Hinduism; avoids personal focus on Modi; general democratic concern on disturbances; broad civil-rights lens on Muslim & Sikh rights; neutral-balanced on Pakistan; supportive on trade; opposed Trump tariffs; critical on India-Russia; supportive of India's strategic value", pakistan:'Neutral-balanced', bills:'H.Res.69 — Celebrating Hindu Americans, condemning Hinduphobia', notes:'Sponsor of H.Res.69.', source:'https://thanedar.house.gov/media', polling:'https://www.epicmra.com', news:'https://www.bridgemi.com/rss.xml' },
+  { id:13, name:'Suhas Subramanyam', party:'D', chamber:'House', state:'Virginia', seat:'VA-10', district:10, tier:2, up2026:true, role:'Samosa Caucus', stance:'Core priority on immigrants/anti-discrimination; cultural respect + pluralism on Hinduism; no explicit position yet on Modi; values-based language on domestic disturbances; civil-rights framing on Muslim & Sikh rights; stability-focused on Pakistan; pro-innovation & trade; opposed Trump tariffs; critical on India-Russia; strong India strategic supporter', pakistan:'Stability-focused', bills:null, notes:'First Indian-American to represent Virginia & East Coast in Congress. Freshman (119th). Took oath on Bhagavad Gita.', source:'https://subramanyam.house.gov/media', polling:'https://cnu.edu/wasoncenter/surveys/', news:'https://www.virginiamercury.com/feed/' },
+  { id:14, name:'George Latimer', party:'D', chamber:'House', state:'New York', seat:'NY-16', district:16, tier:2, up2026:true, role:'Member, House Foreign Affairs South & Central Asia Subcommittee', stance:'Active on Indian-American community issues; diaspora engagement since joining subcommittee in 119th', pakistan:null, bills:null, notes:'Represents large Indian-American constituency in Westchester County.', source:'https://latimer.house.gov/media', polling:'https://maristpoll.marist.edu', news:'https://www.nysfocus.com/feed/' },
+  { id:15, name:'Scott Perry', party:'R', chamber:'House', state:'Pennsylvania', seat:'PA-10', district:10, tier:2, up2026:true, role:'Member, House Foreign Affairs South & Central Asia Subcommittee', stance:'Hawkish on Pakistan, terrorism designations, Khalistan issue; substantive engagement on India-Pakistan dynamics', pakistan:'Hawkish — supports terrorism designations', bills:null, notes:'Peripheral per document but listed for substantive Pakistan/India-Pak engagement.', source:'https://perry.house.gov/news/', polling:'https://www.muhlenberg.edu/aboutus/polling/', news:'https://www.penncapital-star.com/feed/' },
+  // TIER 3 — CRITICAL
+  { id:16, name:'Chris Murphy', party:'D', chamber:'Senate', state:'Connecticut', seat:'Class I — At-Large', district:null, tier:3, up2026:false, role:'Senate Foreign Relations Committee; advocacy-driven engagement (not South Asia subcommittee)', stance:'Supportive on immigrants; neutral on Hinduism; critical on Modi/Hindu nationalism; vocal concern on domestic disturbances; strong emphasis on Muslim & Sikh rights; balanced on Pakistan; mixed on trade; opposed Trump tariffs; strongly critical on India-Russia', pakistan:'Balanced', bills:null, notes:'Re-elected Nov 2024; term ends Jan 2031. NOT up in 2026. India relevance from floor speeches & press.', source:'https://www.murphy.senate.gov/newsroom/press-releases', polling:'https://poll.qu.edu/feed/', news:'https://ctmirror.org/feed/' },
+  { id:17, name:'Pramila Jayapal', party:'D', chamber:'House', state:'Washington', seat:'WA-7', district:7, tier:3, up2026:true, role:'Member, House Foreign Affairs South & Central Asia Subcommittee; Samosa Caucus', stance:'Very strong on immigrants; critical framing on Hinduism; explicitly critical on Modi/Hindu nationalism; domestic disturbances and Muslim & Sikh rights are central issues; balanced on Pakistan; mixed on trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced', bills:null, notes:'5th term (re-elected 2024). Most critical India-stance among all Samosa Caucus members.', source:'https://jayapal.house.gov/category/news/', polling:'https://www.elwayresearch.com', news:'https://washingtonstatestandard.com/feed/' },
+  { id:18, name:'Sydney Kamlager-Dove', party:'D', chamber:'House', state:'California', seat:'CA-37', district:37, tier:3, up2026:true, role:'Ranking Member, House Foreign Affairs South & Central Asia Subcommittee', stance:'Neutral-supportive on immigrants; avoids Hinduism; critical on Modi/Hindu nationalism; emphasised domestic disturbances; strong on Muslim & Sikh rights; balanced on Pakistan; co-led H.R.5271 (Pakistan democracy legislation); mixed on trade; opposed Trump tariffs; critical on India-Russia', pakistan:'Balanced; co-led H.R.5271 Pakistan democracy legislation', bills:'H.R.5271 — Pakistan Democracy Act (co-led with Huizenga)', notes:'Co-led Pakistan democracy legislation alongside Huizenga.', source:'https://kamlager-dove.house.gov/media', polling:'https://igs.berkeley.edu/research/berkeley-igs-poll', news:'https://www.latimes.com/politics/rss2.0.xml' },
+  // TIER 4 — ACTIVE PAKISTAN SUPPORT
+  { id:19, name:'Al Green', party:'D', chamber:'House', state:'Texas', seat:'TX-9', district:9, tier:4, up2026:true, role:'Pakistan Caucus', stance:"Introduced H.Res.1225 commending Pakistan for diplomatic efforts — most explicitly pro-current-government act in 119th Congress", pakistan:'Pro-current Pakistani dispensation', bills:'H.Res.1225 — Commending Pakistan for diplomatic efforts', notes:'Most direct pro-Pakistan act of any member in this roster.', source:'https://algreen.house.gov/media', polling:'https://texaspolitics.utexas.edu/polling', news:'https://feeds.texastribune.org/texastribune/politics' },
+  { id:20, name:'André Carson', party:'D', chamber:'House', state:'Indiana', seat:'IN-7', district:7, tier:4, up2026:true, role:'Pakistan Caucus', stance:'Pakistan Caucus member; no critical stance on military rule on record', pakistan:'Pro-current Pakistani dispensation (Pakistan Caucus)', bills:null, notes:null, source:'https://carson.house.gov/media', polling:'https://www.bsu.edu/academics/collegesanddepartments/cber', news:'https://indianacapitalchronicle.com/feed/' },
+  { id:21, name:'Stephen Lynch', party:'D', chamber:'House', state:'Massachusetts', seat:'MA-8', district:8, tier:4, up2026:true, role:'Pakistan Caucus', stance:'Pakistan Caucus member; no critical stance on record', pakistan:'Pro-current Pakistani dispensation (Pakistan Caucus)', bills:null, notes:null, source:'https://lynch.house.gov/press-releases', polling:'https://www.massinc.org/our-work/policy-agenda/polling/', news:'https://commonwealthbeacon.org/feed/' },
+  { id:22, name:'Marcy Kaptur', party:'D', chamber:'House', state:'Ohio', seat:'OH-9', district:9, tier:4, up2026:true, role:'Pakistan Caucus', stance:'Pakistan Caucus member; no critical stance on record', pakistan:'Pro-current Pakistani dispensation (Pakistan Caucus)', bills:null, notes:null, source:'https://kaptur.house.gov/media-center', polling:'https://ohiocapitaljournal.com/feed/', news:'https://ohiocapitaljournal.com/feed/' },
+  { id:23, name:'Danny K. Davis', party:'D', chamber:'House', state:'Illinois', seat:'IL-7', district:7, tier:4, up2026:false, role:'Pakistan Caucus', stance:'Pakistan Caucus member; no critical stance on military rule', pakistan:'Pro-current Pakistani dispensation (Pakistan Caucus)', bills:null, notes:'Not running for re-election per document.', source:null, polling:'https://paulsimoninstitute.siu.edu/polls/index.php', news:'https://capitolnewsillinois.com/feed/' },
+  // TIER 5 — ACTIVE PAKISTAN OPPOSITION
+  { id:24, name:'Greg Casar', party:'D', chamber:'House', state:'Texas', seat:'TX-35', district:35, tier:5, up2026:true, role:'House', stance:'Led 60+ member letter demanding release of political prisoners including Imran Khan', pakistan:'Critical of Pakistan military — led 60+ member letter demanding release of political prisoners incl. Imran Khan', bills:'Led 60+ member letter on Pakistani political prisoners', notes:'Most explicit anti-military-establishment action of any House member.', source:'https://casar.house.gov/media', polling:'https://texaspolitics.utexas.edu/polling', news:'https://feeds.texastribune.org/texastribune/politics' },
+  { id:25, name:'Joe Wilson', party:'R', chamber:'House', state:'South Carolina', seat:'SC-2', district:2, tier:5, up2026:true, role:'House', stance:'Co-sponsored Pakistan Democracy Act targeting sanctions on Gen. Asim Munir', pakistan:'Critical of Pakistan military — co-sponsored Pakistan Democracy Act targeting sanctions on Gen. Asim Munir', bills:'Pakistan Democracy Act (co-sponsor) — targets sanctions on Gen. Asim Munir', notes:null, source:'https://joewilson.house.gov/media', polling:'https://www.winthrop.edu/wupoll/', news:'https://scdailygazette.com/feed/' },
+  { id:26, name:'Jimmy Panetta', party:'D', chamber:'House', state:'California', seat:'CA-19', district:19, tier:5, up2026:true, role:'House', stance:'Co-sponsored Pakistan Democracy Act', pakistan:'Critical of Pakistan military — co-sponsored Pakistan Democracy Act', bills:'Pakistan Democracy Act (co-sponsor)', notes:null, source:'https://panetta.house.gov/media', polling:'https://igs.berkeley.edu/research/berkeley-igs-poll', news:'https://calmatters.org/feed/' },
+  { id:27, name:'Ilhan Omar', party:'D', chamber:'House', state:'Minnesota', seat:'MN-5', district:5, tier:5, up2026:true, role:'House', stance:'Historically pro-PTI/Imran Khan; visited PoK; critical of Pakistan military crackdowns', pakistan:'Critical of Pakistan military (pro-PTI/Imran Khan)', bills:null, notes:'Visited PoK; critical of military crackdowns.', source:'https://ilhanomar.com/news/', polling:'https://www.startribune.com/minnesota-poll/', news:'https://minnesotareformer.com/feed/' },
+  { id:28, name:'Rashida Tlaib', party:'D', chamber:'House', state:'Michigan', seat:'MI-12', district:12, tier:5, up2026:true, role:'House', stance:'Co-sponsored Pakistan democracy/human rights resolutions', pakistan:'Critical of Pakistan military — co-sponsored Pakistan democracy/human rights resolutions', bills:'Pakistan democracy/human rights resolutions (co-sponsor)', notes:null, source:'https://tlaib.house.gov/', polling:'https://www.epicmra.com', news:'https://michiganadvance.com/feed/' },
+  { id:29, name:'Chris Van Hollen', party:'D', chamber:'Senate', state:'Maryland', seat:'Class III — At-Large', district:null, tier:5, up2026:false, role:'Senate', stance:"Formally wrote to Pakistan's Ambassador expressing concern over military repression of human rights and political dissent; called for Senate hearings on US policy responses", pakistan:"Critical of Pakistan military — wrote to Pakistan's Ambassador re: military repression; called for Senate hearings", bills:"Wrote to Pakistan's Ambassador expressing concern over military repression and political dissent", notes:"Re-elected Nov 2024; NOT up in 2026.", source:'https://www.vanhollen.senate.gov/news', polling:'https://www.goucher.edu/goucher-poll/', news:'https://www.marylandmatters.org/feed/' },
+  // ── MEMBERS 30–39 (bills, stances, URLs) ──
+  { id:30, name:'Bill Cassidy', party:'R', chamber:'Senate', state:'Louisiana', seat:'Class II — At-Large', district:null, tier:3, up2026:true, role:'Bill Sponsor', stance:'Sponsored S.2868 – India Shrimp Tariff Act, which imposes new targeted tariffs on Indian shrimp exports — directly restrictive of US-India trade; positions him as a protectionist voice against Indian goods in bilateral commerce negotiations', pakistan:'Neutral', bills:'S.2868 – India Shrimp Tariff Act', notes:'Up for re-election Nov 2026 (LA). S.2868 puts him on the restrictive side of US-India trade despite generally centrist record.', source:'https://www.cassidy.senate.gov/newsroom/', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=poll+Louisiana+senate+2026', news:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:theadvocate.com+Louisiana+election+2026' },
+  { id:31, name:'Jim Banks', party:'R', chamber:'Senate', state:'Indiana', seat:'Class I — At-Large', district:null, tier:3, up2026:false, role:'Bill Sponsor', stance:'Sponsored S.2821 – American Tech Workforce Act of 2025, which would significantly restrict H-1B visa pathways; Indians hold ~75% of all H-1B visas, making S.2821 one of the most consequential anti-H-1B bills for the Indian-American tech community in the 119th Congress', pakistan:'Skeptical', bills:'S.2821 – American Tech Workforce Act of 2025 (restricts H-1B)', notes:'Elected Nov 2024 — freshman Senator from Indiana. NOT up in 2026. Anti-H-1B bill is the primary India-relevance track.', source:'https://www.banks.senate.gov/news/', polling:'https://www.bsu.edu/academics/collegesanddepartments/cber', news:'https://indianacapitalchronicle.com/feed/' },
+  { id:32, name:'Chuck Grassley', party:'R', chamber:'Senate', state:'Iowa', seat:'Class III — At-Large', district:null, tier:2, up2026:false, role:'Bill Sponsor', stance:'Co-sponsored S.2928 – H-1B and L-1 Visa Reform Act of 2025 alongside Dick Durbin (bipartisan); reform scope determines impact on Indian nationals who hold ~75% of H-1B visas; bipartisan sponsorship suggests compromise rather than outright restriction; Finance/Judiciary committees also give leverage on GSP and employment-based immigration', pakistan:'Neutral', bills:'S.2928 – H-1B and L-1 Visa Reform Act of 2025 (co-sponsor, bipartisan with Durbin)', notes:'Re-elected Nov 2022; NOT up in 2026. Dean of the Senate. Finance/Judiciary dual role provides additional leverage on US-India trade and visa frameworks.', source:'https://www.grassley.senate.gov/news', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Selzer+poll+Iowa+2026', news:'https://iowacapitaldispatch.com/feed/' },
+  { id:33, name:'Dick Durbin', party:'D', chamber:'Senate', state:'Illinois', seat:'Class II — At-Large', district:null, tier:2, up2026:false, role:'Bill Sponsor', stance:'Co-sponsored S.2928 – H-1B and L-1 Visa Reform Act of 2025 alongside Chuck Grassley (bipartisan); long-standing immigration reform champion whose previous work includes the EAGLE Act (per-country cap elimination) — directly benefits the 600,000+ Indian national green card backlog; generally supportive of US-India strategic relationship', pakistan:'Balanced', bills:'S.2928 – H-1B and L-1 Visa Reform Act of 2025 (co-sponsor, bipartisan with Grassley)', notes:'Announced retirement — not seeking re-election in 2026; still serving until Jan 2027. Judiciary Committee role pivotal on immigration legislation critical to the Indian-American community.', source:'https://www.durbin.senate.gov/newsroom/press-releases', polling:'https://paulsimoninstitute.siu.edu/polls/index.php', news:'https://capitolnewsillinois.com/feed/' },
+  { id:34, name:'Marjorie Taylor Greene', party:'R', chamber:'House', state:'Georgia', seat:'GA-14', district:14, tier:4, up2026:true, role:'Bill Sponsor', stance:"Introduced H.R.6937 – End H-1B Now Act, which would eliminate the H-1B visa programme entirely; publicly clashed with Elon Musk over H-1B in Dec 2024/Jan 2025; End H-1B Now Act would devastate the Indian-American tech workforce — Indians hold ~75% of all H-1B visas; among the most-followed members on social media amplifying anti-H-1B sentiment", pakistan:null, bills:'H.R.6937 – End H-1B Now Act', notes:'Highly visible H-1B opposition directly impacts Indian-American tech workforce. Bill seeks complete elimination of the programme — the most extreme anti-H-1B position in the 119th Congress.', source:'https://mtg.house.gov/media', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=poll+Georgia+house+14+2026', news:'https://georgiarecorder.com/feed/' },
+  { id:35, name:'Eli Crane', party:'R', chamber:'House', state:'Arizona', seat:'AZ-2', district:2, tier:4, up2026:true, role:'Bill Sponsor', stance:'Introduced H.R.8443 – End H-1B Visa Abuse Act of 2026, targeting strict restrictions on the H-1B programme; immigration restrictionist; anti-H-1B stance directly harms Indian tech workers who constitute the largest H-1B recipient group; AZ-2 district includes growing South Asian tech-sector presence in Tucson area', pakistan:'Neutral', bills:'H.R.8443 – End H-1B Visa Abuse Act of 2026', notes:'Former Navy SEAL. H-1B bill is the primary India-relevance track. AZ-2 is a competitive district up in 2026.', source:'https://crane.house.gov/media/', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Emerson+poll+Arizona+2026', news:'https://azmirror.com/feed/' },
+  { id:36, name:'Thomas R. Suozzi', party:'D', chamber:'House', state:'New York', seat:'NY-3', district:3, tier:1, up2026:true, role:'Bill Sponsor', stance:"Introduced H.Res.819 – Recognizing Indian American contributions to the United States and condemning racism and discrimination against Indian Americans; the strongest formal expression of congressional solidarity with the Indian-American community in the 119th Congress; represents NY-3 (Long Island/Nassau County) — home to Hicksville, one of the densest Indian-American communities in the US", pakistan:'Balanced', bills:'H.Res.819 – Recognizing Indian American contributions; condemning racism and discrimination against Indian Americans', notes:'Won special election Feb 2024; re-elected Nov 2024. H.Res.819 is a direct pro-Indian-American legislative statement — the most explicitly community-supportive bill in this roster.', source:'https://suozzi.house.gov/media', polling:'https://maristpoll.marist.edu', news:'https://www.nysfocus.com/feed/' },
+  { id:37, name:'Jill N. Tokuda', party:'D', chamber:'House', state:'Hawaii', seat:'HI-2', district:2, tier:1, up2026:true, role:'Bill Sponsor', stance:'Introduced H.R.6286 – Indo-Pacific Partner and Ally Tariff Repeal Act, which explicitly includes India — would repeal Trump-era tariffs on Indian goods; direct pro-India trade legislation; Armed Services member overseeing INDOPACOM (Hawaii) — the strategic hub for Quad military coordination and US-India defence cooperation', pakistan:'Neutral', bills:'H.R.6286 – Indo-Pacific Partner and Ally Tariff Repeal Act (includes India; repeals tariffs on Indian goods)', notes:'HI-2. Hawaii = INDOPACOM headquarters — hub for US-India-Quad military coordination. H.R.6286 makes her a direct trade-policy ally for India. Up for re-election 2026.', source:'https://tokuda.house.gov/media', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=poll+Hawaii+2026', news:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=site:civilbeat.org+Hawaii+election+2026' },
+  { id:38, name:'Jodey C. Arrington', party:'R', chamber:'House', state:'Texas', seat:'TX-19', district:19, tier:3, up2026:true, role:'Bill Sponsor', stance:'Introduced H.J.Res.22 – Disapproving the DHS rule modernizing H-1B requirements; opposes updates that would better serve high-skill H-1B workers — directly impacts Indian tech workers who constitute ~75% of H-1B holders; as House Budget Chair also shapes State/USAID/DoD funding levels affecting US-India bilateral programmes', pakistan:'Neutral', bills:'H.J.Res.22 – Disapproving DHS rule modernizing H-1B requirements', notes:'House Budget Chair dual role: H.J.Res.22 directly opposes H-1B modernisation; Budget jurisdiction indirectly shapes all US-India programme funding. Up for re-election 2026.', source:'https://arrington.house.gov/news/documentquery.aspx', polling:'https://texaspolitics.utexas.edu/polling', news:'https://feeds.texastribune.org/texastribune/politics' },
+  { id:39, name:'Deborah K. Ross', party:'D', chamber:'House', state:'North Carolina', seat:'NC-2', district:2, tier:1, up2026:true, role:'Bill Sponsor', stance:"Introduced H.J.Res.134 – Terminating the national emergency enabling tariffs on India; direct pro-India trade legislation — would remove punitive tariffs on Indian goods; NC Research Triangle (Raleigh-Durham-Chapel Hill) hosts one of the largest concentrations of Indian-American tech workers in the South; pro-immigration and H-1B reform", pakistan:'Balanced', bills:"H.J.Res.134 – Terminating national emergency enabling tariffs on India", notes:"NC-2 anchors the Research Triangle. H.J.Res.134 is a direct legislative act in India's trade interest. Up for re-election 2026.", source:'https://ross.house.gov/media', polling:'https://news.google.com/rss/search?hl=en-US&gl=US&ceid=US:en&q=Meredith+poll+North+Carolina+2026', news:'https://ncnewsline.com/feed/' }
+];
+
+// ── BUILD ROSTER TABLE ────────────────────────────────────────────────────
+let _indiaRosterRowEl = null;
+
+function buildRoster() {
+  const tbody = document.getElementById('roster-tbody');
+  MEMBERS.forEach(m => {
+    const tr = document.createElement('tr');
+    tr.style.cursor = 'pointer';
+    tr.tabIndex = 0;
+    tr.onclick = (e) => {
+      e.stopPropagation(); // don't let the "click outside closes" listener fire for this same click
+      if (_indiaRosterRowEl) _indiaRosterRowEl.classList.remove('sp-row-selected');
+      _indiaRosterRowEl = tr;
+      tr.classList.add('sp-row-selected');
+      openSidePanel(m.id);
+    };
+    tr.onkeydown = (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tr.click(); }
+    };
+    tr.innerHTML = `
+      <td style="color:var(--text3);font-size:11px">${m.id}</td>
+      <td><div class="roster-name">${m.name}</div></td>
+      <td><span class="pill ${m.party==='R'?'pill-r':'pill-d'}">${m.party}</span></td>
+      <td><span class="pill ${m.chamber==='Senate'?'pill-senate':'pill-house'}">${m.chamber}</span></td>
+      <td style="font:400 11.5px var(--sans);color:var(--text2)">${m.seat}</td>
+      <td><span class="roster-tier" style="background:${TIER_COLORS[m.tier]}">${TIER_LABELS[m.tier]}</span></td>
+      <td style="font:400 13px var(--sans);color:var(--text3);max-width:200px">${m.role}</td>
+      <td class="${m.up2026?'up-yes':'up-no'}">${m.up2026?'YES':'NO'}</td>
+      <td>${m.source?`<a href="${m.source}" target="_blank" class="sp-link" onclick="event.stopPropagation()">Office</a>`:'&mdash;'}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ── SIDE PANEL ─────────────────────────────────────────────────────────────
+// Canonical seat ID for a MEMBERS entry, per its actual chamber (most of
+// the roster is House, but it includes senators too).
+function memberSeatId(m) {
+  return m.chamber === 'Senate' ? toSeatId('senate', m.state) : toSeatId('house', m.state + '_' + m.district);
+}
+
+let _sidepanelLastFocused = null;
+
+function openSidePanel(memberId) {
+  const m = MEMBERS.find(x => x.id === memberId);
+  if (!m) return;
+  if (window.SeatPanel) window.SeatPanel.close(); // only one detail panel visible at a time
+  if (!document.getElementById('india-sidepanel').classList.contains('open')) {
+    _sidepanelLastFocused = document.activeElement;
+  }
+  const body = document.getElementById('sidepanel-body');
+  const tierColor = TIER_COLORS[m.tier];
+  body.innerHTML = `
+    <div class="sp-name">${m.name}</div>
+    <div class="sp-meta">${m.party==='R'?'Republican':'Democratic'} &middot; ${m.chamber} &middot; ${m.seat}</div>
+    <span class="sp-tier-badge" style="background:${tierColor}">Tier ${m.tier} &mdash; ${TIER_LABELS[m.tier]}</span>
+
+    <div class="sp-section-label">Role &amp; Position</div>
+    <div class="sp-text">${m.role}</div>
+
+    <div class="sp-section-label">India Stance</div>
+    <div class="sp-text">${m.stance}</div>
+
+    ${m.pakistan ? `<div class="sp-section-label">Pakistan Position</div><div class="sp-text">${m.pakistan}</div>` : ''}
+
+    ${m.bills ? `<div class="sp-section-label">Key Bills &amp; Actions</div><div class="sp-text">${m.bills}</div>` : ''}
+
+    ${m.notes ? `<div class="sp-section-label">Notes</div><div class="sp-text">${m.notes}</div>` : ''}
+
+    <div class="sp-section-label">Sources &amp; Links</div>
+    <div class="sp-links-row">
+      ${m.source ? `<a href="${m.source}" target="_blank" class="sp-link">&#9656; Office Newsroom</a>` : ''}
+      ${m.news ? `<a href="${m.news}" target="_blank" class="sp-link">&#9656; State News RSS</a>` : ''}
+      ${m.polling ? `<a href="${m.polling}" target="_blank" class="sp-link">&#9656; State Polling</a>` : ''}
+    </div>
+    <p style="font:400 11px var(--sans);color:var(--text3);margin-top:16px">Position data sourced from member office newsrooms and our research roster (119th Congress). All positions verified against official statements and committee records.</p>
+
+    <div class="sp-section-label" id="sp-brief-label" style="margin-top:20px;display:none">Seat Brief</div>
+    <div id="sp-embedded-brief"></div>
+
+    <div class="sp-section-label" style="margin-top:20px">Latest News</div>
+    <div id="sp-news-list" class="sp-news-list">
+      <div class="sp-latest-empty">Loading news\u2026</div>
+    </div>
+  `;
+  document.getElementById('india-sidepanel').classList.add('open');
+  document.getElementById('india-overlay').classList.add('open');
+  _loadAndRenderSidepanelNews(m.id);
+
+  // Embed that member's seat brief (India block + 5 sections + Key Issues)
+  // using SeatPanel's own renderer -- no duplicated rendering code here.
+  const seatId = memberSeatId(m);
+  if (window.SeatPanel && seatId) {
+    window.SeatPanel.renderBriefInto(document.getElementById('sp-embedded-brief'), seatId, { mode: 'india' })
+      .then(found => { if (found) document.getElementById('sp-brief-label').style.display = ''; });
+  }
+}
+
+function closeSidePanel() {
+  document.getElementById('india-sidepanel').classList.remove('open');
+  document.getElementById('india-overlay').classList.remove('open');
+  if (_indiaRosterRowEl) { _indiaRosterRowEl.classList.remove('sp-row-selected'); _indiaRosterRowEl = null; }
+  const toFocus = _sidepanelLastFocused;
+  _sidepanelLastFocused = null;
+  if (toFocus && document.contains(toFocus) && typeof toFocus.focus === 'function') toFocus.focus();
+}
+
+// Bubble-phase click-outside-closes for the member side panel (same pattern
+// as seat-panel.js's own overlay -- see the .india-overlay CSS comment).
+document.addEventListener('click', function (e) {
+  const panel = document.getElementById('india-sidepanel');
+  if (!panel.classList.contains('open')) return;
+  if (panel.contains(e.target)) return;
+  closeSidePanel();
+});
+
+// Only one detail panel visible at a time: close the member side panel
+// whenever SeatPanel opens (e.g. a seat/district map click).
+window.addEventListener('seatpanel:open', closeSidePanel);
+
+// Esc closes the member side panel (pre-existing gap -- this panel never had it).
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'Escape') return;
+  if (document.getElementById('india-sidepanel').classList.contains('open')) closeSidePanel();
+});
+
+// ── MAP SETUP ───────────────────────────────────────────────────────────────
+const tooltip = document.getElementById('map-tooltip');
+let houseMapLoaded = false;
+let senateMapLoaded = false;
+let presenceMapLoaded = false;
+let influenceMapLoaded = false;
+
+// GeoJSON cache (shared between interest House map and presence map)
+let _cachedDistrictGeo = null;
+let _districtGeoFetching = false;
+const _districtGeoWaiters = [];
+
+function fetchDistrictGeo(cb) {
+  if (_cachedDistrictGeo) { cb(_cachedDistrictGeo); return; }
+  _districtGeoWaiters.push(cb);
+  if (_districtGeoFetching) return;
+  _districtGeoFetching = true;
+  // 2026 district boundaries; the 119th Congress file is the fallback
+  const getJson = url => fetch(url).then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
+  getJson('assets/districts2026.geojson?v=1')
+    .catch(e => { console.warn('districts2026.geojson unavailable, using districts119.geojson', e); return getJson('assets/districts119.geojson'); })
+    .then(gj => { _cachedDistrictGeo = gj; _districtGeoWaiters.forEach(fn => fn(gj)); _districtGeoWaiters.length = 0; })
+    .catch(() => {
+      ['house-map-loading','presence-map-loading'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = 'Could not load district map.';
+      });
+    });
+}
+
+// Build lookup: state+district → member, state → senators
+const houseIdx = {};
+const senateIdx = {};
+MEMBERS.forEach(m => {
+  if (m.chamber === 'House' && m.district !== null) {
+    houseIdx[m.state + '_' + m.district] = m;
+  }
+  if (m.chamber === 'Senate') {
+    if (!senateIdx[m.state]) senateIdx[m.state] = [];
+    senateIdx[m.state].push(m);
+  }
+});
+
+// Indian-American members (panel-presence)
+const IA_MEMBERS = [
+  { name:'Ami Bera',              short:'Bera',       party:'D', state:'California', district:3  },
+  { name:'Ro Khanna',             short:'Khanna',     party:'D', state:'California', district:17 },
+  { name:'Pramila Jayapal',       short:'Jayapal',    party:'D', state:'Washington', district:7  },
+  { name:'Raja Krishnamoorthi',   short:'Raja K.',    party:'D', state:'Illinois',   district:8  },
+  { name:'Suhas Subramanyam',     short:'Suhas S.',   party:'D', state:'Virginia',   district:10 },
+  { name:'Shri Thanedar',         short:'Thanedar',   party:'D', state:'Michigan',   district:13 },
+];
+const iaIdx = {};
+IA_MEMBERS.forEach(m => { iaIdx[m.state + '_' + m.district] = m; });
+
+function getBestTier(members) {
+  const tiers = members.map(m => m.tier);
+  const proIndia = tiers.filter(t => t <= 2);
+  return proIndia.length ? Math.min(...proIndia) : Math.min(...tiers);
+}
+
+const TIER_COLOR_MAP = {1:'#166534',2:'#4a9a6a',3:'#9333ea',4:'#5b21b6',5:'#1d4ed8'};
+
+// ── ZOOM HELPER ─────────────────────────────────────────────────────────────
+function makeZoom(svgSel, onZoom) {
+  const z = d3.zoom().scaleExtent([1, 12]).on('zoom', e => {
+    onZoom(e.transform);
+    svgSel.style('cursor', e.transform.k > 1 ? 'grabbing' : 'grab');
+  });
+  svgSel.call(z).on('dblclick.zoom', null);
+  return {
+    zoomBy: f => svgSel.transition().duration(350).call(z.scaleBy, f),
+    reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
+  };
+}
+let _houseInterestZoom = null, _senateInterestZoom = null, _presenceZoom = null, _influenceZoom = null;
+let _influenceChoro = null, _influenceBubbles = null, _influenceColorScale = null;
+function houseInterestZoomBy(f)    { _houseInterestZoom?.zoomBy(f); }
+function houseInterestZoomReset()  { _houseInterestZoom?.reset(); }
+function senateInterestZoomBy(f)   { _senateInterestZoom?.zoomBy(f); }
+function senateInterestZoomReset() { _senateInterestZoom?.reset(); }
+function presenceZoomBy(f)         { _presenceZoom?.zoomBy(f); }
+function presenceZoomReset()       { _presenceZoom?.reset(); }
+function influenceZoomBy(f)        { _influenceZoom?.zoomBy(f); }
+function influenceZoomReset()      { _influenceZoom?.reset(); }
+
+// ── INFLUENCE MAP DATA ───────────────────────────────────────────────────────
+const IA_STATE_DATA = {
+  'California':     { pop:960000, pct:2.5,  comp:'safe-d',  outlook:'Safe D — no Senate race in 2026; CA-22 rated Toss-up, CA-48 Lean D' },
+  'Texas':          { pop:430000, pct:1.5,  comp:'lean-r',  outlook:'Lean R — open Senate seat rated Lean D; TX-35 rated Toss-up' },
+  'New Jersey':     { pop:390000, pct:4.4,  comp:'swing',   outlook:'Swing — NJ-07 Lean D, NJ-11 Solid D; Senate (Booker) Solid D' },
+  'New York':       { pop:418000, pct:2.1,  comp:'lean-d',  outlook:'Lean D — NY-17 rated Toss-up; Long Island seats Lean or Likely D' },
+  'Illinois':       { pop:215000, pct:1.7,  comp:'safe-d',  outlook:'Safe D — open Senate seat (Krishnamoorthi lost the primary); IL-08 now open' },
+  'Virginia':       { pop:155000, pct:1.8,  comp:'lean-d',  outlook:'Lean D — VA-10 (Subramanyam incumbent); VA-01 rated Toss-up' },
+  'Georgia':        { pop:115000, pct:1.1,  comp:'swing',   outlook:'Swing — Senate (Ossoff) rated Likely D; open Governor race Lean D' },
+  'Florida':        { pop:100000, pct:0.47, comp:'lean-r',  outlook:'Lean R — several competitive suburban House seats' },
+  'Michigan':       { pop:95000,  pct:0.9,  comp:'swing',   outlook:'Swing — open Senate seat rated Lean D; Thanedar lost the MI-13 primary to Donavan McKinney' },
+  'Pennsylvania':   { pop:90000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; PA-01 rated Toss-up, three seats Lean D' },
+  'Maryland':       { pop:90000,  pct:1.5,  comp:'safe-d',  outlook:'Safe D — no competitive statewide races' },
+  'Washington':     { pop:90000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — Jayapal incumbent WA-07' },
+  'Massachusetts':  { pop:80000,  pct:1.2,  comp:'safe-d',  outlook:'Safe D — no competitive races expected' },
+  'North Carolina': { pop:75000,  pct:0.72, comp:'swing',   outlook:'Swing — open Senate seat rated Likely D; NC-01 and NC-11 Lean D' },
+  'Ohio':           { pop:65000,  pct:0.56, comp:'lean-r',  outlook:'Lean R — Senate special (Husted) and open Governor race rated Lean D' },
+  'Arizona':        { pop:60000,  pct:0.83, comp:'swing',   outlook:'Swing — AZ-01 and AZ-06 rated Lean D; Governor (Hobbs) Likely D' },
+  'Connecticut':    { pop:55000,  pct:1.55, comp:'lean-d',  outlook:'Lean D — CT-05 potentially competitive' },
+  'Colorado':       { pop:55000,  pct:0.96, comp:'lean-d',  outlook:'Lean D — Senate (Hickenlooper) Safe D; CO-05 rated Toss-up, CO-08 Lean D' },
+  'Minnesota':      { pop:50000,  pct:0.9,  comp:'lean-d',  outlook:'Lean D — open Senate seat (Smith retiring) rated Lean D' },
+  'Indiana':        { pop:45000,  pct:0.66, comp:'safe-r',  outlook:'Safe R — strong Republican state' },
+  'Nevada':         { pop:40000,  pct:1.3,  comp:'swing',   outlook:'Swing — Governor (Lombardo) rated Toss-up; NV-02 Lean R; Indian-American community in Las Vegas suburbs' },
+  'Wisconsin':      { pop:40000,  pct:0.7,  comp:'swing',   outlook:'Swing — no Senate race in 2026; open Governor race rated Lean D; community in Madison/Milwaukee suburbs' },
+  'Oregon':         { pop:40000,  pct:0.95, comp:'lean-d',  outlook:'Lean D — Merkley Senate seat; OR-05 potentially competitive' },
+  'Missouri':       { pop:40000,  pct:0.65, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'Tennessee':      { pop:35000,  pct:0.51, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'Delaware':       { pop:25000,  pct:2.57, comp:'safe-d',  outlook:'Safe D — no competitive races' },
+  'Kansas':         { pop:25000,  pct:0.86, comp:'lean-r',  outlook:'Lean R — Senate (Marshall) rated Toss-up; Governor race Lean R' },
+  'Oklahoma':       { pop:25000,  pct:0.63, comp:'safe-r',  outlook:'Safe R — Senate seat (Alan Armstrong, appointed) Safe R' },
+  'South Carolina': { pop:25000,  pct:0.49, comp:'lean-r',  outlook:'Lean R — Senate seat (Darline Graham Nordone, appointed) rated Lean R; open SC-01 Lean R' },
+  'Utah':           { pop:20000,  pct:0.63, comp:'lean-r',  outlook:'Lean R — no Senate race in 2026; no competitive races' },
+  'Kentucky':       { pop:20000,  pct:0.45, comp:'safe-r',  outlook:'Safe R — open Senate seat (McConnell retiring) Safe R; KY-06 rated Toss-up' },
+  'Hawaii':         { pop:20000,  pct:1.41, comp:'safe-d',  outlook:'Safe D — Tokuda HI-02 incumbent' },
+  'Louisiana':      { pop:15000,  pct:0.32, comp:'safe-r',  outlook:'Safe R — open Senate seat (Cassidy not seeking re-election) rated Likely R' },
+  'Iowa':           { pop:15000,  pct:0.48, comp:'swing',   outlook:'Swing — open Senate seat (Ernst retiring) rated Toss-up; Indian-American community in Des Moines suburbs' },
+  'Nebraska':       { pop:15000,  pct:0.77, comp:'safe-r',  outlook:'Safe R — Senate (Ricketts) rated Lean R; first full-term election' },
+  'Rhode Island':   { pop:15000,  pct:1.42, comp:'safe-d',  outlook:'Safe D — no competitive races' },
+  'New Hampshire':  { pop:12000,  pct:0.89, comp:'swing',   outlook:'Swing — Senate seat rated Lean D; NH-01 Likely D' },
+  'Idaho':          { pop:8000,   pct:0.45, comp:'safe-r',  outlook:'Safe R — Risch is seeking re-election' },
+  'Mississippi':    { pop:8000,   pct:0.27, comp:'safe-r',  outlook:'Safe R — no competitive federal races' },
+  'New Mexico':     { pop:10000,  pct:0.48, comp:'safe-d',  outlook:'Safe D — Luján Senate seat' },
+  'Arkansas':       { pop:10000,  pct:0.33, comp:'safe-r',  outlook:'Safe R — no competitive races' },
+  'West Virginia':  { pop:6000,   pct:0.33, comp:'safe-r',  outlook:'Safe R — Capito Senate seat' },
+  'Maine':          { pop:6000,   pct:0.44, comp:'lean-d',  outlook:'Lean D — Senate (Collins) rated Toss-up; open ME-02 Lean R' },
+  'Vermont':        { pop:5000,   pct:0.80, comp:'safe-d',  outlook:'Safe D — no Senate race in 2026' },
+  'North Dakota':   { pop:5000,   pct:0.65, comp:'safe-r',  outlook:'Safe R — no Senate race in 2026' },
+  'South Dakota':   { pop:5000,   pct:0.56, comp:'safe-r',  outlook:'Safe R — Rounds Senate seat' },
+  'Alaska':         { pop:5000,   pct:0.68, comp:'lean-r',  outlook:'Lean R — Sullivan Senate seat (not up 2026)' },
+  'Montana':        { pop:3000,   pct:0.28, comp:'lean-r',  outlook:'Lean R — Daines Senate seat (not up 2026)' },
+  'Wyoming':        { pop:2000,   pct:0.35, comp:'safe-r',  outlook:'Safe R — Barrasso Senate seat' },
+  'Alabama':        { pop:15000,  pct:0.30, comp:'safe-r',  outlook:'Safe R — no competitive federal races' },
+};
+
+// ── INFLUENCE MAP ────────────────────────────────────────────────────────────
+function loadInfluenceMap() {
+  if (influenceMapLoaded) return;
+  influenceMapLoaded = true;
+
+  const svgEl = d3.select('#influence-map-svg');
+  const g = svgEl.append('g');
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+  const pathGen = d3.geoPath().projection(proj);
+
+  const maxPop = d3.max(Object.values(IA_STATE_DATA), d => d.pop);
+  const radiusScale = d3.scaleSqrt().domain([0, maxPop]).range([0, 34]);
+  _influenceColorScale = d3.scaleThreshold()
+    .domain([0.5, 1.5, 2.5])
+    .range(['#FFF3E8', '#F7B96A', '#E8832A', '#B85900']);
+
+  _influenceZoom = makeZoom(svgEl, t => {
+    g.attr('transform', t);
+    if (_influenceBubbles) {
+      const k = t.k;
+      _influenceBubbles.attr('r', d => {
+        const ia = IA_STATE_DATA[d.properties.NAME];
+        return ia ? radiusScale(ia.pop) / k : 0;
+      });
+    }
+  });
+
+  fetch('assets/senate.json')
+    .then(r => r.json())
+    .then(gj => {
+      document.getElementById('influence-map-loading').style.display = 'none';
+
+      // Choropleth layer
+      _influenceChoro = g.selectAll('path.influence-state')
+        .data(gj.features)
+        .join('path')
+        .attr('class', 'influence-state')
+        .attr('d', d => pathGen(d) || '')
+        .style('fill', d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia ? _influenceColorScale(ia.pct) : '#e5e7eb';
+        })
+        .style('stroke', '#fff')
+        .style('stroke-width', '0.8px')
+        .on('mousemove', function(event, d) {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          tooltip.style.display = 'block';
+          tooltip.style.left = (event.clientX + 12) + 'px';
+          tooltip.style.top  = (event.clientY - 28) + 'px';
+          if (ia) {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br>` +
+              `~${ia.pop >= 1000 ? (ia.pop/1000).toFixed(0)+'k' : ia.pop} Indian-Americans &mdash; ${ia.pct}% of state<br>` +
+              `<em style="color:var(--text3)">${ia.outlook}</em>`;
+          } else {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br><em>No data</em>`;
+          }
+        })
+        .on('mouseleave', () => { tooltip.style.display = 'none'; });
+
+      // Bubble layer (only states with meaningful IA population)
+      _influenceBubbles = g.selectAll('circle.influence-bubble')
+        .data(gj.features.filter(d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia && ia.pop >= 5000;
+        }))
+        .join('circle')
+        .attr('class', 'influence-bubble')
+        .attr('cx', d => { const c = pathGen.centroid(d); return isFinite(c[0]) ? c[0] : 0; })
+        .attr('cy', d => { const c = pathGen.centroid(d); return isFinite(c[1]) ? c[1] : 0; })
+        .attr('r', d => {
+          const ia = IA_STATE_DATA[d.properties.NAME];
+          return ia ? radiusScale(ia.pop) : 0;
+        })
+        .style('fill', 'rgba(232,131,42,0.40)')
+        .style('stroke', '#E8832A')
+        .style('stroke-width', '1px')
+        .style('pointer-events', 'none');
+    })
+    .catch(err => {
+      influenceMapLoaded = false;
+      const el = document.getElementById('influence-map-loading');
+      if (el) el.textContent = 'Could not load map — switch tabs to retry.';
+      console.error('Influence map error:', err);
+    });
+}
+
+function setInfluenceView(view, btn) {
+  document.querySelectorAll('.itog').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const mapWrap = document.getElementById('influence-map-wrap');
+  const tableWrap = document.getElementById('influence-table-wrap');
+  if (view === 'table') {
+    mapWrap.style.display = 'none';
+    tableWrap.style.display = 'block';
+  } else {
+    mapWrap.style.display = 'block';
+    tableWrap.style.display = 'none';
+    if (view === 'bubble' && _influenceChoro) {
+      _influenceChoro.style('fill', '#e5e7eb');
+      document.getElementById('influence-legend').style.display = 'none';
+    } else if (view === 'combined' && _influenceChoro) {
+      _influenceChoro.style('fill', d => {
+        const ia = IA_STATE_DATA[d.properties.NAME];
+        return ia ? _influenceColorScale(ia.pct) : '#e5e7eb';
+      });
+      document.getElementById('influence-legend').style.display = 'block';
+    }
+  }
+}
+
+// ── INTEREST HOUSE MAP ──────────────────────────────────────────────────────
+// ── SEAT PANEL INTEGRATION (India-Relevant Races maps) ──────────────────────
+// Map clicks are seat-centric and always go through SeatPanel in "india"
+// mode, regardless of whether the district/state has a tracked roster
+// member -- that's how AZ-01 and CA-40 (neither a tracked member's seat)
+// become clickable. Member-centric clicks (roster rows, presence-map pins)
+// keep using openSidePanel, unchanged.
+let _indiaSeatPathEl = null;
+let _indiaSeatPathDefaultWidth = '0.4px';
+
+function indiaHighlightSeat(pathEl, defaultWidth) {
+  if (_indiaSeatPathEl) {
+    d3.select(_indiaSeatPathEl).style('stroke', '#fff').style('stroke-width', _indiaSeatPathDefaultWidth);
+  }
+  _indiaSeatPathEl = pathEl || null;
+  _indiaSeatPathDefaultWidth = defaultWidth || '0.4px';
+  if (_indiaSeatPathEl) d3.select(_indiaSeatPathEl).style('stroke', '#111').style('stroke-width', '2.5px');
+}
+
+window.addEventListener('seatpanel:close', () => indiaHighlightSeat(null));
+
+let _interestHouseSel = null;
+let _interestHouseTier = 'all';
+
+function loadHouseMap() {
+  if (houseMapLoaded) return;
+  houseMapLoaded = true;
+  const svgEl = d3.select('#house-map-svg');
+  const g = svgEl.append('g');
+  _houseInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+  const pathGen = d3.geoPath().projection(proj);
+
+  fetchDistrictGeo(gj => {
+    document.getElementById('house-map-loading').style.display = 'none';
+    _interestHouseSel = g.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('d', d => pathGen(d) || '')
+      .attr('data-seat-id', d => toSeatId('house', d.properties.state + '_' + d.properties.district))
+      .style('fill', d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = houseIdx[key];
+        return m ? (TIER_COLOR_MAP[m.tier] || '#d1d5db') : '#d1d5db';
+      })
+      .style('stroke', '#fff').style('stroke-width', '0.4px')
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = houseIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        tooltip.innerHTML = m
+          ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'Republican':'Democratic'}<br>${TIER_LABELS[m.tier]}`
+          : `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ' At-Large'}</strong><br><em>Not tracked</em>`;
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const id = toSeatId('house', d.properties.state + '_' + d.properties.district);
+        if (!id) return;
+        indiaHighlightSeat(this, '0.4px');
+        window.SeatPanel.open(id, { mode: 'india' });
+      });
+  });
+}
+
+function filterInterestHouseMap(q) {
+  if (!_interestHouseSel) return;
+  const ql = q.toLowerCase().trim();
+  const active = ql || _interestHouseTier !== 'all';
+  let ct = 0;
+  _interestHouseSel.each(function(d) {
+    const key = d.properties.state + '_' + d.properties.district;
+    const m = houseIdx[key];
+    let show = true;
+    if (ql) show = m && (m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      m.state.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
+      (m.party==='D'?'democrat':'republican').includes(ql));
+    if (_interestHouseTier !== 'all') show = show && m && m.tier === parseInt(_interestHouseTier);
+    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
+    if (show && m) ct++;
+  });
+  const el = document.getElementById('interest-house-count');
+  if (el) el.textContent = active ? ct + ' member' + (ct !== 1 ? 's' : '') : '';
+}
+
+function setInterestHouseTier(tier, btn) {
+  _interestHouseTier = tier;
+  document.querySelectorAll('#inner-house-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
+  filterInterestHouseMap(document.getElementById('interest-house-search')?.value || '');
+}
+
+// ── INTEREST SENATE MAP ─────────────────────────────────────────────────────
+let _interestSenateSel = null;
+let _interestSenateTier = 'all';
+
+function loadSenateMap() {
+  if (senateMapLoaded) return;
+  senateMapLoaded = true;
+  const svgEl = d3.select('#senate-map-svg');
+  const g = svgEl.append('g');
+  _senateInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+  const pathGen = d3.geoPath().projection(proj);
+
+  fetch('assets/senate.json')
+    .then(r => r.json())
+    .then(gj => {
+      document.getElementById('senate-map-loading').style.display = 'none';
+      _interestSenateSel = g.selectAll('path')
+        .data(gj.features)
+        .join('path')
+        .attr('d', d => pathGen(d) || '')
+        .attr('data-seat-id', d => toSeatId('senate', d.properties.NAME))
+        .style('fill', d => {
+          const members = senateIdx[d.properties.NAME];
+          if (!members || !members.length) return '#d1d5db';
+          const tier = getBestTier(members);
+          return TIER_COLOR_MAP[tier] || '#d1d5db';
+        })
+        .style('stroke', '#fff').style('stroke-width', '0.8px')
+        .on('mousemove', function(event, d) {
+          const members = senateIdx[d.properties.NAME];
+          tooltip.style.display = 'block';
+          tooltip.style.left = (event.clientX + 12) + 'px';
+          tooltip.style.top  = (event.clientY - 28) + 'px';
+          if (members && members.length) {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br>` +
+              members.map(m => `${m.name} (${m.party==='R'?'R':'D'}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>');
+          } else {
+            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br><em>No tracked senators</em>`;
+          }
+        })
+        .on('mouseleave', () => { tooltip.style.display = 'none'; })
+        .on('click', function(event, d) {
+          event.stopPropagation();
+          const id = toSeatId('senate', d.properties.NAME);
+          if (!id) return;
+          indiaHighlightSeat(this, '0.8px');
+          window.SeatPanel.open(id, { mode: 'india' });
+        });
+    })
+    .catch(err => {
+      senateMapLoaded = false;
+      const el = document.getElementById('senate-map-loading');
+      if (el) el.textContent = 'Could not load map — click "Senate Map" to retry.';
+      console.error('Senate map error:', err);
+    });
+}
+
+function filterInterestSenateMap(q) {
+  if (!_interestSenateSel) return;
+  const ql = q.toLowerCase().trim();
+  const active = ql || _interestSenateTier !== 'all';
+  let ct = 0;
+  _interestSenateSel.each(function(d) {
+    const members = senateIdx[d.properties.NAME];
+    let show = true;
+    if (ql) show = members && members.some(m =>
+      m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      d.properties.NAME.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
+      (m.party==='D'?'democrat':'republican').includes(ql));
+    if (_interestSenateTier !== 'all') {
+      const t = parseInt(_interestSenateTier);
+      show = show && members && members.some(m => m.tier === t);
+    }
+    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
+    if (show && members && members.length) ct++;
+  });
+  const el = document.getElementById('interest-senate-count');
+  if (el) el.textContent = active ? ct + ' state' + (ct !== 1 ? 's' : '') : '';
+}
+
+function setInterestSenateTier(tier, btn) {
+  _interestSenateTier = tier;
+  document.querySelectorAll('#inner-senate-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
+  filterInterestSenateMap(document.getElementById('interest-senate-search')?.value || '');
+}
+
+// ── PRESENCE MAP (Indian-American members) ─────────────────────────────────
+let _presenceSel = null, _presencePulse = null, _presenceDots = null, _presenceLabels = null;
+
+function loadPresenceMap() {
+  if (presenceMapLoaded) return;
+  presenceMapLoaded = true;
+  const svgEl = d3.select('#presence-map-svg');
+  const g = svgEl.append('g');
+  const BASE_DOT = 8, BASE_RING = 16;
+
+  _presenceZoom = makeZoom(svgEl, t => {
+    g.attr('transform', t);
+    const k = t.k;
+    if (_presencePulse)  _presencePulse.attr('r', BASE_RING / k);
+    if (_presenceDots)   _presenceDots.attr('r', BASE_DOT / k);
+    if (_presenceLabels) _presenceLabels
+      .attr('dy', -(BASE_DOT + 4) / k)
+      .style('font-size', Math.max(5, 9 / k) + 'px')
+      .style('stroke-width', 2.5 / k + 'px');
+  });
+
+  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
+  const pathGen = d3.geoPath().projection(proj);
+
+  fetchDistrictGeo(gj => {
+    document.getElementById('presence-map-loading').style.display = 'none';
+
+    // ── Layer 1: district choropleth ──────────────────────────────────────
+    _presenceSel = g.selectAll('path')
+      .data(gj.features)
+      .join('path')
+      .attr('d', d => pathGen(d) || '')
+      .style('fill', d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        return iaIdx[key] ? '#378ADD' : '#d1d5db';
+      })
+      .style('stroke', '#fff').style('stroke-width', '0.4px')
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        if (m) {
+          tooltip.innerHTML = `<strong>${m.name}</strong><br>${m.state} District ${m.district} &middot; Democrat`;
+        } else {
+          tooltip.innerHTML = `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ''}</strong><br><em>No Indian-American member</em>`;
+        }
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const key = d.properties.state + '_' + d.properties.district;
+        const ia = iaIdx[key];
+        if (!ia) return;
+        const member = MEMBERS.find(x => x.name === ia.name);
+        if (member) openSidePanel(member.id);
+      });
+
+    // ── Layer 2: pin markers at IA district centroids ─────────────────────
+    const iaDists = gj.features.filter(d => {
+      const key = d.properties.state + '_' + d.properties.district;
+      return !!iaIdx[key];
+    });
+    const cx = d => { const c = pathGen.centroid(d); return isFinite(c[0]) ? c[0] : 0; };
+    const cy = d => { const c = pathGen.centroid(d); return isFinite(c[1]) ? c[1] : 0; };
+
+    // Outer ring (glow)
+    _presencePulse = g.selectAll('circle.pmap-ring')
+      .data(iaDists).join('circle')
+      .attr('class', 'pmap-ring')
+      .attr('cx', cx).attr('cy', cy).attr('r', BASE_RING)
+      .style('fill', 'rgba(55,138,221,0.18)')
+      .style('stroke', '#378ADD').style('stroke-width', '1.5px')
+      .style('pointer-events', 'none');
+
+    // Solid inner dot (clickable)
+    _presenceDots = g.selectAll('circle.pmap-dot')
+      .data(iaDists).join('circle')
+      .attr('class', 'pmap-dot')
+      .attr('cx', cx).attr('cy', cy).attr('r', BASE_DOT)
+      .style('fill', '#1A3F8A').style('stroke', '#fff').style('stroke-width', '2px')
+      .style('cursor', 'pointer')
+      .on('mousemove', function(event, d) {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        tooltip.style.display = 'block';
+        tooltip.style.left = (event.clientX + 12) + 'px';
+        tooltip.style.top  = (event.clientY - 28) + 'px';
+        tooltip.innerHTML = `<strong>${m.name}</strong><br>${m.state} District ${m.district} &middot; Democrat`;
+      })
+      .on('mouseleave', () => { tooltip.style.display = 'none'; })
+      .on('click', function(event, d) {
+        event.stopPropagation();
+        const key = d.properties.state + '_' + d.properties.district;
+        const ia = iaIdx[key];
+        if (!ia) return;
+        const member = MEMBERS.find(x => x.name === ia.name);
+        if (member) openSidePanel(member.id);
+      });
+
+    // Name labels (white-outlined for legibility)
+    _presenceLabels = g.selectAll('text.pmap-label')
+      .data(iaDists).join('text')
+      .attr('class', 'pmap-label')
+      .attr('x', cx).attr('y', cy)
+      .attr('dy', -(BASE_DOT + 4))
+      .attr('text-anchor', 'middle')
+      .style('font', '700 10px var(--sans)')
+      .style('fill', '#1A3F8A')
+      .style('paint-order', 'stroke')
+      .style('stroke', '#fff').style('stroke-width', '2.5px')
+      .style('pointer-events', 'none')
+      .text(d => {
+        const key = d.properties.state + '_' + d.properties.district;
+        const m = iaIdx[key];
+        return m ? m.short : '';
+      });
+  });
+}
+
+function filterPresenceMap(q) {
+  if (!_presenceSel) return;
+  const ql = q.toLowerCase().trim();
+  let ct = 0;
+  _presenceSel.each(function(d) {
+    const key = d.properties.state + '_' + d.properties.district;
+    const m = iaIdx[key];
+    let show = true;
+    if (ql) show = m && (m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
+      m.state.toLowerCase().includes(ql) || (m.party==='D'?'democrat':'republican').includes(ql));
+    d3.select(this).attr('opacity', ql ? (show ? 1 : 0.1) : 1);
+    if (show && m) ct++;
+  });
+  const el = document.getElementById('presence-search-count');
+  if (el) el.textContent = ql ? ct + ' member' + (ct !== 1 ? 's' : '') : '';
+}
+
+// ── ALIGNMENT CHART ────────────────────────────────────────────────────────
+new Chart(document.getElementById('c-ia-alignment'), {
+  type: 'line',
+  data: {
+    labels: ['2008', '2012', '2016', '2020', '2022', '2024', '2026\n(proj.)'],
+    datasets: [
+      {
+        label: 'Democratic-leaning (%)',
+        data: [78, 76, 72, 70, 68, 66, 64],
+        borderColor: '#1A3F8A',
+        backgroundColor: 'rgba(26,63,138,.08)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: [4,4,4,4,4,4,5],
+        pointStyle: ['circle','circle','circle','circle','circle','circle','triangle'],
+        borderWidth: 2,
+        segment: { borderDash: ctx => ctx.p0DataIndex >= 5 ? [5,3] : undefined }
+      },
+      {
+        label: 'Republican-leaning (%)',
+        data: [11, 14, 18, 22, 24, 26, 28],
+        borderColor: '#9a1c1c',
+        backgroundColor: 'rgba(154,28,28,.06)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: [4,4,4,4,4,4,5],
+        pointStyle: ['circle','circle','circle','circle','circle','circle','triangle'],
+        borderWidth: 2,
+        segment: { borderDash: ctx => ctx.p0DataIndex >= 5 ? [5,3] : undefined }
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: true, position: 'bottom', labels: { font: { size: 11 }, padding: 14, boxWidth: 12 } },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}%` } }
+    },
+    scales: {
+      x: { grid: { display: false }, border: { display: false }, ticks: { font: { size: 11 }, color: '#6B6B6B' } },
+      y: {
+        min: 0, max: 100,
+        grid: { color: 'rgba(0,0,0,0.05)' }, border: { display: false },
+        ticks: { font: { size: 11 }, callback: v => v + '%' }
+      }
+    }
+  }
+});
+
+// ── INIT ───────────────────────────────────────────────────────────────────
+buildRoster();
+
+// ── MEMBER NEWS FEED ────────────────────────────────────────────────────────
+
+// News comes from assets/candidate-news.json (Google News, refreshed every 6
+// hours by scripts/fetch-candidate-news.js), keyed by member id.
+
+// Member → tier lookup for colour-coding
+const _memberTierMap = {};
+MEMBERS.forEach(m => { _memberTierMap[m.name] = m.tier; });
+
+// HTML escape helper
+function _esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+let _allNewsItems   = [];
+let _newsLoading    = false;   // guard against concurrent fetches
+let _newsLoadedOnce = false;
+let _mnTierFilter   = 'all';
+let _mnSearchQuery  = '';
+
+// ── Interest sub-tab switch ─────────────────────────────────────────────────
+function switchInterestTab(name, btn) {
+  document.querySelectorAll('.interest-subtab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.interest-subpanel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('interest-subpanel-' + name).classList.add('active');
+  if (name === 'news') loadMemberNews(false);
+}
+
+// ── Tier & search filters for Member News sub-panel ─────────────────────────
+function setMnTierFilter(tier, btn) {
+  _mnTierFilter = tier;
+  document.querySelectorAll('.mn-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _renderMemberNews();
+}
+
+function filterMemberNewsPanel(query) {
+  _mnSearchQuery = query.trim().toLowerCase();
+  _renderMemberNews();
+}
+
+function _renderMemberNews() {
+  const loadEl  = document.getElementById('mn-loading');
+  if (loadEl) loadEl.style.display = 'none';
+  const listEl  = document.getElementById('mn-list');
+  const countEl = document.getElementById('mn-count');
+  if (!listEl) return;
+
+  let items = _allNewsItems;
+  if (_mnTierFilter !== 'all') {
+    items = items.filter(i => _memberTierMap[i.member] === _mnTierFilter);
+  }
+  if (_mnSearchQuery) {
+    items = items.filter(i =>
+      i.member.toLowerCase().includes(_mnSearchQuery) ||
+      i.title.toLowerCase().includes(_mnSearchQuery)
+    );
+  }
+
+  if (countEl) countEl.textContent = items.length + ' article' + (items.length !== 1 ? 's' : '');
+
+  if (items.length === 0) {
+    listEl.innerHTML = '<div class="mn-empty">No matching articles found.</div>';
+  } else {
+    listEl.innerHTML = items.map(item => {
+      const color = TIER_COLOR_MAP[_memberTierMap[item.member]] || '#6b7280';
+      return `<div class="mn-article">
+        <div class="mn-article-meta">
+          <span class="mn-article-source">${_esc(item.source)}</span>
+          <span class="mn-article-member" style="background:${color}">${_esc(item.member)}</span>
+        </div>
+        <a href="${_esc(item.link)}" target="_blank" rel="noopener" class="mn-article-title">${_esc(item.title)}</a>
+        <div class="mn-article-date">${_esc(item.date)}</div>
+      </div>`;
+    }).join('');
+  }
+  listEl.style.display = 'flex';
+}
+
+// ── Side panel: render per-member news ──────────────────────────────────────
+async function _loadAndRenderSidepanelNews(memberId) {
+  const news = await window.SeatPanel.loadCandidateNews();
+  const listEl = document.getElementById('sp-news-list');
+  if (!listEl) return;
+  const entry = news.members && news.members[memberId];
+  window.SeatPanel.renderNewsList(listEl, entry ? entry.items : [], news.meta && news.meta.updated);
+}
+
+// ── Main news loader ─────────────────────────────────────────────────────────
+// Flattens assets/candidate-news.json's per-member items into one list for the
+// Member News sub-panel. force re-fetches the file.
+async function loadMemberNews(force) {
+  if (!force && _newsLoadedOnce) {
+    _renderMemberNews();
+    return;
+  }
+  if (_newsLoading) return;
+  _newsLoading = true;
+
+  const loadEl = document.getElementById('mn-loading');
+  const listEl = document.getElementById('mn-list');
+  if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'Loading member news\u2026'; }
+  if (listEl) listEl.style.display = 'none';
+
+  try {
+    const news = await window.SeatPanel.loadCandidateNews(force);
+    const seen = new Set();
+    _allNewsItems = MEMBERS.flatMap(m => ((news.members && news.members[m.id]) || {}).items?.map(item => ({
+      title: item.title,
+      link: item.url,
+      source: item.source,
+      member: m.name,
+      date: new Date(item.date).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+      _ts: new Date(item.date).getTime() || 0,
+    })) || [])
+      .sort((a, b) => b._ts - a._ts)
+      .filter(i => { if (!i.link || seen.has(i.link)) return false; seen.add(i.link); return true; });
+
+    const checked = document.getElementById('mn-checked');
+    if (checked && news.meta && news.meta.updated) {
+      checked.textContent = 'Last checked ' + new Date(news.meta.updated).toLocaleString('en-GB',
+        { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZoneName: 'short' }) + '.';
+    }
+    const badge = document.getElementById('interest-news-badge');
+    if (badge) {
+      badge.textContent = _allNewsItems.length;
+      badge.style.display = _allNewsItems.length > 0 ? 'inline-block' : 'none';
+    }
+  } finally {
+    _newsLoading    = false;
+    _newsLoadedOnce = true;
+  }
+
+  if (_allNewsItems.length === 0) {
+    if (loadEl) { loadEl.style.display = 'block'; loadEl.textContent = 'No coverage found in the last 7 days.'; }
+    return;
+  }
+  _renderMemberNews();
+}
+
+// Preload in background when interest tab is opened (so side panel news is ready immediately)
+(function() {
+  const _orig = switchTab;
+  window.switchTab = function(name) {
+    _orig(name);
+    if (name === 'interest') loadMemberNews(false);
+  };
+})();
+</script>
+<script>
+document.addEventListener('click',function(e){const a=e.target.closest('a');if(a&&a.href&&a.href!==location.href+'#'&&!a.href.startsWith('javascript')&&!a.target){a.target='_blank';a.rel='noopener noreferrer';}});
+</script>
+
+
+<script>
+(function(){
+  var CONTENT = '<strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin-bottom:6px">Battleground seats</strong>Any seat that could realistically flip parties in the election cycle. This is a broad category.<br><br><strong style="font:700 14px \'Lora\',Georgia,serif;color:#620d3c;display:block;margin:6px 0">Toss-up seats</strong>A subset of battleground seats rated as truly 50&#8209;50, where forecasters see no clear favourite.<br><br>While all toss&#8209;up seats are battleground seats, not all battleground seats are toss&#8209;ups. The battlegrounds include Likely, Lean, and Toss&#8209;up seats \u2014 a spectrum of how likely a seat is to change hands.';
+
+  /* --- CSS --- */
+  var st = document.createElement('style');
+  st.textContent =
+    '.dti-btn{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:#f1a222;color:#fff;font:700 10px Inter,Lato,sans-serif;cursor:pointer;vertical-align:middle;line-height:1;margin-left:4px;border:none;outline:none;flex-shrink:0;position:relative;top:-1px;padding:0;box-sizing:border-box}' +
+    '.dti-btn:hover{background:#c98a10}' +
+    '#dti-box{position:fixed;z-index:2147483647;background:#fff;border:1.5px solid #620d3c;border-radius:8px;padding:14px 16px;width:300px;box-shadow:0 6px 28px rgba(0,0,0,.25);font:400 13px/1.6 Inter,Lato,sans-serif;color:#2a2a2a;display:none;pointer-events:none}' +
+    '#dti-box.on{display:block}';
+  document.head.appendChild(st);
+
+  /* --- tooltip box --- */
+  if(document.getElementById('dti-box')) return;
+  var box = document.createElement('div');
+  box.id = 'dti-box';
+  box.innerHTML = CONTENT;
+  document.body.appendChild(box);
+
+  /* --- nearest block-level ancestor (span included per design) --- */
+  var BLOCKS = {DIV:1,P:1,LI:1,SPAN:1,TD:1,TH:1,H1:1,H2:1,H3:1,H4:1,H5:1,H6:1,
+    BLOCKQUOTE:1,DT:1,DD:1,SECTION:1,ARTICLE:1,HEADER:1,FOOTER:1,MAIN:1,ASIDE:1,
+    DETAILS:1,SUMMARY:1,FIGCAPTION:1,LABEL:1,CAPTION:1};
+  var SKIP  = {SCRIPT:1,STYLE:1,CODE:1,PRE:1,TEXTAREA:1,INPUT:1,NOSCRIPT:1,BUTTON:1};
+
+  function nearestBlock(node){
+    var el = node.nodeType===3 ? node.parentElement : node;
+    while(el){ if(BLOCKS[el.nodeName]) return el; el=el.parentElement; }
+    return null;
+  }
+
+  function makeBtn(){
+    var b=document.createElement('button');
+    b.type='button'; b.className='dti-btn';
+    b.setAttribute('aria-label','Define: Battleground / Toss-up seat');
+    b.textContent='i';
+    return b;
+  }
+
+  function inject(root){
+    /* 1. Walk text nodes, collect unique block ancestors */
+    var seen = [];
+    var seenSet = typeof Set!=='undefined' ? new Set() : null;
+    var walker = document.createTreeWalker(root, 1|4 /* ELEMENT|TEXT */, {
+      acceptNode: function(n){
+        if(n.nodeType===1){
+          if(SKIP[n.nodeName]) return 3; /* FILTER_SKIP subtree */
+          if(n.classList && n.classList.contains('dti-btn')) return 2; /* FILTER_REJECT */
+          return 1;
+        }
+        /* text node */
+        return /battleground|toss-up/i.test(n.nodeValue) ? 1 : 3;
+      }
+    });
+    var n;
+    while((n=walker.nextNode())){
+      if(n.nodeType!==3) continue;
+      var block = nearestBlock(n);
+      if(!block) continue;
+      /* deduplicate */
+      if(seenSet){ if(seenSet.has(block)) continue; seenSet.add(block); }
+      else { if(seen.indexOf(block)!==-1) continue; seen.push(block); }
+      /* 2. Append icon at end of block if not already there */
+      if(!block.querySelector('.dti-btn')){
+        block.appendChild(makeBtn());
+      }
+    }
+  }
+
+  /* --- click handler --- */
+  var active=null;
+  document.addEventListener('click',function(e){
+    var btn=e.target.closest ? e.target.closest('.dti-btn') : null;
+    if(btn){
+      e.stopImmediatePropagation();
+      if(active===btn&&box.classList.contains('on')){box.classList.remove('on');active=null;return;}
+      active=btn;
+      box.classList.add('on');
+      var r=btn.getBoundingClientRect(),w=300;
+      var left=r.left+r.width/2-w/2;
+      left=Math.max(8,Math.min(left,window.innerWidth-w-8));
+      var top=r.bottom+8;
+      if(top+210>window.innerHeight) top=r.top-210-8;
+      if(top<8) top=r.bottom+8;
+      box.style.left=left+'px'; box.style.top=top+'px';
+    }else{
+      box.classList.remove('on');active=null;
+    }
+  });
+
+  /* --- run --- */
+  function run(){
+    inject(document.body);
+    setTimeout(function(){inject(document.body);},2000);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run);
+  else run();
+})();
+</script>
+
+<!-- ── COMMENTS AND CONTACT ── -->
+<footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
+</body>
+</html>

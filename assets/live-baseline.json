@@ -13,6 +13,10 @@
   "UT"
  ],
  "footnote": "In redrawn states, gains and losses compare with the new district's expected party.",
+ "votes_2022_source": {
+  "house": "data/house-votes-2022.json (Wikipedia per-state 2022 House results)",
+  "statewide": "UF Election Lab early-vote file, turn_2022 (total ballots in 2022)"
+ },
  "counts": {
   "house": {
    "R": 219,
@@ -32,7 +36,8 @@
   "gov_up": {
    "R": 18,
    "D": 18
-  }
+  },
+  "house_with_2022_baseline": 222
  },
  "notional_blank": [
   "AL-01",
@@ -183,11 +188,14 @@
  "house": {
   "AK-AL": {
    "holder": "R",
-   "member": "Nicholas J. Begich III"
+   "member": "Nicholas J. Begich III",
+   "votes_2022": 264589
   },
   "AL-01": {
    "holder": "R",
    "member": "Barry Moore",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -195,6 +203,8 @@
   "AL-02": {
    "holder": "D",
    "member": "Shomari Figures",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+7 (data.json)"
@@ -202,6 +212,8 @@
   "AL-03": {
    "holder": "R",
    "member": "Mike Rogers",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -209,6 +221,8 @@
   "AL-04": {
    "holder": "R",
    "member": "Robert B. Aderholt",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -216,6 +230,8 @@
   "AL-05": {
    "holder": "R",
    "member": "Dale W. Strong",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -223,6 +239,8 @@
   "AL-06": {
    "holder": "R",
    "member": "Gary J. Palmer",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -230,65 +248,82 @@
   "AL-07": {
    "holder": "D",
    "member": "Terri A. Sewell",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "AR-01": {
    "holder": "R",
-   "member": "Eric A. \"Rick\" Crawford"
+   "member": "Eric A. \"Rick\" Crawford",
+   "votes_2022": 208372
   },
   "AR-02": {
    "holder": "R",
-   "member": "J. French Hill"
+   "member": "J. French Hill",
+   "votes_2022": 246446
   },
   "AR-03": {
    "holder": "R",
-   "member": "Steve Womack"
+   "member": "Steve Womack",
+   "votes_2022": 223588
   },
   "AR-04": {
    "holder": "R",
-   "member": "Bruce Westerman"
+   "member": "Bruce Westerman",
+   "votes_2022": 216696
   },
   "AZ-01": {
    "holder": "R",
-   "member": "David Schweikert"
+   "member": "David Schweikert",
+   "votes_2022": 361477
   },
   "AZ-02": {
    "holder": "R",
-   "member": "Elijah Crane"
+   "member": "Elijah Crane",
+   "votes_2022": 323396
   },
   "AZ-03": {
    "holder": "D",
-   "member": "Yassamin Ansari"
+   "member": "Yassamin Ansari",
+   "votes_2022": 141074
   },
   "AZ-04": {
    "holder": "D",
-   "member": "Greg Stanton"
+   "member": "Greg Stanton",
+   "votes_2022": 265498
   },
   "AZ-05": {
    "holder": "R",
-   "member": "Andy Biggs"
+   "member": "Andy Biggs",
+   "votes_2022": 321590
   },
   "AZ-06": {
    "holder": "R",
-   "member": "Juan Ciscomani"
+   "member": "Juan Ciscomani",
+   "votes_2022": 349283
   },
   "AZ-07": {
    "holder": "D",
-   "member": "Adelita S. Grijalva"
+   "member": "Adelita S. Grijalva",
+   "votes_2022": 195862
   },
   "AZ-08": {
    "holder": "R",
-   "member": "Abraham J. Hamadeh"
+   "member": "Abraham J. Hamadeh",
+   "votes_2022": 204713
   },
   "AZ-09": {
    "holder": "R",
-   "member": "Paul A. Gosar"
+   "member": "Paul A. Gosar",
+   "votes_2022": 197185
   },
   "CA-01": {
    "holder": "R",
    "member": "James Gallagher",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -296,6 +331,8 @@
   "CA-02": {
    "holder": "D",
    "member": "Jared Huffman",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -303,6 +340,8 @@
   "CA-03": {
    "holder": "I",
    "member": "Kevin Kiley",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -310,6 +349,8 @@
   "CA-04": {
    "holder": "D",
    "member": "Mike Thompson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+8 (data.json)"
@@ -317,6 +358,8 @@
   "CA-05": {
    "holder": "R",
    "member": "Tom McClintock",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -324,6 +367,8 @@
   "CA-06": {
    "holder": "D",
    "member": "Ami Bera",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -331,6 +376,8 @@
   "CA-07": {
    "holder": "D",
    "member": "Doris O. Matsui",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -338,6 +385,8 @@
   "CA-08": {
    "holder": "D",
    "member": "John Garamendi",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -345,6 +394,8 @@
   "CA-09": {
    "holder": "D",
    "member": "Josh Harder",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -352,6 +403,8 @@
   "CA-10": {
    "holder": "D",
    "member": "Mark DeSaulnier",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -359,6 +412,8 @@
   "CA-11": {
    "holder": "D",
    "member": "Nancy Pelosi",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+36 (data.json)"
@@ -366,6 +421,8 @@
   "CA-12": {
    "holder": "D",
    "member": "Lateefah Simon",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -373,6 +430,8 @@
   "CA-13": {
    "holder": "D",
    "member": "Adam Gray",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+2 (data.json)"
@@ -380,6 +439,8 @@
   "CA-14": {
    "holder": "D",
    "member": "Aisha Wahab",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -387,6 +448,8 @@
   "CA-15": {
    "holder": "D",
    "member": "Kevin Mullin",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -394,6 +457,8 @@
   "CA-16": {
    "holder": "D",
    "member": "Sam T. Liccardo",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -401,6 +466,8 @@
   "CA-17": {
    "holder": "D",
    "member": "Ro Khanna",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -408,6 +475,8 @@
   "CA-18": {
    "holder": "D",
    "member": "Zoe Lofgren",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -415,6 +484,8 @@
   "CA-19": {
    "holder": "D",
    "member": "Jimmy Panetta",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -422,6 +493,8 @@
   "CA-20": {
    "holder": "R",
    "member": "Vince Fong",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -429,6 +502,8 @@
   "CA-21": {
    "holder": "D",
    "member": "Jim Costa",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -436,6 +511,8 @@
   "CA-22": {
    "holder": "R",
    "member": "David G. Valadao",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+1 (data.json)"
@@ -443,6 +520,8 @@
   "CA-23": {
    "holder": "R",
    "member": "Jay Obernolte",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -450,6 +529,8 @@
   "CA-24": {
    "holder": "D",
    "member": "Salud O. Carbajal",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -457,6 +538,8 @@
   "CA-25": {
    "holder": "D",
    "member": "Raul Ruiz",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -464,6 +547,8 @@
   "CA-26": {
    "holder": "D",
    "member": "Julia Brownley",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -471,6 +556,8 @@
   "CA-27": {
    "holder": "D",
    "member": "George Whitesides",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -478,6 +565,8 @@
   "CA-28": {
    "holder": "D",
    "member": "Judy Chu",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -485,6 +574,8 @@
   "CA-29": {
    "holder": "D",
    "member": "Luz M. Rivas",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -492,6 +583,8 @@
   "CA-30": {
    "holder": "D",
    "member": "Laura Friedman",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -499,6 +592,8 @@
   "CA-31": {
    "holder": "D",
    "member": "Gilbert Ray Cisneros, Jr.",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -506,6 +601,8 @@
   "CA-32": {
    "holder": "D",
    "member": "Brad Sherman",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -513,6 +610,8 @@
   "CA-33": {
    "holder": "D",
    "member": "Pete Aguilar",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -520,6 +619,8 @@
   "CA-34": {
    "holder": "D",
    "member": "Jimmy Gomez",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -527,6 +628,8 @@
   "CA-35": {
    "holder": "D",
    "member": "Norma J. Torres",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -534,6 +637,8 @@
   "CA-36": {
    "holder": "D",
    "member": "Ted Lieu",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -541,6 +646,8 @@
   "CA-37": {
    "holder": "D",
    "member": "Sydney Kamlager-Dove",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -548,6 +655,8 @@
   "CA-38": {
    "holder": "D",
    "member": "Linda T. Sánchez",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -555,6 +664,8 @@
   "CA-39": {
    "holder": "D",
    "member": "Mark Takano",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -562,6 +673,8 @@
   "CA-40": {
    "holder": "R",
    "member": "Young Kim",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+6 (data.json)"
@@ -569,6 +682,8 @@
   "CA-41": {
    "holder": "R",
    "member": "Ken Calvert",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+9 (data.json)"
@@ -576,6 +691,8 @@
   "CA-42": {
    "holder": "D",
    "member": "Robert Garcia",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -583,6 +700,8 @@
   "CA-43": {
    "holder": "D",
    "member": "Maxine Waters",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -590,6 +709,8 @@
   "CA-44": {
    "holder": "D",
    "member": "Nanette Diaz Barragán",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -597,6 +718,8 @@
   "CA-45": {
    "holder": "D",
    "member": "Derek Tran",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+3 (data.json)"
@@ -604,6 +727,8 @@
   "CA-46": {
    "holder": "D",
    "member": "J. Luis Correa",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -611,6 +736,8 @@
   "CA-47": {
    "holder": "D",
    "member": "Dave Min",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -618,6 +745,8 @@
   "CA-48": {
    "holder": "R",
    "member": "Darrell Issa",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+2 (data.json)"
@@ -625,6 +754,8 @@
   "CA-49": {
    "holder": "D",
    "member": "Mike Levin",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -632,6 +763,8 @@
   "CA-50": {
    "holder": "D",
    "member": "Scott H. Peters",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -639,6 +772,8 @@
   "CA-51": {
    "holder": "D",
    "member": "Sara Jacobs",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -646,69 +781,87 @@
   "CA-52": {
    "holder": "D",
    "member": "Juan Vargas",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "CO-01": {
    "holder": "D",
-   "member": "Diana DeGette"
+   "member": "Diana DeGette",
+   "votes_2022": 282686
   },
   "CO-02": {
    "holder": "D",
-   "member": "Joe Neguse"
+   "member": "Joe Neguse",
+   "votes_2022": 348839
   },
   "CO-03": {
    "holder": "R",
-   "member": "Jeff Hurd"
+   "member": "Jeff Hurd",
+   "votes_2022": 327285
   },
   "CO-04": {
    "holder": "R",
-   "member": "Lauren Boebert"
+   "member": "Lauren Boebert",
+   "votes_2022": 354513
   },
   "CO-05": {
    "holder": "R",
-   "member": "Jeff Crank"
+   "member": "Jeff Crank",
+   "votes_2022": 277964
   },
   "CO-06": {
    "holder": "D",
-   "member": "Jason Crow"
+   "member": "Jason Crow",
+   "votes_2022": 280755
   },
   "CO-07": {
    "holder": "D",
-   "member": "Brittany Pettersen"
+   "member": "Brittany Pettersen",
+   "votes_2022": 363601
   },
   "CO-08": {
    "holder": "R",
-   "member": "Gabe Evans"
+   "member": "Gabe Evans",
+   "votes_2022": 236501
   },
   "CT-01": {
    "holder": "D",
-   "member": "John B. Larson"
+   "member": "John B. Larson",
+   "votes_2022": 243913
   },
   "CT-02": {
    "holder": "D",
-   "member": "Joe Courtney"
+   "member": "Joe Courtney",
+   "votes_2022": 285031
   },
   "CT-03": {
    "holder": "D",
-   "member": "Rosa L. DeLauro"
+   "member": "Rosa L. DeLauro",
+   "votes_2022": 242651
   },
   "CT-04": {
    "holder": "D",
-   "member": "James A. Himes"
+   "member": "James A. Himes",
+   "votes_2022": 236084
   },
   "CT-05": {
    "holder": "D",
-   "member": "Jahana Hayes"
+   "member": "Jahana Hayes",
+   "votes_2022": 253672
   },
   "DE-AL": {
    "holder": "D",
-   "member": "Sarah McBride"
+   "member": "Sarah McBride",
+   "votes_2022": 321649
   },
   "FL-01": {
    "holder": "R",
    "member": "Jimmy Patronis",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -716,6 +869,8 @@
   "FL-02": {
    "holder": "R",
    "member": "Neal P. Dunn",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -723,6 +878,8 @@
   "FL-03": {
    "holder": "R",
    "member": "Kat Cammack",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -730,6 +887,8 @@
   "FL-04": {
    "holder": "R",
    "member": "Aaron Bean",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -737,6 +896,8 @@
   "FL-05": {
    "holder": "R",
    "member": "John H. Rutherford",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -744,6 +905,8 @@
   "FL-06": {
    "holder": "R",
    "member": "Randy Fine",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -751,6 +914,8 @@
   "FL-07": {
    "holder": "R",
    "member": "Cory Mills",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
@@ -758,6 +923,8 @@
   "FL-08": {
    "holder": "R",
    "member": "Mike Haridopolos",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -765,6 +932,8 @@
   "FL-09": {
    "holder": "D",
    "member": "Darren Soto",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+8 (data.json)"
@@ -772,6 +941,8 @@
   "FL-10": {
    "holder": "D",
    "member": "Maxwell Frost",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -779,6 +950,8 @@
   "FL-11": {
    "holder": "R",
    "member": "Daniel Webster",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -786,6 +959,8 @@
   "FL-12": {
    "holder": "R",
    "member": "Gus M. Bilirakis",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -793,6 +968,8 @@
   "FL-13": {
    "holder": "R",
    "member": "Anna Paulina Luna",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+6 (data.json)"
@@ -800,6 +977,8 @@
   "FL-14": {
    "holder": "D",
    "member": "Kathy Castor",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+4 (data.json)"
@@ -807,6 +986,8 @@
   "FL-15": {
    "holder": "R",
    "member": "Laurel M. Lee",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -814,6 +995,8 @@
   "FL-16": {
    "holder": "R",
    "member": "Vern Buchanan",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -821,6 +1004,8 @@
   "FL-17": {
    "holder": "R",
    "member": "W. Gregory Steube",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -828,6 +1013,8 @@
   "FL-18": {
    "holder": "R",
    "member": "Scott Franklin",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -835,6 +1022,8 @@
   "FL-19": {
    "holder": "R",
    "member": "Byron Donalds",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -844,6 +1033,8 @@
    "vacant": true,
    "last_holder": "Sheila Cherfilus-McCormick",
    "vacancy_note": "resigned 21 Apr 2026",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+20 (data.json)"
@@ -851,6 +1042,8 @@
   "FL-21": {
    "holder": "R",
    "member": "Brian J. Mast",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -858,6 +1051,8 @@
   "FL-22": {
    "holder": "D",
    "member": "Lois Frankel",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+4 (data.json)"
@@ -865,6 +1060,8 @@
   "FL-23": {
    "holder": "D",
    "member": "Jared Moskowitz",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "D",
    "notional_source": "Cook PVI D+9 (data.json)"
@@ -872,6 +1069,8 @@
   "FL-24": {
    "holder": "D",
    "member": "Frederica S. Wilson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -879,6 +1078,8 @@
   "FL-25": {
    "holder": "D",
    "member": "Debbie Wasserman Schultz",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+3 (data.json)"
@@ -886,6 +1087,8 @@
   "FL-26": {
    "holder": "R",
    "member": "Mario Diaz-Balart",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -893,6 +1096,8 @@
   "FL-27": {
    "holder": "R",
    "member": "Maria Elvira Salazar",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+6 (data.json)"
@@ -900,245 +1105,321 @@
   "FL-28": {
    "holder": "R",
    "member": "Carlos A. Gimenez",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "GA-01": {
    "holder": "R",
-   "member": "Earl L. \"Buddy\" Carter"
+   "member": "Earl L. \"Buddy\" Carter",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-02": {
    "holder": "D",
-   "member": "Sanford D. Bishop, Jr."
+   "member": "Sanford D. Bishop, Jr.",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-03": {
    "holder": "R",
-   "member": "Brian Jack"
+   "member": "Brian Jack",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-04": {
    "holder": "D",
-   "member": "Henry C. \"Hank\" Johnson, Jr."
+   "member": "Henry C. \"Hank\" Johnson, Jr.",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-05": {
    "holder": "D",
-   "member": "Nikema Williams"
+   "member": "Nikema Williams",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-06": {
    "holder": "D",
-   "member": "Lucy McBath"
+   "member": "Lucy McBath",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-07": {
    "holder": "R",
-   "member": "Richard McCormick"
+   "member": "Richard McCormick",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-08": {
    "holder": "R",
-   "member": "Austin Scott"
+   "member": "Austin Scott",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-09": {
    "holder": "R",
-   "member": "Andrew S. Clyde"
+   "member": "Andrew S. Clyde",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-10": {
    "holder": "R",
-   "member": "Mike Collins"
+   "member": "Mike Collins",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-11": {
    "holder": "R",
-   "member": "Barry Loudermilk"
+   "member": "Barry Loudermilk",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-12": {
    "holder": "R",
-   "member": "Rick W. Allen"
+   "member": "Rick W. Allen",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-13": {
    "holder": "D",
-   "member": "Everton Blair Jr."
+   "member": "Everton Blair Jr.",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "GA-14": {
    "holder": "R",
-   "member": "Clay Fuller"
+   "member": "Clay Fuller",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "HI-01": {
    "holder": "D",
-   "member": "Ed Case"
+   "member": "Ed Case",
+   "votes_2022": 194763
   },
   "HI-02": {
    "holder": "D",
-   "member": "Jill N. Tokuda"
+   "member": "Jill N. Tokuda",
+   "votes_2022": 206411
   },
   "IA-01": {
    "holder": "R",
-   "member": "Mariannette Miller-Meeks"
+   "member": "Mariannette Miller-Meeks",
+   "votes_2022": 305380
   },
   "IA-02": {
    "holder": "R",
-   "member": "Ashley Hinson"
+   "member": "Ashley Hinson",
+   "votes_2022": 318399
   },
   "IA-03": {
    "holder": "R",
-   "member": "Zachary Nunn"
+   "member": "Zachary Nunn",
+   "votes_2022": 310913
   },
   "IA-04": {
    "holder": "R",
-   "member": "Randy Feenstra"
+   "member": "Randy Feenstra",
+   "votes_2022": 277008
   },
   "ID-01": {
    "holder": "R",
-   "member": "Russ Fulcher"
+   "member": "Russ Fulcher",
+   "votes_2022": 312442
   },
   "ID-02": {
    "holder": "R",
-   "member": "Michael K. Simpson"
+   "member": "Michael K. Simpson",
+   "votes_2022": 271186
   },
   "IL-01": {
    "holder": "D",
-   "member": "Jonathan L. Jackson"
+   "member": "Jonathan L. Jackson",
+   "votes_2022": 237425
   },
   "IL-02": {
    "holder": "D",
-   "member": "Robin L. Kelly"
+   "member": "Robin L. Kelly",
+   "votes_2022": 209175
   },
   "IL-03": {
    "holder": "D",
-   "member": "Delia C. Ramirez"
+   "member": "Delia C. Ramirez",
+   "votes_2022": 177759
   },
   "IL-04": {
    "holder": "D",
-   "member": "Jesús G. \"Chuy\" García"
+   "member": "Jesús G. \"Chuy\" García",
+   "votes_2022": 133047
   },
   "IL-05": {
    "holder": "D",
-   "member": "Mike Quigley"
+   "member": "Mike Quigley",
+   "votes_2022": 274550
   },
   "IL-06": {
    "holder": "D",
-   "member": "Sean Casten"
+   "member": "Sean Casten",
+   "votes_2022": 276859
   },
   "IL-07": {
    "holder": "D",
-   "member": "Danny K. Davis"
+   "member": "Danny K. Davis",
+   "votes_2022": 167746
   },
   "IL-08": {
    "holder": "D",
-   "member": "Raja Krishnamoorthi"
+   "member": "Raja Krishnamoorthi",
+   "votes_2022": 207215
   },
   "IL-09": {
    "holder": "D",
-   "member": "Janice D. Schakowsky"
+   "member": "Janice D. Schakowsky",
+   "votes_2022": 250530
   },
   "IL-10": {
    "holder": "D",
-   "member": "Bradley Scott Schneider"
+   "member": "Bradley Scott Schneider",
+   "votes_2022": 242165
   },
   "IL-11": {
    "holder": "D",
-   "member": "Bill Foster"
+   "member": "Bill Foster",
+   "votes_2022": 264241
   },
   "IL-12": {
    "holder": "R",
-   "member": "Mike Bost"
+   "member": "Mike Bost",
+   "votes_2022": 291171
   },
   "IL-13": {
    "holder": "D",
-   "member": "Nikki Budzinski"
+   "member": "Nikki Budzinski",
+   "votes_2022": 250450
   },
   "IL-14": {
    "holder": "D",
-   "member": "Lauren Underwood"
+   "member": "Lauren Underwood",
+   "votes_2022": 236600
   },
   "IL-15": {
    "holder": "R",
-   "member": "Mary E. Miller"
+   "member": "Mary E. Miller",
+   "votes_2022": 299403
   },
   "IL-16": {
    "holder": "R",
-   "member": "Darin LaHood"
+   "member": "Darin LaHood",
+   "votes_2022": 297946
   },
   "IL-17": {
    "holder": "D",
-   "member": "Eric Sorensen"
+   "member": "Eric Sorensen",
+   "votes_2022": 233123
   },
   "IN-01": {
    "holder": "D",
-   "member": "Frank J. Mrvan"
+   "member": "Frank J. Mrvan",
+   "votes_2022": 213207
   },
   "IN-02": {
    "holder": "R",
-   "member": "Rudy Yakym III"
+   "member": "Rudy Yakym III",
+   "votes_2022": 194073
   },
   "IN-03": {
    "holder": "R",
-   "member": "Marlin A. Stutzman"
+   "member": "Marlin A. Stutzman",
+   "votes_2022": 201542
   },
   "IN-04": {
    "holder": "R",
-   "member": "James R. Baird"
+   "member": "James R. Baird",
+   "votes_2022": 197698
   },
   "IN-05": {
    "holder": "R",
-   "member": "Victoria Spartz"
+   "member": "Victoria Spartz",
+   "votes_2022": 240009
   },
   "IN-06": {
    "holder": "R",
-   "member": "Jefferson Shreve"
+   "member": "Jefferson Shreve",
+   "votes_2022": 193524
   },
   "IN-07": {
    "holder": "D",
-   "member": "André Carson"
+   "member": "André Carson",
+   "votes_2022": 175180
   },
   "IN-08": {
    "holder": "R",
-   "member": "Mark B. Messmer"
+   "member": "Mark B. Messmer",
+   "votes_2022": 216040
   },
   "IN-09": {
    "holder": "R",
-   "member": "Erin Houchin"
+   "member": "Erin Houchin",
+   "votes_2022": 225276
   },
   "KS-01": {
    "holder": "R",
-   "member": "Tracey Mann"
+   "member": "Tracey Mann",
+   "votes_2022": 238425
   },
   "KS-02": {
    "holder": "R",
-   "member": "Derek Schmidt"
+   "member": "Derek Schmidt",
+   "votes_2022": 233358
   },
   "KS-03": {
    "holder": "D",
-   "member": "Sharice Davids"
+   "member": "Sharice Davids",
+   "votes_2022": 301294
   },
   "KS-04": {
    "holder": "R",
-   "member": "Ron Estes"
+   "member": "Ron Estes",
+   "votes_2022": 228740
   },
   "KY-01": {
    "holder": "R",
-   "member": "James Comer"
+   "member": "James Comer",
+   "votes_2022": 245858
   },
   "KY-02": {
    "holder": "R",
-   "member": "Brett Guthrie"
+   "member": "Brett Guthrie",
+   "votes_2022": 237256
   },
   "KY-03": {
    "holder": "D",
-   "member": "Morgan McGarvey"
+   "member": "Morgan McGarvey",
+   "votes_2022": 259587
   },
   "KY-04": {
    "holder": "R",
-   "member": "Thomas Massie"
+   "member": "Thomas Massie",
+   "votes_2022": 257629
   },
   "KY-05": {
    "holder": "R",
-   "member": "Harold Rogers"
+   "member": "Harold Rogers",
+   "votes_2022": 216270
   },
   "KY-06": {
    "holder": "R",
-   "member": "Andy Barr"
+   "member": "Andy Barr",
+   "votes_2022": 246818
   },
   "LA-01": {
    "holder": "R",
    "member": "Steve Scalise",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1146,6 +1427,8 @@
   "LA-02": {
    "holder": "D",
    "member": "Troy A. Carter",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1153,6 +1436,8 @@
   "LA-03": {
    "holder": "R",
    "member": "Clay Higgins",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1160,6 +1445,8 @@
   "LA-04": {
    "holder": "R",
    "member": "Mike Johnson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1167,6 +1454,8 @@
   "LA-05": {
    "holder": "R",
    "member": "Julia Letlow",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1174,229 +1463,287 @@
   "LA-06": {
    "holder": "D",
    "member": "Cleo Fields",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "MA-01": {
    "holder": "D",
-   "member": "Richard E. Neal"
+   "member": "Richard E. Neal",
+   "votes_2022": 256399
   },
   "MA-02": {
    "holder": "D",
-   "member": "James P. McGovern"
+   "member": "James P. McGovern",
+   "votes_2022": 272871
   },
   "MA-03": {
    "holder": "D",
-   "member": "Lori Trahan"
+   "member": "Lori Trahan",
+   "votes_2022": 243301
   },
   "MA-04": {
    "holder": "D",
-   "member": "Jake Auchincloss"
+   "member": "Jake Auchincloss",
+   "votes_2022": 208279
   },
   "MA-05": {
    "holder": "D",
-   "member": "Katherine M. Clark"
+   "member": "Katherine M. Clark",
+   "votes_2022": 275671
   },
   "MA-06": {
    "holder": "D",
-   "member": "Seth Moulton"
+   "member": "Seth Moulton",
+   "votes_2022": 315081
   },
   "MA-07": {
    "holder": "D",
-   "member": "Ayanna Pressley"
+   "member": "Ayanna Pressley",
+   "votes_2022": 179511
   },
   "MA-08": {
    "holder": "D",
-   "member": "Stephen F. Lynch"
+   "member": "Stephen F. Lynch",
+   "votes_2022": 272564
   },
   "MA-09": {
    "holder": "D",
-   "member": "William R. Keating"
+   "member": "William R. Keating",
+   "votes_2022": 334320
   },
   "MD-01": {
    "holder": "R",
-   "member": "Andy Harris"
+   "member": "Andy Harris",
+   "votes_2022": 293358
   },
   "MD-02": {
    "holder": "D",
-   "member": "Johnny Olszewski, Jr."
+   "member": "Johnny Olszewski, Jr.",
+   "votes_2022": 268434
   },
   "MD-03": {
    "holder": "D",
-   "member": "Sarah Elfreth"
+   "member": "Sarah Elfreth",
+   "votes_2022": 291602
   },
   "MD-04": {
    "holder": "D",
-   "member": "Glenn Ivey"
+   "member": "Glenn Ivey",
+   "votes_2022": 160009
   },
   "MD-05": {
    "holder": "D",
-   "member": "Steny H. Hoyer"
+   "member": "Steny H. Hoyer",
+   "votes_2022": 276920
   },
   "MD-06": {
    "holder": "D",
-   "member": "April McClain Delaney"
+   "member": "April McClain Delaney",
+   "votes_2022": 256398
   },
   "MD-07": {
    "holder": "D",
-   "member": "Kweisi Mfume"
+   "member": "Kweisi Mfume",
+   "votes_2022": 184801
   },
   "MD-08": {
    "holder": "D",
-   "member": "Jamie Raskin"
+   "member": "Jamie Raskin",
+   "votes_2022": 264206
   },
   "ME-01": {
    "holder": "D",
-   "member": "Chellie Pingree"
+   "member": "Chellie Pingree",
+   "votes_2022": 349176
   },
   "ME-02": {
    "holder": "D",
-   "member": "Jared F. Golden"
+   "member": "Jared F. Golden",
+   "votes_2022": 316382
   },
   "MI-01": {
    "holder": "R",
-   "member": "Jack Bergman"
+   "member": "Jack Bergman",
+   "votes_2022": 388599
   },
   "MI-02": {
    "holder": "R",
-   "member": "John R. Moolenaar"
+   "member": "John R. Moolenaar",
+   "votes_2022": 339521
   },
   "MI-03": {
    "holder": "D",
-   "member": "Hillary J. Scholten"
+   "member": "Hillary J. Scholten",
+   "votes_2022": 338988
   },
   "MI-04": {
    "holder": "R",
-   "member": "Bill Huizenga"
+   "member": "Bill Huizenga",
+   "votes_2022": 338348
   },
   "MI-05": {
    "holder": "R",
-   "member": "Tim Walberg"
+   "member": "Tim Walberg",
+   "votes_2022": 317258
   },
   "MI-06": {
    "holder": "D",
-   "member": "Debbie Dingell"
+   "member": "Debbie Dingell",
+   "votes_2022": 366927
   },
   "MI-07": {
    "holder": "R",
-   "member": "Tom Barrett"
+   "member": "Tom Barrett",
+   "votes_2022": 372708
   },
   "MI-08": {
    "holder": "D",
-   "member": "Kristen McDonald Rivet"
+   "member": "Kristen McDonald Rivet",
+   "votes_2022": 335829
   },
   "MI-09": {
    "holder": "R",
-   "member": "Lisa C. McClain"
+   "member": "Lisa C. McClain",
+   "votes_2022": 372922
   },
   "MI-10": {
    "holder": "R",
-   "member": "John James"
+   "member": "John James",
+   "votes_2022": 326237
   },
   "MI-11": {
    "holder": "D",
-   "member": "Haley M. Stevens"
+   "member": "Haley M. Stevens",
+   "votes_2022": 366179
   },
   "MI-12": {
    "holder": "D",
-   "member": "Rashida Tlaib"
+   "member": "Rashida Tlaib",
+   "votes_2022": 277577
   },
   "MI-13": {
    "holder": "D",
-   "member": "Shri Thanedar"
+   "member": "Shri Thanedar",
+   "votes_2022": 234444
   },
   "MN-01": {
    "holder": "R",
-   "member": "Brad Finstad"
+   "member": "Brad Finstad",
+   "votes_2022": 296547
   },
   "MN-02": {
    "holder": "D",
-   "member": "Angie Craig"
+   "member": "Angie Craig",
+   "votes_2022": 325472
   },
   "MN-03": {
    "holder": "D",
-   "member": "Kelly Morrison"
+   "member": "Kelly Morrison",
+   "votes_2022": 333921
   },
   "MN-04": {
    "holder": "D",
-   "member": "Betty McCollum"
+   "member": "Betty McCollum",
+   "votes_2022": 295973
   },
   "MN-05": {
    "holder": "D",
-   "member": "Ilhan Omar"
+   "member": "Ilhan Omar",
+   "votes_2022": 288206
   },
   "MN-06": {
    "holder": "R",
-   "member": "Tom Emmer"
+   "member": "Tom Emmer",
+   "votes_2022": 319767
   },
   "MN-07": {
    "holder": "R",
-   "member": "Michelle Fischbach"
+   "member": "Michelle Fischbach",
+   "votes_2022": 305866
   },
   "MN-08": {
    "holder": "R",
-   "member": "Pete Stauber"
+   "member": "Pete Stauber",
+   "votes_2022": 330080
   },
   "MO-01": {
    "holder": "D",
-   "member": "Wesley Bell"
+   "member": "Wesley Bell",
+   "votes_2022": 220958
   },
   "MO-02": {
    "holder": "R",
-   "member": "Ann Wagner"
+   "member": "Ann Wagner",
+   "votes_2022": 315666
   },
   "MO-03": {
    "holder": "R",
-   "member": "Robert F. Onder, Jr."
+   "member": "Robert F. Onder, Jr.",
+   "votes_2022": 277597
   },
   "MO-04": {
    "holder": "R",
-   "member": "Mark Alford"
+   "member": "Mark Alford",
+   "votes_2022": 255079
   },
   "MO-05": {
    "holder": "D",
-   "member": "Emanuel Cleaver"
+   "member": "Emanuel Cleaver",
+   "votes_2022": 230555
   },
   "MO-06": {
    "holder": "R",
-   "member": "Sam Graves"
+   "member": "Sam Graves",
+   "votes_2022": 262892
   },
   "MO-07": {
    "holder": "R",
-   "member": "Eric Burlison"
+   "member": "Eric Burlison",
+   "votes_2022": 251947
   },
   "MO-08": {
    "holder": "R",
-   "member": "Jason Smith"
+   "member": "Jason Smith",
+   "votes_2022": 245395
   },
   "MS-01": {
    "holder": "R",
-   "member": "Trent Kelly"
+   "member": "Trent Kelly",
+   "votes_2022": 167389
   },
   "MS-02": {
    "holder": "D",
-   "member": "Bennie G. Thompson"
+   "member": "Bennie G. Thompson",
+   "votes_2022": 180169
   },
   "MS-03": {
    "holder": "R",
-   "member": "Michael Guest"
+   "member": "Michael Guest",
+   "votes_2022": 187284
   },
   "MS-04": {
    "holder": "R",
-   "member": "Mike Ezell"
+   "member": "Mike Ezell",
+   "votes_2022": 174258
   },
   "MT-01": {
    "holder": "R",
-   "member": "Ryan K. Zinke"
+   "member": "Ryan K. Zinke",
+   "votes_2022": 247960
   },
   "MT-02": {
    "holder": "R",
-   "member": "Troy Downing"
+   "member": "Troy Downing",
+   "votes_2022": 215672
   },
   "NC-01": {
    "holder": "D",
    "member": "Donald G. Davis",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
@@ -1404,6 +1751,8 @@
   "NC-02": {
    "holder": "D",
    "member": "Deborah K. Ross",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1411,6 +1760,8 @@
   "NC-03": {
    "holder": "R",
    "member": "Gregory F. Murphy",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1418,6 +1769,8 @@
   "NC-04": {
    "holder": "D",
    "member": "Valerie P. Foushee",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1425,6 +1778,8 @@
   "NC-05": {
    "holder": "R",
    "member": "Virginia Foxx",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1432,6 +1787,8 @@
   "NC-06": {
    "holder": "R",
    "member": "Addison P. McDowell",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1439,6 +1796,8 @@
   "NC-07": {
    "holder": "R",
    "member": "David Rouzer",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1446,6 +1805,8 @@
   "NC-08": {
    "holder": "R",
    "member": "Mark Harris",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1453,6 +1814,8 @@
   "NC-09": {
    "holder": "R",
    "member": "Richard Hudson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1460,6 +1823,8 @@
   "NC-10": {
    "holder": "R",
    "member": "Pat Harrigan",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1467,6 +1832,8 @@
   "NC-11": {
    "holder": "R",
    "member": "Chuck Edwards",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
@@ -1474,6 +1841,8 @@
   "NC-12": {
    "holder": "D",
    "member": "Alma S. Adams",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1481,6 +1850,8 @@
   "NC-13": {
    "holder": "R",
    "member": "Brad Knott",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1488,217 +1859,298 @@
   "NC-14": {
    "holder": "R",
    "member": "Tim Moore",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "ND-AL": {
    "holder": "R",
-   "member": "Julie Fedorchak"
+   "member": "Julie Fedorchak",
+   "votes_2022": 238586
   },
   "NE-01": {
    "holder": "R",
-   "member": "Mike Flood"
+   "member": "Mike Flood",
+   "votes_2022": 223165
   },
   "NE-02": {
    "holder": "R",
-   "member": "Don Bacon"
+   "member": "Don Bacon",
+   "votes_2022": 219470
   },
   "NE-03": {
    "holder": "R",
-   "member": "Adrian Smith"
+   "member": "Adrian Smith",
+   "votes_2022": 220552
   },
   "NH-01": {
    "holder": "D",
-   "member": "Chris Pappas"
+   "member": "Chris Pappas",
+   "votes_2022": 309962
   },
   "NH-02": {
    "holder": "D",
-   "member": "Maggie Goodlander"
+   "member": "Maggie Goodlander",
+   "votes_2022": 307584
   },
   "NJ-01": {
    "holder": "D",
-   "member": "Donald Norcross"
+   "member": "Donald Norcross",
+   "votes_2022": 223884
   },
   "NJ-02": {
    "holder": "R",
-   "member": "Jefferson Van Drew"
+   "member": "Jefferson Van Drew",
+   "votes_2022": 236484
   },
   "NJ-03": {
    "holder": "D",
-   "member": "Herbert C. Conaway, Jr."
+   "member": "Herbert C. Conaway, Jr.",
+   "votes_2022": 271376
   },
   "NJ-04": {
    "holder": "R",
-   "member": "Christopher H. Smith"
+   "member": "Christopher H. Smith",
+   "votes_2022": 258962
   },
   "NJ-05": {
    "holder": "D",
-   "member": "Josh Gottheimer"
+   "member": "Josh Gottheimer",
+   "votes_2022": 265943
   },
   "NJ-06": {
    "holder": "D",
-   "member": "Frank Pallone, Jr."
+   "member": "Frank Pallone, Jr.",
+   "votes_2022": 184919
   },
   "NJ-07": {
    "holder": "R",
-   "member": "Thomas H. Kean, Jr."
+   "member": "Thomas H. Kean, Jr.",
+   "votes_2022": 310093
   },
   "NJ-08": {
    "holder": "D",
-   "member": "Robert Menendez"
+   "member": "Robert Menendez",
+   "votes_2022": 106473
   },
   "NJ-09": {
    "holder": "D",
-   "member": "Nellie Pou"
+   "member": "Nellie Pou",
+   "votes_2022": 149984
   },
   "NJ-10": {
    "holder": "D",
-   "member": "LaMonica McIver"
+   "member": "LaMonica McIver",
+   "votes_2022": 129707
   },
   "NJ-11": {
    "holder": "D",
-   "member": "Analilia Mejia"
+   "member": "Analilia Mejia",
+   "votes_2022": 273664
   },
   "NJ-12": {
    "holder": "D",
-   "member": "Bonnie Watson Coleman"
+   "member": "Bonnie Watson Coleman",
+   "votes_2022": 198227
   },
   "NM-01": {
    "holder": "D",
-   "member": "Melanie A. Stansbury"
+   "member": "Melanie A. Stansbury",
+   "votes_2022": 280671
   },
   "NM-02": {
    "holder": "D",
-   "member": "Gabe Vasquez"
+   "member": "Gabe Vasquez",
+   "votes_2022": 192673
   },
   "NM-03": {
    "holder": "D",
-   "member": "Teresa Leger Fernandez"
+   "member": "Teresa Leger Fernandez",
+   "votes_2022": 230782
   },
   "NV-01": {
    "holder": "D",
-   "member": "Dina Titus"
+   "member": "Dina Titus",
+   "votes_2022": 224349
   },
   "NV-02": {
    "holder": "R",
-   "member": "Mark E. Amodei"
+   "member": "Mark E. Amodei",
+   "votes_2022": 310498
   },
   "NV-03": {
    "holder": "D",
-   "member": "Susie Lee"
+   "member": "Susie Lee",
+   "votes_2022": 252169
   },
   "NV-04": {
    "holder": "D",
-   "member": "Steven Horsford"
+   "member": "Steven Horsford",
+   "votes_2022": 222487
   },
   "NY-01": {
    "holder": "R",
-   "member": "Nick LaLota"
+   "member": "Nick LaLota",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-02": {
    "holder": "R",
-   "member": "Andrew R. Garbarino"
+   "member": "Andrew R. Garbarino",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-03": {
    "holder": "D",
-   "member": "Thomas R. Suozzi"
+   "member": "Thomas R. Suozzi",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-04": {
    "holder": "D",
-   "member": "Laura Gillen"
+   "member": "Laura Gillen",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-05": {
    "holder": "D",
-   "member": "Gregory W. Meeks"
+   "member": "Gregory W. Meeks",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-06": {
    "holder": "D",
-   "member": "Grace Meng"
+   "member": "Grace Meng",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-07": {
    "holder": "D",
-   "member": "Nydia M. Velázquez"
+   "member": "Nydia M. Velázquez",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-08": {
    "holder": "D",
-   "member": "Hakeem S. Jeffries"
+   "member": "Hakeem S. Jeffries",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-09": {
    "holder": "D",
-   "member": "Yvette D. Clarke"
+   "member": "Yvette D. Clarke",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-10": {
    "holder": "D",
-   "member": "Daniel S. Goldman"
+   "member": "Daniel S. Goldman",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-11": {
    "holder": "R",
-   "member": "Nicole Malliotakis"
+   "member": "Nicole Malliotakis",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-12": {
    "holder": "D",
-   "member": "Jerrold Nadler"
+   "member": "Jerrold Nadler",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-13": {
    "holder": "D",
-   "member": "Adriano Espaillat"
+   "member": "Adriano Espaillat",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-14": {
    "holder": "D",
-   "member": "Alexandria Ocasio-Cortez"
+   "member": "Alexandria Ocasio-Cortez",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-15": {
    "holder": "D",
-   "member": "Ritchie Torres"
+   "member": "Ritchie Torres",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-16": {
    "holder": "D",
-   "member": "George Latimer"
+   "member": "George Latimer",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-17": {
    "holder": "R",
-   "member": "Michael Lawler"
+   "member": "Michael Lawler",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-18": {
    "holder": "D",
-   "member": "Patrick Ryan"
+   "member": "Patrick Ryan",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-19": {
    "holder": "D",
-   "member": "Josh Riley"
+   "member": "Josh Riley",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-20": {
    "holder": "D",
-   "member": "Paul Tonko"
+   "member": "Paul Tonko",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-21": {
    "holder": "R",
-   "member": "Elise M. Stefanik"
+   "member": "Elise M. Stefanik",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-22": {
    "holder": "D",
-   "member": "John W. Mannion"
+   "member": "John W. Mannion",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-23": {
    "holder": "R",
-   "member": "Nicholas A. Langworthy"
+   "member": "Nicholas A. Langworthy",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-24": {
    "holder": "R",
-   "member": "Claudia Tenney"
+   "member": "Claudia Tenney",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-25": {
    "holder": "D",
-   "member": "Joseph D. Morelle"
+   "member": "Joseph D. Morelle",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "NY-26": {
    "holder": "D",
-   "member": "Timothy M. Kennedy"
+   "member": "Timothy M. Kennedy",
+   "votes_2022": null,
+   "baseline_note": "district redrawn in 2024, no 2022 baseline"
   },
   "OH-01": {
    "holder": "D",
    "member": "Greg Landsman",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1706,6 +2158,8 @@
   "OH-02": {
    "holder": "R",
    "member": "David J. Taylor",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1713,6 +2167,8 @@
   "OH-03": {
    "holder": "D",
    "member": "Joyce Beatty",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1720,6 +2176,8 @@
   "OH-04": {
    "holder": "R",
    "member": "Jim Jordan",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1727,6 +2185,8 @@
   "OH-05": {
    "holder": "R",
    "member": "Robert E. Latta",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1734,6 +2194,8 @@
   "OH-06": {
    "holder": "R",
    "member": "Michael A. Rulli",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1741,6 +2203,8 @@
   "OH-07": {
    "holder": "R",
    "member": "Max L. Miller",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
@@ -1748,6 +2212,8 @@
   "OH-08": {
    "holder": "R",
    "member": "Warren Davidson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1755,6 +2221,8 @@
   "OH-09": {
    "holder": "D",
    "member": "Marcy Kaptur",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
@@ -1762,6 +2230,8 @@
   "OH-10": {
    "holder": "R",
    "member": "Michael R. Turner",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+4 (data.json)"
@@ -1769,6 +2239,8 @@
   "OH-11": {
    "holder": "D",
    "member": "Shontel M. Brown",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1776,6 +2248,8 @@
   "OH-12": {
    "holder": "R",
    "member": "Troy Balderson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1783,6 +2257,8 @@
   "OH-13": {
    "holder": "D",
    "member": "Emilia Strong Sykes",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1790,6 +2266,8 @@
   "OH-14": {
    "holder": "R",
    "member": "David P. Joyce",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1797,165 +2275,207 @@
   "OH-15": {
    "holder": "R",
    "member": "Mike Carey",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+5 (data.json)"
   },
   "OK-01": {
    "holder": "R",
-   "member": "Kevin Hern"
+   "member": "Kevin Hern",
+   "votes_2022": 233495
   },
   "OK-02": {
    "holder": "R",
-   "member": "Josh Brecheen"
+   "member": "Josh Brecheen",
+   "votes_2022": 231672
   },
   "OK-03": {
    "holder": "R",
-   "member": "Frank D. Lucas"
+   "member": "Frank D. Lucas",
+   "votes_2022": 197772
   },
   "OK-04": {
    "holder": "R",
-   "member": "Tom Cole"
+   "member": "Tom Cole",
+   "votes_2022": 224546
   },
   "OK-05": {
    "holder": "R",
-   "member": "Stephanie I. Bice"
+   "member": "Stephanie I. Bice",
+   "votes_2022": 258826
   },
   "OR-01": {
    "holder": "D",
-   "member": "Suzanne Bonamici"
+   "member": "Suzanne Bonamici",
+   "votes_2022": 310243
   },
   "OR-02": {
    "holder": "R",
-   "member": "Cliff Bentz"
+   "member": "Cliff Bentz",
+   "votes_2022": 308676
   },
   "OR-03": {
    "holder": "D",
-   "member": "Maxine Dexter"
+   "member": "Maxine Dexter",
+   "votes_2022": 303334
   },
   "OR-04": {
    "holder": "D",
-   "member": "Val T. Hoyle"
+   "member": "Val T. Hoyle",
+   "votes_2022": 339077
   },
   "OR-05": {
    "holder": "D",
-   "member": "Janelle S. Bynum"
+   "member": "Janelle S. Bynum",
+   "votes_2022": 351233
   },
   "OR-06": {
    "holder": "D",
-   "member": "Andrea Salinas"
+   "member": "Andrea Salinas",
+   "votes_2022": 294377
   },
   "PA-01": {
    "holder": "R",
-   "member": "Brian K. Fitzpatrick"
+   "member": "Brian K. Fitzpatrick",
+   "votes_2022": 367380
   },
   "PA-02": {
    "holder": "D",
-   "member": "Brendan F. Boyle"
+   "member": "Brendan F. Boyle",
+   "votes_2022": 186683
   },
   "PA-03": {
    "holder": "D",
-   "member": "Dwight Evans"
+   "member": "Dwight Evans",
+   "votes_2022": 263935
   },
   "PA-04": {
    "holder": "D",
-   "member": "Madeleine Dean"
+   "member": "Madeleine Dean",
+   "votes_2022": 366785
   },
   "PA-05": {
    "holder": "D",
-   "member": "Mary Gay Scanlon"
+   "member": "Mary Gay Scanlon",
+   "votes_2022": 315186
   },
   "PA-06": {
    "holder": "D",
-   "member": "Chrissy Houlahan"
+   "member": "Chrissy Houlahan",
+   "votes_2022": 326483
   },
   "PA-07": {
    "holder": "R",
-   "member": "Ryan Mackenzie"
+   "member": "Ryan Mackenzie",
+   "votes_2022": 296891
   },
   "PA-08": {
    "holder": "R",
-   "member": "Robert P. Bresnahan, Jr."
+   "member": "Robert P. Bresnahan, Jr.",
+   "votes_2022": 286886
   },
   "PA-09": {
    "holder": "R",
-   "member": "Daniel Meuser"
+   "member": "Daniel Meuser",
+   "votes_2022": 301807
   },
   "PA-10": {
    "holder": "R",
-   "member": "Scott Perry"
+   "member": "Scott Perry",
+   "votes_2022": 314546
   },
   "PA-11": {
    "holder": "R",
-   "member": "Lloyd Smucker"
+   "member": "Lloyd Smucker",
+   "votes_2022": 316826
   },
   "PA-12": {
    "holder": "D",
-   "member": "Summer L. Lee"
+   "member": "Summer L. Lee",
+   "votes_2022": 328620
   },
   "PA-13": {
    "holder": "R",
-   "member": "John Joyce"
+   "member": "John Joyce",
+   "votes_2022": 260345
   },
   "PA-14": {
    "holder": "R",
-   "member": "Guy Reschenthaler"
+   "member": "Guy Reschenthaler",
+   "votes_2022": 230865
   },
   "PA-15": {
    "holder": "R",
-   "member": "Glenn Thompson"
+   "member": "Glenn Thompson",
+   "votes_2022": 305146
   },
   "PA-16": {
    "holder": "R",
-   "member": "Mike Kelly"
+   "member": "Mike Kelly",
+   "votes_2022": 320989
   },
   "PA-17": {
    "holder": "D",
-   "member": "Christopher R. Deluzio"
+   "member": "Christopher R. Deluzio",
+   "votes_2022": 362628
   },
   "RI-01": {
    "holder": "D",
-   "member": "Gabe Amo"
+   "member": "Gabe Amo",
+   "votes_2022": 156734
   },
   "RI-02": {
    "holder": "D",
-   "member": "Seth Magaziner"
+   "member": "Seth Magaziner",
+   "votes_2022": 201089
   },
   "SC-01": {
    "holder": "R",
-   "member": "Nancy Mace"
+   "member": "Nancy Mace",
+   "votes_2022": 272681
   },
   "SC-02": {
    "holder": "R",
-   "member": "Joe Wilson"
+   "member": "Joe Wilson",
+   "votes_2022": 246126
   },
   "SC-03": {
    "holder": "R",
-   "member": "Sheri Biggs"
+   "member": "Sheri Biggs",
+   "votes_2022": 194569
   },
   "SC-04": {
    "holder": "R",
-   "member": "William R. Timmons IV"
+   "member": "William R. Timmons IV",
+   "votes_2022": 182365
   },
   "SC-05": {
    "holder": "R",
-   "member": "Ralph Norman"
+   "member": "Ralph Norman",
+   "votes_2022": 241707
   },
   "SC-06": {
    "holder": "D",
-   "member": "James E. Clyburn"
+   "member": "James E. Clyburn",
+   "votes_2022": 211028
   },
   "SC-07": {
    "holder": "R",
-   "member": "Russell Fry"
+   "member": "Russell Fry",
+   "votes_2022": 253865
   },
   "SD-AL": {
    "holder": "R",
-   "member": "Dusty Johnson"
+   "member": "Dusty Johnson",
+   "votes_2022": 327841
   },
   "TN-01": {
    "holder": "R",
    "member": "Diana Harshbarger",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1963,6 +2483,8 @@
   "TN-02": {
    "holder": "R",
    "member": "Tim Burchett",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1970,6 +2492,8 @@
   "TN-03": {
    "holder": "R",
    "member": "Charles J. \"Chuck\" Fleischmann",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1977,6 +2501,8 @@
   "TN-04": {
    "holder": "R",
    "member": "Scott DesJarlais",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1984,6 +2510,8 @@
   "TN-05": {
    "holder": "R",
    "member": "Andrew Ogles",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1991,6 +2519,8 @@
   "TN-06": {
    "holder": "R",
    "member": "John W. Rose",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -1998,6 +2528,8 @@
   "TN-07": {
    "holder": "R",
    "member": "Matt Van Epps",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2005,6 +2537,8 @@
   "TN-08": {
    "holder": "R",
    "member": "David Kustoff",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2012,6 +2546,8 @@
   "TN-09": {
    "holder": "D",
    "member": "Steve Cohen",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2019,6 +2555,8 @@
   "TX-01": {
    "holder": "R",
    "member": "Nathaniel Moran",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2026,6 +2564,8 @@
   "TX-02": {
    "holder": "R",
    "member": "Dan Crenshaw",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2033,6 +2573,8 @@
   "TX-03": {
    "holder": "R",
    "member": "Keith Self",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2040,6 +2582,8 @@
   "TX-04": {
    "holder": "R",
    "member": "Pat Fallon",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2047,6 +2591,8 @@
   "TX-05": {
    "holder": "R",
    "member": "Lance Gooden",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2054,6 +2600,8 @@
   "TX-06": {
    "holder": "R",
    "member": "Jake Ellzey",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2061,6 +2609,8 @@
   "TX-07": {
    "holder": "D",
    "member": "Lizzie Fletcher",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2068,6 +2618,8 @@
   "TX-08": {
    "holder": "R",
    "member": "Morgan Luttrell",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2075,6 +2627,8 @@
   "TX-09": {
    "holder": "D",
    "member": "Al Green",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2082,6 +2636,8 @@
   "TX-10": {
    "holder": "R",
    "member": "Michael T. McCaul",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2089,6 +2645,8 @@
   "TX-11": {
    "holder": "R",
    "member": "August Pfluger",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2096,6 +2654,8 @@
   "TX-12": {
    "holder": "R",
    "member": "Craig A. Goldman",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2103,6 +2663,8 @@
   "TX-13": {
    "holder": "R",
    "member": "Ronny Jackson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2110,6 +2672,8 @@
   "TX-14": {
    "holder": "R",
    "member": "Randy K. Weber, Sr.",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2117,6 +2681,8 @@
   "TX-15": {
    "holder": "R",
    "member": "Monica De La Cruz",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+7 (data.json)"
@@ -2124,6 +2690,8 @@
   "TX-16": {
    "holder": "D",
    "member": "Veronica Escobar",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2131,6 +2699,8 @@
   "TX-17": {
    "holder": "R",
    "member": "Pete Sessions",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2138,6 +2708,8 @@
   "TX-18": {
    "holder": "D",
    "member": "Christian D. Menefee",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2145,6 +2717,8 @@
   "TX-19": {
    "holder": "R",
    "member": "Jodey C. Arrington",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2152,6 +2726,8 @@
   "TX-20": {
    "holder": "D",
    "member": "Joaquin Castro",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2159,6 +2735,8 @@
   "TX-21": {
    "holder": "R",
    "member": "Chip Roy",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2166,6 +2744,8 @@
   "TX-22": {
    "holder": "R",
    "member": "Troy E. Nehls",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2175,6 +2755,8 @@
    "vacant": true,
    "last_holder": "Tony Gonzales",
    "vacancy_note": "resigned 14 Apr 2026",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+7 (data.json)"
@@ -2182,6 +2764,8 @@
   "TX-24": {
    "holder": "R",
    "member": "Beth Van Duyne",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2189,6 +2773,8 @@
   "TX-25": {
    "holder": "R",
    "member": "Roger Williams",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2196,6 +2782,8 @@
   "TX-26": {
    "holder": "R",
    "member": "Brandon Gill",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2203,6 +2791,8 @@
   "TX-27": {
    "holder": "R",
    "member": "Michael Cloud",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2210,6 +2800,8 @@
   "TX-28": {
    "holder": "D",
    "member": "Henry Cuellar",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+3 (data.json)"
@@ -2217,6 +2809,8 @@
   "TX-29": {
    "holder": "D",
    "member": "Sylvia R. Garcia",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2224,6 +2818,8 @@
   "TX-30": {
    "holder": "D",
    "member": "Jasmine Crockett",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2231,6 +2827,8 @@
   "TX-31": {
    "holder": "R",
    "member": "John R. Carter",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2238,6 +2836,8 @@
   "TX-32": {
    "holder": "D",
    "member": "Julie Johnson",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2245,6 +2845,8 @@
   "TX-33": {
    "holder": "D",
    "member": "Marc A. Veasey",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2252,6 +2854,8 @@
   "TX-34": {
    "holder": "D",
    "member": "Vicente Gonzalez",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+3 (data.json)"
@@ -2259,6 +2863,8 @@
   "TX-35": {
    "holder": "D",
    "member": "Greg Casar",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": "R",
    "notional_source": "Cook PVI R+4 (data.json)"
@@ -2266,6 +2872,8 @@
   "TX-36": {
    "holder": "R",
    "member": "Brian Babin",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2273,6 +2881,8 @@
   "TX-37": {
    "holder": "D",
    "member": "Lloyd Doggett",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2280,6 +2890,8 @@
   "TX-38": {
    "holder": "R",
    "member": "Wesley Hunt",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2287,6 +2899,8 @@
   "UT-01": {
    "holder": "R",
    "member": "Blake D. Moore",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2294,6 +2908,8 @@
   "UT-02": {
    "holder": "R",
    "member": "Celeste Maloy",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2301,6 +2917,8 @@
   "UT-03": {
    "holder": "R",
    "member": "Mike Kennedy",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
@@ -2308,500 +2926,677 @@
   "UT-04": {
    "holder": "R",
    "member": "Burgess Owens",
+   "votes_2022": null,
+   "baseline_note": "new district, no 2022 baseline",
    "redrawn": true,
    "notional_party": null,
    "notional_source": null
   },
   "VA-01": {
    "holder": "R",
-   "member": "Robert J. Wittman"
+   "member": "Robert J. Wittman",
+   "votes_2022": 342738
   },
   "VA-02": {
    "holder": "R",
-   "member": "Jennifer A. Kiggans"
+   "member": "Jennifer A. Kiggans",
+   "votes_2022": 296989
   },
   "VA-03": {
    "holder": "D",
-   "member": "Robert C. \"Bobby\" Scott"
+   "member": "Robert C. \"Bobby\" Scott",
+   "votes_2022": 207843
   },
   "VA-04": {
    "holder": "D",
-   "member": "Jennifer L. McClellan"
+   "member": "Jennifer L. McClellan",
+   "votes_2022": 244972
   },
   "VA-05": {
    "holder": "R",
-   "member": "John J. McGuire III"
+   "member": "John J. McGuire III",
+   "votes_2022": 307775
   },
   "VA-06": {
    "holder": "R",
-   "member": "Ben Cline"
+   "member": "Ben Cline",
+   "votes_2022": 269231
   },
   "VA-07": {
    "holder": "D",
-   "member": "Eugene Simon Vindman"
+   "member": "Eugene Simon Vindman",
+   "votes_2022": 274580
   },
   "VA-08": {
    "holder": "D",
-   "member": "Donald S. Beyer, Jr."
+   "member": "Donald S. Beyer, Jr.",
+   "votes_2022": 268930
   },
   "VA-09": {
    "holder": "R",
-   "member": "H. Morgan Griffith"
+   "member": "H. Morgan Griffith",
+   "votes_2022": 248789
   },
   "VA-10": {
    "holder": "D",
-   "member": "Suhas Subramanyam"
+   "member": "Suhas Subramanyam",
+   "votes_2022": 296140
   },
   "VA-11": {
    "holder": "D",
-   "member": "James R. Walkinshaw"
+   "member": "James R. Walkinshaw",
+   "votes_2022": 289676
   },
   "VT-AL": {
    "holder": "D",
-   "member": "Becca Balint"
+   "member": "Becca Balint",
+   "votes_2022": 291955
   },
   "WA-01": {
    "holder": "D",
-   "member": "Suzan K. DelBene"
+   "member": "Suzan K. DelBene",
+   "votes_2022": 286684
   },
   "WA-02": {
    "holder": "D",
-   "member": "Rick Larsen"
+   "member": "Rick Larsen",
+   "votes_2022": 337923
   },
   "WA-03": {
    "holder": "D",
-   "member": "Marie Gluesenkamp Perez"
+   "member": "Marie Gluesenkamp Perez",
+   "votes_2022": 318013
   },
   "WA-04": {
    "holder": "R",
-   "member": "Dan Newhouse"
+   "member": "Dan Newhouse",
+   "votes_2022": 226647
   },
   "WA-05": {
    "holder": "R",
-   "member": "Michael Baumgartner"
+   "member": "Michael Baumgartner",
+   "votes_2022": 317006
   },
   "WA-06": {
    "holder": "D",
-   "member": "Emily Randall"
+   "member": "Emily Randall",
+   "votes_2022": 347873
   },
   "WA-07": {
    "holder": "D",
-   "member": "Pramila Jayapal"
+   "member": "Pramila Jayapal",
+   "votes_2022": 346647
   },
   "WA-08": {
    "holder": "D",
-   "member": "Kim Schrier"
+   "member": "Kim Schrier",
+   "votes_2022": 336038
   },
   "WA-09": {
    "holder": "D",
-   "member": "Adam Smith"
+   "member": "Adam Smith",
+   "votes_2022": 239848
   },
   "WA-10": {
    "holder": "D",
-   "member": "Marilyn Strickland"
+   "member": "Marilyn Strickland",
+   "votes_2022": 267748
   },
   "WI-01": {
    "holder": "R",
-   "member": "Bryan Steil"
+   "member": "Bryan Steil",
+   "votes_2022": 300867
   },
   "WI-02": {
    "holder": "D",
-   "member": "Mark Pocan"
+   "member": "Mark Pocan",
+   "votes_2022": 378537
   },
   "WI-03": {
    "holder": "R",
-   "member": "Derrick Van Orden"
+   "member": "Derrick Van Orden",
+   "votes_2022": 317922
   },
   "WI-04": {
    "holder": "D",
-   "member": "Gwen Moore"
+   "member": "Gwen Moore",
+   "votes_2022": 255012
   },
   "WI-05": {
    "holder": "R",
-   "member": "Scott Fitzgerald"
+   "member": "Scott Fitzgerald",
+   "votes_2022": 378523
   },
   "WI-06": {
    "holder": "R",
-   "member": "Glenn Grothman"
+   "member": "Glenn Grothman",
+   "votes_2022": 251999
   },
   "WI-07": {
    "holder": "R",
-   "member": "Thomas P. Tiffany"
+   "member": "Thomas P. Tiffany",
+   "votes_2022": 338268
   },
   "WI-08": {
    "holder": "R",
-   "member": "Tony Wied"
+   "member": "Tony Wied",
+   "votes_2022": 310196
   },
   "WV-01": {
    "holder": "R",
-   "member": "Carol D. Miller"
+   "member": "Carol D. Miller",
+   "votes_2022": 227196
   },
   "WV-02": {
    "holder": "R",
-   "member": "Riley M. Moore"
+   "member": "Riley M. Moore",
+   "votes_2022": 244886
   },
   "WY-AL": {
    "holder": "R",
-   "member": "Harriet M. Hageman"
+   "member": "Harriet M. Hageman",
+   "votes_2022": 193902
   }
  },
  "senate": {
   "Senate-AL": {
    "holder": "R",
    "incumbent": "Open seat (Tuberville running for governor)",
-   "state": "Alabama"
+   "state": "Alabama",
+   "votes_2022": null,
+   "baseline_note": "no 2022 statewide total in the source"
   },
   "Senate-AK": {
    "holder": "R",
    "incumbent": "Dan Sullivan",
-   "state": "Alaska"
+   "state": "Alaska",
+   "votes_2022": 267047,
+   "baseline_note": null
   },
   "Senate-AR": {
    "holder": "R",
    "incumbent": "Tom Cotton",
-   "state": "Arkansas"
+   "state": "Arkansas",
+   "votes_2022": 914227,
+   "baseline_note": null
   },
   "Senate-CO": {
    "holder": "D",
    "incumbent": "John Hickenlooper",
-   "state": "Colorado"
+   "state": "Colorado",
+   "votes_2022": 2540666,
+   "baseline_note": null
   },
   "Senate-DE": {
    "holder": "D",
    "incumbent": "Chris Coons",
-   "state": "Delaware"
+   "state": "Delaware",
+   "votes_2022": 325632,
+   "baseline_note": null
   },
   "Senate-GA": {
    "holder": "D",
    "incumbent": "Jon Ossoff",
-   "state": "Georgia"
+   "state": "Georgia",
+   "votes_2022": 3964926,
+   "baseline_note": null
   },
   "Senate-ID": {
    "holder": "R",
    "incumbent": "Jim Risch",
-   "state": "Idaho"
+   "state": "Idaho",
+   "votes_2022": 595350,
+   "baseline_note": null
   },
   "Senate-IL": {
    "holder": "D",
    "incumbent": "Dick Durbin",
-   "state": "Illinois"
+   "state": "Illinois",
+   "votes_2022": 4144125,
+   "baseline_note": null
   },
   "Senate-IA": {
    "holder": "R",
    "incumbent": "Open seat (Ernst retiring)",
-   "state": "Iowa"
+   "state": "Iowa",
+   "votes_2022": 1230417,
+   "baseline_note": null
   },
   "Senate-KS": {
    "holder": "R",
    "incumbent": "Roger Marshall",
-   "state": "Kansas"
+   "state": "Kansas",
+   "votes_2022": 1008998,
+   "baseline_note": null
   },
   "Senate-KY": {
    "holder": "R",
    "incumbent": "Mitch McConnell",
-   "state": "Kentucky"
+   "state": "Kentucky",
+   "votes_2022": 1502550,
+   "baseline_note": null
   },
   "Senate-LA": {
    "holder": "R",
    "incumbent": "Open seat (Cassidy not seeking re-election)",
-   "state": "Louisiana"
+   "state": "Louisiana",
+   "votes_2022": 1410466,
+   "baseline_note": null
   },
   "Senate-ME": {
    "holder": "R",
    "incumbent": "Susan Collins",
-   "state": "Maine"
+   "state": "Maine",
+   "votes_2022": 680909,
+   "baseline_note": null
   },
   "Senate-MA": {
    "holder": "D",
    "incumbent": "Ed Markey",
-   "state": "Massachusetts"
+   "state": "Massachusetts",
+   "votes_2022": 2511461,
+   "baseline_note": null
   },
   "Senate-MI": {
    "holder": "D",
    "incumbent": "Open seat (Peters retiring)",
-   "state": "Michigan"
+   "state": "Michigan",
+   "votes_2022": 4500400,
+   "baseline_note": null
   },
   "Senate-MN": {
    "holder": "D",
    "incumbent": "Open seat (Smith retiring)",
-   "state": "Minnesota"
+   "state": "Minnesota",
+   "votes_2022": 2526646,
+   "baseline_note": null
   },
   "Senate-MS": {
    "holder": "R",
    "incumbent": "Cindy Hyde-Smith",
-   "state": "Mississippi"
+   "state": "Mississippi",
+   "votes_2022": 709100,
+   "baseline_note": null
   },
   "Senate-MT": {
    "holder": "R",
    "incumbent": "Open seat (Daines retiring)",
-   "state": "Montana"
+   "state": "Montana",
+   "votes_2022": 468326,
+   "baseline_note": null
   },
   "Senate-NE": {
    "holder": "R",
    "incumbent": "Pete Ricketts",
-   "state": "Nebraska"
+   "state": "Nebraska",
+   "votes_2022": 682716,
+   "baseline_note": null
   },
   "Senate-NH": {
    "holder": "D",
    "incumbent": "Jeanne Shaheen",
-   "state": "New Hampshire"
+   "state": "New Hampshire",
+   "votes_2022": null,
+   "baseline_note": "no 2022 statewide total in the source"
   },
   "Senate-NJ": {
    "holder": "D",
    "incumbent": "Cory Booker",
-   "state": "New Jersey"
+   "state": "New Jersey",
+   "votes_2022": 2645539,
+   "baseline_note": null
   },
   "Senate-NM": {
    "holder": "D",
    "incumbent": "Ben Ray Luján",
-   "state": "New Mexico"
+   "state": "New Mexico",
+   "votes_2022": 714754,
+   "baseline_note": null
   },
   "Senate-NC": {
    "holder": "R",
    "incumbent": "Open seat (Tillis retiring)",
-   "state": "North Carolina"
+   "state": "North Carolina",
+   "votes_2022": 3790202,
+   "baseline_note": null
   },
   "Senate-OK": {
    "holder": "R",
    "incumbent": "Alan Armstrong (appointed)",
-   "state": "Oklahoma"
+   "state": "Oklahoma",
+   "votes_2022": 1153284,
+   "baseline_note": null
   },
   "Senate-OR": {
    "holder": "D",
    "incumbent": "Jeff Merkley",
-   "state": "Oregon"
+   "state": "Oregon",
+   "votes_2022": 1997689,
+   "baseline_note": null
   },
   "Senate-RI": {
    "holder": "D",
    "incumbent": "Jack Reed",
-   "state": "Rhode Island"
+   "state": "Rhode Island",
+   "votes_2022": 361449,
+   "baseline_note": null
   },
   "Senate-SC": {
    "holder": "R",
    "incumbent": "Darline Graham Nordone (appointed)",
-   "state": "South Carolina"
+   "state": "South Carolina",
+   "votes_2022": 1718626,
+   "baseline_note": null
   },
   "Senate-SD": {
    "holder": "R",
    "incumbent": "Mike Rounds",
-   "state": "South Dakota"
+   "state": "South Dakota",
+   "votes_2022": 354670,
+   "baseline_note": null
   },
   "Senate-TN": {
    "holder": "R",
    "incumbent": "Bill Hagerty",
-   "state": "Tennessee"
+   "state": "Tennessee",
+   "votes_2022": 1756397,
+   "baseline_note": null
   },
   "Senate-TX": {
    "holder": "R",
    "incumbent": "Open seat (Cornyn not seeking re-election)",
-   "state": "Texas"
+   "state": "Texas",
+   "votes_2022": 8151590,
+   "baseline_note": null
   },
   "Senate-VA": {
    "holder": "D",
    "incumbent": "Mark Warner",
-   "state": "Virginia"
+   "state": "Virginia",
+   "votes_2022": 3021956,
+   "baseline_note": null
   },
   "Senate-WV": {
    "holder": "R",
    "incumbent": "Shelley Capito",
-   "state": "West Virginia"
+   "state": "West Virginia",
+   "votes_2022": 494753,
+   "baseline_note": null
   },
   "Senate-WY": {
    "holder": "R",
    "incumbent": "Open seat (Lummis retiring)",
-   "state": "Wyoming"
+   "state": "Wyoming",
+   "votes_2022": 198198,
+   "baseline_note": null
   },
   "Senate-FL": {
    "holder": "R",
    "incumbent": "Ashley Moody",
-   "state": "Florida"
+   "state": "Florida",
+   "votes_2022": 7796916,
+   "baseline_note": null
   },
   "Senate-OH": {
    "holder": "R",
    "incumbent": "Jon Husted",
-   "state": "Ohio"
+   "state": "Ohio",
+   "votes_2022": 4201368,
+   "baseline_note": null
   }
  },
  "gov": {
   "Gov-AL": {
    "holder": "R",
    "incumbent": "Open (Kay Ivey — TL)",
-   "state": "Alabama"
+   "state": "Alabama",
+   "votes_2022": null,
+   "baseline_note": "no 2022 statewide total in the source"
   },
   "Gov-AK": {
    "holder": "R",
    "incumbent": "Open (Mike Dunleavy — TL)",
-   "state": "Alaska"
+   "state": "Alaska",
+   "votes_2022": 267047,
+   "baseline_note": null
   },
   "Gov-AZ": {
    "holder": "D",
    "incumbent": "Katie Hobbs",
-   "state": "Arizona"
+   "state": "Arizona",
+   "votes_2022": 2592313,
+   "baseline_note": null
   },
   "Gov-AR": {
    "holder": "R",
    "incumbent": "Sarah Huckabee Sanders",
-   "state": "Arkansas"
+   "state": "Arkansas",
+   "votes_2022": 914227,
+   "baseline_note": null
   },
   "Gov-CA": {
    "holder": "D",
    "incumbent": "Open (Gavin Newsom — TL)",
-   "state": "California"
+   "state": "California",
+   "votes_2022": 11146610,
+   "baseline_note": null
   },
   "Gov-CO": {
    "holder": "D",
    "incumbent": "Open (Jared Polis — TL)",
-   "state": "Colorado"
+   "state": "Colorado",
+   "votes_2022": 2540666,
+   "baseline_note": null
   },
   "Gov-CT": {
    "holder": "D",
    "incumbent": "Ned Lamont",
-   "state": "Connecticut"
+   "state": "Connecticut",
+   "votes_2022": 1297811,
+   "baseline_note": null
   },
   "Gov-FL": {
    "holder": "R",
    "incumbent": "Open (Ron DeSantis — TL)",
-   "state": "Florida"
+   "state": "Florida",
+   "votes_2022": 7796916,
+   "baseline_note": null
   },
   "Gov-GA": {
    "holder": "R",
    "incumbent": "Open (Brian Kemp — TL)",
-   "state": "Georgia"
+   "state": "Georgia",
+   "votes_2022": 3964926,
+   "baseline_note": null
   },
   "Gov-HI": {
    "holder": "D",
    "incumbent": "Josh Green",
-   "state": "Hawaii"
+   "state": "Hawaii",
+   "votes_2022": 423443,
+   "baseline_note": null
   },
   "Gov-ID": {
    "holder": "R",
    "incumbent": "Brad Little",
-   "state": "Idaho"
+   "state": "Idaho",
+   "votes_2022": 595350,
+   "baseline_note": null
   },
   "Gov-IL": {
    "holder": "D",
    "incumbent": "JB Pritzker",
-   "state": "Illinois"
+   "state": "Illinois",
+   "votes_2022": 4144125,
+   "baseline_note": null
   },
   "Gov-IA": {
    "holder": "R",
    "incumbent": "Open (Kim Reynolds — retiring)",
-   "state": "Iowa"
+   "state": "Iowa",
+   "votes_2022": 1230417,
+   "baseline_note": null
   },
   "Gov-KS": {
    "holder": "D",
    "incumbent": "Open (Laura Kelly — TL)",
-   "state": "Kansas"
+   "state": "Kansas",
+   "votes_2022": 1008998,
+   "baseline_note": null
   },
   "Gov-ME": {
    "holder": "D",
    "incumbent": "Open (Janet Mills — TL)",
-   "state": "Maine"
+   "state": "Maine",
+   "votes_2022": 680909,
+   "baseline_note": null
   },
   "Gov-MD": {
    "holder": "D",
    "incumbent": "Wes Moore",
-   "state": "Maryland"
+   "state": "Maryland",
+   "votes_2022": 2031635,
+   "baseline_note": null
   },
   "Gov-MA": {
    "holder": "D",
    "incumbent": "Maura Healey",
-   "state": "Massachusetts"
+   "state": "Massachusetts",
+   "votes_2022": 2511461,
+   "baseline_note": null
   },
   "Gov-MI": {
    "holder": "D",
    "incumbent": "Open (Gretchen Whitmer — TL)",
-   "state": "Michigan"
+   "state": "Michigan",
+   "votes_2022": 4500400,
+   "baseline_note": null
   },
   "Gov-MN": {
    "holder": "D",
    "incumbent": "Open (Tim Walz ended re-election bid, 5 Jan 2026)",
-   "state": "Minnesota"
+   "state": "Minnesota",
+   "votes_2022": 2526646,
+   "baseline_note": null
   },
   "Gov-NE": {
    "holder": "R",
    "incumbent": "Jim Pillen",
-   "state": "Nebraska"
+   "state": "Nebraska",
+   "votes_2022": 682716,
+   "baseline_note": null
   },
   "Gov-NV": {
    "holder": "R",
    "incumbent": "Joe Lombardo",
-   "state": "Nevada"
+   "state": "Nevada",
+   "votes_2022": 1023617,
+   "baseline_note": null
   },
   "Gov-NH": {
    "holder": "R",
    "incumbent": "Kelly Ayotte",
-   "state": "New Hampshire"
+   "state": "New Hampshire",
+   "votes_2022": null,
+   "baseline_note": "no 2022 statewide total in the source"
   },
   "Gov-NM": {
    "holder": "D",
    "incumbent": "Open (MLG — TL)",
-   "state": "New Mexico"
+   "state": "New Mexico",
+   "votes_2022": 714754,
+   "baseline_note": null
   },
   "Gov-NY": {
    "holder": "D",
    "incumbent": "Kathy Hochul",
-   "state": "New York"
+   "state": "New York",
+   "votes_2022": 5962278,
+   "baseline_note": null
   },
   "Gov-OH": {
    "holder": "R",
    "incumbent": "Open (Mike DeWine — TL)",
-   "state": "Ohio"
+   "state": "Ohio",
+   "votes_2022": 4201368,
+   "baseline_note": null
   },
   "Gov-OK": {
    "holder": "R",
    "incumbent": "Open (Kevin Stitt — TL)",
-   "state": "Oklahoma"
+   "state": "Oklahoma",
+   "votes_2022": 1153284,
+   "baseline_note": null
   },
   "Gov-OR": {
    "holder": "D",
    "incumbent": "Tina Kotek",
-   "state": "Oregon"
+   "state": "Oregon",
+   "votes_2022": 1997689,
+   "baseline_note": null
   },
   "Gov-PA": {
    "holder": "D",
    "incumbent": "Josh Shapiro",
-   "state": "Pennsylvania"
+   "state": "Pennsylvania",
+   "votes_2022": 5410022,
+   "baseline_note": null
   },
   "Gov-RI": {
    "holder": "D",
    "incumbent": "Open seat (McKee not renominated)",
-   "state": "Rhode Island"
+   "state": "Rhode Island",
+   "votes_2022": 361449,
+   "baseline_note": null
   },
   "Gov-SC": {
    "holder": "R",
    "incumbent": "Open (Henry McMaster — TL)",
-   "state": "South Carolina"
+   "state": "South Carolina",
+   "votes_2022": 1718626,
+   "baseline_note": null
   },
   "Gov-SD": {
    "holder": "R",
    "incumbent": "Larry Rhoden",
-   "state": "South Dakota"
+   "state": "South Dakota",
+   "votes_2022": 354670,
+   "baseline_note": null
   },
   "Gov-TN": {
    "holder": "R",
    "incumbent": "Open (Bill Lee — TL)",
-   "state": "Tennessee"
+   "state": "Tennessee",
+   "votes_2022": 1756397,
+   "baseline_note": null
   },
   "Gov-TX": {
    "holder": "R",
    "incumbent": "Greg Abbott",
-   "state": "Texas"
+   "state": "Texas",
+   "votes_2022": 8151590,
+   "baseline_note": null
   },
   "Gov-VT": {
    "holder": "R",
    "incumbent": "Phil Scott",
-   "state": "Vermont"
+   "state": "Vermont",
+   "votes_2022": 291955,
+   "baseline_note": null
   },
   "Gov-WI": {
    "holder": "D",
    "incumbent": "Open (Tony Evers — not running)",
-   "state": "Wisconsin"
+   "state": "Wisconsin",
+   "votes_2022": 2673154,
+   "baseline_note": null
   },
   "Gov-WY": {
    "holder": "R",
    "incumbent": "Open (Mark Gordon — TL)",
-   "state": "Wyoming"
+   "state": "Wyoming",
+   "votes_2022": 198198,
+   "baseline_note": null
   }
  }
 }

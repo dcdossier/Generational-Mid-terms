@@ -1,0 +1,37 @@
+name: Fetch early vote
+
+# UF Election Lab's 2026 Early Vote Tracker updates about daily; checking every
+# 6 hours keeps data/early-vote.json within a few hours of it.
+
+on:
+  schedule:
+    - cron: '27 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-json-writers
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Fetch UF Election Lab early vote CSV
+        run: node scripts/fetch-early-vote.js
+      - name: Commit if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/early-vote.json
+          if git diff --cached --quiet; then echo "No change"; exit 0; fi
+          git commit -m "chore(data): update early vote [skip ci]"
+          for i in 1 2 3; do git pull --rebase && git push && exit 0; sleep 5; done
+          exit 1

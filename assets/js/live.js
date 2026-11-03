@@ -21,6 +21,10 @@
   var DEMO = /[?&]demo=1\b/.test(location.search);
   var STAGE = (/[?&]stage=(pre|early|mid|majority|final)\b/.exec(location.search) || [])[1] || 'mid';
   var DELAYED = /[?&]delayed=1\b/.test(location.search);
+  // Demo clock: 8:15 pm ET on election night, so some states are still voting,
+  // some counting and some called. Runs on from page load.
+  var DEMO_T0 = Date.parse('2026-11-04T01:15:00Z'), LOADED = Date.now();
+  function liveNow() { return DEMO && STAGE !== 'pre' ? DEMO_T0 + (Date.now() - LOADED) : Date.now(); }
 
   var ST = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming' };
   var ABBR = {}; Object.keys(ST).forEach(function (k) { ABBR[ST[k]] = k; });
@@ -30,7 +34,8 @@
     return { chamber: x[0], party: x[1], won: 0, leading: 0, not_up: x[2] };
   });
   var state = { meta: null, chambers: SEED_CHAMBERS.slice(), races: [], holders: {}, baseline: null, config: null, current: null,
-    live: false, loaded: false, error: null, demo: DEMO, pollMs: POLL_MS, nextPollAt: null, lastCheckedAt: null, lastCheckOk: null };
+    live: false, loaded: false, error: null, demo: DEMO, pollMs: POLL_MS, nextPollAt: null, lastCheckedAt: null, lastCheckOk: null,
+    pollClose: null, earlyVote: null, now: liveNow };
   var mounts = [];
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
@@ -51,9 +56,10 @@
   function getJson(url) { return fetch(url).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }); }
   function loadContext() {
     var bust = Math.floor(Date.now() / 600000);
-    return Promise.all([getJson('data.json?t=' + bust), getJson('assets/live-config.json?t=' + bust), getJson('assets/live-baseline.json?t=' + bust)]).then(function (res) {
+    return Promise.all([getJson('data.json?t=' + bust), getJson('assets/live-config.json?t=' + bust), getJson('assets/live-baseline.json?t=' + bust),
+                        getJson('data/poll-close.json?t=' + bust), getJson('data/early-vote.json?t=' + bust)]).then(function (res) {
       var d = res[0], races = d && d.races, h = {};
-      state.config = res[1]; state.baseline = res[2];
+      state.config = res[1]; state.baseline = res[2]; state.pollClose = res[3]; state.earlyVote = res[4];
       if (races) {
         // The 119th Congress as it stands, shown before polls close.
         var hb = races.house && races.house.current_balance || {}, sb = races.senate && races.senate.current_balance || {}, gb = races.governor && races.governor.current_balance || {};
@@ -148,14 +154,19 @@
       Object.keys(b[c] || {}).forEach(function (id) {
         var held = state.holders[id] || b[c][id].holder;
         var out = DEMO_FLIP[id] || held;
-        var called = !pre && (DEMO_CALLED.indexOf(id) >= 0 || (!DEMO_LEAD[id] && rnd() < share[0]));
-        var leader = pre ? null : called ? out : DEMO_LEAD[id] || (rnd() < share[1] ? (rnd() < 0.85 ? out : (out === 'D' ? 'R' : 'D')) : null);
+        var stc = state.pollClose && state.pollClose.states[/^(?:Senate-|Gov-)?([A-Z]{2})/.exec(id)[1]];
+        var open = pre || (STAGE !== 'final' && STAGE !== 'majority' && stc && Date.parse(stc.first_close_utc) > liveNow());   // polls still open at the demo clock
+        var called = !open && (DEMO_CALLED.indexOf(id) >= 0 || (!DEMO_LEAD[id] && rnd() < share[0]));
+        var leader = open ? null : called ? out : DEMO_LEAD[id] || (rnd() < share[1] ? (rnd() < 0.85 ? out : (out === 'D' ? 'R' : 'D')) : null);
         var row = { race_id: id, featured: !!featured[id], featured_order: featured[id] ? featured[id].order : null, leader: leader,
-          winner: called ? out : null, called_by: called ? 'AP' : null, called_at: called ? iso : null, source: 'Demo', other_sources: [], updated_at: iso };
+          winner: called ? out : null, called_by: called ? 'AP' : null, called_at: called ? new Date(liveNow() - Math.round(rnd() * 40) * 60000).toISOString() : null,
+          source: 'Demo', other_sources: [], updated_at: iso };
         if (featured[id] && leader) {
           var lead = 50 + rnd() * 3.5, trail = 100 - lead - 1 - rnd();
           row.pct_d = +(leader === 'D' ? lead : trail).toFixed(1); row.pct_r = +(leader === 'R' ? lead : trail).toFixed(1);
           row.pct_counted = called ? 92 + Math.round(rnd() * 7) : Math.round(35 + rnd() * 50);
+          var v22 = b[c][id].votes_2022 || 260000;
+          row.total_votes = Math.round(v22 * 1.08 * row.pct_counted / 100);
           if (featured[id].order % 4 === 1) row.other_sources = [{ name: 'State results feed (demo)', pct_d: +(row.pct_d - 0.3).toFixed(1), pct_r: +(row.pct_r + 0.3).toFixed(1), pct_counted: row.pct_counted - 2, at: iso }];
         }
         state.races.push(row);
@@ -189,7 +200,7 @@
   function demoCallMaine() {   // a leading pickup becomes a called pickup
     var r = state.races.filter(function (x) { return x.race_id === 'Senate-ME'; })[0];
     if (!r || STAGE === 'pre') return;
-    r.winner = 'D'; r.called_by = 'AP'; r.called_at = new Date().toISOString(); r.pct_counted = 94; r.updated_at = r.called_at;
+    r.winner = 'D'; r.called_by = 'AP'; r.called_at = new Date(liveNow()).toISOString(); r.pct_counted = 94; r.updated_at = new Date().toISOString();
     state.meta.last_update = r.called_at; demoChambers(); render('Senate-ME');
   }
 

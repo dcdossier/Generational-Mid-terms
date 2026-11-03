@@ -64,6 +64,13 @@
     if (st.nextPollAt) parts.push('next check in <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
     if (st.lastCheckedAt) parts.push('last checked ' + istTime(st.lastCheckedAt, true) + (st.lastCheckOk === false ? ' <span class="ls-warn">(could not reach the results service; retrying)</span>' : ''));
     if (m.last_update) parts.push('last change ' + istTime(m.last_update) + ' (' + esc(sourceOf(st)) + ')');
+    var nc = window.LiveSeat && window.LiveSeat.nextClose(st);
+    if (nc) {
+      var secs = Math.max(0, Math.floor(nc.inMs / 1000)), h = Math.floor(secs / 3600);
+      var left = (h ? h + ':' + String(Math.floor(secs % 3600 / 60)).padStart(2, '0') : Math.floor(secs / 60)) + ':' + String(secs % 60).padStart(2, '0');
+      var names = nc.states.length > 4 ? nc.states.slice(0, 4).join(', ') + ' and ' + (nc.states.length - 4) + ' more' : nc.states.join(', ');
+      parts.unshift('<span class="ls-next">Next polls close: ' + esc(names) + ' in <b class="ls-n ls-count">' + left + '</b></span>');
+    }
     var stale = ph !== 'pre' && m.last_push && now - new Date(m.last_push).getTime() > STALE_MS;
     return (stale ? '<span class="ls-delay" role="status">Updates delayed. Last data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
       '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';

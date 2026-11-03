@@ -34,6 +34,10 @@ VACANT = {'FL-20': {'party': 'D', 'last_holder': 'Sheila Cherfilus-McCormick', '
           'TX-23': {'party': 'R', 'last_holder': 'Tony Gonzales', 'note': 'resigned 14 Apr 2026'}}
 AT_LARGE = {'AK', 'DE', 'ND', 'SD', 'VT', 'WY'}
 FOOTNOTE = "In redrawn states, gains and losses compare with the new district's expected party."
+# 2022 totals are only comparable where the district lines are the same as in 2022.
+LINES_CHANGED_2024 = ['GA', 'NY']          # redrawn for 2024 (AL, LA, NC, OH were too, and again for 2026)
+VOTES_2022 = ROOT / 'data' / 'house-votes-2022.json'
+EARLY = ROOT / 'data' / 'early-vote.json'
 
 STATES = {'Alabama': 'AL', 'Alaska': 'AK', 'Arizona': 'AZ', 'Arkansas': 'AR', 'California': 'CA', 'Colorado': 'CO', 'Connecticut': 'CT',
           'Delaware': 'DE', 'Florida': 'FL', 'Georgia': 'GA', 'Hawaii': 'HI', 'Idaho': 'ID', 'Illinois': 'IL', 'Indiana': 'IN', 'Iowa': 'IA',
@@ -65,6 +69,8 @@ def main():
     assert len(seats) == 435, len(seats)
 
     pvi = {r['district']: r.get('pvp') for r in data['races']['house']['competitive'] if r.get('district')}
+    v22 = json.loads(VOTES_2022.read_text())
+    state22 = {st: v['turn_2022'] for st, v in json.loads(EARLY.read_text())['states'].items() if v.get('turn_2022')}
     house, blank = {}, []
     for sid in seats:
         st = sid[:2]
@@ -74,6 +80,14 @@ def main():
             e.update({'vacant': True, 'last_holder': h['last_holder'], 'vacancy_note': h['vacancy_note']})
         else:
             e['member'] = h['member']
+        if st in REDRAWN:
+            e['votes_2022'] = None; e['baseline_note'] = 'new district, no 2022 baseline'
+        elif st in LINES_CHANGED_2024:
+            e['votes_2022'] = None; e['baseline_note'] = 'district redrawn in 2024, no 2022 baseline'
+        elif sid in v22['uncontested']:
+            e['votes_2022'] = None; e['baseline_note'] = 'uncontested in 2022, no vote held'
+        else:
+            e['votes_2022'] = v22['districts'].get(sid)
         if st in REDRAWN:
             e['redrawn'] = True
             if sid in kept:
@@ -89,10 +103,13 @@ def main():
 
     senate = {}
     for r in data['races']['senate']['races']:
-        senate['Senate-' + r['code']] = {'holder': r['party'], 'incumbent': r['incumbent'], 'state': r['state']}
+        senate['Senate-' + r['code']] = {'holder': r['party'], 'incumbent': r['incumbent'], 'state': r['state'], 'votes_2022': state22.get(r['code']),
+                                         'baseline_note': None if state22.get(r['code']) else 'no 2022 statewide total in the source'}
     gov = {}
     for r in data['races']['governor']['races']:
-        gov['Gov-' + STATES[r['state']]] = {'holder': r['party'], 'incumbent': r['incumbent'], 'state': r['state']}
+        ab = STATES[r['state']]
+        gov['Gov-' + ab] = {'holder': r['party'], 'incumbent': r['incumbent'], 'state': r['state'], 'votes_2022': state22.get(ab),
+                            'baseline_note': None if state22.get(ab) else 'no 2022 statewide total in the source'}
 
     sh = Counter(v['holder'] for v in senate.values())
     gh = Counter(v['holder'] for v in gov.values())
@@ -108,10 +125,13 @@ def main():
                   'and set notional_source to "hand" to keep it on the next build.',
         'source': 'archive/119 (snapshot ' + json.loads((ARCH / 'manifest.json').read_text())['snapshot_commit'] + ')',
         'redrawn_states': REDRAWN, 'footnote': FOOTNOTE,
+        'votes_2022_source': {'house': 'data/house-votes-2022.json (Wikipedia per-state 2022 House results)',
+                              'statewide': 'UF Election Lab early-vote file, turn_2022 (total ballots in 2022)'},
         'counts': {'house': dict(Counter(v['holder'] for v in house.values())), 'house_vacant': sorted(VACANT),
                    'house_redrawn': sum(1 for v in house.values() if v.get('redrawn')),
                    'house_notional_set': sum(1 for v in house.values() if v.get('notional_party')),
-                   'senate_up': dict(sh), 'gov_up': dict(gh)},
+                   'senate_up': dict(sh), 'gov_up': dict(gh),
+                   'house_with_2022_baseline': sum(1 for v in house.values() if v.get('votes_2022'))},
         'notional_blank': blank,
         'house': house, 'senate': senate, 'gov': gov}
     OUT.write_text(json.dumps(out, indent=1, ensure_ascii=False) + '\n')

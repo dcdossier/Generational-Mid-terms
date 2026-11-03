@@ -4,7 +4,10 @@
  * Each box shows the leader, vote share, margin, share counted, a "Called"
  * badge once called_by is set, "Ran on" items and other sources. When the
  * leader changes the box border flashes once (a static highlight under
- * prefers-reduced-motion). Tapping a box opens the seat panel on Election Trends.
+ * prefers-reduced-motion). Tapping a box opens the seat panel on Election Trends;
+ * "Read more" goes to the Trends page itself, opened at the seat brief
+ * (map.html?seat=ID&open=brief). Countdown, counting and votes-counted lines come
+ * from live-seat.js.
  */
 (function () {
   'use strict';
@@ -37,6 +40,14 @@
     return null;
   }
 
+  function liveLines(id) {
+    var st = lastState, S = window.LiveSeat;
+    if (!S || !st) return '';
+    var s = S.status(st, id), v = S.votes(st, id), m = S.mailNote(st, id);
+    return (s.text ? '<span class="bg-when bg-when-' + (s.phase || 'none') + '">' + esc(s.text) + '</span>' : '') +
+      (v ? '<span class="bg-votes">' + esc(v) + '</span>' : '') + (m ? '<span class="bg-mail">' + esc(m) + '</span>' : '');
+  }
+
   function boxInner(race, kind, row) {
     var L = window.LiveMath;
     var d = race.candidates.filter(function (c) { return c.party === 'D'; })[0], r = race.candidates.filter(function (c) { return c.party === 'R'; })[0];
@@ -46,9 +57,9 @@
     if (!hasVotes && !win) lead = null;
     var leader = lead === 'D' ? d : lead === 'R' ? r : null, other = lead === 'D' ? r : lead === 'R' ? d : null;
     var lp = lead === 'D' ? pd : pr, op = lead === 'D' ? pr : pd;
-    var head = '<span class="bg-head"><span class="bg-id">' + esc(kind === 'senate' ? 'Senate · ' + race.state : race.race_id) + '</span>' +
+    var head = '<button type="button" class="bg-head bg-open"><span class="bg-id">' + esc(kind === 'senate' ? 'Senate · ' + race.state : race.race_id) + '</span>' +
       '<span class="bg-st">' + esc(kind === 'senate' ? race.label : ST[race.state] || race.state) + '</span>' +
-      (row && row.called_by ? '<span class="bg-called">Called (' + esc(row.called_by) + ')</span>' : '') + '</span>';
+      (row && row.called_by ? '<span class="bg-called">Called (' + esc(row.called_by) + ')</span>' : '') + '</button>';
     var main;
     if (leader) {
       var margin = lp !== null && op !== null ? Math.abs(lp - op) : null;
@@ -70,7 +81,7 @@
       return esc(o.name) + ': D ' + pct(o.pct_d) + ' · R ' + pct(o.pct_r) + (o.pct_counted != null ? ' · ' + pct(o.pct_counted) + ' in' : '') + (o.at ? ' (' + timeET(o.at) + ')' : '');
     }).join('<br>') + '</span>' : '';
     var src = row && row.source ? '<span class="bg-src">Source: ' + esc(row.source) + '</span>' : '';
-    return { html: head + main + cnt + ran + others + src, lead: lead, called: !!(row && row.called_by),
+    return { html: head + main + cnt + liveLines(race.race_id) + ran + others + src, lead: lead, called: !!(row && row.called_by),
       label: (kind === 'senate' ? race.label + ' Senate' : race.race_id) + ': ' + (leader ? leader.name + ' (' + lead + ') ' + (win ? 'won' : 'leads') + ' with ' + pct(lp) : 'awaiting results') +
         (counted !== null ? ', ' + pct(counted) + ' counted' : '') + '. Open seat details.' };
   }
@@ -78,7 +89,11 @@
   function grid(kind, races) {
     return '<div class="bg-group bg-group-' + kind + '"><h3 class="bg-gh">' + (kind === 'senate' ? 'Senate' : 'House') +
       ' <small>' + races.length + ' races</small></h3><div class="bg-grid bg-grid-' + kind + '">' +
-      races.map(function (r) { return '<button type="button" class="bg-box bg-' + kind + '" data-race="' + esc(r.race_id) + '"></button>'; }).join('') + '</div></div>';
+      races.map(function (r) {
+        var href = 'map.html?seat=' + encodeURIComponent(r.race_id) + '&open=brief' + (/[?&]demo=1\b/.test(location.search) ? '&demo=1' : '');
+        return '<div class="bg-box bg-' + kind + '" data-race="' + esc(r.race_id) + '"><span class="bg-inner"></span>' +
+          '<a class="bg-more" href="' + esc(href) + '" target="_self">Read more <span aria-hidden="true">&rarr;</span><span class="sr-only"> about ' + esc(kind === 'senate' ? r.label + ' Senate' : r.race_id) + '</span></a></div>';
+      }).join('') + '</div></div>';
   }
 
   function credits() {
@@ -95,6 +110,7 @@
     el.innerHTML = '<div class="bg-headrow"><h2 class="bg-title">Battleground races</h2><p class="bg-sub" aria-live="off"></p></div>' +
       grid('senate', cfg.senate) + grid('house', cfg.house) + credits();
     el.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;   // "Read more" is a normal link
       var b = e.target.closest('.bg-box'); if (!b) return;
       var id = b.getAttribute('data-race');
       if (typeof window.openSeatFromHome === 'function') window.openSeatFromHome(id);
@@ -115,8 +131,9 @@
           var box = el.querySelector('.bg-box[data-race="' + race.race_id + '"]');
           if (!box) return;
           var b = boxInner(race, g[0], rowFor(st, race.race_id));
-          if (box._html !== b.html) { box.innerHTML = b.html; box._html = b.html; }
-          box.setAttribute('aria-label', b.label);
+          var inner = box.querySelector('.bg-inner');
+          if (box._html !== b.html) { inner.innerHTML = b.html; box._html = b.html; }
+          var ob = inner.querySelector('.bg-open'); if (ob) ob.setAttribute('aria-label', b.label);
           box.classList.toggle('bg-lead-d', b.lead === 'D');
           box.classList.toggle('bg-lead-r', b.lead === 'R');
           box.classList.toggle('bg-is-called', b.called);

@@ -605,3 +605,12 @@
   font-size: 11.5px;
   line-height: 1.35;
 }
+
+/* ── Live status line under the header (assets/js/live-seat.js) ─────────── */
+.sp-live { margin-top: 10px; padding: 8px 10px; border-radius: 6px; background: #F7F5EE; border-left: 3px solid #620d3c; font-size: 14px; line-height: 1.45; }
+.sp-live[hidden] { display: none; }
+.sp-live-status { font-weight: 600; }
+.sp-live-before { color: #7A4A00; }
+.sp-live-called { color: #1A6B3A; }
+.sp-live-votes { font-size: 13px; color: #555; font-variant-numeric: tabular-nums; }
+.sp-live-mail { font-size: 13px; color: #7A4A00; font-style: italic; }

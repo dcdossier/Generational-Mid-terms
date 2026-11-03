@@ -234,6 +234,7 @@
         '</div>' +
         '<div class="sp-ratings" id="sp-ratings"></div>' +
         '<div class="sp-note" id="sp-note" style="display:none"></div>' +
+        '<div class="sp-live" id="sp-live" hidden></div>' +
       '</div>' +
       '<div class="sp-body" id="sp-body"></div>';
 
@@ -264,6 +265,7 @@
       rep: panel.querySelector('#sp-rep'),
       ratings: panel.querySelector('#sp-ratings'),
       note: panel.querySelector('#sp-note'),
+      live: panel.querySelector('#sp-live'),
       body: panel.querySelector('#sp-body'),
     };
     return dom;
@@ -283,6 +285,25 @@
   // hashes (e.g. map.html's "#seats") belong to the host page.
   function isSeatId(s) {
     return /^([A-Z]{2}-(\d{2}|AL)|Senate-[A-Z]{2}|Gov-[A-Z]{2})$/.test(s);
+  }
+
+  // ── live status line (poll close countdown, counting, called; set by live-seat.js) ──
+  var liveProvider = null, liveTimer = null;
+  function refreshLive() {
+    if (!dom || !isOpen || !currentId) return;
+    var html = liveProvider ? liveProvider(currentId) : '';
+    if (dom.live._html !== html) { dom.live.innerHTML = html || ''; dom.live._html = html; }
+    dom.live.hidden = !html;
+  }
+  document.addEventListener('racebook:live', refreshLive);
+
+  // ── shareable URL: ?seat=ID while a panel is open (replaceState, so Back leaves the page) ──
+  function seatUrl(id) {
+    var q = new URLSearchParams(location.search);
+    if (id) q.set('seat', id); else q.delete('seat');
+    q.delete('open');
+    var qs = q.toString();
+    return location.pathname + (qs ? '?' + qs : '');
   }
 
   function onPopState() {
@@ -759,7 +780,16 @@
       }
       ensureDom().body.appendChild(buildPollsSection(id, results[3]));
       ensureDom().body.appendChild(buildNewsSection(id, results[0][id], results[2]));
+      refreshLive();
+      // ?open=brief: start at the seat brief, with the state's issues below it
+      if (opts.scrollTo === 'brief') {
+        var bodyEl = ensureDom().body, first = bodyEl.querySelector('.sp-section');
+        if (first) bodyEl.scrollTop = Math.max(0, first.getBoundingClientRect().top - bodyEl.getBoundingClientRect().top + bodyEl.scrollTop - 6);
+      }
     });
+    refreshLive();
+    clearInterval(liveTimer);
+    liveTimer = setInterval(refreshLive, 30000);   // the countdown ticks each minute
 
     d.overlay.removeAttribute('hidden');
     d.panel.removeAttribute('hidden');
@@ -771,9 +801,8 @@
     });
     d.panel.focus({ preventScroll: true });   // never move the page behind the panel
 
-    if (location.hash.slice(1) !== encodeURIComponent(id)) {
-      history.pushState(null, '', '#' + encodeURIComponent(id));
-    }
+    // Shareable link to this seat; replaceState so Back returns to the previous page
+    history.replaceState(null, '', seatUrl(id));
 
     window.dispatchEvent(new CustomEvent('seatpanel:open', { detail: { id: id } }));
   }
@@ -791,9 +820,8 @@
       d.panel.setAttribute('hidden', '');
     }, 280);
 
-    if (location.hash && decodeURIComponent(location.hash.slice(1)) === currentId) {
-      history.replaceState(null, '', location.pathname + location.search);
-    }
+    history.replaceState(null, '', seatUrl(null));
+    clearInterval(liveTimer);
     currentId = null;
 
     var toFocus = lastFocused;
@@ -824,6 +852,10 @@
   // ── deep link on load ────────────────────────────────────────────────────
 
   document.addEventListener('DOMContentLoaded', function () {
+    // ?seat=ID (shareable links); ?open=brief starts at the brief. A host page that
+    // needs its own context (map.html) sets SeatPanel.deferDeepLink and opens it itself.
+    var q = new URLSearchParams(location.search), qId = q.get('seat');
+    if (qId && isSeatId(qId) && !window.SeatPanelDeferDeepLink) { open(qId, { mode: 'default', scrollTo: q.get('open') === 'brief' ? 'brief' : null }); return; }
     if (location.hash) {
       var hashId = decodeURIComponent(location.hash.slice(1));
       // Guard against redundant re-open: if something already opened this
@@ -843,5 +875,7 @@
     // fn(id, {mode}) opens a seat from a state-issue tile's seat link, so the
     // host can pass its own context (rating, incumbent); null restores open().
     setSeatOpener: function (fn) { seatOpener = typeof fn === 'function' ? fn : null; },
+    // fn(id) returns HTML for the live line under the header (live-seat.js), or ''
+    setLiveProvider: function (fn) { liveProvider = typeof fn === 'function' ? fn : null; refreshLive(); },
   };
 })();

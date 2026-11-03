@@ -69,6 +69,8 @@ create table if not exists public.live_races (
   updated_at     timestamptz not null default now()
 );
 create index if not exists live_races_featured_idx on public.live_races (featured, featured_order);
+-- Votes counted so far (state feeds or the desk); the site compares with 2022 totals.
+alter table public.live_races add column if not exists total_votes bigint check (total_votes is null or total_votes >= 0);
 
 -- ── updated_at on every change ──────────────────────────────────────────────
 create or replace function public.live_touch() returns trigger

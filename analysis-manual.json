@@ -2,7 +2,7 @@
   "meta": {
     "about": "The single source for the Analysis & Commentary page. Entries are added and edited on the private input page; analysis.json is a frozen backup and is no longer read. Entries with needs_enrich: true, or a missing title, date or description, are filled in by scripts/enrich-manual.js.",
     "fields": "id, type (op-ed, newsletter, research, media, podcast), title, url, author, source, date (ISO), description, tags, added_at, manual: true, needs_enrich",
-    "last_updated": "2026-11-03T04:19:35.670Z"
+    "last_updated": "2026-11-03T06:10:29.558Z"
   },
   "posts": [],
   "entries": [
@@ -1376,13 +1376,15 @@
       "title": "The four ‘I’s that could shape the 2026 US midterm elections",
       "url": "https://theprint.in/opinion/us-midterms-2026-four-key-issues-voters/3088718/",
       "author": "Abhishek Kadiyala",
-      "source": "The Print",
+      "source": "ThePrint",
       "date": "2026-11-03T00:00:00.000Z",
-      "description": "",
+      "description": "Each of these issues amplifies the others while connecting regional and demography concerns with the broader national debate, influencing voters’ decisions.",
       "tags": [],
       "added_at": "2026-11-03T06:10:15.222Z",
       "manual": true,
-      "needs_enrich": true
+      "needs_enrich": false,
+      "summary_source": "page",
+      "image": "https://staticprintenglish.theprint.in/wp-content/uploads/2026/10/Trump_752-e1793651715553.jpg"
     }
   ]
 }

@@ -1,6 +1,6 @@
 {
  "_about": "Poll closing times for 3 Nov 2026 (ET is EST, UTC-5; IST is UTC+5:30) and when each state may start processing mail ballots. Closing times: Election Central 2026, checked against PBS NewsHour (2024 final closing times; hours unchanged). Mail processing: Center for Election Innovation & Research, Pre-Processing Timelines, Fall 2026. NCSL and Ballotpedia block automated reads, so they were not used.",
- "approved": false,
+ "approved": true,
  "built": "2026-11-04",
  "sources": [
   {
@@ -432,9 +432,7 @@
     "https://www.pbs.org/newshour/politics/heres-when-polls-are-closing-in-your-state",
     "https://electioninnovation.org/research/pre-processing-timelines/"
    ],
-   "check": [
-    "Election Central lists closings up to 10 pm ET; PBS (2024) gives 9 pm ET. Using PBS; please check."
-   ]
+   "note_checked": "Last close 9 pm ET (PBS); approved"
   },
   "KY": {
    "name": "Kentucky",
@@ -747,9 +745,7 @@
     "https://www.pbs.org/newshour/politics/heres-when-polls-are-closing-in-your-state",
     "https://electioninnovation.org/research/pre-processing-timelines/"
    ],
-   "check": [
-    "Election Central lists closings up to 11 pm ET; PBS (2024) gives 9 pm ET. Using PBS; please check."
-   ]
+   "note_checked": "Last close 9 pm ET (PBS); approved"
   },
   "NE": {
    "name": "Nebraska",
@@ -1323,5 +1319,6 @@
     "https://electioninnovation.org/research/pre-processing-timelines/"
    ]
   }
- }
+ },
+ "approved_on": "2026-11-04"
 }

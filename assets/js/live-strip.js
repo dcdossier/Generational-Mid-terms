@@ -82,12 +82,21 @@
       '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';
   }
 
+  // One line: national early votes (UF Election Lab), under the strip.
+  function earlyHtml(st) {
+    var ev = st.earlyVote; if (!ev || !ev.national) return '';
+    var N = ev.national, M = ev.meta || {}, f = function (v) { return Number(v || 0).toLocaleString('en-US'); };
+    var upd = M.file_updated ? new Date(M.file_updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' }) : '';
+    return '<div class="ls-early">Early votes cast nationally: <b class="ls-n">' + f(N.total) + '</b> (mail ' + f(N.mail_returned) + ' · in person ' + f(N.in_person) + ') · ' +
+      '<a href="' + esc(M.source_url || '#') + '" target="_blank" rel="noopener">UF Election Lab</a>' + (upd ? ', updated ' + esc(upd) : '') + '</div>';
+  }
+
   var mounts = [], lastSt = null;
   function render(st) {
     if (!window.LiveMath) return;
     lastSt = st || (window.RacebookLive && window.RacebookLive.state) || {};
     mounts.forEach(function (el) {
-      el.innerHTML = '<div class="ls-top">' + html(lastSt) + '</div><div class="ls-refresh">' + refreshHtml(lastSt) + '</div>';
+      el.innerHTML = '<div class="ls-top">' + html(lastSt) + '</div><div class="ls-refresh">' + refreshHtml(lastSt) + '</div>' + earlyHtml(lastSt);
       el.hidden = false;
     });
   }

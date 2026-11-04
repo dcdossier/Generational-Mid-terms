@@ -87,15 +87,24 @@
     return best === null ? null : { at: best, inMs: best - t, states: names, et: etIst(new Date(best).toISOString()) };
   }
 
-  // Seat panel header: the same lines as the boxes, plus the mail note.
+  // One line for the seat's state: early votes (UF Election Lab).
+  function earlyLine(st, id) {
+    var ev = st.earlyVote, e = ev && ev.states && ev.states[stateOf(id)];
+    if (!e || !e.total) return '';
+    var upd = ev.meta && ev.meta.file_updated ? new Date(ev.meta.file_updated).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' }) : '';
+    return 'Early votes in ' + e.name + ': ' + e.total.toLocaleString('en-US') + (e.pct_of_2022 ? ' (' + e.pct_of_2022 + '% of the 2022 total)' : '') + ' · UF Election Lab' + (upd ? ', updated ' + upd : '');
+  }
+
+  // Seat panel header: the same lines as the boxes, plus the mail note and early votes.
   function panelHtml(id) {
     var st = window.RacebookLive && window.RacebookLive.state;
     if (!st) return '';
-    var s = status(st, id), v = votes(st, id), m = mailNote(st, id);
-    if (!s.text && !v && !m) return '';
+    var s = status(st, id), v = votes(st, id), m = mailNote(st, id), e = earlyLine(st, id);
+    if (!s.text && !v && !m && !e) return '';
     return (s.text ? '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + esc(s.text) + '</div>' : '') +
       (v ? '<div class="sp-live-votes">' + esc(v) + '</div>' : '') +
-      (m ? '<div class="sp-live-mail">' + esc(m) + '</div>' : '');
+      (m ? '<div class="sp-live-mail">' + esc(m) + '</div>' : '') +
+      (e ? '<div class="sp-live-votes">' + esc(e) + '</div>' : '');
   }
 
   window.LiveSeat = { status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };

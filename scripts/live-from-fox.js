@@ -5,7 +5,7 @@
  * pages, decodes the data the pages embed, and writes assets/live.json.
  *
  * Usage: node scripts/live-from-fox.js            (one run)
- *        node scripts/live-from-fox.js --loop 55  (every 5 minutes for 55 minutes)
+ *        node scripts/live-from-fox.js --loop 55  (every 3 minutes for 55 minutes)
  * Never throws away the last good file: on any failure it keeps assets/live.json and
  * records the error in it.
  */
@@ -159,6 +159,6 @@ async function runOnce() {
   while (Date.now() < end) {
     await runOnce();
     if (process.env.LIVE_COMMIT_CMD) require('child_process').spawnSync('bash', ['-c', process.env.LIVE_COMMIT_CMD], { stdio: 'inherit' });
-    await new Promise(r => setTimeout(r, 5 * 60000));
+    await new Promise(r => setTimeout(r, 3 * 60000));
   }
 })();

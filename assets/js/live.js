@@ -1,8 +1,8 @@
 /* Election-night live results.
  *
  * Reads assets/live.json, which scripts/live-from-fox.js writes from the Fox News
- * results pages (GitHub Actions, every 5 minutes), and data/litigation.json. Re-read
- * every 5 minutes and at once when the tab wakes or regains focus. Any element with data-live-results becomes a results panel.
+ * results pages (GitHub Actions, every 3 minutes), and data/litigation.json. Re-read
+ * every 3 minutes and at once when the tab wakes or regains focus. Any element with data-live-results becomes a results panel.
  * ?demo=1 fills the panel with made-up figures, locally, for testing; add
  * &stage=pre, early, majority or final to see each stage (default: mid-count).
  * ?delayed=1 (with demo=1) fakes a last push 15 minutes old to show the watchdog.
@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var POLL_MS = 5 * 60 * 1000;
+  var POLL_MS = 3 * 60 * 1000;
   var DEMO = /[?&]demo=1\b/.test(location.search);
   var STAGE = (/[?&]stage=(pre|early|mid|majority|final)\b/.exec(location.search) || [])[1] || 'mid';
   var DELAYED = /[?&]delayed=1\b/.test(location.search);
@@ -84,6 +84,7 @@
       fetch(LIT_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       var j = res[0], featured = {};
+      if (!j || !j.races) throw new Error('live.json has no races');   // keep the last good numbers
       state.fox = j; state.litigation = res[1] || state.litigation || null;
       if (state.config) state.config.senate.concat(state.config.house).forEach(function (r, i) { featured[r.race_id] = i + 1; });
       state.meta = { id: 1, status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', source: 'Fox News Decision Desk',
@@ -250,7 +251,7 @@
     var L = window.LiveMath, lab = raceLabel(r.race_id);
     var lead = L.leaderOf(r), win = L.winnerOf(r);
     var status = win ? '<span class="lv-call lv-call-' + win.toLowerCase() + '">' + (win === 'D' ? 'Dem' : win === 'R' ? 'Rep' : 'Ind') + ' win' + (r.called_by ? ' &middot; ' + esc(r.called_by) : '') + '</span>'
-      : lead ? '<span class="lv-lead lv-lead-' + lead.toLowerCase() + '">' + lead + ' leads</span>' : '<span class="lv-wait">Awaiting results</span>';
+      : lead ? '<span class="lv-lead lv-lead-' + lead.toLowerCase() + '">' + lead + ' leads</span>' : '<span class="lv-wait">Polls closed · first votes due</span>';
     var flip = flipIds[r.race_id] ? '<span class="lv-flip">Flip</span>' : '';
     var src = r.source_url ? '<a href="' + esc(r.source_url) + '" target="_blank" rel="noopener">' + esc(r.source || 'Source') + '</a>' : esc(r.source || '');
     var dCls = (win || lead) === 'D' ? ' lv-ahead' : '', rCls = (win || lead) === 'R' ? ' lv-ahead' : '';

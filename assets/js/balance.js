@@ -163,10 +163,14 @@
         var f = st.flips[key][p]; if (!f) return;
         g[p].gained = f.gained; g[p].lost = f.lost; g[p].net = f.net; g.basis = 'races';
       });
+      // Needs count called seats only; "(on course with leads)" when leads would close the gap.
       var needs = function (p) {
-        var n = x[p].need, s = needText(n.majority, 'needed for majority', 'Majority reached');
-        if (key === 'house') s += ' · ' + needText(n.two_thirds, 'for two-thirds', 'Two-thirds reached');
-        if (key === 'senate') s += ' · ' + needText(n.filibuster, 'to break filibuster', 'Filibuster-proof') + ' · ' + needText(n.two_thirds, 'for supermajority', 'Supermajority reached');
+        var n = x[p].need, withLeads = x[p].total + (x[p].leading || 0);
+        var one = function (gap, what, done, line) { return gap === 0 ? '<b>' + done + '</b>' : '<b class="bl-n">' + gap + '</b> ' + what + (line && withLeads >= line ? ' <span class="bl-oncourse">(on course with leads)</span>' : ''); };
+        var TH = key === 'senate' ? { D: [51, 60, 67], R: [50, 60, 67] }[p] || [51, 60, 67] : key === 'gov' ? [26] : [218, 0, 290];
+        var s = one(n.majority, 'needed for majority', 'Majority won', TH[0]);
+        if (key === 'house') s += ' · ' + one(n.two_thirds, 'for two-thirds', 'Two-thirds won', TH[2]);
+        if (key === 'senate') s += ' · ' + one(n.filibuster, 'to break filibuster', 'Filibuster-proof', TH[1]) + ' · ' + one(n.two_thirds, 'for supermajority', 'Supermajority won', TH[2]);
         return '<span class="bl-needline">' + s + '</span>';
       };
       t = { D: x.D.total, R: x.R.total, I: x.I.total, textD: needs('D') + gainLines(g, 'D'), textR: needs('R') + gainLines(g, 'R'),

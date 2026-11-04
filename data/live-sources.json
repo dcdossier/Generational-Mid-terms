@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T18:26:49.588Z",
+ "updated": "2026-11-04T18:43:31.324Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -400,6 +400,17 @@
   }
  ],
  "reports": [
+  {
+   "race": "Senate-VA",
+   "name": "Mark Warner",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNa1hJWDc4Sm0zMFZiNFNyakF5dXNpMW1hbXVXLUlkSHNOejE5QmR5aVR3QU9ONjA1QWFUWHJFcGt1alpxaWtDVWxzRXU0Tml2SnFHRnpIbktudTM2R05BZEItdmlyYVJvUUd5bjB3S0FnbjAwUDhrTzdTTEhIM05vb0Z2ckotU0VwN05Z0gGQAUFVX3lxTE9UZkRBZzhKT0dHUmJhdXppcmRYUmRadTJoN0pVQXRSMEtlbVRuZXEtTVV6Szh2QnpjWGNKWXU0RzYxTTROME5uOHRvTEFPd0tiTVBXZC1MN29pVU5PclVrSllTQU92Tk9sUVFVdGNFOU1vamhOa2RnOGFUSk96RW5zYUpxdGl2Tm9PMzhxQVo2dA?oc=5",
+   "title": "Warner wins fourth term as Virginia’s senator",
+   "at": "2026-11-04T00:05:00.000Z"
+  },
   {
    "race": "FL-20",
    "name": "Debbie Wasserman Schultz",
@@ -4093,12 +4104,27 @@
      "at": "2026-11-04T18:15:00.000Z"
     }
    ]
+  },
+  "Senate-VA": {
+   "fox_winner": "Mark Warner",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNa1hJWDc4Sm0zMFZiNFNyakF5dXNpMW1hbXVXLUlkSHNOejE5QmR5aVR3QU9ONjA1QWFUWHJFcGt1alpxaWtDVWxzRXU0Tml2SnFHRnpIbktudTM2R05BZEItdmlyYVJvUUd5bjB3S0FnbjAwUDhrTzdTTEhIM05vb0Z2ckotU0VwN05Z0gGQAUFVX3lxTE9UZkRBZzhKT0dHUmJhdXppcmRYUmRadTJoN0pVQXRSMEtlbVRuZXEtTVV6Szh2QnpjWGNKWXU0RzYxTTROME5uOHRvTEFPd0tiTVBXZC1MN29pVU5PclVrSllTQU92Tk9sUVFVdGNFOU1vamhOa2RnOGFUSk96RW5zYUpxdGl2Tm9PMzhxQVo2dA?oc=5",
+     "title": "Warner wins fourth term as Virginia’s senator",
+     "winner": "Mark Warner",
+     "party": "D",
+     "at": "2026-11-04T00:05:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 73,
+  "races_confirmed": 74,
   "races_disputed": 3,
   "races_reported_not_called": 8
  }

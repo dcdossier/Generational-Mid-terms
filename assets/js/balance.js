@@ -1,4 +1,4 @@
-/* "Projected 120th Congress": House, Senate and Governor seat bars (any element with data-live-balance).
+/* "120th Congress: live count": House, Senate and Governor seat bars (any element with data-live-balance).
  *
  * One cell per seat (435 House, 100 Senate, 50 governorships). Democrats fill from the
  * left, Republicans from the right. Seats not up tonight are the outermost segments in
@@ -46,7 +46,7 @@
 
   // runs: [{type, n, label?}] left to right; o: {maj, majLabel, marks:[{v, l, dcol, rcol}]}
   function barSvg(id, total, runs, width, o, compact) {
-    var H = 20, many = o.marks.length > 0, top = compact ? 26 : (many ? 62 : 40), bottom = compact ? 14 : (many ? 50 : 14), x = function (v) { return v / total * width; };
+    var H = 20, many = o.marks.length > 0, below = o.marks.some(function (m) { return m.rcol; }), top = compact ? 26 : (many ? 62 : 40), bottom = compact ? 14 : (below ? 50 : 14), x = function (v) { return v / total * width; };
     var a = 0, g = '';
     runs.forEach(function (run) {
       if (run.n <= 0) return;
@@ -61,10 +61,10 @@
     o.marks.forEach(function (m, i) {
       var dx = x(m.v), rx = x(total - m.v), up = i % 2 ? 32 : 14, dn = i % 2 ? 40 : 24;
       g += '<path d="M' + (dx - 5).toFixed(1) + ',' + (top - 9) + ' L' + (dx + 5).toFixed(1) + ',' + (top - 9) + ' L' + dx.toFixed(1) + ',' + (top - 2) + 'z" fill="' + m.dcol + '"/>';
-      g += '<path d="M' + (rx - 5).toFixed(1) + ',' + (top + H + 9) + ' L' + (rx + 5).toFixed(1) + ',' + (top + H + 9) + ' L' + rx.toFixed(1) + ',' + (top + H + 2) + 'z" fill="' + m.rcol + '"/>';
+      if (m.rcol) g += '<path d="M' + (rx - 5).toFixed(1) + ',' + (top + H + 9) + ' L' + (rx + 5).toFixed(1) + ',' + (top + H + 9) + ' L' + rx.toFixed(1) + ',' + (top + H + 2) + 'z" fill="' + m.rcol + '"/>';
       if (!compact) {
         g += '<text x="' + dx.toFixed(1) + '" y="' + (top - up) + '" text-anchor="middle" font-size="11.5" fill="' + m.dcol + '">Dem ' + esc(m.l) + ' ' + m.v + '</text>';
-        g += '<text x="' + rx.toFixed(1) + '" y="' + (top + H + dn) + '" text-anchor="middle" font-size="11.5" fill="' + m.rcol + '">Rep ' + esc(m.l) + ' ' + m.v + '</text>';
+        if (m.rcol) g += '<text x="' + rx.toFixed(1) + '" y="' + (top + H + dn) + '" text-anchor="middle" font-size="11.5" fill="' + m.rcol + '">Rep ' + esc(m.l) + ' ' + m.v + '</text>';
       }
     });
     return '<svg class="bl-svg" width="' + width + '" height="' + (top + H + bottom) + '" viewBox="0 0 ' + width + ' ' + (top + H + bottom) + '" aria-hidden="true" focusable="false" style="overflow:visible">' +
@@ -73,15 +73,15 @@
 
   // Marks: Democratic thresholds above the bar (from the left), Republican below (from the right).
   function MARKS(key) {
-    if (key === 'house') return { maj: 217.5, majLabel: 'Majority 218', marks: [{ v: 290, l: 'two-thirds', dcol: C.d67, rcol: C.r67 }] };
-    if (key === 'senate') return { maj: 50.5, majLabel: 'Majority · Dem 51 / Rep 50 (VP)',
-      marks: [{ v: 60, l: 'filibuster', dcol: C.d60, rcol: C.r60 }, { v: 67, l: 'two-thirds', dcol: C.d67, rcol: C.r67 }] };
+    // Democrats only: the majority line and the two-thirds line (no Republican marks)
+    if (key === 'house') return { maj: 217.5, majLabel: 'Majority 218', marks: [{ v: 290, l: 'two-thirds', dcol: C.d67, rcol: null }] };
+    if (key === 'senate') return { maj: 50.5, majLabel: 'Majority 51', marks: [{ v: 67, l: 'two-thirds', dcol: C.d67, rcol: null }] };
     return { maj: 25, majLabel: 'Majority 26', marks: [] };
   }
   // Phones: the marks' words move under the bar.
   function markKey(o) {
     return '<ul class="bl-key"><li><span class="bl-sw bl-sw-dash"></span>' + esc(o.majLabel) + '</li>' + o.marks.map(function (m) {
-      return '<li><span class="bl-tri" style="color:' + m.dcol + '">▼</span>Dem ' + esc(m.l) + ' ' + m.v + ' <span class="bl-tri" style="color:' + m.rcol + '">▲</span>Rep ' + esc(m.l) + ' ' + m.v + '</li>';
+      return '<li><span class="bl-tri" style="color:' + m.dcol + '">▼</span>Dem ' + esc(m.l) + ' ' + m.v + (m.rcol ? ' <span class="bl-tri" style="color:' + m.rcol + '">▲</span>Rep ' + esc(m.l) + ' ' + m.v : '') + '</li>';
     }).join('') + '</ul>';
   }
 
@@ -197,8 +197,7 @@
         var one = function (gap, what, done, line) { return gap === 0 ? '<b>' + done + '</b>' : '<b class="bl-n">' + gap + '</b> ' + what + (line && withLeads >= line ? ' <span class="bl-oncourse">(on course with leads)</span>' : ''); };
         var TH = key === 'senate' ? { D: [51, 60, 67], R: [50, 60, 67] }[p] || [51, 60, 67] : key === 'gov' ? [26] : [218, 0, 290];
         var s = one(n.majority, 'needed for majority', 'Majority won', TH[0]);
-        if (key === 'house') s += ' · ' + one(n.two_thirds, 'for two-thirds', 'Two-thirds won', TH[2]);
-        if (key === 'senate') s += ' · ' + one(n.filibuster, 'to break filibuster', 'Filibuster-proof', TH[1]) + ' · ' + one(n.two_thirds, 'for supermajority', 'Supermajority won', TH[2]);
+        if (p === 'D' && key !== 'gov') s += ' · ' + one(n.two_thirds, 'short of two-thirds', 'Two-thirds won', TH[2]);
         return '<span class="bl-needline">' + s + '</span>';
       };
       t = { D: x.D.total, R: x.R.total, I: x.I.total, textD: needs('D'), textR: needs('R'), flips: flipChart(g, key),
@@ -229,17 +228,26 @@
       '<div class="bl-bar">' + barSvg(id, total, runs, width, mk, compact) + '</div>' +
       (compact ? markKey(mk) : '') +
       '<div class="bl-needs" aria-hidden="true"><span class="bl-need-d">' + t.textD + '</span>' + (t.mid ? '<span class="bl-mid">' + esc(t.mid) + '</span>' : '') + '<span class="bl-need-r">' + t.textR + '</span></div>' +
+      deskLine(st, key, nu) +
       (t.flips || '') +
       '</div>';
   }
 
+  // What each decision desk has called (plus seats not up), under the bar
+  function deskLine(st, key, nu) {
+    var ds = st.desks; if (!ds || showPreFor(st, key)) return '';
+    var kk = key === 'gov' ? 'governor' : key, add = key === 'house' ? { D: 0, R: 0 } : nu;
+    var one = function (k, label) { var d = ds[k]; if (!d || !d[kk]) return ''; var x = d[kk];
+      return '<span class="bl-desk' + (d.ok === false ? ' bl-desk-off' : '') + '"><b>' + label + '</b> D ' + ((x.D || 0) + (add.D || 0)) + ' · R ' + ((x.R || 0) + (add.R || 0)) + (d.ok === false ? ' (last good)' : '') + '</span>'; };
+    return '<p class="bl-desks">Two of three must agree: ' + one('fox', 'Fox News') + one('ap', 'AP') + one('nbc', 'NBC News') + '</p>';
+  }
   function tipButton(id, label, text) {
     return '<button type="button" class="bl-q" aria-expanded="false" aria-controls="' + id + '" aria-label="' + esc(label) + '"></button>' +
       '<span class="bl-tip" id="' + id + '" role="tooltip" hidden>' + text + '</span>';
   }
   function legend(pre, base) {
     function sw(cls) { return '<i class="bl-lg-sw bl-lg-' + cls + '"></i>'; }
-    var marks = '<span class="bl-lg-marks">▼ Democratic marks above · ▲ Republican marks below</span>';
+    var marks = '<span class="bl-lg-marks">▼ Democratic two-thirds line</span>';
     if (pre) return '<div class="bl-legend"><span>' + sw('called-d') + sw('called-r') + 'Current seats</span><span>' + sw('nu-d') + sw('nu-r') + 'Not up tonight</span><span>' + sw('un') + 'Vacant or other</span>' + marks + '</div>';
     return '<div class="bl-legend"><span>' + sw('nu-d') + sw('nu-r') + 'Not up</span><span>' + sw('called-d') + sw('called-r') + 'Called</span><span>' + sw('lead-d') + sw('lead-r') + 'Leading</span><span>' + sw('un') + 'Not yet called</span>' +
       '<span class="bl-qwrap">' + tipButton(base + 'a', 'What does leading mean?', 'Leading is not won. A leading seat is one where a candidate is ahead in the votes counted so far; the lead can change as more votes are counted. Only called races are counted as won.') + '</span>' +
@@ -259,10 +267,10 @@
     var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + 'No calls yet' + '</span> Showing seats before the election until results arrive.'
       : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
-      : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + (chambersOf(el).indexOf('senate') >= 0 ? ' · Senate includes seats not up this year' : '');
+      : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + (st.desks ? ' · a seat counts as won when two of Fox News, AP and NBC News call it' : '') + (chambersOf(el).indexOf('senate') >= 0 ? ' · Senate includes seats not up this year' : '');
     if (st.demo) sub += ' <b>Demo data.</b>';
     var foot = !pre && st.baseline && st.baseline.footnote ? '<p class="bl-foot">' + esc(st.baseline.footnote) + '</p>' : '';
-    return '<div class="bl-head"><h2 class="bl-title">Projected 120th Congress</h2><p class="bl-sub">' + sub + '</p></div>' +
+    return '<div class="bl-head"><h2 class="bl-title">120th Congress: live count</h2><p class="bl-sub">' + sub + '</p></div>' +
       '<div class="bl-measure"></div>' +
       chambersOf(el).map(function (k) { return chamber(st, k, width); }).join('') + legend(pre, 'bl-tip-' + (++uid)) + foot;
   }

@@ -574,7 +574,7 @@ body{background:#F5F5DC;color:#1E2232}
 }
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
-<link rel="stylesheet" href="assets/css/live.css?v=20261104t">
+<link rel="stylesheet" href="assets/css/live.css?v=20261105a">
 </head>
 <body>
 
@@ -705,7 +705,7 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- ELECTION STATUS STRIP + PROJECTED BALANCE (assets/js/live-strip.js, balance.js) -->
       <div data-live-strip></div>
-      <section data-live-balance aria-label="Projected 120th Congress"></section>
+      <section data-live-balance aria-label="120th Congress: live count"></section>
       <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 
       <!-- HERO -->
@@ -755,8 +755,8 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
       <section class="spj" id="seat-projections" aria-labelledby="spj-title">
-        <h2 class="spj-title" id="spj-title">Where the parties stand</h2>
-        <p class="spj-sub">Seats won and leading in each chamber, against the majority and the two-thirds line Democrats would need.</p>
+        <h2 class="spj-title" id="spj-title">Pre-election forecasts (27 to 29 Oct 2026)</h2>
+        <p class="spj-sub">What the models expected before polls opened. The live count is in "120th Congress: live count" above.</p>
         <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
       </section>
 
@@ -1063,10 +1063,10 @@ body{background:#F5F5DC;color:#1E2232}
 <script src="assets/js/live-math.js?v=20261104m" defer></script>
 <script src="assets/js/live-seat.js?v=20261104t" defer></script>
 <script src="assets/js/live-strip.js?v=20261104u" defer></script>
-<script src="assets/js/balance.js?v=20261104z" defer></script>
+<script src="assets/js/balance.js?v=20261105a" defer></script>
 <script src="assets/js/live-info.js?v=20261104r" defer></script>
 <script src="assets/js/battleground.js?v=20261104r" defer></script>
-<script src="assets/js/live.js?v=20261104w" defer></script>
+<script src="assets/js/live.js?v=20261105a" defer></script>
 <script>
 'use strict';
 const ELECTION_DATE = new Date('2026-11-03T00:00:00');
@@ -1903,12 +1903,8 @@ async function loadSeatProjections() {
   const others = d.other_sources.map(o => `<li><a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.item)} <span aria-hidden="true">&#8599;</span></a></li>`).join('');
 
   box.innerHTML = `
-    <p class="spj-upd">Live</p>
-    <div class="spj-chart"><p class="spj-err">Loading live results&#8230;</p></div>
-    <div class="spj-key" aria-hidden="true"><span><i class="spj-k spj-k-d"></i>Democrats won</span><span><i class="spj-k spj-k-dr"></i>Democrats leading</span><span><i class="spj-k spj-k-un"></i>Not yet called</span><span><i class="spj-k spj-k-rl"></i>Republicans leading</span><span><i class="spj-k spj-k-r"></i>Republicans won</span><span><i class="spj-k spj-k-maj"></i>Majority</span><span><i class="spj-k spj-k-tt"></i>Two-thirds (Democrats)</span></div>
-    <p class="spj-muted spj-note">Won includes Senate seats and governorships not up this year. Leads, and calls made by only one desk, are not counted towards a line. Politico's results use AP calls. NBC News publishes House calls by state, so House races are matched between Fox News and AP.</p>
-    <details class="spj-more">
-      <summary>Pre-election forecasts (27 to 29 Oct) and sources</summary>
+    <details class="spj-more" open>
+      <summary>Forecast models and sources</summary>
       <h4 class="spj-h4">Model detail</h4>
       <div class="spj-scroll"><table class="spj-table spj-models">
         <thead><tr><th>Forecast</th><th>Race</th><th class="num">Democrats</th><th class="num">Republicans</th><th class="num">Date</th><th>Source</th></tr></thead>
@@ -1917,9 +1913,6 @@ async function loadSeatProjections() {
       <h4 class="spj-h4">Other sources</h4>
       <ul class="spj-src">${others}</ul>
     </details>`;
-  document.addEventListener('racebook:live', ev => paint(ev.detail));
-  if (window.RacebookLive && window.RacebookLive.ready) paint(window.RacebookLive.state);
-  else { const iv = setInterval(() => { if (window.RacebookLive && window.RacebookLive.ready) { clearInterval(iv); paint(window.RacebookLive.state); } }, 500); setTimeout(() => clearInterval(iv), 30000); }
 }
 
 

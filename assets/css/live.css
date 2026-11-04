@@ -508,3 +508,6 @@
 .lt-opp, .lt-meta { color: #555; } .lt-meta { font-size: 11.5px; font-variant-numeric: tabular-nums; }
 .lt-wait { color: #6b7280; }
 @media (max-width: 600px) { .race-table .lt-th, .lt-cell { min-width: 168px; } .lt-cell { font-size: 12px; } }
+
+/* decision desk tallies under each balance bar */
+.bl-desks{margin:6px 0 0;font:400 12px/1.5 var(--sans,system-ui);color:#6B6B6B;display:flex;flex-wrap:wrap;gap:2px 14px}.bl-desks b{font-weight:600;color:#3a3f4a}.bl-desk-off{opacity:.6}

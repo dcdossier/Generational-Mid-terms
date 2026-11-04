@@ -489,6 +489,19 @@ body{background:#F5F5DC;color:#1E2232}
 .spj{background:#FFFFFF;border:1px solid #E8E8E0;border-radius:11px;padding:20px 22px 16px;margin-bottom:28px;min-width:0}
 .spj-title{font:700 20px var(--serif);color:#620d3c;line-height:1.3;margin-bottom:4px}
 .spj-sub{font:400 14px/1.55 var(--sans);color:#6B6B6B;margin-bottom:14px}
+.spj-fold{padding-top:6px;padding-bottom:6px}
+.spj-fold-s{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:48px;cursor:pointer;list-style:none;user-select:none}
+.spj-fold-s::-webkit-details-marker{display:none}
+.spj-fold-s .spj-title{margin:0}
+.spj-fold-hint{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;font:600 13px var(--sans);color:#620d3c}
+.spj-fold-hint::before{content:'Show'}
+.spj-fold-hint::after{content:'\25BE';font-size:14px;transition:transform .15s}
+.spj-fold-d[open] .spj-fold-hint::before{content:'Hide'}
+.spj-fold-d[open] .spj-fold-hint::after{transform:rotate(180deg)}
+.spj-fold-s:focus-visible{outline:3px solid #620d3c;outline-offset:3px;border-radius:6px}
+.spj-fold-d[open]>.spj-sub{margin-top:4px}
+.spj-fold-d[open]{padding-bottom:10px}
+@media (prefers-reduced-motion:reduce){.spj-fold-hint::after{transition:none}}
 .spj-table{width:100%;border-collapse:collapse;font:400 14px var(--sans);color:#1E2232}
 .spj-table th{font:700 10px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:#6B6B6B;text-align:left;padding:8px 10px;border-bottom:2px solid #E8E8E0;vertical-align:bottom;line-height:1.35}
 .spj-table td{padding:4px 10px;border-bottom:1px solid #EFEDE6;vertical-align:middle}
@@ -754,11 +767,22 @@ body{background:#F5F5DC;color:#1E2232}
       <section data-live-battleground aria-label="Battleground races" hidden></section>
 
       <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
-      <section class="spj" id="seat-projections" aria-labelledby="spj-title">
-        <h2 class="spj-title" id="spj-title">Pre-election forecasts (27 to 29 Oct 2026)</h2>
-        <p class="spj-sub">What the models expected before polls opened. The live count is in "120th Congress: live count" above.</p>
-        <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
+      <section class="spj spj-fold" id="seat-projections" aria-labelledby="spj-title">
+        <details class="spj-fold-d" id="spj-fold">
+          <summary class="spj-fold-s"><h2 class="spj-title" id="spj-title">Pre-election forecasts (27 to 29 Oct 2026)</h2><span class="spj-fold-hint" aria-hidden="true"></span></summary>
+          <p class="spj-sub">What the models expected before polls opened. The live count is in "120th Congress: live count" above.</p>
+          <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
+        </details>
       </section>
+      <script>
+      // Collapsed by default; opens for a #seat-projections link and remembers this viewer's choice.
+      (function () {
+        var d = document.getElementById('spj-fold'); if (!d) return;
+        try { if (localStorage.getItem('spj-fold') === 'open') d.open = true; } catch (e) {}
+        if (location.hash === '#seat-projections') d.open = true;
+        d.addEventListener('toggle', function () { try { localStorage.setItem('spj-fold', d.open ? 'open' : 'closed'); } catch (e) {} });
+      })();
+      </script>
 
       <!-- LIVE METRICS -->
       <div class="home-metrics">

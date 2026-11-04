@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-04T02:13:16.309Z",
+ "updated": "2026-11-04T02:18:14.739Z",
  "status": "counting",
  "source": "Our news sources only (midterm_rss_feeds_v2.xlsx, 150 feeds). A call needs 3 distinct publishers and no contradiction in the last 60 minutes.",
  "feeds": 150,
- "items_scanned": 7080,
- "candidates_matched": 95,
+ "items_scanned": 7081,
+ "candidates_matched": 102,
  "calls": [
   {
    "race_id": "Senate-GA",
@@ -278,6 +278,20 @@
     }
    ],
    "called_by": "DDHQ · 1 sources"
+  },
+  {
+   "race_id": "Senate-CO",
+   "winner": "D",
+   "candidate": "John Hickenlooper",
+   "sources": [
+    {
+     "publisher": "Colorado Politics",
+     "url": "https://www.coloradopolitics.com/2026/11/03/john-hickenlooper-mark-baisley-colorado-senate-election-results/",
+     "title": "Democrat John Hickenlooper wins 2nd term in Colorado U.S. Senate race",
+     "at": "2026-11-04T02:10:00.000Z"
+    }
+   ],
+   "called_by": "1 sources"
   },
   {
    "race_id": "NY-12",
@@ -698,8 +712,36 @@
     }
    ],
    "called_by": "1 sources"
+  },
+  {
+   "race_id": "Gov-CO",
+   "winner": "D",
+   "candidate": "Phil Weiser",
+   "sources": [
+    {
+     "publisher": "Colorado Politics",
+     "url": "https://www.coloradopolitics.com/2026/11/03/phil-weiser-victor-marx-colorado-governor-election-results/",
+     "title": "Democrat Phil Weiser wins Colorado’s race for governor",
+     "at": "2026-11-04T02:10:00.000Z"
+    }
+   ],
+   "called_by": "1 sources"
+  },
+  {
+   "race_id": "Gov-CT",
+   "winner": "D",
+   "candidate": "Ned Lamont",
+   "sources": [
+    {
+     "publisher": "CT Mirror",
+     "url": "https://ctmirror.org/2026/11/03/gov-ned-lamont-defeats-ryan-fazio-winning-3rd-term/",
+     "title": "Gov. Ned Lamont defeats Ryan Fazio, winning 3rd term",
+     "at": "2026-11-04T02:17:50.000Z"
+    }
+   ],
+   "called_by": "1 sources"
   }
  ],
  "held": [],
- "changed": "2026-11-04T02:13:16.309Z"
+ "changed": "2026-11-04T02:18:14.739Z"
 }

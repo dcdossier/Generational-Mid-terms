@@ -33,10 +33,27 @@ const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (
 const AT_LARGE = new Set(['AK', 'DE', 'ND', 'SD', 'VT', 'WY']);
 const PARTY = p => { p = String(p || '').toLowerCase(); return /^(dem|d|dfl)$/.test(p) ? 'D' : /^(gop|rep|r)$/.test(p) ? 'R' : p ? 'I' : null; };
 
-async function getJson(url) {
-  const res = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now(), { headers: { 'User-Agent': UA, 'Accept': 'application/json', 'Cache-Control': 'no-cache' } });
-  if (!res.ok) throw new Error(url + ': HTTP ' + res.status);
-  return res.json();
+// Browser-like headers per desk: the feeds refuse bare requests from data-centre addresses.
+const SITE = {
+  ap: { Referer: 'https://apnews.com/', Origin: 'https://apnews.com' },
+  nbc: { Referer: 'https://www.nbcnews.com/politics/2026-elections/senate-results', Origin: 'https://www.nbcnews.com' },
+};
+const RETRIES = 3, RETRY_MS = 5000, TIMEOUT_MS = 20000;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// One try plus up to 3 retries, 5 seconds apart; the last error is thrown.
+async function getJson(url, site) {
+  const headers = Object.assign({ 'User-Agent': UA, 'Accept': 'application/json, text/plain, */*', 'Accept-Language': 'en-GB,en;q=0.9', 'Cache-Control': 'no-cache' }, SITE[site] || {});
+  let err;
+  for (let i = 0; i <= RETRIES; i++) {
+    if (i) { console.warn(`[desks] ${site.toUpperCase()} retry ${i}/${RETRIES} after: ${err.message}`); await sleep(RETRY_MS); }
+    try {
+      const res = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now(), { headers, signal: AbortSignal.timeout(TIMEOUT_MS) });
+      if (!res.ok) throw new Error(url + ': HTTP ' + res.status);
+      return await res.json();
+    } catch (e) { err = e; }
+  }
+  throw err;
 }
 
 // AP: { calls: {seatId: party}, tabulated: Set of seat ids, updated }
@@ -93,12 +110,12 @@ async function main() {
 
   let ap = null, nbc = null;
   try {
-    const [meta, prog] = await Promise.all([getJson(AP_BASE + 'metadata.json'), getJson(AP_BASE + 'progress.json')]);
+    const [meta, prog] = await Promise.all([getJson(AP_BASE + 'metadata.json', 'ap'), getJson(AP_BASE + 'progress.json', 'ap')]);
     ap = parseAP(meta, prog); desks.ap = { name: 'AP', ok: true, updated: ap.updated, via: 'apnews.com, also shown by Politico' };
   } catch (e) { console.error('[desks] AP failed:', e.message); desks.ap = Object.assign({}, prev.ap || { name: 'AP' }, { ok: false, error: e.message }); }
   try {
     const pages = {};
-    for (const k of ['senate', 'house', 'governor']) pages[k] = await getJson(NBC_BASE + k + '-results');
+    for (const k of ['senate', 'house', 'governor']) pages[k] = await getJson(NBC_BASE + k + '-results', 'nbc');
     nbc = parseNBC(pages); desks.nbc = { name: 'NBC News', ok: true, updated: nbc.updated };
   } catch (e) { console.error('[desks] NBC failed:', e.message); desks.nbc = Object.assign({}, prev.nbc || { name: 'NBC News' }, { ok: false, error: e.message }); }
 

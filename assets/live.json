@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T17:25:40.764Z",
- "fetched_at": "2026-11-04T17:25:37.615Z",
+ "source_last_updated": "2026-11-04T17:29:01.450Z",
+ "fetched_at": "2026-11-04T17:28:58.950Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 68,
+   "remaining": 67,
    "parties": {
     "D": {
-     "won": 228,
-     "net_gain": 25,
-     "flipped_to": 25,
+     "won": 229,
+     "net_gain": 26,
+     "flipped_to": 26,
      "majority_called": true
     },
     "R": {
      "won": 139,
-     "net_gain": -25,
+     "net_gain": -26,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -720,7 +720,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 34.4,
-   "total_votes": 304620,
+   "total_votes": 304618,
    "called_at": "2026-11-04T00:41:47.560Z",
    "candidates": [
     {
@@ -9701,11 +9701,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 93,
+   "pct_in": 94,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 22,
-   "total_votes": 337762,
+   "margin_pct": 22.3,
+   "total_votes": 341667,
    "called_at": "2026-11-04T03:27:54.454Z",
    "candidates": [
     {
@@ -9713,8 +9713,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 206114,
-     "pct": 61.02,
+     "votes": 208847,
+     "pct": 61.13,
      "photo": null
     },
     {
@@ -9722,8 +9722,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 131648,
-     "pct": 38.98,
+     "votes": 132820,
+     "pct": 38.87,
      "photo": null
     }
    ],
@@ -12303,7 +12303,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 21.9,
-   "total_votes": 251213,
+   "total_votes": 251227,
    "called_at": "2026-11-04T04:13:55.358Z",
    "candidates": [
     {
@@ -12311,7 +12311,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 149757,
+     "votes": 149768,
      "pct": 59.61,
      "photo": null
     },
@@ -12320,7 +12320,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 94651,
+     "votes": 94654,
      "pct": 37.68,
      "photo": null
     },
@@ -19257,6 +19257,71 @@
     "AP"
    ]
   },
+  "MI-10": {
+   "id": "MI-10",
+   "kind": "house",
+   "state": "MI",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 7.2,
+   "total_votes": 358665,
+   "called_at": "2026-11-04T17:26:10.023Z",
+   "candidates": [
+    {
+     "name": "Christina Hines",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 188078,
+     "pct": 52.44,
+     "photo": "https://images.api.fox.com/elections/headshots/HINES_CHRISTINA_DMI_HOUSE_.png"
+    },
+    {
+     "name": "Michael Bouchard",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 162347,
+     "pct": 45.26,
+     "photo": "https://images.api.fox.com/elections/headshots/BOUCHARD_MICHAEL_RMI_HOUSE.png"
+    },
+    {
+     "name": "Andrea Kirby",
+     "party": "WC",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3978,
+     "pct": 1.11,
+     "photo": null
+    },
+    {
+     "name": "Mike Saliba",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3088,
+     "pct": 0.86,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20759,67 +20824,6 @@
      "winner": false,
      "votes": 4963,
      "pct": 1.25,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "MI-10": {
-   "id": "MI-10",
-   "kind": "house",
-   "state": "MI",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 7.2,
-   "total_votes": 358665,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Christina Hines",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 188078,
-     "pct": 52.44,
-     "photo": "https://images.api.fox.com/elections/headshots/HINES_CHRISTINA_DMI_HOUSE_.png"
-    },
-    {
-     "name": "Michael Bouchard",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 162347,
-     "pct": 45.26,
-     "photo": "https://images.api.fox.com/elections/headshots/BOUCHARD_MICHAEL_RMI_HOUSE.png"
-    },
-    {
-     "name": "Andrea Kirby",
-     "party": "WC",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3978,
-     "pct": 1.11,
-     "photo": null
-    },
-    {
-     "name": "Mike Saliba",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3088,
-     "pct": 0.86,
      "photo": null
     }
    ],
@@ -23609,7 +23613,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.1,
-   "total_votes": 2352170,
+   "total_votes": 2357616,
    "called_at": null,
    "candidates": [
     {
@@ -23617,8 +23621,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1558933,
-     "pct": 63.31,
+     "votes": 1562011,
+     "pct": 63.29,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
     {
@@ -23626,8 +23630,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 793237,
-     "pct": 32.21,
+     "votes": 795605,
+     "pct": 32.23,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
    ],
@@ -26355,6 +26359,14 @@
  },
  "latest_calls": [
   {
+   "id": "MI-10",
+   "kind": "house",
+   "party": "D",
+   "winner": "Christina Hines",
+   "flipped": true,
+   "at": "2026-11-04T17:26:10.023Z"
+  },
+  {
    "id": "NV-03",
    "kind": "house",
    "party": "D",
@@ -26745,23 +26757,15 @@
    "winner": "Bob Harvie",
    "flipped": true,
    "at": "2026-11-04T05:37:55.727Z"
-  },
-  {
-   "id": "TX-31",
-   "kind": "house",
-   "party": "R",
-   "winner": "John Carter",
-   "flipped": false,
-   "at": "2026-11-04T05:37:40.890Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T17:25:40.764Z",
+   "updated": "2026-11-04T17:29:01.450Z",
    "house": {
-    "D": 228,
+    "D": 229,
     "R": 139,
     "I": 0
    },
@@ -26779,10 +26783,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T17:25:11.686000Z",
+   "updated": "2026-11-04T17:28:35.663000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 222,
+    "D": 223,
     "R": 138,
     "I": 0
    },
@@ -26800,7 +26804,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T17:25:22.000Z",
+   "updated": "2026-11-04T17:28:45.000Z",
    "house": {
     "D": 236,
     "R": 146,
@@ -26819,5 +26823,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T17:25:41.551Z"
+ "desks_checked_at": "2026-11-04T17:29:02.231Z"
 }

@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-04T02:43:14.454Z",
+ "updated": "2026-11-04T02:48:14.691Z",
  "status": "counting",
  "source": "Our news sources only (midterm_rss_feeds_v2.xlsx, 150 feeds). A call needs 3 distinct publishers and no contradiction in the last 60 minutes.",
  "feeds": 150,
- "items_scanned": 7369,
- "candidates_matched": 129,
+ "items_scanned": 7228,
+ "candidates_matched": 130,
  "calls": [
   {
    "race_id": "Senate-GA",
@@ -164,13 +164,19 @@
      "at": "2026-11-04T02:24:31.000Z"
     },
     {
+     "publisher": "The Guardian",
+     "url": "https://www.theguardian.com/us-news/2026/nov/03/keisha-lance-bottoms-georgia-governor-midterm-election",
+     "title": "Georgia: Democrat Keisha Lance Bottoms becomes first Black, female governor in US",
+     "at": "2026-11-04T02:27:40.000Z"
+    },
+    {
      "publisher": "Georgia Recorder",
      "url": "https://georgiarecorder.com/2026/11/03/keisha-lance-bottoms-will-be-georgias-next-governor-in-historic-win/",
      "title": "Keisha Lance Bottoms will be Georgia’s next governor in historic win",
      "at": "2026-11-04T02:27:48.000Z"
     }
    ],
-   "called_by": "DDHQ · 3 sources"
+   "called_by": "DDHQ · 4 sources"
   }
  ],
  "featured": {},
@@ -292,7 +298,33 @@
    }
   }
  },
- "control": {},
+ "control": {
+  "house": {
+   "party": "D",
+   "called_by": "3 sources",
+   "confirmations": [
+    {
+     "publisher": "GPB News",
+     "url": "https://www.gpb.org/news/2026/11/03/rep-katherine-clark-says-democrats-are-on-track-win-control-of-the-house-tonight",
+     "title": "Rep. Katherine Clark says Democrats are on track to win control of the House tonight",
+     "at": "2026-11-04T01:27:34.000Z"
+    },
+    {
+     "publisher": "The Hill",
+     "url": "https://thehill.com/homenews/campaign/6190941-live-updates-trump-midterm-elections-2026/",
+     "title": "Live updates: Democrats take control of House, flip key Kentucky House seat",
+     "at": "2026-11-04T02:11:47.000Z",
+     "desk": "DDHQ"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://www.theguardian.com/us-news/2026/nov/03/democrats-house-midterm-elections-results",
+     "title": "Democrats look poised to win House control in midterm elections after two turbulent years of Trump",
+     "at": "2026-11-04T02:34:11.000Z"
+    }
+   ]
+  }
+ },
  "pending": [
   {
    "race_id": "Senate-WY",
@@ -738,6 +770,20 @@
    "called_by": "1 sources"
   },
   {
+   "race_id": "Gov-PA",
+   "winner": "D",
+   "candidate": "Josh Shapiro",
+   "sources": [
+    {
+     "publisher": "NBC News",
+     "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNX3hDaXVfdnR1QnpuR3R0RUdOTTQtYU8xVjVKdUVyQmFXR2toS3hIeXR1N1ZTNnVmMFR6SG9HS2RzYU1sNWdzeWZ4T0Q4aFVsbDZrd2J2bDg1T0c0OTVUVjAtM0xHdHB0LUwzSXVFTUYtTE9WY1IyalpVbW53Mm5DamQwMA?oc=5",
+     "title": "Pennsylvania Governor Election 2026 Live Results: Josh Shapiro Wins",
+     "at": "2026-11-04T02:44:32.000Z"
+    }
+   ],
+   "called_by": "1 sources"
+  },
+  {
    "race_id": "Gov-NY",
    "winner": "D",
    "candidate": "Kathy Hochul",
@@ -747,9 +793,15 @@
      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPNGQwYVc0enJzZzliQlFRc24tUmEyNkZtZEhUYVg1OUh1M3Vra3ItZ2JGRF9XcDdzOFQyVWdYMTBBWnF3MF84bS1wOWh2VlFNUHBNcHNHLVMxZjJPZ0I2akpXQnR5YXcyNlpvd3A4LUR3cXhJbWlwTHA5S3pMTmFUZVhIaU5VbVJjMkwxQXphaFlRU3B3aXRIODRMY2pydTItbllBLVVzTE1qZTFFU2xGdGljTFM?oc=5",
      "title": "Hochul defeats Blakeman, wins reelection as governor in New York",
      "at": "2026-11-04T02:05:00.000Z"
+    },
+    {
+     "publisher": "Associated Press",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQZTRJaFA3anVJU1pRR3dqV1pUblE1MnRTRTdWT2R5REw4a2VTWFVrZExvdVBldXBSU2pDaEtQU1gtWUpRYndYZ0VKemd4YlpOcjlRXzZ6TmxYSDRheE9DeUY3UGJLV2w4NnBLLUlGRWtkRVdramdoMWxwZjkzSUZzZ19ISWx1OGlHa1k1ZkFHVE44cHc5LXhhS3dieGVrTzlxNklKOFN3a2pfSDFPWGU0dG4wRm5Lc1d4VGliMHFwRlljcDN5OHdnRFdBVjRSakVHeTJZ?oc=5",
+     "title": "Breaking News: Gov. Kathy Hochul, a moderate Democrat, won a second full term in New York, according to The Associated Press. The state’s first female governor, she defeated Bruce Blakeman, who has cl",
+     "at": "2026-11-04T02:41:56.000Z"
     }
    ],
-   "called_by": "1 sources"
+   "called_by": "2 sources"
   },
   {
    "race_id": "ME-01",
@@ -891,5 +943,5 @@
    "reason": "Griffith, Cline win reelection, McGuire vs. Perriello too close to call"
   }
  ],
- "changed": "2026-11-04T02:43:14.454Z"
+ "changed": "2026-11-04T02:48:14.691Z"
 }

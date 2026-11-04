@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T19:07:30.812Z",
+ "updated": "2026-11-04T19:14:10.174Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2346,6 +2346,17 @@
    "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQRjExNDA0SGVad1NPWmE1US04V2pBa0pkdmVlbEpNNFFzMVhMZ044UkMzblNrYml2VDB6VFRMa2V4WDMwcnE2Mk9SSmZOYWJjZW81TW90c2NSZFZyQUpJcUE1UTFBa0FPOFE3MkhHZmlOQUlkUV8xQzZSeE54aGpIbUFrUnhuTy1uZS1DeHZrLVJBdzF6RU4yc0xUdW5rMXFocVJPRkZRWDhvUHNaLWk3cXI4aEFoS0RkRkhxdlRZT0k?oc=5",
    "title": "Mike Flood declares victory over Chris Backemeyer in Nebraska's 1st District race",
    "at": "2026-11-04T18:15:00.000Z"
+  },
+  {
+   "race": "CA-22",
+   "name": "Randy Villegas",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbFhFTGEwRXplNTluSDB1T1ZnQUlMYmpFcnJFeFdLblFURUNvMTRITDJIaXItc0lxbG9QZDVWNWVtMTFGZDdHaVlndEQzSVpGaEs3Tm5semxfd2YtcFE2ZmVMd2I4dk5RSGhweW96d2EwMWlWVHBmeFhxRXN1VURsQ1FXLXFERVdFOEtzMHZBcFg?oc=5",
+   "title": "California progressive Randy Villegas wins redrawn House seat for Democrats",
+   "at": "2026-11-04T18:48:00.000Z"
   }
  ],
  "races": {
@@ -3774,7 +3785,16 @@
   },
   "CA-22": {
    "fox_winner": "Randy Villegas",
-   "agree": [],
+   "agree": [
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbFhFTGEwRXplNTluSDB1T1ZnQUlMYmpFcnJFeFdLblFURUNvMTRITDJIaXItc0lxbG9QZDVWNWVtMTFGZDdHaVlndEQzSVpGaEs3Tm5semxfd2YtcFE2ZmVMd2I4dk5RSGhweW96d2EwMWlWVHBmeFhxRXN1VURsQ1FXLXFERVdFOEtzMHZBcFg?oc=5",
+     "title": "California progressive Randy Villegas wins redrawn House seat for Democrats",
+     "winner": "Randy Villegas",
+     "party": "D",
+     "at": "2026-11-04T18:48:00.000Z"
+    }
+   ],
    "disagree": [
     {
      "publisher": "The Hill",
@@ -4198,7 +4218,7 @@
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 77,
+  "races_confirmed": 78,
   "races_disputed": 3,
   "races_reported_not_called": 7
  }

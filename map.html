@@ -308,7 +308,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 }
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
-<link rel="stylesheet" href="assets/css/live.css?v=20261104s">
+<link rel="stylesheet" href="assets/css/live.css?v=20261104t">
 <style>.live-wrap{max-width:900px;margin:0 auto;padding:24px 28px 0}.live-wrap .lv{margin-bottom:0}.live-wrap:has(.lv[hidden]){display:none}@media(max-width:600px){.live-wrap{padding:16px 16px 0}}</style>
 </head>
 <body>
@@ -322,6 +322,12 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
     </div>
     <span class="source-note" id="source-note">Loading&#8230;</span>
   </div>
+</div>
+
+<!-- PROJECTED 120TH CONGRESS and SEATS CHANGING HANDS (assets/js/balance.js, shared with Home) -->
+<div class="trends-live">
+  <section data-live-balance aria-label="Projected 120th Congress"></section>
+  <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 </div>
 
 <div class="seatwise-banner" id="seatwise-banner" role="region" aria-label="Seat-wise analysis">
@@ -430,6 +436,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <thead>
         <tr>
           <th onclick="sortTable(0)">State</th>
+          <th class="lt-th">Live result</th>
           <th onclick="sortTable(1)">Incumbent</th>
           <th onclick="sortTable(2)">Party</th>
           <th onclick="sortTable(3)">Rating</th>
@@ -437,7 +444,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         </tr>
       </thead>
       <tbody id="race-tbody">
-        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+        <tr><td colspan="6" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
     </div>
@@ -542,9 +549,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <div class="dl-label" data-block="races.house" data-kind="ratings"></div>
 
   <!-- SEAT BALANCE -->
-  <!-- PROJECTED 120TH CONGRESS (assets/js/balance.js) -->
-  <section data-live-balance aria-label="Projected 120th Congress"></section>
-  <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 
   <div class="balance-wrap">
     <div class="balance-label">
@@ -604,6 +608,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <thead>
         <tr>
           <th onclick="sortCompTable(0)">District</th>
+          <th class="lt-th">Live result</th>
           <th onclick="sortCompTable(1)">Incumbent</th>
           <th onclick="sortCompTable(2)">Party</th>
           <th onclick="sortCompTable(3)">Rating</th>
@@ -611,7 +616,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         </tr>
       </thead>
       <tbody id="comp-tbody">
-        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+        <tr><td colspan="6" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
     </div>
@@ -772,6 +777,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
       <thead>
         <tr>
           <th onclick="sortGovTable(0)">State</th>
+          <th class="lt-th">Live result</th>
           <th onclick="sortGovTable(1)">Incumbent / Open</th>
           <th onclick="sortGovTable(2)">Party</th>
           <th onclick="sortGovTable(3)">Rating</th>
@@ -779,7 +785,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
         </tr>
       </thead>
       <tbody id="gov-race-tbody">
-        <tr><td colspan="5" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
+        <tr><td colspan="6" style="text-align:center;color:var(--t4);padding:24px">Loading&#8230;</td></tr>
       </tbody>
     </table>
     </div>
@@ -1473,9 +1479,10 @@ function filterTable(filter, btn) {
 function sortTable(col) {
   if (sortCol === col) sortDir = -sortDir;
   else { sortCol = col; sortDir = 1; }
-  document.querySelectorAll('.race-table th').forEach((th, i) => {
-    th.classList.toggle('sorted-asc',  i === col && sortDir === 1);
-    th.classList.toggle('sorted-desc', i === col && sortDir === -1);
+  document.querySelectorAll('#race-table th').forEach(th => {
+    const on = th.getAttribute('onclick') === 'sortTable(' + col + ')';
+    th.classList.toggle('sorted-asc',  on && sortDir === 1);
+    th.classList.toggle('sorted-desc', on && sortDir === -1);
   });
   renderTable(DATA.races.senate.races, activeFilter, sortCol, sortDir);
 }
@@ -1498,7 +1505,7 @@ function renderTable(races, filter, col, dir) {
 
   const tbody = document.getElementById('race-tbody');
   if (!filtered.length) {
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t4);padding:18px">No races match this filter.</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--t4);padding:18px">No races match this filter.</td></tr>';
     return;
   }
 
@@ -1506,6 +1513,7 @@ function renderTable(races, filter, col, dir) {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
     return `<tr class="${r.open ? 'open-seat' : ''}" style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('senate', r.state)}" onclick="clickTableRow('${r.code}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td><span class="state-link">${r.state}</span></td>
+      <td class="lt-cell" data-live-cell="${toSeatId('senate', r.state)}"></td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party === 'R' ? 'R' : 'D'}</span></td>
       <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
@@ -1741,6 +1749,7 @@ function renderCompTable(races) {
     const seatId = toSeatId('house', r.district);
     return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${seatId}" onclick="clickCompTableRow('${r.district}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td style="font-weight:600">${r.district}</td>
+      <td class="lt-cell" data-live-cell="${seatId}"></td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
       <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
@@ -1812,6 +1821,7 @@ function renderGovTable(races, filter, col, dir) {
     const cfg = RC[r.rating] || { bg: '#ccc', tx: '#fff' };
     return `<tr style="cursor:pointer" tabindex="0" data-seat-id="${toSeatId('governor', r.state)}" onclick="clickGovTableRow('${r.state.replace(/'/g, "\\'")}', event)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">
       <td style="font-weight:600">${r.state}</td>
+      <td class="lt-cell" data-live-cell="${toSeatId('governor', r.state)}"></td>
       <td>${r.incumbent}</td>
       <td><span class="party-pill ${r.party}">${r.party}</span></td>
       <td><span class="rating-pill" style="background:${cfg.bg};color:${cfg.tx}">${r.rating}</span>${r.rating_source ? `<div style="font:400 10px var(--sans);color:#888;margin-top:2px">${r.rating_source}</div>` : ''}</td>
@@ -2216,9 +2226,10 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 <footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
 <script src="comments.js?v=2" defer></script>
 <script src="assets/js/live-math.js?v=20261104m" defer></script>
-<script src="assets/js/live-seat.js?v=20261104r" defer></script>
+<script src="assets/js/live-seat.js?v=20261104t" defer></script>
 <script src="assets/js/live-info.js?v=20261104r" defer></script>
 <script src="assets/js/balance.js?v=20261104s" defer></script>
 <script src="assets/js/live.js?v=20261104r" defer></script>
+<script src="assets/js/live-trends.js?v=20261104t" defer></script>
 </body>
 </html>

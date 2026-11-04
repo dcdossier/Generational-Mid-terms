@@ -148,6 +148,23 @@
       (e ? '<div class="sp-live-votes">' + esc(e) + '</div>' : '');
   }
 
+  // One-line result for a seat row (Trends tables, map tooltips): winner or leader, top-two
+  // shares, margin, % counted, Called time and a Flipped badge; else the status (countdown).
+  function summary(st, id) {
+    var r = row(st, id), s = status(st, id);
+    var c = r && r.candidates ? r.candidates.slice(0, 2) : [], counted = r && r.pct_counted ? Number(r.pct_counted) : 0;
+    var win = s.phase === 'called', first = c[0], second = c[1];
+    if (!first || !(win || counted > 0)) return '<span class="lt-wait">' + s.html + '</span>';
+    var pp = function (x) { return x.party === 'D' || x.party === 'R' ? x.party.toLowerCase() : 'i'; };
+    var pc = function (x) { return x && x.pct != null ? Number(x.pct).toFixed(1) + '%' : ''; };
+    var lead = c.filter(function (x) { return x.winner; })[0] || first, other = lead === first ? second : first;
+    return (win ? '<span class="lt-badge lt-called">Called</span>' : '') + (win && r.flipped ? '<span class="lt-badge lt-flip">Flipped</span>' : '') +
+      '<span class="lt-who lt-' + pp(lead) + '"><b>' + esc(lead.name) + ' (' + esc(lead.party) + ')' + (win ? ' ✓' : '') + '</b> ' + (win ? 'won' : 'leads') + ' ' + pc(lead) + '</span>' +
+      (other ? '<span class="lt-opp">' + esc(other.name) + ' (' + esc(other.party) + ') ' + pc(other) + '</span>' : '') +
+      '<span class="lt-meta">' + (r.margin != null ? 'Margin ' + Number(r.margin).toFixed(1) + ' pts · ' : '') + Math.round(counted) + '% counted' +
+      (win && r.called_at ? ' · Called ' + etIst(r.called_at) : '') + '</span>';
+  }
+
   // "Called · confirmed by n sources", opening to the publishers with links (tap or hover).
   function confHtml(s, cls) {
     if (!s.conf || !s.conf.length) return '<span class="' + cls + '">' + esc(s.text) + '</span>';
@@ -158,7 +175,7 @@
     }).join('') + '</ul></details>';
   }
 
-  window.LiveSeat = { confHtml: confHtml, noteHtml: noteHtml, row: function (st, id) { return row(st, id); }, hms: hms, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
+  window.LiveSeat = { summary: summary, confHtml: confHtml, noteHtml: noteHtml, row: function (st, id) { return row(st, id); }, hms: hms, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
 
   setInterval(function () { [].forEach.call(document.querySelectorAll('.li-cd[data-cd]'), function (e) { e.textContent = hms(+e.getAttribute('data-cd') - Date.now()); }); }, 1000);
   function hook() { if (window.SeatPanel && window.SeatPanel.setLiveProvider) window.SeatPanel.setLiveProvider(panelHtml); }

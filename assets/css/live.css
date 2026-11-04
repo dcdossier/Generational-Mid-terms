@@ -495,3 +495,22 @@
 .fl-sw{display:inline-block;width:16px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
 @media (max-width:600px){.fl{padding:12px}.fl-net{font-size:22px}.fl-bar{height:32px}.fl-labels{flex-direction:column;gap:6px}.fl-lab-r{text-align:left}}
 @media (prefers-reduced-motion:reduce){.fl-seg{transition:none}}
+
+/* ── Trends: live results on every tracked seat (assets/js/live-trends.js) ── */
+.trends-live { max-width: 1100px; margin: 0 auto; padding: 20px 28px 0; }
+@media (max-width: 600px) { .trends-live { padding: 14px 16px 0; } }
+.race-table .lt-th { cursor: default; min-width: 200px; }
+.lt-cell { font: 400 12.5px/1.4 var(--sans, sans-serif); color: #374151; min-width: 200px; }
+.lt-cell > span { display: block; }
+.lt-cell .lt-badge, .lt-tip .lt-badge { display: inline-block; font: 700 9.5px var(--sans, sans-serif); text-transform: uppercase; letter-spacing: .06em; padding: 1px 6px; border-radius: 4px; margin: 0 4px 3px 0; }
+.lt-called { background: #1E2232; color: #fff; } .lt-flip { background: #f1a222; color: #3d0824; }
+.lt-who.lt-d { color: #1f3a8a; } .lt-who.lt-r { color: #9b1c1c; }
+.lt-opp, .lt-meta { color: #555; } .lt-meta { font-size: 11.5px; font-variant-numeric: tabular-nums; }
+.lt-wait { color: #6b7280; }
+.lt-tip { margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(255,255,255,.2); font-size: 12.5px; }
+.lt-tip > span { display: block; } .lt-tip .lt-who.lt-d { color: #b9c8ec; } .lt-tip .lt-who.lt-r { color: #f1c4c4; } .lt-tip .lt-opp, .lt-tip .lt-meta, .lt-tip .lt-wait { color: #d8d4cc; }
+.lt-key { font: 400 12px/1.6 var(--sans, sans-serif); color: #555; margin: 0 0 8px; }
+.lt-key i { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin: 0 2px 0 6px; vertical-align: -1px; }
+.lt-key i + i { margin-left: 0; }
+.lt-key .lt-key-flip { background: #fff; border: 2px solid #E8735A; box-sizing: border-box; }
+@media (max-width: 600px) { .race-table .lt-th, .lt-cell { min-width: 168px; } .lt-cell { font-size: 12px; } }

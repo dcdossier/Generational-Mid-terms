@@ -45,6 +45,7 @@
     if (!S || !st) return '';
     var s = S.status(st, id), v = S.votes(st, id), m = S.mailNote(st, id);
     return (s.text ? '<span class="bg-when bg-when-' + (s.phase || 'none') + '">' + S.confHtml(s, 'bg-conf') + '</span>' : '') +
+      (s.note ? '<span class="bg-note">' + S.noteHtml(s, 'bg-conf') + '</span>' : '') +
       (v ? '<span class="bg-votes">' + esc(v) + '</span>' : '') + (m ? '<span class="bg-mail">' + esc(m) + '</span>' : '');
   }
 

@@ -75,17 +75,19 @@
 
   // ── results: assets/live.json, written from the Fox News results pages by
   // scripts/live-from-fox.js (GitHub Actions, every 5 minutes). The only results source.
-  var LIVE_URL = 'assets/live.json', LIT_URL = 'data/litigation.json';
+  var LIVE_URL = 'assets/live.json', LIT_URL = 'data/litigation.json', SRC_URL = 'data/live-sources.json';
   var KIND = { house: 'house', senate: 'senate', governor: 'gov' };
   function readAll() {
     var t = Date.now();
     return Promise.all([
       fetch(LIVE_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
-      fetch(LIT_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+      fetch(LIT_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+      fetch(SRC_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
     ]).then(function (res) {
       var j = res[0], featured = {};
       if (!j || !j.races) throw new Error('live.json has no races');   // keep the last good numbers
-      state.fox = j; state.litigation = res[1] || state.litigation || null;
+      state.fox = j; state.litigation = res[1] || state.litigation || null; state.sources = res[2] || state.sources || null;
+      var cross = (state.sources && state.sources.races) || {};
       if (state.config) state.config.senate.concat(state.config.house).forEach(function (r, i) { featured[r.race_id] = i + 1; });
       state.meta = { id: 1, status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', source: 'Fox News Decision Desk',
         last_update: j.source_last_updated || j.fetched_at, last_push: j.fetched_at, ok: j.ok !== false, last_attempt: j.last_attempt || null };
@@ -98,7 +100,8 @@
         var row = { race_id: id, featured: !!featured[id], featured_order: featured[id] || null,
           winner: r.called ? r.winner_party : null, called_by: r.called ? 'Fox News Decision Desk' : null, called_at: r.called_at || null,
           leader: r.leader_party, pct_d: d ? d.pct : null, pct_r: rp ? rp.pct : null, pct_counted: r.pct_in, total_votes: r.total_votes,
-          flipped: !!r.flipped, too_close: !!r.too_close, margin: r.margin_pct, candidates: c, kind: KIND[r.kind] || r.kind };
+          flipped: !!r.flipped, too_close: !!r.too_close, margin: r.margin_pct, candidates: c, kind: KIND[r.kind] || r.kind,
+          cross: cross[id] || null };
         if (!row.winner && r.leader_party) { var k = (KIND[r.kind] || r.kind) + '|' + (r.leader_party === 'D' || r.leader_party === 'R' ? r.leader_party : 'I'); lead[k] = (lead[k] || 0) + 1; }
         return row;
       });
@@ -176,7 +179,7 @@
     var conf = [{ publisher: 'The Texas Tribune', url: 'https://www.texastribune.org/', title: 'Talarico defeats Paxton to win Texas Senate seat (demo)' },
                 { publisher: 'Houston Chronicle', url: 'https://www.houstonchronicle.com/', title: 'James Talarico wins Texas Senate race (demo)' },
                 { publisher: 'NBC News', url: 'https://www.nbcnews.com/', title: 'NBC News projects James Talarico wins (demo)', desk: 'NBC News' }];
-    state.races.forEach(function (r) { if (r.race_id === 'Senate-TX' && r.winner) { r.confirmations = conf; r.called_by = 'NBC News · 3 sources'; } });
+    state.races.forEach(function (r) { if (r.race_id === 'Senate-TX' && r.winner) { r.cross = { agree: conf, disagree: [], reported: [] }; } });
     if (STAGE === 'majority' || STAGE === 'final') state.meta.control = { house: { party: 'D', called_by: '3 sources', confirmations: conf.map(function (c) { return { publisher: c.publisher, url: c.url, title: 'Democrats win control of the House (demo)' }; }) } };
     demoChambers();
     state.loaded = true; state.live = true; state.lastCheckedAt = Date.now(); state.lastCheckOk = true; state.nextPollAt = Date.now() + POLL_MS;

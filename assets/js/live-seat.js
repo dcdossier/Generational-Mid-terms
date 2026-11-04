@@ -41,14 +41,36 @@
   function hms(ms) { ms = Math.max(0, ms); var x = Math.floor(ms / 1000), h = Math.floor(x / 3600), m = Math.floor(x % 3600 / 60); x = x % 60; return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x; }
   // Called → "Called <time>"; counting → "Counting · x% counted"; polls open → "Polls close in hh:mm:ss"
   // (ticking); polls closed, nothing in → "Polls closed · first votes due". Never "Awaiting results".
+  // Called races add the cross-check (data/live-sources.json): other outlets reporting the same
+  // winner, or a different one. Uncalled races get a note when outlets report a winner.
   function status(st, id) {
-    var L = window.LiveMath, r = row(st, id), p = pc(st, id), t = now(st);
+    var L = window.LiveMath, r = row(st, id);
     if (r && L && L.winnerOf(r)) {
-      var conf = Array.isArray(r.confirmations) ? r.confirmations : [];
+      var x = r.cross || {}, agree = x.agree || [], dis = x.disagree || [];
       var when = r.called_at ? ' ' + etIst(r.called_at) : '';
-      return { phase: 'called', conf: conf.length ? conf : null, flipped: !!r.flipped,
-               text: 'Called' + when + (r.called_by ? ' · ' + r.called_by : ''), html: esc('Called' + when + (r.called_by ? ' · ' + r.called_by : '')) };
+      var text = 'Called' + when + (r.called_by ? ' · ' + r.called_by : '') +
+        (agree.length ? ' · confirmed by ' + agree.length + ' other source' + (agree.length === 1 ? '' : 's') : '') +
+        (dis.length ? ' · ' + dis.length + ' report' + (dis.length === 1 ? 's' : '') + ' a different winner' : '');
+      var conf = agree.concat(dis.map(function (d) { return { publisher: d.publisher, url: d.url, title: d.title + ' (reports ' + d.winner + ', not the Fox winner)' }; }));
+      var s = { phase: 'called', conf: conf.length ? conf : null, flipped: !!r.flipped, disputed: dis.length > 0, text: text };
+      s.html = confHtml(s, 'sp-conf');
+      return s;
     }
+    var rep = reportedNote(r);
+    var base = statusBase(st, id, r);
+    if (rep) { base.note = rep; }
+    return base;
+  }
+  // A winner reported by other outlets that Fox has not called yet (the most reported name).
+  function reportedNote(r) {
+    var list = r && r.cross && r.cross.reported; if (!list || !list.length) return null;
+    var n = {}; list.forEach(function (x) { n[x.winner] = (n[x.winner] || 0) + 1; });
+    var w = Object.keys(n).sort(function (a, b) { return n[b] - n[a]; })[0];
+    return { text: n[w] + ' source' + (n[w] === 1 ? ' reports ' : 's report ') + w + ' won · not yet called by Fox', conf: list };
+  }
+  function noteHtml(s, cls) { return s && s.note ? confHtml(s.note, cls) : ''; }
+  function statusBase(st, id, r) {
+    var p = pc(st, id), t = now(st);
     var counted = r && r.pct_counted != null && r.pct_counted !== '' ? Number(r.pct_counted) : null;
     if (counted > 0) return { phase: 'counting', text: 'Counting · ' + Math.round(counted) + '% counted', html: 'Counting · ' + Math.round(counted) + '% counted' };
     var stc = st && st.pollClose ? st.pollClose.states[stateOf(id)] : null;
@@ -120,6 +142,7 @@
     var badges = (s.phase === 'called' ? '<span class="sp-badge sp-badge-called">Called</span>' : '') + (r && r.flipped && s.phase === 'called' ? '<span class="sp-badge sp-badge-flip">Flipped</span>' : '');
     return '<div class="sp-live-src">Fox News Decision Desk</div>' + candLines(st, id) +
       '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + badges + s.html + '</div>' +
+      (s.note ? '<div class="sp-live-note">' + noteHtml(s, 'sp-conf') + '</div>' : '') +
       (v ? '<div class="sp-live-votes">' + esc(v) + '</div>' : '') +
       (m ? '<div class="sp-live-mail">' + esc(m) + '</div>' : '') +
       (e ? '<div class="sp-live-votes">' + esc(e) + '</div>' : '');
@@ -135,7 +158,7 @@
     }).join('') + '</ul></details>';
   }
 
-  window.LiveSeat = { confHtml: confHtml, row: function (st, id) { return row(st, id); }, hms: hms, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
+  window.LiveSeat = { confHtml: confHtml, noteHtml: noteHtml, row: function (st, id) { return row(st, id); }, hms: hms, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
 
   setInterval(function () { [].forEach.call(document.querySelectorAll('.li-cd[data-cd]'), function (e) { e.textContent = hms(+e.getAttribute('data-cd') - Date.now()); }); }, 1000);
   function hook() { if (window.SeatPanel && window.SeatPanel.setLiveProvider) window.SeatPanel.setLiveProvider(panelHtml); }

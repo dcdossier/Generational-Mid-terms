@@ -63,6 +63,8 @@
     var m = st.meta || {}, now = Date.now();
     var parts = ['Live results: <b class="ls-n">Fox News Decision Desk</b>'];
     if (m.last_update) parts.push('Fox updated ' + istTime(m.last_update));
+    var sc = st.sources && st.sources.counts;
+    if (sc && sc.read) parts.push('calls cross-checked against <span title="The outlets in our source sheet, the Financial Times and Ground News">' + sc.read + ' news sources</span>');
     if (st.nextPollAt) parts.push('next check <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
     var delayed = !st.demo && st.loaded && st.connected === false;
     return (delayed ? '<span class="ls-delay" role="status">Updates delayed. Last good data ' + esc(istTime(m.last_push)) + '.</span>' : '') +

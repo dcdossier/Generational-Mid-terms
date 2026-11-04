@@ -153,6 +153,11 @@
         { type: 'd', n: x.D.won }, { type: 'dl', n: x.D.leading }, { type: 'i', n: x.I.won }, { type: 'il', n: x.I.leading },
         { type: 'u', n: tonightUn }, { type: 'rl', n: x.R.leading }, { type: 'r', n: x.R.won }]).concat(key === 'house' ? [] : [{ type: 'nur', n: nu.R, label: 'Not up (' + nu.R + ')' }]);
       g = L.gains(key, st.races, st.holders, st.chambers);
+      // Fox's own flip counts (flipped_to per party) win over our baseline comparison
+      if (st.flips && st.flips[key]) ['D', 'R', 'I'].forEach(function (p) {
+        var f = st.flips[key][p]; if (!f) return;
+        g[p].gained = f.gained; g[p].lost = f.lost; g[p].net = f.net; g.basis = 'races';
+      });
       var needs = function (p) {
         var n = x[p].need, s = needText(n.majority, 'needed for majority', 'Majority reached');
         if (key === 'house') s += ' · ' + needText(n.two_thirds, 'for two-thirds', 'Two-thirds reached');
@@ -208,7 +213,7 @@
     var L = window.LiveMath, ph = L.phase(st.meta), pre = showPre(st);
     var mEl = el.querySelector('.bl-measure');
     var width = Math.max(240, Math.floor(mEl ? mEl.getBoundingClientRect().width : el.clientWidth - 40));
-    var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + (st.connected === false ? 'Live data not connected' : 'Awaiting results') + '</span> Showing seats before the election until results arrive.'
+    var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + (st.connected === false ? 'Updates delayed' : 'No calls yet') + '</span> Showing seats before the election until results arrive.'
       : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
       : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + ' · Senate includes seats not up this year';

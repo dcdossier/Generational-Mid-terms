@@ -48,42 +48,49 @@
       (v ? '<span class="bg-votes">' + esc(v) + '</span>' : '') + (m ? '<span class="bg-mail">' + esc(m) + '</span>' : '');
   }
 
+  // Litigation or interference reports for this race or its state (data/litigation.json)
+  function litFor(race) {
+    var L = lastState && lastState.litigation, e = (L && L.entries) || [];
+    return e.filter(function (x) { return x.race_id === race.race_id || (!x.race_id && x.state === race.state); });
+  }
+  function litHtml(race) {
+    var e = litFor(race); if (!e.length) return '';
+    return '<details class="bg-lit"><summary aria-label="' + e.length + ' litigation or interference report' + (e.length > 1 ? 's' : '') + '">▲</summary><ul>' +
+      e.map(function (x) { return '<li><b>' + (x.type === 'lawsuit' ? 'Lawsuit' : 'Interference') + ':</b> ' + esc(x.summary) + '<br>' +
+        x.sources.map(function (s) { return '<a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.publisher) + '</a>'; }).join(' · ') + '</li>'; }).join('') + '</ul></details>';
+  }
+
+  // Both candidates always: Fox's top two (shares, winner), photos from live-config where the name matches.
   function boxInner(race, kind, row) {
-    var L = window.LiveMath;
-    var d = race.candidates.filter(function (c) { return c.party === 'D'; })[0], r = race.candidates.filter(function (c) { return c.party === 'R'; })[0];
-    var pd = row ? num(row.pct_d) : null, pr = row ? num(row.pct_r) : null, counted = row ? num(row.pct_counted) : null;
-    var hasVotes = row && ((pd || 0) + (pr || 0) > 0);
-    var win = row ? L.winnerOf(row) : null, lead = row ? (win || L.leaderOf(row)) : null;
-    if (!hasVotes && !win) lead = null;
-    var leader = lead === 'D' ? d : lead === 'R' ? r : null, other = lead === 'D' ? r : lead === 'R' ? d : null;
-    var lp = lead === 'D' ? pd : pr, op = lead === 'D' ? pr : pd;
+    var S = window.LiveSeat, st = lastState || {};
+    var fox = row && row.candidates && row.candidates.length ? row.candidates.slice(0, 2) : null;
+    var cfgBy = {}; race.candidates.forEach(function (c) { cfgBy[c.party] = c; });
+    var people = fox ? fox.map(function (x) {
+      var c = cfgBy[x.party] && cfgBy[x.party].name.split(' ').pop().toLowerCase() === String(x.name).split(' ').pop().toLowerCase() ? cfgBy[x.party] : null;
+      return { name: x.name, party: x.party, pct: x.pct, winner: !!x.winner, photo: c ? c.photo : null, initials: c ? c.initials : String(x.name).split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2) };
+    }) : race.candidates.map(function (c) { return { name: c.name, party: c.party, pct: null, winner: false, photo: c.photo, initials: c.initials }; });
+    var s = S ? S.status(st, race.race_id) : { phase: null, html: '' };
+    var called = s.phase === 'called', lead = row ? (row.winner || row.leader) : null;
+    if (!(row && ((row.pct_counted || 0) > 0 || called))) lead = null;
     var head = '<button type="button" class="bg-head bg-open"><span class="bg-id">' + esc(kind === 'senate' ? 'Senate · ' + race.state : race.race_id) + '</span>' +
-      '<span class="bg-st">' + esc(kind === 'senate' ? race.label : ST[race.state] || race.state) + '</span>' +
-      (row && row.called_by ? '<span class="bg-called">Called (' + esc(row.confirmations && row.confirmations.length ? row.confirmations.length + ' sources' : row.called_by) + ')</span>' : '') + '</button>';
-    var main;
-    if (leader) {
-      var margin = lp !== null && op !== null ? Math.abs(lp - op) : null;
-      main = '<span class="bg-main">' + face(leader, 'lg') +
-        '<span class="bg-who"><span class="bg-name">' + esc(leader.name) + '</span>' +
-        '<span class="bg-party bg-party-' + lead.toLowerCase() + '">' + (win ? 'Won' : 'Leads') + ' &middot; ' + PARTY[lead] + '</span>' +
-        '<span class="bg-nums"><b class="bg-pct">' + pct(lp) + '</b>' + (margin !== null ? '<span class="bg-margin">+' + margin.toFixed(1) + ' pts</span>' : '') + '</span></span></span>' +
-        '<span class="bg-vs">' + esc(other.name) + ' (' + other.party + ') ' + pct(op) + '</span>';
-    } else {
-      main = '<span class="bg-pair">' +
-        '<span class="bg-cand">' + face(d, 'sm') + '<span>' + esc(d.name) + ' <small>(D)</small></span></span>' +
-        '<span class="bg-cand">' + face(r, 'sm') + '<span>' + esc(r.name) + ' <small>(R)</small></span></span></span>' +
-        '<span class="bg-wait">' + (row && row.called_by ? '' : 'Awaiting results') + '</span>';
-    }
-    var cnt = '<span class="bg-count"><span class="bg-count-l">' + (counted === null ? 'No votes counted yet' : pct(counted) + ' counted') + '</span>' +
-      '<span class="bg-count-bar" aria-hidden="true"><span style="width:' + (counted === null ? 0 : Math.max(0, Math.min(100, counted))) + '%"></span></span></span>';
+      '<span class="bg-st">' + esc(kind === 'senate' ? race.label : ST[race.state] || race.state) + '</span></button>' +
+      '<span class="bg-badges">' + (called ? '<span class="bg-called">Called</span>' : '') + (called && row.flipped ? '<span class="bg-flipped">Flipped</span>' : '') + litHtml(race) + '</span>';
+    var list = '<span class="bg-cands">' + people.map(function (p) {
+      var pp = p.party === 'D' || p.party === 'R' ? p.party.toLowerCase() : 'i', isLead = lead && p.party === lead && (!called || p.winner);
+      return '<span class="bg-cand2' + (isLead ? ' bg-ahead' : '') + '">' + face({ photo: p.photo, party: p.party === 'D' || p.party === 'R' ? p.party : 'I', initials: p.initials }, 'sm') +
+        '<span class="bg-cname">' + esc(p.name) + ' <small class="bg-p-' + pp + '">(' + esc(p.party) + ')</small>' + (p.winner ? ' <span class="bg-check" aria-label="winner">✓</span>' : '') + '</span>' +
+        '<b class="bg-cpct">' + (p.pct != null && (row && (row.pct_counted || 0) > 0 || p.winner) ? Number(p.pct).toFixed(1) + '%' : '') + '</b></span>';
+    }).join('') + '</span>';
+    var counted = row && row.pct_counted != null ? Number(row.pct_counted) : 0;
+    var margin = row && row.margin != null && counted > 0 ? '<span class="bg-margin2">Margin ' + Number(row.margin).toFixed(1) + ' pts · ' + Math.round(counted) + '% counted</span>' : '';
+    var bar = '<span class="bg-count-bar" aria-hidden="true"><span style="width:' + Math.max(0, Math.min(100, counted)) + '%"></span></span>';
+    var when = '<span class="bg-when bg-when-' + (s.phase || 'none') + '">' + s.html + '</span>';
+    var v = S ? S.votes(st, race.race_id) : '', m = S ? S.mailNote(st, race.race_id) : '';
     var ran = race.ran_on && race.ran_on.length ? '<span class="bg-ran"><b>Ran on:</b> ' + race.ran_on.map(function (x) { return esc(x.text); }).join('; ') + '</span>' : '';
-    var others = row && row.other_sources && row.other_sources.length ? '<span class="bg-other">' + row.other_sources.map(function (o) {
-      return esc(o.name) + ': D ' + pct(o.pct_d) + ' · R ' + pct(o.pct_r) + (o.pct_counted != null ? ' · ' + pct(o.pct_counted) + ' in' : '') + (o.at ? ' (' + timeET(o.at) + ')' : '');
-    }).join('<br>') + '</span>' : '';
-    var src = row && row.source ? '<span class="bg-src">Source: ' + esc(row.source) + '</span>' : '';
-    return { html: head + main + cnt + liveLines(race.race_id) + ran + others + src, lead: lead, called: !!(row && row.called_by),
-      label: (kind === 'senate' ? race.label + ' Senate' : race.race_id) + ': ' + (leader ? leader.name + ' (' + lead + ') ' + (win ? 'won' : 'leads') + ' with ' + pct(lp) : 'awaiting results') +
-        (counted !== null ? ', ' + pct(counted) + ' counted' : '') + '. Open seat details.' };
+    var leaderP = people.filter(function (p) { return p.party === lead; })[0];
+    return { html: head + list + margin + bar + when + (v ? '<span class="bg-votes">' + esc(v) + '</span>' : '') + (m ? '<span class="bg-mail">' + esc(m) + '</span>' : '') + ran,
+      lead: lead === 'D' || lead === 'R' ? lead : null, called: called,
+      label: (kind === 'senate' ? race.label + ' Senate' : race.race_id) + ': ' + (leaderP ? leaderP.name + (called ? ' won' : ' leads') : s.text) + (counted ? ', ' + Math.round(counted) + '% counted' : '') + '. Open seat details.' };
   }
 
   function grid(kind, races) {
@@ -110,7 +117,7 @@
     el.innerHTML = '<div class="bg-headrow"><h2 class="bg-title">Battleground races</h2><p class="bg-sub" aria-live="off"></p></div>' +
       grid('senate', cfg.senate) + grid('house', cfg.house) + credits();
     el.addEventListener('click', function (e) {
-      if (e.target.closest('a') || e.target.closest('details')) return;   // links and the sources list
+      if (e.target.closest('a') || e.target.closest('details')) return;   // links, sources and litigation lists
       var b = e.target.closest('.bg-box'); if (!b) return;
       var id = b.getAttribute('data-race');
       if (typeof window.openSeatFromHome === 'function') window.openSeatFromHome(id);

@@ -22,7 +22,7 @@
 
   function sourceOf(st) {
     var src = (st.chambers || []).map(function (c) { return c.source; }).filter(Boolean)[0];
-    return src || 'news sources';
+    return src || 'Fox News';
   }
 
   function html(st) {
@@ -38,12 +38,6 @@
       return '<div class="ls-row"><span class="ls-tag ls-tag-final">Final</span>' +
         '<span class="ls-main">Counting continues in slow states.' + (m.last_update ? ' Last update ' + esc(ist(m.last_update)) + '.' : '') + '</span></div>';
     }
-    if (!st.demo && st.connected === false) {
-      var lastAt = m.last_update || m.last_push;
-      return '<div class="ls-row"><span class="ls-tag ls-tag-off">Results</span>' +
-        '<span class="ls-main ls-off">Live data not connected. Last update ' + (lastAt ? esc(ist(lastAt)) : 'none yet') + '.</span></div>' +
-        '<div class="ls-sub">Seat bars show the makeup before the election until results arrive. We check again every 5 minutes.</div>';
-    }
     var c = L.called(st.chambers), U = L.RACES_UP;
     var start = new Date(m.counting_started || m.polls_first_close || L.FIRST_CLOSE).getTime();
     var parts = [
@@ -51,7 +45,7 @@
       '<span class="ls-item"><b class="ls-n">' + c.total + '</b> of ' + c.up + ' races called ' +
         '<span class="ls-by">(House ' + c.house + '/' + U.house + ' &middot; Senate ' + c.senate + '/' + U.senate + ' &middot; Governors ' + c.gov + '/' + U.gov + ')</span></span>',
       '<span class="ls-item"><b class="ls-n">' + c.counting + '</b> still counting</span>',
-      '<span class="ls-item">' + (m.last_update ? 'Updated ' + esc(ist(m.last_update)) + ' (' + esc(sourceOf(st)) + ')' : 'Awaiting first results') + '</span>'
+      '<span class="ls-item">' + (m.last_update ? 'Updated ' + esc(ist(m.last_update)) + ' (' + esc(sourceOf(st)) + ')' : 'Fox results loading') + '</span>'
     ];
     return '<div class="ls-row"><span class="ls-tag ls-tag-live"><span class="ls-dot" aria-hidden="true"></span>Counting active</span>' +
       parts.join('<span class="ls-sep" aria-hidden="true">&middot;</span>') + '</div>';
@@ -63,22 +57,15 @@
     return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: secs ? '2-digit' : undefined, timeZone: 'Asia/Kolkata' }) + ' IST';
   }
   function mmss(ms) { ms = Math.max(0, ms); var m = Math.floor(ms / 60000), s = Math.floor(ms % 60000 / 1000); return m + ':' + (s < 10 ? '0' : '') + s; }
+  // "Live results: Fox News Decision Desk · Fox updated <IST> · next check m:ss";
+  // "Updates delayed. Last good data <IST>." when Fox's file is stale or the last fetch failed.
   function refreshHtml(st) {
-    var m = st.meta || {}, now = Date.now(), ph = window.LiveMath.phase(m, now);
-    var every = Math.round((st.pollMs || 300000) / 60000);
-    var parts = ['Auto-updates every ' + every + ' min'];
-    if (st.nextPollAt) parts.push('next check in <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
-    if (st.lastCheckedAt) parts.push('last checked ' + istTime(st.lastCheckedAt, true) + (st.lastCheckOk === false ? ' <span class="ls-warn">(could not reach the results service; retrying)</span>' : ''));
-    if (m.last_update) parts.push('last change ' + istTime(m.last_update) + ' (' + esc(sourceOf(st)) + ')');
-    var nc = window.LiveSeat && window.LiveSeat.nextClose(st);
-    if (nc) {
-      var secs = Math.max(0, Math.floor(nc.inMs / 1000)), h = Math.floor(secs / 3600);
-      var left = (h ? h + ':' + String(Math.floor(secs % 3600 / 60)).padStart(2, '0') : Math.floor(secs / 60)) + ':' + String(secs % 60).padStart(2, '0');
-      var names = nc.states.length > 4 ? nc.states.slice(0, 4).join(', ') + ' and ' + (nc.states.length - 4) + ' more' : nc.states.join(', ');
-      parts.unshift('<span class="ls-next">Next polls close: ' + esc(names) + ' in <b class="ls-n ls-count">' + left + '</b></span>');
-    }
-    var stale = ph !== 'pre' && st.connected !== false && m.last_push && now - new Date(m.last_push).getTime() > STALE_MS;
-    return (stale ? '<span class="ls-delay" role="status">Updates delayed. Last data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
+    var m = st.meta || {}, now = Date.now();
+    var parts = ['Live results: <b class="ls-n">Fox News Decision Desk</b>'];
+    if (m.last_update) parts.push('Fox updated ' + istTime(m.last_update));
+    if (st.nextPollAt) parts.push('next check <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
+    var delayed = !st.demo && st.loaded && st.connected === false;
+    return (delayed ? '<span class="ls-delay" role="status">Updates delayed. Last good data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
       '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';
   }
 

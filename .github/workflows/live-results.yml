@@ -2,7 +2,8 @@ name: Live results (Fox News)
 
 # Election-night results from the Fox News results pages (scripts/live-from-fox.js),
 # the site's only source of live results. Starts every hour and loops for 58 minutes,
-# fetching every 5 minutes; commits assets/live.json only when it changed.
+# fetching every 5 minutes; commits assets/live.json only when it changed. The same
+# loop refreshes data/litigation.json (scripts/litigation.js).
 # Its own concurrency group, so it never queues behind the data jobs.
 
 on:
@@ -26,10 +27,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
+      - name: Install feed-reader dependencies (litigation tracker)
+        run: npm ci --prefix scripts
       - name: Fox results every 5 minutes for 58 minutes
         env:
           LIVE_COMMIT_CMD: >-
-            git add assets/live.json &&
+            (node scripts/litigation.js || true) &&
+            git add assets/live.json data/litigation.json &&
             (git diff --cached --quiet || (git commit -q -m "chore(live): Fox results [skip ci]" &&
             for i in 1 2 3 4; do git pull --rebase -q && git push -q && break; sleep 7; done))
         run: |

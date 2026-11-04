@@ -38,21 +38,25 @@
     return p.first_close.et.replace(' ET', '') + '–' + p.last_close.et + ' (' + p.first_close.ist.replace(' IST', '') + '–' + p.last_close.ist + ')';
   }
 
+  function hms(ms) { ms = Math.max(0, ms); var x = Math.floor(ms / 1000), h = Math.floor(x / 3600), m = Math.floor(x % 3600 / 60); x = x % 60; return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m + ':' + (x < 10 ? '0' : '') + x; }
+  // Called → "Called <time>"; counting → "Counting · x% counted"; polls open → "Polls close in hh:mm:ss"
+  // (ticking); polls closed, nothing in → "Polls closed · first votes due". Never "Awaiting results".
   function status(st, id) {
     var L = window.LiveMath, r = row(st, id), p = pc(st, id), t = now(st);
     if (r && L && L.winnerOf(r)) {
       var conf = Array.isArray(r.confirmations) ? r.confirmations : [];
-      if (conf.length) return { phase: 'called', conf: conf, text: 'Called · confirmed by ' + conf.length + ' source' + (conf.length === 1 ? '' : 's') + (r.called_at ? ' · ' + etIst(r.called_at) : '') };
-      return { phase: 'called', text: 'Called' + (r.called_at ? ' ' + etIst(r.called_at) : '') + (r.called_by ? ' by ' + r.called_by : '') };
+      var when = r.called_at ? ' ' + etIst(r.called_at) : '';
+      return { phase: 'called', conf: conf.length ? conf : null, flipped: !!r.flipped,
+               text: 'Called' + when + (r.called_by ? ' · ' + r.called_by : ''), html: esc('Called' + when + (r.called_by ? ' · ' + r.called_by : '')) };
     }
     var counted = r && r.pct_counted != null && r.pct_counted !== '' ? Number(r.pct_counted) : null;
-    if (p && t < Date.parse(p.first_close_utc)) {
-      return { phase: 'before', text: 'Polls close ' + closeText(p) + ' · counting starts in ' + hm(Date.parse(p.first_close_utc) - t) };
+    if (counted > 0) return { phase: 'counting', text: 'Counting · ' + Math.round(counted) + '% counted', html: 'Counting · ' + Math.round(counted) + '% counted' };
+    var stc = st && st.pollClose ? st.pollClose.states[stateOf(id)] : null;
+    if (stc && t < Date.parse(stc.first_close_utc)) {
+      var at = Date.parse(stc.first_close_utc), off = Date.now() - t;
+      return { phase: 'before', text: 'Polls close in ' + hms(at - t), html: 'Polls close in <b class="li-cd" data-cd="' + (at + off) + '">' + hms(at - t) + '</b>' };
     }
-    if (p || counted !== null) {
-      return { phase: 'counting', text: 'Counting · ' + (counted !== null ? Math.round(counted) + '% counted' : 'no results yet') };
-    }
-    return { phase: null, text: '' };
+    return { phase: 'closed', text: 'Polls closed · first votes due', html: 'Polls closed · first votes due' };
   }
 
   function votes(st, id) {
@@ -97,13 +101,25 @@
     return 'Early votes in ' + e.name + ': ' + e.total.toLocaleString('en-US') + (e.pct_of_2022 ? ' (' + e.pct_of_2022 + '% of the 2022 total)' : '') + ' · UF Election Lab' + (upd ? ', updated ' + upd : '');
   }
 
-  // Seat panel header: the same lines as the boxes, plus the mail note and early votes.
+  // Top two candidates with shares (Fox), leader or winner first.
+  function candLines(st, id) {
+    var r = row(st, id); if (!r || !r.candidates || !r.candidates.length) return '';
+    var c = r.candidates.slice(0, 2);
+    return '<div class="sp-live-cands">' + c.map(function (x) {
+      var p = x.party === 'D' || x.party === 'R' ? x.party.toLowerCase() : 'i';
+      return '<div class="sp-live-cand sp-live-' + p + (x.winner ? ' sp-live-win' : '') + '"><span>' + esc(x.name) + ' (' + esc(x.party) + ')' + (x.winner ? ' ✓' : '') + '</span>' +
+        '<b>' + (x.pct != null && ((r.pct_counted || 0) > 0 || x.winner) ? Number(x.pct).toFixed(1) + '%' : '') + '</b></div>';
+    }).join('') + (r.margin != null && (r.pct_counted || 0) > 0 ? '<div class="sp-live-margin">Margin ' + Number(r.margin).toFixed(1) + ' pts · ' + Math.round(r.pct_counted || 0) + '% counted</div>' : '') + '</div>';
+  }
+
+  // Seat panel header: both candidates, status (called, flipped, counting or poll close), votes, notes.
   function panelHtml(id) {
     var st = window.RacebookLive && window.RacebookLive.state;
     if (!st) return '';
-    var s = status(st, id), v = votes(st, id), m = mailNote(st, id), e = earlyLine(st, id);
-    if (!s.text && !v && !m && !e) return '';
-    return (s.text ? '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + confHtml(s, 'sp-conf') + '</div>' : '') +
+    var s = status(st, id), v = votes(st, id), m = mailNote(st, id), e = earlyLine(st, id), r = row(st, id);
+    var badges = (s.phase === 'called' ? '<span class="sp-badge sp-badge-called">Called</span>' : '') + (r && r.flipped && s.phase === 'called' ? '<span class="sp-badge sp-badge-flip">Flipped</span>' : '');
+    return '<div class="sp-live-src">Fox News Decision Desk</div>' + candLines(st, id) +
+      '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + badges + s.html + '</div>' +
       (v ? '<div class="sp-live-votes">' + esc(v) + '</div>' : '') +
       (m ? '<div class="sp-live-mail">' + esc(m) + '</div>' : '') +
       (e ? '<div class="sp-live-votes">' + esc(e) + '</div>' : '');
@@ -119,8 +135,9 @@
     }).join('') + '</ul></details>';
   }
 
-  window.LiveSeat = { confHtml: confHtml, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
+  window.LiveSeat = { confHtml: confHtml, row: function (st, id) { return row(st, id); }, hms: hms, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
 
+  setInterval(function () { [].forEach.call(document.querySelectorAll('.li-cd[data-cd]'), function (e) { e.textContent = hms(+e.getAttribute('data-cd') - Date.now()); }); }, 1000);
   function hook() { if (window.SeatPanel && window.SeatPanel.setLiveProvider) window.SeatPanel.setLiveProvider(panelHtml); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hook); else hook();
 })();

@@ -1,8 +1,8 @@
 /* Election-night live results.
  *
- * Reads assets/live.json, which scripts/live-from-news.js writes from our news
- * sources only (GitHub Actions, every 5 minutes). Re-read every 5 minutes and at
- * once when the tab wakes. Any element with data-live-results becomes a results panel.
+ * Reads assets/live.json, which scripts/live-from-fox.js writes from the Fox News
+ * results pages (GitHub Actions, every 5 minutes), and data/litigation.json. Re-read
+ * every 5 minutes and at once when the tab wakes or regains focus. Any element with data-live-results becomes a results panel.
  * ?demo=1 fills the panel with made-up figures, locally, for testing; add
  * &stage=pre, early, majority or final to see each stage (default: mid-count).
  * ?delayed=1 (with demo=1) fakes a last push 15 minutes old to show the watchdog.
@@ -73,40 +73,59 @@
     });
   }
 
-  // ── results: assets/live.json, written from our news sources by scripts/live-from-news.js ──
-  // (GitHub Actions, every 5 minutes). Nothing else feeds the live results.
-  var LIVE_URL = 'assets/live.json';
+  // ── results: assets/live.json, written from the Fox News results pages by
+  // scripts/live-from-fox.js (GitHub Actions, every 5 minutes). The only results source.
+  var LIVE_URL = 'assets/live.json', LIT_URL = 'data/litigation.json';
+  var KIND = { house: 'house', senate: 'senate', governor: 'gov' };
   function readAll() {
-    return fetch(LIVE_URL + '?t=' + Date.now(), { cache: 'no-store' }).then(function (r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    }).then(function (j) {
-      var featured = {};
+    var t = Date.now();
+    return Promise.all([
+      fetch(LIVE_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); }),
+      fetch(LIT_URL + '?t=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+    ]).then(function (res) {
+      var j = res[0], featured = {};
+      state.fox = j; state.litigation = res[1] || state.litigation || null;
       if (state.config) state.config.senate.concat(state.config.house).forEach(function (r, i) { featured[r.race_id] = i + 1; });
-      state.meta = { id: 1, status: j.status || 'counting', polls_first_close: '2026-11-03T23:00:00Z',
-        last_update: j.changed || j.updated, last_push: j.updated, control: j.control || {}, source: 'news sources' };
-      state.chambers = (j.chambers || []).map(function (c) { return Object.assign({ source: 'News sources' }, c); });
-      var rows = {};
-      (j.calls || []).forEach(function (c) {
-        rows[c.race_id] = { race_id: c.race_id, winner: c.winner, leader: c.winner, called_by: c.called_by, confirmations: c.sources || [] };
+      state.meta = { id: 1, status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', source: 'Fox News Decision Desk',
+        last_update: j.source_last_updated || j.fetched_at, last_push: j.fetched_at, ok: j.ok !== false, last_attempt: j.last_attempt || null };
+      // races: called winner, leader, top-two shares, % counted, flips
+      var lead = {};
+      state.races = Object.keys(j.races || {}).map(function (id) {
+        var r = j.races[id], c = r.candidates || [];
+        var top = function (p) { return c.filter(function (x) { return x.party === p; })[0] || null; };
+        var d = top('D'), rp = top('R');
+        var row = { race_id: id, featured: !!featured[id], featured_order: featured[id] || null,
+          winner: r.called ? r.winner_party : null, called_by: r.called ? 'Fox News Decision Desk' : null, called_at: r.called_at || null,
+          leader: r.leader_party, pct_d: d ? d.pct : null, pct_r: rp ? rp.pct : null, pct_counted: r.pct_in, total_votes: r.total_votes,
+          flipped: !!r.flipped, too_close: !!r.too_close, margin: r.margin_pct, candidates: c, kind: KIND[r.kind] || r.kind };
+        if (!row.winner && r.leader_party) { var k = (KIND[r.kind] || r.kind) + '|' + (r.leader_party === 'D' || r.leader_party === 'R' ? r.leader_party : 'I'); lead[k] = (lead[k] || 0) + 1; }
+        return row;
       });
-      Object.keys(j.featured || {}).forEach(function (id) {
-        var f = j.featured[id], r = rows[id] || (rows[id] = { race_id: id });
-        r.pct_d = f.pct_d; r.pct_r = f.pct_r; r.pct_counted = f.pct_counted; r.source = f.source; r.source_url = f.url; r.updated_at = f.at;
-        if (!r.winner) r.leader = f.leader;
+      // chambers: won = called; Senate and Governors add not-up seats; flips from Fox
+      state.chambers = []; state.flips = {};
+      Object.keys(KIND).forEach(function (fk) {
+        var ch = (j.chambers || {})[fk]; if (!ch) return;
+        var k = KIND[fk], P = ch.parties || {}, nu = ch.not_up || {};
+        var map = { D: 'D', R: 'R', I: 'Oth' };
+        state.flips[k] = {};
+        ['D', 'R', 'I'].forEach(function (p) {
+          var x = P[map[p]] || {}, other = p === 'D' ? (P.R || {}) : p === 'R' ? (P.D || {}) : {};
+          state.chambers.push({ chamber: k, party: p, won: x.won || 0, leading: lead[k + '|' + p] || 0, not_up: k === 'house' ? 0 : (nu[map[p]] || 0), source: 'Fox News' });
+          state.flips[k][p] = { gained: x.flipped_to || 0, lost: other.flipped_to || 0, net: x.net_gain || 0, majority_called: !!x.majority_called };
+        });
+        state.flips[k].remaining = ch.remaining;
       });
-      state.races = Object.keys(rows).map(function (id) { var r = rows[id]; r.featured = !!featured[id]; r.featured_order = featured[id] || null; return r; });
-      if (state.races.length) state.hadResults = true;
+      if (state.races.some(function (r) { return r.winner || r.pct_counted; })) state.hadResults = true;
       state.loaded = true; state.error = null; state.lastCheckedAt = Date.now(); state.lastCheckOk = true;
     }).catch(function (e) { state.error = e.message; state.lastCheckedAt = Date.now(); state.lastCheckOk = false; })   // keep the last numbers
       .then(function () { state.connected = connected(); });
   }
-  // Connected while live.json keeps updating (a run every 5 minutes, a heartbeat at least every 10).
-  var STALE_MS = 20 * 60 * 1000;
+  // Fresh when Fox's file was fetched in the last 12 minutes and the last fetch worked.
+  var STALE_MS = 12 * 60 * 1000;
   function connected() {
     if (DEMO) return true;
     var m = state.meta;
-    return !state.error && !!m && !!m.last_push && Date.now() - Date.parse(m.last_push) <= STALE_MS;
+    return !state.error && !!m && m.ok && !!m.last_push && Date.now() - Date.parse(m.last_push) <= STALE_MS;
   }
 
   // ── demo data (?demo=1): made up, never sent anywhere ─────────────────────
@@ -318,6 +337,7 @@
     mounts.forEach(function (el) { el.hidden = true; el.classList.add('lv'); el.setAttribute('aria-live', 'polite'); });
     loadContext().then(function () {
       document.addEventListener('visibilitychange', function () { if (!document.hidden) poll(); });
+      window.addEventListener('focus', function () { if (!state.lastCheckedAt || Date.now() - state.lastCheckedAt > 30000) poll(); });
       window.addEventListener('online', function () { poll(); });
       if (DEMO) {
         demoState(); render(); schedule();

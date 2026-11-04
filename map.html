@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/seat-panel.css?v=20261104e">
+<link rel="stylesheet" href="assets/css/seat-panel.css?v=20261104m">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <script src="assets/js/seat-ids.js"></script>
@@ -33,7 +33,7 @@ if (window.top === window.self && location.hash === '#seats') location.replace('
 // ?seat=ID&open=brief is opened by this page once its data is in (with the race's rating and context)
 if (/[?&]seat=/.test(location.search)) window.SeatPanelDeferDeepLink = true;
 </script>
-<script src="assets/js/seat-panel.js?v=20261104e"></script>
+<script src="assets/js/seat-panel.js?v=20261104m"></script>
 <style>
 :root {
   --bg:#FFFFFF; --bg-s:#F7F7F7; --bg-h:#F2F2F2;
@@ -308,7 +308,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 }
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
-<link rel="stylesheet" href="assets/css/live.css?v=20261104k">
+<link rel="stylesheet" href="assets/css/live.css?v=20261104m">
 <style>.live-wrap{max-width:900px;margin:0 auto;padding:24px 28px 0}.live-wrap .lv{margin-bottom:0}.live-wrap:has(.lv[hidden]){display:none}@media(max-width:600px){.live-wrap{padding:16px 16px 0}}</style>
 </head>
 <body>
@@ -328,9 +328,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <button type="button" class="seatwise-go" id="seatwise-go">Click any battleground seat on the map or in the list for detailed seat-wise analysis <span aria-hidden="true">&#8594;</span></button>
   <button type="button" class="seatwise-close" id="seatwise-close" aria-label="Hide this tip">&times;</button>
 </div>
-
-<!-- ELECTION NIGHT LIVE RESULTS (assets/js/live.js; hidden until results arrive) -->
-<div class="live-wrap"><section data-live-results aria-label="Live results" hidden></section></div>
 
 <!-- ══════════════════════════════════════════════
      SENATE PANEL
@@ -547,6 +544,7 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
   <!-- SEAT BALANCE -->
   <!-- PROJECTED 120TH CONGRESS (assets/js/balance.js) -->
   <section data-live-balance aria-label="Projected 120th Congress"></section>
+  <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 
   <div class="balance-wrap">
     <div class="balance-label">
@@ -2217,9 +2215,10 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 <section data-comments="election-trends" aria-label="Comments"></section>
 <footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
 <script src="comments.js?v=2" defer></script>
-<script src="assets/js/live-math.js?v=20261104e" defer></script>
-<script src="assets/js/live-seat.js?v=20261104i" defer></script>
-<script src="assets/js/balance.js?v=20261104k" defer></script>
-<script src="assets/js/live.js?v=20261104k" defer></script>
+<script src="assets/js/live-math.js?v=20261104m" defer></script>
+<script src="assets/js/live-seat.js?v=20261104m" defer></script>
+<script src="assets/js/live-info.js?v=20261104m" defer></script>
+<script src="assets/js/balance.js?v=20261104m" defer></script>
+<script src="assets/js/live.js?v=20261104m" defer></script>
 </body>
 </html>

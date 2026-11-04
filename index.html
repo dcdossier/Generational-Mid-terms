@@ -544,7 +544,7 @@ body{background:#F5F5DC;color:#1E2232}
 }
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
-<link rel="stylesheet" href="assets/css/live.css?v=20261104k">
+<link rel="stylesheet" href="assets/css/live.css?v=20261104m">
 </head>
 <body>
 
@@ -676,6 +676,7 @@ body{background:#F5F5DC;color:#1E2232}
       <!-- ELECTION STATUS STRIP + PROJECTED BALANCE (assets/js/live-strip.js, balance.js) -->
       <div data-live-strip></div>
       <section data-live-balance aria-label="Projected 120th Congress"></section>
+      <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 
       <!-- HERO -->
       <div class="home-hero">
@@ -721,9 +722,6 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- BATTLEGROUND LIVE BOXES (assets/js/battleground.js, races in assets/live-config.json) -->
       <section data-live-battleground aria-label="Battleground races" hidden></section>
-
-      <!-- ELECTION NIGHT LIVE RESULTS (assets/js/live.js; hidden until results arrive) -->
-      <section data-live-results aria-label="Live results" hidden></section>
 
       <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
       <section class="spj" id="seat-projections" aria-labelledby="spj-title">
@@ -1032,12 +1030,13 @@ body{background:#F5F5DC;color:#1E2232}
 </div><!-- /page-shell -->
 
 <script src="comments.js?v=2" defer></script>
-<script src="assets/js/live-math.js?v=20261104e" defer></script>
-<script src="assets/js/live-seat.js?v=20261104i" defer></script>
-<script src="assets/js/live-strip.js?v=20261104k" defer></script>
-<script src="assets/js/balance.js?v=20261104k" defer></script>
-<script src="assets/js/battleground.js?v=20261104j" defer></script>
-<script src="assets/js/live.js?v=20261104k" defer></script>
+<script src="assets/js/live-math.js?v=20261104m" defer></script>
+<script src="assets/js/live-seat.js?v=20261104m" defer></script>
+<script src="assets/js/live-strip.js?v=20261104m" defer></script>
+<script src="assets/js/balance.js?v=20261104m" defer></script>
+<script src="assets/js/live-info.js?v=20261104m" defer></script>
+<script src="assets/js/battleground.js?v=20261104m" defer></script>
+<script src="assets/js/live.js?v=20261104m" defer></script>
 <script>
 'use strict';
 const ELECTION_DATE = new Date('2026-11-03T00:00:00');

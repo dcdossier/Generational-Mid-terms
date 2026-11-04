@@ -12,10 +12,10 @@
 (function () {
   'use strict';
 
+  // Colours and stripes follow ~/Downloads/balance-mock.html (Prompt 45).
   var C = {
-    D: '#1A2F7A', Dl: '#7F9BE0', R: '#7A1A1A', Rl: '#DC8C8C', I: '#5B5F66', Il: '#A3A6AB', un: '#C9C6BA',
-    D218: '#8EB4F0', R218: '#F2A7B8', D290: '#0E1F5C', R290: '#5C0F0F', D60: '#3F62C4', R60: '#B54848',
-    nuD: 'rgba(26,47,122,.35)', nuR: 'rgba(122,26,26,.35)'
+    D: '#2b4c9b', Dl: '#dbe4f6', R: '#b4232a', Rl: '#f6dcdc', I: '#5B5F66', Il: '#E4E5E7', un: '#eceae4',
+    dText: '#1f3a8a', rText: '#9b1c1c', d60: '#3a5bb0', r60: '#a33a3a', d67: '#1f3a8a', r67: '#7f1d1d', ink: '#1c2430'
   };
   var SEATS = { house: 435, senate: 100, gov: 50 };
   var UP = { house: 435, senate: 35, gov: 36 };
@@ -24,61 +24,65 @@
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]; }); }
   function timeET(iso) { var d = new Date(iso); return !iso || isNaN(d) ? '' : d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'America/New_York' }) + ' ET'; }
+  function timeIST(iso) { var d = new Date(iso); return !iso || isNaN(d) ? '' : d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }) + ' IST'; }
   function signed(n) { return n > 0 ? '+' + n : n < 0 ? '−' + Math.abs(n) : '0'; }
 
-  // 45° stripes for tonight's seats; not-up seats are solid (fill colour, no pattern).
+  // Called: solid party colour with faint white 45° stripes. Leading: pale fill with
+  // party-colour stripes. Not yet called: flat grey. Not up: party colour at 35%, no stripes.
   function patterns(id) {
-    function pat(name, size, stroke, colour, bg) {
-      return '<pattern id="' + id + name + '" width="' + size + '" height="' + size + '" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
-        '<rect width="' + size + '" height="' + size + '" fill="' + bg + '"/>' +
-        '<rect width="' + stroke + '" height="' + size + '" fill="' + colour + '"/></pattern>';
+    function pat(name, bg, line, op) {
+      return '<pattern id="' + id + name + '" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">' +
+        '<rect width="8" height="8" fill="' + bg + '"/><line x1="0" y1="0" x2="0" y2="8" stroke="' + line + '" stroke-opacity="' + op + '" stroke-width="2"/></pattern>';
     }
-    return '<defs>' +
-      pat('d', 4, 3, C.D, '#3B54A0') + pat('dl', 7, 2, C.Dl, '#F3F6FD') +
-      pat('r', 4, 3, C.R, '#A13A3A') + pat('rl', 7, 2, C.Rl, '#FDF4F4') +
-      pat('i', 4, 3, C.I, '#7D8086') + pat('il', 7, 2, C.Il, '#F5F5F5') +
-      pat('u', 7, 1.5, C.un, '#F4F2EC') +
-      '</defs>';
+    return '<defs>' + pat('d', C.D, '#fff', '.18') + pat('dl', C.Dl, C.D, '.35') + pat('r', C.R, '#fff', '.18') + pat('rl', C.Rl, C.R, '.35') +
+      pat('i', C.I, '#fff', '.18') + pat('il', C.Il, C.I, '.35') + '</defs>';
   }
-  function fillOf(id, type) { return type === 'nud' ? C.nuD : type === 'nur' ? C.nuR : 'url(#' + id + type + ')'; }
+  function fillOf(id, type) {
+    if (type === 'nud') return C.D + '" fill-opacity=".35';
+    if (type === 'nur') return C.R + '" fill-opacity=".35';
+    if (type === 'u') return C.un;
+    return 'url(#' + id + type + ')';
+  }
 
-  // runs: [{type, n, label?}] left to right. One cell per seat; labelled runs get text inside.
-  function barSvg(id, total, runs, width, markers) {
-    var H = 30, top = 7, cw = width / total, gap = Math.min(cw * 0.18, 1.2), x = 0, cells = '', labels = '';
+  // runs: [{type, n, label?}] left to right; o: {maj, majLabel, marks:[{v, l, dcol, rcol}]}
+  function barSvg(id, total, runs, width, o, compact) {
+    var H = 20, many = o.marks.length > 0, top = compact ? 26 : (many ? 62 : 40), bottom = compact ? 14 : (many ? 50 : 14), x = function (v) { return v / total * width; };
+    var a = 0, g = '';
     runs.forEach(function (run) {
-      var x0 = x;
-      for (var k = 0; k < run.n; k++) {
-        cells += '<rect x="' + (x + gap / 2).toFixed(2) + '" y="' + top + '" width="' + Math.max(0.2, cw - gap).toFixed(2) + '" height="' + (H - 2 * top + 6) + '" fill="' + fillOf(id, run.type) + '"/>';
-        x += cw;
-      }
-      if (run.label && run.n * cw >= 62) {
-        labels += '<text x="' + (x0 + run.n * cw / 2).toFixed(1) + '" y="' + (top + 15.5) + '" text-anchor="middle" class="bl-nu-t" fill="' + (run.type === 'nud' ? C.D : C.R) + '">' + esc(run.label) + '</text>';
+      if (run.n <= 0) return;
+      var w = Math.max(0, x(run.n) - 1.5);
+      g += '<rect x="' + x(a).toFixed(2) + '" y="' + top + '" width="' + w.toFixed(2) + '" height="' + H + '" rx="3" fill="' + fillOf(id, run.type) + '"/>';
+      if (run.label && w >= 70) g += '<text x="' + (x(a) + w / 2).toFixed(1) + '" y="' + (top + 14) + '" text-anchor="middle" class="bl-nu-t" fill="' + (run.type === 'nud' ? C.dText : C.rText) + '">' + esc(run.label) + '</text>';
+      a += run.n;
+    });
+    var mx = x(o.maj);
+    g += '<line x1="' + mx.toFixed(1) + '" y1="' + (top - 8) + '" x2="' + mx.toFixed(1) + '" y2="' + (top + H + 8) + '" stroke="' + C.ink + '" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    if (!compact) g += '<text x="' + mx.toFixed(1) + '" y="' + (top - 32) + '" text-anchor="middle" font-size="12" font-weight="600" fill="' + C.ink + '">' + esc(o.majLabel) + '</text>';
+    o.marks.forEach(function (m, i) {
+      var dx = x(m.v), rx = x(total - m.v), up = i % 2 ? 32 : 14, dn = i % 2 ? 40 : 24;
+      g += '<path d="M' + (dx - 5).toFixed(1) + ',' + (top - 9) + ' L' + (dx + 5).toFixed(1) + ',' + (top - 9) + ' L' + dx.toFixed(1) + ',' + (top - 2) + 'z" fill="' + m.dcol + '"/>';
+      g += '<path d="M' + (rx - 5).toFixed(1) + ',' + (top + H + 9) + ' L' + (rx + 5).toFixed(1) + ',' + (top + H + 9) + ' L' + rx.toFixed(1) + ',' + (top + H + 2) + 'z" fill="' + m.rcol + '"/>';
+      if (!compact) {
+        g += '<text x="' + dx.toFixed(1) + '" y="' + (top - up) + '" text-anchor="middle" font-size="11.5" fill="' + m.dcol + '">Dem ' + esc(m.l) + ' ' + m.v + '</text>';
+        g += '<text x="' + rx.toFixed(1) + '" y="' + (top + H + dn) + '" text-anchor="middle" font-size="11.5" fill="' + m.rcol + '">Rep ' + esc(m.l) + ' ' + m.v + '</text>';
       }
     });
-    var lines = markers.map(function (m) {
-      var mx = (m.at * cw).toFixed(2);
-      return '<line x1="' + mx + '" x2="' + mx + '" y1="0" y2="' + (H + 6) + '" stroke="' + m.colour + '" stroke-width="2.5"/>';
-    }).join('');
-    return '<svg class="bl-svg" width="' + width + '" height="' + (H + 6) + '" viewBox="0 0 ' + width + ' ' + (H + 6) + '" aria-hidden="true" focusable="false">' +
-      patterns(id) + cells + labels + lines + '</svg>';
+    return '<svg class="bl-svg" width="' + width + '" height="' + (top + H + bottom) + '" viewBox="0 0 ' + width + ' ' + (top + H + bottom) + '" aria-hidden="true" focusable="false" style="overflow:visible">' +
+      patterns(id) + g + '</svg>';
   }
 
-  function markerLabels(markers, total, side) {
-    return '<div class="bl-labels bl-labels-' + side + '">' + markers.filter(function (m) { return m.side === side; }).map(function (m) {
-      return '<span class="bl-ml bl-ml-' + side + '" style="left:' + (m.at / total * 100).toFixed(3) + '%;--c:' + m.colour + '"><b>' + m.n + '</b>' + esc(m.label) + '</span>';
-    }).join('') + '</div>';
+  // Marks: Democratic thresholds above the bar (from the left), Republican below (from the right).
+  function MARKS(key) {
+    if (key === 'house') return { maj: 217.5, majLabel: 'Majority 218', marks: [{ v: 290, l: 'two-thirds', dcol: C.d67, rcol: C.r67 }] };
+    if (key === 'senate') return { maj: 50.5, majLabel: 'Majority · Dem 51 / Rep 50 (VP)',
+      marks: [{ v: 60, l: 'filibuster', dcol: C.d60, rcol: C.r60 }, { v: 67, l: 'two-thirds', dcol: C.d67, rcol: C.r67 }] };
+    return { maj: 25, majLabel: 'Majority 26', marks: [] };
   }
-  function markerKey(markers) {
-    return '<ul class="bl-key">' + markers.map(function (m) {
-      return '<li><span class="bl-sw" style="background:' + m.colour + '"></span>' + (m.side === 'top' ? 'D' : 'R') + ' ' + m.n + ' ' + esc(m.label) + '</li>';
+  // Phones: the marks' words move under the bar.
+  function markKey(o) {
+    return '<ul class="bl-key"><li><span class="bl-sw bl-sw-dash"></span>' + esc(o.majLabel) + '</li>' + o.marks.map(function (m) {
+      return '<li><span class="bl-tri" style="color:' + m.dcol + '">▼</span>Dem ' + esc(m.l) + ' ' + m.v + ' <span class="bl-tri" style="color:' + m.rcol + '">▲</span>Rep ' + esc(m.l) + ' ' + m.v + '</li>';
     }).join('') + '</ul>';
-  }
-  function MARKERS(key) {
-    if (key === 'house') return [{ n: 218, at: 218, side: 'top', colour: C.D218, label: 'majority' }, { n: 290, at: 290, side: 'top', colour: C.D290, label: 'two-thirds' },
-      { n: 218, at: 435 - 218, side: 'bot', colour: C.R218, label: 'majority' }, { n: 290, at: 435 - 290, side: 'bot', colour: C.R290, label: 'two-thirds' }];
-    if (key === 'senate') return [{ n: 51, at: 51, side: 'top', colour: C.D218, label: 'majority' }, { n: 60, at: 60, side: 'top', colour: C.D60, label: 'filibuster' }, { n: 67, at: 67, side: 'top', colour: C.D290, label: 'two-thirds' },
-      { n: 50, at: 50, side: 'bot', colour: C.R218, label: 'majority (VP)' }, { n: 60, at: 40, side: 'bot', colour: C.R60, label: 'filibuster' }, { n: 67, at: 33, side: 'bot', colour: C.R290, label: 'two-thirds' }];
-    return [{ n: 26, at: 26, side: 'top', colour: C.D218, label: 'majority' }, { n: 26, at: 50 - 26, side: 'bot', colour: C.R218, label: 'majority' }];
   }
 
   function needText(n, what, done) { return n === 0 ? '<b>' + done + '</b>' : '<b class="bl-n">' + n + '</b> ' + what; }
@@ -110,7 +114,7 @@
   }
   function chamber(st, key, width) {
     var L = window.LiveMath, pre = showPre(st);
-    var total = SEATS[key], up = UP[key], markers = MARKERS(key), nu = notUpOf(st, key);
+    var total = SEATS[key], up = UP[key], mk = MARKS(key), nu = notUpOf(st, key), compact = width < 560;
     var runs, t, sr, g = null, nm = NAME[key];
 
     if (pre) {
@@ -145,8 +149,9 @@
       g = L.gains(key, st.races, st.holders, st.chambers);
       var needs = function (p) {
         var n = x[p].need, s = needText(n.majority, 'needed for majority', 'Majority reached');
-        if (key === 'senate') s += '<br>' + needText(n.filibuster, 'to break filibuster', 'Filibuster-proof') + '<br>' + needText(n.two_thirds, 'for supermajority', 'Supermajority reached');
-        return s;
+        if (key === 'house') s += ' · ' + needText(n.two_thirds, 'for two-thirds', 'Two-thirds reached');
+        if (key === 'senate') s += ' · ' + needText(n.filibuster, 'to break filibuster', 'Filibuster-proof') + ' · ' + needText(n.two_thirds, 'for supermajority', 'Supermajority reached');
+        return '<span class="bl-needline">' + s + '</span>';
       };
       t = { D: x.D.total, R: x.R.total, I: x.I.total, textD: needs('D') + gainLines(g, 'D'), textR: needs('R') + gainLines(g, 'R'),
         mid: (up - calledN) + ' of ' + up + ' not yet called' };
@@ -166,11 +171,11 @@
     var id = 'blp' + (++uid) + '-', summ = summaryText(st, key);
     return '<div class="bl-ch bl-ch-' + key + '">' +
       '<div class="bl-ch-head"><span class="bl-ch-name">' + nm + ' <small>' + total + ' seats</small></span>' +
-        '<span class="bl-tot"><span class="bl-tot-d">D <b>' + t.D + '</b></span>' + (t.I ? '<span class="bl-tot-i">I <b>' + t.I + '</b></span>' : '') + '<span class="bl-tot-r">R <b>' + t.R + '</b></span></span></div>' +
+        '<span class="bl-tot"><span class="bl-tot-d">D ' + t.D + '</span>' + (t.I ? '<span class="bl-tot-i">I ' + t.I + '</span>' : '') + '<span class="bl-tot-r">R ' + t.R + '</span></span></div>' +
       (summ ? '<p class="bl-summ">' + esc(summ) + '</p>' : '') +
       '<p class="sr-only">' + esc(sr) + '</p>' +
-      '<div class="bl-bar">' + markerLabels(markers, total, 'top') + barSvg(id, total, runs, width, markers) + markerLabels(markers, total, 'bot') + '</div>' +
-      markerKey(markers) +
+      '<div class="bl-bar">' + barSvg(id, total, runs, width, mk, compact) + '</div>' +
+      (compact ? markKey(mk) : '') +
       '<div class="bl-needs" aria-hidden="true"><span class="bl-need-d">' + t.textD + '</span>' + (t.mid ? '<span class="bl-mid">' + esc(t.mid) + '</span>' : '') + '<span class="bl-need-r">' + t.textR + '</span></div>' +
       '</div>';
   }
@@ -180,12 +185,13 @@
       '<span class="bl-tip" id="' + id + '" role="tooltip" hidden>' + text + '</span>';
   }
   function legend(pre, base) {
-    function sw(cls) { return '<span class="bl-lg-sw bl-lg-' + cls + '"></span>'; }
-    if (pre) return '<div class="bl-legend">' + sw('called-d') + sw('called-r') + ' Current seats ' + sw('nu-d') + sw('nu-r') + ' Not up tonight ' + sw('un') + ' Vacant or other</div>';
-    return '<div class="bl-legend">' + sw('nu-d') + sw('nu-r') + ' Not up ' + sw('called-d') + sw('called-r') + ' Called ' + sw('lead-d') + sw('lead-r') + ' Leading ' + sw('un') + ' Not yet called' +
+    function sw(cls) { return '<i class="bl-lg-sw bl-lg-' + cls + '"></i>'; }
+    var marks = '<span class="bl-lg-marks">▼ Democratic marks above · ▲ Republican marks below</span>';
+    if (pre) return '<div class="bl-legend"><span>' + sw('called-d') + sw('called-r') + 'Current seats</span><span>' + sw('nu-d') + sw('nu-r') + 'Not up tonight</span><span>' + sw('un') + 'Vacant or other</span>' + marks + '</div>';
+    return '<div class="bl-legend"><span>' + sw('nu-d') + sw('nu-r') + 'Not up</span><span>' + sw('called-d') + sw('called-r') + 'Called</span><span>' + sw('lead-d') + sw('lead-r') + 'Leading</span><span>' + sw('un') + 'Not yet called</span>' +
       '<span class="bl-qwrap">' + tipButton(base + 'a', 'What does leading mean?', 'Leading is not won. A leading seat is one where a candidate is ahead in the votes counted so far; the lead can change as more votes are counted. Only called races are counted as won.') + '</span>' +
       '<span class="bl-qwrap bl-qgain">Gains and losses' + tipButton(base + 'b', 'What do gained, lost and net mean?',
-        '<b>Gained</b>: called races a party won in seats another party held before the election. <b>Lost</b>: called races in seats the party held that another party won. <b>Net</b>: gained minus lost. Leading pickups and losses are the same comparison for races not yet called. In redrawn states the comparison is with the party expected under the new map.') + '</span></div>';
+        '<b>Gained</b>: called races a party won in seats another party held before the election. <b>Lost</b>: called races in seats the party held that another party won. <b>Net</b>: gained minus lost. Leading pickups and losses are the same comparison for races not yet called. In redrawn states the comparison is with the party expected under the new map.') + '</span>' + marks + '</div>';
   }
 
   function html(el, st) {
@@ -195,7 +201,7 @@
     var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + (st.connected === false ? 'Live data not connected' : 'Awaiting results') + '</span> Showing seats before the election until results arrive.'
       : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
-      : '<span class="bl-stage bl-stage-live">Live count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '');
+      : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + ' · Senate includes seats not up this year';
     if (st.demo) sub += ' <b>Demo data.</b>';
     var foot = !pre && st.baseline && st.baseline.footnote ? '<p class="bl-foot">' + esc(st.baseline.footnote) + '</p>' : '';
     return '<div class="bl-head"><h2 class="bl-title">Projected 120th Congress</h2><p class="bl-sub">' + sub + '</p></div>' +

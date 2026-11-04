@@ -1,7 +1,7 @@
-name: Live results (Fox News)
+name: Live results (Fox News, AP, NBC News)
 
-# Election-night results from the Fox News results pages (scripts/live-from-fox.js),
-# the site's only source of live results. Starts every hour and loops for 58 minutes,
+# Election-night results from three decision desks: Fox News (scripts/live-from-fox.js),
+# then AP and NBC News (scripts/live-desks.js). A seat counts when two desks agree. Starts every hour and loops for 58 minutes,
 # fetching every 3 minutes; commits assets/live.json only when it changed. The same
 # loop refreshes data/litigation.json (scripts/litigation.js) and the cross-check of calls
 # against the source sheet's outlets, the FT and Ground News (scripts/live-sources.js).
@@ -37,6 +37,7 @@ jobs:
       - name: Fox results every 3 minutes for 56 minutes
         env:
           LIVE_COMMIT_CMD: >-
+            (node scripts/live-desks.js || true) &&
             (node scripts/litigation.js || true) &&
             (node scripts/live-sources.js || true) &&
             git add assets/live.json data/litigation.json data/live-sources.json &&

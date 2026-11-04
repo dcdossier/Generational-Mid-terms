@@ -74,7 +74,8 @@
   }
 
   // ── results: assets/live.json, written from the Fox News results pages by
-  // scripts/live-from-fox.js (GitHub Actions, every 5 minutes). The only results source.
+  // scripts/live-from-fox.js, then checked against AP and NBC News by scripts/live-desks.js
+  // (GitHub Actions, every 3 minutes). A race counts as won when two of the three desks agree.
   var LIVE_URL = 'assets/live.json', LIT_URL = 'data/litigation.json', SRC_URL = 'data/live-sources.json';
   var KIND = { house: 'house', senate: 'senate', governor: 'gov' };
   function readAll() {
@@ -89,20 +90,26 @@
       state.fox = j; state.litigation = res[1] || state.litigation || null; state.sources = res[2] || state.sources || null;
       var cross = (state.sources && state.sources.races) || {};
       if (state.config) state.config.senate.concat(state.config.house).forEach(function (r, i) { featured[r.race_id] = i + 1; });
-      state.meta = { id: 1, status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', source: 'Fox News Decision Desk',
+      // Three desks (scripts/live-desks.js): a race is won when two of Fox News, AP and NBC News agree.
+      var multi = !!(j.desks && j.consensus_rule);
+      state.desks = multi ? j.desks : null; state.consensusRule = multi ? j.consensus_rule : null;
+      state.meta = { id: 1, status: 'counting', polls_first_close: '2026-11-03T23:00:00Z', source: multi ? 'Fox News, AP and NBC News (two must agree)' : 'Fox News Decision Desk',
         last_update: j.source_last_updated || j.fetched_at, last_push: j.fetched_at, ok: j.ok !== false, last_attempt: j.last_attempt || null };
       // races: called winner, leader, top-two shares, % counted, flips
-      var lead = {};
+      var lead = {}, won = {};
       state.races = Object.keys(j.races || {}).map(function (id) {
         var r = j.races[id], c = r.candidates || [];
         var top = function (p) { return c.filter(function (x) { return x.party === p; })[0] || null; };
         var d = top('D'), rp = top('R');
+        var win = multi ? (r.consensus || null) : (r.called ? r.winner_party : null);
+        var by = multi ? (r.consensus_by && r.consensus_by.length ? r.consensus_by.join(', ') : null) : (r.called ? 'Fox News Decision Desk' : null);
         var row = { race_id: id, featured: !!featured[id], featured_order: featured[id] || null,
-          winner: r.called ? r.winner_party : null, called_by: r.called ? 'Fox News Decision Desk' : null, called_at: r.called_at || null,
-          leader: r.leader_party, pct_d: d ? d.pct : null, pct_r: rp ? rp.pct : null, pct_counted: r.pct_in, total_votes: r.total_votes,
+          winner: win, called_by: win ? by : null, called_at: r.called_at || null, desks: r.desks || null,
+          leader: multi && !win && r.desks ? (r.desks.fox || r.desks.ap || r.desks.nbc || r.leader_party) : r.leader_party, pct_d: d ? d.pct : null, pct_r: rp ? rp.pct : null, pct_counted: r.pct_in, total_votes: r.total_votes,
           flipped: !!r.flipped, too_close: !!r.too_close, margin: r.margin_pct, candidates: c, kind: KIND[r.kind] || r.kind,
           cross: cross[id] || null };
-        if (!row.winner && r.leader_party) { var k = (KIND[r.kind] || r.kind) + '|' + (r.leader_party === 'D' || r.leader_party === 'R' ? r.leader_party : 'I'); lead[k] = (lead[k] || 0) + 1; }
+        if (!row.winner && row.leader) { var k = (KIND[r.kind] || r.kind) + '|' + (row.leader === 'D' || row.leader === 'R' ? row.leader : 'I'); lead[k] = (lead[k] || 0) + 1; }
+        if (row.winner) { var wk = (KIND[r.kind] || r.kind) + '|' + (row.winner === 'D' || row.winner === 'R' ? row.winner : 'I'); won[wk] = (won[wk] || 0) + 1; }
         return row;
       });
       // chambers: won = called; Senate and Governors add not-up seats; flips from Fox
@@ -114,7 +121,7 @@
         state.flips[k] = {};
         ['D', 'R', 'I'].forEach(function (p) {
           var x = P[map[p]] || {}, other = p === 'D' ? (P.R || {}) : p === 'R' ? (P.D || {}) : {};
-          state.chambers.push({ chamber: k, party: p, won: x.won || 0, leading: lead[k + '|' + p] || 0, not_up: k === 'house' ? 0 : (nu[map[p]] || 0), source: 'Fox News' });
+          state.chambers.push({ chamber: k, party: p, won: multi ? (won[k + '|' + p] || 0) : (x.won || 0), leading: lead[k + '|' + p] || 0, not_up: k === 'house' ? 0 : (nu[map[p]] || 0), source: multi ? 'Fox News, AP, NBC News' : 'Fox News' });
           state.flips[k][p] = { gained: x.flipped_to || 0, lost: other.flipped_to || 0, net: x.net_gain || 0, majority_called: !!x.majority_called };
         });
         state.flips[k].remaining = ch.remaining;

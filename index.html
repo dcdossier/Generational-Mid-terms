@@ -521,12 +521,17 @@ body{background:#F5F5DC;color:#1E2232}
 .spj-sd{left:0;background:#2b4c9b;border-radius:4px 0 0 4px}
 .spj-sdr{background:repeating-linear-gradient(45deg,#2b4c9b 0 4px,#9fb3e3 4px 8px)}
 .spj-sr{right:0;background:#b4232a;border-radius:0 4px 4px 0}
+.spj-srl{background:repeating-linear-gradient(45deg,#b4232a 0 4px,#eaa4a4 4px 8px)}
+.spj-upd{font:600 12px var(--sans);color:#620d3c;margin:-6px 0 12px}.spj-note{font:400 12px var(--sans);margin-top:6px}
+.spj-tots small{font:400 12px var(--sans);opacity:.85}
+.spj-k-un{background:#eceae4}.spj-k-rl{background:repeating-linear-gradient(45deg,#b4232a 0 3px,#eaa4a4 3px 6px)}
 .spj-now{width:0;border-left:2px dotted #fff;z-index:1}
 .spj-mk{position:absolute;top:-20px;bottom:-4px;width:0;border-left:2px solid #1c2430;z-index:2}
 .spj-mk.spj-mk-tt{border-left:2px dashed #620d3c}
 .spj-mk em{position:absolute;top:0;left:4px;font:600 11px var(--sans);font-style:normal;color:#1c2430;white-space:nowrap}
 .spj-mk.spj-mk-tt em{color:#620d3c}
 .spj-mk.spj-mk-l em{left:auto;right:4px}
+.spj-desks{display:flex;flex-wrap:wrap;gap:2px 16px;margin-top:4px;font:400 12px var(--sans);color:#6B6B6B}.spj-desks b{font-weight:600;color:#3a3f4a}.spj-desk-off{opacity:.6}
 .spj-lines{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;font:400 13px/1.5 var(--sans);color:#3a3f4a}
 .spj-ok{color:#1A6B3A}.spj-mid{color:#9a6a00}.spj-no{color:#9B2020}.spj-muted{color:#6B6B6B}
 .spj-key{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font:400 12px var(--sans);color:#6B6B6B}
@@ -750,8 +755,8 @@ body{background:#F5F5DC;color:#1E2232}
 
       <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
       <section class="spj" id="seat-projections" aria-labelledby="spj-title">
-        <h2 class="spj-title" id="spj-title">2026 Midterms Seat Projections (29 Oct 2026)</h2>
-        <p class="spj-sub">Where Democrats are projected to land in each chamber, and whether that reaches a majority or two-thirds. Forecasts of 27 to 29 Oct 2026.</p>
+        <h2 class="spj-title" id="spj-title">Where the parties stand</h2>
+        <p class="spj-sub">Seats won and leading in each chamber, against the majority and the two-thirds line Democrats would need.</p>
         <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
       </section>
 
@@ -1818,8 +1823,7 @@ async function loadSeatProjections() {
     if (!r.ok) throw new Error(r.status);
     d = await r.json();
   } catch (err) {
-    box.innerHTML = '<p class="spj-err">Seat projections are unavailable right now.</p>';
-    return;
+    d = { models: [], other_sources: [] }; // forecasts are optional; the live chart still runs
   }
   const MINUS = '−', DASH = '–';
   const sign = n => n > 0 ? '+' + n : n < 0 ? MINUS + Math.abs(n) : '0';
@@ -1831,39 +1835,65 @@ async function loadSeatProjections() {
   const cell = (label, inner, cls) => `<td class="num${cls ? ' ' + cls : ''}" data-label="${e(label)}"><span class="spj-v">${inner}</span></td>`;
   const na = tip => `<button type="button" class="info-btn spj-na" data-tip="${e(tip)}" aria-label="Not applicable: ${e(tip)}">n/a</button>`;
 
-  // One chart: each chamber is a bar of all its seats. Democrats fill from the left (solid to the
-  // low end of the projected range, striped to the high end), Republicans take the rest from the
-  // right. Markers show the majority and, where it exists, the two-thirds line Democrats would need.
+  // Live chart: where each party stands now, from the same live results as the rest of the page
+  // (window.RacebookLive, "racebook:live" events). Per chamber, one bar of all its seats:
+  // Democrats from the left (dark = won or not up this year, striped = leading), Republicans
+  // from the right, grey = not yet called. Markers: majority and the Democratic two-thirds line.
+  // Only called seats count towards a line; leads show as "on course".
   const pct = (n, t) => (n / t * 100).toFixed(2) + '%';
-  const gapText = (lo, hi, line, what) => {
-    if (lo >= line) return hi === line ? `<b class="spj-ok">${what} reached</b>, with no seats to spare` : `<b class="spj-ok">${what} reached</b> with ${range(lo - line, hi - line, String)} to spare`;
-    if (hi >= line) return `<b class="spj-mid">${what} within range</b>: reached at the high end, ${line - lo} short at the low end`;
-    return `<b class="spj-no">${range(line - hi, line - lo, String)} short</b> of ${what.toLowerCase()}`;
+  const CH = [
+    { key: 'house', name: 'House', T: 435, maj: 218, tt: 290, nu: { D: 0, R: 0 } },
+    { key: 'senate', name: 'Senate', T: 100, maj: 51, tt: 67, nu: { D: 34, R: 31 } },
+    { key: 'gov', name: 'Governors', T: 50, maj: 26, tt: null, nu: { D: 6, R: 8 } }
+  ];
+  const status = (have, lead, line, what) => {
+    if (have >= line) return `<b class="spj-ok">${what} won</b>`;
+    const gap = line - have;
+    return `<b class="spj-no">${gap}</b> more needed for ${what.toLowerCase()}` + (have + lead >= line ? ' <b class="spj-mid">(on course with leads)</b>' : '');
   };
-  const rows = d.rows.map(r => {
-    const T = r.total_seats, lo = r.projected_min, hi = r.projected_max, rLo = T - hi, rHi = T - lo;
-    const marks = [{ n: r.majority_needed, label: 'Majority ' + r.majority_needed, cls: 'spj-mk-maj' }];
-    if (r.two_thirds_needed != null) marks.push({ n: r.two_thirds_needed, label: 'Two-thirds ' + r.two_thirds_needed, cls: 'spj-mk-tt' });
-    const name = r.chamber === 'Governors' ? 'Governors' : r.chamber;
-    const lines = [gapText(lo, hi, r.majority_needed, 'Majority')];
-    if (r.two_thirds_needed != null) lines.push(gapText(lo, hi, r.two_thirds_needed, 'Two-thirds'));
-    else lines.push('<span class="spj-muted">No two-thirds rule for governors</span>');
-    const sr = `${name}: Democrats projected ${range(lo, hi, String)} of ${T} seats, up from ${r.seats_now}. Republicans ${range(rLo, rHi, String)}. Majority needs ${r.majority_needed}` +
-      (r.two_thirds_needed != null ? `; two-thirds needs ${r.two_thirds_needed}` : '') + '.';
-    return `<div class="spj-row">
-      <div class="spj-rh"><span class="spj-ch">${e(name)} <small>${T} seats</small></span>
-        <span class="spj-tots"><span class="spj-td">D ${range(lo, hi, String)}</span><span class="spj-tr">R ${range(rLo, rHi, String)}</span>
-        <button type="button" class="info-btn spj-i" data-tip="${e(r.notes)}" aria-label="Notes on ${e(name)}"></button></span></div>
-      <p class="sr-only">${e(sr)}</p>
-      <div class="spj-bar" aria-hidden="true">
-        <i class="spj-sd" style="width:${pct(lo, T)}"></i><i class="spj-sdr" style="left:${pct(lo, T)};width:${pct(hi - lo, T)}"></i>
-        <i class="spj-sr" style="width:${pct(rLo, T)}"></i>
-        <i class="spj-now" style="left:${pct(r.seats_now, T)}" title="Democrats now: ${r.seats_now}"></i>
-        ${marks.map(m => `<span class="spj-mk ${m.cls}${m.cls === 'spj-mk-maj' ? ' spj-mk-l' : ''}" style="left:${pct(m.n, T)}"><em>${e(m.label)}</em></span>`).join('')}
-      </div>
-      <div class="spj-lines" aria-hidden="true"><span>Democrats now <b>${r.seats_now}</b>, change <b class="${tone(r.change_min, r.change_max)}">${range(r.change_min, r.change_max, sign)}</b></span>${lines.map(l => '<span>' + l + '</span>').join('')}</div>
-    </div>`;
-  }).join('');
+  const timeIST = iso => { const t = new Date(iso); return isNaN(t) ? '' : t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }) + ' IST'; };
+  function liveRows(st) {
+    const L = window.LiveMath;
+    return CH.map(c => {
+      const x = c.key === 'house' ? L.house(st.chambers) : c.key === 'senate' ? L.senate(st.chambers) : L.gov(st.chambers);
+      const nuD = c.key === 'house' ? 0 : (x.D.not_up || c.nu.D), nuR = c.key === 'house' ? 0 : (x.R.not_up || c.nu.R);
+      const D = { have: nuD + x.D.won, lead: x.D.leading }, R = { have: nuR + x.R.won + (x.I ? x.I.won : 0), lead: x.R.leading + (x.I ? x.I.leading : 0) };
+      const un = Math.max(0, c.T - D.have - D.lead - R.have - R.lead);
+      const lines = [status(D.have, D.lead, c.maj, 'Majority')];
+      if (c.tt) lines.push(status(D.have, D.lead, c.tt, 'Two-thirds'));
+      const marks = [{ n: c.maj, label: 'Majority ' + c.maj, cls: 'spj-mk-maj' }];
+      if (c.tt) marks.push({ n: c.tt, label: 'Two-thirds ' + c.tt, cls: 'spj-mk-tt' });
+      const sr = `${c.name}: Democrats ${D.have} won${nuD ? ' including ' + nuD + ' not up' : ''}, ${D.lead} leading. Republicans ${R.have} won, ${R.lead} leading. ${c.T - D.have - R.have} not yet called. Majority is ${c.maj}` + (c.tt ? `, two-thirds is ${c.tt}` : '') + '.';
+      return `<div class="spj-row">
+        <div class="spj-rh"><span class="spj-ch">${c.name} <small>${c.T} seats</small></span>
+          <span class="spj-tots"><span class="spj-td">D ${D.have}${D.lead ? ' <small>+' + D.lead + ' leading</small>' : ''}</span><span class="spj-tr">R ${R.have}${R.lead ? ' <small>+' + R.lead + ' leading</small>' : ''}</span></span></div>
+        <p class="sr-only">${e(sr)}</p>
+        <div class="spj-bar" aria-hidden="true">
+          <i class="spj-sd" style="width:${pct(D.have, c.T)}"></i><i class="spj-sdr" style="left:${pct(D.have, c.T)};width:${pct(D.lead, c.T)}"></i>
+          <i class="spj-srl" style="right:${pct(R.have, c.T)};width:${pct(R.lead, c.T)}"></i><i class="spj-sr" style="width:${pct(R.have, c.T)}"></i>
+          ${marks.map(m => `<span class="spj-mk ${m.cls}${m.cls === 'spj-mk-maj' ? ' spj-mk-l' : ''}" style="left:${pct(m.n, c.T)}"><em>${e(m.label)}</em></span>`).join('')}
+        </div>
+        <div class="spj-lines" aria-hidden="true">${lines.map(l => '<span>' + l + '</span>').join('')}<span class="spj-muted">${c.T - D.have - R.have} not yet called</span></div>
+        ${deskLine(st, c, nuD, nuR)}
+      </div>`;
+    }).join('');
+  }
+  // Each desk's own called seats (plus seats not up), so readers see where the three differ
+  function deskLine(st, c, nuD, nuR) {
+    const ds = st.desks; if (!ds) return '';
+    const kk = c.key === 'gov' ? 'governor' : c.key;
+    const one = (k, label) => { const d = ds[k]; if (!d || !d[kk]) return ''; const x = d[kk];
+      return `<span class="spj-desk${d.ok === false ? ' spj-desk-off' : ''}"><b>${label}</b> D ${(x.D || 0) + (c.key === 'house' || (k === 'nbc' && c.key === 'house') ? 0 : nuD)} · R ${(x.R || 0) + (c.key === 'house' ? 0 : nuR)}${d.ok === false ? ' (last good)' : ''}</span>`; };
+    return `<div class="spj-desks">${one('fox', 'Fox News')}${one('ap', 'AP')}${one('nbc', 'NBC News')}</div>`;
+  }
+  const chartEl = () => box.querySelector('.spj-chart');
+  function paint(st) {
+    if (!st || !window.LiveMath || !chartEl()) return;
+    const h = liveRows(st); if (chartEl()._h !== h) { chartEl().innerHTML = h; chartEl()._h = h; }
+    const u = box.querySelector('.spj-upd'), t = st.meta && st.meta.last_update;
+    const rule = st.desks ? 'a seat counts as won when two of Fox News, AP and NBC News call it for the same party' : 'Fox News Decision Desk calls';
+    if (u) u.textContent = (t ? 'Live · updated ' + timeIST(t) + ' · ' : 'Live · ') + rule;
+  }
 
   const models = d.models.map(m => `<tr>
       <td>${e(m.forecast)}</td><td>${e(m.race)}</td>
@@ -1873,10 +1903,12 @@ async function loadSeatProjections() {
   const others = d.other_sources.map(o => `<li><a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.item)} <span aria-hidden="true">&#8599;</span></a></li>`).join('');
 
   box.innerHTML = `
-    <div class="spj-chart">${rows}</div>
-    <div class="spj-key" aria-hidden="true"><span><i class="spj-k spj-k-d"></i>Democrats, low end of projections</span><span><i class="spj-k spj-k-dr"></i>Democrats, range to high end</span><span><i class="spj-k spj-k-r"></i>Republicans</span><span><i class="spj-k spj-k-now"></i>Democrats now</span><span><i class="spj-k spj-k-maj"></i>Majority</span><span><i class="spj-k spj-k-tt"></i>Two-thirds</span></div>
+    <p class="spj-upd">Live</p>
+    <div class="spj-chart"><p class="spj-err">Loading live results&#8230;</p></div>
+    <div class="spj-key" aria-hidden="true"><span><i class="spj-k spj-k-d"></i>Democrats won</span><span><i class="spj-k spj-k-dr"></i>Democrats leading</span><span><i class="spj-k spj-k-un"></i>Not yet called</span><span><i class="spj-k spj-k-rl"></i>Republicans leading</span><span><i class="spj-k spj-k-r"></i>Republicans won</span><span><i class="spj-k spj-k-maj"></i>Majority</span><span><i class="spj-k spj-k-tt"></i>Two-thirds (Democrats)</span></div>
+    <p class="spj-muted spj-note">Won includes Senate seats and governorships not up this year. Leads, and calls made by only one desk, are not counted towards a line. Politico's results use AP calls. NBC News publishes House calls by state, so House races are matched between Fox News and AP.</p>
     <details class="spj-more">
-      <summary>Model detail and sources</summary>
+      <summary>Pre-election forecasts (27 to 29 Oct) and sources</summary>
       <h4 class="spj-h4">Model detail</h4>
       <div class="spj-scroll"><table class="spj-table spj-models">
         <thead><tr><th>Forecast</th><th>Race</th><th class="num">Democrats</th><th class="num">Republicans</th><th class="num">Date</th><th>Source</th></tr></thead>
@@ -1885,6 +1917,9 @@ async function loadSeatProjections() {
       <h4 class="spj-h4">Other sources</h4>
       <ul class="spj-src">${others}</ul>
     </details>`;
+  document.addEventListener('racebook:live', ev => paint(ev.detail));
+  if (window.RacebookLive && window.RacebookLive.ready) paint(window.RacebookLive.state);
+  else { const iv = setInterval(() => { if (window.RacebookLive && window.RacebookLive.ready) { clearInterval(iv); paint(window.RacebookLive.state); } }, 500); setTimeout(() => clearInterval(iv), 30000); }
 }
 
 

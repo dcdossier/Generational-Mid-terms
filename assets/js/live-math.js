@@ -154,7 +154,26 @@
     return out;
   }
 
-  root.LiveMath = { house: house, senate: senate, gov: gov, flips: flips, winnerOf: winnerOf, leaderOf: leaderOf, need: need,
+  // Votes cast so far: per state the largest count among its races (a statewide race, or the House
+  // districts added up), so each ballot counts once; plus the House vote by party (all candidates).
+  function turnout(st) {
+    var by = {}, party = { D: 0, R: 0, other: 0 };
+    ((st && st.races) || []).forEach(function (r) {
+      var s = String(r.race_id).replace(/^(Senate|Gov)-/, '').slice(0, 2), x = by[s] || (by[s] = { house: 0, houseIn: 0, houseN: 0, wide: 0, wideIn: 0 });
+      var v = num(r.total_votes), p = Number(r.pct_counted) || 0;
+      if (chamberOf(r.race_id) === 'house') {
+        x.house += v; x.houseIn += p; x.houseN++;
+        (r.candidates || []).forEach(function (c) { var k = c.party === 'D' || c.party === 'R' ? c.party : 'other'; party[k] += num(c.votes); });
+      } else if (v > x.wide) { x.wide = v; x.wideIn = p; }
+    });
+    var total = 0;
+    Object.keys(by).forEach(function (s) {
+      var x = by[s]; x.votes = Math.max(x.house, x.wide); x.counted = x.wide >= x.house ? x.wideIn : (x.houseN ? x.houseIn / x.houseN : 0); total += x.votes;
+    });
+    return { total: total, states: by, house: party };
+  }
+
+  root.LiveMath = { turnout: turnout, house: house, senate: senate, gov: gov, flips: flips, winnerOf: winnerOf, leaderOf: leaderOf, need: need,
                     phase: phase, called: called, gains: gains, chamberOf: chamberOf, RACES_UP: RACES_UP, FIRST_CLOSE: FIRST_CLOSE };
   if (typeof module !== 'undefined' && module.exports) module.exports = root.LiveMath;
 })(typeof window !== 'undefined' ? window : this);

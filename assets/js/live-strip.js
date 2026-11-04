@@ -23,6 +23,23 @@
     return src || 'Fox News';
   }
 
+  // Turnout so far against 2022: all votes (UF Election Lab ballots) and each party's House vote
+  // (Office of the Clerk). Counting continues, so a fall can still close as the last states report.
+  var hist = null;
+  fetch('data/turnout-history.json').then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { hist = j; if (lastSt) render(lastSt); }).catch(function () {});
+  function mil(n) { return (n / 1e6).toFixed(1) + 'M'; }
+  function vs(now, then) {
+    var d = now - then, pc = then ? d / then * 100 : 0, up = d >= 0;
+    return '<span class="ls-tv ls-tv-' + (up ? 'up' : 'down') + '"><span aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' + (up ? 'up' : 'down') + ' ' + Math.abs(pc).toFixed(1) + '% (' + (up ? '+' : '−') + mil(Math.abs(d)) + ')</span>';
+  }
+  function turnoutItem(st) {
+    var y = hist && hist.years.filter(function (x) { return x.year === 2022; })[0], hv = hist && hist.house_vote_2022, T = window.LiveMath.turnout(st);
+    if (!y || !T.total) return '';
+    return '<span class="ls-item ls-turn" title="2022: ' + mil(y.ballots) + ' ballots (UF Election Lab); House vote R ' + mil(hv.R) + ', D ' + mil(hv.D) + ' (Office of the Clerk). Counting continues.">' +
+      'Turnout <b class="ls-n">' + mil(T.total) + '</b> ' + vs(T.total, y.ballots) + ' on 2022' +
+      (hv ? ' <span class="ls-by">· Rep vote ' + mil(T.house.R) + ' ' + vs(T.house.R, hv.R) + ' · Dem vote ' + mil(T.house.D) + ' ' + vs(T.house.D, hv.D) + '</span>' : '') + '</span>';
+  }
+
   function html(st) {
     var L = window.LiveMath, m = st.meta || {}, now = Date.now();
     var ph = L.phase(m, now);
@@ -43,6 +60,7 @@
       '<span class="ls-item"><b class="ls-n">' + c.total + '</b> of ' + c.up + ' races called ' +
         '<span class="ls-by">(House ' + c.house + '/' + U.house + ' &middot; Senate ' + c.senate + '/' + U.senate + ' &middot; Governors ' + c.gov + '/' + U.gov + ')</span></span>',
       '<span class="ls-item"><b class="ls-n">' + c.counting + '</b> still counting</span>',
+      turnoutItem(st),
       '<span class="ls-item">' + (m.last_update ? 'Updated ' + esc(ist(m.last_update)) + ' (' + esc(sourceOf(st)) + ')' : 'Fox results loading') + '</span>'
     ];
     return '<div class="ls-row"><span class="ls-tag ls-tag-live"><span class="ls-dot" aria-hidden="true"></span>Counting active</span>' +

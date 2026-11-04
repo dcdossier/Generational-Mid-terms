@@ -55,20 +55,7 @@
   // and total ballots per state). 2026 votes per state are the largest count among its races
   // (a statewide race, or the House districts added up), so every ballot cast is counted once.
   var MIN_STATES = 5;
-  function stateVotes(st) {
-    var by = {};
-    (st.races || []).forEach(function (r) {
-      var s = String(r.race_id).replace(/^(Senate|Gov)-/, '').slice(0, 2), x = by[s] || (by[s] = { house: 0, houseIn: 0, houseN: 0, wide: 0, wideIn: 0 });
-      var v = Number(r.total_votes) || 0, p = Number(r.pct_counted) || 0;
-      if (r.kind === 'house') { x.house += v; x.houseIn += p; x.houseN++; }
-      else if (v > x.wide) { x.wide = v; x.wideIn = p; }
-    });
-    Object.keys(by).forEach(function (s) {
-      var x = by[s], hIn = x.houseN ? x.houseIn / x.houseN : 0;
-      x.votes = Math.max(x.house, x.wide); x.counted = x.wide >= x.house ? x.wideIn : hIn;
-    });
-    return by;
-  }
+  function stateVotes(st) { return window.LiveMath.turnout(st).states; }
   function signed(n, f) { return (n > 0 ? '+' : n < 0 ? '−' : '') + f(Math.abs(n)); }
   function change(now, then, label) {
     var d = now - then, pc = then ? d / then * 100 : 0, up = d >= 0;

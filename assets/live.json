@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T18:02:28.847Z",
- "fetched_at": "2026-11-04T18:02:42.130Z",
+ "source_last_updated": "2026-11-04T18:06:04.701Z",
+ "fetched_at": "2026-11-04T18:06:01.554Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,10 +20,10 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 67,
+   "remaining": 64,
    "parties": {
     "D": {
-     "won": 229,
+     "won": 232,
      "net_gain": 26,
      "flipped_to": 26,
      "majority_called": true
@@ -720,7 +720,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 34.3,
-   "total_votes": 304648,
+   "total_votes": 304647,
    "called_at": "2026-11-04T00:41:47.560Z",
    "candidates": [
     {
@@ -12303,7 +12303,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 21.9,
-   "total_votes": 251234,
+   "total_votes": 251263,
    "called_at": "2026-11-04T04:13:55.358Z",
    "candidates": [
     {
@@ -12311,7 +12311,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 149771,
+     "votes": 149781,
      "pct": 59.61,
      "photo": null
     },
@@ -12320,7 +12320,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 94657,
+     "votes": 94676,
      "pct": 37.68,
      "photo": null
     },
@@ -19322,6 +19322,156 @@
     "AP"
    ]
   },
+  "TX-09": {
+   "id": "TX-09",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 15.1,
+   "total_votes": 170419,
+   "called_at": "2026-11-04T18:02:04.375Z",
+   "candidates": [
+    {
+     "name": "Leticia Gutierrez",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 98079,
+     "pct": 57.55,
+     "photo": null
+    },
+    {
+     "name": "Alex Mealer",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 72340,
+     "pct": 42.45,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "CA-13": {
+   "id": "CA-13",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 57,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 22.6,
+   "total_votes": 94941,
+   "called_at": "2026-11-04T18:03:14.496Z",
+   "candidates": [
+    {
+     "name": "Adam Gray",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 58217,
+     "pct": 61.32,
+     "photo": "https://images.api.fox.com/elections/headshots/GRAY_ADAM_DCA_HOUSE.png"
+    },
+    {
+     "name": "Kevin Lincoln",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 36724,
+     "pct": 38.68,
+     "photo": "https://images.api.fox.com/elections/headshots/LINCOLN_KEVIN_RCA_HOUSE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "WA-03": {
+   "id": "WA-03",
+   "kind": "house",
+   "state": "WA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 67,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 10.8,
+   "total_votes": 260925,
+   "called_at": "2026-11-04T18:04:01.273Z",
+   "candidates": [
+    {
+     "name": "Marie Gluesenkamp Perez",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 143417,
+     "pct": 54.96,
+     "photo": "https://images.api.fox.com/elections/headshots/GLUESENKAMP_PEREZ_MARIE_DWA_HOUSE.png"
+    },
+    {
+     "name": "John Braun",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 115271,
+     "pct": 44.18,
+     "photo": "https://images.api.fox.com/elections/headshots/BRAUN_JOHN_RWA_HOUSE.png"
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2237,
+     "pct": 0.86,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -19805,49 +19955,6 @@
      "votes": 70511,
      "pct": 44.58,
      "photo": "https://images.api.fox.com/elections/headshots/CHAN_CONNIE_DCA_HOUSE.png"
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-13": {
-   "id": "CA-13",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 57,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 22.6,
-   "total_votes": 94941,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Adam Gray",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 58217,
-     "pct": 61.32,
-     "photo": "https://images.api.fox.com/elections/headshots/GRAY_ADAM_DCA_HOUSE.png"
-    },
-    {
-     "name": "Kevin Lincoln",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 36724,
-     "pct": 38.68,
-     "photo": "https://images.api.fox.com/elections/headshots/LINCOLN_KEVIN_RCA_HOUSE.png"
     }
    ],
    "desks": {
@@ -21658,11 +21765,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 78,
+   "pct_in": 79,
    "winner_party": null,
    "leader_party": "R",
-   "margin_pct": 2.6,
-   "total_votes": 244620,
+   "margin_pct": 3.2,
+   "total_votes": 248455,
    "called_at": null,
    "candidates": [
     {
@@ -21670,8 +21777,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 125338,
-     "pct": 51.24,
+     "votes": 128090,
+     "pct": 51.55,
      "photo": null
     },
     {
@@ -21679,8 +21786,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 119079,
-     "pct": 48.68,
+     "votes": 120157,
+     "pct": 48.36,
      "photo": null
     },
     {
@@ -21688,7 +21795,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 203,
+     "votes": 208,
      "pct": 0.08,
      "photo": null
     }
@@ -21710,11 +21817,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 87,
+   "pct_in": 90,
    "winner_party": null,
    "leader_party": "D",
-   "margin_pct": 10.4,
-   "total_votes": 261875,
+   "margin_pct": 9.8,
+   "total_votes": 270572,
    "called_at": null,
    "candidates": [
     {
@@ -21722,8 +21829,8 @@
      "party": "D",
      "incumbent": true,
      "winner": false,
-     "votes": 144174,
-     "pct": 55.05,
+     "votes": 148216,
+     "pct": 54.78,
      "photo": "https://images.api.fox.com/elections/headshots/SUOZZI_TOM_DNY_HOUSE.png"
     },
     {
@@ -21731,8 +21838,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 117001,
-     "pct": 44.68,
+     "votes": 121623,
+     "pct": 44.95,
      "photo": "https://images.api.fox.com/elections/headshots/LIPETRI_MICHAEL_RNY_HOUSE.png"
     },
     {
@@ -21740,7 +21847,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 700,
+     "votes": 733,
      "pct": 0.27,
      "photo": null
     }
@@ -21762,11 +21869,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 85,
+   "pct_in": 90,
    "winner_party": null,
    "leader_party": "D",
-   "margin_pct": 12.8,
-   "total_votes": 269164,
+   "margin_pct": 12.6,
+   "total_votes": 285480,
    "called_at": null,
    "candidates": [
     {
@@ -21774,8 +21881,8 @@
      "party": "D",
      "incumbent": true,
      "winner": false,
-     "votes": 151336,
-     "pct": 56.22,
+     "votes": 160234,
+     "pct": 56.13,
      "photo": "https://images.api.fox.com/elections/headshots/GILLEN_LAURA_DNY_HOUSE.png"
     },
     {
@@ -21783,8 +21890,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 116912,
-     "pct": 43.44,
+     "votes": 124259,
+     "pct": 43.53,
      "photo": "https://images.api.fox.com/elections/headshots/DRISCOLL_JEANINE_RNY_HOUSE.png"
     },
     {
@@ -21792,7 +21899,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 663,
+     "votes": 714,
      "pct": 0.25,
      "photo": null
     },
@@ -21801,8 +21908,8 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 253,
-     "pct": 0.09,
+     "votes": 273,
+     "pct": 0.1,
      "photo": null
     }
    ],
@@ -22422,49 +22529,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "TX-09": {
-   "id": "TX-09",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 15.1,
-   "total_votes": 170419,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Leticia Gutierrez",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 98079,
-     "pct": 57.55,
-     "photo": null
-    },
-    {
-     "name": "Alex Mealer",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 72340,
-     "pct": 42.45,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "TX-22": {
    "id": "TX-22",
    "kind": "house",
@@ -22870,58 +22934,6 @@
      "winner": false,
      "votes": 708,
      "pct": 0.2,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "WA-03": {
-   "id": "WA-03",
-   "kind": "house",
-   "state": "WA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 67,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 10.8,
-   "total_votes": 260925,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Marie Gluesenkamp Perez",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 143417,
-     "pct": 54.96,
-     "photo": "https://images.api.fox.com/elections/headshots/GLUESENKAMP_PEREZ_MARIE_DWA_HOUSE.png"
-    },
-    {
-     "name": "John Braun",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 115271,
-     "pct": 44.18,
-     "photo": "https://images.api.fox.com/elections/headshots/BRAUN_JOHN_RWA_HOUSE.png"
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2237,
-     "pct": 0.86,
      "photo": null
     }
    ],
@@ -25671,8 +25683,8 @@
    "pct_in": 88,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 20.4,
-   "total_votes": 5901078,
+   "margin_pct": 20.2,
+   "total_votes": 5930268,
    "called_at": null,
    "candidates": [
     {
@@ -25680,8 +25692,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 3552397,
-     "pct": 60.07,
+     "votes": 3565798,
+     "pct": 60,
      "photo": "https://images.api.fox.com/elections/headshots/HOCHUL_KATHY_DNY_GOVERNOR.png"
     },
     {
@@ -25689,8 +25701,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 2348681,
-     "pct": 39.72,
+     "votes": 2364470,
+     "pct": 39.79,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_BLAKEMAN_BRUCE_RNY_GOVERNOR.png"
     }
    ],
@@ -26326,7 +26338,7 @@
    "winner_party": null,
    "leader_party": "D",
    "margin_pct": 0.5,
-   "total_votes": 1087683,
+   "total_votes": 1087712,
    "called_at": null,
    "candidates": [
     {
@@ -26334,7 +26346,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 546626,
+     "votes": 546645,
      "pct": 50.26,
      "photo": "https://images.api.fox.com/elections/headshots/HOLSCHER_CINDY_DKS_STATESEN.png"
     },
@@ -26343,7 +26355,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 541057,
+     "votes": 541067,
      "pct": 49.74,
      "photo": "https://images.api.fox.com/elections/headshots/MASTERSON_TY_RKS_GOVERNOR.png"
     }
@@ -26358,6 +26370,30 @@
   }
  },
  "latest_calls": [
+  {
+   "id": "WA-03",
+   "kind": "house",
+   "party": "D",
+   "winner": "Marie Gluesenkamp Perez",
+   "flipped": false,
+   "at": "2026-11-04T18:04:01.273Z"
+  },
+  {
+   "id": "CA-13",
+   "kind": "house",
+   "party": "D",
+   "winner": "Adam Gray",
+   "flipped": false,
+   "at": "2026-11-04T18:03:14.496Z"
+  },
+  {
+   "id": "TX-09",
+   "kind": "house",
+   "party": "D",
+   "winner": "Leticia Gutierrez",
+   "flipped": false,
+   "at": "2026-11-04T18:02:04.375Z"
+  },
   {
    "id": "MI-10",
    "kind": "house",
@@ -26733,39 +26769,15 @@
    "winner": "Mark Teixeira",
    "flipped": false,
    "at": "2026-11-04T05:42:34.575Z"
-  },
-  {
-   "id": "TX-14",
-   "kind": "house",
-   "party": "R",
-   "winner": "Randy Weber",
-   "flipped": false,
-   "at": "2026-11-04T05:41:14.100Z"
-  },
-  {
-   "id": "CA-41",
-   "kind": "house",
-   "party": "D",
-   "winner": "Linda Sánchez",
-   "flipped": true,
-   "at": "2026-11-04T05:39:23.555Z"
-  },
-  {
-   "id": "PA-01",
-   "kind": "house",
-   "party": "D",
-   "winner": "Bob Harvie",
-   "flipped": true,
-   "at": "2026-11-04T05:37:55.727Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T18:02:28.847Z",
+   "updated": "2026-11-04T18:06:04.701Z",
    "house": {
-    "D": 229,
+    "D": 232,
     "R": 139,
     "I": 0
    },
@@ -26783,10 +26795,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T18:02:04.375000Z",
+   "updated": "2026-11-04T18:05:47.369000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 224,
+    "D": 226,
     "R": 138,
     "I": 0
    },
@@ -26804,7 +26816,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T18:02:29.000Z",
+   "updated": "2026-11-04T18:05:45.000Z",
    "house": {
     "D": 236,
     "R": 146,
@@ -26823,5 +26835,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T18:02:42.841Z"
+ "desks_checked_at": "2026-11-04T18:06:06.422Z"
 }

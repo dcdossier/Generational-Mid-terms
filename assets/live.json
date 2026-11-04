@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T22:10:57.846Z",
- "fetched_at": "2026-11-04T22:11:12.349Z",
+ "source_last_updated": "2026-11-04T22:14:30.255Z",
+ "fetched_at": "2026-11-04T22:14:32.244Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,18 +20,18 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 59,
+   "remaining": 52,
    "parties": {
     "D": {
      "won": 237,
-     "net_gain": 29,
+     "net_gain": 28,
      "flipped_to": 29,
      "majority_called": true
     },
     "R": {
-     "won": 139,
-     "net_gain": -29,
-     "flipped_to": 0,
+     "won": 146,
+     "net_gain": -28,
+     "flipped_to": 1,
      "majority_called": false
     },
     "Oth": {
@@ -720,7 +720,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 34.4,
-   "total_votes": 304628,
+   "total_votes": 304629,
    "called_at": "2026-11-04T00:41:47.560Z",
    "candidates": [
     {
@@ -5264,7 +5264,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 11.2,
-   "total_votes": 316615,
+   "total_votes": 316622,
    "called_at": "2026-11-04T02:10:30.669Z",
    "candidates": [
     {
@@ -5272,7 +5272,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 175796,
+     "votes": 175797,
      "pct": 55.52,
      "photo": null
     },
@@ -5281,7 +5281,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 140210,
+     "votes": 140216,
      "pct": 44.28,
      "photo": null
     },
@@ -19799,6 +19799,380 @@
     "AP"
    ]
   },
+  "OK-05": {
+   "id": "OK-05",
+   "kind": "house",
+   "state": "OK",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.3,
+   "total_votes": 264647,
+   "called_at": "2026-11-04T22:10:38.344Z",
+   "candidates": [
+    {
+     "name": "Stephanie Bice",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 130972,
+     "pct": 49.49,
+     "photo": null
+    },
+    {
+     "name": "Jena Nelson",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 127608,
+     "pct": 48.22,
+     "photo": null
+    },
+    {
+     "name": "Robert Henri",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 4024,
+     "pct": 1.52,
+     "photo": null
+    },
+    {
+     "name": "Austin Nieves",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2043,
+     "pct": 0.77,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "NE-01": {
+   "id": "NE-01",
+   "kind": "house",
+   "state": "NE",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 92,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 4.1,
+   "total_votes": 248343,
+   "called_at": "2026-11-04T22:11:11.832Z",
+   "candidates": [
+    {
+     "name": "Mike Flood",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 124881,
+     "pct": 50.29,
+     "photo": null
+    },
+    {
+     "name": "Chris Backemeyer",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 114664,
+     "pct": 46.17,
+     "photo": null
+    },
+    {
+     "name": "Nik Sandman",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 4500,
+     "pct": 1.81,
+     "photo": null
+    },
+    {
+     "name": "Dan Hartong",
+     "party": "Oth",
+     "incumbent": false,
+     "winner": false,
+     "votes": 4298,
+     "pct": 1.73,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TX-02": {
+   "id": "TX-02",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 2,
+   "total_votes": 283915,
+   "called_at": "2026-11-04T22:11:41.765Z",
+   "candidates": [
+    {
+     "name": "Steve Toth",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 144748,
+     "pct": 50.98,
+     "photo": null
+    },
+    {
+     "name": "Shaun Finnie",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 139167,
+     "pct": 49.02,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TX-05": {
+   "id": "TX-05",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 2.9,
+   "total_votes": 253133,
+   "called_at": "2026-11-04T22:11:54.444Z",
+   "candidates": [
+    {
+     "name": "Lance Gooden",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 130278,
+     "pct": 51.47,
+     "photo": null
+    },
+    {
+     "name": "Chelsey Hockett",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 122855,
+     "pct": 48.53,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TX-22": {
+   "id": "TX-22",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 3.6,
+   "total_votes": 289752,
+   "called_at": "2026-11-04T22:12:10.165Z",
+   "candidates": [
+    {
+     "name": "Trever Nehls",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 150161,
+     "pct": 51.82,
+     "photo": null
+    },
+    {
+     "name": "Marquette Greene-Scott",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 139591,
+     "pct": 48.18,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TX-32": {
+   "id": "TX-32",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 2.9,
+   "total_votes": 277615,
+   "called_at": "2026-11-04T22:12:21.225Z",
+   "candidates": [
+    {
+     "name": "Jace Yarbrough",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 142834,
+     "pct": 51.45,
+     "photo": null
+    },
+    {
+     "name": "Dan Barrios",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 134781,
+     "pct": 48.55,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TX-38": {
+   "id": "TX-38",
+   "kind": "house",
+   "state": "TX",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 4.2,
+   "total_votes": 305101,
+   "called_at": "2026-11-04T22:12:40.074Z",
+   "candidates": [
+    {
+     "name": "Jon Bonck",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 157261,
+     "pct": 51.54,
+     "photo": null
+    },
+    {
+     "name": "Melissa McDonough",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 144397,
+     "pct": 47.33,
+     "photo": null
+    },
+    {
+     "name": "Alex McMenemy",
+     "party": "Gr",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3443,
+     "pct": 1.13,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -21676,67 +22050,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "NE-01": {
-   "id": "NE-01",
-   "kind": "house",
-   "state": "NE",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 92,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 4.1,
-   "total_votes": 248343,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Mike Flood",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 124881,
-     "pct": 50.29,
-     "photo": null
-    },
-    {
-     "name": "Chris Backemeyer",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 114664,
-     "pct": 46.17,
-     "photo": null
-    },
-    {
-     "name": "Nik Sandman",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 4500,
-     "pct": 1.81,
-     "photo": null
-    },
-    {
-     "name": "Dan Hartong",
-     "party": "Oth",
-     "incumbent": false,
-     "winner": false,
-     "votes": 4298,
-     "pct": 1.73,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "NJ-02": {
    "id": "NJ-02",
    "kind": "house",
@@ -21958,7 +22271,7 @@
    "winner_party": null,
    "leader_party": "D",
    "margin_pct": 4.3,
-   "total_votes": 257747,
+   "total_votes": 258023,
    "called_at": null,
    "candidates": [
     {
@@ -21966,8 +22279,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 134275,
-     "pct": 52.1,
+     "votes": 134454,
+     "pct": 52.11,
      "photo": "https://images.api.fox.com/elections/headshots/CONLEY_CAIT_DNY_HOUSE.png"
     },
     {
@@ -21975,8 +22288,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 123193,
-     "pct": 47.8,
+     "votes": 123289,
+     "pct": 47.78,
      "photo": "https://images.api.fox.com/elections/headshots/LAWLER_MIKE_RNY_HOUSE.png"
     },
     {
@@ -21984,7 +22297,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 279,
+     "votes": 280,
      "pct": 0.11,
      "photo": null
     }
@@ -22096,67 +22409,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "OK-05": {
-   "id": "OK-05",
-   "kind": "house",
-   "state": "OK",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.3,
-   "total_votes": 264647,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Stephanie Bice",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 130972,
-     "pct": 49.49,
-     "photo": null
-    },
-    {
-     "name": "Jena Nelson",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 127608,
-     "pct": 48.22,
-     "photo": null
-    },
-    {
-     "name": "Robert Henri",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 4024,
-     "pct": 1.52,
-     "photo": null
-    },
-    {
-     "name": "Austin Nieves",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2043,
-     "pct": 0.77,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
     "nbc": null
    },
    "consensus": null,
@@ -22467,135 +22719,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "TX-02": {
-   "id": "TX-02",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 2,
-   "total_votes": 283915,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Steve Toth",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 144748,
-     "pct": 50.98,
-     "photo": null
-    },
-    {
-     "name": "Shaun Finnie",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 139167,
-     "pct": 49.02,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TX-05": {
-   "id": "TX-05",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 2.9,
-   "total_votes": 253133,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Lance Gooden",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 130278,
-     "pct": 51.47,
-     "photo": null
-    },
-    {
-     "name": "Chelsey Hockett",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 122855,
-     "pct": 48.53,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TX-22": {
-   "id": "TX-22",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 3.6,
-   "total_votes": 289752,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Trever Nehls",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 150161,
-     "pct": 51.82,
-     "photo": null
-    },
-    {
-     "name": "Marquette Greene-Scott",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 139591,
-     "pct": 48.18,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "TX-27": {
    "id": "TX-27",
    "kind": "house",
@@ -22628,101 +22751,6 @@
      "winner": false,
      "votes": 137928,
      "pct": 48.84,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TX-32": {
-   "id": "TX-32",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 2.9,
-   "total_votes": 277615,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Jace Yarbrough",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 142834,
-     "pct": 51.45,
-     "photo": null
-    },
-    {
-     "name": "Dan Barrios",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 134781,
-     "pct": 48.55,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TX-38": {
-   "id": "TX-38",
-   "kind": "house",
-   "state": "TX",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 4.2,
-   "total_votes": 305101,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Jon Bonck",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 157261,
-     "pct": 51.54,
-     "photo": null
-    },
-    {
-     "name": "Melissa McDonough",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 144397,
-     "pct": 47.33,
-     "photo": null
-    },
-    {
-     "name": "Alex McMenemy",
-     "party": "Gr",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3443,
-     "pct": 1.13,
      "photo": null
     }
    ],
@@ -22921,7 +22949,7 @@
    "winner_party": null,
    "leader_party": "R",
    "margin_pct": 2.2,
-   "total_votes": 361178,
+   "total_votes": 361180,
    "called_at": null,
    "candidates": [
     {
@@ -22956,7 +22984,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 708,
+     "votes": 710,
      "pct": 0.2,
      "photo": null
     }
@@ -24494,7 +24522,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.4,
-   "total_votes": 3543763,
+   "total_votes": 3543770,
    "called_at": null,
    "candidates": [
     {
@@ -24502,7 +24530,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2169831,
+     "votes": 2169837,
      "pct": 61.07,
      "photo": "https://images.api.fox.com/elections/headshots/WARNER_MARK_DVA_SENATE.png"
     },
@@ -24511,7 +24539,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1373932,
+     "votes": 1373933,
      "pct": 38.67,
      "photo": null
     }
@@ -26395,6 +26423,62 @@
  },
  "latest_calls": [
   {
+   "id": "TX-38",
+   "kind": "house",
+   "party": "R",
+   "winner": "Jon Bonck",
+   "flipped": false,
+   "at": "2026-11-04T22:12:40.074Z"
+  },
+  {
+   "id": "TX-32",
+   "kind": "house",
+   "party": "R",
+   "winner": "Jace Yarbrough",
+   "flipped": true,
+   "at": "2026-11-04T22:12:21.225Z"
+  },
+  {
+   "id": "TX-22",
+   "kind": "house",
+   "party": "R",
+   "winner": "Trever Nehls",
+   "flipped": false,
+   "at": "2026-11-04T22:12:10.165Z"
+  },
+  {
+   "id": "TX-05",
+   "kind": "house",
+   "party": "R",
+   "winner": "Lance Gooden",
+   "flipped": false,
+   "at": "2026-11-04T22:11:54.444Z"
+  },
+  {
+   "id": "TX-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "Steve Toth",
+   "flipped": false,
+   "at": "2026-11-04T22:11:41.765Z"
+  },
+  {
+   "id": "NE-01",
+   "kind": "house",
+   "party": "R",
+   "winner": "Mike Flood",
+   "flipped": false,
+   "at": "2026-11-04T22:11:11.832Z"
+  },
+  {
+   "id": "OK-05",
+   "kind": "house",
+   "party": "R",
+   "winner": "Stephanie Bice",
+   "flipped": false,
+   "at": "2026-11-04T22:10:38.344Z"
+  },
+  {
    "id": "MI-07",
    "kind": "house",
    "party": "D",
@@ -26737,72 +26821,16 @@
    "winner": "Jack Bergman",
    "flipped": false,
    "at": "2026-11-04T06:09:29.238Z"
-  },
-  {
-   "id": "TX-08",
-   "kind": "house",
-   "party": "R",
-   "winner": "Jessica Hart Steinmann",
-   "flipped": false,
-   "at": "2026-11-04T06:08:38.787Z"
-  },
-  {
-   "id": "CA-51",
-   "kind": "house",
-   "party": "D",
-   "winner": "Sara Jacobs",
-   "flipped": false,
-   "at": "2026-11-04T06:07:54.740Z"
-  },
-  {
-   "id": "TX-23",
-   "kind": "house",
-   "party": "D",
-   "winner": "Katy Padilla Stout",
-   "flipped": true,
-   "at": "2026-11-04T06:05:50.409Z"
-  },
-  {
-   "id": "IN-05",
-   "kind": "house",
-   "party": "D",
-   "winner": "J.D. Ford",
-   "flipped": true,
-   "at": "2026-11-04T06:03:32.370Z"
-  },
-  {
-   "id": "CA-27",
-   "kind": "house",
-   "party": "D",
-   "winner": "George Whitesides",
-   "flipped": false,
-   "at": "2026-11-04T06:01:40.953Z"
-  },
-  {
-   "id": "TX-10",
-   "kind": "house",
-   "party": "R",
-   "winner": "Chris Gober",
-   "flipped": false,
-   "at": "2026-11-04T06:00:38.956Z"
-  },
-  {
-   "id": "MI-03",
-   "kind": "house",
-   "party": "D",
-   "winner": "Hillary Scholten",
-   "flipped": false,
-   "at": "2026-11-04T05:54:25.475Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T22:10:57.846Z",
+   "updated": "2026-11-04T22:14:30.255Z",
    "house": {
     "D": 237,
-    "R": 139,
+    "R": 146,
     "I": 0
    },
    "senate": {
@@ -26819,11 +26847,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T22:10:59.551000Z",
+   "updated": "2026-11-04T22:14:17.243000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 232,
-    "R": 139,
+    "R": 145,
     "I": 0
    },
    "senate": {
@@ -26840,7 +26868,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T22:10:53.000Z",
+   "updated": "2026-11-04T22:14:24.000Z",
    "house": {
     "D": 242,
     "R": 150,
@@ -26859,5 +26887,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T22:11:13.412Z"
+ "desks_checked_at": "2026-11-04T22:14:33.588Z"
 }

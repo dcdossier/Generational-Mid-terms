@@ -147,6 +147,11 @@
         var thr = key === 'senate' ? { D: [51, 60, 67], R: [50, 60, 67] } : { D: [26], R: [26] };
         ['D', 'R'].forEach(function (p) { x[p].need = { majority: L.need(thr[p][0], x[p].total), filibuster: L.need(thr[p][1] || 0, x[p].total), two_thirds: L.need(thr[p][2] || 0, x[p].total) }; });
       }
+      // Totals and what each party still needs count called seats only (plus seats not up);
+      // leads stay visible as the lighter stripes but never reach a majority on their own.
+      ['D', 'R', 'I'].forEach(function (p) { x[p].total = (x[p].not_up || 0) + x[p].won; });
+      var thrC = key === 'senate' ? { D: [51, 60, 67], R: [50, 60, 67] } : key === 'gov' ? { D: [26], R: [26] } : { D: [218, 0, 290], R: [218, 0, 290] };
+      ['D', 'R'].forEach(function (p) { x[p].need = { majority: L.need(thrC[p][0], x[p].total), filibuster: L.need(thrC[p][1] || 0, x[p].total), two_thirds: L.need(thrC[p][2] || 0, x[p].total) }; });
       var calledN = x.D.won + x.R.won + x.I.won;
       var tonightUn = Math.max(0, up - calledN - x.D.leading - x.R.leading - x.I.leading);
       runs = (key === 'house' ? [] : [{ type: 'nud', n: nu.D, label: 'Not up (' + nu.D + ')' }]).concat([

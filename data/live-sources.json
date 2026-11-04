@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T17:12:42.716Z",
+ "updated": "2026-11-04T17:19:18.146Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2029,6 +2029,17 @@
    "at": "2026-11-04T12:54:59.353Z"
   },
   {
+   "race": "NV-03",
+   "name": "Susie Lee",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdVJRYjN5ekFlR2g5Ri12RWREMWxUbXctZkxKTFFUZEJXUzREQ2F1N216dUVjbGgzQUNxMGdxYm8tMnlkWXNRM0JnLS1PYkdWd1NMc25vZXdaeVg2WGRRVUJIMVZwNnBib3NiZnpHMm1ON2g1T3hNeFIzdkpPUXREaXp3eUw3TXpJZlR6NFk2S0FsUdIBlwFBVV95cUxOdVJOa2dmYndybTNOektRaF9abDlmcG5DTU82MjlnR1A4N0Y2UWxLMDNvYVNSN2JlT2d4R3Y5TW9IMkZuVWVLYlNra0J5bXk5RFEzdktfMVpUVERIanYwVXlzbFd1WllkM0NiQ0Ntbl9iMzN0a1hkdXF1Z1RsNEJCdElvQWxndkVLaG1jYmNoRzg4dXgxZ3hz?oc=5",
+   "title": "Susie Lee wins reelection to Nevada House seat",
+   "at": "2026-11-04T13:37:00.000Z"
+  },
+  {
    "race": "Gov-FL",
    "name": "Byron Donalds",
    "party": "R",
@@ -3828,12 +3839,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NV-03": {
+   "fox_winner": "Susie Lee",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOdVJRYjN5ekFlR2g5Ri12RWREMWxUbXctZkxKTFFUZEJXUzREQ2F1N216dUVjbGgzQUNxMGdxYm8tMnlkWXNRM0JnLS1PYkdWd1NMc25vZXdaeVg2WGRRVUJIMVZwNnBib3NiZnpHMm1ON2g1T3hNeFIzdkpPUXREaXp3eUw3TXpJZlR6NFk2S0FsUdIBlwFBVV95cUxOdVJOa2dmYndybTNOektRaF9abDlmcG5DTU82MjlnR1A4N0Y2UWxLMDNvYVNSN2JlT2d4R3Y5TW9IMkZuVWVLYlNra0J5bXk5RFEzdktfMVpUVERIanYwVXlzbFd1WllkM0NiQ0Ntbl9iMzN0a1hkdXF1Z1RsNEJCdElvQWxndkVLaG1jYmNoRzg4dXgxZ3hz?oc=5",
+     "title": "Susie Lee wins reelection to Nevada House seat",
+     "winner": "Susie Lee",
+     "party": "D",
+     "at": "2026-11-04T13:37:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 67,
+  "races_confirmed": 68,
   "races_disputed": 2,
   "races_reported_not_called": 7
  }

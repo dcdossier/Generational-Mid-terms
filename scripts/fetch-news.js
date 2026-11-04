@@ -566,8 +566,13 @@ async function main() {
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error('[fetch-news] Fatal error:', err);
-  saveStatus();
-  process.exit(1);
-});
+// The feed list and reader are shared with scripts/live-from-news.js.
+module.exports = { FEEDS, fetchFeed };
+
+if (require.main === module) {
+  main().catch(err => {
+    console.error('[fetch-news] Fatal error:', err);
+    saveStatus();
+    process.exit(1);
+  });
+}

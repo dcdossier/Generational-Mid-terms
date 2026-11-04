@@ -1,9 +1,8 @@
 /* Election-night live results.
  *
- * Reads live_meta, live_chamber and live_races from Supabase with the public
- * anon key (SELECT only; see supabase/live.sql). Changes arrive over Realtime
- * within seconds; a full re-read every 5 minutes is the backup if the socket
- * drops. Any element with data-live-results becomes a results panel.
+ * Reads assets/live.json, which scripts/live-from-news.js writes from our news
+ * sources only (GitHub Actions, every 5 minutes). Re-read every 5 minutes and at
+ * once when the tab wakes. Any element with data-live-results becomes a results panel.
  * ?demo=1 fills the panel with made-up figures, locally, for testing; add
  * &stage=pre, early, majority or final to see each stage (default: mid-count).
  * ?delayed=1 (with demo=1) fakes a last push 15 minutes old to show the watchdog.
@@ -14,9 +13,6 @@
 (function () {
   'use strict';
 
-  var SB_URL = 'https://zxwrecjvhmoceyfsarwz.supabase.co';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp4d3JlY2p2aG1vY2V5ZnNhcnd6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI0NzQxMzUsImV4cCI6MjEwODA1MDEzNX0.v6JG5hyTbfl-Yon7GSATXkmfwpItUm5DKb8PLcmELlY';
-  var LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js';
   var POLL_MS = 5 * 60 * 1000;
   var DEMO = /[?&]demo=1\b/.test(location.search);
   var STAGE = (/[?&]stage=(pre|early|mid|majority|final)\b/.exec(location.search) || [])[1] || 'mid';
@@ -29,7 +25,7 @@
   var ST = { AL:'Alabama',AK:'Alaska',AZ:'Arizona',AR:'Arkansas',CA:'California',CO:'Colorado',CT:'Connecticut',DE:'Delaware',FL:'Florida',GA:'Georgia',HI:'Hawaii',ID:'Idaho',IL:'Illinois',IN:'Indiana',IA:'Iowa',KS:'Kansas',KY:'Kentucky',LA:'Louisiana',ME:'Maine',MD:'Maryland',MA:'Massachusetts',MI:'Michigan',MN:'Minnesota',MS:'Mississippi',MO:'Missouri',MT:'Montana',NE:'Nebraska',NV:'Nevada',NH:'New Hampshire',NJ:'New Jersey',NM:'New Mexico',NY:'New York',NC:'North Carolina',ND:'North Dakota',OH:'Ohio',OK:'Oklahoma',OR:'Oregon',PA:'Pennsylvania',RI:'Rhode Island',SC:'South Carolina',SD:'South Dakota',TN:'Tennessee',TX:'Texas',UT:'Utah',VT:'Vermont',VA:'Virginia',WA:'Washington',WV:'West Virginia',WI:'Wisconsin',WY:'Wyoming' };
   var ABBR = {}; Object.keys(ST).forEach(function (k) { ABBR[ST[k]] = k; });
 
-  // Same not-up seats as supabase/live.sql, so the bars are right before the tables answer.
+  // Seats not up this year, so the bars are right before live.json loads.
   var SEED_CHAMBERS = [['senate', 'D', 34], ['senate', 'R', 31], ['gov', 'D', 6], ['gov', 'R', 8]].map(function (x) {
     return { chamber: x[0], party: x[1], won: 0, leading: 0, not_up: x[2] };
   });
@@ -77,65 +73,40 @@
     });
   }
 
-  // ── Supabase reads ─────────────────────────────────────────────────────────
-  function rest(path) {
-    return fetch(SB_URL + '/rest/v1/' + path, { headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY } })
-      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); });
-  }
+  // ── results: assets/live.json, written from our news sources by scripts/live-from-news.js ──
+  // (GitHub Actions, every 5 minutes). Nothing else feeds the live results.
+  var LIVE_URL = 'assets/live.json';
   function readAll() {
-    return Promise.all([
-      rest('live_meta?select=*&id=eq.1'),
-      rest('live_chamber?select=*'),
-      rest('live_races?select=*&order=featured_order.asc.nullslast,race_id.asc')
-    ]).then(function (res) {
-      state.meta = res[0][0] || null; state.chambers = res[1].length ? res[1] : SEED_CHAMBERS.slice(); state.races = res[2];
+    return fetch(LIVE_URL + '?t=' + Date.now(), { cache: 'no-store' }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (j) {
+      var featured = {};
+      if (state.config) state.config.senate.concat(state.config.house).forEach(function (r, i) { featured[r.race_id] = i + 1; });
+      state.meta = { id: 1, status: j.status || 'counting', polls_first_close: '2026-11-03T23:00:00Z',
+        last_update: j.changed || j.updated, last_push: j.updated, control: j.control || {}, source: 'news sources' };
+      state.chambers = (j.chambers || []).map(function (c) { return Object.assign({ source: 'News sources' }, c); });
+      var rows = {};
+      (j.calls || []).forEach(function (c) {
+        rows[c.race_id] = { race_id: c.race_id, winner: c.winner, leader: c.winner, called_by: c.called_by, confirmations: c.sources || [] };
+      });
+      Object.keys(j.featured || {}).forEach(function (id) {
+        var f = j.featured[id], r = rows[id] || (rows[id] = { race_id: id });
+        r.pct_d = f.pct_d; r.pct_r = f.pct_r; r.pct_counted = f.pct_counted; r.source = f.source; r.source_url = f.url; r.updated_at = f.at;
+        if (!r.winner) r.leader = f.leader;
+      });
+      state.races = Object.keys(rows).map(function (id) { var r = rows[id]; r.featured = !!featured[id]; r.featured_order = featured[id] || null; return r; });
+      if (state.races.length) state.hadResults = true;
       state.loaded = true; state.error = null; state.lastCheckedAt = Date.now(); state.lastCheckOk = true;
-      if (res[1].some(function (c) { return c.won || c.leading; }) || res[2].some(function (r) { return r.winner || r.leader || r.pct_counted; })) state.hadResults = true;
     }).catch(function (e) { state.error = e.message; state.lastCheckedAt = Date.now(); state.lastCheckOk = false; })   // keep the last numbers
       .then(function () { state.connected = connected(); });
   }
-  // Live data counts as connected when the tables answer and the Results Desk pushed in the last 12 minutes.
-  var STALE_MS = 12 * 60 * 1000;
+  // Connected while live.json keeps updating (a run every 5 minutes, a heartbeat at least every 10).
+  var STALE_MS = 20 * 60 * 1000;
   function connected() {
     if (DEMO) return true;
     var m = state.meta;
     return !state.error && !!m && !!m.last_push && Date.now() - Date.parse(m.last_push) <= STALE_MS;
-  }
-  function upsertLocal(list, row, keyFn) {
-    var k = keyFn(row), i;
-    for (i = 0; i < list.length; i++) if (keyFn(list[i]) === k) { list[i] = row; return; }
-    list.push(row);
-  }
-  function startRealtime() {
-    loadLib().then(function () {
-      var client = window.supabase.createClient(SB_URL, SB_KEY, { auth: { persistSession: false, autoRefreshToken: false } });
-      client.channel('racebook-live')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'live_meta' }, function (p) { if (p.new && p.new.id) state.meta = p.new; render(); })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'live_chamber' }, function (p) {
-          if (p.new && p.new.chamber) upsertLocal(state.chambers, p.new, function (r) { return r.chamber + '/' + r.party; }); render();
-        })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'live_races' }, function (p) {
-          if (p.eventType === 'DELETE' && p.old) state.races = state.races.filter(function (r) { return r.race_id !== p.old.race_id; });
-          else if (p.new && p.new.race_id) upsertLocal(state.races, p.new, function (r) { return r.race_id; });
-          render();
-        })
-        .subscribe(function (status) {
-          var was = state.live;
-          state.live = status === 'SUBSCRIBED';
-          if (state.live && !was) readAll().then(render);   // catch anything missed while connecting
-          else if (was !== state.live) render();
-        });
-    }).catch(function () { state.live = false; render(); });
-  }
-  function loadLib() {
-    return new Promise(function (resolve, reject) {
-      if (window.supabase && window.supabase.createClient) return resolve();
-      var s = document.createElement('script');
-      s.src = LIB; s.async = true; s.crossOrigin = 'anonymous';
-      s.onload = function () { window.supabase && window.supabase.createClient ? resolve() : reject(new Error('lib')); };
-      s.onerror = function () { reject(new Error('lib')); };
-      document.head.appendChild(s);
-    });
   }
 
   // ── demo data (?demo=1): made up, never sent anywhere ─────────────────────
@@ -314,8 +285,8 @@
       '<thead><tr><th scope="col">Race</th><th scope="col">Democrat</th><th scope="col">Republican</th><th scope="col" class="lv-num">Counted</th><th scope="col">Status</th><th scope="col">Source</th></tr></thead>' +
       '<tbody>' + featured.map(function (r) { return raceRow(r, flipIds, fresh); }).join('') + '</tbody></table></div>' : '';
 
-    var foot = '<p class="lv-foot">Seat totals and calls come from our Results Desk. Vote shares come from official state results where a state publishes a feed, ' +
-      'otherwise from the desk. &ldquo;Counted&rdquo; is the share of precincts reporting where that is all a state publishes. Flips compare a called winner with the party holding the seat now.</p>';
+    var foot = '<p class="lv-foot">Calls and vote shares come only from our news sources: a race is called when three different publishers report the same winner and none contradicts it. ' +
+      'Vote shares are the latest a news report gave. Flips compare a called winner with the party holding the seat before the election.</p>';
     return head + notes + cards + flips + table + foot;
   }
 
@@ -353,7 +324,7 @@
         if (STAGE !== 'pre') { setInterval(demoTick, 3500); setTimeout(demoCallMaine, 12000); }
         return;
       }
-      readAll().then(function () { render(); schedule(); startRealtime(); });
+      readAll().then(function () { render(); schedule(); });
     });
   }
 

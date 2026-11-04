@@ -22,7 +22,7 @@
 
   function sourceOf(st) {
     var src = (st.chambers || []).map(function (c) { return c.source; }).filter(Boolean)[0];
-    return src || 'Results Desk';
+    return src || 'news sources';
   }
 
   function html(st) {

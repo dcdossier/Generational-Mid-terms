@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T18:16:11.959Z",
- "fetched_at": "2026-11-04T18:16:08.802Z",
+ "source_last_updated": "2026-11-04T18:19:34.809Z",
+ "fetched_at": "2026-11-04T18:19:32.114Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 63,
+   "remaining": 62,
    "parties": {
     "D": {
-     "won": 233,
-     "net_gain": 27,
-     "flipped_to": 27,
+     "won": 234,
+     "net_gain": 28,
+     "flipped_to": 28,
      "majority_called": true
     },
     "R": {
      "won": 139,
-     "net_gain": -27,
+     "net_gain": -28,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -15980,7 +15980,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 6.5,
-   "total_votes": 243260,
+   "total_votes": 243261,
    "called_at": "2026-11-04T05:26:31.787Z",
    "candidates": [
     {
@@ -15988,7 +15988,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 125042,
+     "votes": 125043,
      "pct": 51.4,
      "photo": null
     },
@@ -19575,6 +19575,53 @@
     "AP"
    ]
   },
+  "CA-22": {
+   "id": "CA-22",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 57,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 32.8,
+   "total_votes": 81817,
+   "called_at": "2026-11-04T18:17:49.897Z",
+   "candidates": [
+    {
+     "name": "Randy Villegas",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 54337,
+     "pct": 66.41,
+     "photo": "https://images.api.fox.com/elections/headshots/VILLEGAS_RANDY_DCA_HOUSE.png"
+    },
+    {
+     "name": "David Valadao",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 27480,
+     "pct": 33.59,
+     "photo": "https://images.api.fox.com/elections/headshots/VALADAO_DAVID_RCA_HOUSE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20101,49 +20148,6 @@
      "votes": 52755,
      "pct": 43.47,
      "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-22": {
-   "id": "CA-22",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 57,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 32.8,
-   "total_votes": 81817,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Randy Villegas",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 54337,
-     "pct": 66.41,
-     "photo": "https://images.api.fox.com/elections/headshots/VILLEGAS_RANDY_DCA_HOUSE.png"
-    },
-    {
-     "name": "David Valadao",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 27480,
-     "pct": 33.59,
-     "photo": "https://images.api.fox.com/elections/headshots/VALADAO_DAVID_RCA_HOUSE.png"
     }
    ],
    "desks": {
@@ -20855,11 +20859,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 87,
+   "pct_in": 88,
    "winner_party": null,
    "leader_party": "R",
    "margin_pct": 0,
-   "total_votes": 306338,
+   "total_votes": 306807,
    "called_at": null,
    "candidates": [
     {
@@ -20867,8 +20871,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 153135,
-     "pct": 49.99,
+     "votes": 153355,
+     "pct": 49.98,
      "photo": null
     },
     {
@@ -20876,7 +20880,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 153042,
+     "votes": 153291,
      "pct": 49.96,
      "photo": "https://images.api.fox.com/elections/headshots/DUNLAP_MATT_DME_HOUSE.png"
     },
@@ -23492,7 +23496,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 4.9,
-   "total_votes": 1059740,
+   "total_votes": 1059741,
    "called_at": null,
    "candidates": [
     {
@@ -23509,7 +23513,7 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 503266,
+     "votes": 503267,
      "pct": 46.06,
      "photo": "https://images.api.fox.com/elections/headshots/MARSHALL_ROGER_RKS_SENATE.png"
     }
@@ -23680,7 +23684,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 7.4,
-   "total_votes": 679665,
+   "total_votes": 680130,
    "called_at": null,
    "candidates": [
     {
@@ -23688,7 +23692,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 364977,
+     "votes": 365206,
      "pct": 53.66,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_JACKSON_TROY_DME_SENATE.png"
     },
@@ -23697,7 +23701,7 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 314688,
+     "votes": 314924,
      "pct": 46.27,
      "photo": "https://images.api.fox.com/elections/headshots/COLLINS_SUSAN_RME_SENATE.png"
     }
@@ -25363,7 +25367,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 18.1,
-   "total_votes": 628719,
+   "total_votes": 629159,
    "called_at": null,
    "candidates": [
     {
@@ -25371,7 +25375,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 376263,
+     "votes": 376497,
      "pct": 55.01,
      "photo": "https://images.api.fox.com/elections/headshots/PINGREE_HANNAH_DME_GOVERNOR.png"
     },
@@ -25380,8 +25384,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 252456,
-     "pct": 36.91,
+     "votes": 252662,
+     "pct": 36.92,
      "photo": "https://images.api.fox.com/elections/headshots/CHARLES_ROBERT_RME_GOVERNOR.png"
     }
    ],
@@ -26379,6 +26383,14 @@
  },
  "latest_calls": [
   {
+   "id": "CA-22",
+   "kind": "house",
+   "party": "D",
+   "winner": "Randy Villegas",
+   "flipped": true,
+   "at": "2026-11-04T18:17:49.897Z"
+  },
+  {
    "id": "MI-04",
    "kind": "house",
    "party": "D",
@@ -26769,23 +26781,15 @@
    "winner": "Brandon Gill",
    "flipped": false,
    "at": "2026-11-04T05:47:37.881Z"
-  },
-  {
-   "id": "LA-05",
-   "kind": "house",
-   "party": "D",
-   "winner": "Patricia Moore",
-   "flipped": false,
-   "at": "2026-11-04T05:46:26.772Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T18:16:11.959Z",
+   "updated": "2026-11-04T18:19:34.809Z",
    "house": {
-    "D": 233,
+    "D": 234,
     "R": 139,
     "I": 0
    },
@@ -26803,10 +26807,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T18:15:50.326000Z",
+   "updated": "2026-11-04T18:19:22.716000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 228,
+    "D": 229,
     "R": 138,
     "I": 0
    },
@@ -26824,7 +26828,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T18:15:44.000Z",
+   "updated": "2026-11-04T18:19:14.000Z",
    "house": {
     "D": 238,
     "R": 146,
@@ -26843,5 +26847,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T18:16:13.118Z"
+ "desks_checked_at": "2026-11-04T18:19:36.421Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T18:16:30.173Z",
+ "updated": "2026-11-04T18:20:05.462Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2269,6 +2269,17 @@
    "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOeUJwdlU1cWhQdVFlMHNTNDROcVVoUjE0NTBaUnl6RHhZU1dEZTd0Y0otQU8tTkFGbVBsWUQwWHl0a2dHNWp4TXh6TmRJdTA0RTZjNTlNMUkzQ3pnc2JIWkFKcS02cWVPdVlXSnlfU2IwNDgwRExya0R0ZVdIY3JJTHFoeFFObVFWd1BDTWJJeGlKWTdQLS10bVZVSU5VbnhrWWtiSUtpUQ?oc=5",
    "title": "South Carolina Stunner: Annie Andrews Explains How She Won",
    "at": "2026-11-04T17:46:22.000Z"
+  },
+  {
+   "race": "NE-01",
+   "name": "Mike Flood",
+   "party": "R",
+   "result": "won",
+   "publisher": "Lincoln Journal Star",
+   "outlet": "journalstar.com",
+   "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQRjExNDA0SGVad1NPWmE1US04V2pBa0pkdmVlbEpNNFFzMVhMZ044UkMzblNrYml2VDB6VFRMa2V4WDMwcnE2Mk9SSmZOYWJjZW81TW90c2NSZFZyQUpJcUE1UTFBa0FPOFE3MkhHZmlOQUlkUV8xQzZSeE54aGpIbUFrUnhuTy1uZS1DeHZrLVJBdzF6RU4yc0xUdW5rMXFocVJPRkZRWDhvUHNaLWk3cXI4aEFoS0RkRkhxdlRZT0k?oc=5",
+   "title": "Mike Flood declares victory over Chris Backemeyer in Nebraska's 1st District race",
+   "at": "2026-11-04T18:15:00.000Z"
   }
  ],
  "races": {
@@ -3666,10 +3677,9 @@
    "reported": []
   },
   "CA-22": {
-   "fox_winner": null,
+   "fox_winner": "Randy Villegas",
    "agree": [],
-   "disagree": [],
-   "reported": [
+   "disagree": [
     {
      "publisher": "The Hill",
      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHJydk9ZUXpxZlRzZkxiaHFoUWd6MUFNalhYbXRMR1FiZ0RPUFA4SklzalRwc0JLblVrNk5lb2VpaGZBZFBuTnNXaEszUlVzWGxDQ0EwWWNpNzdFeXRhVnhLZHlkSGd4OUozSThVaGd6TE1SMmdMek9LbXYzSURvdmkzS05WbGp5V0RrbWJJWHEzSmvSAZgBQVVfeXFMTk0zTjhVSWpvdGxKMFlxSUxmODZ0aldjUjhsRzN2QVVqdG5YNnFFZUFiOGpmTXJNT0FfT2g0R3VTS2dlQmxrRG1pYzBvQzJ6em96MWJpbnhqZlVXbUo1Mks1OS1hOHVteEJZM0c5U1hEMmUxRUdFbGI2R1pSaUJFdGpCWDM3TVpQNmtBRW1jZkJ2SkhGR0NKelE?oc=5",
@@ -3678,7 +3688,8 @@
      "party": "R",
      "at": "2026-11-04T06:35:00.000Z"
     }
-   ]
+   ],
+   "reported": []
   },
   "FL-27": {
    "fox_winner": null,
@@ -4041,13 +4052,28 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NE-01": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "Lincoln Journal Star",
+     "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQRjExNDA0SGVad1NPWmE1US04V2pBa0pkdmVlbEpNNFFzMVhMZ044UkMzblNrYml2VDB6VFRMa2V4WDMwcnE2Mk9SSmZOYWJjZW81TW90c2NSZFZyQUpJcUE1UTFBa0FPOFE3MkhHZmlOQUlkUV8xQzZSeE54aGpIbUFrUnhuTy1uZS1DeHZrLVJBdzF6RU4yc0xUdW5rMXFocVJPRkZRWDhvUHNaLWk3cXI4aEFoS0RkRkhxdlRZT0k?oc=5",
+     "title": "Mike Flood declares victory over Chris Backemeyer in Nebraska's 1st District race",
+     "winner": "Mike Flood",
+     "party": "R",
+     "at": "2026-11-04T18:15:00.000Z"
+    }
+   ]
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
   "races_confirmed": 73,
-  "races_disputed": 2,
+  "races_disputed": 3,
   "races_reported_not_called": 7
  }
 }

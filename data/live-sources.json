@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T20:24:55.042Z",
+ "updated": "2026-11-04T20:31:36.073Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1223,6 +1223,17 @@
    "outlet": "wunc.org",
    "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPUWlMS1B3dThYZUZqV3VXb1Q0N2VOM2tEWTlZdGFmN3JmVmpSS2JKQ3hnS0lHUEY3TVJBajhxZno0ZmlZUnJocWdQZTQ5OExybERxYzdHUE1XOHhCNkZTUnRPdzhiVWE3M25fUURwbWljbDdrWVR6XzgtVWFhZGdSQWxvYTY?oc=5",
    "title": "Democrat James Talarico wins Texas Senate seat",
+   "at": "2026-11-04T04:04:00.000Z"
+  },
+  {
+   "race": "NM-01",
+   "name": "Melanie Stansbury",
+   "party": "D",
+   "result": "won",
+   "publisher": "Albuquerque Journal",
+   "outlet": "abqjournal.com",
+   "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSmxYejUzejB3X0NhaGs5b0d5TWY1VG1MTGlRcnBiTDFpS0tYZFRoSjhRY0ctX3gySHgwRS1FZXFDN09RN09GTTNkNzA5RXNjTnJnakdnM2RpbzR2WFZUSFZFRlQyU0ZTRjYyYVBuWXRrcndhNF9TVUZJWWpfNERpRkpja1ZVclQ1U2RPSQ?oc=5",
+   "title": "Stansbury wins reelection in U.S. House race",
    "at": "2026-11-04T04:04:00.000Z"
   },
   {
@@ -4486,12 +4497,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NM-01": {
+   "fox_winner": "Melanie Stansbury",
+   "agree": [
+    {
+     "publisher": "Albuquerque Journal",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSmxYejUzejB3X0NhaGs5b0d5TWY1VG1MTGlRcnBiTDFpS0tYZFRoSjhRY0ctX3gySHgwRS1FZXFDN09RN09GTTNkNzA5RXNjTnJnakdnM2RpbzR2WFZUSFZFRlQyU0ZTRjYyYVBuWXRrcndhNF9TVUZJWWpfNERpRkpja1ZVclQ1U2RPSQ?oc=5",
+     "title": "Stansbury wins reelection in U.S. House race",
+     "winner": "Melanie Stansbury",
+     "party": "D",
+     "at": "2026-11-04T04:04:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 82,
+  "races_confirmed": 83,
   "races_disputed": 3,
   "races_reported_not_called": 9
  }

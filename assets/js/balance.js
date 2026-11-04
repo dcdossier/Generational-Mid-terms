@@ -112,8 +112,14 @@
     var any = (st.chambers || []).some(function (c) { return c.won || c.leading; });
     return !any;
   }
+  // Per chamber: one with no calls or leads yet keeps showing its seats before the election.
+  function showPreFor(st, key) {
+    if (showPre(st)) return true;
+    if (st.demo) return false;
+    return !(st.chambers || []).some(function (c) { return c.chamber === key && (c.won || c.leading); });
+  }
   function chamber(st, key, width) {
-    var L = window.LiveMath, pre = showPre(st);
+    var L = window.LiveMath, pre = showPreFor(st, key);
     var total = SEATS[key], up = UP[key], mk = MARKS(key), nu = notUpOf(st, key), compact = width < 560;
     var runs, t, sr, g = null, nm = NAME[key];
 
@@ -176,6 +182,7 @@
       '<div class="bl-ch-head"><span class="bl-ch-name">' + nm + ' <small>' + total + ' seats</small></span>' +
         '<span class="bl-tot"><span class="bl-tot-d">D ' + t.D + '</span>' + (t.I ? '<span class="bl-tot-i">I ' + t.I + '</span>' : '') + '<span class="bl-tot-r">R ' + t.R + '</span></span></div>' +
       (summ ? '<p class="bl-summ">' + esc(summ) + '</p>' : '') + ctlHtml +
+      (pre && !showPre(st) ? '<p class="bl-summ bl-nocalls">No calls yet in this chamber: showing seats before the election.</p>' : '') +
       '<p class="sr-only">' + esc(sr) + '</p>' +
       '<div class="bl-bar">' + barSvg(id, total, runs, width, mk, compact) + '</div>' +
       (compact ? markKey(mk) : '') +

@@ -1,55 +1,38 @@
-name: Live results (news sources)
+name: Live results (Fox News)
 
-# Election-night results from our news sources only (scripts/live-from-news.js).
-# Starts every hour and loops for 55 minutes, running the script every 5 minutes,
-# so the site gets a new assets/live.json within about 5 minutes of a call.
-# Commits only when the file changed (plus a 10-minute heartbeat the site's
-# watchdog uses). No [skip ci]: GitHub Pages must publish every commit.
+# Election-night results from the Fox News results pages (scripts/live-from-fox.js),
+# the site's only source of live results. Starts every hour and loops for 58 minutes,
+# fetching every 5 minutes; commits assets/live.json only when it changed.
+# Its own concurrency group, so it never queues behind the data jobs.
 
 on:
   schedule:
-    - cron: '3 * * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: live-results
+  group: live-results-fox
   cancel-in-progress: false
 
 jobs:
   live:
     runs-on: ubuntu-latest
-    timeout-minutes: 58
+    timeout-minutes: 62
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install script dependencies
-        run: npm ci --prefix scripts
-      - name: Loop for 55 minutes, every 5 minutes
+      - name: Fox results every 5 minutes for 58 minutes
+        env:
+          LIVE_COMMIT_CMD: >-
+            git add assets/live.json &&
+            (git diff --cached --quiet || (git commit -q -m "chore(live): Fox results [skip ci]" &&
+            for i in 1 2 3 4; do git pull --rebase -q && git push -q && break; sleep 7; done))
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          end=$(( $(date +%s) + 55 * 60 ))
-          n=0
-          while [ "$(date +%s)" -lt "$end" ]; do
-            start=$(date +%s); n=$((n + 1))
-            git pull --rebase --autostash -q || echo "pull failed; using local copy"
-            if node scripts/live-from-news.js; then
-              git add assets/live.json data/live-evidence.json
-              if ! git diff --cached --quiet; then
-                git commit -q -m "chore(live): results from news sources (run $n)"
-                for i in 1 2 3 4; do git pull --rebase -q && git push -q && break; sleep 7; done
-              fi
-            else
-              echo "::warning::live-from-news.js failed on run $n; trying again in 5 minutes"
-              git checkout -- assets/live.json data/live-evidence.json 2>/dev/null || true
-            fi
-            wait=$(( 300 - ($(date +%s) - start) ))
-            left=$(( end - $(date +%s) ))
-            [ "$wait" -gt "$left" ] && wait=$left
-            [ "$wait" -gt 0 ] && sleep "$wait"
-          done
+          node scripts/live-from-fox.js --loop 58

@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-04T02:12:10.219Z",
+ "updated": "2026-11-04T02:13:16.309Z",
  "status": "counting",
  "source": "Our news sources only (midterm_rss_feeds_v2.xlsx, 150 feeds). A call needs 3 distinct publishers and no contradiction in the last 60 minutes.",
  "feeds": 150,
- "items_scanned": 5085,
- "candidates_matched": 82,
+ "items_scanned": 7080,
+ "candidates_matched": 95,
  "calls": [
   {
    "race_id": "Senate-GA",
@@ -84,6 +84,33 @@
     }
    ],
    "called_by": "AP, DDHQ · 5 sources"
+  },
+  {
+   "race_id": "Senate-NH",
+   "winner": "D",
+   "candidate": "Chris Pappas",
+   "sources": [
+    {
+     "publisher": "The Hill",
+     "url": "https://thehill.com/homenews/campaign/6185147-democratic-rep-chris-pappas-wins-senate-seat-in-new-hampshire/",
+     "title": "Democratic Rep. Chris Pappas wins Senate seat in New Hampshire",
+     "at": "2026-11-04T01:04:35.000Z",
+     "desk": "DDHQ"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://www.theguardian.com/us-news/2026/nov/03/new-hampshire-senate-chris-pappas-john-sununu",
+     "title": "Democrat Chris Pappas wins New Hampshire Senate race to become first out gay senator",
+     "at": "2026-11-04T01:34:31.000Z"
+    },
+    {
+     "publisher": "NH Bulletin",
+     "url": "https://newhampshirebulletin.com/2026/11/03/pappas-defeats-sununu-in-pivotal-u-s-senate-race/",
+     "title": "Pappas defeats Sununu in pivotal U.S. Senate race",
+     "at": "2026-11-04T01:48:06.000Z"
+    }
+   ],
+   "called_by": "DDHQ · 3 sources"
   }
  ],
  "featured": {},
@@ -113,7 +140,7 @@
    "chamber": "senate",
    "party": "D",
    "not_up": 34,
-   "won": 2,
+   "won": 3,
    "leading": 0
   },
   {
@@ -322,9 +349,15 @@
      "title": "Democrat Ager flips Edwards’s North Carolina House seat",
      "at": "2026-11-04T01:34:30.000Z",
      "desk": "DDHQ"
+    },
+    {
+     "publisher": "Associated Press",
+     "url": "https://ncnewsline.com/2026/11/03/democrat-jamie-ager-flips-western-north-carolina-us-house-seat/",
+     "title": "Democrat Jamie Ager flips western North Carolina US House seat",
+     "at": "2026-11-04T02:00:46.000Z"
     }
    ],
-   "called_by": "DDHQ · 1 sources"
+   "called_by": "DDHQ · 2 sources"
   },
   {
    "race_id": "Gov-FL",
@@ -567,27 +600,6 @@
    "called_by": "DDHQ · 1 sources"
   },
   {
-   "race_id": "Senate-NH",
-   "winner": "D",
-   "candidate": "Chris Pappas",
-   "sources": [
-    {
-     "publisher": "The Hill",
-     "url": "https://thehill.com/homenews/campaign/6185147-democratic-rep-chris-pappas-wins-senate-seat-in-new-hampshire/",
-     "title": "Democratic Rep. Chris Pappas wins Senate seat in New Hampshire",
-     "at": "2026-11-04T01:04:35.000Z",
-     "desk": "DDHQ"
-    },
-    {
-     "publisher": "The Guardian",
-     "url": "https://www.theguardian.com/us-news/2026/nov/03/new-hampshire-senate-chris-pappas-john-sununu",
-     "title": "Democrat Chris Pappas wins New Hampshire Senate race to become first out gay senator",
-     "at": "2026-11-04T01:34:31.000Z"
-    }
-   ],
-   "called_by": "DDHQ · 2 sources"
-  },
-  {
    "race_id": "FL-11",
    "winner": "R",
    "candidate": "Joe Strada",
@@ -672,8 +684,22 @@
     }
    ],
    "called_by": "1 sources"
+  },
+  {
+   "race_id": "ME-01",
+   "winner": "D",
+   "candidate": "Chellie Pingree",
+   "sources": [
+    {
+     "publisher": "Maine Morning Star",
+     "url": "https://mainemorningstar.com/2026/11/03/pingree-defeats-russell-in-1st-district-rematch/",
+     "title": "Pingree defeats Russell in 1st District rematch",
+     "at": "2026-11-04T01:27:42.000Z"
+    }
+   ],
+   "called_by": "1 sources"
   }
  ],
  "held": [],
- "changed": "2026-11-04T02:12:10.219Z"
+ "changed": "2026-11-04T02:13:16.309Z"
 }

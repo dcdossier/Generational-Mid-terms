@@ -101,8 +101,15 @@
     return '<span class="bl-gain">' + line + '</span>' + (g.basis === 'desk' ? '' : '<span class="bl-glead">' + lead + '</span>');
   }
 
+  // Without results (or with the live tables unreachable) show the makeup before the election, never zeros.
+  function showPre(st) {
+    if (window.LiveMath.phase(st.meta) === 'pre') return true;
+    if (st.demo) return false;
+    var any = (st.chambers || []).some(function (c) { return c.won || c.leading; });
+    return !any;
+  }
   function chamber(st, key, width) {
-    var L = window.LiveMath, pre = L.phase(st.meta) === 'pre';
+    var L = window.LiveMath, pre = showPre(st);
     var total = SEATS[key], up = UP[key], markers = MARKERS(key), nu = notUpOf(st, key);
     var runs, t, sr, g = null, nm = NAME[key];
 
@@ -182,10 +189,11 @@
   }
 
   function html(el, st) {
-    var L = window.LiveMath, ph = L.phase(st.meta), pre = ph === 'pre';
+    var L = window.LiveMath, ph = L.phase(st.meta), pre = showPre(st);
     var mEl = el.querySelector('.bl-measure');
     var width = Math.max(240, Math.floor(mEl ? mEl.getBoundingClientRect().width : el.clientWidth - 40));
-    var sub = pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
+    var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + (st.connected === false ? 'Live data not connected' : 'Awaiting results') + '</span> Showing seats before the election until results arrive.'
+      : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
       : '<span class="bl-stage bl-stage-live">Live count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '');
     if (st.demo) sub += ' <b>Demo data.</b>';

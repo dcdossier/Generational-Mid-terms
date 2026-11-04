@@ -34,7 +34,7 @@
     return { chamber: x[0], party: x[1], won: 0, leading: 0, not_up: x[2] };
   });
   var state = { meta: null, chambers: SEED_CHAMBERS.slice(), races: [], holders: {}, baseline: null, config: null, current: null,
-    live: false, loaded: false, error: null, demo: DEMO, pollMs: POLL_MS, nextPollAt: null, lastCheckedAt: null, lastCheckOk: null,
+    live: false, loaded: false, error: null, demo: DEMO, connected: DEMO, hadResults: false, pollMs: POLL_MS, nextPollAt: null, lastCheckedAt: null, lastCheckOk: null,
     pollClose: null, earlyVote: null, now: liveNow };
   var mounts = [];
 
@@ -90,7 +90,16 @@
     ]).then(function (res) {
       state.meta = res[0][0] || null; state.chambers = res[1].length ? res[1] : SEED_CHAMBERS.slice(); state.races = res[2];
       state.loaded = true; state.error = null; state.lastCheckedAt = Date.now(); state.lastCheckOk = true;
-    }).catch(function (e) { state.error = e.message; state.lastCheckedAt = Date.now(); state.lastCheckOk = false; });   // keep the last numbers
+      if (res[1].some(function (c) { return c.won || c.leading; }) || res[2].some(function (r) { return r.winner || r.leader || r.pct_counted; })) state.hadResults = true;
+    }).catch(function (e) { state.error = e.message; state.lastCheckedAt = Date.now(); state.lastCheckOk = false; })   // keep the last numbers
+      .then(function () { state.connected = connected(); });
+  }
+  // Live data counts as connected when the tables answer and the Results Desk pushed in the last 12 minutes.
+  var STALE_MS = 12 * 60 * 1000;
+  function connected() {
+    if (DEMO) return true;
+    var m = state.meta;
+    return !state.error && !!m && !!m.last_push && Date.now() - Date.parse(m.last_push) <= STALE_MS;
   }
   function upsertLocal(list, row, keyFn) {
     var k = keyFn(row), i;

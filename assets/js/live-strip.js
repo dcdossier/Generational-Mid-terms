@@ -38,6 +38,12 @@
       return '<div class="ls-row"><span class="ls-tag ls-tag-final">Final</span>' +
         '<span class="ls-main">Counting continues in slow states.' + (m.last_update ? ' Last update ' + esc(ist(m.last_update)) + '.' : '') + '</span></div>';
     }
+    if (!st.demo && st.connected === false) {
+      var lastAt = m.last_update || m.last_push;
+      return '<div class="ls-row"><span class="ls-tag ls-tag-off">Results</span>' +
+        '<span class="ls-main ls-off">Live data not connected. Last update ' + (lastAt ? esc(ist(lastAt)) : 'none yet') + '.</span></div>' +
+        '<div class="ls-sub">Seat bars show the makeup before the election until results arrive. We check again every 5 minutes.</div>';
+    }
     var c = L.called(st.chambers), U = L.RACES_UP;
     var start = new Date(m.counting_started || m.polls_first_close || L.FIRST_CLOSE).getTime();
     var parts = [
@@ -71,7 +77,7 @@
       var names = nc.states.length > 4 ? nc.states.slice(0, 4).join(', ') + ' and ' + (nc.states.length - 4) + ' more' : nc.states.join(', ');
       parts.unshift('<span class="ls-next">Next polls close: ' + esc(names) + ' in <b class="ls-n ls-count">' + left + '</b></span>');
     }
-    var stale = ph !== 'pre' && m.last_push && now - new Date(m.last_push).getTime() > STALE_MS;
+    var stale = ph !== 'pre' && st.connected !== false && m.last_push && now - new Date(m.last_push).getTime() > STALE_MS;
     return (stale ? '<span class="ls-delay" role="status">Updates delayed. Last data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
       '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';
   }

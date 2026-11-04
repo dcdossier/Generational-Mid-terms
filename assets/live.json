@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T18:12:50.902Z",
- "fetched_at": "2026-11-04T18:12:47.462Z",
+ "source_last_updated": "2026-11-04T18:16:11.959Z",
+ "fetched_at": "2026-11-04T18:16:08.802Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 64,
+   "remaining": 63,
    "parties": {
     "D": {
-     "won": 232,
-     "net_gain": 26,
-     "flipped_to": 26,
+     "won": 233,
+     "net_gain": 27,
+     "flipped_to": 27,
      "majority_called": true
     },
     "R": {
      "won": 139,
-     "net_gain": -26,
+     "net_gain": -27,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -719,8 +719,8 @@
    "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 34.3,
-   "total_votes": 304647,
+   "margin_pct": 34.4,
+   "total_votes": 304637,
    "called_at": "2026-11-04T00:41:47.560Z",
    "candidates": [
     {
@@ -729,7 +729,7 @@
      "incumbent": true,
      "winner": true,
      "votes": 198673,
-     "pct": 65.21,
+     "pct": 65.22,
      "photo": null
     },
     {
@@ -14442,11 +14442,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 96,
+   "pct_in": 97,
    "winner_party": "R",
    "leader_party": "R",
-   "margin_pct": 10.9,
-   "total_votes": 223960,
+   "margin_pct": 10.5,
+   "total_votes": 226336,
    "called_at": "2026-11-04T04:50:56.091Z",
    "candidates": [
     {
@@ -14454,8 +14454,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 121466,
-     "pct": 54.24,
+     "votes": 122326,
+     "pct": 54.05,
      "photo": null
     },
     {
@@ -14463,8 +14463,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 96997,
-     "pct": 43.31,
+     "votes": 98480,
+     "pct": 43.51,
      "photo": null
     },
     {
@@ -14472,8 +14472,8 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 5497,
-     "pct": 2.45,
+     "votes": 5530,
+     "pct": 2.44,
      "photo": null
     }
    ],
@@ -19519,6 +19519,62 @@
     "AP"
    ]
   },
+  "MI-04": {
+   "id": "MI-04",
+   "kind": "house",
+   "state": "MI",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 1.8,
+   "total_votes": 369860,
+   "called_at": "2026-11-04T18:13:09.652Z",
+   "candidates": [
+    {
+     "name": "Sean McCann",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 185440,
+     "pct": 50.14,
+     "photo": "https://images.api.fox.com/elections/headshots/512x512_MCCANN_SEAN_DMI_STATESEN.png"
+    },
+    {
+     "name": "Bill Huizenga",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 178741,
+     "pct": 48.33,
+     "photo": "https://images.api.fox.com/elections/headshots/512x512_HUIZENGA_BILL_RMI_HOUSE.png"
+    },
+    {
+     "name": "Shafina Barnett",
+     "party": "Gr",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5679,
+     "pct": 1.54,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20803,7 +20859,7 @@
    "winner_party": null,
    "leader_party": "R",
    "margin_pct": 0,
-   "total_votes": 306001,
+   "total_votes": 306338,
    "called_at": null,
    "candidates": [
     {
@@ -20811,8 +20867,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 152951,
-     "pct": 49.98,
+     "votes": 153135,
+     "pct": 49.99,
      "photo": null
     },
     {
@@ -20820,7 +20876,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 152889,
+     "votes": 153042,
      "pct": 49.96,
      "photo": "https://images.api.fox.com/elections/headshots/DUNLAP_MATT_DME_HOUSE.png"
     },
@@ -20831,58 +20887,6 @@
      "winner": false,
      "votes": 161,
      "pct": 0.05,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "MI-04": {
-   "id": "MI-04",
-   "kind": "house",
-   "state": "MI",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 1.8,
-   "total_votes": 369860,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Sean McCann",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 185440,
-     "pct": 50.14,
-     "photo": "https://images.api.fox.com/elections/headshots/512x512_MCCANN_SEAN_DMI_STATESEN.png"
-    },
-    {
-     "name": "Bill Huizenga",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 178741,
-     "pct": 48.33,
-     "photo": "https://images.api.fox.com/elections/headshots/512x512_HUIZENGA_BILL_RMI_HOUSE.png"
-    },
-    {
-     "name": "Shafina Barnett",
-     "party": "Gr",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5679,
-     "pct": 1.54,
      "photo": null
     }
    ],
@@ -23676,7 +23680,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 7.4,
-   "total_votes": 679328,
+   "total_votes": 679665,
    "called_at": null,
    "candidates": [
     {
@@ -23684,8 +23688,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 364841,
-     "pct": 53.67,
+     "votes": 364977,
+     "pct": 53.66,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_JACKSON_TROY_DME_SENATE.png"
     },
     {
@@ -23693,8 +23697,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 314487,
-     "pct": 46.26,
+     "votes": 314688,
+     "pct": 46.27,
      "photo": "https://images.api.fox.com/elections/headshots/COLLINS_SUSAN_RME_SENATE.png"
     }
    ],
@@ -25359,7 +25363,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 18.1,
-   "total_votes": 628402,
+   "total_votes": 628719,
    "called_at": null,
    "candidates": [
     {
@@ -25367,8 +25371,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 376125,
-     "pct": 55.02,
+     "votes": 376263,
+     "pct": 55.01,
      "photo": "https://images.api.fox.com/elections/headshots/PINGREE_HANNAH_DME_GOVERNOR.png"
     },
     {
@@ -25376,8 +25380,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 252277,
-     "pct": 36.9,
+     "votes": 252456,
+     "pct": 36.91,
      "photo": "https://images.api.fox.com/elections/headshots/CHARLES_ROBERT_RME_GOVERNOR.png"
     }
    ],
@@ -26158,7 +26162,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 7,
-   "total_votes": 304625,
+   "total_votes": 304725,
    "called_at": null,
    "candidates": [
     {
@@ -26167,7 +26171,7 @@
      "incumbent": true,
      "winner": true,
      "votes": 163153,
-     "pct": 52.62,
+     "pct": 52.6,
      "photo": "https://images.api.fox.com/elections/headshots/SCOTT_PHIL_RVT_GOVERNOR.png"
     },
     {
@@ -26175,8 +26179,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 141472,
-     "pct": 45.62,
+     "votes": 141572,
+     "pct": 45.64,
      "photo": "https://images.api.fox.com/elections/headshots/JANOO_AMANDA_DVT_GOVERNOR.png"
     }
    ],
@@ -26374,6 +26378,14 @@
   }
  },
  "latest_calls": [
+  {
+   "id": "MI-04",
+   "kind": "house",
+   "party": "D",
+   "winner": "Sean McCann",
+   "flipped": true,
+   "at": "2026-11-04T18:13:09.652Z"
+  },
   {
    "id": "CA-34",
    "kind": "house",
@@ -26765,23 +26777,15 @@
    "winner": "Patricia Moore",
    "flipped": false,
    "at": "2026-11-04T05:46:26.772Z"
-  },
-  {
-   "id": "TX-04",
-   "kind": "house",
-   "party": "R",
-   "winner": "Pat Fallon",
-   "flipped": false,
-   "at": "2026-11-04T05:44:32.828Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T18:12:50.902Z",
+   "updated": "2026-11-04T18:16:11.959Z",
    "house": {
-    "D": 232,
+    "D": 233,
     "R": 139,
     "I": 0
    },
@@ -26799,10 +26803,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T18:12:28.479000Z",
+   "updated": "2026-11-04T18:15:50.326000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 227,
+    "D": 228,
     "R": 138,
     "I": 0
    },
@@ -26820,9 +26824,9 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T18:12:43.000Z",
+   "updated": "2026-11-04T18:15:44.000Z",
    "house": {
-    "D": 237,
+    "D": 238,
     "R": 146,
     "I": 0
    },
@@ -26839,5 +26843,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T18:12:52.236Z"
+ "desks_checked_at": "2026-11-04T18:16:13.118Z"
 }

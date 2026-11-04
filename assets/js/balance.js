@@ -251,7 +251,7 @@
     var L = window.LiveMath, ph = L.phase(st.meta), pre = showPre(st);
     var mEl = el.querySelector('.bl-measure');
     var width = Math.max(240, Math.floor(mEl ? mEl.getBoundingClientRect().width : el.clientWidth - 40));
-    var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + (st.connected === false ? 'Updates delayed' : 'No calls yet') + '</span> Showing seats before the election until results arrive.'
+    var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + 'No calls yet' + '</span> Showing seats before the election until results arrive.'
       : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
       : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + ' · Senate includes seats not up this year';

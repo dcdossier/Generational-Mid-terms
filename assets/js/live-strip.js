@@ -2,9 +2,7 @@
  * Before the first polls close: a countdown, ticking every minute.
  * While counting: elapsed time, races called by chamber, and the last update.
  * Final: a short note. Data comes from live.js ("racebook:live" events).
- * Under it, a refresh line: "Auto-updates every 5 min · next check in m:ss ·
- * last checked … · last change …", ticking every second, and an amber
- * "Updates delayed" badge when the Results Desk's last push is over 12 minutes old.
+ * Under it, one refresh line: "Next update in m:ss", ticking every second.
  */
 (function () {
   'use strict';
@@ -51,24 +49,10 @@
       parts.join('<span class="ls-sep" aria-hidden="true">&middot;</span>') + '</div>';
   }
 
-  var STALE_MS = 12 * 60 * 1000;
-  function istTime(t, secs) {
-    var d = new Date(t); if (!t || isNaN(d)) return '';
-    return d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: secs ? '2-digit' : undefined, timeZone: 'Asia/Kolkata' }) + ' IST';
-  }
   function mmss(ms) { ms = Math.max(0, ms); var m = Math.floor(ms / 60000), s = Math.floor(ms % 60000 / 1000); return m + ':' + (s < 10 ? '0' : '') + s; }
-  // "Live results: Fox News Decision Desk · Fox updated <IST> · next check m:ss";
-  // "Updates delayed. Last good data <IST>." when Fox's file is stale or the last fetch failed.
+  // "Next update in m:ss" and nothing else.
   function refreshHtml(st) {
-    var m = st.meta || {}, now = Date.now();
-    var parts = ['Live results: <b class="ls-n">Fox News Decision Desk</b>'];
-    if (m.last_update) parts.push('Fox updated ' + istTime(m.last_update));
-    var sc = st.sources && st.sources.counts;
-    if (sc && sc.read) parts.push('calls cross-checked against <span title="The outlets in our source sheet, the Financial Times and Ground News">' + sc.read + ' news sources</span>');
-    if (st.nextPollAt) parts.push('next check <b class="ls-n ls-count">' + mmss(st.nextPollAt - now) + '</b>');
-    var delayed = !st.demo && st.loaded && st.connected === false;
-    return (delayed ? '<span class="ls-delay" role="status">Updates delayed. Last good data ' + esc(istTime(m.last_push)) + '.</span>' : '') +
-      '<span class="ls-ref-t">' + parts.join(' &middot; ') + '</span>';
+    return st.nextPollAt ? '<span class="ls-ref-t">Next update in <b class="ls-n ls-count">' + mmss(st.nextPollAt - Date.now()) + '</b></span>' : '';
   }
 
   // One line: national early votes (UF Election Lab), under the strip.

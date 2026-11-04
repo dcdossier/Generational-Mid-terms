@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T20:11:37.641Z",
+ "updated": "2026-11-04T20:14:53.833Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2447,6 +2447,17 @@
    "at": "2026-11-04T18:48:00.000Z"
   },
   {
+   "race": "PA-02",
+   "name": "Brendan Boyle",
+   "party": "D",
+   "result": "won",
+   "publisher": "Inquirer.com",
+   "outlet": "inquirer.com",
+   "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPd0kyQXpEUl9scDZXWGNIbmpVZUktbUl4QlpBOGNlVUhRVnBmOWFXS1ZFOXpKeUIzOC1NM2xOZUxqVU0yYTd0R0J0b2R1LXpOT1RzbU5VNTZaMnRNbWFUaWVhbGY2UFVOLWxrcmg0eW1QT1dlZHJ5QnE2R1pZUVljNXVfdHd0cnJTaWlKeW1fcUVTT0Niak5Fc1o4V1NDMFhHdUpWYnNSMFZRNUkwR1cyci1hZWlseTV6ZzY5X2lpc29uUHc?oc=5",
+   "title": "Philly’s U.S. Rep. Brendan Boyle said he won’t run for Sen. John Fetterman’s seat in 2028",
+   "at": "2026-11-04T19:01:00.000Z"
+  },
+  {
    "race": "MI-07",
    "name": "William Lawrence",
    "party": "D",
@@ -4411,12 +4422,27 @@
      "at": "2026-11-04T18:15:00.000Z"
     }
    ]
+  },
+  "PA-02": {
+   "fox_winner": "Brendan Boyle",
+   "agree": [
+    {
+     "publisher": "Inquirer.com",
+     "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPd0kyQXpEUl9scDZXWGNIbmpVZUktbUl4QlpBOGNlVUhRVnBmOWFXS1ZFOXpKeUIzOC1NM2xOZUxqVU0yYTd0R0J0b2R1LXpOT1RzbU5VNTZaMnRNbWFUaWVhbGY2UFVOLWxrcmg0eW1QT1dlZHJ5QnE2R1pZUVljNXVfdHd0cnJTaWlKeW1fcUVTT0Niak5Fc1o4V1NDMFhHdUpWYnNSMFZRNUkwR1cyci1hZWlseTV6ZzY5X2lpc29uUHc?oc=5",
+     "title": "Philly’s U.S. Rep. Brendan Boyle said he won’t run for Sen. John Fetterman’s seat in 2028",
+     "winner": "Brendan Boyle",
+     "party": "D",
+     "at": "2026-11-04T19:01:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 81,
+  "races_confirmed": 82,
   "races_disputed": 3,
   "races_reported_not_called": 9
  }

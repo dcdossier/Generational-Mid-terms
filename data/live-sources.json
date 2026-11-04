@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T04:56:20.927Z",
+ "updated": "2026-11-04T04:59:43.469Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -698,6 +698,17 @@
    "at": "2026-11-04T02:45:00.000Z"
   },
   {
+   "race": "Senate-FL",
+   "name": "Ashley Moody",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdWx2eWN2SDM0cmJ1T2V5Y1JMVE9qMmZyUE5WbkNBYzJ4RzBCLVN4Q2xLTmRWeXZCZzR1dmJYV1FCVTZGSlQ5c3F0eDdMOUlOZEd3eDlYbm41VUR1Q0pPakZhMXctMVpZUWpud015dzNKZzVtZDdfTjdWUW9Yb3llbG9mQ0xMMzZPemtnTXV3?oc=5",
+   "title": "Republican Ashley Moody defeats progressive Angie Nixon in Florida Senate race",
+   "at": "2026-11-04T02:46:00.000Z"
+  },
+  {
    "race": "IN-05",
    "name": "J.D. Ford",
    "party": "D",
@@ -938,6 +949,17 @@
    "url": "https://ground.news/article/queer-marine-veteran-joanna-mendoza-flips-arizona-house-seat-defeating-republican-juan-ciscomani",
    "title": "JoAnna Mendoza wins Arizona House seat, flipping key district for Dems",
    "at": "2026-11-04T04:49:44.183Z"
+  },
+  {
+   "race": "Gov-WI",
+   "name": "David Crowley",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/david-crowley-to-make-history-as-wisconsins-first-black-governor",
+   "title": "Democrat David Crowley Wins Wisconsin Governor’s Race, Becomes State’s First Black Governor",
+   "at": "2026-11-04T04:59:43.468Z"
   }
  ],
  "races": {
@@ -1533,12 +1555,42 @@
      "at": "2026-11-04T04:49:44.183Z"
     }
    ]
+  },
+  "Senate-FL": {
+   "fox_winner": "Ashley Moody",
+   "agree": [
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNdWx2eWN2SDM0cmJ1T2V5Y1JMVE9qMmZyUE5WbkNBYzJ4RzBCLVN4Q2xLTmRWeXZCZzR1dmJYV1FCVTZGSlQ5c3F0eDdMOUlOZEd3eDlYbm41VUR1Q0pPakZhMXctMVpZUWpud015dzNKZzVtZDdfTjdWUW9Yb3llbG9mQ0xMMzZPemtnTXV3?oc=5",
+     "title": "Republican Ashley Moody defeats progressive Angie Nixon in Florida Senate race",
+     "winner": "Ashley Moody",
+     "party": "R",
+     "at": "2026-11-04T02:46:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Gov-WI": {
+   "fox_winner": "David Crowley",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/david-crowley-to-make-history-as-wisconsins-first-black-governor",
+     "title": "Democrat David Crowley Wins Wisconsin Governor’s Race, Becomes State’s First Black Governor",
+     "winner": "David Crowley",
+     "party": "D",
+     "at": "2026-11-04T04:59:43.468Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 28,
+  "races_confirmed": 30,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

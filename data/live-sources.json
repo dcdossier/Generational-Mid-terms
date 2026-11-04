@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:13:15.894Z",
+ "updated": "2026-11-04T05:20:00.283Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -720,6 +720,17 @@
    "at": "2026-11-04T02:52:00.000Z"
   },
   {
+   "race": "IN-05",
+   "name": "J.D. Ford",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOZWRBb3YwUGtYYXk4R0NTYU5DZVdHSTZCTEdlMTc0WDRNRFVTcV9jMGVrRFdHbEowc1RwZUhocmRNN3phdWxCYjBZUG9teFFwb3EwMUIzNl9GcGlQZFA2Y3M2YlhzVndMYUtBYlpicVpjdWJlb0xtMDNxQ1FhQjJ5N091WdIBiAFBVV95cUxOM3VIdjR5LVVjMnhCWUFXTHR5T216WEM1VFJVcHRTM0ZNZ3Z3NmczRGxqWG00RWdIek9FbzI4U3M0NEhicUZ4cDE0TTB3NVVmUzV6M016MDZEdDBwblhxd3k0am5WQXA2TzYyZzV2aTRTQk02WFRWcWdJanZjUEh0TUhuNGp0cElS?oc=5",
+   "title": "Democrat J.D. Ford beats Spartz in major upset for Indiana House seat",
+   "at": "2026-11-04T02:52:00.000Z"
+  },
+  {
    "race": "Senate-SC",
    "name": "Annie Andrews",
    "party": "D",
@@ -1004,6 +1015,17 @@
    "url": "https://ground.news/article/democrat-xavier-becerra-wins-california-governor-election-global-voices",
    "title": "Former Health and Human Services Secretary Xavier Becerra wins California governor’s race",
    "at": "2026-11-04T05:09:52.894Z"
+  },
+  {
+   "race": "Senate-OR",
+   "name": "Jeff Merkley",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/us-sen-jeff-merkley-wins-reelection",
+   "title": "Oregon Sen. Merkley wins reelection bid",
+   "at": "2026-11-04T05:20:00.282Z"
   }
  ],
  "races": {
@@ -1661,12 +1683,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Senate-OR": {
+   "fox_winner": "Jeff Merkley",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/us-sen-jeff-merkley-wins-reelection",
+     "title": "Oregon Sen. Merkley wins reelection bid",
+     "winner": "Jeff Merkley",
+     "party": "D",
+     "at": "2026-11-04T05:20:00.282Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 30,
+  "races_confirmed": 31,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

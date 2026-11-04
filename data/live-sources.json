@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T19:27:38.097Z",
+ "updated": "2026-11-04T19:37:43.510Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2271,6 +2271,17 @@
    "at": "2026-11-04T16:03:00.000Z"
   },
   {
+   "race": "Senate-AK",
+   "name": "Mary Peltola",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNSDZBQlYyZE1fQXhINE4wemp1YzNKZ0w0b0Nod3B4WENqZTl4RHRQXzNjUjZHSGF2RTlHM1RWcUtIQUZ0dGZPS0lvVWZYYW5fR0VPYkxmS2FuVWNJbFFCbXBSOEVXRU8yZ3dtREdpY0xFdlFDY1JMLTJOeHNZZWJBOUVSUzNxQUZhdmxZ0gGQAUFVX3lxTE1vbG5XakJ0TV9nSlpCOV9ZS0l3Qy1wZ2Vtb2tJX2FOTC0yWmlBbzdHTDlhN1dXcFh4RGRlNzVMUHVEWFFiRWV6R25DX2MtOWlVVTV6OUpkQm0zZDlmbS1USDBfRmlCTXZvblVSLTZpOGwxUEdWZUstZXRxM1ZtSW5CUHc4M3ljUXd3eE5tNVNGMg?oc=5",
+   "title": "Peltola takes slight lead in Alaska Senate race",
+   "at": "2026-11-04T16:07:00.000Z"
+  },
+  {
    "race": "Senate-SC",
    "name": "Annie Andrews",
    "party": "D",
@@ -4250,6 +4261,21 @@
      "at": "2026-11-04T18:15:00.000Z"
     }
    ]
+  },
+  "Senate-AK": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNSDZBQlYyZE1fQXhINE4wemp1YzNKZ0w0b0Nod3B4WENqZTl4RHRQXzNjUjZHSGF2RTlHM1RWcUtIQUZ0dGZPS0lvVWZYYW5fR0VPYkxmS2FuVWNJbFFCbXBSOEVXRU8yZ3dtREdpY0xFdlFDY1JMLTJOeHNZZWJBOUVSUzNxQUZhdmxZ0gGQAUFVX3lxTE1vbG5XakJ0TV9nSlpCOV9ZS0l3Qy1wZ2Vtb2tJX2FOTC0yWmlBbzdHTDlhN1dXcFh4RGRlNzVMUHVEWFFiRWV6R25DX2MtOWlVVTV6OUpkQm0zZDlmbS1USDBfRmlCTXZvblVSLTZpOGwxUEdWZUstZXRxM1ZtSW5CUHc4M3ljUXd3eE5tNVNGMg?oc=5",
+     "title": "Peltola takes slight lead in Alaska Senate race",
+     "winner": "Mary Peltola",
+     "party": "D",
+     "at": "2026-11-04T16:07:00.000Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -4257,6 +4283,6 @@
   "read": 66,
   "races_confirmed": 79,
   "races_disputed": 3,
-  "races_reported_not_called": 7
+  "races_reported_not_called": 8
  }
 }

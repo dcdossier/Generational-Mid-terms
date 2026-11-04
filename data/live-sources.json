@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:33:37.283Z",
+ "updated": "2026-11-04T05:36:53.750Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -643,6 +643,17 @@
    "at": "2026-11-04T02:16:00.000Z"
   },
   {
+   "race": "Gov-GA",
+   "name": "Keisha Bottoms",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPTUk4djBzMlg5ZGNaaURyUlZ1bHphSTRKNTlBeVo2SERrZ2pBMUNIVTEydUsyRFdLY1prbkFhdzU2bFItQXN2Y1hZXzNHUXczWkVndG5fVFRLM3dFaWJGNjdBSmZELUNMUUktT2pyaHp0Q1NzRFhOX3FWRVZzdTBUdU1kd0VNZDNDOFAydjZOUDEzN0nSAZgBQVVfeXFMTWhDUEplM0VaVlB0NHB6cXNkRzFyY0t4cmZSM1dfV0E5eVhhaUNFcndnY0xrUGxuZWV5eXdGY0tZNFBFU1JvX014b1JBWGRwN2Zkd2JxckxxSTlEQlVUZE5Hbmx4Wmo4alFIa3I4c2wyVDZLX3N0Rm1PTDV5TEUxWGlqdmJIQzZNeF9HaFV4RV9mazN4Tk1tTVE?oc=5",
+   "title": "Bottoms defeats Rick Jackson, turning Georgia governor’s office blue",
+   "at": "2026-11-04T02:16:00.000Z"
+  },
+  {
    "race": "Gov-FL",
    "name": "Byron Donalds",
    "party": "R",
@@ -1059,6 +1070,17 @@
    "url": "https://ground.news/article/susan-collins-concedes-to-troy-jackson-in-maine-senate-race",
    "title": "Susan Collins concedes to Troy Jackson in Maine Senate race",
    "at": "2026-11-04T05:30:13.575Z"
+  },
+  {
+   "race": "Senate-MN",
+   "name": "Peggy Flanagan",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/progressive-peggy-flanagan-wins-minnesotas-senate-race",
+   "title": "Democrat Peggy Flanagan Wins Election to U.S. Senate From Minnesota",
+   "at": "2026-11-04T05:36:53.749Z"
   }
  ],
  "races": {
@@ -1761,12 +1783,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Senate-MN": {
+   "fox_winner": "Peggy Flanagan",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/progressive-peggy-flanagan-wins-minnesotas-senate-race",
+     "title": "Democrat Peggy Flanagan Wins Election to U.S. Senate From Minnesota",
+     "winner": "Peggy Flanagan",
+     "party": "D",
+     "at": "2026-11-04T05:36:53.749Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 33,
+  "races_confirmed": 34,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

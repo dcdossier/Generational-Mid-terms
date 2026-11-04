@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:50:16.124Z",
+ "updated": "2026-11-04T11:59:00.423Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -294,49 +294,49 @@
    "name": "Tampa Bay Times",
    "domain": "tampabay.com",
    "state": "FL",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Iowa Capital Dispatch",
    "domain": "iowacapitaldispatch.com",
    "state": "IA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Iowa Starting Line",
    "domain": "iowastartingline.com",
    "state": "IA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "The Gazette (Cedar Rapids)",
    "domain": "thegazette.com",
    "state": "IA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Spotlight PA",
    "domain": "spotlightpa.org",
    "state": "PA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Philadelphia Inquirer",
    "domain": "inquirer.com",
    "state": "PA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Pittsburgh Post-Gazette",
    "domain": "post-gazette.com",
    "state": "PA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Virginia Mercury",
    "domain": "virginiamercury.com",
    "state": "VA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Richmond Times-Dispatch",
@@ -401,6 +401,17 @@
  ],
  "reports": [
   {
+   "race": "FL-20",
+   "name": "Debbie Wasserman Schultz",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQVRsVHZIUVpPMWEyRGo0RlZvWDAxYmUza2VhQzJXQ2lZS0pqajhubU0zTGk4V0JiVW1BXzNvWF9HSUdLM2hxOTBYZ2hQS1ZodEVQWjZHM2ZuLVlXd3R1dkJxNnlHdW1sSmdJSlk4M3VTX1JfZklSd1RTdTN2NEZhUldJWk1ydGVvdV93UUxUVdIBlAFBVV95cUxQRVlIUHlBMVFSSjFSNTl6dHFJR0JkdXpsMEM2WVRYWW0zMkRvVlVVMXFPeFpzcmJvRG01bWhDZG9mZExNOVg4UXJNWXFEWldyUVZYUzViZ1BPdlZtaGNnRGZIdWExMFRzWjdNb042Y2lEa1B3aFF4VlJrM3NvV3E2Zm1PSmpmUFZDTUluOFFlWUJZSGVk?oc=5",
+   "title": "Rep. Debbie Wasserman Schultz wins Florida House seat",
+   "at": "2026-11-04T00:24:00.000Z"
+  },
+  {
    "race": "FL-16",
    "name": "Sydney Gruters",
    "party": "R",
@@ -416,11 +427,33 @@
    "name": "Jon Ossoff",
    "party": "D",
    "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNd2dsVFN4MWpnMUZoaTEzUkdrNWxrTWFlSmdKcW9ZNDd1OV9sRlZFR0o3RHpEbGIySGVyWDRXMlVfM0kxX3h0TDMzQkoxUUtKUExmQkhwYVpndkt5aTQ0Q3BncEcxN0RCbHQtTHRQRlhfb2p6NzhCdjduQldYVDBpY1RQaU5YYkQ0eGtXYldqcw?oc=5",
+   "title": "Jon Ossoff wins Georgia Senate race over Republican Mike Collins",
+   "at": "2026-11-04T00:57:00.000Z"
+  },
+  {
+   "race": "Senate-GA",
+   "name": "Jon Ossoff",
+   "party": "D",
+   "result": "won",
    "publisher": "USA Today",
    "outlet": null,
    "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOajl2WWl3SXF0a3FwbnJwQ01SbllpZGVFZ1RWSkp6bjU1c3Zja1FRUmJZbkxFZjlXZnR5dWlETkRhUDZWNVZjb1F4RHF5NXMyTDdmVFY4SjFIcWNWdUh5RmMxVGd0OVhMc3Q4U1E3dUFmQzcwQ3hyRENlWFVRRG9WcU1HTkp1UHlSYnA4SXEzUm9JdTBJbjlLMmdObWRTT3YzcDUxVkZjQUk0Y1FhOTJtVjdDX1FPX1NXSTRpOXVjWDJ4VHdvZFA2cWRLZWptUUEzTkJV?oc=5",
    "title": "Sen. Jon Ossoff wins reelection in Georgia over Rep. Mike Collins",
    "at": "2026-11-04T01:02:32.000Z"
+  },
+  {
+   "race": "Senate-FL",
+   "name": "Ashley Moody",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNSF9yckxic1JBNUt3dm5IeVB4aFVDcjlwUzV5NkdqX0RKbmI3ZTNGYWhVTzNCckowSS0xQnFMSHRIcERUMWgtVDY3MUVGRDh2RDZXUnZ6VGdld0swUGJXOGx4WXJ5ekNNUVVkUUVKdWQ4TEkzU2NhanNjX1BUVmlwYdIBhgFBVV95cUxQUjViaFNSdlFRa1BXNWRoLUhkUWZaal9OcmJobnM0VS1Qb0ZWbjdrS1N4SkpjWGJiVkhFSXgwcDJFd1lnMS1PNlRPTnptNnpJN0xMSHpwYk1ULXI3dXBGeU9UZElzSmtpUjQtNXhCT0luSk91N185R0Nvem43V2w0bGVNeGZqUQ?oc=5",
+   "title": "Moody projected to win Florida Senate seat in tight contest with Angie Nixon",
+   "at": "2026-11-04T01:03:00.000Z"
   },
   {
    "race": "Senate-NH",
@@ -555,6 +588,17 @@
    "at": "2026-11-04T01:44:42.000Z"
   },
   {
+   "race": "FL-16",
+   "name": "Sydney Gruters",
+   "party": "R",
+   "result": "won",
+   "publisher": "Sarasota Herald-Tribune",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQS0FRbWxLamJ1LXpLXzBJQTJUOUliWTNnay1FTGtSSDYxNnhBRFJXM3E4c3F3djF3MlRSb0VOTV9rak90bXBPUTY2blZsekpDV3JWTkRQeW43c2pvazc2dncwVFJ3OFIzTVl0bFZyN19fUE9ZQkk5YnlKOWVRT3FnZDlmQlhtYk1YbGh5NEdCeVl6Vy1TcGtUMFlNaHV1VXIwczhyQ0hXY0M4M3pVV09HUG1COGZyTUhnWllRSGRCeG1tbF95MVFuWnBqbFRRYjQtdDRkRXBn?oc=5",
+   "title": "Sarasota's Sydney Gruters wins Florida Congressional District 16",
+   "at": "2026-11-04T01:55:00.000Z"
+  },
+  {
    "race": "CO-01",
    "name": "Melat Kiros",
    "party": "D",
@@ -575,6 +619,17 @@
    "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQTUtrYmtLM2pNcGl2a09RM1ZjanhOV2pjbG9EQW0xVXRfalI4WkducFkxRk9NVFBrVHhXOV9VdjRiaTRXc2NTTkhMdFpfYmhMQVB4WG1PVlZNd3VYZmd6Zmt2UWpwRS1DWUxleUFZRFRzTHBPMHpNSGoyMWU2MWZtVHBiRTY4SVRFYmpWM240TkNOeUxGaG5WZHVtY1YxUQ?oc=5",
    "title": "Democrat Jamie Ager flips western North Carolina US House seat",
    "at": "2026-11-04T02:02:42.000Z"
+  },
+  {
+   "race": "Senate-NM",
+   "name": "Ben Lujan",
+   "party": "D",
+   "result": "won",
+   "publisher": "Albuquerque Journal",
+   "outlet": "abqjournal.com",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOSmZhbW9aU1Myc2dKWXdxaXJrNTZrdFZKWDNLQ29CV2luaHdfNzlSdXhHSzNoZWwwTVNSOXI4bXZHSks4RE1hTjd3ZUt1NkZNOWRhdFcwSXpTdjZNOVA0UGxRa1ZaX04teXNwZnh0WUtPWDBKU1h3bHJkdWxYYnBiRQ?oc=5",
+   "title": "Ben Ray Luján wins reelection to U.S. Senate in New Mexico",
+   "at": "2026-11-04T02:04:00.000Z"
   },
   {
    "race": "NY-12",
@@ -665,6 +720,28 @@
    "at": "2026-11-04T02:18:20.000Z"
   },
   {
+   "race": "Gov-GA",
+   "name": "Keisha Bottoms",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORGk3MUs2YWpsTWt1Zm1YNDBUVEVrTzVmV1EzOXpJSmRsWXVROGQ3aG1QRXVWTUY5RnZ1ZEh1cmRVLWRUUk4tMXY5ZEhfU1FZRkktSlUwWmVObnRaWWRaZkV0dG93dk9yMVo5ZUZBempCMU9TZnhYNmdCdWxsYTdHOGtsb05YLUpBRDljdnZkSjhwM185SE5mcWdyWFFHU1BCeTJHOA?oc=5",
+   "title": "Georgia’s Keisha Lance Bottoms makes US history as first Black woman to be elected state governor",
+   "at": "2026-11-04T02:27:00.000Z"
+  },
+  {
+   "race": "CO-01",
+   "name": "Melat Kiros",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPMVd0b2ZiTm43U2hrR3hOdVRhai1kYTBEOGRaN1JFU0JhS0lENU02dnBDLWJTYmM1NkJMSWNTNFVLeVRrX2cyb0JPcmQ4UlkxOFJ4N0VyUldpSkNLNTMyYzYyNTNISHk5c3M2b3o3NGlNcHEtYndlbDhyQU42Qm1xZzBMWURuVExWZ1lkUlJvbnZvb1FJSHdhOQ?oc=5",
+   "title": "Melat Kiros easily wins 1st District seat",
+   "at": "2026-11-04T02:27:51.000Z"
+  },
+  {
    "race": "CO-01",
    "name": "Melat Kiros",
    "party": "D",
@@ -674,6 +751,17 @@
    "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQWnFzZjdDTTFndnRFTlNwVlZTaTVRMU53YTdBcldsdEQxWUM1SXJPcXk3U3Q0OTVrUUJZenZZNnhNTktsV0lOVUNrUnVtQkVkQkVSeUUwQkNEVThlWWxqYjVDTjVveE1ETWVZaEZyb1pGeEtDX25sa3JiN2gtT1liYkJPY3NoZElnbTJoZjFNZXFxQnZpRnZTSkcwOHg0eHpnU0w4OU5HMzVYQ0hURGhPTVZ6Zzk?oc=5",
    "title": "Democratic socialist Melat Kiros elected to represent 1st Congressional District in Denver",
    "at": "2026-11-04T02:30:00.000Z"
+  },
+  {
+   "race": "Senate-IL",
+   "name": "Juliana Stratton",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNLWsxUDl2TWUzS3Q4VGh0NFIyQUo1UV9CNmY2U01uS20zeHlRYVpWTF9FeWNuLXZad3ZmVW8yb0plbDNnc1ZfTUJMMktCX2J6YTJBOG5XSllJa2NVQk1mbG1iMDhBbVh1S2ZIZjd0WGo1NlJjMmc2WF9oZ2NwZ05yenJMd0dxY0JNNDlXNmtpVU1KV21FZ1dPWEhJZkdQLU0?oc=5",
+   "title": "Juliana Stratton wins Illinois U.S. Senate race, making history",
+   "at": "2026-11-04T02:41:39.000Z"
   },
   {
    "race": "Gov-GA",
@@ -753,6 +841,17 @@
    "at": "2026-11-04T02:57:00.000Z"
   },
   {
+   "race": "Senate-IL",
+   "name": "Juliana Stratton",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQcm0xdmN1NXhTdGFJeDRNMmdPRmRVMUpLcHhUU1F2Y1d6M0dwQm9oQWdKV0pSRC0wVWR6UzBiUWljc1NDem5FSUVwd2w5b2tlNFFCQkpQb3hHSjRpWmpuLXF4ODZiRjRob3IxUGpmQm5TTFVxbFZhMmF2Wnl6VFpZQg?oc=5",
+   "title": "Juliana Stratton's win sets up historic first for 3 Black women in Senate",
+   "at": "2026-11-04T03:02:03.000Z"
+  },
+  {
    "race": "Senate-SC",
    "name": "Annie Andrews",
    "party": "D",
@@ -762,6 +861,28 @@
    "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQSEhvdlY4Wk1fTmhUV050a2ZmZC1GREZVQnlDX09OWldzQU1WcHFVbGw3dlZpNjVqN2VfU1E0clM5VVM2MnZ0bEVjcUZLZHVTNGVnMTVyOUhOOXdBQ3UtZ2xUeHNjVmNGMUtsd1o1YmJBekpjX3AyMlpFMlkwOVFQTTFoZVdkdE1kNkZjaEpaX2taTDJMbjFEVmFVXzVfQVI2NUFCcXQ4cm1xclpuZ2lIZzBHN0thNnVkTzY4eVlrME9Ec0RLdUlJ?oc=5",
    "title": "Democrat Annie Andrews wins SC Senate race in major upset over Darline Graham",
    "at": "2026-11-04T03:05:00.000Z"
+  },
+  {
+   "race": "Senate-SD",
+   "name": "Mike Rounds",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQ0s0TE1yc1FMUFh5bU43NklHSzZwRkdKdzc3bEhEektqQmNTNk1TRmdnUUhneGJITzIyT3M2bE9wZE5yRE96SmQwdU9nZWZlU0hJUTBFNTBOU0tZLUh5Q25SUGkyeFM5QU9seENBOHFsN0h6Tzl0cVlITGMzNl9uNVJXNDhaWHk5dDI40gGQAUFVX3lxTE9KM1B2bDZNOWRfRUFwLWVpR1UxQzREQldYR1ZVN3dySjdxektTN21LM2dTbzJsVUJWS1FVZHRlb1VqdklrNzZWZVNtSkZiWDNYejRDOEc1Y1BVRGg3Wi1SaE5MVFhlYWt1VG9OdVUzOGhPc3h4YU5ZakVMYTNWVml5aDF4dC1WQkwwZXFHendhcw?oc=5",
+   "title": "Sen. Mike Rounds wins reelection in South Dakota",
+   "at": "2026-11-04T03:08:00.000Z"
+  },
+  {
+   "race": "AZ-06",
+   "name": "JoAnna Mendoza",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbkRlMGdKOTJkdHQyMEhyQ1drXzZRMG9ZVjAxQkNsN1AzN1Zpb3hYTnFZMy11V0h6YnFDWnRzSW5vQnE3eldpaWV6RnJpdU5XMXFFQ292UEZzR01reDFaZkxscEFaRzB5RUJEZTZRNGMzOFFLRmM4b1Q5YmtCc3ZmVVVMUHNJWExUYUxjSzhiaUXSAZYBQVVfeXFMT21hWjIwemh4cUxESUx2YjlvQm5lTmZONkpTUjhGQU5DOTVvOVlqUzg2d2o4WVRRMjlfNFlTWURVdmdCUWpNVDlXRV8tZWxLRFhwZDFqV1RLRzBBM1o1eFdIV3VySXNKc2htdmpJbDdYUkpiQU4wTWFXTzVNdzdiM2ZDXzdfblIyWXpNREx6a3RXc0lmNW9B?oc=5",
+   "title": "JoAnna Mendoza wins Arizona House seat, flipping key district for Dems",
+   "at": "2026-11-04T03:16:00.000Z"
   },
   {
    "race": "Senate-SC",
@@ -786,6 +907,17 @@
    "at": "2026-11-04T03:35:00.000Z"
   },
   {
+   "race": "Senate-AR",
+   "name": "Tom Cotton",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNbExlMnlQbUhGdmRNSTNmN3hpUDM5b3c1WUF0WWNKU2N0ZFc3a1J4b0hqM2VkZlJQUE5WOTY2ek42djUyVjdqLVY2VHJ3VF9PTGJKN3E2UEpsQ3RlQ0JjbHd4N1NCbFV2Q2NCS1luaWFCTGdpaEhRaXZtUnExX2JXLUZYMko3NlNZTnhYMGkzN0I2aGlDOFEw0gGcAUFVX3lxTE5XOUd0SGNIa1N0M0FqTUFhRzB0UEJ0UVRkTkwzTkxnNHY0WDVIQlFHSUN6WDhTc0ZBWjc1X1ZTMFkxRW5FU0YyWE9FRUZ2SEx1bjkwaURGSzV1Vm12U3ZkU3hSaXQyOW9UMzFIWWVBU2xpVXlITTJhZmFZdl85RXJYdV8zMUtOTWZjWm9WLWMzUE4yWmk5R0pCaWVuNw?oc=5",
+   "title": "Cotton wins third term in Senate for Arkansas",
+   "at": "2026-11-04T03:35:00.000Z"
+  },
+  {
    "race": "MI-11",
    "name": "Jeremy Moss",
    "party": "D",
@@ -795,6 +927,17 @@
    "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdWxyVWR4bUoxVjR3WXNMTEVNWjBQZGo0R3hBWngyZjkzYW1nWWM5ZUZ4TFJ5RWxtNHZ0QzdKYndoNGN2SmVfUENJdEV0MUN2a3F6d29mek9VdEZRaHgydmVzNDc5TnNNQWg2WEdVeWxDZmI0aWxXZVNhRklhVWVlZkZXNFFjbmJONTRKLV9kdVFscnROQWs2eVZBX1RMeE5VTWVxOVp5WmlTcnFWbW1QMUNyNA?oc=5",
    "title": "Moss wins election to Congress, takes seat currently held by Haley Stevens",
    "at": "2026-11-04T03:37:34.000Z"
+  },
+  {
+   "race": "PA-10",
+   "name": "Janelle Stelson",
+   "party": "D",
+   "result": "won",
+   "publisher": "Spotlight PA",
+   "outlet": "spotlightpa.org",
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNbnVsSjNDelNTMkwyZFFKQ1BaSHpsOEJMSmpEWkdWdmk1ZEJNTEQ3dlc3dlR5azJmVUNUZGJESC1xNHJyNDh1R052QmxGaklxbEQyaFg2cUhPMnd6NjVFeUtfNjU0WEk4OGlBQlhiTUtHREtOSUFjUkJlTW5razRwdF9yTm5MNW1qTTk4T1ZiNy0wN0dfY0tEU3h4d0Itb3R6ZGtINTV0SDFSeTRGN2tSMTJvX3ROb1FiN0RIdFVxQUVhdnBBeUFsbEdtNkZrNGJqQ1p3aQ?oc=5",
+   "title": "Democrat Janelle Stelson defeats Scott Perry in Pa.’s 10th Congressional District",
+   "at": "2026-11-04T03:43:13.000Z"
   },
   {
    "race": "Senate-TX",
@@ -856,11 +999,44 @@
    "name": "James Talarico",
    "party": "D",
    "result": "won",
+   "publisher": "WUNC News",
+   "outlet": "wunc.org",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPUWlMS1B3dThYZUZqV3VXb1Q0N2VOM2tEWTlZdGFmN3JmVmpSS2JKQ3hnS0lHUEY3TVJBajhxZno0ZmlZUnJocWdQZTQ5OExybERxYzdHUE1XOHhCNkZTUnRPdzhiVWE3M25fUURwbWljbDdrWVR6XzgtVWFhZGdSQWxvYTY?oc=5",
+   "title": "Democrat James Talarico wins Texas Senate seat",
+   "at": "2026-11-04T04:04:00.000Z"
+  },
+  {
+   "race": "Senate-TX",
+   "name": "James Talarico",
+   "party": "D",
+   "result": "won",
    "publisher": "The Guardian",
    "outlet": "theguardian.com",
    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNWnUwcmlzc25vTHdwbW1rTkwyU0ZzNmVZMUVOQzlrT0NnWEpHcUJMRHd1bVlsRnF2YWM4MmRpbVJHTUxoa2xvMWZEOWJFVTdYdURGMC03Rm5LV2tvMktqa3RJVDNrZ0VLaWkwUnBHU2NsLUlKMVRHRjNETi1sbWFyZlQ2em82eDhlQ3lJU1V0VQ?oc=5",
    "title": "James Talarico wins Texas Senate race in historic victory for Democrats",
    "at": "2026-11-04T04:06:00.000Z"
+  },
+  {
+   "race": "Senate-OR",
+   "name": "Jeff Merkley",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOTFE4TG45RDJqWnVrSDZXUmtFM3NpX3g3LTFMaFNTMUhUall3QlFzdi1nSnhkbTJBV3Q5eFkxN1Fnd1VtVVhkY3BxdlVjcjJfcG50emNMQ09lNUhQSkszM0hKeGlPSlc0SWduYmlOY1c5UTJuOHBxUzlyU1B1cmI4VnYyTVnSAYoBQVVfeXFMTjViQXRJN1ZaeDZ3Q1owQmpYWm41RmNHQ2FKZ2Q0VWpBVlhqYUpQTkx6WGVKemFHV1FuR0s5QkZFWW5seFY1OWxhdi1aV3YtN0pkZjJSeEtCMzhrSmJsanJHRHY2bElvd0dTMExsMlBwLUFvNHhlQS1kRndfN2ZPRnJST2NReFRiT0JB?oc=5",
+   "title": "Oregon Sen. Merkley wins reelection bid",
+   "at": "2026-11-04T04:07:00.000Z"
+  },
+  {
+   "race": "Gov-CA",
+   "name": "Xavier Becerra",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNdTB3SWJEamVMQkpSMGdQYzRyYVY2Q2JOUEwxMC0tRlR5NWZyYjhsV292VUxHREhkSXNqcUVUSmVMR1VoRllKaXZjUVlCT2Vqbm1INGY0bWtiQk9McUlDRFR3U0J3T1UzRVRoOWxuM2pVX0FfV09KU1ZKclF3TkFaR3lLQlgtQlpmSEotbEEwX3Bza3YxWlhsVA?oc=5",
+   "title": "Xavier Becerra beats Trump-backed Steve Hilton in California governor's race",
+   "at": "2026-11-04T04:07:54.000Z"
   },
   {
    "race": "Gov-CA",
@@ -907,6 +1083,17 @@
    "at": "2026-11-04T04:15:00.000Z"
   },
   {
+   "race": "Gov-IA",
+   "name": "Rob Sand",
+   "party": "D",
+   "result": "won",
+   "publisher": "WUNC News",
+   "outlet": "wunc.org",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOT2tmTG9NZTEyRUZrQ3JtYkdwMjVDTFBrR3BHdkQ4MHZvRnREU1NBamtjQnJBMEVQOWpCVkp2RGRweUlIZWdnOWVXX1pOQy1zckZQODJIOFNTcndGWmtrMkpvd05UcTZCQTdpVEw5QjlWbHlfcWFzYS1DbDVFLS1TRWVXb1BteGI5QnlDaXNwZmNlVjdIRXBKUmVNMldPVFJXSmhSVTMxTGp6RUk?oc=5",
+   "title": "Democrat Rob Sand wins Iowa governor's race, ending GOP control of the office",
+   "at": "2026-11-04T04:16:00.000Z"
+  },
+  {
    "race": "MI-13",
    "name": "Donavan McKinney",
    "party": "D",
@@ -951,6 +1138,28 @@
    "at": "2026-11-04T04:28:00.000Z"
   },
   {
+   "race": "MI-02",
+   "name": "John Moolenaar",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOejJNQU5ZdmhOVGlvcVdyaHhQajB4bG05YlR5R1JRY3FqYkl4WVlsSTNmLVh1eVdaRUpDQ2xpampJTEdQV2lxb0EySkRSM1pEUHN6MmRlMUQ3ZmdkSVRkZHdELU9UaWFiWHBqeVNiWExhSnZjeFRGSkJieXRFNFBqWDdySzNIQW91TzMzLTZ1NHIyaDc3NTlEZ0xkWm5JUzF5LVk5UUJxVXlEQ1JRSzM2TGJEVThpeU4zbGFDUC1JYWF5ZjFvdWRBUy0weDZCdjZpWHRPUERSc2tyTHJ1YjNORzNEZTVDTzdJeW9ybHFuYw?oc=5",
+   "title": "Michigan GOP U.S. Rep. John Moolenaar wins reelection in 2nd District",
+   "at": "2026-11-04T04:28:29.000Z"
+  },
+  {
+   "race": "IA-04",
+   "name": "Chris McGowan",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWlJfTHUtM1hCVXJUcjE5VXhDa1ZqeVV1N3duWUc5LVZZYXNNV0xzQVBjWFdnWHBwYmI0MnlnT3Y5VHRBLXlRbnpNamJTOHFnQ04xTDVPdThWS3pEOEY3ZDZZUVJldDBFX1VHcmN4aW5fX0RncjNJY2pPZXR4YnRlQzFmYnFqZknSAYwBQVVfeXFMUFl4ckh5X1ZEWjg5YmpSQS0wcElUZm41Q0FOZGptZDNwMEY3ZXY4Zk9hWndhR2JGaHpyRGFSSDRpeGxGUHY2VkEtZzZCTmx6NHFMclRjekVWWFYyZ3lrbk1wOTQtMExUQnpQY2JyT0pRNkk0bTI1eTQ4bGVCR2tHWTJUeG5iNXdVTEJVTnQ?oc=5",
+   "title": "McGowan wins Iowa House race for open Feenstra seat",
+   "at": "2026-11-04T04:29:00.000Z"
+  },
+  {
    "race": "Senate-KS",
    "name": "Adam Hamilton",
    "party": "D",
@@ -960,6 +1169,17 @@
    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNUHFaZ3F6aG82S3hubXlGSEdSSkI5Q1prcFF0ajRmZ291OU9TVzRXMU14YmlWU3NQdkVHYlRLWDRFLVJjakhVS0FrVGZTTEtCM3BaTTJYQThVaW1hZ1Q3VmtoZkVpZS1kSmJKbmhsWTF3VUtRamVCX0YxdXN2VzRqdWpBMUFsWkx1YlJkVjJ6UERmN05j?oc=5",
    "title": "Adam Hamilton wins in Kansas to become state’s first Democrat in Senate since 1932",
    "at": "2026-11-04T04:37:00.000Z"
+  },
+  {
+   "race": "Gov-OH",
+   "name": "Amy Acton",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Columbus Dispatch",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPSXI1VzJYQUYxNVcwdk5OZUFHZnE1VkNraWVSNVQ5LVFZZWx3UGc5SnNfSDhoc2ppRkJrLXZZdGFzbHBTbXIyTlRqcFNlbW85ck43OFgybklRZDZGSmV4U0p3aUx4c1VwdXNKZVRvMkFZN1hrUFh5M0Y5M0dKMl8xU2JLVXFiVDhtQzdZTVRZZHlFS3pGTFZfTkwtVXpiZzlkb09vQUlaOFdlT05TN0VtbS0yb0dOMHBza0xZVGVhLWtXMjJETTZSdXJrYmVEMmctMkE?oc=5",
+   "title": "Amy Acton first woman elected Ohio governor, first Democrat in 20 years",
+   "at": "2026-11-04T04:47:39.000Z"
   },
   {
    "race": "Senate-KS",
@@ -1028,6 +1248,28 @@
    "at": "2026-11-04T04:49:44.183Z"
   },
   {
+   "race": "Gov-OH",
+   "name": "Amy Acton",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5UWTRUTUVDZXhTZ3dZS2F3Q2kwZlptVkVIWm1mLUV4Z0s5OGpMa0R1aU93OGNSRE82OG4xWHhONVEwVVhVMkJRUUthQXB6amt3VWVSbGZhWmJ4WHhEalV2MUQ4bU4yTlFCTkFIQXpqdkxtQmhoeFVHQmpn?oc=5",
+   "title": "Acton flips Ohio governor's office for Democrats",
+   "at": "2026-11-04T04:52:35.000Z"
+  },
+  {
+   "race": "MI-11",
+   "name": "Jeremy Moss",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOYzdyQ1V6RDJGdE5rN3hTeVlTUEJGVEwyMlFEOWdReHlRblA3RVppSUhkQ1dIVWloV3NvU01iTUc1R3hqc0JoMHJ1RVA4aDRsWFVYazBhbXBaT1FqVUJNWFBmejRUQzNJNHhfRkJ4UzJwam1kRXc3QjBXU0Rwc182ZWJBZUpaNXdjdEwtRGd5RjF5b2xxNGJ0VGc0bGNQRWJYbmhqMmlSekJrb2VPMmxnWDJYQ3RwWW9pd2xpS1dCZHhqWlpzTExqSFhGMWUybl8xcHJxcTZzLW9DSk5VeGxZb2hWRE9xVklqY1F0V3pnRFhQQTAwV2ptYVNZYkxVelRzSGNZWGl0dw?oc=5",
+   "title": "Democrat Jeremy Moss wins to become Michigan's first gay congressman",
+   "at": "2026-11-04T04:58:00.000Z"
+  },
+  {
    "race": "Gov-WI",
    "name": "David Crowley",
    "party": "D",
@@ -1050,6 +1292,28 @@
    "at": "2026-11-04T05:09:52.894Z"
   },
   {
+   "race": "Senate-MN",
+   "name": "Peggy Flanagan",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOb2JYXzRuck1ESHZORXJBU21UOG0wbFdCUVhNUnhVcloyX3JkbnptR2J5ak15VlpTRktVYm5uVGZfQmowam5OTldfenlaalRGRkozcDZKOVlHVzNLNXZrbXk1ZmxWT3IwRTVpTXhBcGVLdGF2NmhPOFpEYVIzbk5wVmhDZndWbzVSRGlBWUVRRTVHcmpNRmc?oc=5",
+   "title": "Peggy Flanagan keeps Minnesota Senate seat blue in historic win",
+   "at": "2026-11-04T05:12:28.000Z"
+  },
+  {
+   "race": "Gov-TN",
+   "name": "Marsha Blackburn",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Tennessean",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQb0dHcnl5SzlBRFJTRlpqdllCcDJhVnpYRWtlLWZpTWF3N2V3WnpYMmF6eHdkWHdCUV81VTFicnZMMmQ2Y0o4eGxUUzVrb1VfWEtVUEU0dG83a1Z3TG1IaElGOE1HR3RjckI0MDNKVlJ0MG9LVmQzVzA2aE9WTEZxc1Z6R3dqZHlGMHE1S1RYU1ZtQVlqNXB6bUhtdmVPTVJaMll5ME1BeFlQMV8yX29HVHdTb3F0Sl94aVlXMW94Ry1Wc1ZyRjl2MWE0Q09lNkZIcEpHYg?oc=5",
+   "title": "Marsha Blackburn makes history as the first woman elected Tennessee governor",
+   "at": "2026-11-04T05:17:32.000Z"
+  },
+  {
    "race": "Senate-OR",
    "name": "Jeff Merkley",
    "party": "D",
@@ -1059,6 +1323,17 @@
    "url": "https://ground.news/article/us-sen-jeff-merkley-wins-reelection",
    "title": "Oregon Sen. Merkley wins reelection bid",
    "at": "2026-11-04T05:20:00.282Z"
+  },
+  {
+   "race": "AZ-06",
+   "name": "JoAnna Mendoza",
+   "party": "D",
+   "result": "won",
+   "publisher": "azcentral.com and The Arizona Republic",
+   "outlet": "azcentral.com",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQUjdyYmdNYlBDd2p1bGtqYUJnOFJpXzJyTVlZcFZhMTBRMVNBVFRCZC1mb1NMTS1VVTB6QnZYei1ZVXdPWjNOd0g5UTVUR3lnVm5RaXVyVFZoVk90OXNjMWkwNTFLVkRxRnNPLXB2N1puRGMyLUViM2Npc2VfaHhHZ3JSU1lkY21PSlNzYnJRUlJIUXZZdUdpZGN3Z3lRR1dqS0I3S2ZkaEd5TmRmdEplQVpuVE5BeC1kNEk5MnFDbkFYQlBrajc4TQ?oc=5",
+   "title": "JoAnna Mendoza declares win in pivotal Tucson-area US House race",
+   "at": "2026-11-04T05:24:00.000Z"
   },
   {
    "race": "Gov-MN",
@@ -1094,6 +1369,17 @@
    "at": "2026-11-04T05:36:53.749Z"
   },
   {
+   "race": "Senate-ME",
+   "name": "Troy Jackson",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNUElPREdhRlZaRW56NXM5aHV3SUVCdHpSVTBPQ0FFaVBmVmdCcFF5YWgybDhYamlMbzBYVERkY25ucVJnSGllWWJrOXVFdXNmMGNXbDE1YkNLXzNhcjNsaG5TT0ZxbFVhMFV6dl9hcUFHeGN3b1VTMkJ0U2RINjAwajlR?oc=5",
+   "title": "Democrat Troy Jackson defeats Susan Collins to win Maine US Senate seat in blow to Republicans",
+   "at": "2026-11-04T05:38:00.000Z"
+  },
+  {
    "race": "Senate-TX",
    "name": "James Talarico",
    "party": "D",
@@ -1114,6 +1400,270 @@
    "url": "https://ground.news/article/lindsay-james-wins-in-iowa-turning-hinsons-house-seat-blue",
    "title": "Lindsay James wins in Iowa, turning Hinson’s House seat blue",
    "at": "2026-11-04T05:40:16.512Z"
+  },
+  {
+   "race": "PA-01",
+   "name": "Bob Harvie",
+   "party": "D",
+   "result": "won",
+   "publisher": "Inquirer.com",
+   "outlet": "inquirer.com",
+   "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNelVFcWV6T3JHbkt0eEtjd1UteG5wQzZ4bHNWUzBuRlA1ZklhQlc3SGZ4QWllM1RVQ1R4S1EzQW9ROU1WSURGbUc2bEh2QnVTdk9lbG40Zm5zSm85cU5DMHVnbU5lTHBHXy1IUWNvUHF3cnJtTHg3SU1VNkJSOFVYdkd0UmFnd1FPOGNJXzR4WDJPYk9WVnp6NFBsZ2FpOVJSMWhUY1JXQVpQdlp1TGZiVHNIMVZtVkdMa3JxX0pn?oc=5",
+   "title": "Bob Harvie ousts Brian Fitzpatrick in Bucks County, flipping a House seat Republicans have held for over a decade",
+   "at": "2026-11-04T05:40:38.000Z"
+  },
+  {
+   "race": "TN-05",
+   "name": "Charlie Hatcher",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQVUNvcS00MlNabGdNb2hIRnJzeG52bVBtOU9qcmVoVHMzV3huOE5NclZteEVGQ01PUzV3dnRTWE9KdXkxLVFPN0VicHZnVGpSc1JYMkk5dG54dW1ZOC1YclE1a00yRWI0bm1KeUphUU9pUk1ubEtfY01hejNtMDVIQnV1SWlteWp0SlR1cnl30gGTAUFVX3lxTE9sWEJJbEZZeHRSZzlkTzRmZ2tqeFFLVmpWaTJFV0Y3ZkZzUTRaVUc5dDduU3NDMlA2SE91aTRuTGdlejF5TDlCVm5IalRpOWszb09mYk1QMzViTU1tYkcwaFVPOUxqWjZvUF9pRUF1cjZvUGRxR3VieWUyR29nbUYtbzFyS1AyXzZBOE1KY1pHcG5aUQ?oc=5",
+   "title": "Hatcher wins Tennessee House race after defeating Ogles in GOP primary",
+   "at": "2026-11-04T05:55:00.000Z"
+  },
+  {
+   "race": "Gov-TX",
+   "name": "Greg Abbott",
+   "party": "R",
+   "result": "won",
+   "publisher": "USA Today",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORi1heHJFeS1sdWlyV1Q0SU1zV1U4TmtITWN5cE1paGwwcXFpMVBBRS1POUFWdVJmUklPTTZ4SGRUSXBrclA5RS04eXBPWGptMVIyVkxySzNVYko1UGtyVTFOMEN2M25yVjYwSkljdG9KOUdDYTYzNDdIdlZRZEhkUkptbFVKUzIyOEU3VmowV0I0VS1sZDVha3F1cVpIRUdqeHgtM2NTRjE3OUVMYm93YVlxcXZMcTFyNU5zUHcwSEx1UC1qSnJfcFN3M1ZOZ1Fra09ISg?oc=5",
+   "title": "Trump calls Abbott a 'RINO' after Democrat flips Texas governor seat",
+   "at": "2026-11-04T06:08:00.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZUgybFFVeVhjX2lBZGpqM2xqN2JJUklmZDB6cld4eDlfWlBZMmZTQmhYYUdFeERyVTV4QXhHVzRZOVMyWWhIUXhacVYtclRURF9KcDRHRU0xVXBrUHVseElUODhBNW1pN2ZDb1BVelR0eEx2T25uX1VDeU5wcjBDVFpB0gGHAUFVX3lxTFBNalNHekpsS1UwQTl0aDFObVdFdjdJYkVvR2lpWDBaZF9VV280ZkE1TjdpVFdvRE1FYXFLbkF3ZEFQQm85bTE4MWo1aXR1YlNIRU5JT0VVQTU0R0dqSXNFQ0pxd2dkNS1jNEVtN0pZcGRmTm4wVmNrMU00NHMzZXZORWRfTGJjdw?oc=5",
+   "title": "El-Sayed defeats Rogers to win Michigan Senate race",
+   "at": "2026-11-04T06:17:00.000Z"
+  },
+  {
+   "race": "Gov-AZ",
+   "name": "Katie Hobbs",
+   "party": "D",
+   "result": "won",
+   "publisher": "azcentral.com and The Arizona Republic",
+   "outlet": "azcentral.com",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOcHp5Njg0bEdDZ3hDd0tUQkJfOXdQdXhHR3FtbDhzTVdtbFJLOWtjZnNqTEtvVGY2R19qMTNWUXVJVmZMZTI1REs4dFBvT3RMbnNQUXhwSmhRcFZDd28xQXhFREJnRVhvRmNZc21IOEFvbUthSGJWQUtFZTJpOF9IN01fSmt2cWxUNXJKSlRlTXM2T19ONDFkdXJzSjZhTDJ2NjUzSzAyRFA2U085TFNPelJsc0ZaMHF0NXc?oc=5",
+   "title": "Katie Hobbs projected to win second term as Arizona governor",
+   "at": "2026-11-04T06:17:19.000Z"
+  },
+  {
+   "race": "CA-22",
+   "name": "David Valadao",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHJydk9ZUXpxZlRzZkxiaHFoUWd6MUFNalhYbXRMR1FiZ0RPUFA4SklzalRwc0JLblVrNk5lb2VpaGZBZFBuTnNXaEszUlVzWGxDQ0EwWWNpNzdFeXRhVnhLZHlkSGd4OUozSThVaGd6TE1SMmdMek9LbXYzSURvdmkzS05WbGp5V0RrbWJJWHEzSmvSAZgBQVVfeXFMTk0zTjhVSWpvdGxKMFlxSUxmODZ0aldjUjhsRzN2QVVqdG5YNnFFZUFiOGpmTXJNT0FfT2g0R3VTS2dlQmxrRG1pYzBvQzJ6em96MWJpbnhqZlVXbUo1Mks1OS1hOHVteEJZM0c5U1hEMmUxRUdFbGI2R1pSaUJFdGpCWDM3TVpQNmtBRW1jZkJ2SkhGR0NKelE?oc=5",
+   "title": "Valadao ousted in battleground California House contest",
+   "at": "2026-11-04T06:35:00.000Z"
+  },
+  {
+   "race": "Gov-TX",
+   "name": "Gina Hinojosa",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Guardian",
+   "outlet": "theguardian.com",
+   "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOR3g2WmFFbWRMS3VRdTlmRS1CVEFiVDFzeG5zMzkzeFcwMXpNX2M4OVNMN0lCTTJleF9INUhubkRwSDEzZlFCY05STDVoTEFIYlpYLTZoX1hYMEl3NG8yRkQ2VXJoZFFqOHlqaW5kTDNMOGRvSDBESHctc0gyMnBTQkRYOWtrZWJFV3lrZmladmd6Zw?oc=5",
+   "title": "Democrat Gina Hinojosa defeats Texas governor Greg Abbott in stunning upset",
+   "at": "2026-11-04T06:44:39.000Z"
+  },
+  {
+   "race": "OH-10",
+   "name": "Kristina Knickerbocker",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORUFNWVVsS3l1OXdkR19OenJEN3dWWEl4NXV0RWFJLVFmd3FRWXdiNGhMUUtlY0VENVVGMnUzcWV5b0U2QmVDTFlsWEItOU0wWU1qV2tldjcxYl9XQkw3ZDB4WDFPLVJ2WjMwY1FSNUpyT2JxQ0ZaV1Q2ZGtLSU4xbERSY1QwRjluVmV1V0hJQWYwa1FkM0NIMnRBTlNJMWRURW5GOHdjSS1NbHPSAbABQVVfeXFMUE5Hb2lBU2h2Rl9qMG9aeC10anpBelppMzh2akl6NUFXQzNBRmVkWmFrZFloczVWb182dmVKc0lCanVfem5aUzgzYi15UHhQZ2xralNpZVJhLURhV1RTZ29JbnNlRVRkZmRkMUlhQmJ2SnZHWDFQNkpiSDBxaDg3YWRielQ5ZjU5LV9aNXBHUFhQN1UzMWpobmlMOWk5bE5BM2M5a1Z4VmpZVjFnSTc1LXk?oc=5",
+   "title": "Knickerbocker defeats Turner, flips Ohio House seat for Democrats",
+   "at": "2026-11-04T06:48:00.000Z"
+  },
+  {
+   "race": "MI-12",
+   "name": "Rashida Tlaib",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPRzc0TWwxdVZwSjdGLXBRZUgzMFk4OEdYSXIyVk1YR2pHYmNHTzJJaFpDcGU5R25LUzZ1eTkzMGY3Ny1NaGMxVjliblI1ZXYzcThaWllUVXFCZ1MyWTJyTHhJS2ppNnh2dmsweHZCQ01mYng2S2g0RGlGVkhkcTZHcUk3NmJ5SDF3ZnRTd2M4ZUN0R0JpckFpWENUUTlLeDE1T3JsNjVuWVR3OVd0bXoxdjJsOFZlMUhLWHA2YUZHdFhIZHFaTDNXZHptLVFOdktCV2ViZjNPWTdMcmRjLW45SFhwa3pZMlpDRXNIV3lvVmxrZkRpUGVv?oc=5",
+   "title": "Democratic U.S. Rep. Rashida Tlaib reelected in 12th District",
+   "at": "2026-11-04T06:48:06.000Z"
+  },
+  {
+   "race": "MI-03",
+   "name": "Hillary Scholten",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPandoRzFyblJheUtNMl90NzlDZFdSSkk3dk5jNG9IbHhicWZHblRiMjBjcTZBZDdTdmVXd2poLUhTOFlaaHlSMEo3d2xfd212U3R3SDdXejl6a041Y2NIcThvaHd4cEM3Q2NNLTloelJQaEpGc1RVNXdqSnpUMWUtUG90b2lEOEdDTmJzSXEyQUlnNm80dTBSb2x2Wm93ZFVrV3plV0wxSGZsdmJuZzloNExDWEloUUFvdHFWcFVaS2xxUldVbGhvVXhNSDF3UzJnQjY4RW9XRllxbzBfX1J3dHZ3MjZkbnR2bkU5T1ZnRVU1VDZvc1Zv?oc=5",
+   "title": "Democrat U.S. Rep. Scholten wins over GOP's DeBoer in 3rd District",
+   "at": "2026-11-04T06:48:15.000Z"
+  },
+  {
+   "race": "Gov-TX",
+   "name": "Gina Hinojosa",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPMnRtMGNkb1lUV2thbkVRYU9naTRUUHBaTWx2bzFteVhNeDdhYnI4RzNQcU9XRTlFSjA5YmhacldVa05XTVR0ZzZOVnFTSmZocHRpakJENVRnZGk4SjRHTTVfVW0xMTVac05TWFBlUndfMGVld0VtX3UyUHRTNGZIQnV2LWlaaWdwQlFpRlhhQ1ZNZVBEQnZHVGtR?oc=5",
+   "title": "Hinojosa defeats Abbott, flips Texas governor's office blue",
+   "at": "2026-11-04T06:56:34.000Z"
+  },
+  {
+   "race": "Gov-IA",
+   "name": "Rob Sand",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Des Moines Register",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOTzNzcFo2VWd6V0pHMk1ScGExTElqeF9hcS1jVlM5b29NY3Voc2pfZXFFMEFMVmc0cEZkRDJUZzhycTBvaFJPXzdXM2FxTXNPTTNEZ0IzMUd6dUNCS1ZNV3dHQVNhd2Z0M0hxMTgtbnZsai05QW5nQ3lJY0xpMUJxOTRNeDdWeS02MS13NVN5NmpzakZGcFR5Wkd4OVBYYXRGaHVtWEttcTRkd1VLaU1ySVJ4YV9KNFhpUWpGb21EeU5nTXlLZWM2MHpDcEw4aTdGU1VCZ1Nha0dxMjlFdHZibw?oc=5",
+   "title": "Democrat Rob Sand cruises to governor win as blue wave sweeps Iowa",
+   "at": "2026-11-04T07:31:56.000Z"
+  },
+  {
+   "race": "Senate-IA",
+   "name": "Josh Turek",
+   "party": "D",
+   "result": "won",
+   "publisher": "Iowa Capital Dispatch",
+   "outlet": "iowacapitaldispatch.com",
+   "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNanJ3dnpKMlZBOHd5NmFUbHJWdi1xVWtKZG1IRVRhTDhoM2dlNThQdGRVOUhZdm9rWUVRMU9vS2l2NXczbGdieWNCWS1SVF9PWVlJWGxqb013eDY4ajVyT1JjN3NGUEtXU3dZVFhSRFhXYXdKUmh3RHZjSDA2VWJobFVybWh2R2tpMTEyR0dGajBrQmVlT3Y1MmVlWkozWWpXcjk3NQ?oc=5",
+   "title": "Democrat Josh Turek wins Iowa’s U.S. Senate seat, AP projects",
+   "at": "2026-11-04T07:33:18.000Z"
+  },
+  {
+   "race": "Gov-MI",
+   "name": "Jocelyn Benson",
+   "party": "D",
+   "result": "won",
+   "publisher": "Bridge Michigan",
+   "outlet": "bridgemi.com",
+   "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNVHR6M1F5eVV0QnB4QjM0bjlmTVZqMFFaNVlQQ2NYXzdGb2oybU1Xcldid3pEVG0zems3TnJ1czdTWDhtX2lZNXdmVmx4SkVxYS1HSmJMV1dXVTJBVjRUTDViRmUxNFB1QXduMkNzSVdIYnpzdGFJZUN5bG5MN3dTUFNMT29QaE1uc0hKWjcwbVJSM05nVWlTRG5XUXBIa3pZYmtlYzMtODhIYWRJclE?oc=5",
+   "title": "Jocelyn Benson beats John James in Michigan governor’s race",
+   "at": "2026-11-04T07:53:00.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "Bridge Michigan",
+   "outlet": "bridgemi.com",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNMnVBT2pBNjZsUTgxZUJ0NGthY2wybVR5bTlaa0t5M0JOWE5XWjJpSVh6Vy1mQ2RFWGxkYXJLOFdjMXlIQlhGTXJRRGZ4eUJrbjlEWEFRQnQ5TFFKU096LU9ldDRHZHo4dWF6Vk11NFBvUGxSUWpKbnc0STJnTEJEZEVPblVDYi03TEhhT0Q1NFAxTk1TbkctY01IWHJ0RXp1NGI3TGZWNmo?oc=5",
+   "title": "Abdul El-Sayed beats Mike Rogers in US Senate race: ‘Michigan, we did it’",
+   "at": "2026-11-04T07:54:15.000Z"
+  },
+  {
+   "race": "Gov-MI",
+   "name": "Jocelyn Benson",
+   "party": "D",
+   "result": "won",
+   "publisher": "Michigan Advance",
+   "outlet": "michiganadvance.com",
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNNWxFNlltVlVtUWdkUDhkbDhqeDQ3NXhzR3NQUlVPSENxNFhCS2x0WV9xYWtPWnY4Vmp1SEZpS00wcndCMUxOdWhyMXBIUEZZbFY3a2FTOXQ4dEVuQ2tIWDRzNzdqSHlCYnE1TWxMcmtpZkRfWU41bDdwR21NNzdpcTdoNkFkajhVTTN5U3RCT1BGTHNjaDhiUGw0MUpFd1A2VEJ1Nkg5NEFtUkhjb2JsYVB6VjNqMlZveEdSWFFMZU1Edw?oc=5",
+   "title": "Benson wins key victory over James as Michigan’s next governor, continuing Dem control",
+   "at": "2026-11-04T07:55:59.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPa0kzX2lHTWxHLUFXZWxpLWJJRC01TXJiOWo4WkZPNEZiMmlBOE9MZmx5dElubmZmYjdBUXpEN2FGdS1ZQjJqWGw4QThlSEFDWGJZN1BpQ2RSdS1mdEwyTm9qaGdUNUI1b3JKSGtkb3JBdUF1SnRlQ0pnZVI3bEdtemY5U241aGJ3OC1WMmlpMUlXQmJYV0Q3cVBVVVFObWg4NC0yMF9tMUdqLW9vZkgwRzU5R3BjYS1GZ3Nhengya0ZkVGt0UWtqckJ4UHlXVDFHMWhVY2dHUFY?oc=5",
+   "title": "El-Sayed defeats Rogers to become America's first Muslim U.S. senator",
+   "at": "2026-11-04T08:10:42.000Z"
+  },
+  {
+   "race": "Gov-MI",
+   "name": "Jocelyn Benson",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOZzFHZEJWejUyODZyM3F6NTBFMnk4Z1ZZZ3J1QWYwMlZIVzdCQnZKTzVyaW12VUwwOERpekJLeW5TM1Z6d3JHaldzRkdwUENfTTk5X2ZaUGxJRFk1YUVsS2hQaVM3TW9DNU1aVGVkUEg3ZjdZR1hmUTdyZVRaVGU3U2dCMjFxU051dHktVVJ1R0hVZ0lBVnpBdEJpX3hSbUdhdmJxbmZIM0puWHhzODF0S25FTV83X2d1bE1BVHZlcHpTMlU3NXBQZnpLMEtqcUlDMzFQVUpzcEtYbGg0T3h4SEF1QlNLNTAtTHhSeGtzX2phdF90?oc=5",
+   "title": "Jocelyn Benson defeats John James as Democrats hold on to governor's seat",
+   "at": "2026-11-04T08:10:42.000Z"
+  },
+  {
+   "race": "OH-09",
+   "name": "Marcy Kaptur",
+   "party": "D",
+   "result": "won",
+   "publisher": "Cleveland.com",
+   "outlet": "cleveland.com",
+   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZ0RCMVVaMDBFS2dpdHNVV0NxZFZWYWt0aXg1LTdzWkdZbnpGWDd0aHRfcDJvUGxNcThZMGpIaldRN1ZtNkZqQTE0akxFYUlkRWlDM3d5QUpYblljR045bm41a2VrTmFCR1l1aWUtODZUMWExQms1MzlzV1pXNUlyZnVmOGI0ZVg1Y0xVVzZidEE2bXllRWRIOFpR0gGuAUFVX3lxTE9WN1RubVlHc0JhSU5DUk5QNV9wZzdibEtEdkptalVNcFU2NGZPZWlDZExxVlpzZTdLTGY1UndGTzhNQTNXRU1KWDctQlQ1UzYxOTVjYTNUajZYTHYyYkhFVWxvU1hySXV5RURPdDBzTlJuUkdqYjNnM1dKSXBLdW5CWEtNWE1Yc05uR25LdmVndDJSZllqYWFsaThJNVBqc0FfMkw0V2Z6RDE4Z1p3Zw?oc=5",
+   "title": "Marcy Kaptur wins record 23rd term in U.S. House",
+   "at": "2026-11-04T08:22:00.000Z"
+  },
+  {
+   "race": "Senate-NE",
+   "name": "Pete Ricketts",
+   "party": "R",
+   "result": "won",
+   "publisher": "Nebraska Examiner",
+   "outlet": "nebraskaexaminer.com",
+   "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOS3h6eWJDQjJKVnM1ZGZjOTZGZ3VHXy1vMFpGdUdPdW9XbDE0XzRaWlJZejN4X3FrQTNza0loNHVfNVlBMkVZeE42bkZtWkZBM2NmdFAxU2N5SnZtZWNXNXZoR2VhcFVrRXRpcW82VFJ0ekRWZ2t1bkdvTmlIRF9UREZmOTRBY0hwNmxfYUR1R01TQ2pRekpUek5SUHdXeVNtNmhGMHNGSWVncnlsNjZtLVdCWEJLMDZZdXRHQjNucTZ3MVRLeWh4bk1ZellUWUM1T0Nr?oc=5",
+   "title": "Pete Ricketts claims victory over Dan Osborn in US Senate race",
+   "at": "2026-11-04T08:47:13.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "Michigan Advance",
+   "outlet": "michiganadvance.com",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNVnhtRjRLZ3VwMF9jQlpXVGljV0o5UHk3WGZlNWhFelpwc3czZ0hpZ2I0N1QzcHNpbGNMWGZ0OHZlYldqSDhnWHhudHhVQm9JUFlWQ3k0a2NGRlRWZEk1WHhMWkJXdUdSa3dRaUtSRlYzM1JvcWZ6OHpFemJBeE5BTld6WElRRmVuLWFHVkNMcnlnTnRPMDJJSkhKYw?oc=5",
+   "title": "El-Sayed declares victory and storms into the US Senate",
+   "at": "2026-11-04T08:52:37.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "USA Today",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNelVtZHRoNVRidTlKdm9hRFAyQ3lEa29pQU5vQ0NIZGdIZndrRVRDV0dmVDVZTXhvdkdpLTQzeVY3dVc0eG9ReHpaT1Z3VU5aM1dwWDZfMXU2VVhySjQ5Mk9iOWJsWHNlZ0JJRjhtc3hJcHZIN2U4SWNEUzJHZlk4ZzNWakJTbVpEdThhRGtIT19lS0lQVjJlWldPRVhDbzV1UXdPNDdfbzgzZm01bXpzc3JQdF9mZ1lNSW5IeEg2ZXExSUwzMzcwSUtYSUc?oc=5",
+   "title": "Democrat Abdul El-Sayed wins crucial Michigan Senate race over Mike Rogers",
+   "at": "2026-11-04T11:29:00.000Z"
+  },
+  {
+   "race": "Senate-MI",
+   "name": "Abdul El-Sayed",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/democrat-abdul-el-sayed-wins-michigan-senate-race-makes-history-as-first-muslim-senator_61e86d",
+   "title": "Democrat Abdul El-Sayed Wins Michigan Senate Race, Makes History as First Muslim Senator",
+   "at": "2026-11-04T11:59:00.421Z"
+  },
+  {
+   "race": "Senate-ME",
+   "name": "Troy Jackson",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/democrat-troy-jackson-ousts-republican-senator-susan-collins-in-maine_44658c",
+   "title": "Democrat Troy Jackson ousts Republican Senator Susan Collins in Maine",
+   "at": "2026-11-04T11:59:00.422Z"
   }
  ],
  "races": {
@@ -1127,6 +1677,14 @@
      "winner": "Sydney Gruters",
      "party": "R",
      "at": "2026-11-04T00:57:00.000Z"
+    },
+    {
+     "publisher": "Sarasota Herald-Tribune",
+     "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQS0FRbWxLamJ1LXpLXzBJQTJUOUliWTNnay1FTGtSSDYxNnhBRFJXM3E4c3F3djF3MlRSb0VOTV9rak90bXBPUTY2blZsekpDV3JWTkRQeW43c2pvazc2dncwVFJ3OFIzTVl0bFZyN19fUE9ZQkk5YnlKOWVRT3FnZDlmQlhtYk1YbGh5NEdCeVl6Vy1TcGtUMFlNaHV1VXIwczhyQ0hXY0M4M3pVV09HUG1COGZyTUhnWllRSGRCeG1tbF95MVFuWnBqbFRRYjQtdDRkRXBn?oc=5",
+     "title": "Sarasota's Sydney Gruters wins Florida Congressional District 16",
+     "winner": "Sydney Gruters",
+     "party": "R",
+     "at": "2026-11-04T01:55:00.000Z"
     }
    ],
    "disagree": [],
@@ -1142,6 +1700,14 @@
      "winner": "Jon Ossoff",
      "party": "D",
      "at": "2026-11-04T01:02:32.000Z"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNd2dsVFN4MWpnMUZoaTEzUkdrNWxrTWFlSmdKcW9ZNDd1OV9sRlZFR0o3RHpEbGIySGVyWDRXMlVfM0kxX3h0TDMzQkoxUUtKUExmQkhwYVpndkt5aTQ0Q3BncEcxN0RCbHQtTHRQRlhfb2p6NzhCdjduQldYVDBpY1RQaU5YYkQ0eGtXYldqcw?oc=5",
+     "title": "Jon Ossoff wins Georgia Senate race over Republican Mike Collins",
+     "winner": "Jon Ossoff",
+     "party": "D",
+     "at": "2026-11-04T00:57:00.000Z"
     }
    ],
    "disagree": [],
@@ -1371,6 +1937,14 @@
      "winner": "Melat Kiros",
      "party": "D",
      "at": "2026-11-04T02:30:00.000Z"
+    },
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPMVd0b2ZiTm43U2hrR3hOdVRhai1kYTBEOGRaN1JFU0JhS0lENU02dnBDLWJTYmM1NkJMSWNTNFVLeVRrX2cyb0JPcmQ4UlkxOFJ4N0VyUldpSkNLNTMyYzYyNTNISHk5c3M2b3o3NGlNcHEtYndlbDhyQU42Qm1xZzBMWURuVExWZ1lkUlJvbnZvb1FJSHdhOQ?oc=5",
+     "title": "Melat Kiros easily wins 1st District seat",
+     "winner": "Melat Kiros",
+     "party": "D",
+     "at": "2026-11-04T02:27:51.000Z"
     }
    ],
    "disagree": [],
@@ -1447,6 +2021,14 @@
      "winner": "Keisha Bottoms",
      "party": "D",
      "at": "2026-11-04T02:42:28.000Z"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxORGk3MUs2YWpsTWt1Zm1YNDBUVEVrTzVmV1EzOXpJSmRsWXVROGQ3aG1QRXVWTUY5RnZ1ZEh1cmRVLWRUUk4tMXY5ZEhfU1FZRkktSlUwWmVObnRaWWRaZkV0dG93dk9yMVo5ZUZBempCMU9TZnhYNmdCdWxsYTdHOGtsb05YLUpBRDljdnZkSjhwM185SE5mcWdyWFFHU1BCeTJHOA?oc=5",
+     "title": "Georgia’s Keisha Lance Bottoms makes US history as first Black woman to be elected state governor",
+     "winner": "Keisha Bottoms",
+     "party": "D",
+     "at": "2026-11-04T02:27:00.000Z"
     }
    ],
    "disagree": [],
@@ -1462,16 +2044,22 @@
      "winner": "Ashley Moody",
      "party": "R",
      "at": "2026-11-04T02:46:00.000Z"
+    },
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNSF9yckxic1JBNUt3dm5IeVB4aFVDcjlwUzV5NkdqX0RKbmI3ZTNGYWhVTzNCckowSS0xQnFMSHRIcERUMWgtVDY3MUVGRDh2RDZXUnZ6VGdld0swUGJXOGx4WXJ5ekNNUVVkUUVKdWQ4TEkzU2NhanNjX1BUVmlwYdIBhgFBVV95cUxQUjViaFNSdlFRa1BXNWRoLUhkUWZaal9OcmJobnM0VS1Qb0ZWbjdrS1N4SkpjWGJiVkhFSXgwcDJFd1lnMS1PNlRPTnptNnpJN0xMSHpwYk1ULXI3dXBGeU9UZElzSmtpUjQtNXhCT0luSk91N185R0Nvem43V2w0bGVNeGZqUQ?oc=5",
+     "title": "Moody projected to win Florida Senate seat in tight contest with Angie Nixon",
+     "winner": "Ashley Moody",
+     "party": "R",
+     "at": "2026-11-04T01:03:00.000Z"
     }
    ],
    "disagree": [],
    "reported": []
   },
   "IN-05": {
-   "fox_winner": null,
-   "agree": [],
-   "disagree": [],
-   "reported": [
+   "fox_winner": "J.D. Ford",
+   "agree": [
     {
      "publisher": "The Hill",
      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOZWRBb3YwUGtYYXk4R0NTYU5DZVdHSTZCTEdlMTc0WDRNRFVTcV9jMGVrRFdHbEowc1RwZUhocmRNN3phdWxCYjBZUG9teFFwb3EwMUIzNl9GcGlQZFA2Y3M2YlhzVndMYUtBYlpicVpjdWJlb0xtMDNxQ1FhQjJ5N091WQ?oc=5",
@@ -1480,7 +2068,9 @@
      "party": "D",
      "at": "2026-11-04T02:52:00.000Z"
     }
-   ]
+   ],
+   "disagree": [],
+   "reported": []
   },
   "Senate-SC": {
    "fox_winner": "Annie Andrews",
@@ -1531,6 +2121,22 @@
      "winner": "Amy Acton",
      "party": "D",
      "at": "2026-11-04T03:57:00.000Z"
+    },
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5UWTRUTUVDZXhTZ3dZS2F3Q2kwZlptVkVIWm1mLUV4Z0s5OGpMa0R1aU93OGNSRE82OG4xWHhONVEwVVhVMkJRUUthQXB6amt3VWVSbGZhWmJ4WHhEalV2MUQ4bU4yTlFCTkFIQXpqdkxtQmhoeFVHQmpn?oc=5",
+     "title": "Acton flips Ohio governor's office for Democrats",
+     "winner": "Amy Acton",
+     "party": "D",
+     "at": "2026-11-04T04:52:35.000Z"
+    },
+    {
+     "publisher": "The Columbus Dispatch",
+     "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPSXI1VzJYQUYxNVcwdk5OZUFHZnE1VkNraWVSNVQ5LVFZZWx3UGc5SnNfSDhoc2ppRkJrLXZZdGFzbHBTbXIyTlRqcFNlbW85ck43OFgybklRZDZGSmV4U0p3aUx4c1VwdXNKZVRvMkFZN1hrUFh5M0Y5M0dKMl8xU2JLVXFiVDhtQzdZTVRZZHlFS3pGTFZfTkwtVXpiZzlkb09vQUlaOFdlT05TN0VtbS0yb0dOMHBza0xZVGVhLWtXMjJETTZSdXJrYmVEMmctMkE?oc=5",
+     "title": "Amy Acton first woman elected Ohio governor, first Democrat in 20 years",
+     "winner": "Amy Acton",
+     "party": "D",
+     "at": "2026-11-04T04:47:39.000Z"
     }
    ],
    "disagree": [],
@@ -1546,6 +2152,14 @@
      "winner": "Jeremy Moss",
      "party": "D",
      "at": "2026-11-04T03:37:34.000Z"
+    },
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMihwJBVV95cUxOYzdyQ1V6RDJGdE5rN3hTeVlTUEJGVEwyMlFEOWdReHlRblA3RVppSUhkQ1dIVWloV3NvU01iTUc1R3hqc0JoMHJ1RVA4aDRsWFVYazBhbXBaT1FqVUJNWFBmejRUQzNJNHhfRkJ4UzJwam1kRXc3QjBXU0Rwc182ZWJBZUpaNXdjdEwtRGd5RjF5b2xxNGJ0VGc0bGNQRWJYbmhqMmlSekJrb2VPMmxnWDJYQ3RwWW9pd2xpS1dCZHhqWlpzTExqSFhGMWUybl8xcHJxcTZzLW9DSk5VeGxZb2hWRE9xVklqY1F0V3pnRFhQQTAwV2ptYVNZYkxVelRzSGNZWGl0dw?oc=5",
+     "title": "Democrat Jeremy Moss wins to become Michigan's first gay congressman",
+     "winner": "Jeremy Moss",
+     "party": "D",
+     "at": "2026-11-04T04:58:00.000Z"
     }
    ],
    "disagree": [],
@@ -1577,6 +2191,14 @@
      "winner": "James Talarico",
      "party": "D",
      "at": "2026-11-04T05:38:15.000Z"
+    },
+    {
+     "publisher": "WUNC News",
+     "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPUWlMS1B3dThYZUZqV3VXb1Q0N2VOM2tEWTlZdGFmN3JmVmpSS2JKQ3hnS0lHUEY3TVJBajhxZno0ZmlZUnJocWdQZTQ5OExybERxYzdHUE1XOHhCNkZTUnRPdzhiVWE3M25fUURwbWljbDdrWVR6XzgtVWFhZGdSQWxvYTY?oc=5",
+     "title": "Democrat James Talarico wins Texas Senate seat",
+     "winner": "James Talarico",
+     "party": "D",
+     "at": "2026-11-04T04:04:00.000Z"
     }
    ],
    "disagree": [],
@@ -1631,6 +2253,14 @@
      "winner": "Xavier Becerra",
      "party": "D",
      "at": "2026-11-04T05:09:52.894Z"
+    },
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNdTB3SWJEamVMQkpSMGdQYzRyYVY2Q2JOUEwxMC0tRlR5NWZyYjhsV292VUxHREhkSXNqcUVUSmVMR1VoRllKaXZjUVlCT2Vqbm1INGY0bWtiQk9McUlDRFR3U0J3T1UzRVRoOWxuM2pVX0FfV09KU1ZKclF3TkFaR3lLQlgtQlpmSEotbEEwX3Bza3YxWlhsVA?oc=5",
+     "title": "Xavier Becerra beats Trump-backed Steve Hilton in California governor's race",
+     "winner": "Xavier Becerra",
+     "party": "D",
+     "at": "2026-11-04T04:07:54.000Z"
     }
    ],
    "disagree": [],
@@ -1654,16 +2284,30 @@
      "winner": "Rob Sand",
      "party": "D",
      "at": "2026-11-04T04:49:44.179Z"
+    },
+    {
+     "publisher": "WUNC News",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOT2tmTG9NZTEyRUZrQ3JtYkdwMjVDTFBrR3BHdkQ4MHZvRnREU1NBamtjQnJBMEVQOWpCVkp2RGRweUlIZWdnOWVXX1pOQy1zckZQODJIOFNTcndGWmtrMkpvd05UcTZCQTdpVEw5QjlWbHlfcWFzYS1DbDVFLS1TRWVXb1BteGI5QnlDaXNwZmNlVjdIRXBKUmVNMldPVFJXSmhSVTMxTGp6RUk?oc=5",
+     "title": "Democrat Rob Sand wins Iowa governor's race, ending GOP control of the office",
+     "winner": "Rob Sand",
+     "party": "D",
+     "at": "2026-11-04T04:16:00.000Z"
+    },
+    {
+     "publisher": "The Des Moines Register",
+     "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOTzNzcFo2VWd6V0pHMk1ScGExTElqeF9hcS1jVlM5b29NY3Voc2pfZXFFMEFMVmc0cEZkRDJUZzhycTBvaFJPXzdXM2FxTXNPTTNEZ0IzMUd6dUNCS1ZNV3dHQVNhd2Z0M0hxMTgtbnZsai05QW5nQ3lJY0xpMUJxOTRNeDdWeS02MS13NVN5NmpzakZGcFR5Wkd4OVBYYXRGaHVtWEttcTRkd1VLaU1ySVJ4YV9KNFhpUWpGb21EeU5nTXlLZWM2MHpDcEw4aTdGU1VCZ1Nha0dxMjlFdHZibw?oc=5",
+     "title": "Democrat Rob Sand cruises to governor win as blue wave sweeps Iowa",
+     "winner": "Rob Sand",
+     "party": "D",
+     "at": "2026-11-04T07:31:56.000Z"
     }
    ],
    "disagree": [],
    "reported": []
   },
   "OH-07": {
-   "fox_winner": null,
-   "agree": [],
-   "disagree": [],
-   "reported": [
+   "fox_winner": "Brian Poindexter",
+   "agree": [
     {
      "publisher": "The Hill",
      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOM0R1OWU3YjltMlFEQ0UyaldpUkp5MTVXbnF5cEFyRWxmaExfbHRYalhyS0JUN094anRZaHN3TnI4aWpVSzltU0x4QXhnSGd2NkpFSUdYMzR0dlc0bV9tZ2ozR0c5MzRmOVFYWWdVdnMwWi05VjUtT0p2RFMyVlN2SnRoZ9IBiAFBVV95cUxOcWpUMjZEenpDM0M4OGlycVp5NlhSaFZQWnNqMWlZeExoR0MzeVlSQk1JRFBxQzZYeF8xMEtOSktweFJTMU5hMmppb0t4V3JiLXdPaUVJcXFkN3NlM0xWMlQ3V3NWNVFCSXl0Z0NGMWVXR0Rzd3ZmU2dfaTlBTnM4WjN1ZDR1c1dC?oc=5",
@@ -1672,7 +2316,9 @@
      "party": "D",
      "at": "2026-11-04T04:22:00.000Z"
     }
-   ]
+   ],
+   "disagree": [],
+   "reported": []
   },
   "Senate-OH": {
    "fox_winner": "Sherrod Brown",
@@ -1730,6 +2376,14 @@
      "winner": "Josh Turek",
      "party": "D",
      "at": "2026-11-04T04:49:44.181Z"
+    },
+    {
+     "publisher": "Iowa Capital Dispatch",
+     "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNanJ3dnpKMlZBOHd5NmFUbHJWdi1xVWtKZG1IRVRhTDhoM2dlNThQdGRVOUhZdm9rWUVRMU9vS2l2NXczbGdieWNCWS1SVF9PWVlJWGxqb013eDY4ajVyT1JjN3NGUEtXU3dZVFhSRFhXYXdKUmh3RHZjSDA2VWJobFVybWh2R2tpMTEyR0dGajBrQmVlT3Y1MmVlWkozWWpXcjk3NQ?oc=5",
+     "title": "Democrat Josh Turek wins Iowa’s U.S. Senate seat, AP projects",
+     "winner": "Josh Turek",
+     "party": "D",
+     "at": "2026-11-04T07:33:18.000Z"
     }
    ],
    "disagree": [],
@@ -1745,9 +2399,34 @@
      "winner": "Gina Hinojosa",
      "party": "D",
      "at": "2026-11-04T04:49:44.182Z"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOR3g2WmFFbWRMS3VRdTlmRS1CVEFiVDFzeG5zMzkzeFcwMXpNX2M4OVNMN0lCTTJleF9INUhubkRwSDEzZlFCY05STDVoTEFIYlpYLTZoX1hYMEl3NG8yRkQ2VXJoZFFqOHlqaW5kTDNMOGRvSDBESHctc0gyMnBTQkRYOWtrZWJFV3lrZmladmd6Zw?oc=5",
+     "title": "Democrat Gina Hinojosa defeats Texas governor Greg Abbott in stunning upset",
+     "winner": "Gina Hinojosa",
+     "party": "D",
+     "at": "2026-11-04T06:44:39.000Z"
+    },
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPMnRtMGNkb1lUV2thbkVRYU9naTRUUHBaTWx2bzFteVhNeDdhYnI4RzNQcU9XRTlFSjA5YmhacldVa05XTVR0ZzZOVnFTSmZocHRpakJENVRnZGk4SjRHTTVfVW0xMTVac05TWFBlUndfMGVld0VtX3UyUHRTNGZIQnV2LWlaaWdwQlFpRlhhQ1ZNZVBEQnZHVGtR?oc=5",
+     "title": "Hinojosa defeats Abbott, flips Texas governor's office blue",
+     "winner": "Gina Hinojosa",
+     "party": "D",
+     "at": "2026-11-04T06:56:34.000Z"
     }
    ],
-   "disagree": [],
+   "disagree": [
+    {
+     "publisher": "USA Today",
+     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxORi1heHJFeS1sdWlyV1Q0SU1zV1U4TmtITWN5cE1paGwwcXFpMVBBRS1POUFWdVJmUklPTTZ4SGRUSXBrclA5RS04eXBPWGptMVIyVkxySzNVYko1UGtyVTFOMEN2M25yVjYwSkljdG9KOUdDYTYzNDdIdlZRZEhkUkptbFVKUzIyOEU3VmowV0I0VS1sZDVha3F1cVpIRUdqeHgtM2NTRjE3OUVMYm93YVlxcXZMcTFyNU5zUHcwSEx1UC1qSnJfcFN3M1ZOZ1Fra09ISg?oc=5",
+     "title": "Trump calls Abbott a 'RINO' after Democrat flips Texas governor seat",
+     "winner": "Greg Abbott",
+     "party": "R",
+     "at": "2026-11-04T06:08:00.000Z"
+    }
+   ],
    "reported": []
   },
   "AZ-06": {
@@ -1762,6 +2441,22 @@
      "winner": "JoAnna Mendoza",
      "party": "D",
      "at": "2026-11-04T04:49:44.183Z"
+    },
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPbkRlMGdKOTJkdHQyMEhyQ1drXzZRMG9ZVjAxQkNsN1AzN1Zpb3hYTnFZMy11V0h6YnFDWnRzSW5vQnE3eldpaWV6RnJpdU5XMXFFQ292UEZzR01reDFaZkxscEFaRzB5RUJEZTZRNGMzOFFLRmM4b1Q5YmtCc3ZmVVVMUHNJWExUYUxjSzhiaUXSAZYBQVVfeXFMT21hWjIwemh4cUxESUx2YjlvQm5lTmZONkpTUjhGQU5DOTVvOVlqUzg2d2o4WVRRMjlfNFlTWURVdmdCUWpNVDlXRV8tZWxLRFhwZDFqV1RLRzBBM1o1eFdIV3VySXNKc2htdmpJbDdYUkpiQU4wTWFXTzVNdzdiM2ZDXzdfblIyWXpNREx6a3RXc0lmNW9B?oc=5",
+     "title": "JoAnna Mendoza wins Arizona House seat, flipping key district for Dems",
+     "winner": "JoAnna Mendoza",
+     "party": "D",
+     "at": "2026-11-04T03:16:00.000Z"
+    },
+    {
+     "publisher": "azcentral.com and The Arizona Republic",
+     "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQUjdyYmdNYlBDd2p1bGtqYUJnOFJpXzJyTVlZcFZhMTBRMVNBVFRCZC1mb1NMTS1VVTB6QnZYei1ZVXdPWjNOd0g5UTVUR3lnVm5RaXVyVFZoVk90OXNjMWkwNTFLVkRxRnNPLXB2N1puRGMyLUViM2Npc2VfaHhHZ3JSU1lkY21PSlNzYnJRUlJIUXZZdUdpZGN3Z3lRR1dqS0I3S2ZkaEd5TmRmdEplQVpuVE5BeC1kNEk5MnFDbkFYQlBrajc4TQ?oc=5",
+     "title": "JoAnna Mendoza declares win in pivotal Tucson-area US House race",
+     "winner": "JoAnna Mendoza",
+     "party": "D",
+     "at": "2026-11-04T05:24:00.000Z"
     }
    ]
   },
@@ -1790,6 +2485,14 @@
      "winner": "Jeff Merkley",
      "party": "D",
      "at": "2026-11-04T05:20:00.282Z"
+    },
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOTFE4TG45RDJqWnVrSDZXUmtFM3NpX3g3LTFMaFNTMUhUall3QlFzdi1nSnhkbTJBV3Q5eFkxN1Fnd1VtVVhkY3BxdlVjcjJfcG50emNMQ09lNUhQSkszM0hKeGlPSlc0SWduYmlOY1c5UTJuOHBxUzlyU1B1cmI4VnYyTVnSAYoBQVVfeXFMTjViQXRJN1ZaeDZ3Q1owQmpYWm41RmNHQ2FKZ2Q0VWpBVlhqYUpQTkx6WGVKemFHV1FuR0s5QkZFWW5seFY1OWxhdi1aV3YtN0pkZjJSeEtCMzhrSmJsanJHRHY2bElvd0dTMExsMlBwLUFvNHhlQS1kRndfN2ZPRnJST2NReFRiT0JB?oc=5",
+     "title": "Oregon Sen. Merkley wins reelection bid",
+     "winner": "Jeff Merkley",
+     "party": "D",
+     "at": "2026-11-04T04:07:00.000Z"
     }
    ],
    "disagree": [],
@@ -1820,6 +2523,14 @@
      "winner": "Troy Jackson",
      "party": "D",
      "at": "2026-11-04T05:30:13.575Z"
+    },
+    {
+     "publisher": "The Guardian",
+     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNUElPREdhRlZaRW56NXM5aHV3SUVCdHpSVTBPQ0FFaVBmVmdCcFF5YWgybDhYamlMbzBYVERkY25ucVJnSGllWWJrOXVFdXNmMGNXbDE1YkNLXzNhcjNsaG5TT0ZxbFVhMFV6dl9hcUFHeGN3b1VTMkJ0U2RINjAwajlR?oc=5",
+     "title": "Democrat Troy Jackson defeats Susan Collins to win Maine US Senate seat in blow to Republicans",
+     "winner": "Troy Jackson",
+     "party": "D",
+     "at": "2026-11-04T05:38:00.000Z"
     }
    ],
    "disagree": [],
@@ -1835,6 +2546,14 @@
      "winner": "Peggy Flanagan",
      "party": "D",
      "at": "2026-11-04T05:36:53.749Z"
+    },
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOb2JYXzRuck1ESHZORXJBU21UOG0wbFdCUVhNUnhVcloyX3JkbnptR2J5ak15VlpTRktVYm5uVGZfQmowam5OTldfenlaalRGRkozcDZKOVlHVzNLNXZrbXk1ZmxWT3IwRTVpTXhBcGVLdGF2NmhPOFpEYVIzbk5wVmhDZndWbzVSRGlBWUVRRTVHcmpNRmc?oc=5",
+     "title": "Peggy Flanagan keeps Minnesota Senate seat blue in historic win",
+     "winner": "Peggy Flanagan",
+     "party": "D",
+     "at": "2026-11-04T05:12:28.000Z"
     }
    ],
    "disagree": [],
@@ -1854,13 +2573,369 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Senate-MI": {
+   "fox_winner": "Abdul El-Sayed",
+   "agree": [
+    {
+     "publisher": "Bridge Michigan",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNMnVBT2pBNjZsUTgxZUJ0NGthY2wybVR5bTlaa0t5M0JOWE5XWjJpSVh6Vy1mQ2RFWGxkYXJLOFdjMXlIQlhGTXJRRGZ4eUJrbjlEWEFRQnQ5TFFKU096LU9ldDRHZHo4dWF6Vk11NFBvUGxSUWpKbnc0STJnTEJEZEVPblVDYi03TEhhT0Q1NFAxTk1TbkctY01IWHJ0RXp1NGI3TGZWNmo?oc=5",
+     "title": "Abdul El-Sayed beats Mike Rogers in US Senate race: ‘Michigan, we did it’",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T07:54:15.000Z"
+    },
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQZUgybFFVeVhjX2lBZGpqM2xqN2JJUklmZDB6cld4eDlfWlBZMmZTQmhYYUdFeERyVTV4QXhHVzRZOVMyWWhIUXhacVYtclRURF9KcDRHRU0xVXBrUHVseElUODhBNW1pN2ZDb1BVelR0eEx2T25uX1VDeU5wcjBDVFpB0gGHAUFVX3lxTFBNalNHekpsS1UwQTl0aDFObVdFdjdJYkVvR2lpWDBaZF9VV280ZkE1TjdpVFdvRE1FYXFLbkF3ZEFQQm85bTE4MWo1aXR1YlNIRU5JT0VVQTU0R0dqSXNFQ0pxd2dkNS1jNEVtN0pZcGRmTm4wVmNrMU00NHMzZXZORWRfTGJjdw?oc=5",
+     "title": "El-Sayed defeats Rogers to win Michigan Senate race",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T06:17:00.000Z"
+    },
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPa0kzX2lHTWxHLUFXZWxpLWJJRC01TXJiOWo4WkZPNEZiMmlBOE9MZmx5dElubmZmYjdBUXpEN2FGdS1ZQjJqWGw4QThlSEFDWGJZN1BpQ2RSdS1mdEwyTm9qaGdUNUI1b3JKSGtkb3JBdUF1SnRlQ0pnZVI3bEdtemY5U241aGJ3OC1WMmlpMUlXQmJYV0Q3cVBVVVFObWg4NC0yMF9tMUdqLW9vZkgwRzU5R3BjYS1GZ3Nhengya0ZkVGt0UWtqckJ4UHlXVDFHMWhVY2dHUFY?oc=5",
+     "title": "El-Sayed defeats Rogers to become America's first Muslim U.S. senator",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T08:10:42.000Z"
+    },
+    {
+     "publisher": "Michigan Advance",
+     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNVnhtRjRLZ3VwMF9jQlpXVGljV0o5UHk3WGZlNWhFelpwc3czZ0hpZ2I0N1QzcHNpbGNMWGZ0OHZlYldqSDhnWHhudHhVQm9JUFlWQ3k0a2NGRlRWZEk1WHhMWkJXdUdSa3dRaUtSRlYzM1JvcWZ6OHpFemJBeE5BTld6WElRRmVuLWFHVkNMcnlnTnRPMDJJSkhKYw?oc=5",
+     "title": "El-Sayed declares victory and storms into the US Senate",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T08:52:37.000Z"
+    },
+    {
+     "publisher": "USA Today",
+     "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNelVtZHRoNVRidTlKdm9hRFAyQ3lEa29pQU5vQ0NIZGdIZndrRVRDV0dmVDVZTXhvdkdpLTQzeVY3dVc0eG9ReHpaT1Z3VU5aM1dwWDZfMXU2VVhySjQ5Mk9iOWJsWHNlZ0JJRjhtc3hJcHZIN2U4SWNEUzJHZlk4ZzNWakJTbVpEdThhRGtIT19lS0lQVjJlWldPRVhDbzV1UXdPNDdfbzgzZm01bXpzc3JQdF9mZ1lNSW5IeEg2ZXExSUwzMzcwSUtYSUc?oc=5",
+     "title": "Democrat Abdul El-Sayed wins crucial Michigan Senate race over Mike Rogers",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T11:29:00.000Z"
+    },
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/democrat-abdul-el-sayed-wins-michigan-senate-race-makes-history-as-first-muslim-senator_61e86d",
+     "title": "Democrat Abdul El-Sayed Wins Michigan Senate Race, Makes History as First Muslim Senator",
+     "winner": "Abdul El-Sayed",
+     "party": "D",
+     "at": "2026-11-04T11:59:00.421Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Gov-MI": {
+   "fox_winner": "Jocelyn Benson",
+   "agree": [
+    {
+     "publisher": "Bridge Michigan",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNVHR6M1F5eVV0QnB4QjM0bjlmTVZqMFFaNVlQQ2NYXzdGb2oybU1Xcldid3pEVG0zems3TnJ1czdTWDhtX2lZNXdmVmx4SkVxYS1HSmJMV1dXVTJBVjRUTDViRmUxNFB1QXduMkNzSVdIYnpzdGFJZUN5bG5MN3dTUFNMT29QaE1uc0hKWjcwbVJSM05nVWlTRG5XUXBIa3pZYmtlYzMtODhIYWRJclE?oc=5",
+     "title": "Jocelyn Benson beats John James in Michigan governor’s race",
+     "winner": "Jocelyn Benson",
+     "party": "D",
+     "at": "2026-11-04T07:53:00.000Z"
+    },
+    {
+     "publisher": "Michigan Advance",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNNWxFNlltVlVtUWdkUDhkbDhqeDQ3NXhzR3NQUlVPSENxNFhCS2x0WV9xYWtPWnY4Vmp1SEZpS00wcndCMUxOdWhyMXBIUEZZbFY3a2FTOXQ4dEVuQ2tIWDRzNzdqSHlCYnE1TWxMcmtpZkRfWU41bDdwR21NNzdpcTdoNkFkajhVTTN5U3RCT1BGTHNjaDhiUGw0MUpFd1A2VEJ1Nkg5NEFtUkhjb2JsYVB6VjNqMlZveEdSWFFMZU1Edw?oc=5",
+     "title": "Benson wins key victory over James as Michigan’s next governor, continuing Dem control",
+     "winner": "Jocelyn Benson",
+     "party": "D",
+     "at": "2026-11-04T07:55:59.000Z"
+    },
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxOZzFHZEJWejUyODZyM3F6NTBFMnk4Z1ZZZ3J1QWYwMlZIVzdCQnZKTzVyaW12VUwwOERpekJLeW5TM1Z6d3JHaldzRkdwUENfTTk5X2ZaUGxJRFk1YUVsS2hQaVM3TW9DNU1aVGVkUEg3ZjdZR1hmUTdyZVRaVGU3U2dCMjFxU051dHktVVJ1R0hVZ0lBVnpBdEJpX3hSbUdhdmJxbmZIM0puWHhzODF0S25FTV83X2d1bE1BVHZlcHpTMlU3NXBQZnpLMEtqcUlDMzFQVUpzcEtYbGg0T3h4SEF1QlNLNTAtTHhSeGtzX2phdF90?oc=5",
+     "title": "Jocelyn Benson defeats John James as Democrats hold on to governor's seat",
+     "winner": "Jocelyn Benson",
+     "party": "D",
+     "at": "2026-11-04T08:10:42.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Senate-AR": {
+   "fox_winner": "Tom Cotton",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNbExlMnlQbUhGdmRNSTNmN3hpUDM5b3c1WUF0WWNKU2N0ZFc3a1J4b0hqM2VkZlJQUE5WOTY2ek42djUyVjdqLVY2VHJ3VF9PTGJKN3E2UEpsQ3RlQ0JjbHd4N1NCbFV2Q2NCS1luaWFCTGdpaEhRaXZtUnExX2JXLUZYMko3NlNZTnhYMGkzN0I2aGlDOFEw0gGcAUFVX3lxTE5XOUd0SGNIa1N0M0FqTUFhRzB0UEJ0UVRkTkwzTkxnNHY0WDVIQlFHSUN6WDhTc0ZBWjc1X1ZTMFkxRW5FU0YyWE9FRUZ2SEx1bjkwaURGSzV1Vm12U3ZkU3hSaXQyOW9UMzFIWWVBU2xpVXlITTJhZmFZdl85RXJYdV8zMUtOTWZjWm9WLWMzUE4yWmk5R0pCaWVuNw?oc=5",
+     "title": "Cotton wins third term in Senate for Arkansas",
+     "winner": "Tom Cotton",
+     "party": "R",
+     "at": "2026-11-04T03:35:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Senate-IL": {
+   "fox_winner": "Juliana Stratton",
+   "agree": [
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNLWsxUDl2TWUzS3Q4VGh0NFIyQUo1UV9CNmY2U01uS20zeHlRYVpWTF9FeWNuLXZad3ZmVW8yb0plbDNnc1ZfTUJMMktCX2J6YTJBOG5XSllJa2NVQk1mbG1iMDhBbVh1S2ZIZjd0WGo1NlJjMmc2WF9oZ2NwZ05yenJMd0dxY0JNNDlXNmtpVU1KV21FZ1dPWEhJZkdQLU0?oc=5",
+     "title": "Juliana Stratton wins Illinois U.S. Senate race, making history",
+     "winner": "Juliana Stratton",
+     "party": "D",
+     "at": "2026-11-04T02:41:39.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "IA-04": {
+   "fox_winner": "Chris McGowan",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPWlJfTHUtM1hCVXJUcjE5VXhDa1ZqeVV1N3duWUc5LVZZYXNNV0xzQVBjWFdnWHBwYmI0MnlnT3Y5VHRBLXlRbnpNamJTOHFnQ04xTDVPdThWS3pEOEY3ZDZZUVJldDBFX1VHcmN4aW5fX0RncjNJY2pPZXR4YnRlQzFmYnFqZknSAYwBQVVfeXFMUFl4ckh5X1ZEWjg5YmpSQS0wcElUZm41Q0FOZGptZDNwMEY3ZXY4Zk9hWndhR2JGaHpyRGFSSDRpeGxGUHY2VkEtZzZCTmx6NHFMclRjekVWWFYyZ3lrbk1wOTQtMExUQnpQY2JyT0pRNkk0bTI1eTQ4bGVCR2tHWTJUeG5iNXdVTEJVTnQ?oc=5",
+     "title": "McGowan wins Iowa House race for open Feenstra seat",
+     "winner": "Chris McGowan",
+     "party": "R",
+     "at": "2026-11-04T04:29:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "FL-20": {
+   "fox_winner": "Debbie Wasserman Schultz",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPQVRsVHZIUVpPMWEyRGo0RlZvWDAxYmUza2VhQzJXQ2lZS0pqajhubU0zTGk4V0JiVW1BXzNvWF9HSUdLM2hxOTBYZ2hQS1ZodEVQWjZHM2ZuLVlXd3R1dkJxNnlHdW1sSmdJSlk4M3VTX1JfZklSd1RTdTN2NEZhUldJWk1ydGVvdV93UUxUVdIBlAFBVV95cUxQRVlIUHlBMVFSSjFSNTl6dHFJR0JkdXpsMEM2WVRYWW0zMkRvVlVVMXFPeFpzcmJvRG01bWhDZG9mZExNOVg4UXJNWXFEWldyUVZYUzViZ1BPdlZtaGNnRGZIdWExMFRzWjdNb042Y2lEa1B3aFF4VlJrM3NvV3E2Zm1PSmpmUFZDTUluOFFlWUJZSGVk?oc=5",
+     "title": "Rep. Debbie Wasserman Schultz wins Florida House seat",
+     "winner": "Debbie Wasserman Schultz",
+     "party": "D",
+     "at": "2026-11-04T00:24:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Senate-SD": {
+   "fox_winner": "Mike Rounds",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOQ0s0TE1yc1FMUFh5bU43NklHSzZwRkdKdzc3bEhEektqQmNTNk1TRmdnUUhneGJITzIyT3M2bE9wZE5yRE96SmQwdU9nZWZlU0hJUTBFNTBOU0tZLUh5Q25SUGkyeFM5QU9seENBOHFsN0h6Tzl0cVlITGMzNl9uNVJXNDhaWHk5dDI40gGQAUFVX3lxTE9KM1B2bDZNOWRfRUFwLWVpR1UxQzREQldYR1ZVN3dySjdxektTN21LM2dTbzJsVUJWS1FVZHRlb1VqdklrNzZWZVNtSkZiWDNYejRDOEc1Y1BVRGg3Wi1SaE5MVFhlYWt1VG9OdVUzOGhPc3h4YU5ZakVMYTNWVml5aDF4dC1WQkwwZXFHendhcw?oc=5",
+     "title": "Sen. Mike Rounds wins reelection in South Dakota",
+     "winner": "Mike Rounds",
+     "party": "R",
+     "at": "2026-11-04T03:08:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "OH-10": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxORUFNWVVsS3l1OXdkR19OenJEN3dWWEl4NXV0RWFJLVFmd3FRWXdiNGhMUUtlY0VENVVGMnUzcWV5b0U2QmVDTFlsWEItOU0wWU1qV2tldjcxYl9XQkw3ZDB4WDFPLVJ2WjMwY1FSNUpyT2JxQ0ZaV1Q2ZGtLSU4xbERSY1QwRjluVmV1V0hJQWYwa1FkM0NIMnRBTlNJMWRURW5GOHdjSS1NbHPSAbABQVVfeXFMUE5Hb2lBU2h2Rl9qMG9aeC10anpBelppMzh2akl6NUFXQzNBRmVkWmFrZFloczVWb182dmVKc0lCanVfem5aUzgzYi15UHhQZ2xralNpZVJhLURhV1RTZ29JbnNlRVRkZmRkMUlhQmJ2SnZHWDFQNkpiSDBxaDg3YWRielQ5ZjU5LV9aNXBHUFhQN1UzMWpobmlMOWk5bE5BM2M5a1Z4VmpZVjFnSTc1LXk?oc=5",
+     "title": "Knickerbocker defeats Turner, flips Ohio House seat for Democrats",
+     "winner": "Kristina Knickerbocker",
+     "party": "D",
+     "at": "2026-11-04T06:48:00.000Z"
+    }
+   ]
+  },
+  "CA-22": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQWHJydk9ZUXpxZlRzZkxiaHFoUWd6MUFNalhYbXRMR1FiZ0RPUFA4SklzalRwc0JLblVrNk5lb2VpaGZBZFBuTnNXaEszUlVzWGxDQ0EwWWNpNzdFeXRhVnhLZHlkSGd4OUozSThVaGd6TE1SMmdMek9LbXYzSURvdmkzS05WbGp5V0RrbWJJWHEzSmvSAZgBQVVfeXFMTk0zTjhVSWpvdGxKMFlxSUxmODZ0aldjUjhsRzN2QVVqdG5YNnFFZUFiOGpmTXJNT0FfT2g0R3VTS2dlQmxrRG1pYzBvQzJ6em96MWJpbnhqZlVXbUo1Mks1OS1hOHVteEJZM0c5U1hEMmUxRUdFbGI2R1pSaUJFdGpCWDM3TVpQNmtBRW1jZkJ2SkhGR0NKelE?oc=5",
+     "title": "Valadao ousted in battleground California House contest",
+     "winner": "David Valadao",
+     "party": "R",
+     "at": "2026-11-04T06:35:00.000Z"
+    }
+   ]
+  },
+  "TN-05": {
+   "fox_winner": "Charlie Hatcher",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQVUNvcS00MlNabGdNb2hIRnJzeG52bVBtOU9qcmVoVHMzV3huOE5NclZteEVGQ01PUzV3dnRTWE9KdXkxLVFPN0VicHZnVGpSc1JYMkk5dG54dW1ZOC1YclE1a00yRWI0bm1KeUphUU9pUk1ubEtfY01hejNtMDVIQnV1SWlteWp0SlR1cnl30gGTAUFVX3lxTE9sWEJJbEZZeHRSZzlkTzRmZ2tqeFFLVmpWaTJFV0Y3ZkZzUTRaVUc5dDduU3NDMlA2SE91aTRuTGdlejF5TDlCVm5IalRpOWszb09mYk1QMzViTU1tYkcwaFVPOUxqWjZvUF9pRUF1cjZvUGRxR3VieWUyR29nbUYtbzFyS1AyXzZBOE1KY1pHcG5aUQ?oc=5",
+     "title": "Hatcher wins Tennessee House race after defeating Ogles in GOP primary",
+     "winner": "Charlie Hatcher",
+     "party": "R",
+     "at": "2026-11-04T05:55:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Senate-NE": {
+   "fox_winner": "Pete Ricketts",
+   "agree": [
+    {
+     "publisher": "Nebraska Examiner",
+     "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOS3h6eWJDQjJKVnM1ZGZjOTZGZ3VHXy1vMFpGdUdPdW9XbDE0XzRaWlJZejN4X3FrQTNza0loNHVfNVlBMkVZeE42bkZtWkZBM2NmdFAxU2N5SnZtZWNXNXZoR2VhcFVrRXRpcW82VFJ0ekRWZ2t1bkdvTmlIRF9UREZmOTRBY0hwNmxfYUR1R01TQ2pRekpUek5SUHdXeVNtNmhGMHNGSWVncnlsNjZtLVdCWEJLMDZZdXRHQjNucTZ3MVRLeWh4bk1ZellUWUM1T0Nr?oc=5",
+     "title": "Pete Ricketts claims victory over Dan Osborn in US Senate race",
+     "winner": "Pete Ricketts",
+     "party": "R",
+     "at": "2026-11-04T08:47:13.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "MI-03": {
+   "fox_winner": "Hillary Scholten",
+   "agree": [
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPandoRzFyblJheUtNMl90NzlDZFdSSkk3dk5jNG9IbHhicWZHblRiMjBjcTZBZDdTdmVXd2poLUhTOFlaaHlSMEo3d2xfd212U3R3SDdXejl6a041Y2NIcThvaHd4cEM3Q2NNLTloelJQaEpGc1RVNXdqSnpUMWUtUG90b2lEOEdDTmJzSXEyQUlnNm80dTBSb2x2Wm93ZFVrV3plV0wxSGZsdmJuZzloNExDWEloUUFvdHFWcFVaS2xxUldVbGhvVXhNSDF3UzJnQjY4RW9XRllxbzBfX1J3dHZ3MjZkbnR2bkU5T1ZnRVU1VDZvc1Zv?oc=5",
+     "title": "Democrat U.S. Rep. Scholten wins over GOP's DeBoer in 3rd District",
+     "winner": "Hillary Scholten",
+     "party": "D",
+     "at": "2026-11-04T06:48:15.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "MI-12": {
+   "fox_winner": "Rashida Tlaib",
+   "agree": [
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPRzc0TWwxdVZwSjdGLXBRZUgzMFk4OEdYSXIyVk1YR2pHYmNHTzJJaFpDcGU5R25LUzZ1eTkzMGY3Ny1NaGMxVjliblI1ZXYzcThaWllUVXFCZ1MyWTJyTHhJS2ppNnh2dmsweHZCQ01mYng2S2g0RGlGVkhkcTZHcUk3NmJ5SDF3ZnRTd2M4ZUN0R0JpckFpWENUUTlLeDE1T3JsNjVuWVR3OVd0bXoxdjJsOFZlMUhLWHA2YUZHdFhIZHFaTDNXZHptLVFOdktCV2ViZjNPWTdMcmRjLW45SFhwa3pZMlpDRXNIV3lvVmxrZkRpUGVv?oc=5",
+     "title": "Democratic U.S. Rep. Rashida Tlaib reelected in 12th District",
+     "winner": "Rashida Tlaib",
+     "party": "D",
+     "at": "2026-11-04T06:48:06.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "MI-02": {
+   "fox_winner": "John Moolenaar",
+   "agree": [
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxOejJNQU5ZdmhOVGlvcVdyaHhQajB4bG05YlR5R1JRY3FqYkl4WVlsSTNmLVh1eVdaRUpDQ2xpampJTEdQV2lxb0EySkRSM1pEUHN6MmRlMUQ3ZmdkSVRkZHdELU9UaWFiWHBqeVNiWExhSnZjeFRGSkJieXRFNFBqWDdySzNIQW91TzMzLTZ1NHIyaDc3NTlEZ0xkWm5JUzF5LVk5UUJxVXlEQ1JRSzM2TGJEVThpeU4zbGFDUC1JYWF5ZjFvdWRBUy0weDZCdjZpWHRPUERSc2tyTHJ1YjNORzNEZTVDTzdJeW9ybHFuYw?oc=5",
+     "title": "Michigan GOP U.S. Rep. John Moolenaar wins reelection in 2nd District",
+     "winner": "John Moolenaar",
+     "party": "R",
+     "at": "2026-11-04T04:28:29.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Senate-NM": {
+   "fox_winner": "Ben Lujan",
+   "agree": [
+    {
+     "publisher": "Albuquerque Journal",
+     "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOSmZhbW9aU1Myc2dKWXdxaXJrNTZrdFZKWDNLQ29CV2luaHdfNzlSdXhHSzNoZWwwTVNSOXI4bXZHSks4RE1hTjd3ZUt1NkZNOWRhdFcwSXpTdjZNOVA0UGxRa1ZaX04teXNwZnh0WUtPWDBKU1h3bHJkdWxYYnBiRQ?oc=5",
+     "title": "Ben Ray Luján wins reelection to U.S. Senate in New Mexico",
+     "winner": "Ben Lujan",
+     "party": "D",
+     "at": "2026-11-04T02:04:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "OH-09": {
+   "fox_winner": "Marcy Kaptur",
+   "agree": [
+    {
+     "publisher": "Cleveland.com",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQZ0RCMVVaMDBFS2dpdHNVV0NxZFZWYWt0aXg1LTdzWkdZbnpGWDd0aHRfcDJvUGxNcThZMGpIaldRN1ZtNkZqQTE0akxFYUlkRWlDM3d5QUpYblljR045bm41a2VrTmFCR1l1aWUtODZUMWExQms1MzlzV1pXNUlyZnVmOGI0ZVg1Y0xVVzZidEE2bXllRWRIOFpR0gGuAUFVX3lxTE9WN1RubVlHc0JhSU5DUk5QNV9wZzdibEtEdkptalVNcFU2NGZPZWlDZExxVlpzZTdLTGY1UndGTzhNQTNXRU1KWDctQlQ1UzYxOTVjYTNUajZYTHYyYkhFVWxvU1hySXV5RURPdDBzTlJuUkdqYjNnM1dKSXBLdW5CWEtNWE1Yc05uR25LdmVndDJSZllqYWFsaThJNVBqc0FfMkw0V2Z6RDE4Z1p3Zw?oc=5",
+     "title": "Marcy Kaptur wins record 23rd term in U.S. House",
+     "winner": "Marcy Kaptur",
+     "party": "D",
+     "at": "2026-11-04T08:22:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Gov-TN": {
+   "fox_winner": "Marsha Blackburn",
+   "agree": [
+    {
+     "publisher": "The Tennessean",
+     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQb0dHcnl5SzlBRFJTRlpqdllCcDJhVnpYRWtlLWZpTWF3N2V3WnpYMmF6eHdkWHdCUV81VTFicnZMMmQ2Y0o4eGxUUzVrb1VfWEtVUEU0dG83a1Z3TG1IaElGOE1HR3RjckI0MDNKVlJ0MG9LVmQzVzA2aE9WTEZxc1Z6R3dqZHlGMHE1S1RYU1ZtQVlqNXB6bUhtdmVPTVJaMll5ME1BeFlQMV8yX29HVHdTb3F0Sl94aVlXMW94Ry1Wc1ZyRjl2MWE0Q09lNkZIcEpHYg?oc=5",
+     "title": "Marsha Blackburn makes history as the first woman elected Tennessee governor",
+     "winner": "Marsha Blackburn",
+     "party": "R",
+     "at": "2026-11-04T05:17:32.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "Gov-AZ": {
+   "fox_winner": "Katie Hobbs",
+   "agree": [
+    {
+     "publisher": "azcentral.com and The Arizona Republic",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOcHp5Njg0bEdDZ3hDd0tUQkJfOXdQdXhHR3FtbDhzTVdtbFJLOWtjZnNqTEtvVGY2R19qMTNWUXVJVmZMZTI1REs4dFBvT3RMbnNQUXhwSmhRcFZDd28xQXhFREJnRVhvRmNZc21IOEFvbUthSGJWQUtFZTJpOF9IN01fSmt2cWxUNXJKSlRlTXM2T19ONDFkdXJzSjZhTDJ2NjUzSzAyRFA2U085TFNPelJsc0ZaMHF0NXc?oc=5",
+     "title": "Katie Hobbs projected to win second term as Arizona governor",
+     "winner": "Katie Hobbs",
+     "party": "D",
+     "at": "2026-11-04T06:17:19.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "PA-01": {
+   "fox_winner": "Bob Harvie",
+   "agree": [
+    {
+     "publisher": "Inquirer.com",
+     "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNelVFcWV6T3JHbkt0eEtjd1UteG5wQzZ4bHNWUzBuRlA1ZklhQlc3SGZ4QWllM1RVQ1R4S1EzQW9ROU1WSURGbUc2bEh2QnVTdk9lbG40Zm5zSm85cU5DMHVnbU5lTHBHXy1IUWNvUHF3cnJtTHg3SU1VNkJSOFVYdkd0UmFnd1FPOGNJXzR4WDJPYk9WVnp6NFBsZ2FpOVJSMWhUY1JXQVpQdlp1TGZiVHNIMVZtVkdMa3JxX0pn?oc=5",
+     "title": "Bob Harvie ousts Brian Fitzpatrick in Bucks County, flipping a House seat Republicans have held for over a decade",
+     "winner": "Bob Harvie",
+     "party": "D",
+     "at": "2026-11-04T05:40:38.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "PA-10": {
+   "fox_winner": "Janelle Stelson",
+   "agree": [
+    {
+     "publisher": "Spotlight PA",
+     "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNbnVsSjNDelNTMkwyZFFKQ1BaSHpsOEJMSmpEWkdWdmk1ZEJNTEQ3dlc3dlR5azJmVUNUZGJESC1xNHJyNDh1R052QmxGaklxbEQyaFg2cUhPMnd6NjVFeUtfNjU0WEk4OGlBQlhiTUtHREtOSUFjUkJlTW5razRwdF9yTm5MNW1qTTk4T1ZiNy0wN0dfY0tEU3h4d0Itb3R6ZGtINTV0SDFSeTRGN2tSMTJvX3ROb1FiN0RIdFVxQUVhdnBBeUFsbEdtNkZrNGJqQ1p3aQ?oc=5",
+     "title": "Democrat Janelle Stelson defeats Scott Perry in Pa.’s 10th Congressional District",
+     "winner": "Janelle Stelson",
+     "party": "D",
+     "at": "2026-11-04T03:43:13.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
-  "read": 58,
-  "races_confirmed": 35,
-  "races_disputed": 0,
+  "read": 66,
+  "races_confirmed": 55,
+  "races_disputed": 1,
   "races_reported_not_called": 3
  }
 }

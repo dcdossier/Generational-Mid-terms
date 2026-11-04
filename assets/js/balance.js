@@ -169,10 +169,13 @@
     }
 
     var id = 'blp' + (++uid) + '-', summ = summaryText(st, key);
+    var ctl = !pre && st.meta && st.meta.control && st.meta.control[key];
+    var ctlHtml = ctl && ctl.party ? '<div class="bl-control bl-control-' + ctl.party.toLowerCase() + '">' + (ctl.party === 'D' ? 'Democrats' : 'Republicans') + ' win control · ' +
+      (window.LiveSeat ? window.LiveSeat.confHtml({ text: 'confirmed by ' + (ctl.confirmations || []).length + ' sources', conf: ctl.confirmations }, 'bl-conf') : 'confirmed by ' + (ctl.confirmations || []).length + ' sources') + '</div>' : '';
     return '<div class="bl-ch bl-ch-' + key + '">' +
       '<div class="bl-ch-head"><span class="bl-ch-name">' + nm + ' <small>' + total + ' seats</small></span>' +
         '<span class="bl-tot"><span class="bl-tot-d">D ' + t.D + '</span>' + (t.I ? '<span class="bl-tot-i">I ' + t.I + '</span>' : '') + '<span class="bl-tot-r">R ' + t.R + '</span></span></div>' +
-      (summ ? '<p class="bl-summ">' + esc(summ) + '</p>' : '') +
+      (summ ? '<p class="bl-summ">' + esc(summ) + '</p>' : '') + ctlHtml +
       '<p class="sr-only">' + esc(sr) + '</p>' +
       '<div class="bl-bar">' + barSvg(id, total, runs, width, mk, compact) + '</div>' +
       (compact ? markKey(mk) : '') +

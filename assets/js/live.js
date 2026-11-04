@@ -181,6 +181,12 @@
         state.races.push(row);
       });
     });
+    // triangulated calls (Calls.gs) for testing the "confirmed by n sources" display
+    var conf = [{ publisher: 'The Texas Tribune', url: 'https://www.texastribune.org/', title: 'Talarico defeats Paxton to win Texas Senate seat (demo)' },
+                { publisher: 'Houston Chronicle', url: 'https://www.houstonchronicle.com/', title: 'James Talarico wins Texas Senate race (demo)' },
+                { publisher: 'NBC News', url: 'https://www.nbcnews.com/', title: 'NBC News projects James Talarico wins (demo)', desk: 'NBC News' }];
+    state.races.forEach(function (r) { if (r.race_id === 'Senate-TX' && r.winner) { r.confirmations = conf; r.called_by = 'NBC News · 3 sources'; } });
+    if (STAGE === 'majority' || STAGE === 'final') state.meta.control = { house: { party: 'D', called_by: '3 sources', confirmations: conf.map(function (c) { return { publisher: c.publisher, url: c.url, title: 'Democrats win control of the House (demo)' }; }) } };
     demoChambers();
     state.loaded = true; state.live = true; state.lastCheckedAt = Date.now(); state.lastCheckOk = true; state.nextPollAt = Date.now() + POLL_MS;
   }

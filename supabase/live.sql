@@ -20,6 +20,8 @@ create table if not exists public.live_meta (
 insert into public.live_meta (id) values (1) on conflict (id) do nothing;
 -- last_push: set by every Results Desk run, even when nothing changed (site watchdog).
 alter table public.live_meta add column if not exists last_push timestamptz;
+-- Chamber control under the same 3-source rule: {"house": {"party": "D", "called_by": "...", "confirmations": [...]}, "senate": {...}}
+alter table public.live_meta add column if not exists control jsonb not null default '{}'::jsonb;
 
 -- ── live_chamber: seats won and leading per chamber and party ───────────────
 -- not_up: seats not on the ballot this year. Senate D 34 includes the two
@@ -71,6 +73,8 @@ create table if not exists public.live_races (
 create index if not exists live_races_featured_idx on public.live_races (featured, featured_order);
 -- Votes counted so far (state feeds or the desk); the site compares with 2022 totals.
 alter table public.live_races add column if not exists total_votes bigint check (total_votes is null or total_votes >= 0);
+-- Triangulated calls: the distinct publishers that confirmed the winner [{publisher, url, title, at, desk}].
+alter table public.live_races add column if not exists confirmations jsonb not null default '[]'::jsonb check (jsonb_typeof(confirmations) = 'array');
 
 -- ── updated_at on every change ──────────────────────────────────────────────
 create or replace function public.live_touch() returns trigger

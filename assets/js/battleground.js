@@ -44,7 +44,7 @@
     var st = lastState, S = window.LiveSeat;
     if (!S || !st) return '';
     var s = S.status(st, id), v = S.votes(st, id), m = S.mailNote(st, id);
-    return (s.text ? '<span class="bg-when bg-when-' + (s.phase || 'none') + '">' + esc(s.text) + '</span>' : '') +
+    return (s.text ? '<span class="bg-when bg-when-' + (s.phase || 'none') + '">' + S.confHtml(s, 'bg-conf') + '</span>' : '') +
       (v ? '<span class="bg-votes">' + esc(v) + '</span>' : '') + (m ? '<span class="bg-mail">' + esc(m) + '</span>' : '');
   }
 
@@ -59,7 +59,7 @@
     var lp = lead === 'D' ? pd : pr, op = lead === 'D' ? pr : pd;
     var head = '<button type="button" class="bg-head bg-open"><span class="bg-id">' + esc(kind === 'senate' ? 'Senate · ' + race.state : race.race_id) + '</span>' +
       '<span class="bg-st">' + esc(kind === 'senate' ? race.label : ST[race.state] || race.state) + '</span>' +
-      (row && row.called_by ? '<span class="bg-called">Called (' + esc(row.called_by) + ')</span>' : '') + '</button>';
+      (row && row.called_by ? '<span class="bg-called">Called (' + esc(row.confirmations && row.confirmations.length ? row.confirmations.length + ' sources' : row.called_by) + ')</span>' : '') + '</button>';
     var main;
     if (leader) {
       var margin = lp !== null && op !== null ? Math.abs(lp - op) : null;
@@ -110,7 +110,7 @@
     el.innerHTML = '<div class="bg-headrow"><h2 class="bg-title">Battleground races</h2><p class="bg-sub" aria-live="off"></p></div>' +
       grid('senate', cfg.senate) + grid('house', cfg.house) + credits();
     el.addEventListener('click', function (e) {
-      if (e.target.closest('a')) return;   // "Read more" is a normal link
+      if (e.target.closest('a') || e.target.closest('details')) return;   // links and the sources list
       var b = e.target.closest('.bg-box'); if (!b) return;
       var id = b.getAttribute('data-race');
       if (typeof window.openSeatFromHome === 'function') window.openSeatFromHome(id);

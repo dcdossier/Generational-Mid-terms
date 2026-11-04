@@ -389,3 +389,18 @@
 }
 .ls-early { margin-top: 7px; padding-top: 7px; border-top: 1px solid rgba(245,240,232,.14); font-size: 12px; color: rgba(245,240,232,.8); }
 .ls-early a { color: #F7C060; }
+
+/* ── Triangulated calls: "confirmed by n sources" (Calls.gs) ──────────────── */
+.lv-conf { display: inline; }
+.lv-conf > summary { display: inline; cursor: pointer; list-style: none; text-decoration: underline dotted; text-underline-offset: 3px; }
+.lv-conf > summary::-webkit-details-marker { display: none; }
+.lv-conf > summary::after { content: ' ▾'; font-size: .8em; }
+.lv-conf[open] > summary::after { content: ' ▴'; }
+.lv-conf ul { margin: 4px 0 2px; padding-left: 16px; font-weight: 400; color: #3a3a3a; }
+.lv-conf li { margin: 3px 0; line-height: 1.35; }
+.lv-conf a { color: #620d3c; display: inline-flex; align-items: center; min-height: 28px; }
+.lv-conf small { color: #6B6B6B; }
+.bl-control { margin: 2px 0 0; font: 600 13px var(--sans, sans-serif); }
+.bl-control-d { color: #1f3a8a; } .bl-control-r { color: #9b1c1c; }
+@media (hover: hover) { .bg-box .lv-conf:hover > ul { display: block; } }
+.bg-called { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }

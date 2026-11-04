@@ -41,6 +41,8 @@
   function status(st, id) {
     var L = window.LiveMath, r = row(st, id), p = pc(st, id), t = now(st);
     if (r && L && L.winnerOf(r)) {
+      var conf = Array.isArray(r.confirmations) ? r.confirmations : [];
+      if (conf.length) return { phase: 'called', conf: conf, text: 'Called · confirmed by ' + conf.length + ' source' + (conf.length === 1 ? '' : 's') + (r.called_at ? ' · ' + etIst(r.called_at) : '') };
       return { phase: 'called', text: 'Called' + (r.called_at ? ' ' + etIst(r.called_at) : '') + (r.called_by ? ' by ' + r.called_by : '') };
     }
     var counted = r && r.pct_counted != null && r.pct_counted !== '' ? Number(r.pct_counted) : null;
@@ -101,13 +103,23 @@
     if (!st) return '';
     var s = status(st, id), v = votes(st, id), m = mailNote(st, id), e = earlyLine(st, id);
     if (!s.text && !v && !m && !e) return '';
-    return (s.text ? '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + esc(s.text) + '</div>' : '') +
+    return (s.text ? '<div class="sp-live-status sp-live-' + (s.phase || 'none') + '">' + confHtml(s, 'sp-conf') + '</div>' : '') +
       (v ? '<div class="sp-live-votes">' + esc(v) + '</div>' : '') +
       (m ? '<div class="sp-live-mail">' + esc(m) + '</div>' : '') +
       (e ? '<div class="sp-live-votes">' + esc(e) + '</div>' : '');
   }
 
-  window.LiveSeat = { status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
+  // "Called · confirmed by n sources", opening to the publishers with links (tap or hover).
+  function confHtml(s, cls) {
+    if (!s.conf || !s.conf.length) return '<span class="' + cls + '">' + esc(s.text) + '</span>';
+    return '<details class="lv-conf ' + cls + '"><summary>' + esc(s.text) + '</summary><ul>' + s.conf.map(function (c) {
+      var u = /^https?:\/\//.test(c.url || '') ? c.url : null;
+      return '<li>' + (u ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(c.publisher) + '</a>' : esc(c.publisher)) +
+        (c.desk ? ' <small>(' + esc(c.desk) + ' decision desk)</small>' : '') + (c.title ? '<br><small>' + esc(c.title) + '</small>' : '') + '</li>';
+    }).join('') + '</ul></details>';
+  }
+
+  window.LiveSeat = { confHtml: confHtml, status: status, votes: votes, mailNote: mailNote, nextClose: nextClose, panelHtml: panelHtml, enabled: enabled, etIst: etIst };
 
   function hook() { if (window.SeatPanel && window.SeatPanel.setLiveProvider) window.SeatPanel.setLiveProvider(panelHtml); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hook); else hook();

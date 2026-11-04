@@ -247,6 +247,11 @@
         '<b>Gained</b>: called races a party won in seats another party held before the election. <b>Lost</b>: called races in seats the party held that another party won. <b>Net</b>: gained minus lost. Leading pickups and losses are the same comparison for races not yet called. In redrawn states the comparison is with the party expected under the new map.') + '</span>' + marks + '</div>';
   }
 
+  // data-chambers="senate" (or "house gov") limits a mount to those chambers; default is all three.
+  function chambersOf(el) {
+    var a = (el.getAttribute('data-chambers') || 'house senate gov').split(/\s+/).filter(function (k) { return SEATS[k]; });
+    return a.length ? a : ['house', 'senate', 'gov'];
+  }
   function html(el, st) {
     var L = window.LiveMath, ph = L.phase(st.meta), pre = showPre(st);
     var mEl = el.querySelector('.bl-measure');
@@ -254,12 +259,12 @@
     var sub = pre && ph !== 'pre' ? '<span class="bl-stage bl-stage-off">' + 'No calls yet' + '</span> Showing seats before the election until results arrive.'
       : pre ? '<span class="bl-stage">Before the election</span> The 119th Congress and governorships as they stand. The bars switch to the live count when polls close.'
       : ph === 'final' ? '<span class="bl-stage bl-stage-final">Final count</span>' + (st.meta && st.meta.last_update ? ' Updated ' + timeET(st.meta.last_update) + '.' : '')
-      : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + ' · Senate includes seats not up this year';
+      : 'Live count' + (st.meta && st.meta.last_update ? ' · updated ' + timeIST(st.meta.last_update) : '') + (chambersOf(el).indexOf('senate') >= 0 ? ' · Senate includes seats not up this year' : '');
     if (st.demo) sub += ' <b>Demo data.</b>';
     var foot = !pre && st.baseline && st.baseline.footnote ? '<p class="bl-foot">' + esc(st.baseline.footnote) + '</p>' : '';
     return '<div class="bl-head"><h2 class="bl-title">Projected 120th Congress</h2><p class="bl-sub">' + sub + '</p></div>' +
       '<div class="bl-measure"></div>' +
-      chamber(st, 'house', width) + chamber(st, 'senate', width) + chamber(st, 'gov', width) + legend(pre, 'bl-tip-' + (++uid)) + foot;
+      chambersOf(el).map(function (k) { return chamber(st, k, width); }).join('') + legend(pre, 'bl-tip-' + (++uid)) + foot;
   }
 
   var mounts = [], last = null;

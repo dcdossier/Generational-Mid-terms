@@ -329,7 +329,6 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
 
 <!-- PROJECTED 120TH CONGRESS and SEATS CHANGING HANDS (assets/js/balance.js, shared with Home) -->
 <div class="trends-live">
-  <section data-live-balance aria-label="Projected 120th Congress"></section>
   <section data-live-info aria-label="Flips, litigation, turnout, polls and counting" hidden></section>
 </div>
 
@@ -342,6 +341,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
      SENATE PANEL
 ══════════════════════════════════════════════ -->
 <div class="subpanel" id="subpanel-senate">
+  <!-- PROJECTED 120TH CONGRESS and SEATS CHANGING HANDS, this chamber only (assets/js/balance.js) -->
+  <div class="trends-live"><section data-live-balance data-chambers="senate" aria-label="Projected 120th Congress: Senate"></section></div>
+
 
   <!-- ── INNER SUBTAB BAR ───────────────────── -->
   <div class="inner-tab-bar">
@@ -502,6 +504,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
      HOUSE PANEL
 ══════════════════════════════════════════════ -->
 <div class="subpanel active" id="subpanel-house">
+  <!-- PROJECTED 120TH CONGRESS and SEATS CHANGING HANDS, this chamber only (assets/js/balance.js) -->
+  <div class="trends-live"><section data-live-balance data-chambers="house" aria-label="Projected 120th Congress: House"></section></div>
+
 
   <!-- ── INNER SUBTAB BAR ───────────────────── -->
   <div class="inner-tab-bar">
@@ -659,6 +664,9 @@ body{background:var(--bg);color:var(--t2);font-family:var(--sans);font-size:16px
      GOVERNOR PANEL
 ══════════════════════════════════════════════ -->
 <div class="subpanel" id="subpanel-governor">
+  <!-- PROJECTED 120TH CONGRESS and SEATS CHANGING HANDS, this chamber only (assets/js/balance.js) -->
+  <div class="trends-live"><section data-live-balance data-chambers="gov" aria-label="Projected 120th Congress: Governors"></section></div>
+
 <div class="panel-inner">
 
   <!-- CHAMBER OVERVIEW -->
@@ -1905,7 +1913,7 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 <script src="assets/js/live-math.js?v=20261104m" defer></script>
 <script src="assets/js/live-seat.js?v=20261104t" defer></script>
 <script src="assets/js/live-info.js?v=20261104r" defer></script>
-<script src="assets/js/balance.js?v=20261104u" defer></script>
+<script src="assets/js/balance.js?v=20261104z&o=20261104u" defer></script>
 <script src="assets/js/live.js?v=20261104w" defer></script>
 <script src="assets/js/live-trends.js?v=20261104v" defer></script>
 </body>

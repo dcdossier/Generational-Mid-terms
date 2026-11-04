@@ -509,6 +509,31 @@ body{background:#F5F5DC;color:#1E2232}
 .info-btn.spj-i:hover{background:none}.info-btn.spj-i:hover::before{background:#620d3c;color:#fff}
 .info-btn.spj-na{width:auto;height:44px;min-width:44px;margin:0 -6px 0 0;padding:0 6px;background:none;border-radius:4px;color:#6B6B6B;font:400 14px var(--sans);text-decoration:underline dotted;text-underline-offset:3px}
 .info-btn.spj-na:hover{background:#F5F5DC;color:#620d3c}
+.spj .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.spj-row{position:relative}
+.spj-chart{display:grid;gap:18px;margin-top:4px}
+.spj-rh{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:22px}
+.spj-ch{font:700 16px var(--serif);color:#1E2232}.spj-ch small{font:400 12px var(--sans);color:#6B6B6B;margin-left:4px}
+.spj-tots{display:inline-flex;align-items:center;gap:10px;font:700 14px var(--sans);font-variant-numeric:tabular-nums}
+.spj-td{color:#1A2F7A}.spj-tr{color:#9B2020}
+.spj-bar{position:relative;height:26px;background:#eceae4;border-radius:4px}
+.spj-bar>i{position:absolute;top:0;bottom:0;display:block}
+.spj-sd{left:0;background:#2b4c9b;border-radius:4px 0 0 4px}
+.spj-sdr{background:repeating-linear-gradient(45deg,#2b4c9b 0 4px,#9fb3e3 4px 8px)}
+.spj-sr{right:0;background:#b4232a;border-radius:0 4px 4px 0}
+.spj-now{width:0;border-left:2px dotted #fff;z-index:1}
+.spj-mk{position:absolute;top:-20px;bottom:-4px;width:0;border-left:2px solid #1c2430;z-index:2}
+.spj-mk.spj-mk-tt{border-left:2px dashed #620d3c}
+.spj-mk em{position:absolute;top:0;left:4px;font:600 11px var(--sans);font-style:normal;color:#1c2430;white-space:nowrap}
+.spj-mk.spj-mk-tt em{color:#620d3c}
+.spj-mk.spj-mk-l em{left:auto;right:4px}
+.spj-lines{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;font:400 13px/1.5 var(--sans);color:#3a3f4a}
+.spj-ok{color:#1A6B3A}.spj-mid{color:#9a6a00}.spj-no{color:#9B2020}.spj-muted{color:#6B6B6B}
+.spj-key{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font:400 12px var(--sans);color:#6B6B6B}
+.spj-k{display:inline-block;width:14px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.spj-k-d{background:#2b4c9b}.spj-k-dr{background:repeating-linear-gradient(45deg,#2b4c9b 0 3px,#9fb3e3 3px 6px)}.spj-k-r{background:#b4232a}
+.spj-k-now{background:#2b4c9b;border-right:2px dotted #fff;box-shadow:inset -3px 0 0 #2b4c9b}
+.spj-k-maj{width:0;height:12px;border-left:2px solid #1c2430;border-radius:0}.spj-k-tt{width:0;height:12px;border-left:2px dashed #620d3c;border-radius:0}
 .spj-more{margin-top:12px;border-top:1px solid #E8E8E0}
 .spj-more>summary{min-height:44px;display:flex;align-items:center;gap:8px;cursor:pointer;list-style:none;font:600 14px var(--sans);color:#620d3c;user-select:none}
 .spj-more>summary::-webkit-details-marker{display:none}
@@ -726,7 +751,7 @@ body{background:#F5F5DC;color:#1E2232}
       <!-- SEAT PROJECTIONS (data: assets/seat-projections.json) -->
       <section class="spj" id="seat-projections" aria-labelledby="spj-title">
         <h2 class="spj-title" id="spj-title">2026 Midterms Seat Projections (29 Oct 2026)</h2>
-        <p class="spj-sub">Projected party majority seats against majority and two-thirds thresholds. Updated 29 Oct 2026.</p>
+        <p class="spj-sub">Where Democrats are projected to land in each chamber, and whether that reaches a majority or two-thirds. Forecasts of 27 to 29 Oct 2026.</p>
         <div id="spj-body"><p class="spj-err">Loading projections&#8230;</p></div>
       </section>
 
@@ -1033,7 +1058,7 @@ body{background:#F5F5DC;color:#1E2232}
 <script src="assets/js/live-math.js?v=20261104m" defer></script>
 <script src="assets/js/live-seat.js?v=20261104t" defer></script>
 <script src="assets/js/live-strip.js?v=20261104u" defer></script>
-<script src="assets/js/balance.js?v=20261104u" defer></script>
+<script src="assets/js/balance.js?v=20261104z" defer></script>
 <script src="assets/js/live-info.js?v=20261104r" defer></script>
 <script src="assets/js/battleground.js?v=20261104r" defer></script>
 <script src="assets/js/live.js?v=20261104w" defer></script>
@@ -1806,20 +1831,38 @@ async function loadSeatProjections() {
   const cell = (label, inner, cls) => `<td class="num${cls ? ' ' + cls : ''}" data-label="${e(label)}"><span class="spj-v">${inner}</span></td>`;
   const na = tip => `<button type="button" class="info-btn spj-na" data-tip="${e(tip)}" aria-label="Not applicable: ${e(tip)}">n/a</button>`;
 
+  // One chart: each chamber is a bar of all its seats. Democrats fill from the left (solid to the
+  // low end of the projected range, striped to the high end), Republicans take the rest from the
+  // right. Markers show the majority and, where it exists, the two-thirds line Democrats would need.
+  const pct = (n, t) => (n / t * 100).toFixed(2) + '%';
+  const gapText = (lo, hi, line, what) => {
+    if (lo >= line) return hi === line ? `<b class="spj-ok">${what} reached</b>, with no seats to spare` : `<b class="spj-ok">${what} reached</b> with ${range(lo - line, hi - line, String)} to spare`;
+    if (hi >= line) return `<b class="spj-mid">${what} within range</b>: reached at the high end, ${line - lo} short at the low end`;
+    return `<b class="spj-no">${range(line - hi, line - lo, String)} short</b> of ${what.toLowerCase()}`;
+  };
   const rows = d.rows.map(r => {
-    const party = /^Dem/.test(r.party) ? 'spj-d' : 'spj-r';
-    const twoThirds = r.two_thirds_needed == null ? na(r.two_thirds_note) : r.two_thirds_needed;
-    const short = r.short_of_two_thirds_at_max == null ? na(r.two_thirds_note) : r.short_of_two_thirds_at_max;
-    return `<tr>
-      <td class="spj-head spj-chamber">${e(r.chamber)}<span class="spj-party ${party}" data-m="1">${e(r.party)}</span><button type="button" class="info-btn spj-i" data-tip="${e(r.notes)}" aria-label="Notes on ${e(r.chamber)} ${e(r.party)}"></button></td>
-      <td><span class="spj-party ${party}">${e(r.party)}</span></td>
-      ${cell('Seats now', r.seats_now)}
-      ${cell('Projected seats', range(r.projected_min, r.projected_max, String), 'spj-proj')}
-      ${cell('Change', range(r.change_min, r.change_max, sign), tone(r.change_min, r.change_max))}
-      ${cell('Majority needed', r.majority_needed)}
-      ${cell('Two-thirds needed', twoThirds)}
-      ${cell('Short of two-thirds (at max)', short)}
-    </tr>`;
+    const T = r.total_seats, lo = r.projected_min, hi = r.projected_max, rLo = T - hi, rHi = T - lo;
+    const marks = [{ n: r.majority_needed, label: 'Majority ' + r.majority_needed, cls: 'spj-mk-maj' }];
+    if (r.two_thirds_needed != null) marks.push({ n: r.two_thirds_needed, label: 'Two-thirds ' + r.two_thirds_needed, cls: 'spj-mk-tt' });
+    const name = r.chamber === 'Governors' ? 'Governors' : r.chamber;
+    const lines = [gapText(lo, hi, r.majority_needed, 'Majority')];
+    if (r.two_thirds_needed != null) lines.push(gapText(lo, hi, r.two_thirds_needed, 'Two-thirds'));
+    else lines.push('<span class="spj-muted">No two-thirds rule for governors</span>');
+    const sr = `${name}: Democrats projected ${range(lo, hi, String)} of ${T} seats, up from ${r.seats_now}. Republicans ${range(rLo, rHi, String)}. Majority needs ${r.majority_needed}` +
+      (r.two_thirds_needed != null ? `; two-thirds needs ${r.two_thirds_needed}` : '') + '.';
+    return `<div class="spj-row">
+      <div class="spj-rh"><span class="spj-ch">${e(name)} <small>${T} seats</small></span>
+        <span class="spj-tots"><span class="spj-td">D ${range(lo, hi, String)}</span><span class="spj-tr">R ${range(rLo, rHi, String)}</span>
+        <button type="button" class="info-btn spj-i" data-tip="${e(r.notes)}" aria-label="Notes on ${e(name)}"></button></span></div>
+      <p class="sr-only">${e(sr)}</p>
+      <div class="spj-bar" aria-hidden="true">
+        <i class="spj-sd" style="width:${pct(lo, T)}"></i><i class="spj-sdr" style="left:${pct(lo, T)};width:${pct(hi - lo, T)}"></i>
+        <i class="spj-sr" style="width:${pct(rLo, T)}"></i>
+        <i class="spj-now" style="left:${pct(r.seats_now, T)}" title="Democrats now: ${r.seats_now}"></i>
+        ${marks.map(m => `<span class="spj-mk ${m.cls}${m.cls === 'spj-mk-maj' ? ' spj-mk-l' : ''}" style="left:${pct(m.n, T)}"><em>${e(m.label)}</em></span>`).join('')}
+      </div>
+      <div class="spj-lines" aria-hidden="true"><span>Democrats now <b>${r.seats_now}</b>, change <b class="${tone(r.change_min, r.change_max)}">${range(r.change_min, r.change_max, sign)}</b></span>${lines.map(l => '<span>' + l + '</span>').join('')}</div>
+    </div>`;
   }).join('');
 
   const models = d.models.map(m => `<tr>
@@ -1830,13 +1873,8 @@ async function loadSeatProjections() {
   const others = d.other_sources.map(o => `<li><a href="${e(o.url)}" target="_blank" rel="noopener">${e(o.item)} <span aria-hidden="true">&#8599;</span></a></li>`).join('');
 
   box.innerHTML = `
-    <div class="spj-wrap"><table class="spj-table spj-main">
-      <thead><tr>
-        <th>Chamber</th><th>Projected majority party</th><th class="num">Seats now</th><th class="num">Projected seats</th><th class="num">Change</th>
-        <th class="num">Majority needed</th><th class="num">Two-thirds needed</th><th class="num">Short of two-thirds (at max)</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table></div>
+    <div class="spj-chart">${rows}</div>
+    <div class="spj-key" aria-hidden="true"><span><i class="spj-k spj-k-d"></i>Democrats, low end of projections</span><span><i class="spj-k spj-k-dr"></i>Democrats, range to high end</span><span><i class="spj-k spj-k-r"></i>Republicans</span><span><i class="spj-k spj-k-now"></i>Democrats now</span><span><i class="spj-k spj-k-maj"></i>Majority</span><span><i class="spj-k spj-k-tt"></i>Two-thirds</span></div>
     <details class="spj-more">
       <summary>Model detail and sources</summary>
       <h4 class="spj-h4">Model detail</h4>

@@ -6,14 +6,18 @@ name: Live results (Fox News)
 # loop refreshes data/litigation.json (scripts/litigation.js) and the cross-check of calls
 # against the source sheet's outlets, the FT and Ground News (scripts/live-sources.js).
 # Its own concurrency group, so it never queues behind the data jobs.
+# GitHub drops hourly scheduled runs under load (4 Nov: the 12:58 and 13:58 UTC runs never
+# started). Two guards: the cron fires every 10 minutes (a trigger while a run is going just
+# waits as the single pending run), and each run dispatches the next one when it ends.
 
 on:
   schedule:
-    - cron: '0 * * * *'
+    - cron: '*/10 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: live-results-fox
@@ -30,7 +34,7 @@ jobs:
           node-version: '20'
       - name: Install feed-reader dependencies (litigation tracker)
         run: npm ci --prefix scripts
-      - name: Fox results every 3 minutes for 58 minutes
+      - name: Fox results every 3 minutes for 56 minutes
         env:
           LIVE_COMMIT_CMD: >-
             (node scripts/litigation.js || true) &&
@@ -41,4 +45,9 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          node scripts/live-from-fox.js --loop 58
+          node scripts/live-from-fox.js --loop 56
+      - name: Start the next run (keeps the loop going if a scheduled run is dropped)
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run live-results.yml --ref main || true

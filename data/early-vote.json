@@ -3,9 +3,9 @@
   "source": "University of Florida Election Lab, 2026 Early Vote Tracker",
   "source_url": "https://election.lab.ufl.edu/early-vote/2026-early-voting/",
   "data_url": "https://election.lab.ufl.edu/data-downloads/earlyvote/2026/US.csv",
-  "file_updated": "2026-11-03T19:37:33.000Z",
+  "file_updated": "2026-11-04T05:55:08.000Z",
   "latest_state_update": "2026-11-03",
-  "fetched": "2026-11-03T19:50:37.102Z",
+  "fetched": "2026-11-04T06:42:28.943Z",
   "cadence": "updated daily by source",
   "party_note": "by party registration, not votes cast",
   "missing_states": [
@@ -14,12 +14,12 @@
   ]
  },
  "national": {
-  "total": 60207997,
-  "in_person": 32448049,
-  "mail_returned": 27759948,
-  "mail_requested": 60852963,
+  "total": 61736408,
+  "in_person": 32535203,
+  "mail_returned": 29201205,
+  "mail_requested": 61040229,
   "turn_2022_reporting_states": 109774082,
-  "pct_of_2022": 54.8,
+  "pct_of_2022": 56.2,
   "states_reporting": 48
  },
  "states": {
@@ -73,35 +73,35 @@
   },
   "CA": {
    "name": "California",
-   "total": 7132379,
+   "total": 7315224,
    "in_person": 479207,
-   "mail_returned": 6653172,
+   "mail_returned": 6836017,
    "mail_requested": 23451620,
-   "party_d": 3297382,
-   "party_r": 1786444,
-   "party_other": 1398136,
+   "party_d": 3664939,
+   "party_r": 1971449,
+   "party_other": 1563782,
    "turn_2022": 11146610,
    "updated": "2026-11-03",
    "source": "https://www.sos.ca.gov/elections/upcoming-elections/general-election-november-3-2026",
    "notes": "Some statistics provided by [PDI](https://politicaldata.com/). The higher value provided by the California Secretary of State or PDI is used where reporting differences exist. Because PDI, the source for party registration data, does not report by method of voting, all party registration calculations include in-person early and mail ballots.",
    "has_party": true,
-   "pct_of_2022": 64
+   "pct_of_2022": 65.6
   },
   "CO": {
    "name": "Colorado",
-   "total": 1899759,
-   "in_person": 50976,
-   "mail_returned": 1848783,
-   "mail_requested": 4056293,
-   "party_d": 572642,
-   "party_r": 467376,
-   "party_other": 859741,
+   "total": 2524979,
+   "in_person": 138132,
+   "mail_returned": 2386847,
+   "mail_requested": 4223515,
+   "party_d": 727356,
+   "party_r": 609204,
+   "party_other": 1188419,
    "turn_2022": 2540666,
    "updated": "2026-11-03",
    "source": "Colorado Secretary of State",
    "notes": null,
    "has_party": true,
-   "pct_of_2022": 74.8
+   "pct_of_2022": 99.4
   },
   "CT": {
    "name": "Connecticut",
@@ -137,19 +137,19 @@
   },
   "FL": {
    "name": "Florida",
-   "total": 5475004,
-   "in_person": 3467812,
-   "mail_returned": 2007192,
-   "mail_requested": 2464405,
-   "party_d": 2069165,
-   "party_r": 2197862,
-   "party_other": 1207977,
+   "total": 5518179,
+   "in_person": 3467810,
+   "mail_returned": 2050369,
+   "mail_requested": 2477553,
+   "party_d": 2084519,
+   "party_r": 2213519,
+   "party_other": 1220141,
    "turn_2022": 7796916,
    "updated": "2026-11-03",
    "source": "https://countyfilesvbm-ev.floridados.gov/VoteByMailEarlyVotingReports/PublicStats",
    "notes": "Some Florida statistics are obtained from county websites that may report more recent and higher numbers than the Florida Division of Elections reports.",
    "has_party": true,
-   "pct_of_2022": 70.2
+   "pct_of_2022": 70.8
   },
   "GA": {
    "name": "Georgia",
@@ -297,19 +297,19 @@
   },
   "ME": {
    "name": "Maine",
-   "total": 300491,
+   "total": 309351,
    "in_person": 0,
-   "mail_returned": 300491,
-   "mail_requested": 320474,
-   "party_d": 140212,
-   "party_r": 68886,
-   "party_other": 91393,
+   "mail_returned": 309351,
+   "mail_requested": 320878,
+   "party_d": 143814,
+   "party_r": 70773,
+   "party_other": 94764,
    "turn_2022": 680909,
-   "updated": "2026-11-02",
+   "updated": "2026-11-03",
    "source": "https://www.maine.gov/sos/cec/elec/data/index.html",
    "notes": null,
    "has_party": true,
-   "pct_of_2022": 44.1
+   "pct_of_2022": 45.4
   },
   "MD": {
    "name": "Maryland",
@@ -569,19 +569,19 @@
   },
   "OR": {
    "name": "Oregon",
-   "total": 1505694,
+   "total": 1808770,
    "in_person": 0,
-   "mail_returned": 1505694,
+   "mail_returned": 1808770,
    "mail_requested": 3117439,
-   "party_d": 612415,
-   "party_r": 462306,
-   "party_other": 430973,
+   "party_d": 720033,
+   "party_r": 539073,
+   "party_other": 549664,
    "turn_2022": 1997689,
    "updated": "2026-11-03",
    "source": "https://sos.oregon.gov/elections/Documents/2026-general-election-unofficial-ballot-returns.pdf",
    "notes": null,
    "has_party": true,
-   "pct_of_2022": 75.4
+   "pct_of_2022": 90.5
   },
   "PA": {
    "name": "Pennsylvania",
@@ -729,19 +729,19 @@
   },
   "WA": {
    "name": "Washington",
-   "total": 1992533,
+   "total": 2349137,
    "in_person": 0,
-   "mail_returned": 1992533,
+   "mail_returned": 2349137,
    "mail_requested": 5131622,
    "party_d": 0,
    "party_r": 0,
    "party_other": 0,
    "turn_2022": 3067686,
-   "updated": "2026-11-02",
+   "updated": "2026-11-03",
    "source": "https://www.sos.wa.gov/elections/data-research/election-data-and-maps/ballot-return-statistics",
    "notes": null,
    "has_party": false,
-   "pct_of_2022": 65
+   "pct_of_2022": 76.6
   },
   "WV": {
    "name": "West Virginia",
@@ -777,19 +777,19 @@
   },
   "WY": {
    "name": "Wyoming",
-   "total": 65264,
+   "total": 73895,
    "in_person": 0,
-   "mail_returned": 65264,
-   "mail_requested": 70442,
-   "party_d": 10976,
-   "party_r": 49221,
-   "party_other": 5067,
+   "mail_returned": 73895,
+   "mail_requested": 76934,
+   "party_d": 12324,
+   "party_r": 55593,
+   "party_other": 5978,
    "turn_2022": 198198,
-   "updated": "2026-11-02",
+   "updated": "2026-11-03",
    "source": "Wyoming Secretary of State",
    "notes": null,
    "has_party": true,
-   "pct_of_2022": 32.9
+   "pct_of_2022": 37.3
   }
  }
 }

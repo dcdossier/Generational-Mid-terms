@@ -313,6 +313,9 @@ async function fetchNYTPolls(data) {
       fetched,
       n_polls: entries.length,
       latest: entries.slice(0, 5),
+      // Every poll of the nominee matchup, newest first: [end date, D minus R margin, pollster, partisan 1/0].
+      // The margin is null when a third candidate places in the top two (e.g. an independent in Alaska).
+      history: entries.map(e => [e.end, e.dem && e.rep && !(e.others || []).some(o => o.pct > Math.min(e.dem.pct, e.rep.pct)) ? +(e.dem.pct - e.rep.pct).toFixed(1) : null, e.pollster, e.partisan ? 1 : 0]),
       average_30d: recent.length ? { ...weightedAverage(recent), window_days: 30 } : null,
     };
     // Two races can share a seat ID (e.g. a special election); keep the one polled most recently
@@ -1166,8 +1169,12 @@ async function main() {
   process.exit(0);
 }
 
-main().catch(err => {
-  console.error('[fetch-polls] Fatal error:', err);
-  saveStatus();
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error('[fetch-polls] Fatal error:', err);
+    saveStatus();
+    process.exit(1);
+  });
+}
+
+module.exports = { fetchNYTPolls };

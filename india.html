@@ -22,6 +22,8 @@
 <link rel="stylesheet" href="assets/css/seat-panel.css?v=20261104e">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="assets/js/timeline-map.js?v=20261104a"></script>
 <script src="assets/js/seat-ids.js"></script>
 <link rel="stylesheet" href="assets/css/data-labels.css">
 <script src="assets/js/data-labels.js"></script>
@@ -845,6 +847,7 @@ body {
 
 </style>
 <link rel="stylesheet" href="comments.css?v=2">
+<link rel="stylesheet" href="assets/css/timeline-map.css?v=20261104a">
 </head>
 <body>
 
@@ -1463,15 +1466,7 @@ body {
           <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestHouseTier(5,this)">T5 Pak-Oppose</button>
         </div>
       </div>
-      <div class="map-wrap" style="min-height:360px">
-        <div class="map-loading" id="house-map-loading">Loading congressional district map&hellip;</div>
-        <svg id="house-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
-        <div class="map-zoom-ctrl">
-          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1.5)">+</button>
-          <button class="map-zoom-btn" onclick="houseInterestZoomBy(1/1.5)">&minus;</button>
-          <button class="map-zoom-btn reset" onclick="houseInterestZoomReset()">&#8859;</button>
-        </div>
-      </div>
+      <div class="tm-mount" id="tm-india-house" data-live-timeline></div>
     </div>
 
     <!-- SENATE MAP -->
@@ -1488,15 +1483,7 @@ body {
           <button class="tier-chip" style="background:#1d4ed8;color:#fff;border-color:#1d4ed8" onclick="setInterestSenateTier(5,this)">T5 Pak-Oppose</button>
         </div>
       </div>
-      <div class="map-wrap" style="min-height:360px">
-        <div class="map-loading" id="senate-map-loading">Loading Senate map&hellip;</div>
-        <svg id="senate-map-svg" viewBox="0 0 960 580" style="cursor:grab"></svg>
-        <div class="map-zoom-ctrl">
-          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1.5)">+</button>
-          <button class="map-zoom-btn" onclick="senateInterestZoomBy(1/1.5)">&minus;</button>
-          <button class="map-zoom-btn reset" onclick="senateInterestZoomReset()">&#8859;</button>
-        </div>
-      </div>
+      <div class="tm-mount" id="tm-india-senate" data-live-timeline></div>
     </div>
 
     <!-- Legend -->
@@ -1855,12 +1842,8 @@ function makeZoom(svgSel, onZoom) {
     reset:  () => svgSel.transition().duration(500).call(z.transform, d3.zoomIdentity),
   };
 }
-let _houseInterestZoom = null, _senateInterestZoom = null, _presenceZoom = null, _influenceZoom = null;
+let _presenceZoom = null, _influenceZoom = null;
 let _influenceChoro = null, _influenceBubbles = null, _influenceColorScale = null;
-function houseInterestZoomBy(f)    { _houseInterestZoom?.zoomBy(f); }
-function houseInterestZoomReset()  { _houseInterestZoom?.reset(); }
-function senateInterestZoomBy(f)   { _senateInterestZoom?.zoomBy(f); }
-function senateInterestZoomReset() { _senateInterestZoom?.reset(); }
 function presenceZoomBy(f)         { _presenceZoom?.zoomBy(f); }
 function presenceZoomReset()       { _presenceZoom?.reset(); }
 function influenceZoomBy(f)        { _influenceZoom?.zoomBy(f); }
@@ -2051,163 +2034,77 @@ function indiaHighlightSeat(pathEl, defaultWidth) {
 
 window.addEventListener('seatpanel:close', () => indiaHighlightSeat(null));
 
-let _interestHouseSel = null;
-let _interestHouseTier = 'all';
 
-function loadHouseMap() {
-  if (houseMapLoaded) return;
-  houseMapLoaded = true;
-  const svgEl = d3.select('#house-map-svg');
-  const g = svgEl.append('g');
-  _houseInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
-  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
-  const pathGen = d3.geoPath().projection(proj);
 
-  fetchDistrictGeo(gj => {
-    document.getElementById('house-map-loading').style.display = 'none';
-    _interestHouseSel = g.selectAll('path')
-      .data(gj.features)
-      .join('path')
-      .attr('d', d => pathGen(d) || '')
-      .attr('data-seat-id', d => toSeatId('house', d.properties.state + '_' + d.properties.district))
-      .style('fill', d => {
-        const key = d.properties.state + '_' + d.properties.district;
-        const m = houseIdx[key];
-        return m ? (TIER_COLOR_MAP[m.tier] || '#d1d5db') : '#d1d5db';
-      })
-      .style('stroke', '#fff').style('stroke-width', '0.4px')
-      .on('mousemove', function(event, d) {
-        const key = d.properties.state + '_' + d.properties.district;
-        const m = houseIdx[key];
-        tooltip.style.display = 'block';
-        tooltip.style.left = (event.clientX + 12) + 'px';
-        tooltip.style.top  = (event.clientY - 28) + 'px';
-        tooltip.innerHTML = m
-          ? `<strong>${m.name}</strong><br>${m.seat} &middot; ${m.party==='R'?'Republican':'Democratic'}<br>${TIER_LABELS[m.tier]}`
-          : `<strong>${d.properties.state}${d.properties.district > 0 ? ' District ' + d.properties.district : ' At-Large'}</strong><br><em>Not tracked</em>`;
-      })
-      .on('mouseleave', () => { tooltip.style.display = 'none'; })
-      .on('click', function(event, d) {
-        event.stopPropagation();
-        const id = toSeatId('house', d.properties.state + '_' + d.properties.district);
-        if (!id) return;
-        indiaHighlightSeat(this, '0.4px');
-        window.SeatPanel.open(id, { mode: 'india' });
-      });
-  });
+// ── INTEREST HOUSE AND SENATE MAPS: the shared timeline map (assets/js/timeline-map.js)
+// with an "India tiers" lens (tier colours of 119th Congress members), plus its Story,
+// Redistricting, Polling and Result lenses. Search and the tier chips dim other seats.
+const houseById = {}, senateById = {};
+MEMBERS.forEach(m => {
+  if (m.chamber === 'House' && m.district !== null) { const id = toSeatId('house', m.state + '_' + m.district); if (id) houseById[id] = m; }
+  if (m.chamber === 'Senate') { const id = toSeatId('senate', m.state); if (id) (senateById[id] = senateById[id] || []).push(m); }
+});
+const TIER_LEGEND = [1, 2, 3, 4, 5].map(t => [TIER_COLOR_MAP[t], 'T' + t + ' ' + TIER_LABELS[t]]).concat([['#d1d5db', 'Not tracked']]);
+const partyName = p => p === 'R' ? 'Republican' : 'Democratic';
+const INDIA_TM = {};
+const indiaTier = { house: 'all', senate: 'all' };
+function tiersLens(ch) {
+  return {
+    id: 'tiers', label: 'India tiers', legend: TIER_LEGEND,
+    fill: id => {
+      if (ch === 'house') { const m = houseById[id]; return m ? (TIER_COLOR_MAP[m.tier] || '#d1d5db') : '#d1d5db'; }
+      const ms = senateById[id]; return ms && ms.length ? (TIER_COLOR_MAP[getBestTier(ms)] || '#d1d5db') : '#d1d5db';
+    },
+    tip: id => {
+      if (ch === 'house') { const m = houseById[id]; return m ? `${m.name} &middot; ${partyName(m.party)}<br>${TIER_LABELS[m.tier]}` : '<em>Not tracked</em>'; }
+      const ms = senateById[id] || [];
+      return ms.length ? ms.map(m => `${m.name} (${m.party === 'R' ? 'R' : 'D'}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>') : '<em>No tracked senators</em>';
+    },
+    caption: () => '<p>' + (ch === 'house' ? 'Each district is coloured by its 119th Congress member\'s stance on India.' : 'Each state is coloured by its senators\' stance on India (the more supportive tier where they differ).') +
+      ' Move the slider to see the new district lines; switch lens to follow polls and the result.</p>',
+    note: 'India tiers: Takshashila assessment of 119th Congress members. District lines and results: see the other lenses.',
+  };
 }
-
-function filterInterestHouseMap(q) {
-  if (!_interestHouseSel) return;
-  const ql = q.toLowerCase().trim();
-  const active = ql || _interestHouseTier !== 'all';
-  let ct = 0;
-  _interestHouseSel.each(function(d) {
-    const key = d.properties.state + '_' + d.properties.district;
-    const m = houseIdx[key];
-    let show = true;
-    if (ql) show = m && (m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
-      m.state.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
-      (m.party==='D'?'democrat':'republican').includes(ql));
-    if (_interestHouseTier !== 'all') show = show && m && m.tier === parseInt(_interestHouseTier);
-    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
-    if (show && m) ct++;
-  });
-  const el = document.getElementById('interest-house-count');
-  if (el) el.textContent = active ? ct + ' member' + (ct !== 1 ? 's' : '') : '';
+function indiaMatch(ch, ql) {
+  const t = indiaTier[ch] === 'all' ? null : parseInt(indiaTier[ch], 10);
+  return id => {
+    const ms = ch === 'house' ? (houseById[id] ? [houseById[id]] : []) : (senateById[id] || []);
+    if (!ms.length) return !ql && !t ? true : false;
+    return ms.some(m => (!t || m.tier === t) && (!ql || [m.name, m.party, m.party === 'D' ? 'democrat' : 'republican', m.state, m.seat || '', id].join(' ').toLowerCase().includes(ql)));
+  };
 }
-
+function indiaFilter(ch) {
+  const inst = INDIA_TM[ch]; if (!inst) return;
+  const ql = (document.getElementById('interest-' + ch + '-search')?.value || '').toLowerCase().trim();
+  const active = ql || indiaTier[ch] !== 'all';
+  const fn = indiaMatch(ch, ql);
+  inst.setFilter(active ? fn : null);
+  const ids = Object.keys(ch === 'house' ? houseById : senateById);
+  const ct = active ? ids.filter(fn).length : 0, el = document.getElementById('interest-' + ch + '-count');
+  if (el) el.textContent = active ? ct + (ch === 'house' ? ' member' : ' state') + (ct !== 1 ? 's' : '') : '';
+}
+function mountIndiaMap(ch) {
+  if (INDIA_TM[ch]) return;
+  INDIA_TM[ch] = window.TimelineMap.mount(document.getElementById('tm-india-' + ch), {
+    chamber: ch, chambers: [ch], lens: 'tiers', extraLenses: [tiersLens(ch)],
+    sub: ch === 'house' ? 'India stance of each district\'s member, with the new district lines, polls and the result month by month.' : 'India stance of each state\'s senators, with the 2026 races\' polls and the result month by month.',
+    onSeat: id => window.SeatPanel.open(id, { mode: 'india' }),
+  });
+  indiaFilter(ch);
+}
+function loadHouseMap() { houseMapLoaded = true; mountIndiaMap('house'); }
+function loadSenateMap() { senateMapLoaded = true; mountIndiaMap('senate'); }
+function filterInterestHouseMap() { indiaFilter('house'); }
+function filterInterestSenateMap() { indiaFilter('senate'); }
 function setInterestHouseTier(tier, btn) {
-  _interestHouseTier = tier;
+  indiaTier.house = tier;
   document.querySelectorAll('#inner-house-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
-  filterInterestHouseMap(document.getElementById('interest-house-search')?.value || '');
+  indiaFilter('house');
 }
-
-// ── INTEREST SENATE MAP ─────────────────────────────────────────────────────
-let _interestSenateSel = null;
-let _interestSenateTier = 'all';
-
-function loadSenateMap() {
-  if (senateMapLoaded) return;
-  senateMapLoaded = true;
-  const svgEl = d3.select('#senate-map-svg');
-  const g = svgEl.append('g');
-  _senateInterestZoom = makeZoom(svgEl, t => g.attr('transform', t));
-  const proj = d3.geoAlbersUsa().translate([480, 300]).scale(1070);
-  const pathGen = d3.geoPath().projection(proj);
-
-  fetch('assets/senate.json')
-    .then(r => r.json())
-    .then(gj => {
-      document.getElementById('senate-map-loading').style.display = 'none';
-      _interestSenateSel = g.selectAll('path')
-        .data(gj.features)
-        .join('path')
-        .attr('d', d => pathGen(d) || '')
-        .attr('data-seat-id', d => toSeatId('senate', d.properties.NAME))
-        .style('fill', d => {
-          const members = senateIdx[d.properties.NAME];
-          if (!members || !members.length) return '#d1d5db';
-          const tier = getBestTier(members);
-          return TIER_COLOR_MAP[tier] || '#d1d5db';
-        })
-        .style('stroke', '#fff').style('stroke-width', '0.8px')
-        .on('mousemove', function(event, d) {
-          const members = senateIdx[d.properties.NAME];
-          tooltip.style.display = 'block';
-          tooltip.style.left = (event.clientX + 12) + 'px';
-          tooltip.style.top  = (event.clientY - 28) + 'px';
-          if (members && members.length) {
-            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br>` +
-              members.map(m => `${m.name} (${m.party==='R'?'R':'D'}) &mdash; ${TIER_LABELS[m.tier]}`).join('<br>');
-          } else {
-            tooltip.innerHTML = `<strong>${d.properties.NAME}</strong><br><em>No tracked senators</em>`;
-          }
-        })
-        .on('mouseleave', () => { tooltip.style.display = 'none'; })
-        .on('click', function(event, d) {
-          event.stopPropagation();
-          const id = toSeatId('senate', d.properties.NAME);
-          if (!id) return;
-          indiaHighlightSeat(this, '0.8px');
-          window.SeatPanel.open(id, { mode: 'india' });
-        });
-    })
-    .catch(err => {
-      senateMapLoaded = false;
-      const el = document.getElementById('senate-map-loading');
-      if (el) el.textContent = 'Could not load map — click "Senate Map" to retry.';
-      console.error('Senate map error:', err);
-    });
-}
-
-function filterInterestSenateMap(q) {
-  if (!_interestSenateSel) return;
-  const ql = q.toLowerCase().trim();
-  const active = ql || _interestSenateTier !== 'all';
-  let ct = 0;
-  _interestSenateSel.each(function(d) {
-    const members = senateIdx[d.properties.NAME];
-    let show = true;
-    if (ql) show = members && members.some(m =>
-      m.name.toLowerCase().includes(ql) || m.party.toLowerCase().includes(ql) ||
-      d.properties.NAME.toLowerCase().includes(ql) || m.seat.toLowerCase().includes(ql) ||
-      (m.party==='D'?'democrat':'republican').includes(ql));
-    if (_interestSenateTier !== 'all') {
-      const t = parseInt(_interestSenateTier);
-      show = show && members && members.some(m => m.tier === t);
-    }
-    d3.select(this).attr('opacity', active ? (show ? 1 : 0.08) : 1);
-    if (show && members && members.length) ct++;
-  });
-  const el = document.getElementById('interest-senate-count');
-  if (el) el.textContent = active ? ct + ' state' + (ct !== 1 ? 's' : '') : '';
-}
-
 function setInterestSenateTier(tier, btn) {
-  _interestSenateTier = tier;
+  indiaTier.senate = tier;
   document.querySelectorAll('#inner-senate-map .tier-chip').forEach(b => b.classList.toggle('active', b === btn));
-  filterInterestSenateMap(document.getElementById('interest-senate-search')?.value || '');
+  indiaFilter('senate');
 }
 
 // ── PRESENCE MAP (Indian-American members) ─────────────────────────────────
@@ -2661,5 +2558,9 @@ document.addEventListener('click',function(e){const a=e.target.closest('a');if(a
 <section data-comments="india" aria-label="Comments"></section>
 <footer class="page-contact">Contact: <a href="mailto:usstudies@takshashila.org.in">usstudies@takshashila.org.in</a></footer>
 <script src="comments.js?v=2" defer></script>
+<!-- Live results for the timeline map's last stops (same reader and refresh as Home) -->
+<script src="assets/js/live-math.js?v=20261104m" defer></script>
+<script src="assets/js/live-seat.js?v=20261104t" defer></script>
+<script src="assets/js/live.js?v=20261104w" defer></script>
 </body>
 </html>

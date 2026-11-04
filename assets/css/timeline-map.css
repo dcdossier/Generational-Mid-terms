@@ -1,0 +1,79 @@
+/* "How the map changed" timeline map (assets/js/timeline-map.js), Trends and India's Interest */
+.tm { --tm-ink: #1c2430; --tm-mut: #6b7280; --tm-line: #e8dfc8; --tm-navy: #1f2a44; --tm-gold: #c98a12;
+  position: relative; background: #fff; border: 1px solid var(--tm-line); border-radius: 14px; padding: 16px; margin: 0 0 20px;
+  color: var(--tm-ink); font: 15px/1.5 "Times New Roman", Times, serif; }
+.tm-head { margin-bottom: 10px; }
+.tm-title { font: 400 26px/1.2 "Times New Roman", Times, serif; color: var(--tm-navy); margin: 0 0 4px; }
+.tm-sub { color: var(--tm-mut); margin: 0; font-size: 15px; }
+.tm-controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 12px; }
+.tm-ctl { display: inline-flex; align-items: center; flex-wrap: wrap; gap: 4px; }
+.tm-lab { font: 600 11px system-ui, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: var(--tm-mut); margin-right: 6px; }
+.tm-seg { display: inline-flex; border: 1px solid var(--tm-line); border-radius: 10px; overflow: hidden; }
+.tm-seg button { font: 15px "Times New Roman", serif; border: 0; background: #fff; padding: 7px 13px; cursor: pointer; color: var(--tm-ink); min-height: 40px; }
+.tm-seg button + button { border-left: 1px solid var(--tm-line); }
+.tm-seg button.on { background: var(--tm-navy); color: #fff; }
+.tm-seg button:focus-visible, .tm-play:focus-visible, .tm-tick:focus-visible, .tm-zoom button:focus-visible { outline: 3px solid var(--tm-gold); outline-offset: 2px; }
+.tm-play { font: 15px "Times New Roman", serif; border: 1px solid var(--tm-navy); background: var(--tm-navy); color: #fff; border-radius: 10px; padding: 7px 14px; cursor: pointer; min-height: 40px; }
+.tm-grid { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; }
+.tm-mapcol { min-width: 0; }
+.tm-mapwrap { position: relative; }
+.tm-map { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.tm-loading { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--tm-mut); font: 14px system-ui, sans-serif; }
+.tm-loading[hidden] { display: none; }
+.tm-zoom { display: flex; justify-content: flex-end; gap: 4px; margin: 0 0 4px; }
+.tm-zoom button { width: 32px; height: 32px; border: 1px solid var(--tm-line); background: #fff; border-radius: 8px; font: 18px/1 system-ui, sans-serif; color: var(--tm-navy); cursor: pointer; }
+.tm-dist { stroke: #fff; stroke-width: .35; transition: fill .5s ease; cursor: pointer; }
+.tm-dist.tm-flip, .tm-state.tm-flip { stroke: #111; stroke-width: 1.4; }
+.tm-state { stroke: #fff; stroke-width: 1; transition: fill .5s ease; cursor: pointer; }
+.tm-state.tm-flip { stroke-width: 2; }
+.tm-st-out { fill: none; stroke: #fff; stroke-width: 1; pointer-events: none; }
+.tm-rd-out { fill: none; stroke: var(--tm-gold); stroke-width: 2.2; stroke-dasharray: 4 2; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .tm-dist, .tm-state { transition: none; } }
+
+.tm-slider { margin: 14px 4px 4px; position: relative; }
+.tm-ticks { position: relative; height: 22px; margin: 0 9px; }
+.tm-tick { position: absolute; top: -11px; transform: translateX(-50%); width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.tm-tick span { width: 10px; height: 10px; border-radius: 50%; background: var(--tm-gold); border: 2px solid var(--tm-gold); display: block; }
+.tm-tick.tm-unv span { background: #fff; }
+.tm-tick.on span { width: 14px; height: 14px; box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--tm-gold); }
+.tm-slider input[type=range] { width: 100%; accent-color: var(--tm-navy); height: 44px; margin: 0; cursor: pointer; }
+.tm-mlabels { position: relative; height: 34px; font: 12px system-ui, sans-serif; color: var(--tm-mut); margin: 0 9px; }
+.tm-mlabels span { position: absolute; top: 0; white-space: nowrap; }
+.tm-mlabels .tm-end { font-weight: 600; color: var(--tm-navy); }
+.tm-mlabels .tm-last { top: 16px; }
+
+.tm-frame { font: 400 22px/1.25 "Times New Roman", serif; color: var(--tm-navy); margin: 0 0 6px; }
+.tm-cap p { margin: 0 0 10px; }
+.tm-small { font: 12.5px/1.45 system-ui, sans-serif; color: var(--tm-mut); }
+.tm-ev { border-left: 3px solid var(--tm-gold); padding: 4px 0 4px 10px; margin: 0 0 10px; font-size: 14px; }
+.tm-ev.tm-ev-unv { border-left-style: dashed; }
+.tm-ev b { color: var(--tm-navy); }
+.tm-ev small { display: block; color: var(--tm-mut); font: 12px system-ui, sans-serif; }
+.tm-ev a { color: var(--tm-navy); }
+.tm-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+.tm-stat { background: #faf7ef; border: 1px solid var(--tm-line); border-radius: 10px; padding: 8px 10px; }
+.tm-stat b { display: block; font-size: 22px; color: var(--tm-navy); }
+.tm-stat span { font: 12px system-ui, sans-serif; color: var(--tm-mut); }
+.tm-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 12px system-ui, sans-serif; color: var(--tm-mut); margin-top: 10px; }
+.tm-sw { display: inline-block; width: 14px; height: 10px; border-radius: 2px; margin-right: 4px; vertical-align: -1px; box-sizing: border-box; }
+.tm-note { font: 12px system-ui, sans-serif; color: var(--tm-mut); margin: 12px 0 0; }
+
+.tm-tip { position: absolute; z-index: 30; pointer-events: none; background: #fff; border: 1px solid var(--tm-line); border-radius: 10px; padding: 8px 10px;
+  font: 13px/1.45 system-ui, sans-serif; box-shadow: 0 6px 18px rgba(0,0,0,.12); color: var(--tm-ink); }
+.tm-tip[hidden] { display: none; }
+.tm-tip b { font-family: "Times New Roman", serif; font-size: 15px; }
+.tm-tip.tm-tip-tap { pointer-events: auto; }
+.tm-tip-open { display: block; width: 100%; margin-top: 6px; min-height: 44px; border: 1px solid var(--tm-navy); background: var(--tm-navy); color: #fff; border-radius: 8px; font: 15px "Times New Roman", serif; cursor: pointer; }
+
+@media (max-width: 900px) { .tm-grid { grid-template-columns: 1fr; } }
+@media (max-width: 600px) {
+  .tm { padding: 12px; border-radius: 12px; }
+  .tm-title { font-size: 22px; }
+  .tm-mapcol { margin: 0 -12px; }
+  .tm-slider { margin: 10px 12px 4px; }
+  .tm-mlabels .tm-mid { display: none; }
+  .tm-mlabels span { font-size: 11px; }
+  .tm-seg button { min-height: 44px; padding: 7px 10px; }
+  .tm-play { min-height: 44px; }
+  .tm-zoom button { width: 44px; height: 44px; }
+}

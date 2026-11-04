@@ -336,7 +336,7 @@
 
   function init() {
     mounts = [].slice.call(document.querySelectorAll('[data-live-results]'));
-    if (!document.querySelector('[data-live-results], [data-live-strip], [data-live-balance], [data-live-battleground]')) return;
+    if (!document.querySelector('[data-live-results], [data-live-strip], [data-live-balance], [data-live-battleground], [data-live-timeline]')) return;
     setInterval(emit, 30000);   // countdowns and the automatic switch at first poll close
     mounts.forEach(function (el) { el.hidden = true; el.classList.add('lv'); el.setAttribute('aria-live', 'polite'); });
     loadContext().then(function () {

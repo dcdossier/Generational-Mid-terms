@@ -466,3 +466,7 @@
 .sp-badge { display: inline-block; font: 700 10px var(--sans, sans-serif); text-transform: uppercase; letter-spacing: .06em; padding: 1px 6px; border-radius: 4px; margin-right: 6px; vertical-align: 1px; }
 .sp-badge-called { background: #1E2232; color: #fff; } .sp-badge-flip { background: #f1a222; color: #3d0824; }
 .bl-oncourse { color: #6b7280; font-weight: 400; }
+.li-trend { font-size: 14px; }
+.li-trend-up { color: #1A6B3A; } .li-trend-down { color: #B4232A; }
+.li-arrow { font-size: 15px; }
+.li .sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

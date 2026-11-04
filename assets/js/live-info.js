@@ -1,7 +1,7 @@
 /* Info row under the projected balance (any element with data-live-info): five cells.
  *   a. Flips per chamber and party (Fox: flipped_to, net_gain) and progress to a majority
  *   b. Litigation and interference (data/litigation.json), opening to the list
- *   c. Turnout: House votes counted against the 2022 House total, with UF Election Lab history
+ *   c. Turnout: House votes counted, with an up or down arrow on 2022 (like-for-like districts)
  *   d. Polls: countdown to the last poll close (Alaska), then when all polls closed
  *   e. Counting: races still uncalled per chamber; never an estimated finish time
  * Data from live.js ("racebook:live" events).
@@ -50,16 +50,33 @@
       '<p class="li-note">From Ground News and our news feeds; an entry needs 2 distinct publishers.' + (L && L.updated ? ' Checked ' + ist(L.updated) + '.' : '') + '</p></details>';
   }
 
+  // Like for like: House districts at least 95% counted, on the same lines as 2022.
+  // Shows a coloured arrow only when enough districts are in to say up or down.
+  var MIN_DISTRICTS = 20;
+  function trend(st) {
+    var b = st.baseline && st.baseline.house; if (!b) return '';
+    var now = 0, then = 0, n = 0;
+    (st.races || []).forEach(function (r) {
+      var e = b[r.race_id];
+      if (r.kind !== 'house' || !e || !e.votes_2022 || (r.pct_counted || 0) < 95 || !r.total_votes) return;
+      now += Number(r.total_votes); then += e.votes_2022; n++;
+    });
+    if (n < MIN_DISTRICTS || !then) return '';
+    var ch = (now / then - 1) * 100, up = ch >= 0;
+    return '<p class="li-trend li-trend-' + (up ? 'up' : 'down') + '"><span class="li-arrow" aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' +
+      '<b>' + (up ? '+' : '−') + Math.abs(ch).toFixed(1) + '%</b> on 2022 <span class="li-small">(' + n + ' districts at least 95% counted, same lines as 2022)</span>' +
+      '<span class="sr-only"> Turnout is ' + (up ? 'up' : 'down') + ' ' + Math.abs(ch).toFixed(1) + ' per cent on 2022 in these districts.</span></p>';
+  }
+
   function turnoutCell(st) {
     var house = (st.races || []).filter(function (r) { return r.kind === 'house'; }).reduce(function (a, r) { return a + (Number(r.total_votes) || 0); }, 0);
-    var base = votes22 && votes22.total, id = 'li-tip-' + (++uid);
+    var id = 'li-tip-' + (++uid);
     var tip = history ? '<span class="li-tip" id="' + id + '" role="tooltip" hidden>Midterm turnout is historically lower than presidential. National turnout of eligible voters (VEP): ' +
       history.years.map(function (y) { return y.year + ' ' + y.vep_pct.toFixed(1) + '% (' + y.kind + ')'; }).join(' · ') +
       '. Source: <a href="' + esc(history.source_url) + '" target="_blank" rel="noopener">UF Election Lab</a>.</span>' : '';
     var ev = st.earlyVote && st.earlyVote.national;
     return '<h3 class="li-h">Turnout ' + (tip ? '<button type="button" class="li-i" aria-expanded="false" aria-controls="' + id + '" aria-label="About midterm turnout"></button>' : '') + '</h3>' + tip +
-      '<p class="li-big">Votes counted: <b>' + mil(house) + '</b></p>' +
-      (base ? '<p>2022 final House vote ' + mil(base) + ' (' + (house / base * 100).toFixed(0) + '%)</p>' : '') +
+      '<p class="li-big">Votes counted: <b>' + mil(house) + '</b></p>' + trend(st) +
       (ev ? '<p class="li-small">Early votes cast nationally: ' + mil(ev.total) + ' (UF Election Lab)</p>' : '');
   }
 

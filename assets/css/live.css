@@ -471,3 +471,27 @@
 .li-arrow { font-size: 15px; }
 .li .sr-only { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .sp-live-note, .bg-note { display: block; font-size: 13px; color: #6B6B6B; margin-top: 2px; }
+
+/* Seats changing hands (below each balance bar; larger on purpose) */
+.fl{margin:18px 0 6px;padding:16px 18px;border:1px solid #eadfc4;border-radius:12px;background:#fffdf7}
+.fl-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.fl-title{font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#374151}
+.fl-net{font-family:var(--serif, 'Times New Roman', serif);font-size:28px;font-weight:700;line-height:1}
+.fl-net small{font:400 13px var(--sans, sans-serif);color:#6b7280}
+.fl-net-d{color:#1f3a8a}.fl-net-r{color:#9b1c1c}.fl-net-n{color:#374151}
+.fl-bar{display:flex;align-items:stretch;height:40px}
+.fl-side{flex:1;display:flex;background:#f3f1ea;border-radius:8px;overflow:hidden}
+.fl-side-d{justify-content:flex-end;border-radius:8px 0 0 8px}
+.fl-side-r{justify-content:flex-start;border-radius:0 8px 8px 0}
+.fl-seg{display:block;height:100%;transition:width .6s ease}
+.fl-dc{background:#1f3a8a}.fl-dl{background:#b9c8ec}.fl-rc{background:#9b1c1c}.fl-rl{background:#f1c4c4}
+.fl-mid{width:3px;background:#1c2430;margin:-6px 0}
+.fl-labels{display:flex;justify-content:space-between;gap:16px;margin-top:10px}
+.fl-lab{font-size:14px;line-height:1.45}.fl-lab b{font-size:22px;font-family:var(--serif, 'Times New Roman', serif)}
+.fl-lab-d{color:#1f3a8a}.fl-lab-r{color:#9b1c1c;text-align:right}
+.fl-lead{color:#6b7280;font-size:13px;margin-left:4px}
+.fl-sub{display:block;color:#4b5563;font-size:12.5px}
+.fl-key{display:flex;gap:18px;margin-top:10px;font-size:12px;color:#6b7280}
+.fl-sw{display:inline-block;width:16px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+@media (max-width:600px){.fl{padding:12px}.fl-net{font-size:22px}.fl-bar{height:32px}.fl-labels{flex-direction:column;gap:6px}.fl-lab-r{text-align:left}}
+@media (prefers-reduced-motion:reduce){.fl-seg{transition:none}}

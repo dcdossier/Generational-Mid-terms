@@ -97,6 +97,34 @@
     return c && c.text ? c.text : '';
   }
 
+  // Seats changing hands: one diverging bar. Left = seats flipping to Democrats (Republican
+  // losses), right = seats flipping to Republicans (Democratic losses). Dark = called,
+  // light = only leading. Bigger than the balance bar on purpose.
+  function flipChart(g, key) {
+    if (!g) return '';
+    var dC = g.D.gained, dL = g.D.leadGain, rC = g.R.gained, rL = g.R.leadGain;
+    var side = Math.max(dC + dL, rC + rL, 5);
+    var w = function (n) { return (n / side * 100).toFixed(2) + '%'; };
+    var net = g.D.net, netTxt = net === 0 ? 'No net change' : (net > 0 ? 'Democrats' : 'Republicans') + ' net ' + signed(Math.abs(net));
+    var netCls = net > 0 ? 'd' : net < 0 ? 'r' : 'n';
+    var nm = key === 'gov' ? 'governorships' : 'seats';
+    return '<div class="fl" role="group" aria-label="' + esc((key === 'house' ? 'House' : key === 'senate' ? 'Senate' : 'Governor') + ' seats changing hands') + '">' +
+      '<div class="fl-head"><span class="fl-title">' + (key === 'gov' ? 'Governorships' : 'Seats') + ' changing hands</span>' +
+        '<span class="fl-net fl-net-' + netCls + '">' + netTxt + ' <small>(called)</small></span></div>' +
+      '<div class="fl-bar">' +
+        '<div class="fl-side fl-side-d"><span class="fl-seg fl-dl" style="width:' + w(dL) + '"></span><span class="fl-seg fl-dc" style="width:' + w(dC) + '"></span></div>' +
+        '<div class="fl-mid" aria-hidden="true"></div>' +
+        '<div class="fl-side fl-side-r"><span class="fl-seg fl-rc" style="width:' + w(rC) + '"></span><span class="fl-seg fl-rl" style="width:' + w(rL) + '"></span></div>' +
+      '</div>' +
+      '<div class="fl-labels">' +
+        '<div class="fl-lab fl-lab-d"><b>' + dC + '</b> flipped to Democrats <span class="fl-lead">+' + dL + ' leading</span>' +
+          '<span class="fl-sub">Democrats gained ' + g.D.gained + ' · lost ' + g.D.lost + ' ' + nm + '</span></div>' +
+        '<div class="fl-lab fl-lab-r"><b>' + rC + '</b> flipped to Republicans <span class="fl-lead">+' + rL + ' leading</span>' +
+          '<span class="fl-sub">Republicans gained ' + g.R.gained + ' · lost ' + g.R.lost + ' ' + nm + '</span></div>' +
+      '</div>' +
+      '<div class="fl-key"><span><i class="fl-sw fl-dc"></i><i class="fl-sw fl-rc"></i>Called</span><span><i class="fl-sw fl-dl"></i><i class="fl-sw fl-rl"></i>Leading, not called</span></div>' +
+    '</div>';
+  }
   function gainLines(g, p) {
     if (!g) return '';
     var x = g[p];
@@ -173,7 +201,7 @@
         if (key === 'senate') s += ' · ' + one(n.filibuster, 'to break filibuster', 'Filibuster-proof', TH[1]) + ' · ' + one(n.two_thirds, 'for supermajority', 'Supermajority won', TH[2]);
         return '<span class="bl-needline">' + s + '</span>';
       };
-      t = { D: x.D.total, R: x.R.total, I: x.I.total, textD: needs('D') + gainLines(g, 'D'), textR: needs('R') + gainLines(g, 'R'),
+      t = { D: x.D.total, R: x.R.total, I: x.I.total, textD: needs('D'), textR: needs('R'), flips: flipChart(g, key),
         mid: (up - calledN) + ' of ' + up + ' not yet called' };
       var line = function (name, y, p) {
         var n = y.need, parts = [name + ' ' + y.total + ' (' + (y.not_up ? y.not_up + ' not up, ' : '') + y.won + ' won, ' + y.leading + ' leading)'];
@@ -201,6 +229,7 @@
       '<div class="bl-bar">' + barSvg(id, total, runs, width, mk, compact) + '</div>' +
       (compact ? markKey(mk) : '') +
       '<div class="bl-needs" aria-hidden="true"><span class="bl-need-d">' + t.textD + '</span>' + (t.mid ? '<span class="bl-mid">' + esc(t.mid) + '</span>' : '') + '<span class="bl-need-r">' + t.textR + '</span></div>' +
+      (t.flips || '') +
       '</div>';
   }
 

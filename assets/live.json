@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-04T19:03:53.139Z",
- "fetched_at": "2026-11-04T19:03:50.606Z",
+ "source_last_updated": "2026-11-04T19:07:07.561Z",
+ "fetched_at": "2026-11-04T19:07:11.084Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 62,
+   "remaining": 59,
    "parties": {
     "D": {
-     "won": 234,
-     "net_gain": 28,
-     "flipped_to": 28,
+     "won": 237,
+     "net_gain": 29,
+     "flipped_to": 29,
      "majority_called": true
     },
     "R": {
      "won": 139,
-     "net_gain": -28,
+     "net_gain": -29,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -11040,7 +11040,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 24.7,
-   "total_votes": 279495,
+   "total_votes": 279498,
    "called_at": "2026-11-04T03:54:14.040Z",
    "candidates": [
     {
@@ -11048,7 +11048,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 174232,
+     "votes": 174235,
      "pct": 62.34,
      "photo": null
     },
@@ -11725,7 +11725,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.9,
-   "total_votes": 233084,
+   "total_votes": 233106,
    "called_at": "2026-11-04T04:04:31.485Z",
    "candidates": [
     {
@@ -11733,7 +11733,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 151747,
+     "votes": 151762,
      "pct": 65.1,
      "photo": null
     },
@@ -11742,7 +11742,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 77423,
+     "votes": 77427,
      "pct": 33.22,
      "photo": null
     },
@@ -11751,7 +11751,7 @@
      "party": "Gr",
      "incumbent": false,
      "winner": false,
-     "votes": 3914,
+     "votes": 3917,
      "pct": 1.68,
      "photo": null
     }
@@ -16144,7 +16144,7 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 94,
+   "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 36.1,
@@ -16594,7 +16594,7 @@
    "too_close": false,
    "flipped": true,
    "runoff": false,
-   "pct_in": 95,
+   "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 24.6,
@@ -19622,6 +19622,183 @@
     "AP"
    ]
   },
+  "NY-03": {
+   "id": "NY-03",
+   "kind": "house",
+   "state": "NY",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 9.8,
+   "total_votes": 270572,
+   "called_at": "2026-11-04T19:04:10.881Z",
+   "candidates": [
+    {
+     "name": "Thomas Suozzi",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 148216,
+     "pct": 54.78,
+     "photo": "https://images.api.fox.com/elections/headshots/SUOZZI_TOM_DNY_HOUSE.png"
+    },
+    {
+     "name": "Michael LiPetri",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 121623,
+     "pct": 44.95,
+     "photo": "https://images.api.fox.com/elections/headshots/LIPETRI_MICHAEL_RNY_HOUSE.png"
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 733,
+     "pct": 0.27,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "NY-04": {
+   "id": "NY-04",
+   "kind": "house",
+   "state": "NY",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 12.6,
+   "total_votes": 285480,
+   "called_at": "2026-11-04T19:04:26.176Z",
+   "candidates": [
+    {
+     "name": "Laura Gillen",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 160234,
+     "pct": 56.13,
+     "photo": "https://images.api.fox.com/elections/headshots/GILLEN_LAURA_DNY_HOUSE.png"
+    },
+    {
+     "name": "Jeanine Driscoll",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 124259,
+     "pct": 43.53,
+     "photo": "https://images.api.fox.com/elections/headshots/DRISCOLL_JEANINE_RNY_HOUSE.png"
+    },
+    {
+     "name": "Blay Tarnoff",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 714,
+     "pct": 0.25,
+     "photo": null
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 273,
+     "pct": 0.1,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "MI-07": {
+   "id": "MI-07",
+   "kind": "house",
+   "state": "MI",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 3.3,
+   "total_votes": 397113,
+   "called_at": "2026-11-04T19:05:49.862Z",
+   "candidates": [
+    {
+     "name": "William Lawrence",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 202657,
+     "pct": 51.03,
+     "photo": "https://images.api.fox.com/elections/headshots/512x512_LAWRENCE_WILL_DMI_HOUSE.png"
+    },
+    {
+     "name": "Tom Barrett",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 189482,
+     "pct": 47.71,
+     "photo": "https://images.api.fox.com/elections/headshots/512x512_BARRETT_TOM_RMI_HOUSE_.png"
+    },
+    {
+     "name": "Shane Dedrick",
+     "party": "Gr",
+     "incumbent": false,
+     "winner": false,
+     "votes": 4974,
+     "pct": 1.25,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20902,58 +21079,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "MI-07": {
-   "id": "MI-07",
-   "kind": "house",
-   "state": "MI",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 3.3,
-   "total_votes": 397113,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "William Lawrence",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 202657,
-     "pct": 51.03,
-     "photo": "https://images.api.fox.com/elections/headshots/512x512_LAWRENCE_WILL_DMI_HOUSE.png"
-    },
-    {
-     "name": "Tom Barrett",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 189482,
-     "pct": 47.71,
-     "photo": "https://images.api.fox.com/elections/headshots/512x512_BARRETT_TOM_RMI_HOUSE_.png"
-    },
-    {
-     "name": "Shane Dedrick",
-     "party": "Gr",
-     "incumbent": false,
-     "winner": false,
-     "votes": 4974,
-     "pct": 1.25,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "MN-01": {
    "id": "MN-01",
    "kind": "house",
@@ -21560,11 +21685,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 91,
+   "pct_in": 92,
    "winner_party": null,
    "leader_party": "R",
-   "margin_pct": 3.7,
-   "total_votes": 245351,
+   "margin_pct": 4.1,
+   "total_votes": 248343,
    "called_at": null,
    "candidates": [
     {
@@ -21572,8 +21697,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 122874,
-     "pct": 50.08,
+     "votes": 124881,
+     "pct": 50.29,
      "photo": null
     },
     {
@@ -21581,8 +21706,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 113806,
-     "pct": 46.38,
+     "votes": 114664,
+     "pct": 46.17,
      "photo": null
     },
     {
@@ -21590,7 +21715,7 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 4436,
+     "votes": 4500,
      "pct": 1.81,
      "photo": null
     },
@@ -21599,7 +21724,7 @@
      "party": "Oth",
      "incumbent": false,
      "winner": false,
-     "votes": 4235,
+     "votes": 4298,
      "pct": 1.73,
      "photo": null
     }
@@ -21809,119 +21934,6 @@
      "winner": false,
      "votes": 208,
      "pct": 0.08,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NY-03": {
-   "id": "NY-03",
-   "kind": "house",
-   "state": "NY",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 9.8,
-   "total_votes": 270572,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Thomas Suozzi",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 148216,
-     "pct": 54.78,
-     "photo": "https://images.api.fox.com/elections/headshots/SUOZZI_TOM_DNY_HOUSE.png"
-    },
-    {
-     "name": "Michael LiPetri",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 121623,
-     "pct": 44.95,
-     "photo": "https://images.api.fox.com/elections/headshots/LIPETRI_MICHAEL_RNY_HOUSE.png"
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 733,
-     "pct": 0.27,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NY-04": {
-   "id": "NY-04",
-   "kind": "house",
-   "state": "NY",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 12.6,
-   "total_votes": 285480,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Laura Gillen",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 160234,
-     "pct": 56.13,
-     "photo": "https://images.api.fox.com/elections/headshots/GILLEN_LAURA_DNY_HOUSE.png"
-    },
-    {
-     "name": "Jeanine Driscoll",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 124259,
-     "pct": 43.53,
-     "photo": "https://images.api.fox.com/elections/headshots/DRISCOLL_JEANINE_RNY_HOUSE.png"
-    },
-    {
-     "name": "Blay Tarnoff",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 714,
-     "pct": 0.25,
-     "photo": null
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 273,
-     "pct": 0.1,
      "photo": null
     }
    ],
@@ -23637,7 +23649,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31,
-   "total_votes": 2397670,
+   "total_votes": 2397695,
    "called_at": null,
    "candidates": [
     {
@@ -23645,7 +23657,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1588158,
+     "votes": 1588175,
      "pct": 63.28,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
@@ -23654,7 +23666,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 809512,
+     "votes": 809520,
      "pct": 32.25,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
@@ -23918,8 +23930,8 @@
    "pct_in": 91,
    "winner_party": "R",
    "leader_party": "R",
-   "margin_pct": 6.7,
-   "total_votes": 691629,
+   "margin_pct": 6.8,
+   "total_votes": 694418,
    "called_at": null,
    "candidates": [
     {
@@ -23927,8 +23939,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 370411,
-     "pct": 50.38,
+     "votes": 372274,
+     "pct": 50.43,
      "photo": "https://images.api.fox.com/elections/headshots/RICKETTS_PETE_RNE_SENATE.png"
     },
     {
@@ -23936,8 +23948,8 @@
      "party": "NP",
      "incumbent": false,
      "winner": false,
-     "votes": 321218,
-     "pct": 43.69,
+     "votes": 322144,
+     "pct": 43.64,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_OSBORN_DAN_INE_SENATE_.png"
     }
    ],
@@ -24944,7 +24956,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 17.6,
-   "total_votes": 1234262,
+   "total_votes": 1234278,
    "called_at": null,
    "candidates": [
     {
@@ -24952,7 +24964,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 725669,
+     "votes": 725680,
      "pct": 58.79,
      "photo": "https://images.api.fox.com/elections/headshots/LAMONT_NED_DCT_GOVERNOR.png"
     },
@@ -24961,7 +24973,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 508593,
+     "votes": 508598,
      "pct": 41.21,
      "photo": "https://images.api.fox.com/elections/headshots/FAZIO_RYAN_RCT_GOVERNOR.png"
     }
@@ -25273,7 +25285,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 27.5,
-   "total_votes": 2431213,
+   "total_votes": 2431237,
    "called_at": null,
    "candidates": [
     {
@@ -25281,7 +25293,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1561526,
+     "votes": 1561541,
      "pct": 62.07,
      "photo": "https://images.api.fox.com/elections/headshots/HEALEY_MAURA_DMA_GOVERNOR.png"
     },
@@ -25290,7 +25302,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 869687,
+     "votes": 869696,
      "pct": 34.57,
      "photo": "https://images.api.fox.com/elections/headshots/MINOGUE_MICHAEL_RMA_GOVERNOR.png"
     }
@@ -25504,11 +25516,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 91,
+   "pct_in": 92,
    "winner_party": "R",
    "leader_party": "R",
-   "margin_pct": 8.4,
-   "total_votes": 684828,
+   "margin_pct": 8.5,
+   "total_votes": 687553,
    "called_at": null,
    "candidates": [
     {
@@ -25516,8 +25528,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 373465,
-     "pct": 50.69,
+     "votes": 375355,
+     "pct": 50.74,
      "photo": "https://images.api.fox.com/elections/headshots/PILLEN_JIM_RNE_GOVERNOR.png"
     },
     {
@@ -25525,8 +25537,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 311363,
-     "pct": 42.26,
+     "votes": 312198,
+     "pct": 42.21,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_WALZ_LYNNE_DNE_GOVERNOR.png"
     }
    ],
@@ -26383,6 +26395,30 @@
  },
  "latest_calls": [
   {
+   "id": "MI-07",
+   "kind": "house",
+   "party": "D",
+   "winner": "William Lawrence",
+   "flipped": true,
+   "at": "2026-11-04T19:05:49.862Z"
+  },
+  {
+   "id": "NY-04",
+   "kind": "house",
+   "party": "D",
+   "winner": "Laura Gillen",
+   "flipped": false,
+   "at": "2026-11-04T19:04:26.176Z"
+  },
+  {
+   "id": "NY-03",
+   "kind": "house",
+   "party": "D",
+   "winner": "Thomas Suozzi",
+   "flipped": false,
+   "at": "2026-11-04T19:04:10.881Z"
+  },
+  {
    "id": "CA-22",
    "kind": "house",
    "party": "D",
@@ -26757,39 +26793,15 @@
    "winner": "Hillary Scholten",
    "flipped": false,
    "at": "2026-11-04T05:54:25.475Z"
-  },
-  {
-   "id": "WI-03",
-   "kind": "house",
-   "party": "D",
-   "winner": "Rebecca Cooke",
-   "flipped": true,
-   "at": "2026-11-04T05:48:40.114Z"
-  },
-  {
-   "id": "WI-01",
-   "kind": "house",
-   "party": "D",
-   "winner": "Mitchell Berman",
-   "flipped": true,
-   "at": "2026-11-04T05:48:24.571Z"
-  },
-  {
-   "id": "TX-26",
-   "kind": "house",
-   "party": "R",
-   "winner": "Brandon Gill",
-   "flipped": false,
-   "at": "2026-11-04T05:47:37.881Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-04T19:03:53.139Z",
+   "updated": "2026-11-04T19:07:07.561Z",
    "house": {
-    "D": 234,
+    "D": 237,
     "R": 139,
     "I": 0
    },
@@ -26807,10 +26819,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-04T19:03:22.045000Z",
+   "updated": "2026-11-04T19:06:58.245000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 229,
+    "D": 232,
     "R": 138,
     "I": 0
    },
@@ -26828,9 +26840,9 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-04T19:03:32.000Z",
+   "updated": "2026-11-04T19:07:08.000Z",
    "house": {
-    "D": 238,
+    "D": 239,
     "R": 146,
     "I": 0
    },
@@ -26847,5 +26859,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-04T19:03:54.366Z"
+ "desks_checked_at": "2026-11-04T19:07:13.817Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T18:06:22.397Z",
+ "updated": "2026-11-04T18:13:06.423Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2161,6 +2161,17 @@
    "at": "2026-11-04T15:47:44.214Z"
   },
   {
+   "race": "FL-09",
+   "name": "Darren Soto",
+   "party": "D",
+   "result": "won",
+   "publisher": "Florida Politics",
+   "outlet": "floridapolitics.com",
+   "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPaFhqenV1ZHJRUmpFRzd0THN3UU1vVDdqSUJqZE96c0gtdFlocXJHbmdLYzBPcDFGT21WZW5aYWpUZ2J5R1E1bkpiVjhnTFcxZ1FvalI2enh6bGVyOUNMeXNDbWNuRXBTa0dkU1BUYk9scjVtblk1TmNIQ25yS3lzUjl1cUd0NkdOSHNVUTBxQVZBMmt4TThSRUNPLUtjUzljMDFmVWFVZGdTcG1hVlpQWVIxYUFmRVdBemFkM3ZDX3ZYV1BjMUZDQg?oc=5",
+   "title": "Darren Soto narrowly defeats Dan Green despite CD 9 gerrymander",
+   "at": "2026-11-04T15:53:22.000Z"
+  },
+  {
    "race": "Senate-MI",
    "name": "Abdul El-Sayed",
    "party": "D",
@@ -4015,6 +4026,21 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "FL-09": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "Florida Politics",
+     "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPaFhqenV1ZHJRUmpFRzd0THN3UU1vVDdqSUJqZE96c0gtdFlocXJHbmdLYzBPcDFGT21WZW5aYWpUZ2J5R1E1bkpiVjhnTFcxZ1FvalI2enh6bGVyOUNMeXNDbWNuRXBTa0dkU1BUYk9scjVtblk1TmNIQ25yS3lzUjl1cUd0NkdOSHNVUTBxQVZBMmt4TThSRUNPLUtjUzljMDFmVWFVZGdTcG1hVlpQWVIxYUFmRVdBemFkM3ZDX3ZYV1BjMUZDQg?oc=5",
+     "title": "Darren Soto narrowly defeats Dan Green despite CD 9 gerrymander",
+     "winner": "Darren Soto",
+     "party": "D",
+     "at": "2026-11-04T15:53:22.000Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -4022,6 +4048,6 @@
   "read": 66,
   "races_confirmed": 73,
   "races_disputed": 2,
-  "races_reported_not_called": 6
+  "races_reported_not_called": 7
  }
 }

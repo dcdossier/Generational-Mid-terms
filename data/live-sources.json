@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:36:53.750Z",
+ "updated": "2026-11-04T05:40:16.514Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1081,6 +1081,28 @@
    "url": "https://ground.news/article/progressive-peggy-flanagan-wins-minnesotas-senate-race",
    "title": "Democrat Peggy Flanagan Wins Election to U.S. Senate From Minnesota",
    "at": "2026-11-04T05:36:53.749Z"
+  },
+  {
+   "race": "Senate-TX",
+   "name": "James Talarico",
+   "party": "D",
+   "result": "won",
+   "publisher": "Financial Times",
+   "outlet": "ft.com",
+   "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVTl5aHpJbXdtMWZUX2x1R0Rxa2hmSVFvV1JfQTlwcEQ2N1RuVC0zRjdSR2FCTXV1elU1SXljSmJtdF9OVUp5ZXpZdEpiNzhCZE10SGVjUjRpa19YRHNYVXp3U1NROEE4RVpyMEI1V0xlek1ESC1NR2ZHN0duMVFWOFRuMVc?oc=5",
+   "title": "James Talarico’s historic Texas Senate victory deals blow to Elon Musk",
+   "at": "2026-11-04T05:38:15.000Z"
+  },
+  {
+   "race": "IA-02",
+   "name": "Lindsay James",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/lindsay-james-wins-in-iowa-turning-hinsons-house-seat-blue",
+   "title": "Lindsay James wins in Iowa, turning Hinson’s House seat blue",
+   "at": "2026-11-04T05:40:16.512Z"
   }
  ],
  "races": {
@@ -1536,6 +1558,14 @@
      "winner": "James Talarico",
      "party": "D",
      "at": "2026-11-04T04:06:00.000Z"
+    },
+    {
+     "publisher": "Financial Times",
+     "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxPVTl5aHpJbXdtMWZUX2x1R0Rxa2hmSVFvV1JfQTlwcEQ2N1RuVC0zRjdSR2FCTXV1elU1SXljSmJtdF9OVUp5ZXpZdEpiNzhCZE10SGVjUjRpa19YRHNYVXp3U1NROEE4RVpyMEI1V0xlek1ESC1NR2ZHN0duMVFWOFRuMVc?oc=5",
+     "title": "James Talarico’s historic Texas Senate victory deals blow to Elon Musk",
+     "winner": "James Talarico",
+     "party": "D",
+     "at": "2026-11-04T05:38:15.000Z"
     }
    ],
    "disagree": [],
@@ -1798,12 +1828,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "IA-02": {
+   "fox_winner": "Lindsay James",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/lindsay-james-wins-in-iowa-turning-hinsons-house-seat-blue",
+     "title": "Lindsay James wins in Iowa, turning Hinson’s House seat blue",
+     "winner": "Lindsay James",
+     "party": "D",
+     "at": "2026-11-04T05:40:16.512Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 34,
+  "races_confirmed": 35,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

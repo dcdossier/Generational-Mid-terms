@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:20:00.283Z",
+ "updated": "2026-11-04T05:26:49.416Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1026,6 +1026,17 @@
    "url": "https://ground.news/article/us-sen-jeff-merkley-wins-reelection",
    "title": "Oregon Sen. Merkley wins reelection bid",
    "at": "2026-11-04T05:20:00.282Z"
+  },
+  {
+   "race": "Gov-MN",
+   "name": "Amy Klobuchar",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/sen-amy-klobuchar-wins-the-minnesota-governors-race-extending-democrats-hold-on-the-state_f1d492",
+   "title": "Democrat Amy Klobuchar Elected Minnesota’s First Woman Governor",
+   "at": "2026-11-04T05:26:49.415Z"
   }
  ],
  "races": {
@@ -1698,12 +1709,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Gov-MN": {
+   "fox_winner": "Amy Klobuchar",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/sen-amy-klobuchar-wins-the-minnesota-governors-race-extending-democrats-hold-on-the-state_f1d492",
+     "title": "Democrat Amy Klobuchar Elected Minnesota’s First Woman Governor",
+     "winner": "Amy Klobuchar",
+     "party": "D",
+     "at": "2026-11-04T05:26:49.415Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 31,
+  "races_confirmed": 32,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

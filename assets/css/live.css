@@ -407,9 +407,22 @@
 .bl-nocalls { color: #7A4A00; font-style: italic; }
 
 /* ── Info row under the balance (assets/js/live-info.js) ──────────────────── */
-.li { display: grid; grid-template-columns: 1.6fr repeat(4, minmax(0, 1fr)); gap: 0; background: #fff; border: 1px solid #eadfc4; border-radius: 12px; margin: -8px 0 22px;
+.li { display: block; background: #fff; border: 1px solid #eadfc4; border-radius: 12px; margin: -8px 0 22px;
   font: 400 13px/1.45 var(--sans, sans-serif); color: #1c2430; overflow: hidden; }
 .li[hidden] { display: none !important; }
+.li-grid { display: grid; grid-template-columns: 1.6fr repeat(4, minmax(0, 1fr)); gap: 0; border-top: 1px solid #f0e8d2; }
+/* "Live trends" fold (summary bar) */
+.li-fold-s { display: flex; align-items: center; flex-wrap: wrap; gap: 2px 12px; min-height: 48px; padding: 8px 16px; cursor: pointer; list-style: none; user-select: none; }
+.li-fold-s::-webkit-details-marker { display: none; }
+.li-fold-s:focus-visible { outline: 3px solid #620d3c; outline-offset: -3px; border-radius: 12px; }
+.li-title { margin: 0; font: 700 18px/1.3 var(--serif, Georgia, serif); color: #620d3c; }
+.li-fold-sub { font-size: 12.5px; color: #6b7280; flex: 1 1 auto; }
+.li-fold-hint { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font: 600 13px var(--sans, sans-serif); color: #620d3c; }
+.li-fold-hint::before { content: 'Show'; }
+.li-fold-hint::after { content: '\25BE'; font-size: 14px; transition: transform .15s; }
+.li-fold[open] .li-fold-hint::before { content: 'Hide'; }
+.li-fold[open] .li-fold-hint::after { transform: rotate(180deg); }
+@media (prefers-reduced-motion: reduce) { .li-fold-hint::after { transition: none; } }
 .li-cell { padding: 12px 14px; border-left: 1px solid #f0e8d2; min-width: 0; position: relative; }
 .li-cell:first-child { border-left: 0; }
 .li-h { margin: 0 0 6px; font: 700 11px var(--sans, sans-serif); text-transform: uppercase; letter-spacing: .1em; color: #620d3c; display: flex; align-items: center; gap: 4px; }
@@ -432,8 +445,8 @@
 .li-i::before { content: 'i'; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%; background: #d8d4cc; color: #555; font: 700 10px var(--sans, sans-serif); text-transform: none; }
 .li-tip { display: block; margin: 4px 0 6px; padding: 8px 10px; border-radius: 6px; background: #1E2232; color: #f5f0e8; font-size: 12px; }
 .li-tip[hidden] { display: none; } .li-tip a { color: #F7C060; }
-@media (max-width: 900px) { .li { grid-template-columns: 1fr 1fr; } .li-cell { border-left: 0; border-top: 1px solid #f0e8d2; } .li-flips { grid-column: 1 / -1; border-top: 0; } }
-@media (max-width: 600px) { .li { grid-template-columns: 1fr; margin-top: -6px; } }
+@media (max-width: 900px) { .li-grid { grid-template-columns: 1fr 1fr; } .li-cell { border-left: 0; border-top: 1px solid #f0e8d2; } .li-flips { grid-column: 1 / -1; border-top: 0; } }
+@media (max-width: 600px) { .li-grid { grid-template-columns: 1fr; } .li { margin-top: -6px; } .li-fold-sub { flex-basis: 100%; order: 3; } }
 
 /* ── Boxes on Fox data: both candidates, badges, litigation ▲ ─────────────── */
 .bg-box { position: relative; }

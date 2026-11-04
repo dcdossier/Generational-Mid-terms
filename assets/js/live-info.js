@@ -1,7 +1,8 @@
 /* Info row under the projected balance (any element with data-live-info): five cells.
  *   a. Flips per chamber and party (Fox: flipped_to, net_gain) and progress to a majority
  *   b. Litigation and interference (data/litigation.json), opening to the list
- *   c. Turnout: House votes counted, with an up or down arrow on 2022 (like-for-like districts)
+ *   c. Turnout rates: 2026 against 2022, as a share of eligible voters and in votes, nationally
+ *      and for the states that have finished counting
  *   d. Polls: countdown to the last poll close (Alaska), then when all polls closed
  *   e. Counting: races still uncalled per chamber; never an estimated finish time
  * Data from live.js ("racebook:live" events).
@@ -50,34 +51,52 @@
       '<p class="li-note">From Ground News and our news feeds; an entry needs 2 distinct publishers.' + (L && L.updated ? ' Checked ' + ist(L.updated) + '.' : '') + '</p></details>';
   }
 
-  // Like for like: House districts at least 95% counted, on the same lines as 2022.
-  // Shows a coloured arrow only when enough districts are in to say up or down.
-  var MIN_DISTRICTS = 20;
-  function trend(st) {
-    var b = st.baseline && st.baseline.house; if (!b) return '';
-    var now = 0, then = 0, n = 0;
+  // Turnout against 2022 (UF Election Lab: national ballots and turnout of eligible voters,
+  // and total ballots per state). 2026 votes per state are the largest count among its races
+  // (a statewide race, or the House districts added up), so every ballot cast is counted once.
+  var MIN_STATES = 5;
+  function stateVotes(st) {
+    var by = {};
     (st.races || []).forEach(function (r) {
-      var e = b[r.race_id];
-      if (r.kind !== 'house' || !e || !e.votes_2022 || (r.pct_counted || 0) < 95 || !r.total_votes) return;
-      now += Number(r.total_votes); then += e.votes_2022; n++;
+      var s = String(r.race_id).replace(/^(Senate|Gov)-/, '').slice(0, 2), x = by[s] || (by[s] = { house: 0, houseIn: 0, houseN: 0, wide: 0, wideIn: 0 });
+      var v = Number(r.total_votes) || 0, p = Number(r.pct_counted) || 0;
+      if (r.kind === 'house') { x.house += v; x.houseIn += p; x.houseN++; }
+      else if (v > x.wide) { x.wide = v; x.wideIn = p; }
     });
-    if (n < MIN_DISTRICTS || !then) return '';
-    var ch = (now / then - 1) * 100, up = ch >= 0;
+    Object.keys(by).forEach(function (s) {
+      var x = by[s], hIn = x.houseN ? x.houseIn / x.houseN : 0;
+      x.votes = Math.max(x.house, x.wide); x.counted = x.wide >= x.house ? x.wideIn : hIn;
+    });
+    return by;
+  }
+  function signed(n, f) { return (n > 0 ? '+' : n < 0 ? '−' : '') + f(Math.abs(n)); }
+  function change(now, then, label) {
+    var d = now - then, pc = then ? d / then * 100 : 0, up = d >= 0;
     return '<p class="li-trend li-trend-' + (up ? 'up' : 'down') + '"><span class="li-arrow" aria-hidden="true">' + (up ? '▲' : '▼') + '</span> ' +
-      '<b>' + (up ? '+' : '−') + Math.abs(ch).toFixed(1) + '%</b> on 2022 <span class="li-small">(' + n + ' districts at least 95% counted, same lines as 2022)</span>' +
-      '<span class="sr-only"> Turnout is ' + (up ? 'up' : 'down') + ' ' + Math.abs(ch).toFixed(1) + ' per cent on 2022 in these districts.</span></p>';
+      '<b>' + signed(d, mil) + ' (' + signed(pc, function (v) { return v.toFixed(1) + '%'; }) + ')</b> on 2022 <span class="li-small">' + label + '</span>' +
+      '<span class="sr-only"> ' + (up ? 'Up' : 'Down') + ' ' + mil(Math.abs(d)) + ' votes, ' + Math.abs(pc).toFixed(1) + ' per cent, on 2022.</span></p>';
   }
 
   function turnoutCell(st) {
-    var house = (st.races || []).filter(function (r) { return r.kind === 'house'; }).reduce(function (a, r) { return a + (Number(r.total_votes) || 0); }, 0);
+    var y22 = history && history.years.filter(function (y) { return y.year === 2022; })[0];
+    var evs = (st.earlyVote && st.earlyVote.states) || {}, by = stateVotes(st);
+    var total = Object.keys(by).reduce(function (a, s) { return a + by[s].votes; }, 0);
     var id = 'li-tip-' + (++uid);
-    var tip = history ? '<span class="li-tip" id="' + id + '" role="tooltip" hidden>Midterm turnout is historically lower than presidential. National turnout of eligible voters (VEP): ' +
+    var tip = history ? '<span class="li-tip" id="' + id + '" role="tooltip" hidden>Turnout of eligible voters (VEP), national: ' +
       history.years.map(function (y) { return y.year + ' ' + y.vep_pct.toFixed(1) + '% (' + y.kind + ')'; }).join(' · ') +
-      '. Source: <a href="' + esc(history.source_url) + '" target="_blank" rel="noopener">UF Election Lab</a>.</span>' : '';
-    var ev = st.earlyVote && st.earlyVote.national;
-    return '<h3 class="li-h">Turnout ' + (tip ? '<button type="button" class="li-i" aria-expanded="false" aria-controls="' + id + '" aria-label="About midterm turnout"></button>' : '') + '</h3>' + tip +
-      '<p class="li-big">Votes counted: <b>' + mil(house) + '</b></p>' + trend(st) +
-      (ev ? '<p class="li-small">Early votes cast nationally: ' + mil(ev.total) + ' (UF Election Lab)</p>' : '');
+      '. The 2026 rate divides votes counted so far by the 2022 eligible population, so it is an estimate until UF publishes 2026 figures. Source: <a href="' + esc(history.source_url) + '" target="_blank" rel="noopener">UF Election Lab</a>.</span>' : '';
+    var h = '<h3 class="li-h">Turnout rates ' + (tip ? '<button type="button" class="li-i" aria-expanded="false" aria-controls="' + id + '" aria-label="About turnout rates"></button>' : '') + '</h3>' + tip;
+    if (y22 && total) {
+      var vep = y22.ballots / (y22.vep_pct / 100), rate = total / vep * 100;
+      h += '<p class="li-big">2026: <b>' + rate.toFixed(1) + '%</b> of eligible voters so far · 2022: <b>' + y22.vep_pct.toFixed(1) + '%</b></p>' +
+        '<p>Votes counted: <b>' + mil(total) + '</b> · 2022 total: ' + mil(y22.ballots) + '</p>' +
+        change(total, y22.ballots, '(nationally, counting continues)');
+    } else h += '<p class="li-big">Votes counted: <b>' + mil(total) + '</b></p>';
+    // like for like: states at least 95% counted
+    var now = 0, then = 0, n = 0;
+    Object.keys(by).forEach(function (s) { var e = evs[s]; if (e && e.turn_2022 && by[s].counted >= 95 && by[s].votes) { now += by[s].votes; then += e.turn_2022; n++; } });
+    if (n >= MIN_STATES) h += change(now, then, '(' + n + ' states at least 95% counted: ' + mil(now) + ' against ' + mil(then) + ')');
+    return h;
   }
 
   function lastClose(st) {
@@ -97,13 +116,26 @@
       (t && now(st) < t ? '<p class="li-small">Last counting starts in ' + cd(t) + '</p>' : '');
   }
 
+  // "Live trends": one collapsible panel (closed by default, remembers this viewer's choice);
+  // the grid inside is redrawn on every update without closing the panel.
+  var FOLD_KEY = 'li-fold';
+  function fold(el) {
+    var d = el.querySelector('.li-fold');
+    if (d) return d.querySelector('.li-grid');
+    el.innerHTML = '<details class="li-fold"><summary class="li-fold-s"><h2 class="li-title">Live trends</h2>' +
+      '<span class="li-fold-sub">Flips, litigation, turnout rates, polls and counting</span><span class="li-fold-hint" aria-hidden="true"></span></summary><div class="li-grid"></div></details>';
+    d = el.querySelector('.li-fold');
+    try { if (localStorage.getItem(FOLD_KEY) === 'open') d.open = true; } catch (e) {}
+    d.addEventListener('toggle', function () { try { localStorage.setItem(FOLD_KEY, d.open ? 'open' : 'closed'); } catch (e) {} });
+    return d.querySelector('.li-grid');
+  }
   function render(st) {
     if (!st) return; last = st;
     mounts.forEach(function (el) {
-      var open = el.querySelector('.li-det[open]') ? 1 : 0;
-      el.innerHTML = '<div class="li-cell li-flips">' + flipsCell(st) + '</div><div class="li-cell">' + litCell(st) + '</div><div class="li-cell">' + turnoutCell(st) + '</div>' +
+      var g = fold(el), open = g.querySelector('.li-det[open]') ? 1 : 0;
+      g.innerHTML = '<div class="li-cell li-flips">' + flipsCell(st) + '</div><div class="li-cell">' + litCell(st) + '</div><div class="li-cell">' + turnoutCell(st) + '</div>' +
         '<div class="li-cell">' + pollsCell(st) + '</div><div class="li-cell">' + countingCell(st) + '</div>';
-      if (open) { var d = el.querySelector('.li-det'); if (d) d.open = true; }
+      if (open) { var d = g.querySelector('.li-det'); if (d) d.open = true; }
       el.hidden = false;
     });
   }

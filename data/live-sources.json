@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T15:47:44.216Z",
+ "updated": "2026-11-04T15:51:00.360Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2018,6 +2018,17 @@
    "at": "2026-11-04T15:03:54.469Z"
   },
   {
+   "race": "LA-04",
+   "name": "Mike Johnson",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxORjRVVDlZSWJ1ZXN3VUp2OTh3ZGQxbmdrNHBLZGIyWE4wV1dkWVV0V0l2Z2NLM2t6Nk1PMzVyRVotTEJIU2lCRHZPYWlYQy1yMy0xdlBMM1JQbnpDX3EyY0tNZ0RhYlBRc0tkWjlJRWpsSDVuY3ZuUEdyZmk4ZDlPOTZtWHg5WUx4T3fSAY8BQVVfeXFMTXkyTm1jMVZ0NGk5MS1CZUc4VVJjdlJIdzJoVHhsXzl0NG8zeHpvVEwzT3ZZZEU3Y2VlMGFSTjFqTGlhTVVQYVRnZUxzSXQ1eUJKdF9rcVZCaFlsSTQ3Y0cxTFlzclZCMm1ZWUFSMXdaVGx2ZHg1LTQ1ODFVSzJqcFkyekktRjNPMURZbDg2UTA?oc=5",
+   "title": "Speaker Mike Johnson won’t run for minority leader, setting up GOP battle",
+   "at": "2026-11-04T15:19:00.000Z"
+  },
+  {
    "race": "MN-05",
    "name": "Ilhan Omar",
    "party": "D",
@@ -3570,12 +3581,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "LA-04": {
+   "fox_winner": "Mike Johnson",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxORjRVVDlZSWJ1ZXN3VUp2OTh3ZGQxbmdrNHBLZGIyWE4wV1dkWVV0V0l2Z2NLM2t6Nk1PMzVyRVotTEJIU2lCRHZPYWlYQy1yMy0xdlBMM1JQbnpDX3EyY0tNZ0RhYlBRc0tkWjlJRWpsSDVuY3ZuUEdyZmk4ZDlPOTZtWHg5WUx4T3fSAY8BQVVfeXFMTXkyTm1jMVZ0NGk5MS1CZUc4VVJjdlJIdzJoVHhsXzl0NG8zeHpvVEwzT3ZZZEU3Y2VlMGFSTjFqTGlhTVVQYVRnZUxzSXQ1eUJKdF9rcVZCaFlsSTQ3Y0cxTFlzclZCMm1ZWUFSMXdaVGx2ZHg1LTQ1ODFVSzJqcFkyekktRjNPMURZbDg2UTA?oc=5",
+     "title": "Speaker Mike Johnson won’t run for minority leader, setting up GOP battle",
+     "winner": "Mike Johnson",
+     "party": "R",
+     "at": "2026-11-04T15:19:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 64,
+  "races_confirmed": 65,
   "races_disputed": 2,
   "races_reported_not_called": 5
  }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T05:26:49.416Z",
+ "updated": "2026-11-04T05:30:13.577Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1037,6 +1037,17 @@
    "url": "https://ground.news/article/sen-amy-klobuchar-wins-the-minnesota-governors-race-extending-democrats-hold-on-the-state_f1d492",
    "title": "Democrat Amy Klobuchar Elected Minnesota’s First Woman Governor",
    "at": "2026-11-04T05:26:49.415Z"
+  },
+  {
+   "race": "Senate-ME",
+   "name": "Susan Collins",
+   "party": "R",
+   "result": "lost",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/susan-collins-concedes-to-troy-jackson-in-maine-senate-race",
+   "title": "Susan Collins concedes to Troy Jackson in Maine Senate race",
+   "at": "2026-11-04T05:30:13.575Z"
   }
  ],
  "races": {
@@ -1724,12 +1735,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Senate-ME": {
+   "fox_winner": "Troy Jackson",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/susan-collins-concedes-to-troy-jackson-in-maine-senate-race",
+     "title": "Susan Collins concedes to Troy Jackson in Maine Senate race",
+     "winner": "Troy Jackson",
+     "party": "D",
+     "at": "2026-11-04T05:30:13.575Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 32,
+  "races_confirmed": 33,
   "races_disputed": 0,
   "races_reported_not_called": 3
  }

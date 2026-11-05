@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T17:11:30.453Z",
- "fetched_at": "2026-11-05T17:12:01.847Z",
+ "source_last_updated": "2026-11-05T17:15:07.590Z",
+ "fetched_at": "2026-11-05T17:15:19.335Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -1193,11 +1193,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 0,
+   "pct_in": 2,
    "winner_party": "D",
-   "leader_party": null,
+   "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 0,
+   "total_votes": 7390,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1205,8 +1205,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 0,
-     "pct": 0,
+     "votes": 7390,
+     "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/MCGOVERN_JAMES_DMA_HOUSE.png"
     }
    ],
@@ -1231,11 +1231,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 61,
+   "pct_in": 68,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 184601,
+   "total_votes": 206925,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1243,7 +1243,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 184601,
+     "votes": 206925,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/CLARK_KATHERINE_DMA_HOUSE.png"
     }
@@ -12518,7 +12518,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 26,
-   "total_votes": 218778,
+   "total_votes": 218777,
    "called_at": "2026-11-04T04:18:51.791Z",
    "candidates": [
     {
@@ -12526,7 +12526,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 127292,
+     "votes": 127291,
      "pct": 58.18,
      "photo": null
     },
@@ -14060,7 +14060,7 @@
      "party": "I",
      "incumbent": false,
      "winner": false,
-     "votes": 4716,
+     "votes": 4724,
      "pct": 1.4,
      "photo": null
     },
@@ -23937,7 +23937,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 10.6,
-   "total_votes": 414523,
+   "total_votes": 414522,
    "called_at": null,
    "candidates": [
     {
@@ -23945,7 +23945,7 @@
      "party": "R",
      "incumbent": false,
      "winner": true,
-     "votes": 232864,
+     "votes": 232863,
      "pct": 48.32,
      "photo": "https://images.api.fox.com/elections/headshots/ALME_KURT_RMT_SENATE.png"
     },
@@ -25385,7 +25385,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 27.7,
-   "total_votes": 2496771,
+   "total_votes": 2496813,
    "called_at": null,
    "candidates": [
     {
@@ -25393,7 +25393,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1605757,
+     "votes": 1605783,
      "pct": 62.16,
      "photo": "https://images.api.fox.com/elections/headshots/HEALEY_MAURA_DMA_GOVERNOR.png"
     },
@@ -25402,7 +25402,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 891014,
+     "votes": 891030,
      "pct": 34.49,
      "photo": "https://images.api.fox.com/elections/headshots/MINOGUE_MICHAEL_RMA_GOVERNOR.png"
     }
@@ -26899,7 +26899,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T17:11:30.453Z",
+   "updated": "2026-11-05T17:15:07.590Z",
    "house": {
     "D": 247,
     "R": 153,
@@ -26919,7 +26919,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T17:11:42.707000Z",
+   "updated": "2026-11-05T17:15:06.598000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 243,
@@ -26940,7 +26940,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T17:11:40.000Z",
+   "updated": "2026-11-05T17:15:12.000Z",
    "house": {
     "D": 244,
     "R": 155,
@@ -26959,5 +26959,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T17:12:02.758Z"
+ "desks_checked_at": "2026-11-05T17:15:20.373Z"
 }

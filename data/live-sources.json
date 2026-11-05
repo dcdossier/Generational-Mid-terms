@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T19:42:54.701Z",
+ "updated": "2026-11-05T20:19:23.661Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2854,6 +2854,17 @@
    "at": "2026-11-05T02:55:40.758Z"
   },
   {
+   "race": "CO-05",
+   "name": "Jessica Killin",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Colorado Sun",
+   "outlet": "coloradosun.com",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQSG1vOFVvWGF5WGlLc1c5b0hzNVIwSnV0amUwNTFXRGJwWDVwMFZqbzUwTjZwUXZobmQ0WXZnU3FGb2pSUWZyelF0SlNqSDY3NEMzY0I5TnlvZkxmUXBOVU5pVDJWWDRTY0RrdGd0cGNJbTdTVEJwcGFDdlFaWGZWTnBGRUMxSThramhxa3JsUFVkQ0c2Sklmbg?oc=5",
+   "title": "Democrat Jessica Killin unseats Republican Jeff Crank in 5th Congressional District",
+   "at": "2026-11-05T15:39:56.000Z"
+  },
+  {
    "race": "Gov-OH",
    "name": "Amy Acton",
    "party": "D",
@@ -5165,12 +5176,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "CO-05": {
+   "fox_winner": "Jessica Killin",
+   "agree": [
+    {
+     "publisher": "The Colorado Sun",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQSG1vOFVvWGF5WGlLc1c5b0hzNVIwSnV0amUwNTFXRGJwWDVwMFZqbzUwTjZwUXZobmQ0WXZnU3FGb2pSUWZyelF0SlNqSDY3NEMzY0I5TnlvZkxmUXBOVU5pVDJWWDRTY0RrdGd0cGNJbTdTVEJwcGFDdlFaWGZWTnBGRUMxSThramhxa3JsUFVkQ0c2Sklmbg?oc=5",
+     "title": "Democrat Jessica Killin unseats Republican Jeff Crank in 5th Congressional District",
+     "winner": "Jessica Killin",
+     "party": "D",
+     "at": "2026-11-05T15:39:56.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 100,
+  "races_confirmed": 101,
   "races_disputed": 5,
   "races_reported_not_called": 4
  }

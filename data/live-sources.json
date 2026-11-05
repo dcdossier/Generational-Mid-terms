@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T04:29:52.464Z",
+ "updated": "2026-11-05T05:06:05.200Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -597,6 +597,17 @@
    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSUlRUWRCcFpqeWU0bi1ka285S2djY0Zfa1MwV3RRTklJWWtQcUJPeE1IcURzV2NqNlBBVzBYNWhqeUtUWDRhWTcza0lfVnREdHZITUNSRU0zSnZHdkE5V3FvNTNZVE1TNXZpNGxQb0ZSNFM2MzYtRkZsbmszRjI3elNNLTdBSnZGdURn0gGQAUFVX3lxTE45R3F6WjFyUEp3ZUJKdkNYaERNVm5FT0tDbXNZSTVIcDF2VXVtNUNfOTZnSkdfWWZGMXcxOEpBbWp6Sk9KQWxRbXZDTVJiWVRldGJ3VjVYbXQxWnU3N0hmRjI3X0N6Q2d4VmJWU1ZUVHBtUnplcG02c195WDZhMXFuQk1lRlE1ZXZMYTZsbU93SQ?oc=5",
    "title": "Cleaver clinches another House term after Missouri redistricting saga",
    "at": "2026-11-04T01:15:00.000Z"
+  },
+  {
+   "race": "Gov-PA",
+   "name": "Josh Shapiro",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOUllwbG45VW1UbWxnOHVncDljYWZKSEhMRnhEX3l0WEJ4b2xVY0hVNm16Rll0eVg5aG8yWThBWnQ2ekRKTER1bEhmWlZCcGVkeEx6U3I2ejdESU5DbktrSWc1dTBJblV2T0gwOGpLVXZ5M3llTGVObUI0SG1PMXJ5ODVzb3EyVG80WDdKZElVdjdUamJpMmZiQmFCSW1qQWQyVFNkSXZ30gGrAUFVX3lxTFA0cWhGa1p0T0Qxbkc4RElJaE5OSkF3WjdOcU8wQ25yQXN0Y2xqRXdoX2VibjBBNGJubGNFMU1Jak1uOGhIbGN2RVpvcnl0OHFsOUdrRm0xZ00yTUhPZEtBYlNMUktUc0h5akZmRDI5alBwMEJKTUE2RlRPeW5KOUNBRlRKRzdfYUFUUkZVd2VycnI5T0Y4ZUJodE9fTWZWR2NfX3ZSblpQckt1UQ?oc=5",
+   "title": "Shapiro wins reelection as Pennsylvania governor",
+   "at": "2026-11-04T01:23:00.000Z"
   },
   {
    "race": "Senate-NC",
@@ -4833,12 +4844,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Gov-PA": {
+   "fox_winner": "Josh Shapiro",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOUllwbG45VW1UbWxnOHVncDljYWZKSEhMRnhEX3l0WEJ4b2xVY0hVNm16Rll0eVg5aG8yWThBWnQ2ekRKTER1bEhmWlZCcGVkeEx6U3I2ejdESU5DbktrSWc1dTBJblV2T0gwOGpLVXZ5M3llTGVObUI0SG1PMXJ5ODVzb3EyVG80WDdKZElVdjdUamJpMmZiQmFCSW1qQWQyVFNkSXZ30gGrAUFVX3lxTFA0cWhGa1p0T0Qxbkc4RElJaE5OSkF3WjdOcU8wQ25yQXN0Y2xqRXdoX2VibjBBNGJubGNFMU1Jak1uOGhIbGN2RVpvcnl0OHFsOUdrRm0xZ00yTUhPZEtBYlNMUktUc0h5akZmRDI5alBwMEJKTUE2RlRPeW5KOUNBRlRKRzdfYUFUUkZVd2VycnI5T0Y4ZUJodE9fTWZWR2NfX3ZSblpQckt1UQ?oc=5",
+     "title": "Shapiro wins reelection as Pennsylvania governor",
+     "winner": "Josh Shapiro",
+     "party": "D",
+     "at": "2026-11-04T01:23:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 90,
+  "races_confirmed": 91,
   "races_disputed": 3,
   "races_reported_not_called": 9
  }

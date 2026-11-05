@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T23:36:51.906Z",
+ "updated": "2026-11-05T23:40:19.409Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3006,6 +3006,17 @@
    "url": "https://ground.news/article/dei-is-back-ro-khanna-hails-democratic-wins-as-party-makes-history-in-us-midterm-elections_12fe81",
    "title": "‘DEI is back!’: Ro Khanna hails Democratic wins as party makes history in US midterm elections",
    "at": "2026-11-05T23:12:47.113Z"
+  },
+  {
+   "race": "TN-09",
+   "name": "Brent Taylor",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/taylor-declares-victory-in-narrow-race-for-tennessees-redrawn-us-house-district-9",
+   "title": "Republican Brent Taylor Wins Election to U.S. House in Tennessee's 9th Congressional District",
+   "at": "2026-11-05T23:40:19.408Z"
   }
  ],
  "races": {
@@ -5404,12 +5415,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "TN-09": {
+   "fox_winner": "Brent Taylor",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/taylor-declares-victory-in-narrow-race-for-tennessees-redrawn-us-house-district-9",
+     "title": "Republican Brent Taylor Wins Election to U.S. House in Tennessee's 9th Congressional District",
+     "winner": "Brent Taylor",
+     "party": "R",
+     "at": "2026-11-05T23:40:19.408Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 105,
+  "races_confirmed": 106,
   "races_disputed": 5,
   "races_reported_not_called": 4
  }

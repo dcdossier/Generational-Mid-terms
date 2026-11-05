@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T18:59:11.619Z",
+ "updated": "2026-11-05T19:15:56.853Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -630,6 +630,17 @@
    "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxONWc0RVROTXkyY1FZVWFyVXB5Ymd6MF9IQllKMklPX2lqU00tM3d0LTJldGlienJTWVRiX1RtQ21pNkVNc3lWU3hrcmRBUWdlYXloamt4VTFuMmNiZ1dDLWlKNmNDb0pMTC0wS19VbHBOUkhubTNYSnhaZWswYXJsVElzUl9BcUpwMHhkY2lR?oc=5",
    "title": "Democrat Roy Cooper wins a North Carolina Senate seat",
    "at": "2026-11-04T01:24:00.000Z"
+  },
+  {
+   "race": "Gov-IL",
+   "name": "JB Pritzker",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOckpqZ3NZYllhTU5lZWZoZWtnLTdtdmVqU3JHcFhCWklfNVRiVERtdmp6ajd4RDlFSXJPMktyb3paTmM3SDJUNl9VVGJXVngtU2gwRzV1MTZkeHJub1I0YzFvWXJBaTd2WkFSdU9ySm9fQk9FUDZ3WTRSOWtfdGgyc2NpTU5hTFXSAYwBQVVfeXFMT0owZlBVbVVjbmE4VjlzYWhYS3dFTXpnMWZkR05sZGVYVG13YzhIeEhtYnZtSUNQcm54eDNibjR0TndZbUNobGIxcDg3NEQ2LWVfczBOMGFfYkJ4S29NNFdhSzFnd1ZSdUlYTjRNT0VYV0RUNFNNLWc5aWRjdWlXOTNUNnl6Q0lhcGtYTnQ?oc=5",
+   "title": "Pritzker wins third term as Illinois governor",
+   "at": "2026-11-04T01:25:00.000Z"
   },
   {
    "race": "PA-03",
@@ -5128,12 +5139,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Gov-IL": {
+   "fox_winner": "JB Pritzker",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOckpqZ3NZYllhTU5lZWZoZWtnLTdtdmVqU3JHcFhCWklfNVRiVERtdmp6ajd4RDlFSXJPMktyb3paTmM3SDJUNl9VVGJXVngtU2gwRzV1MTZkeHJub1I0YzFvWXJBaTd2WkFSdU9ySm9fQk9FUDZ3WTRSOWtfdGgyc2NpTU5hTFXSAYwBQVVfeXFMT0owZlBVbVVjbmE4VjlzYWhYS3dFTXpnMWZkR05sZGVYVG13YzhIeEhtYnZtSUNQcm54eDNibjR0TndZbUNobGIxcDg3NEQ2LWVfczBOMGFfYkJ4S29NNFdhSzFnd1ZSdUlYTjRNT0VYV0RUNFNNLWc5aWRjdWlXOTNUNnl6Q0lhcGtYTnQ?oc=5",
+     "title": "Pritzker wins third term as Illinois governor",
+     "winner": "JB Pritzker",
+     "party": "D",
+     "at": "2026-11-04T01:25:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 96,
+  "races_confirmed": 97,
   "races_disputed": 5,
   "races_reported_not_called": 7
  }

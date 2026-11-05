@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T22:09:53.313Z",
+ "updated": "2026-11-05T22:53:02.920Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2973,6 +2973,17 @@
    "url": "https://ground.news/article/democrat-jessica-killin-wins-election-to-us-house-in-colorados-5th-congressional-district_7a68d2",
    "title": "Democrat Jessica Killin wins election to U.S. House in Colorado’s 5th Congressional District",
    "at": "2026-11-05T22:09:53.312Z"
+  },
+  {
+   "race": "AR-02",
+   "name": "French Hill",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/french-hill-wins-reelection-faces-loss-of-house-committee-chair",
+   "title": "French Hill Wins Reelection, Faces Loss of House Committee Chair",
+   "at": "2026-11-05T22:53:02.919Z"
   }
  ],
  "races": {
@@ -5333,12 +5344,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "AR-02": {
+   "fox_winner": "French Hill",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/french-hill-wins-reelection-faces-loss-of-house-committee-chair",
+     "title": "French Hill Wins Reelection, Faces Loss of House Committee Chair",
+     "winner": "French Hill",
+     "party": "R",
+     "at": "2026-11-05T22:53:02.919Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 103,
+  "races_confirmed": 104,
   "races_disputed": 5,
   "races_reported_not_called": 4
  }

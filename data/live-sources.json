@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T02:28:42.019Z",
+ "updated": "2026-11-05T02:32:24.268Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -150,49 +150,49 @@
    "name": "NJ Monitor",
    "domain": "njmonitor.com",
    "state": "NJ",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Albuquerque Journal",
    "domain": "abqjournal.com",
    "state": "NM",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NM Political Report",
    "domain": "nmpoliticalreport.com",
    "state": "NM",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Source New Mexico",
    "domain": "sourcenm.com",
    "state": "NM",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Nevada Independent",
    "domain": "thenevadaindependent.com",
    "state": "NV",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Nevada Current",
    "domain": "nevadacurrent.com",
    "state": "NV",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Las Vegas Review-Journal",
    "domain": "reviewjournal.com",
    "state": "NV",
-   "ok": true
+   "ok": false
   },
   {
    "name": "City & State NY",
    "domain": "cityandstateny.com",
    "state": "NY",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NY State of Politics / Spectrum News",
@@ -3957,6 +3957,21 @@
    ],
    "reported": []
   },
+  "NC-14": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "WUNC News",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQS0s5Z1hyeG1nblR3Y1V1Rm1tTUJLcnZoRXRMYW9zOXROOTc0TjF2OTNqeUxuRWVMU0ozSWVpOHJUV2xSeElNeDJ1bXdnU0FHSjVYdnRKTWtWSHhEOFBENFZ4NXRZOWd5dWt3ajhKQXhVSkUyM3pIQnA2TkFwQkhiVFF3MDVyakp0SU9jbw?oc=5",
+     "title": "U.S. Congressman Tim Moore, a longtime fixture of NC politics, defeated in reelection bid",
+     "winner": "Tim Moore",
+     "party": "R",
+     "at": "2026-11-04T04:53:00.000Z"
+    }
+   ]
+  },
   "Gov-WI": {
    "fox_winner": "David Crowley",
    "agree": [
@@ -4524,10 +4539,8 @@
    "reported": []
   },
   "NV-02": {
-   "fox_winner": null,
-   "agree": [],
-   "disagree": [],
-   "reported": [
+   "fox_winner": "Teresa Benitez-Thompson",
+   "agree": [
     {
      "publisher": "The Nevada Independent",
      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPRzZaUjVzTlZmcFZIbWNKcVd5T3lYbFZEeWR6VDdiVHBUM3hnRVJuNDFyVmZrWDBqT2tnQUoyM1loVzR3ZGREcUJzUHFSRE01UzV5VWR2eTBiOTZrT3lVTkZrcjBNQTZRVWNXbVpObnBMd0RVY1pMLVQxdzJyejlNOENhWjJxTTQyNUMtcGYtLU9LRDRJeUxBLURGWGlkZXNUaVdJenc2U3lZZjl2ajB5X0dtdFRBRlBoQjFTSXpNTDgxN28?oc=5",
@@ -4536,7 +4549,9 @@
      "party": "D",
      "at": "2026-11-04T10:59:30.000Z"
     }
-   ]
+   ],
+   "disagree": [],
+   "reported": []
   },
   "NV-03": {
    "fox_winner": "Susie Lee",
@@ -4710,28 +4725,13 @@
    ],
    "disagree": [],
    "reported": []
-  },
-  "NC-14": {
-   "fox_winner": null,
-   "agree": [],
-   "disagree": [],
-   "reported": [
-    {
-     "publisher": "WUNC News",
-     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQS0s5Z1hyeG1nblR3Y1V1Rm1tTUJLcnZoRXRMYW9zOXROOTc0TjF2OTNqeUxuRWVMU0ozSWVpOHJUV2xSeElNeDJ1bXdnU0FHSjVYdnRKTWtWSHhEOFBENFZ4NXRZOWd5dWt3ajhKQXhVSkUyM3pIQnA2TkFwQkhiVFF3MDVyakp0SU9jbw?oc=5",
-     "title": "U.S. Congressman Tim Moore, a longtime fixture of NC politics, defeated in reelection bid",
-     "winner": "Tim Moore",
-     "party": "R",
-     "at": "2026-11-04T04:53:00.000Z"
-    }
-   ]
   }
  },
  "counts": {
   "sources": 66,
-  "read": 66,
-  "races_confirmed": 88,
+  "read": 58,
+  "races_confirmed": 89,
   "races_disputed": 3,
-  "races_reported_not_called": 8
+  "races_reported_not_called": 7
  }
 }

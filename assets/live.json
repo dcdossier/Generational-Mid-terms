@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T02:28:16.275Z",
- "fetched_at": "2026-11-05T02:28:22.957Z",
+ "source_last_updated": "2026-11-05T02:31:56.640Z",
+ "fetched_at": "2026-11-05T02:32:00.428Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 49,
+   "remaining": 48,
    "parties": {
     "D": {
-     "won": 239,
-     "net_gain": 29,
-     "flipped_to": 30,
+     "won": 240,
+     "net_gain": 30,
+     "flipped_to": 31,
      "majority_called": true
     },
     "R": {
      "won": 147,
-     "net_gain": -29,
+     "net_gain": -30,
      "flipped_to": 1,
      "majority_called": false
     },
@@ -9069,7 +9069,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 24.4,
-   "total_votes": 349486,
+   "total_votes": 349487,
    "called_at": "2026-11-04T03:12:06.684Z",
    "candidates": [
     {
@@ -9077,7 +9077,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 212194,
+     "votes": 212195,
      "pct": 60.72,
      "photo": null
     },
@@ -20314,6 +20314,62 @@
     "AP"
    ]
   },
+  "NV-02": {
+   "id": "NV-02",
+   "kind": "house",
+   "state": "NV",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 93,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 5.9,
+   "total_votes": 299089,
+   "called_at": "2026-11-05T02:29:25.426Z",
+   "candidates": [
+    {
+     "name": "Teresa Benitez-Thompson",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 150333,
+     "pct": 50.26,
+     "photo": null
+    },
+    {
+     "name": "David Flippo",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 132762,
+     "pct": 44.39,
+     "photo": null
+    },
+    {
+     "name": "Lynn Chapman",
+     "party": "IA",
+     "incumbent": false,
+     "winner": false,
+     "votes": 15994,
+     "pct": 5.35,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -21052,8 +21108,8 @@
    "pct_in": 88,
    "winner_party": null,
    "leader_party": "D",
-   "margin_pct": 1,
-   "total_votes": 357902,
+   "margin_pct": 0.9,
+   "total_votes": 358138,
    "called_at": null,
    "candidates": [
     {
@@ -21061,8 +21117,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 174930,
-     "pct": 48.88,
+     "votes": 174963,
+     "pct": 48.85,
      "photo": "https://images.api.fox.com/elections/headshots/LAUBACHER_EILEEN_DCO_HOUSE.png"
     },
     {
@@ -21070,8 +21126,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 171525,
-     "pct": 47.93,
+     "votes": 171711,
+     "pct": 47.95,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_BOEBERT_LAUREN_RCO_HOUSE.png"
     },
     {
@@ -21079,7 +21135,7 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 11447,
+     "votes": 11464,
      "pct": 3.2,
      "photo": null
     }
@@ -21101,11 +21157,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 81,
+   "pct_in": 83,
    "winner_party": null,
    "leader_party": "D",
-   "margin_pct": 4.9,
-   "total_votes": 268699,
+   "margin_pct": 4.6,
+   "total_votes": 278287,
    "called_at": null,
    "candidates": [
     {
@@ -21113,8 +21169,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 136461,
-     "pct": 50.79,
+     "votes": 140713,
+     "pct": 50.56,
      "photo": "https://images.api.fox.com/elections/headshots/KILLIN_JESSICA_DCO_HOUSE.png"
     },
     {
@@ -21122,8 +21178,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 123210,
-     "pct": 45.85,
+     "votes": 127946,
+     "pct": 45.98,
      "photo": "https://images.api.fox.com/elections/headshots/CRANK_JEFF_RCO_HOUSE.png"
     },
     {
@@ -21131,8 +21187,8 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 4722,
-     "pct": 1.76,
+     "votes": 5032,
+     "pct": 1.81,
      "photo": null
     },
     {
@@ -21140,8 +21196,8 @@
      "party": "AC",
      "incumbent": false,
      "winner": false,
-     "votes": 4306,
-     "pct": 1.6,
+     "votes": 4596,
+     "pct": 1.65,
      "photo": null
     }
    ],
@@ -22146,58 +22202,6 @@
      "winner": false,
      "votes": 2817,
      "pct": 1.05,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NV-02": {
-   "id": "NV-02",
-   "kind": "house",
-   "state": "NV",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 93,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 5.9,
-   "total_votes": 299089,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Teresa Benitez-Thompson",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 150333,
-     "pct": 50.26,
-     "photo": null
-    },
-    {
-     "name": "David Flippo",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 132762,
-     "pct": 44.39,
-     "photo": null
-    },
-    {
-     "name": "Lynn Chapman",
-     "party": "IA",
-     "incumbent": false,
-     "winner": false,
-     "votes": 15994,
-     "pct": 5.35,
      "photo": null
     }
    ],
@@ -23219,8 +23223,8 @@
    "pct_in": 84,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 24.3,
-   "total_votes": 2253083,
+   "margin_pct": 24.2,
+   "total_votes": 2262272,
    "called_at": null,
    "candidates": [
     {
@@ -23228,8 +23232,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1413135,
-     "pct": 60.01,
+     "votes": 1417321,
+     "pct": 59.93,
      "photo": "https://images.api.fox.com/elections/headshots/HICKENLOOPER_JOHN_DCO_SENATE.png"
     },
     {
@@ -23237,8 +23241,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 839948,
-     "pct": 35.67,
+     "votes": 844951,
+     "pct": 35.73,
      "photo": "https://images.api.fox.com/elections/headshots/BAISLEY_MARK_RCO_STATESEN.png"
     }
    ],
@@ -26435,6 +26439,14 @@
  },
  "latest_calls": [
   {
+   "id": "NV-02",
+   "kind": "house",
+   "party": "D",
+   "winner": "Teresa Benitez-Thompson",
+   "flipped": true,
+   "at": "2026-11-05T02:29:25.426Z"
+  },
+  {
    "id": "CA-48",
    "kind": "house",
    "party": "D",
@@ -26825,23 +26837,15 @@
    "winner": "Raul Ruiz",
    "flipped": false,
    "at": "2026-11-04T06:12:47.012Z"
-  },
-  {
-   "id": "CA-50",
-   "kind": "house",
-   "party": "D",
-   "winner": "Scott Peters",
-   "flipped": false,
-   "at": "2026-11-04T06:12:18.732Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T02:28:16.275Z",
+   "updated": "2026-11-05T02:31:56.640Z",
    "house": {
-    "D": 239,
+    "D": 240,
     "R": 147,
     "I": 0
    },
@@ -26859,10 +26863,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T02:27:46.842000Z",
+   "updated": "2026-11-05T02:31:06.424000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 234,
+    "D": 235,
     "R": 146,
     "I": 0
    },
@@ -26880,7 +26884,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T02:27:56.000Z",
+   "updated": "2026-11-05T02:31:12.000Z",
    "house": {
     "D": 242,
     "R": 151,
@@ -26899,5 +26903,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T02:28:23.699Z"
+ "desks_checked_at": "2026-11-05T02:32:01.391Z"
 }

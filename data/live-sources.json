@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T12:37:40.262Z",
+ "updated": "2026-11-05T15:05:36.644Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2810,6 +2810,17 @@
    "at": "2026-11-05T00:02:03.118Z"
   },
   {
+   "race": "CA-48",
+   "name": "Marni von Wilpert",
+   "party": "D",
+   "result": "won",
+   "publisher": "Politico",
+   "outlet": "politico.com",
+   "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNnU1R3BxTUFscXFZRk5ZWFNHNGkxZ0YyMnJWWm4wNlJ6VUJIMTdWMnFZcmZmLUFETF9iMHZOdnpEV2dzTHhCZ3J4RkxVVXllamFyZ1FFX0xSVmFYSDVnSHZhN3JNYUZwejBYaVYwenhwT0pDOElmV1ZnbGJIYVFMYi1TRzcwdWFXMDV5M250VVRsU3JLbWFRYUF0TTZhQk9RZzFCME40U0JsdW9fYXhJQ3VKbVlMVXJydHc?oc=5",
+   "title": "Democrat Marni von Wilpert wins redrawn Southern California district",
+   "at": "2026-11-05T01:47:00.000Z"
+  },
+  {
    "race": "WA-03",
    "name": "Marie Gluesenkamp Perez",
    "party": "D",
@@ -5057,12 +5068,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "CA-48": {
+   "fox_winner": "Marni von Wilpert",
+   "agree": [
+    {
+     "publisher": "Politico",
+     "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNNnU1R3BxTUFscXFZRk5ZWFNHNGkxZ0YyMnJWWm4wNlJ6VUJIMTdWMnFZcmZmLUFETF9iMHZOdnpEV2dzTHhCZ3J4RkxVVXllamFyZ1FFX0xSVmFYSDVnSHZhN3JNYUZwejBYaVYwenhwT0pDOElmV1ZnbGJIYVFMYi1TRzcwdWFXMDV5M250VVRsU3JLbWFRYUF0TTZhQk9RZzFCME40U0JsdW9fYXhJQ3VKbVlMVXJydHc?oc=5",
+     "title": "Democrat Marni von Wilpert wins redrawn Southern California district",
+     "winner": "Marni von Wilpert",
+     "party": "D",
+     "at": "2026-11-05T01:47:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 92,
+  "races_confirmed": 93,
   "races_disputed": 3,
   "races_reported_not_called": 11
  }

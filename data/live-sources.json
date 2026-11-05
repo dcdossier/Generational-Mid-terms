@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T03:02:20.344Z",
+ "updated": "2026-11-05T03:05:40.914Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1686,6 +1686,17 @@
    "url": "https://ground.news/article/sen-amy-klobuchar-wins-the-minnesota-governors-race-extending-democrats-hold-on-the-state_f1d492",
    "title": "Democrat Amy Klobuchar Elected Minnesota’s First Woman Governor",
    "at": "2026-11-04T05:26:49.415Z"
+  },
+  {
+   "race": "NC-09",
+   "name": "Richard Ojeda",
+   "party": "D",
+   "result": "won",
+   "publisher": "WUNC News",
+   "outlet": "wunc.org",
+   "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNMnRlNDcyVWNtTkk2VF9vZzBpTDh6ZE5FMjY5R3FUVG1obnhKMTd5R2JfWU5PY3BSUDJ6aFRGRjk2WU5UNFVDX0Y0SWRjMGNjSzd3RDRCenlpUDNLa053a3pfQUs0MVZIM2lsYmRQbWtaaG1zdndHRXRpMEpFRUxiR1Q4bVpvRlVic01MTW5RUEN1ZWJpc1VjSg?oc=5",
+   "title": "Ojeda defeats Republican campaign chairman Hudson in NC's 9th Congressional District",
+   "at": "2026-11-04T05:30:00.000Z"
   },
   {
    "race": "Senate-ME",
@@ -4770,6 +4781,21 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NC-09": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "WUNC News",
+     "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNMnRlNDcyVWNtTkk2VF9vZzBpTDh6ZE5FMjY5R3FUVG1obnhKMTd5R2JfWU5PY3BSUDJ6aFRGRjk2WU5UNFVDX0Y0SWRjMGNjSzd3RDRCenlpUDNLa053a3pfQUs0MVZIM2lsYmRQbWtaaG1zdndHRXRpMEpFRUxiR1Q4bVpvRlVic01MTW5RUEN1ZWJpc1VjSg?oc=5",
+     "title": "Ojeda defeats Republican campaign chairman Hudson in NC's 9th Congressional District",
+     "winner": "Richard Ojeda",
+     "party": "D",
+     "at": "2026-11-04T05:30:00.000Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -4777,6 +4803,6 @@
   "read": 66,
   "races_confirmed": 90,
   "races_disputed": 3,
-  "races_reported_not_called": 7
+  "races_reported_not_called": 8
  }
 }

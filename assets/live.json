@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T01:31:47.072Z",
- "fetched_at": "2026-11-05T01:32:04.012Z",
+ "source_last_updated": "2026-11-05T01:35:25.127Z",
+ "fetched_at": "2026-11-05T01:35:39.571Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 50,
+   "remaining": 49,
    "parties": {
     "D": {
-     "won": 238,
-     "net_gain": 28,
-     "flipped_to": 29,
+     "won": 239,
+     "net_gain": 29,
+     "flipped_to": 30,
      "majority_called": true
     },
     "R": {
      "won": 147,
-     "net_gain": -28,
+     "net_gain": -29,
      "flipped_to": 1,
      "majority_called": false
     },
@@ -20267,6 +20267,53 @@
     "AP"
    ]
   },
+  "CA-48": {
+   "id": "CA-48",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 54,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 19,
+   "total_votes": 160570,
+   "called_at": "2026-11-05T01:32:45.566Z",
+   "candidates": [
+    {
+     "name": "Marni von Wilpert",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 95547,
+     "pct": 59.5,
+     "photo": "https://images.api.fox.com/elections/headshots/VONWILPERT_MARNI_DCA_HOUSE.png"
+    },
+    {
+     "name": "Jim Desmond",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 65023,
+     "pct": 40.5,
+     "photo": "https://images.api.fox.com/elections/headshots/DESMOND_JIM_RCA_HOUSE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20922,49 +20969,6 @@
      "votes": 63733,
      "pct": 45.61,
      "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-48": {
-   "id": "CA-48",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 54,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 19,
-   "total_votes": 160570,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Marni von Wilpert",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 95547,
-     "pct": 59.5,
-     "photo": "https://images.api.fox.com/elections/headshots/VONWILPERT_MARNI_DCA_HOUSE.png"
-    },
-    {
-     "name": "Jim Desmond",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 65023,
-     "pct": 40.5,
-     "photo": "https://images.api.fox.com/elections/headshots/DESMOND_JIM_RCA_HOUSE.png"
     }
    ],
    "desks": {
@@ -26431,6 +26435,14 @@
  },
  "latest_calls": [
   {
+   "id": "CA-48",
+   "kind": "house",
+   "party": "D",
+   "winner": "Marni von Wilpert",
+   "flipped": true,
+   "at": "2026-11-05T01:32:45.566Z"
+  },
+  {
    "id": "CA-47",
    "kind": "house",
    "party": "D",
@@ -26821,23 +26833,15 @@
    "winner": "Scott Peters",
    "flipped": false,
    "at": "2026-11-04T06:12:18.732Z"
-  },
-  {
-   "id": "CA-39",
-   "kind": "house",
-   "party": "D",
-   "winner": "Mark Takano",
-   "flipped": false,
-   "at": "2026-11-04T06:11:44.245Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T01:31:47.072Z",
+   "updated": "2026-11-05T01:35:25.127Z",
    "house": {
-    "D": 238,
+    "D": 239,
     "R": 147,
     "I": 0
    },
@@ -26855,10 +26859,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T01:31:46.521000Z",
+   "updated": "2026-11-05T01:33:49.128000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 233,
+    "D": 234,
     "R": 146,
     "I": 0
    },
@@ -26876,7 +26880,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T01:31:30.000Z",
+   "updated": "2026-11-05T01:33:59.000Z",
    "house": {
     "D": 242,
     "R": 151,
@@ -26895,5 +26899,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T01:32:04.913Z"
+ "desks_checked_at": "2026-11-05T01:35:40.444Z"
 }

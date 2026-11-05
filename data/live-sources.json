@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T06:26:00.235Z",
+ "updated": "2026-11-05T07:09:04.977Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -597,6 +597,17 @@
    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSUlRUWRCcFpqeWU0bi1ka285S2djY0Zfa1MwV3RRTklJWWtQcUJPeE1IcURzV2NqNlBBVzBYNWhqeUtUWDRhWTcza0lfVnREdHZITUNSRU0zSnZHdkE5V3FvNTNZVE1TNXZpNGxQb0ZSNFM2MzYtRkZsbmszRjI3elNNLTdBSnZGdURn0gGQAUFVX3lxTE45R3F6WjFyUEp3ZUJKdkNYaERNVm5FT0tDbXNZSTVIcDF2VXVtNUNfOTZnSkdfWWZGMXcxOEpBbWp6Sk9KQWxRbXZDTVJiWVRldGJ3VjVYbXQxWnU3N0hmRjI3X0N6Q2d4VmJWU1ZUVHBtUnplcG02c195WDZhMXFuQk1lRlE1ZXZMYTZsbU93SQ?oc=5",
    "title": "Cleaver clinches another House term after Missouri redistricting saga",
    "at": "2026-11-04T01:15:00.000Z"
+  },
+  {
+   "race": "TX-33",
+   "name": "Colin Allred",
+   "party": "D",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQdGM4T1RMZFZrcjBYOVB4RDZyTi1hd3dtSVpTVFdkX2NESmk5YVBEdU4zSWx4aDQxM0wwWUZvNEtsSmxsLUtlZjVZYnFVbHh3VjZEdWpDNzIweDZraDJOeUFibTU2aEo0WFpoT3pabnJjOWtZQUZ6V1F4VjdUT0xrRVlQcUhocEtIeU5vR05meHBRTUIxTFdISWtIa9IBoAFBVV95cUxOQi1DcVZZSjR5dTNTUXFkbUdHQXpJUlJuNmpRcUhsS001QW45S09MTUE3Rzg1cS13ZFpDYm0yek41WnlJZFFvampRQml4YmtmMkl1UW1QU0hOTnlWd0E0dmQyckhxa2UtbmZ1dHBPY0VpVWZuUzJIXzRiY0t3SGt6RnJzRWNPd1ZZcDNhSDluV0c0VmhGNkYwNTA2NDlkdTBY?oc=5",
+   "title": "Allred wins Texas House seat in comeback bid after 2 Senate campaigns",
+   "at": "2026-11-04T01:16:00.000Z"
   },
   {
    "race": "Gov-PA",
@@ -4915,12 +4926,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "TX-33": {
+   "fox_winner": "Colin Allred",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQdGM4T1RMZFZrcjBYOVB4RDZyTi1hd3dtSVpTVFdkX2NESmk5YVBEdU4zSWx4aDQxM0wwWUZvNEtsSmxsLUtlZjVZYnFVbHh3VjZEdWpDNzIweDZraDJOeUFibTU2aEo0WFpoT3pabnJjOWtZQUZ6V1F4VjdUT0xrRVlQcUhocEtIeU5vR05meHBRTUIxTFdISWtIa9IBoAFBVV95cUxOQi1DcVZZSjR5dTNTUXFkbUdHQXpJUlJuNmpRcUhsS001QW45S09MTUE3Rzg1cS13ZFpDYm0yek41WnlJZFFvampRQml4YmtmMkl1UW1QU0hOTnlWd0E0dmQyckhxa2UtbmZ1dHBPY0VpVWZuUzJIXzRiY0t3SGt6RnJzRWNPd1ZZcDNhSDluV0c0VmhGNkYwNTA2NDlkdTBY?oc=5",
+     "title": "Allred wins Texas House seat in comeback bid after 2 Senate campaigns",
+     "winner": "Colin Allred",
+     "party": "D",
+     "at": "2026-11-04T01:16:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 91,
+  "races_confirmed": 92,
   "races_disputed": 3,
   "races_reported_not_called": 10
  }

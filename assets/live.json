@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T19:38:59.720Z",
- "fetched_at": "2026-11-05T19:39:18.670Z",
+ "source_last_updated": "2026-11-05T19:42:39.033Z",
+ "fetched_at": "2026-11-05T19:42:40.049Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,18 +20,18 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 34,
+   "remaining": 29,
    "parties": {
     "D": {
-     "won": 248,
-     "net_gain": 37,
-     "flipped_to": 38,
+     "won": 251,
+     "net_gain": 39,
+     "flipped_to": 41,
      "majority_called": true
     },
     "R": {
-     "won": 153,
-     "net_gain": -37,
-     "flipped_to": 1,
+     "won": 155,
+     "net_gain": -39,
+     "flipped_to": 2,
      "majority_called": false
     },
     "Oth": {
@@ -12583,7 +12583,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 23.2,
-   "total_votes": 228913,
+   "total_votes": 228948,
    "called_at": "2026-11-04T04:19:47.209Z",
    "candidates": [
     {
@@ -12591,7 +12591,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 141060,
+     "votes": 141081,
      "pct": 61.62,
      "photo": null
     },
@@ -12600,7 +12600,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 87853,
+     "votes": 87867,
      "pct": 38.38,
      "photo": null
     }
@@ -15476,7 +15476,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 27.2,
-   "total_votes": 281998,
+   "total_votes": 282002,
    "called_at": "2026-11-04T05:07:37.574Z",
    "candidates": [
     {
@@ -15484,7 +15484,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 179357,
+     "votes": 179361,
      "pct": 63.6,
      "photo": null
     },
@@ -21219,6 +21219,295 @@
     "AP"
    ]
   },
+  "CO-05": {
+   "id": "CO-05",
+   "kind": "house",
+   "state": "CO",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 94,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 4.6,
+   "total_votes": 278287,
+   "called_at": "2026-11-05T19:38:34.112Z",
+   "candidates": [
+    {
+     "name": "Jessica Killin",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 140713,
+     "pct": 50.56,
+     "photo": "https://images.api.fox.com/elections/headshots/KILLIN_JESSICA_DCO_HOUSE.png"
+    },
+    {
+     "name": "Jeff Crank",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 127946,
+     "pct": 45.98,
+     "photo": "https://images.api.fox.com/elections/headshots/CRANK_JEFF_RCO_HOUSE.png"
+    },
+    {
+     "name": "Mark Elworth",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5032,
+     "pct": 1.81,
+     "photo": null
+    },
+    {
+     "name": "Christopher Mitchell",
+     "party": "AC",
+     "incumbent": false,
+     "winner": false,
+     "votes": 4596,
+     "pct": 1.65,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "FL-13": {
+   "id": "FL-13",
+   "kind": "house",
+   "state": "FL",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.8,
+   "total_votes": 313496,
+   "called_at": "2026-11-05T19:38:55.301Z",
+   "candidates": [
+    {
+     "name": "Anna Luna",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 155117,
+     "pct": 49.48,
+     "photo": "https://images.api.fox.com/elections/headshots/LUNA_ANNA_PAULINA_RFL_HOUSE.png"
+    },
+    {
+     "name": "Leela Gray",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 152600,
+     "pct": 48.68,
+     "photo": "https://images.api.fox.com/elections/headshots/GRAY_LEELA_DFL_HOUSE.png"
+    },
+    {
+     "name": "Tony D'Arrigo",
+     "party": "NF",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5779,
+     "pct": 1.84,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "NC-09": {
+   "id": "NC-09",
+   "kind": "house",
+   "state": "NC",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 2.2,
+   "total_votes": 271399,
+   "called_at": "2026-11-05T19:39:21.200Z",
+   "candidates": [
+    {
+     "name": "Richard Ojeda",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 138707,
+     "pct": 51.11,
+     "photo": null
+    },
+    {
+     "name": "Richard Hudson",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 132692,
+     "pct": 48.89,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "OH-10": {
+   "id": "OH-10",
+   "kind": "house",
+   "state": "OH",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 98,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 1.6,
+   "total_votes": 302016,
+   "called_at": "2026-11-05T19:39:42.727Z",
+   "candidates": [
+    {
+     "name": "Kristina Knickerbocker",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 149024,
+     "pct": 49.34,
+     "photo": null
+    },
+    {
+     "name": "Mike Turner",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 144086,
+     "pct": 47.71,
+     "photo": null
+    },
+    {
+     "name": "Thomas McMasters",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 8906,
+     "pct": 2.95,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "TN-09": {
+   "id": "TN-09",
+   "kind": "house",
+   "state": "TN",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.1,
+   "total_votes": 225614,
+   "called_at": "2026-11-05T19:40:13.354Z",
+   "candidates": [
+    {
+     "name": "Brent Taylor",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 111968,
+     "pct": 49.63,
+     "photo": null
+    },
+    {
+     "name": "Justin Pearson",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 109429,
+     "pct": 48.5,
+     "photo": null
+    },
+    {
+     "name": "Dennis Clark",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2413,
+     "pct": 1.07,
+     "photo": null
+    },
+    {
+     "name": "Michelle Davis Head",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 1804,
+     "pct": 0.8,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -21789,67 +22078,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "CO-05": {
-   "id": "CO-05",
-   "kind": "house",
-   "state": "CO",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 94,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 4.6,
-   "total_votes": 278287,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Jessica Killin",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 140713,
-     "pct": 50.56,
-     "photo": "https://images.api.fox.com/elections/headshots/KILLIN_JESSICA_DCO_HOUSE.png"
-    },
-    {
-     "name": "Jeff Crank",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 127946,
-     "pct": 45.98,
-     "photo": "https://images.api.fox.com/elections/headshots/CRANK_JEFF_RCO_HOUSE.png"
-    },
-    {
-     "name": "Mark Elworth",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5032,
-     "pct": 1.81,
-     "photo": null
-    },
-    {
-     "name": "Christopher Mitchell",
-     "party": "AC",
-     "incumbent": false,
-     "winner": false,
-     "votes": 4596,
-     "pct": 1.65,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "FL-07": {
    "id": "FL-07",
    "kind": "house",
@@ -21940,58 +22168,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "FL-13": {
-   "id": "FL-13",
-   "kind": "house",
-   "state": "FL",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.8,
-   "total_votes": 313496,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Anna Luna",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 155117,
-     "pct": 49.48,
-     "photo": "https://images.api.fox.com/elections/headshots/LUNA_ANNA_PAULINA_RFL_HOUSE.png"
-    },
-    {
-     "name": "Leela Gray",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 152600,
-     "pct": 48.68,
-     "photo": "https://images.api.fox.com/elections/headshots/GRAY_LEELA_DFL_HOUSE.png"
-    },
-    {
-     "name": "Tony D'Arrigo",
-     "party": "NF",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5779,
-     "pct": 1.84,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
     "nbc": null
    },
    "consensus": null,
@@ -22165,8 +22341,8 @@
    "pct_in": 96,
    "winner_party": null,
    "leader_party": "R",
-   "margin_pct": 1.1,
-   "total_votes": 332814,
+   "margin_pct": 1.2,
+   "total_votes": 333513,
    "called_at": null,
    "candidates": [
     {
@@ -22174,8 +22350,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 166360,
-     "pct": 49.99,
+     "votes": 166660,
+     "pct": 49.97,
      "photo": null
     },
     {
@@ -22183,8 +22359,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 162620,
-     "pct": 48.86,
+     "votes": 162755,
+     "pct": 48.8,
      "photo": "https://images.api.fox.com/elections/headshots/DUNLAP_MATT_DME_HOUSE.png"
     },
     {
@@ -22192,8 +22368,8 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 3659,
-     "pct": 1.1,
+     "votes": 3923,
+     "pct": 1.18,
      "photo": null
     },
     {
@@ -22474,49 +22650,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "NC-09": {
-   "id": "NC-09",
-   "kind": "house",
-   "state": "NC",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 2.2,
-   "total_votes": 271399,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Richard Ojeda",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 138707,
-     "pct": 51.11,
-     "photo": null
-    },
-    {
-     "name": "Richard Hudson",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 132692,
-     "pct": 48.89,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "NC-10": {
    "id": "NC-10",
    "kind": "house",
@@ -22725,58 +22858,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "OH-10": {
-   "id": "OH-10",
-   "kind": "house",
-   "state": "OH",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 98,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 1.6,
-   "total_votes": 302016,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Kristina Knickerbocker",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 149024,
-     "pct": 49.34,
-     "photo": null
-    },
-    {
-     "name": "Mike Turner",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 144086,
-     "pct": 47.71,
-     "photo": null
-    },
-    {
-     "name": "Thomas McMasters",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 8906,
-     "pct": 2.95,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "SC-01": {
    "id": "SC-01",
    "kind": "house",
@@ -22949,67 +23030,6 @@
      "winner": false,
      "votes": 1853,
      "pct": 0.95,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TN-09": {
-   "id": "TN-09",
-   "kind": "house",
-   "state": "TN",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.1,
-   "total_votes": 225614,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Brent Taylor",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 111968,
-     "pct": 49.63,
-     "photo": null
-    },
-    {
-     "name": "Justin Pearson",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 109429,
-     "pct": 48.5,
-     "photo": null
-    },
-    {
-     "name": "Dennis Clark",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2413,
-     "pct": 1.07,
-     "photo": null
-    },
-    {
-     "name": "Michelle Davis Head",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 1804,
-     "pct": 0.8,
      "photo": null
     }
    ],
@@ -23762,7 +23782,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.3,
-   "total_votes": 2469922,
+   "total_votes": 2476758,
    "called_at": null,
    "candidates": [
     {
@@ -23770,8 +23790,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1638915,
-     "pct": 63.4,
+     "votes": 1643997,
+     "pct": 63.42,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
     {
@@ -23779,8 +23799,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 831007,
-     "pct": 32.14,
+     "votes": 832761,
+     "pct": 32.12,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
    ],
@@ -24185,7 +24205,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 26.5,
-   "total_votes": 724227,
+   "total_votes": 724267,
    "called_at": null,
    "candidates": [
     {
@@ -24193,7 +24213,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 457980,
+     "votes": 458007,
      "pct": 63.24,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_LUJAN_BEN_RAY_DNM_SENATE.png"
     },
@@ -24202,7 +24222,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 266247,
+     "votes": 266260,
      "pct": 36.76,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_MARKER_LARRY_RNM_SENATE.png"
     }
@@ -25397,8 +25417,8 @@
    "pct_in": 98,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 27.6,
-   "total_votes": 2507838,
+   "margin_pct": 27.7,
+   "total_votes": 2514738,
    "called_at": null,
    "candidates": [
     {
@@ -25406,8 +25426,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1612399,
-     "pct": 62.14,
+     "votes": 1617475,
+     "pct": 62.16,
      "photo": "https://images.api.fox.com/elections/headshots/HEALEY_MAURA_DMA_GOVERNOR.png"
     },
     {
@@ -25415,8 +25435,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 895439,
-     "pct": 34.51,
+     "votes": 897263,
+     "pct": 34.48,
      "photo": "https://images.api.fox.com/elections/headshots/MINOGUE_MICHAEL_RMA_GOVERNOR.png"
     }
    ],
@@ -25727,7 +25747,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 14.7,
-   "total_votes": 724653,
+   "total_votes": 724694,
    "called_at": null,
    "candidates": [
     {
@@ -25735,7 +25755,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 415458,
+     "votes": 415484,
      "pct": 57.33,
      "photo": "https://images.api.fox.com/elections/headshots/HAALAND_DEB_DNM_GOVERNOR.png"
     },
@@ -25744,7 +25764,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 309195,
+     "votes": 309210,
      "pct": 42.67,
      "photo": "https://images.api.fox.com/elections/headshots/HULL_GREGGORY_RNM_GOVERNOR.png"
     }
@@ -26508,6 +26528,46 @@
  },
  "latest_calls": [
   {
+   "id": "TN-09",
+   "kind": "house",
+   "party": "R",
+   "winner": "Brent Taylor",
+   "flipped": true,
+   "at": "2026-11-05T19:40:13.354Z"
+  },
+  {
+   "id": "OH-10",
+   "kind": "house",
+   "party": "D",
+   "winner": "Kristina Knickerbocker",
+   "flipped": true,
+   "at": "2026-11-05T19:39:42.727Z"
+  },
+  {
+   "id": "NC-09",
+   "kind": "house",
+   "party": "D",
+   "winner": "Richard Ojeda",
+   "flipped": true,
+   "at": "2026-11-05T19:39:21.200Z"
+  },
+  {
+   "id": "FL-13",
+   "kind": "house",
+   "party": "R",
+   "winner": "Anna Luna",
+   "flipped": false,
+   "at": "2026-11-05T19:38:55.301Z"
+  },
+  {
+   "id": "CO-05",
+   "kind": "house",
+   "party": "D",
+   "winner": "Jessica Killin",
+   "flipped": true,
+   "at": "2026-11-05T19:38:34.112Z"
+  },
+  {
    "id": "AZ-06",
    "kind": "house",
    "party": "D",
@@ -26866,56 +26926,16 @@
    "winner": "Tom McClintock",
    "flipped": false,
    "at": "2026-11-04T07:33:21.419Z"
-  },
-  {
-   "id": "TX-06",
-   "kind": "house",
-   "party": "R",
-   "winner": "Jake Ellzey",
-   "flipped": false,
-   "at": "2026-11-04T07:20:02.967Z"
-  },
-  {
-   "id": "CA-49",
-   "kind": "house",
-   "party": "D",
-   "winner": "Mike Levin",
-   "flipped": false,
-   "at": "2026-11-04T07:13:34.674Z"
-  },
-  {
-   "id": "MN-08",
-   "kind": "house",
-   "party": "R",
-   "winner": "Pete Stauber",
-   "flipped": false,
-   "at": "2026-11-04T07:11:54.417Z"
-  },
-  {
-   "id": "TX-03",
-   "kind": "house",
-   "party": "R",
-   "winner": "Keith Self",
-   "flipped": false,
-   "at": "2026-11-04T07:09:45.723Z"
-  },
-  {
-   "id": "TX-25",
-   "kind": "house",
-   "party": "R",
-   "winner": "Roger Williams",
-   "flipped": false,
-   "at": "2026-11-04T07:04:52.519Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T19:38:59.720Z",
+   "updated": "2026-11-05T19:42:39.033Z",
    "house": {
-    "D": 248,
-    "R": 153,
+    "D": 251,
+    "R": 155,
     "I": 0
    },
    "senate": {
@@ -26932,11 +26952,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T19:38:59.181000Z",
+   "updated": "2026-11-05T19:42:32.909000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 245,
-    "R": 153,
+    "D": 247,
+    "R": 154,
     "I": 0
    },
    "senate": {
@@ -26953,10 +26973,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T19:38:58.000Z",
+   "updated": "2026-11-05T19:42:31.000Z",
    "house": {
-    "D": 246,
-    "R": 156,
+    "D": 247,
+    "R": 157,
     "I": 0
    },
    "senate": {
@@ -26972,5 +26992,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T19:39:19.343Z"
+ "desks_checked_at": "2026-11-05T19:42:40.650Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-04T23:32:06.095Z",
+ "updated": "2026-11-05T00:02:03.121Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2577,6 +2577,17 @@
    "url": "https://ground.news/article/progressive-william-lawrence-defeats-gop-rep-tom-barrett-in-swing-michigan-district",
    "title": "Progressive William Lawrence defeats GOP Rep. Tom Barrett in swing Michigan district",
    "at": "2026-11-04T20:24:55.041Z"
+  },
+  {
+   "race": "NY-08",
+   "name": "Hakeem Jeffries",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/hakeem-jeffries-launches-campaign-for-house-speaker-position",
+   "title": "SPEAKER BID: Hakeem Jeffries Moves to Take House Gavel Following Democratic Midterm Victory",
+   "at": "2026-11-05T00:02:03.118Z"
   }
  ],
  "races": {
@@ -4624,12 +4635,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NY-08": {
+   "fox_winner": "Hakeem Jeffries",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/hakeem-jeffries-launches-campaign-for-house-speaker-position",
+     "title": "SPEAKER BID: Hakeem Jeffries Moves to Take House Gavel Following Democratic Midterm Victory",
+     "winner": "Hakeem Jeffries",
+     "party": "D",
+     "at": "2026-11-05T00:02:03.118Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 87,
+  "races_confirmed": 88,
   "races_disputed": 3,
   "races_reported_not_called": 7
  }

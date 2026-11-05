@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T01:45:50.583Z",
+ "updated": "2026-11-05T02:28:42.019Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1543,6 +1543,17 @@
    "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5UWTRUTUVDZXhTZ3dZS2F3Q2kwZlptVkVIWm1mLUV4Z0s5OGpMa0R1aU93OGNSRE82OG4xWHhONVEwVVhVMkJRUUthQXB6amt3VWVSbGZhWmJ4WHhEalV2MUQ4bU4yTlFCTkFIQXpqdkxtQmhoeFVHQmpn?oc=5",
    "title": "Acton flips Ohio governor's office for Democrats",
    "at": "2026-11-04T04:52:35.000Z"
+  },
+  {
+   "race": "NC-14",
+   "name": "Tim Moore",
+   "party": "R",
+   "result": "won",
+   "publisher": "WUNC News",
+   "outlet": "wunc.org",
+   "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQS0s5Z1hyeG1nblR3Y1V1Rm1tTUJLcnZoRXRMYW9zOXROOTc0TjF2OTNqeUxuRWVMU0ozSWVpOHJUV2xSeElNeDJ1bXdnU0FHSjVYdnRKTWtWSHhEOFBENFZ4NXRZOWd5dWt3ajhKQXhVSkUyM3pIQnA2TkFwQkhiVFF3MDVyakp0SU9jbw?oc=5",
+   "title": "U.S. Congressman Tim Moore, a longtime fixture of NC politics, defeated in reelection bid",
+   "at": "2026-11-04T04:53:00.000Z"
   },
   {
    "race": "MI-11",
@@ -4699,6 +4710,21 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NC-14": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "WUNC News",
+     "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQS0s5Z1hyeG1nblR3Y1V1Rm1tTUJLcnZoRXRMYW9zOXROOTc0TjF2OTNqeUxuRWVMU0ozSWVpOHJUV2xSeElNeDJ1bXdnU0FHSjVYdnRKTWtWSHhEOFBENFZ4NXRZOWd5dWt3ajhKQXhVSkUyM3pIQnA2TkFwQkhiVFF3MDVyakp0SU9jbw?oc=5",
+     "title": "U.S. Congressman Tim Moore, a longtime fixture of NC politics, defeated in reelection bid",
+     "winner": "Tim Moore",
+     "party": "R",
+     "at": "2026-11-04T04:53:00.000Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -4706,6 +4732,6 @@
   "read": 66,
   "races_confirmed": 88,
   "races_disputed": 3,
-  "races_reported_not_called": 7
+  "races_reported_not_called": 8
  }
 }

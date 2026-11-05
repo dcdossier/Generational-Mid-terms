@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T21:29:02.899Z",
- "fetched_at": "2026-11-05T21:29:00.465Z",
+ "source_last_updated": "2026-11-05T21:32:15.820Z",
+ "fetched_at": "2026-11-05T21:32:33.807Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 29,
+   "remaining": 28,
    "parties": {
     "D": {
-     "won": 251,
-     "net_gain": 39,
-     "flipped_to": 41,
+     "won": 252,
+     "net_gain": 40,
+     "flipped_to": 42,
      "majority_called": true
     },
     "R": {
      "won": 155,
-     "net_gain": -39,
+     "net_gain": -40,
      "flipped_to": 2,
      "majority_called": false
     },
@@ -1193,11 +1193,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 21,
+   "pct_in": 25,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 67148,
+   "total_votes": 80201,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1205,7 +1205,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 67148,
+     "votes": 80201,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/MCGOVERN_JAMES_DMA_HOUSE.png"
     }
@@ -2516,7 +2516,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 87.2,
-   "total_votes": 271237,
+   "total_votes": 271524,
    "called_at": "2026-11-04T01:27:44.834Z",
    "candidates": [
     {
@@ -2524,8 +2524,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 253887,
-     "pct": 93.6,
+     "votes": 254163,
+     "pct": 93.61,
      "photo": null
     },
     {
@@ -2533,8 +2533,8 @@
      "party": "I",
      "incumbent": false,
      "winner": false,
-     "votes": 17350,
-     "pct": 6.4,
+     "votes": 17361,
+     "pct": 6.39,
      "photo": null
     }
    ],
@@ -2610,7 +2610,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 61.6,
-   "total_votes": 183156,
+   "total_votes": 183732,
    "called_at": "2026-11-04T01:28:38.680Z",
    "candidates": [
     {
@@ -2618,8 +2618,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 147970,
-     "pct": 80.79,
+     "votes": 148452,
+     "pct": 80.8,
      "photo": null
     },
     {
@@ -2627,8 +2627,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 35186,
-     "pct": 19.21,
+     "votes": 35280,
+     "pct": 19.2,
      "photo": null
     }
    ],
@@ -2653,7 +2653,7 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 98,
+   "pct_in": 99,
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 32.1,
@@ -21508,6 +21508,62 @@
     "AP"
    ]
   },
+  "NJ-02": {
+   "id": "NJ-02",
+   "kind": "house",
+   "state": "NJ",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 2.6,
+   "total_votes": 270069,
+   "called_at": "2026-11-05T21:29:00.736Z",
+   "candidates": [
+    {
+     "name": "Zack Mullock",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 137166,
+     "pct": 50.79,
+     "photo": null
+    },
+    {
+     "name": "Jeff Van Drew",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 130084,
+     "pct": 48.17,
+     "photo": null
+    },
+    {
+     "name": "Ramon Mora",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2819,
+     "pct": 1.04,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22702,58 +22758,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "NJ-02": {
-   "id": "NJ-02",
-   "kind": "house",
-   "state": "NJ",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 2.6,
-   "total_votes": 270069,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Zack Mullock",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 137166,
-     "pct": 50.79,
-     "photo": null
-    },
-    {
-     "name": "Jeff Van Drew",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 130084,
-     "pct": 48.17,
-     "photo": null
-    },
-    {
-     "name": "Ramon Mora",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2819,
-     "pct": 1.04,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "NY-17": {
    "id": "NY-17",
    "kind": "house",
@@ -23111,11 +23115,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 68,
+   "pct_in": 69,
    "winner_party": null,
    "leader_party": "R",
    "margin_pct": 8.9,
-   "total_votes": 151820,
+   "total_votes": 152514,
    "called_at": null,
    "candidates": [
     {
@@ -23123,8 +23127,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 82528,
-     "pct": 54.36,
+     "votes": 82892,
+     "pct": 54.35,
      "photo": null
     },
     {
@@ -23132,7 +23136,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 69011,
+     "votes": 69339,
      "pct": 45.46,
      "photo": null
     },
@@ -23141,7 +23145,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 281,
+     "votes": 283,
      "pct": 0.19,
      "photo": null
     }
@@ -23166,8 +23170,8 @@
    "pct_in": 63,
    "winner_party": null,
    "leader_party": "R",
-   "margin_pct": 1.3,
-   "total_votes": 206548,
+   "margin_pct": 1.5,
+   "total_votes": 207096,
    "called_at": null,
    "candidates": [
     {
@@ -23175,8 +23179,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 104289,
-     "pct": 50.49,
+     "votes": 104738,
+     "pct": 50.57,
      "photo": null
     },
     {
@@ -23184,8 +23188,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 101581,
-     "pct": 49.18,
+     "votes": 101677,
+     "pct": 49.1,
      "photo": null
     },
     {
@@ -23193,7 +23197,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 678,
+     "votes": 681,
      "pct": 0.33,
      "photo": null
     }
@@ -26029,7 +26033,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.1,
-   "total_votes": 4915761,
+   "total_votes": 4916367,
    "called_at": null,
    "candidates": [
     {
@@ -26037,7 +26041,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 3008307,
+     "votes": 3008814,
      "pct": 60.41,
      "photo": "https://images.api.fox.com/elections/headshots/SHAPIRO_JOSH_DPA_GOVERNOR.png"
     },
@@ -26046,7 +26050,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1907454,
+     "votes": 1907553,
      "pct": 38.3,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_GARRITY_STACY_RPA_GOVERNOR.png"
     }
@@ -26528,6 +26532,14 @@
  },
  "latest_calls": [
   {
+   "id": "NJ-02",
+   "kind": "house",
+   "party": "D",
+   "winner": "Zack Mullock",
+   "flipped": true,
+   "at": "2026-11-05T21:29:00.736Z"
+  },
+  {
    "id": "TN-09",
    "kind": "house",
    "party": "R",
@@ -26918,23 +26930,15 @@
    "winner": "Marcy Kaptur",
    "flipped": false,
    "at": "2026-11-04T07:53:04.366Z"
-  },
-  {
-   "id": "CA-05",
-   "kind": "house",
-   "party": "R",
-   "winner": "Tom McClintock",
-   "flipped": false,
-   "at": "2026-11-04T07:33:21.419Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T21:29:02.899Z",
+   "updated": "2026-11-05T21:32:15.820Z",
    "house": {
-    "D": 251,
+    "D": 252,
     "R": 155,
     "I": 0
    },
@@ -26952,10 +26956,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T21:28:46.066000Z",
+   "updated": "2026-11-05T21:31:36.233000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 247,
+    "D": 248,
     "R": 154,
     "I": 0
    },
@@ -26973,7 +26977,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T21:28:45.000Z",
+   "updated": "2026-11-05T21:32:20.000Z",
    "house": {
     "D": 248,
     "R": 157,
@@ -26992,5 +26996,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T21:29:03.507Z"
+ "desks_checked_at": "2026-11-05T21:32:34.902Z"
 }

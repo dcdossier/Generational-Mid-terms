@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T21:56:39.947Z",
+ "updated": "2026-11-05T22:00:01.908Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2951,6 +2951,17 @@
    "url": "https://ground.news/article/democrat-jessica-killin-wins-election-to-us-house-in-colorados-5th-congressional-district",
    "title": "Democrat Jessica Killin Wins Election to U.S. House in Colorado's 5th Congressional District",
    "at": "2026-11-05T21:22:39.666Z"
+  },
+  {
+   "race": "FL-13",
+   "name": "Anna Luna",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/gray-battles-to-unseat-luna-in-district-13-election",
+   "title": "Republican Anna Luna wins reelection to U.S. House in Florida’s 13th Congressional District",
+   "at": "2026-11-05T22:00:01.906Z"
   }
  ],
  "races": {
@@ -3596,6 +3607,21 @@
      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE91UXZBU0RuNGRRQXRUMUdmWlpxZGV4ZkYwbjhlNk0tcVJtenZFaDdDV1l3dXFaOXRLblBJOHVPc2dCbU1SMHlmT2F3ZTcwTnZKX1U0MWVrZlk3bUg5RGM4TGtQNmgwYjdIY0d3TExSb25yWndpdFHSAXtBVV95cUxPQkVxOEx3OWVRdGh0R2hmNUdUMk8ycDE5Y0xVUzE3VWllM1N6ZWVmSHBSa24xaW1YRzdZQXdWMWc4SC1ValFqZFJidDlPSlZnSFdJTGxKMmtuZ0JJTThTLWt3RVRTX1hOZmlmeG9wTUM3WWlzY01xY1hVV2M?oc=5",
      "title": "Trump-backed Mike Mazzei wins Oklahoma governor’s race",
      "winner": "Mike Mazzei",
+     "party": "R",
+     "at": "2026-11-04T02:34:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
+  },
+  "SC-05": {
+   "fox_winner": "Wes Climer",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNM2tLMktvSEVlclhUR1R3dnloUFRZY044NTJjSFIyQ09kSDl0U3ppUG9fMVYtWUVvdGpVZlRJeHhaZUpQSHhDVWtRSVhhN1FFUGU4cmM2b2JNTGNjNi1rMFBDb2VVWnJpejZuX1VfSVA1RlZBMXBGeDd4aWNrdkhmQUwyTjYwMG9XWkE5anhCaF8tUQ?oc=5",
+     "title": "South Carolina’s Climer wins election to succeed Norman in House",
+     "winner": "Wes Climer",
      "party": "R",
      "at": "2026-11-04T02:34:00.000Z"
     }
@@ -5282,16 +5308,16 @@
    "disagree": [],
    "reported": []
   },
-  "SC-05": {
-   "fox_winner": "Wes Climer",
+  "FL-13": {
+   "fox_winner": "Anna Luna",
    "agree": [
     {
-     "publisher": "The Hill",
-     "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNM2tLMktvSEVlclhUR1R3dnloUFRZY044NTJjSFIyQ09kSDl0U3ppUG9fMVYtWUVvdGpVZlRJeHhaZUpQSHhDVWtRSVhhN1FFUGU4cmM2b2JNTGNjNi1rMFBDb2VVWnJpejZuX1VfSVA1RlZBMXBGeDd4aWNrdkhmQUwyTjYwMG9XWkE5anhCaF8tUQ?oc=5",
-     "title": "South Carolina’s Climer wins election to succeed Norman in House",
-     "winner": "Wes Climer",
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/gray-battles-to-unseat-luna-in-district-13-election",
+     "title": "Republican Anna Luna wins reelection to U.S. House in Florida’s 13th Congressional District",
+     "winner": "Anna Luna",
      "party": "R",
-     "at": "2026-11-04T02:34:00.000Z"
+     "at": "2026-11-05T22:00:01.906Z"
     }
    ],
    "disagree": [],
@@ -5301,7 +5327,7 @@
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 102,
+  "races_confirmed": 103,
   "races_disputed": 5,
   "races_reported_not_called": 4
  }

@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T23:12:09.844Z",
- "fetched_at": "2026-11-05T23:12:32.181Z",
+ "source_last_updated": "2026-11-05T23:15:22.839Z",
+ "fetched_at": "2026-11-05T23:15:48.760Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 28,
+   "remaining": 27,
    "parties": {
     "D": {
-     "won": 252,
-     "net_gain": 40,
-     "flipped_to": 42,
+     "won": 253,
+     "net_gain": 41,
+     "flipped_to": 43,
      "majority_called": true
     },
     "R": {
      "won": 155,
-     "net_gain": -40,
+     "net_gain": -41,
      "flipped_to": 2,
      "majority_called": false
     },
@@ -1193,11 +1193,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 60,
+   "pct_in": 62,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 191304,
+   "total_votes": 194960,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1205,7 +1205,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 191304,
+     "votes": 194960,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/MCGOVERN_JAMES_DMA_HOUSE.png"
     }
@@ -21564,6 +21564,62 @@
     "AP"
    ]
   },
+  "NY-17": {
+   "id": "NY-17",
+   "kind": "house",
+   "state": "NY",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 88,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 4.4,
+   "total_votes": 268750,
+   "called_at": "2026-11-05T23:12:39.941Z",
+   "candidates": [
+    {
+     "name": "Cait Conley",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 140165,
+     "pct": 52.15,
+     "photo": "https://images.api.fox.com/elections/headshots/CONLEY_CAIT_DNY_HOUSE.png"
+    },
+    {
+     "name": "Mike Lawler",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 128292,
+     "pct": 47.74,
+     "photo": "https://images.api.fox.com/elections/headshots/LAWLER_MIKE_RNY_HOUSE.png"
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 293,
+     "pct": 0.11,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22747,58 +22803,6 @@
      "winner": false,
      "votes": 4673,
      "pct": 1.59,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NY-17": {
-   "id": "NY-17",
-   "kind": "house",
-   "state": "NY",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 88,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 4.4,
-   "total_votes": 268750,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Cait Conley",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 140165,
-     "pct": 52.15,
-     "photo": "https://images.api.fox.com/elections/headshots/CONLEY_CAIT_DNY_HOUSE.png"
-    },
-    {
-     "name": "Mike Lawler",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 128292,
-     "pct": 47.74,
-     "photo": "https://images.api.fox.com/elections/headshots/LAWLER_MIKE_RNY_HOUSE.png"
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 293,
-     "pct": 0.11,
      "photo": null
     }
    ],
@@ -26532,6 +26536,14 @@
  },
  "latest_calls": [
   {
+   "id": "NY-17",
+   "kind": "house",
+   "party": "D",
+   "winner": "Cait Conley",
+   "flipped": true,
+   "at": "2026-11-05T23:12:39.941Z"
+  },
+  {
    "id": "NJ-02",
    "kind": "house",
    "party": "D",
@@ -26922,23 +26934,15 @@
    "winner": "Rudy Yakym",
    "flipped": false,
    "at": "2026-11-04T07:54:36.982Z"
-  },
-  {
-   "id": "OH-09",
-   "kind": "house",
-   "party": "D",
-   "winner": "Marcy Kaptur",
-   "flipped": false,
-   "at": "2026-11-04T07:53:04.366Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T23:12:09.844Z",
+   "updated": "2026-11-05T23:15:22.839Z",
    "house": {
-    "D": 252,
+    "D": 253,
     "R": 155,
     "I": 0
    },
@@ -26956,10 +26960,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T23:12:01.518000Z",
+   "updated": "2026-11-05T23:15:32.329000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 248,
+    "D": 249,
     "R": 154,
     "I": 0
    },
@@ -26977,7 +26981,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T23:12:02.000Z",
+   "updated": "2026-11-05T23:15:42.576Z",
    "house": {
     "D": 249,
     "R": 157,
@@ -26996,5 +27000,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T23:12:33.140Z"
+ "desks_checked_at": "2026-11-05T23:15:49.528Z"
 }

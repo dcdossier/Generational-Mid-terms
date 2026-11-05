@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T17:01:48.596Z",
- "fetched_at": "2026-11-05T17:02:04.751Z",
+ "source_last_updated": "2026-11-05T17:05:16.191Z",
+ "fetched_at": "2026-11-05T17:05:25.420Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 39,
+   "remaining": 35,
    "parties": {
     "D": {
-     "won": 245,
-     "net_gain": 34,
-     "flipped_to": 35,
+     "won": 247,
+     "net_gain": 36,
+     "flipped_to": 37,
      "majority_called": true
     },
     "R": {
-     "won": 151,
-     "net_gain": -34,
+     "won": 153,
+     "net_gain": -36,
      "flipped_to": 1,
      "majority_called": false
     },
@@ -1231,11 +1231,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 53,
+   "pct_in": 57,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 159580,
+   "total_votes": 172835,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1243,7 +1243,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 159580,
+     "votes": 172835,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/CLARK_KATHERINE_DMA_HOUSE.png"
     }
@@ -20710,7 +20710,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 3.2,
-   "total_votes": 248455,
+   "total_votes": 248655,
    "called_at": "2026-11-05T17:00:30.832Z",
    "candidates": [
     {
@@ -20718,7 +20718,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 128090,
+     "votes": 128184,
      "pct": 51.55,
      "photo": null
     },
@@ -20727,8 +20727,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 120157,
-     "pct": 48.36,
+     "votes": 120263,
+     "pct": 48.37,
      "photo": null
     },
     {
@@ -20874,6 +20874,286 @@
     "AP"
    ]
   },
+  "AR-02": {
+   "id": "AR-02",
+   "kind": "house",
+   "state": "AR",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.8,
+   "total_votes": 250469,
+   "called_at": "2026-11-05T17:01:35.527Z",
+   "candidates": [
+    {
+     "name": "French Hill",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 127437,
+     "pct": 50.88,
+     "photo": null
+    },
+    {
+     "name": "Chris Jones",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 123032,
+     "pct": 49.12,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "MT-01": {
+   "id": "MT-01",
+   "kind": "house",
+   "state": "MT",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 3.6,
+   "total_votes": 262219,
+   "called_at": "2026-11-05T17:02:04.546Z",
+   "candidates": [
+    {
+     "name": "Sam Forstag",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 132003,
+     "pct": 50.34,
+     "photo": "https://images.api.fox.com/elections/headshots/FORSTAG_SAM_DMT_HOUSE.png"
+    },
+    {
+     "name": "Aaron Flint",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 122694,
+     "pct": 46.79,
+     "photo": "https://images.api.fox.com/elections/headshots/FLINT_AARON_RMT_HOUSE.png"
+    },
+    {
+     "name": "Nick Sheedy",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 7522,
+     "pct": 2.87,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "UT-02": {
+   "id": "UT-02",
+   "kind": "house",
+   "state": "UT",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 89,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 7.8,
+   "total_votes": 233617,
+   "called_at": "2026-11-05T17:02:26.384Z",
+   "candidates": [
+    {
+     "name": "Blake Moore",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 117192,
+     "pct": 50.16,
+     "photo": null
+    },
+    {
+     "name": "Peter Crosby",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 98952,
+     "pct": 42.36,
+     "photo": null
+    },
+    {
+     "name": "Carlton Bowen",
+     "party": "IA",
+     "incumbent": false,
+     "winner": false,
+     "votes": 7437,
+     "pct": 3.18,
+     "photo": null
+    },
+    {
+     "name": "Robert Moesinger",
+     "party": "UN",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5968,
+     "pct": 2.55,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "AZ-01": {
+   "id": "AZ-01",
+   "kind": "house",
+   "state": "AZ",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 86,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 7,
+   "total_votes": 319712,
+   "called_at": "2026-11-05T17:02:49.849Z",
+   "candidates": [
+    {
+     "name": "Amish Shah",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 167807,
+     "pct": 52.49,
+     "photo": "https://images.api.fox.com/elections/headshots/SHAH_AMISH_DAZ_HOUSE.png"
+    },
+    {
+     "name": "Thomas Feely",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 145313,
+     "pct": 45.45,
+     "photo": "https://images.api.fox.com/elections/headshots/FEELY_JAY_RAZ_HOUSE.png"
+    },
+    {
+     "name": "Monica Alponte",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 6578,
+     "pct": 2.06,
+     "photo": null
+    },
+    {
+     "name": "Dev Gupta (write-in)",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 8,
+     "pct": 0,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "CA-29": {
+   "id": "CA-29",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 72,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 19.7,
+   "total_votes": 121835,
+   "called_at": "2026-11-05T17:03:21.636Z",
+   "candidates": [
+    {
+     "name": "Luz Rivas",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 72919,
+     "pct": 59.85,
+     "photo": null
+    },
+    {
+     "name": "Angélica Dueñas",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 48916,
+     "pct": 40.15,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -20924,110 +21204,6 @@
      "winner": false,
      "votes": 5789,
      "pct": 2.72,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "AR-02": {
-   "id": "AR-02",
-   "kind": "house",
-   "state": "AR",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.8,
-   "total_votes": 250469,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "French Hill",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 127437,
-     "pct": 50.88,
-     "photo": null
-    },
-    {
-     "name": "Chris Jones",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 123032,
-     "pct": 49.12,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "AZ-01": {
-   "id": "AZ-01",
-   "kind": "house",
-   "state": "AZ",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 86,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 7,
-   "total_votes": 319712,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Amish Shah",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 167807,
-     "pct": 52.49,
-     "photo": "https://images.api.fox.com/elections/headshots/SHAH_AMISH_DAZ_HOUSE.png"
-    },
-    {
-     "name": "Thomas Feely",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 145313,
-     "pct": 45.45,
-     "photo": "https://images.api.fox.com/elections/headshots/FEELY_JAY_RAZ_HOUSE.png"
-    },
-    {
-     "name": "Monica Alponte",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 6578,
-     "pct": 2.06,
-     "photo": null
-    },
-    {
-     "name": "Dev Gupta (write-in)",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 8,
-     "pct": 0,
      "photo": null
     }
    ],
@@ -21442,49 +21618,6 @@
      "winner": false,
      "votes": 64075,
      "pct": 48.64,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-29": {
-   "id": "CA-29",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 72,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 19.7,
-   "total_votes": 121835,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Luz Rivas",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 72919,
-     "pct": 59.85,
-     "photo": null
-    },
-    {
-     "name": "Angélica Dueñas",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 48916,
-     "pct": 40.15,
      "photo": null
     }
    ],
@@ -22109,58 +22242,6 @@
      "winner": false,
      "votes": 391,
      "pct": 0.12,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "MT-01": {
-   "id": "MT-01",
-   "kind": "house",
-   "state": "MT",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 3.6,
-   "total_votes": 262219,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Sam Forstag",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 132003,
-     "pct": 50.34,
-     "photo": "https://images.api.fox.com/elections/headshots/FORSTAG_SAM_DMT_HOUSE.png"
-    },
-    {
-     "name": "Aaron Flint",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 122694,
-     "pct": 46.79,
-     "photo": "https://images.api.fox.com/elections/headshots/FLINT_AARON_RMT_HOUSE.png"
-    },
-    {
-     "name": "Nick Sheedy",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 7522,
-     "pct": 2.87,
      "photo": null
     }
    ],
@@ -22916,67 +22997,6 @@
      "winner": false,
      "votes": 1804,
      "pct": 0.8,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "UT-02": {
-   "id": "UT-02",
-   "kind": "house",
-   "state": "UT",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 89,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 7.8,
-   "total_votes": 233617,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Blake Moore",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 117192,
-     "pct": 50.16,
-     "photo": null
-    },
-    {
-     "name": "Peter Crosby",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 98952,
-     "pct": 42.36,
-     "photo": null
-    },
-    {
-     "name": "Carlton Bowen",
-     "party": "IA",
-     "incumbent": false,
-     "winner": false,
-     "votes": 7437,
-     "pct": 3.18,
-     "photo": null
-    },
-    {
-     "name": "Robert Moesinger",
-     "party": "UN",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5968,
-     "pct": 2.55,
      "photo": null
     }
    ],
@@ -26475,6 +26495,46 @@
  },
  "latest_calls": [
   {
+   "id": "CA-29",
+   "kind": "house",
+   "party": "D",
+   "winner": "Luz Rivas",
+   "flipped": false,
+   "at": "2026-11-05T17:03:21.636Z"
+  },
+  {
+   "id": "AZ-01",
+   "kind": "house",
+   "party": "D",
+   "winner": "Amish Shah",
+   "flipped": true,
+   "at": "2026-11-05T17:02:49.849Z"
+  },
+  {
+   "id": "UT-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "Blake Moore",
+   "flipped": false,
+   "at": "2026-11-05T17:02:26.384Z"
+  },
+  {
+   "id": "MT-01",
+   "kind": "house",
+   "party": "D",
+   "winner": "Sam Forstag",
+   "flipped": true,
+   "at": "2026-11-05T17:02:04.546Z"
+  },
+  {
+   "id": "AR-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "French Hill",
+   "flipped": false,
+   "at": "2026-11-05T17:01:35.527Z"
+  },
+  {
    "id": "TN-07",
    "kind": "house",
    "party": "R",
@@ -26833,56 +26893,16 @@
    "winner": "Richard Pan",
    "flipped": false,
    "at": "2026-11-04T07:00:40.011Z"
-  },
-  {
-   "id": "TX-17",
-   "kind": "house",
-   "party": "R",
-   "winner": "Pete Sessions",
-   "flipped": false,
-   "at": "2026-11-04T06:59:29.171Z"
-  },
-  {
-   "id": "CA-45",
-   "kind": "house",
-   "party": "D",
-   "winner": "Derek Tran",
-   "flipped": false,
-   "at": "2026-11-04T06:57:25.358Z"
-  },
-  {
-   "id": "OR-06",
-   "kind": "house",
-   "party": "D",
-   "winner": "Andrea Salinas",
-   "flipped": false,
-   "at": "2026-11-04T06:48:14.873Z"
-  },
-  {
-   "id": "MN-06",
-   "kind": "house",
-   "party": "R",
-   "winner": "Tom Emmer",
-   "flipped": false,
-   "at": "2026-11-04T06:42:19.677Z"
-  },
-  {
-   "id": "TX-36",
-   "kind": "house",
-   "party": "R",
-   "winner": "Brian Babin",
-   "flipped": false,
-   "at": "2026-11-04T06:36:05.832Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T17:01:48.596Z",
+   "updated": "2026-11-05T17:05:16.191Z",
    "house": {
-    "D": 245,
-    "R": 151,
+    "D": 247,
+    "R": 153,
     "I": 0
    },
    "senate": {
@@ -26899,11 +26919,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T17:01:49.819000Z",
+   "updated": "2026-11-05T17:05:05.750000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 240,
-    "R": 151,
+    "D": 243,
+    "R": 152,
     "I": 0
    },
    "senate": {
@@ -26920,7 +26940,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T17:01:55.000Z",
+   "updated": "2026-11-05T17:04:54.000Z",
    "house": {
     "D": 244,
     "R": 155,
@@ -26939,5 +26959,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T17:02:05.559Z"
+ "desks_checked_at": "2026-11-05T17:05:26.693Z"
 }

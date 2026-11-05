@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-05T14:18:26.497Z",
- "fetched_at": "2026-11-05T14:18:24.032Z",
+ "source_last_updated": "2026-11-05T14:21:45.369Z",
+ "fetched_at": "2026-11-05T14:21:42.603Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -1269,11 +1269,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 0,
+   "pct_in": 40,
    "winner_party": "D",
-   "leader_party": null,
+   "leader_party": "D",
    "margin_pct": null,
-   "total_votes": 0,
+   "total_votes": 103232,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
     {
@@ -1281,8 +1281,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 0,
-     "pct": 0,
+     "votes": 103232,
+     "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/PRESSLEY_AYANNA_DMA_HOUSE.png"
     }
    ],
@@ -11949,7 +11949,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 29.8,
-   "total_votes": 330628,
+   "total_votes": 330648,
    "called_at": "2026-11-04T04:08:00.798Z",
    "candidates": [
     {
@@ -11958,7 +11958,7 @@
      "incumbent": true,
      "winner": true,
      "votes": 214503,
-     "pct": 64.88,
+     "pct": 64.87,
      "photo": null
     },
     {
@@ -11966,7 +11966,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 115805,
+     "votes": 115825,
      "pct": 35.03,
      "photo": null
     },
@@ -18607,7 +18607,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 6.2,
-   "total_votes": 359455,
+   "total_votes": 359454,
    "called_at": "2026-11-04T07:11:54.417Z",
    "candidates": [
     {
@@ -18624,7 +18624,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 168352,
+     "votes": 168351,
      "pct": 46.84,
      "photo": null
     },
@@ -23834,7 +23834,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 10.1,
-   "total_votes": 2754341,
+   "total_votes": 2754340,
    "called_at": null,
    "candidates": [
     {
@@ -23842,7 +23842,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 1520871,
+     "votes": 1520870,
      "pct": 53.71,
      "photo": "https://images.api.fox.com/elections/headshots/FLANAGAN_PEGGY_DMN_LTGOV.png"
     },
@@ -25517,7 +25517,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 12.8,
-   "total_votes": 2776283,
+   "total_votes": 2776282,
    "called_at": null,
    "candidates": [
     {
@@ -25525,7 +25525,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 1569696,
+     "votes": 1569695,
      "pct": 55.46,
      "photo": "https://images.api.fox.com/elections/headshots/KLOBUCHAR_AMY_DMN_SENATE.png"
     },
@@ -26843,7 +26843,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-05T14:18:26.497Z",
+   "updated": "2026-11-05T14:21:45.369Z",
    "house": {
     "D": 240,
     "R": 147,
@@ -26863,7 +26863,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-05T14:18:09.257000Z",
+   "updated": "2026-11-05T14:20:44.079000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 235,
@@ -26884,7 +26884,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-05T14:18:16.000Z",
+   "updated": "2026-11-05T14:21:35.000Z",
    "house": {
     "D": 242,
     "R": 151,
@@ -26903,5 +26903,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-05T14:18:27.068Z"
+ "desks_checked_at": "2026-11-05T14:21:46.126Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T14:16:06.800Z",
+ "updated": "2026-11-06T14:35:52.462Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3138,6 +3138,17 @@
    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNci1zV21GUDhpT0dDUGtQOG10NnBQZTg5LXhpWmpEaG1wckhsMzhvQ3JWZ3hZQ2N5dThlSnFJRDgwa3F5Tk9rVU1zZUdnNURtYUs4WkV4Q2ZrXzVtSDBQTGM4Q2l2V2ctWU1YcE9fUzFnR0wwSUg5blZKMllOUEMyOGMteDhsaGdhLVVuNlNsV2zSAZYBQVVfeXFMT1ItSTRmYmNnZFFONmFRTi1vdWIya2hONlBGaGVtMnJSMFRJdTRrWTBUX0RCZ29DUzQzbGtkM0dpZzBFeHZYaE9NSXQ3NFJtT0JPTkpYSjBSeDZuT3RoSEJzTnZYemxiTm1fTDBPQVJVUEExMG5hSU9KdHFQNEVweXFuWkx5NjF3LXNmeWdLMlN4OTFOTnJn?oc=5",
    "title": "Toth wins open Crenshaw House seat in Texas",
    "at": "2026-11-06T13:32:00.000Z"
+  },
+  {
+   "race": "AZ-05",
+   "name": "Mark Lamb",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPc3ZSVWRpT0VDODlsazNBR01rR0NCMEliRFB1UEhwMk1UakdrYVU5cXhtSE1GcEhFMjFCVHNNazRPT3dld3hxZm91dzNiYkhCWnJHT2RnaHZxX2t2ZHhRNGJNSEhZMkc3OFNLa08tRFZDRjFVanJqRHJFSlJNS3BqVTFpWWw4VU9tV1hvUmlsRFBvbjTSAZgBQVVfeXFMTjhoM3dadDlXTzlNTmVIS05WRWQ3NXljYnc5X29HSThsQTlKVmpBQnJsdFBwUDh3d1IzOWc3YlJPWGNNbnIxVjZ3RE1UOFNMVUpVV3VYeW9ROGh5R1NsRXo1ZWJPVWNIcUpueVUzcmRXMWo0Wm5mQWNGZmVUQzJQWTViZ0RRRWJsNmk4NVBmaEc4TFE4QURPNS0?oc=5",
+   "title": "Trump-backed Mark Lamb wins Arizona House seat",
+   "at": "2026-11-06T13:52:00.000Z"
   }
  ],
  "races": {
@@ -5644,6 +5655,21 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "AZ-05": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPc3ZSVWRpT0VDODlsazNBR01rR0NCMEliRFB1UEhwMk1UakdrYVU5cXhtSE1GcEhFMjFCVHNNazRPT3dld3hxZm91dzNiYkhCWnJHT2RnaHZxX2t2ZHhRNGJNSEhZMkc3OFNLa08tRFZDRjFVanJqRHJFSlJNS3BqVTFpWWw4VU9tV1hvUmlsRFBvbjTSAZgBQVVfeXFMTjhoM3dadDlXTzlNTmVIS05WRWQ3NXljYnc5X29HSThsQTlKVmpBQnJsdFBwUDh3d1IzOWc3YlJPWGNNbnIxVjZ3RE1UOFNMVUpVV3VYeW9ROGh5R1NsRXo1ZWJPVWNIcUpueVUzcmRXMWo0Wm5mQWNGZmVUQzJQWTViZ0RRRWJsNmk4NVBmaEc4TFE4QURPNS0?oc=5",
+     "title": "Trump-backed Mark Lamb wins Arizona House seat",
+     "winner": "Mark Lamb",
+     "party": "R",
+     "at": "2026-11-06T13:52:00.000Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -5651,6 +5677,6 @@
   "read": 66,
   "races_confirmed": 110,
   "races_disputed": 6,
-  "races_reported_not_called": 4
+  "races_reported_not_called": 5
  }
 }

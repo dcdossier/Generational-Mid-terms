@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-06T16:26:02.934Z",
- "fetched_at": "2026-11-06T16:25:59.936Z",
+ "source_last_updated": "2026-11-06T16:29:24.348Z",
+ "fetched_at": "2026-11-06T16:29:21.535Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -2899,7 +2899,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 46,
-   "total_votes": 308977,
+   "total_votes": 308988,
    "called_at": "2026-11-04T01:33:41.774Z",
    "candidates": [
     {
@@ -2907,7 +2907,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 223082,
+     "votes": 223090,
      "pct": 72.2,
      "photo": null
     },
@@ -2916,7 +2916,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 81019,
+     "votes": 81022,
      "pct": 26.22,
      "photo": null
     },
@@ -8626,7 +8626,7 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 96,
+   "pct_in": 97,
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 18.1,
@@ -21862,6 +21862,100 @@
     "AP"
    ]
   },
+  "AZ-05": {
+   "id": "AZ-05",
+   "kind": "house",
+   "state": "AZ",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 93,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 3,
+   "total_votes": 303237,
+   "called_at": "2026-11-06T16:25:33.037Z",
+   "candidates": [
+    {
+     "name": "Mark Lamb",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 156179,
+     "pct": 51.5,
+     "photo": null
+    },
+    {
+     "name": "Elizabeth Lee",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 147058,
+     "pct": 48.5,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "CA-11": {
+   "id": "CA-11",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 74,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 9.1,
+   "total_votes": 218935,
+   "called_at": "2026-11-06T16:25:58.753Z",
+   "candidates": [
+    {
+     "name": "Scott Wiener",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 119475,
+     "pct": 54.57,
+     "photo": null
+    },
+    {
+     "name": "Connie Chan",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 99460,
+     "pct": 45.43,
+     "photo": "https://images.api.fox.com/elections/headshots/CHAN_CONNIE_DCA_HOUSE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -21970,49 +22064,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "AZ-05": {
-   "id": "AZ-05",
-   "kind": "house",
-   "state": "AZ",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 93,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 3,
-   "total_votes": 303237,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Mark Lamb",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 156179,
-     "pct": 51.5,
-     "photo": null
-    },
-    {
-     "name": "Elizabeth Lee",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 147058,
-     "pct": 48.5,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
     "nbc": null
    },
    "consensus": null,
@@ -22137,49 +22188,6 @@
      "votes": 57310,
      "pct": 42.5,
      "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-11": {
-   "id": "CA-11",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 74,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 9.1,
-   "total_votes": 218935,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Scott Wiener",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 119475,
-     "pct": 54.57,
-     "photo": null
-    },
-    {
-     "name": "Connie Chan",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 99460,
-     "pct": 45.43,
-     "photo": "https://images.api.fox.com/elections/headshots/CHAN_CONNIE_DCA_HOUSE.png"
     }
    ],
    "desks": {
@@ -24651,7 +24659,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.6,
-   "total_votes": 3560899,
+   "total_votes": 3560911,
    "called_at": null,
    "candidates": [
     {
@@ -24659,7 +24667,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2183866,
+     "votes": 2183874,
      "pct": 61.17,
      "photo": "https://images.api.fox.com/elections/headshots/WARNER_MARK_DVA_SENATE.png"
     },
@@ -24668,7 +24676,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1377033,
+     "votes": 1377037,
      "pct": 38.57,
      "photo": null
     }
@@ -25394,8 +25402,8 @@
    "pct_in": 94,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 23,
-   "total_votes": 3894980,
+   "margin_pct": 22.9,
+   "total_votes": 3900192,
    "called_at": null,
    "candidates": [
     {
@@ -25403,8 +25411,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2410256,
-     "pct": 59.8,
+     "votes": 2411168,
+     "pct": 59.75,
      "photo": "https://images.api.fox.com/elections/headshots/PRITZKER_JB_DIL_GOVERNOR.png"
     },
     {
@@ -25412,8 +25420,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1484724,
-     "pct": 36.84,
+     "votes": 1489024,
+     "pct": 36.9,
      "photo": "https://images.api.fox.com/elections/headshots/BAILEY_DARREN_RIL_GOVERNOR.png"
     }
    ],
@@ -26552,6 +26560,22 @@
  },
  "latest_calls": [
   {
+   "id": "CA-11",
+   "kind": "house",
+   "party": "D",
+   "winner": "Scott Wiener",
+   "flipped": false,
+   "at": "2026-11-06T16:25:58.753Z"
+  },
+  {
+   "id": "AZ-05",
+   "kind": "house",
+   "party": "R",
+   "winner": "Mark Lamb",
+   "flipped": false,
+   "at": "2026-11-06T16:25:33.037Z"
+  },
+  {
    "id": "CO-03",
    "kind": "house",
    "party": "R",
@@ -26934,29 +26958,13 @@
    "winner": "Susie Lee",
    "flipped": false,
    "at": "2026-11-04T09:04:34.029Z"
-  },
-  {
-   "id": "NV-01",
-   "kind": "house",
-   "party": "D",
-   "winner": "Dina Titus",
-   "flipped": false,
-   "at": "2026-11-04T09:00:54.107Z"
-  },
-  {
-   "id": "NV-04",
-   "kind": "house",
-   "party": "D",
-   "winner": "Steven Horsford",
-   "flipped": false,
-   "at": "2026-11-04T08:53:17.226Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-06T16:26:02.934Z",
+   "updated": "2026-11-06T16:29:24.348Z",
    "house": {
     "D": 253,
     "R": 160,
@@ -26976,10 +26984,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-06T16:25:38.044000Z",
+   "updated": "2026-11-06T16:28:49.255000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 249,
+    "D": 250,
     "R": 159,
     "I": 0
    },
@@ -26997,7 +27005,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-06T16:25:53.000Z",
+   "updated": "2026-11-06T16:28:57.000Z",
    "house": {
     "D": 250,
     "R": 161,
@@ -27016,5 +27024,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-06T16:26:04.300Z"
+ "desks_checked_at": "2026-11-06T16:29:25.410Z"
 }

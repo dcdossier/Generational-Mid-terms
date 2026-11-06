@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-06T16:22:40.009Z",
- "fetched_at": "2026-11-06T16:22:37.303Z",
+ "source_last_updated": "2026-11-06T16:26:02.934Z",
+ "fetched_at": "2026-11-06T16:25:59.936Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,7 +20,7 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 25,
+   "remaining": 22,
    "parties": {
     "D": {
      "won": 253,
@@ -29,7 +29,7 @@
      "majority_called": true
     },
     "R": {
-     "won": 157,
+     "won": 160,
      "net_gain": -41,
      "flipped_to": 2,
      "majority_called": false
@@ -2899,7 +2899,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 46,
-   "total_votes": 308967,
+   "total_votes": 308977,
    "called_at": "2026-11-04T01:33:41.774Z",
    "candidates": [
     {
@@ -2907,7 +2907,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 223076,
+     "votes": 223082,
      "pct": 72.2,
      "photo": null
     },
@@ -2916,7 +2916,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 81016,
+     "votes": 81019,
      "pct": 26.22,
      "photo": null
     },
@@ -2925,7 +2925,7 @@
      "party": "I",
      "incumbent": false,
      "winner": false,
-     "votes": 4144,
+     "votes": 4145,
      "pct": 1.34,
      "photo": null
     },
@@ -21741,6 +21741,127 @@
     "AP"
    ]
   },
+  "NY-21": {
+   "id": "NY-21",
+   "kind": "house",
+   "state": "NY",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 2.1,
+   "total_votes": 275179,
+   "called_at": "2026-11-06T16:23:12.472Z",
+   "candidates": [
+    {
+     "name": "Anthony Constantino",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 140126,
+     "pct": 50.92,
+     "photo": null
+    },
+    {
+     "name": "Blake Gendebien",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 134399,
+     "pct": 48.84,
+     "photo": null
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 654,
+     "pct": 0.24,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "CO-03": {
+   "id": "CO-03",
+   "kind": "house",
+   "state": "CO",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 97,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.9,
+   "total_votes": 332044,
+   "called_at": "2026-11-06T16:24:39.416Z",
+   "candidates": [
+    {
+     "name": "Jeff Hurd",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 163655,
+     "pct": 49.29,
+     "photo": "https://images.api.fox.com/elections/headshots/HURD_JEFF_RCO_HOUSE.png"
+    },
+    {
+     "name": "Dwayne Romero",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 157523,
+     "pct": 47.44,
+     "photo": "https://images.api.fox.com/elections/headshots/ROMERO_DWAYNE_DCO_HOUSE.png"
+    },
+    {
+     "name": "Cory Robertson",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5539,
+     "pct": 1.67,
+     "photo": null
+    },
+    {
+     "name": "Clifton Brown",
+     "party": "UN",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5327,
+     "pct": 1.6,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -21891,7 +22012,7 @@
    ],
    "desks": {
     "fox": null,
-    "ap": null,
+    "ap": "R",
     "nbc": null
    },
    "consensus": null,
@@ -22187,67 +22308,6 @@
      "winner": false,
      "votes": 68864,
      "pct": 45.81,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CO-03": {
-   "id": "CO-03",
-   "kind": "house",
-   "state": "CO",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.9,
-   "total_votes": 332044,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Jeff Hurd",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 163655,
-     "pct": 49.29,
-     "photo": "https://images.api.fox.com/elections/headshots/HURD_JEFF_RCO_HOUSE.png"
-    },
-    {
-     "name": "Dwayne Romero",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 157523,
-     "pct": 47.44,
-     "photo": "https://images.api.fox.com/elections/headshots/ROMERO_DWAYNE_DCO_HOUSE.png"
-    },
-    {
-     "name": "Cory Robertson",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5539,
-     "pct": 1.67,
-     "photo": null
-    },
-    {
-     "name": "Clifton Brown",
-     "party": "UN",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5327,
-     "pct": 1.6,
      "photo": null
     }
    ],
@@ -22924,58 +22984,6 @@
      "winner": false,
      "votes": 4673,
      "pct": 1.59,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NY-21": {
-   "id": "NY-21",
-   "kind": "house",
-   "state": "NY",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 97,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 2.1,
-   "total_votes": 275179,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Anthony Constantino",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 140126,
-     "pct": 50.92,
-     "photo": null
-    },
-    {
-     "name": "Blake Gendebien",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 134399,
-     "pct": 48.84,
-     "photo": null
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 654,
-     "pct": 0.24,
      "photo": null
     }
    ],
@@ -24643,7 +24651,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.6,
-   "total_votes": 3560889,
+   "total_votes": 3560899,
    "called_at": null,
    "candidates": [
     {
@@ -24651,7 +24659,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2183860,
+     "votes": 2183866,
      "pct": 61.17,
      "photo": "https://images.api.fox.com/elections/headshots/WARNER_MARK_DVA_SENATE.png"
     },
@@ -24660,7 +24668,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1377029,
+     "votes": 1377033,
      "pct": 38.57,
      "photo": null
     }
@@ -26544,6 +26552,22 @@
  },
  "latest_calls": [
   {
+   "id": "CO-03",
+   "kind": "house",
+   "party": "R",
+   "winner": "Jeff Hurd",
+   "flipped": false,
+   "at": "2026-11-06T16:24:39.416Z"
+  },
+  {
+   "id": "NY-21",
+   "kind": "house",
+   "party": "R",
+   "winner": "Anthony Constantino",
+   "flipped": false,
+   "at": "2026-11-06T16:23:12.472Z"
+  },
+  {
    "id": "WA-04",
    "kind": "house",
    "party": "R",
@@ -26926,32 +26950,16 @@
    "winner": "Steven Horsford",
    "flipped": false,
    "at": "2026-11-04T08:53:17.226Z"
-  },
-  {
-   "id": "ID-02",
-   "kind": "house",
-   "party": "R",
-   "winner": "Mike Simpson",
-   "flipped": false,
-   "at": "2026-11-04T08:49:18.630Z"
-  },
-  {
-   "id": "AZ-09",
-   "kind": "house",
-   "party": "R",
-   "winner": "Paul Gosar",
-   "flipped": false,
-   "at": "2026-11-04T08:45:30.365Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-06T16:22:40.009Z",
+   "updated": "2026-11-06T16:26:02.934Z",
    "house": {
     "D": 253,
-    "R": 157,
+    "R": 160,
     "I": 0
    },
    "senate": {
@@ -26968,11 +26976,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-06T16:22:24.882000Z",
+   "updated": "2026-11-06T16:25:38.044000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 249,
-    "R": 156,
+    "R": 159,
     "I": 0
    },
    "senate": {
@@ -26989,7 +26997,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-06T16:22:09.000Z",
+   "updated": "2026-11-06T16:25:53.000Z",
    "house": {
     "D": 250,
     "R": 161,
@@ -27008,5 +27016,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-06T16:22:40.703Z"
+ "desks_checked_at": "2026-11-06T16:26:04.300Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-06T06:13:00.176Z",
+ "updated": "2026-11-06T07:09:04.305Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -2953,6 +2953,17 @@
    "at": "2026-11-05T16:44:00.000Z"
   },
   {
+   "race": "AZ-01",
+   "name": "Amish Shah",
+   "party": "D",
+   "result": "won",
+   "publisher": "Axios",
+   "outlet": "axios.com",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxON0RSaWpZNE1tOWEwSXhiVE5Dd0MtdTFERzZnbEd4Nzd5eVFjUWVZb1BlOHpFSXBZY2NkVVFJeVFqU01iVDNuSXdjREhPVWJxV0hVSDNwQ3RlekZ5NmdHMEdXclJMTHFvb0hua2FWQ2ZPNXNlRVhSQ0s0Q0lwb2hYWWRod1pha05vVlFuNTJnMU4xMk93ZDdaTVlaNkxxTWRxR0tQOGNKY1ZlenZSWkZSUUNFU1FjZw?oc=5",
+   "title": "Democrat Amish Shah wins Arizona's 1st Congressional District",
+   "at": "2026-11-05T17:29:32.000Z"
+  },
+  {
    "race": "Gov-TX",
    "name": "Gina Hinojosa",
    "party": "D",
@@ -5566,12 +5577,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "AZ-01": {
+   "fox_winner": "Amish Shah",
+   "agree": [
+    {
+     "publisher": "Axios",
+     "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxON0RSaWpZNE1tOWEwSXhiVE5Dd0MtdTFERzZnbEd4Nzd5eVFjUWVZb1BlOHpFSXBZY2NkVVFJeVFqU01iVDNuSXdjREhPVWJxV0hVSDNwQ3RlekZ5NmdHMEdXclJMTHFvb0hua2FWQ2ZPNXNlRVhSQ0s0Q0lwb2hYWWRod1pha05vVlFuNTJnMU4xMk93ZDdaTVlaNkxxTWRxR0tQOGNKY1ZlenZSWkZSUUNFU1FjZw?oc=5",
+     "title": "Democrat Amish Shah wins Arizona's 1st Congressional District",
+     "winner": "Amish Shah",
+     "party": "D",
+     "at": "2026-11-05T17:29:32.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 107,
+  "races_confirmed": 108,
   "races_disputed": 6,
   "races_reported_not_called": 4
  }

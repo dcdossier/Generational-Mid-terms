@@ -9,8 +9,8 @@
  },
  "source_last_updated": "2026-11-07T13:14:35.156Z",
  "fetched_at": "2026-11-07T13:14:53.745Z",
- "ok": true,
- "error": null,
+ "ok": false,
+ "error": "fetch failed",
  "chambers": {
   "house": {
    "not_up": {
@@ -26979,7 +26979,7 @@
  "desks": {
   "fox": {
    "name": "Fox News",
-   "ok": true,
+   "ok": false,
    "updated": "2026-11-07T13:14:35.156Z",
    "house": {
     "D": 254,
@@ -27040,5 +27040,6 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-07T13:14:54.521Z"
+ "desks_checked_at": "2026-11-07T13:18:22.744Z",
+ "last_attempt": "2026-11-07T13:18:21.231Z"
 }

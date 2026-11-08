@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-08T13:01:47.451Z",
+ "updated": "2026-11-08T14:38:01.653Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -1884,6 +1884,17 @@
    "url": "https://ground.news/article/susan-collins-concedes-to-troy-jackson-in-maine-senate-race",
    "title": "Susan Collins concedes to Troy Jackson in Maine Senate race",
    "at": "2026-11-04T05:30:13.575Z"
+  },
+  {
+   "race": "NM-02",
+   "name": "Gabriel Vasquez",
+   "party": "D",
+   "result": "won",
+   "publisher": "Albuquerque Journal",
+   "outlet": "abqjournal.com",
+   "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPVlpjNU1HalVlOFBwa3JGNFlldXdKQnJka1hRNm45UkdVc0dCd2dqR1d5UXZCVnZ2a3dnUTUzVjRGVUVQa1FhZEo5Z2d0WlZnd2RXLXdsMk5TN3kwUG94cEJSRE1lTnJHejZBV1FrMTZHYlAxZ3dkaTZEWDkzazF4czhSN3E1VUhYdVlFOTFpSmM2NGp1SnhUYVBSZk5DektkMGF4YmFhTTU?oc=5",
+   "title": "Gabe Vasquez wins third term in New Mexico’s 2nd Congressional District",
+   "at": "2026-11-04T05:32:00.000Z"
   },
   {
    "race": "Senate-MN",
@@ -6051,12 +6062,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "NM-02": {
+   "fox_winner": "Gabriel Vasquez",
+   "agree": [
+    {
+     "publisher": "Albuquerque Journal",
+     "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPVlpjNU1HalVlOFBwa3JGNFlldXdKQnJka1hRNm45UkdVc0dCd2dqR1d5UXZCVnZ2a3dnUTUzVjRGVUVQa1FhZEo5Z2d0WlZnd2RXLXdsMk5TN3kwUG94cEJSRE1lTnJHejZBV1FrMTZHYlAxZ3dkaTZEWDkzazF4czhSN3E1VUhYdVlFOTFpSmM2NGp1SnhUYVBSZk5DektkMGF4YmFhTTU?oc=5",
+     "title": "Gabe Vasquez wins third term in New Mexico’s 2nd Congressional District",
+     "winner": "Gabriel Vasquez",
+     "party": "D",
+     "at": "2026-11-04T05:32:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 114,
+  "races_confirmed": 115,
   "races_disputed": 6,
   "races_reported_not_called": 4
  }

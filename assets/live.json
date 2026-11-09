@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-09T19:05:03.394Z",
- "fetched_at": "2026-11-09T19:04:59.502Z",
+ "source_last_updated": "2026-11-09T19:08:35.263Z",
+ "fetched_at": "2026-11-09T19:08:31.926Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -5264,7 +5264,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 11,
-   "total_votes": 317948,
+   "total_votes": 317947,
    "called_at": "2026-11-04T02:10:30.669Z",
    "candidates": [
     {
@@ -5272,7 +5272,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 176121,
+     "votes": 176120,
      "pct": 55.39,
      "photo": null
     },
@@ -6536,7 +6536,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 27.7,
-   "total_votes": 268066,
+   "total_votes": 268109,
    "called_at": "2026-11-04T02:28:58.884Z",
    "candidates": [
     {
@@ -6544,7 +6544,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 171143,
+     "votes": 171155,
      "pct": 63.84,
      "photo": null
     },
@@ -6553,7 +6553,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 96923,
+     "votes": 96954,
      "pct": 36.16,
      "photo": null
     }
@@ -22227,6 +22227,67 @@
     "AP"
    ]
   },
+  "LA-06": {
+   "id": "LA-06",
+   "kind": "house",
+   "state": "LA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": true,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.3,
+   "total_votes": 261951,
+   "called_at": "2026-11-09T19:07:32.705Z",
+   "candidates": [
+    {
+     "name": "Chauna Banks",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 50878,
+     "pct": 19.42,
+     "photo": null
+    },
+    {
+     "name": "Blake Miguez",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 50213,
+     "pct": 19.17,
+     "photo": null
+    },
+    {
+     "name": "Rick Edmonds",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 49241,
+     "pct": 18.8,
+     "photo": null
+    },
+    {
+     "name": "Lindsay Garcia",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 33544,
+     "pct": 12.81,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": null,
+    "nbc": null
+   },
+   "consensus": null,
+   "consensus_by": []
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22692,67 +22753,6 @@
      "votes": 123438,
      "pct": 49.78,
      "photo": "https://images.api.fox.com/elections/headshots/RODRIGUEZ_ELLIOT_DFL_HOUSE.png"
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "LA-06": {
-   "id": "LA-06",
-   "kind": "house",
-   "state": "LA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.3,
-   "total_votes": 261951,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Chauna Banks",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 50878,
-     "pct": 19.42,
-     "photo": null
-    },
-    {
-     "name": "Blake Miguez",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 50213,
-     "pct": 19.17,
-     "photo": null
-    },
-    {
-     "name": "Rick Edmonds",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 49241,
-     "pct": 18.8,
-     "photo": null
-    },
-    {
-     "name": "Lindsay Garcia",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 33544,
-     "pct": 12.81,
-     "photo": null
     }
    ],
    "desks": {
@@ -23833,8 +23833,8 @@
    "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 31.2,
-   "total_votes": 2487937,
+   "margin_pct": 31.3,
+   "total_votes": 2488062,
    "called_at": null,
    "candidates": [
     {
@@ -23842,7 +23842,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1650780,
+     "votes": 1650874,
      "pct": 63.39,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
@@ -23851,8 +23851,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 837157,
-     "pct": 32.15,
+     "votes": 837188,
+     "pct": 32.14,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
    ],
@@ -24679,7 +24679,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.9,
-   "total_votes": 3588956,
+   "total_votes": 3588955,
    "called_at": null,
    "candidates": [
     {
@@ -24696,7 +24696,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1382446,
+     "votes": 1382445,
      "pct": 38.42,
      "photo": null
     }
@@ -25470,7 +25470,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 27.2,
-   "total_votes": 2536736,
+   "total_votes": 2536863,
    "called_at": null,
    "candidates": [
     {
@@ -25478,7 +25478,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1625495,
+     "votes": 1625597,
      "pct": 61.97,
      "photo": "https://images.api.fox.com/elections/headshots/HEALEY_MAURA_DMA_GOVERNOR.png"
     },
@@ -25487,7 +25487,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 911241,
+     "votes": 911266,
      "pct": 34.74,
      "photo": "https://images.api.fox.com/elections/headshots/MINOGUE_MICHAEL_RMA_GOVERNOR.png"
     }
@@ -26081,7 +26081,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.2,
-   "total_votes": 4924468,
+   "total_votes": 4924512,
    "called_at": null,
    "candidates": [
     {
@@ -26089,7 +26089,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 3015063,
+     "votes": 3015095,
      "pct": 60.43,
      "photo": "https://images.api.fox.com/elections/headshots/SHAPIRO_JOSH_DPA_GOVERNOR.png"
     },
@@ -26098,7 +26098,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1909405,
+     "votes": 1909417,
      "pct": 38.27,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_GARRITY_STACY_RPA_GOVERNOR.png"
     }
@@ -26580,6 +26580,14 @@
  },
  "latest_calls": [
   {
+   "id": "LA-06",
+   "kind": "house",
+   "party": "D",
+   "winner": "Chauna Banks",
+   "flipped": false,
+   "at": "2026-11-09T19:07:32.705Z"
+  },
+  {
    "id": "AZ-02",
    "kind": "house",
    "party": "R",
@@ -26970,21 +26978,13 @@
    "winner": "Sean McCann",
    "flipped": true,
    "at": "2026-11-04T18:13:09.652Z"
-  },
-  {
-   "id": "CA-34",
-   "kind": "house",
-   "party": "D",
-   "winner": "Angela Gonzales-Torres",
-   "flipped": false,
-   "at": "2026-11-04T18:11:54.264Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-09T19:05:03.394Z",
+   "updated": "2026-11-09T19:08:35.263Z",
    "house": {
     "D": 254,
     "R": 163,
@@ -27004,7 +27004,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-09T19:04:48.971000Z",
+   "updated": "2026-11-09T19:08:05.832000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 252,
@@ -27025,7 +27025,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-09T19:04:50.000Z",
+   "updated": "2026-11-09T19:08:24.000Z",
    "house": {
     "D": 252,
     "R": 163,
@@ -27044,5 +27044,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-09T19:05:04.328Z"
+ "desks_checked_at": "2026-11-09T19:08:36.323Z"
 }

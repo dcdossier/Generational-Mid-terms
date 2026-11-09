@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T15:27:12.680Z",
+ "updated": "2026-11-09T20:03:25.068Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3490,6 +3490,17 @@
    "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOdkpPa3hVM3U4Y19rcWRBWDRqYWh1S3pjZnpXUFlMNHE2cTdyWmdrMjM3SjNzbUIwNzJkbkRhSktRR2RNclAyOG5RN0tzV1FwQnBiM3pHRDkzbENTZm42Tm11U1FBWGl0TTFabVY4Vk5GZmRxUDNCd3BIZjJQanVkRlVjaTdQU1pwcDhxc2w5RQ?oc=5",
    "title": "Josh Shapiro says Texas won't replace Pennsylvania as the 'ultimate swing state'",
    "at": "2026-11-09T15:00:00.000Z"
+  },
+  {
+   "race": "AZ-02",
+   "name": "Eli Crane",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/eli-crane-barely-hangs-onto-his-seat-in-arizonas-second-congressional-district",
+   "title": "Arizona Republican Eli Crane Narrowly Wins Reelection After Close House Race",
+   "at": "2026-11-09T20:03:25.067Z"
   }
  ],
  "races": {
@@ -6182,12 +6193,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "AZ-02": {
+   "fox_winner": "Eli Crane",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/eli-crane-barely-hangs-onto-his-seat-in-arizonas-second-congressional-district",
+     "title": "Arizona Republican Eli Crane Narrowly Wins Reelection After Close House Race",
+     "winner": "Eli Crane",
+     "party": "R",
+     "at": "2026-11-09T20:03:25.067Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 115,
+  "races_confirmed": 116,
   "races_disputed": 6,
   "races_reported_not_called": 5
  }

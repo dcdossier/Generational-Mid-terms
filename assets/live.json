@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-09T17:50:31.221Z",
- "fetched_at": "2026-11-09T17:50:49.984Z",
+ "source_last_updated": "2026-11-09T17:54:24.974Z",
+ "fetched_at": "2026-11-09T17:54:20.204Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,7 +20,7 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 19,
+   "remaining": 18,
    "parties": {
     "D": {
      "won": 254,
@@ -29,7 +29,7 @@
      "majority_called": true
     },
     "R": {
-     "won": 162,
+     "won": 163,
      "net_gain": -42,
      "flipped_to": 2,
      "majority_called": false
@@ -2899,7 +2899,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 46,
-   "total_votes": 310021,
+   "total_votes": 310022,
    "called_at": "2026-11-04T01:33:41.774Z",
    "candidates": [
     {
@@ -2916,7 +2916,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 81194,
+     "votes": 81195,
      "pct": 26.19,
      "photo": null
     },
@@ -5264,7 +5264,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 11,
-   "total_votes": 317622,
+   "total_votes": 317701,
    "called_at": "2026-11-04T02:10:30.669Z",
    "candidates": [
     {
@@ -5272,8 +5272,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 176044,
-     "pct": 55.43,
+     "votes": 176068,
+     "pct": 55.42,
      "photo": null
     },
     {
@@ -5281,8 +5281,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 140965,
-     "pct": 44.38,
+     "votes": 141019,
+     "pct": 44.39,
      "photo": null
     },
     {
@@ -5290,7 +5290,7 @@
      "party": "AO",
      "incumbent": false,
      "winner": false,
-     "votes": 613,
+     "votes": 614,
      "pct": 0.19,
      "photo": null
     }
@@ -7360,7 +7360,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 30.9,
-   "total_votes": 270974,
+   "total_votes": 270977,
    "called_at": "2026-11-04T02:38:52.897Z",
    "candidates": [
     {
@@ -7368,7 +7368,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 177323,
+     "votes": 177325,
      "pct": 65.44,
      "photo": null
     },
@@ -7377,7 +7377,7 @@
      "party": "I",
      "incumbent": false,
      "winner": false,
-     "votes": 93651,
+     "votes": 93652,
      "pct": 34.56,
      "photo": null
     }
@@ -20645,7 +20645,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 2,
-   "total_votes": 362613,
+   "total_votes": 362614,
    "called_at": "2026-11-05T16:59:42.774Z",
    "candidates": [
     {
@@ -20662,7 +20662,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 174460,
+     "votes": 174461,
      "pct": 48.11,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_PERRIELLO_TOM_DVA_HOUSE.png"
     },
@@ -22171,6 +22171,62 @@
     "AP"
    ]
   },
+  "AZ-02": {
+   "id": "AZ-02",
+   "kind": "house",
+   "state": "AZ",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.2,
+   "total_votes": 327651,
+   "called_at": "2026-11-09T17:53:43.059Z",
+   "candidates": [
+    {
+     "name": "Eli Crane",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 162753,
+     "pct": 49.67,
+     "photo": null
+    },
+    {
+     "name": "Jonathan Nez",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 158919,
+     "pct": 48.5,
+     "photo": null
+    },
+    {
+     "name": "Curtis Goodwin",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 5979,
+     "pct": 1.82,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22221,58 +22277,6 @@
      "winner": false,
      "votes": 5789,
      "pct": 2.72,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "AZ-02": {
-   "id": "AZ-02",
-   "kind": "house",
-   "state": "AZ",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.2,
-   "total_votes": 327651,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Eli Crane",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 162753,
-     "pct": 49.67,
-     "photo": null
-    },
-    {
-     "name": "Jonathan Nez",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 158919,
-     "pct": 48.5,
-     "photo": null
-    },
-    {
-     "name": "Curtis Goodwin",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 5979,
-     "pct": 1.82,
      "photo": null
     }
    ],
@@ -23501,7 +23505,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 18,
-   "total_votes": 4180275,
+   "total_votes": 4180679,
    "called_at": null,
    "candidates": [
     {
@@ -23509,7 +23513,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2467109,
+     "votes": 2467390,
      "pct": 59.02,
      "photo": "https://images.api.fox.com/elections/headshots/OSSOFF_JON_DGA_SENATE.png"
     },
@@ -23518,7 +23522,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1713166,
+     "votes": 1713289,
      "pct": 40.98,
      "photo": "https://images.api.fox.com/elections/headshots/COLLINS_MICHAEL_RGA_HOUSE.png"
     }
@@ -23548,7 +23552,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 4.2,
-   "total_votes": 1319522,
+   "total_votes": 1319527,
    "called_at": null,
    "candidates": [
     {
@@ -23556,7 +23560,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 688295,
+     "votes": 688296,
      "pct": 50.55,
      "photo": "https://images.api.fox.com/elections/headshots/TUREK_JOSH_DIA_STATEREP.png"
     },
@@ -23565,7 +23569,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 631227,
+     "votes": 631231,
      "pct": 46.36,
      "photo": "https://images.api.fox.com/elections/headshots/HINSON_ASHLEY_RIA_HOUSE.png"
     }
@@ -23830,7 +23834,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.2,
-   "total_votes": 2487935,
+   "total_votes": 2487937,
    "called_at": null,
    "candidates": [
     {
@@ -23838,7 +23842,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1650779,
+     "votes": 1650780,
      "pct": 63.39,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
@@ -23847,7 +23851,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 837156,
+     "votes": 837157,
      "pct": 32.15,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
@@ -24675,7 +24679,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.9,
-   "total_votes": 3587403,
+   "total_votes": 3587673,
    "called_at": null,
    "candidates": [
     {
@@ -24683,7 +24687,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2205490,
+     "votes": 2205695,
      "pct": 61.32,
      "photo": "https://images.api.fox.com/elections/headshots/WARNER_MARK_DVA_SENATE.png"
     },
@@ -24692,7 +24696,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1381913,
+     "votes": 1381978,
      "pct": 38.42,
      "photo": null
     }
@@ -24722,7 +24726,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 20.4,
-   "total_votes": 439048,
+   "total_votes": 439157,
    "called_at": null,
    "candidates": [
     {
@@ -24730,7 +24734,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 266100,
+     "votes": 266157,
      "pct": 58.33,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_MOORE_CAPITO_SHELLEY_RWV_SENATE.png"
     },
@@ -24739,7 +24743,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 172948,
+     "votes": 173000,
      "pct": 37.91,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_FETTY_ANDERSON_RACHEL_DWV_SENATE_.png"
     }
@@ -25231,7 +25235,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 8.7,
-   "total_votes": 4182507,
+   "total_votes": 4182904,
    "called_at": null,
    "candidates": [
     {
@@ -25239,7 +25243,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 2272150,
+     "votes": 2272406,
      "pct": 54.33,
      "photo": "https://images.api.fox.com/elections/headshots/LANCEBOTTOMS_KEISHA_DGA_GOVERNOR.png"
     },
@@ -25248,7 +25252,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1910357,
+     "votes": 1910498,
      "pct": 45.67,
      "photo": "https://images.api.fox.com/elections/headshots/JACKSON_RICK_RGA_GOVERNOR.png"
     }
@@ -25325,7 +25329,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 11.1,
-   "total_votes": 1367206,
+   "total_votes": 1367211,
    "called_at": null,
    "candidates": [
     {
@@ -25333,7 +25337,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 759230,
+     "votes": 759232,
      "pct": 55.53,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_SAND_ROB_DIA_GOVERNOR_.png"
     },
@@ -25342,7 +25346,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 607976,
+     "votes": 607979,
      "pct": 44.47,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_LAHN_ZACH_RIA_GOVERNOR.png"
     }
@@ -25466,7 +25470,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 27.2,
-   "total_votes": 2536733,
+   "total_votes": 2536736,
    "called_at": null,
    "candidates": [
     {
@@ -25474,7 +25478,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1625493,
+     "votes": 1625495,
      "pct": 61.97,
      "photo": "https://images.api.fox.com/elections/headshots/HEALEY_MAURA_DMA_GOVERNOR.png"
     },
@@ -25483,7 +25487,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 911240,
+     "votes": 911241,
      "pct": 34.74,
      "photo": "https://images.api.fox.com/elections/headshots/MINOGUE_MICHAEL_RMA_GOVERNOR.png"
     }
@@ -26359,7 +26363,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 6.6,
-   "total_votes": 303648,
+   "total_votes": 303668,
    "called_at": null,
    "candidates": [
     {
@@ -26367,8 +26371,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 162030,
-     "pct": 52.43,
+     "votes": 162050,
+     "pct": 52.44,
      "photo": "https://images.api.fox.com/elections/headshots/SCOTT_PHIL_RVT_GOVERNOR.png"
     },
     {
@@ -26575,6 +26579,14 @@
   }
  },
  "latest_calls": [
+  {
+   "id": "AZ-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "Eli Crane",
+   "flipped": false,
+   "at": "2026-11-09T17:53:43.059Z"
+  },
   {
    "id": "CA-14",
    "kind": "house",
@@ -26966,24 +26978,16 @@
    "winner": "Angela Gonzales-Torres",
    "flipped": false,
    "at": "2026-11-04T18:11:54.264Z"
-  },
-  {
-   "id": "WA-03",
-   "kind": "house",
-   "party": "D",
-   "winner": "Marie Gluesenkamp Perez",
-   "flipped": false,
-   "at": "2026-11-04T18:04:01.273Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-09T17:50:31.221Z",
+   "updated": "2026-11-09T17:54:24.974Z",
    "house": {
     "D": 254,
-    "R": 162,
+    "R": 163,
     "I": 0
    },
    "senate": {
@@ -27000,11 +27004,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-09T17:50:12.272000Z",
+   "updated": "2026-11-09T17:54:12.812000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 252,
-    "R": 161,
+    "R": 162,
     "I": 0
    },
    "senate": {
@@ -27021,7 +27025,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-09T17:50:25.000Z",
+   "updated": "2026-11-09T17:54:06.000Z",
    "house": {
     "D": 252,
     "R": 162,
@@ -27040,5 +27044,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-09T17:50:51.160Z"
+ "desks_checked_at": "2026-11-09T17:54:26.434Z"
 }

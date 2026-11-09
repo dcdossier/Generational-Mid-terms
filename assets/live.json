@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-09T21:32:25.053Z",
- "fetched_at": "2026-11-09T21:32:28.503Z",
+ "source_last_updated": "2026-11-09T21:35:17.959Z",
+ "fetched_at": "2026-11-09T21:35:47.508Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,7 +20,7 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 18,
+   "remaining": 17,
    "parties": {
     "D": {
      "won": 254,
@@ -29,7 +29,7 @@
      "majority_called": true
     },
     "R": {
-     "won": 163,
+     "won": 164,
      "net_gain": -42,
      "flipped_to": 2,
      "majority_called": false
@@ -7150,7 +7150,7 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 95,
+   "pct_in": 96,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 25.8,
@@ -11725,7 +11725,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 36.3,
-   "total_votes": 253351,
+   "total_votes": 253371,
    "called_at": "2026-11-04T04:04:31.485Z",
    "candidates": [
     {
@@ -11733,7 +11733,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 170455,
+     "votes": 170475,
      "pct": 67.28,
      "photo": null
     },
@@ -15140,7 +15140,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 7.3,
-   "total_votes": 353051,
+   "total_votes": 353052,
    "called_at": "2026-11-04T05:03:37.503Z",
    "candidates": [
     {
@@ -15157,7 +15157,7 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 163659,
+     "votes": 163660,
      "pct": 46.36,
      "photo": "https://images.api.fox.com/elections/headshots/NUNN_ZACH_RIA_HOUSE.png"
     }
@@ -22288,6 +22288,62 @@
    "consensus": null,
    "consensus_by": []
   },
+  "FL-26": {
+   "id": "FL-26",
+   "kind": "house",
+   "state": "FL",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.7,
+   "total_votes": 229804,
+   "called_at": "2026-11-09T21:32:50.569Z",
+   "candidates": [
+    {
+     "name": "Mario Diaz-Balart",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 114578,
+     "pct": 49.86,
+     "photo": "https://images.api.fox.com/elections/headshots/DIAZ_BALART_MARIO_RFL_HOUSE.png"
+    },
+    {
+     "name": "Nicole Locklin",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 112874,
+     "pct": 49.12,
+     "photo": null
+    },
+    {
+     "name": "Deborah Meidinger Hosey",
+     "party": "NF",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2352,
+     "pct": 1.02,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22657,58 +22713,6 @@
      "winner": false,
      "votes": 141808,
      "pct": 49.74,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "FL-26": {
-   "id": "FL-26",
-   "kind": "house",
-   "state": "FL",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.7,
-   "total_votes": 229804,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Mario Diaz-Balart",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 114578,
-     "pct": 49.86,
-     "photo": "https://images.api.fox.com/elections/headshots/DIAZ_BALART_MARIO_RFL_HOUSE.png"
-    },
-    {
-     "name": "Nicole Locklin",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 112874,
-     "pct": 49.12,
-     "photo": null
-    },
-    {
-     "name": "Deborah Meidinger Hosey",
-     "party": "NF",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2352,
-     "pct": 1.02,
      "photo": null
     }
    ],
@@ -26580,6 +26584,14 @@
  },
  "latest_calls": [
   {
+   "id": "FL-26",
+   "kind": "house",
+   "party": "R",
+   "winner": "Mario Diaz-Balart",
+   "flipped": false,
+   "at": "2026-11-09T21:32:50.569Z"
+  },
+  {
    "id": "LA-06",
    "kind": "house",
    "party": "D",
@@ -26970,24 +26982,16 @@
    "winner": "Randy Villegas",
    "flipped": true,
    "at": "2026-11-04T18:17:49.897Z"
-  },
-  {
-   "id": "MI-04",
-   "kind": "house",
-   "party": "D",
-   "winner": "Sean McCann",
-   "flipped": true,
-   "at": "2026-11-04T18:13:09.652Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-09T21:32:25.053Z",
+   "updated": "2026-11-09T21:35:17.959Z",
    "house": {
     "D": 254,
-    "R": 163,
+    "R": 164,
     "I": 0
    },
    "senate": {
@@ -27004,11 +27008,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-09T21:32:01.054000Z",
+   "updated": "2026-11-09T21:34:44.114000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 252,
-    "R": 162,
+    "R": 163,
     "I": 0
    },
    "senate": {
@@ -27025,10 +27029,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-09T21:32:16.000Z",
+   "updated": "2026-11-09T21:34:57.000Z",
    "house": {
     "D": 252,
-    "R": 163,
+    "R": 164,
     "I": 0
    },
    "senate": {
@@ -27044,5 +27048,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-09T21:32:29.316Z"
+ "desks_checked_at": "2026-11-09T21:35:48.223Z"
 }

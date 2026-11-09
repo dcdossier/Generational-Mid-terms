@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-09T20:03:25.068Z",
+ "updated": "2026-11-09T20:51:55.090Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3501,6 +3501,17 @@
    "url": "https://ground.news/article/eli-crane-barely-hangs-onto-his-seat-in-arizonas-second-congressional-district",
    "title": "Arizona Republican Eli Crane Narrowly Wins Reelection After Close House Race",
    "at": "2026-11-09T20:03:25.067Z"
+  },
+  {
+   "race": "CO-04",
+   "name": "Eileen Laubacher",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/gop-rep-lauren-boebert-will-lose-reelection-to-democrat-eileen-laubacher-in-colorado-cnn-projects",
+   "title": "Democrat Eileen Laubacher Projected to Unseat Lauren Boebert in Colorado's 4th Congressional District",
+   "at": "2026-11-09T20:51:55.088Z"
   }
  ],
  "races": {
@@ -6208,6 +6219,21 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "CO-04": {
+   "fox_winner": null,
+   "agree": [],
+   "disagree": [],
+   "reported": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/gop-rep-lauren-boebert-will-lose-reelection-to-democrat-eileen-laubacher-in-colorado-cnn-projects",
+     "title": "Democrat Eileen Laubacher Projected to Unseat Lauren Boebert in Colorado's 4th Congressional District",
+     "winner": "Eileen Laubacher",
+     "party": "D",
+     "at": "2026-11-09T20:51:55.088Z"
+    }
+   ]
   }
  },
  "counts": {
@@ -6215,6 +6241,6 @@
   "read": 66,
   "races_confirmed": 116,
   "races_disputed": 6,
-  "races_reported_not_called": 5
+  "races_reported_not_called": 6
  }
 }

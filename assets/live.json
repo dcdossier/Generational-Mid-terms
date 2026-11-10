@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-10T02:29:53.094Z",
- "fetched_at": "2026-11-10T02:30:29.513Z",
+ "source_last_updated": "2026-11-10T02:33:15.068Z",
+ "fetched_at": "2026-11-10T02:33:47.339Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -22400,6 +22400,53 @@
     "AP"
    ]
   },
+  "CA-40": {
+   "id": "CA-40",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 71,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 7.2,
+   "total_votes": 183600,
+   "called_at": "2026-11-10T02:31:06.944Z",
+   "candidates": [
+    {
+     "name": "Ken Calvert",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 98455,
+     "pct": 53.62,
+     "photo": null
+    },
+    {
+     "name": "Young Kim",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 85145,
+     "pct": 46.38,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22579,49 +22626,6 @@
      "winner": false,
      "votes": 101572,
      "pct": 49.18,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-40": {
-   "id": "CA-40",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 71,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 7.2,
-   "total_votes": 183600,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Ken Calvert",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 98455,
-     "pct": 53.62,
-     "photo": null
-    },
-    {
-     "name": "Young Kim",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 85145,
-     "pct": 46.38,
      "photo": null
     }
    ],
@@ -26588,6 +26592,14 @@
  },
  "latest_calls": [
   {
+   "id": "CA-40",
+   "kind": "house",
+   "party": "R",
+   "winner": "Ken Calvert",
+   "flipped": false,
+   "at": "2026-11-10T02:31:06.944Z"
+  },
+  {
    "id": "WA-05",
    "kind": "house",
    "party": "R",
@@ -26978,21 +26990,13 @@
    "winner": "Laura Gillen",
    "flipped": false,
    "at": "2026-11-04T19:04:26.176Z"
-  },
-  {
-   "id": "NY-03",
-   "kind": "house",
-   "party": "D",
-   "winner": "Thomas Suozzi",
-   "flipped": false,
-   "at": "2026-11-04T19:04:10.881Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-10T02:29:53.094Z",
+   "updated": "2026-11-10T02:33:15.068Z",
    "house": {
     "D": 254,
     "R": 165,
@@ -27012,11 +27016,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-10T02:27:36.694000Z",
+   "updated": "2026-11-10T02:31:06.944000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 252,
-    "R": 164,
+    "R": 165,
     "I": 0
    },
    "senate": {
@@ -27033,10 +27037,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-10T02:28:57.000Z",
+   "updated": "2026-11-10T02:31:17.000Z",
    "house": {
     "D": 252,
-    "R": 165,
+    "R": 166,
     "I": 0
    },
    "senate": {
@@ -27052,5 +27056,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-10T02:30:30.404Z"
+ "desks_checked_at": "2026-11-10T02:33:48.438Z"
 }

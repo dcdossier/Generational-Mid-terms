@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T19:58:55.377Z",
+ "updated": "2026-11-10T20:46:01.721Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3622,6 +3622,17 @@
    "url": "https://ground.news/article/jim-jordan-wins-house-gop-minority-leader-race",
    "title": "Jim Jordan wins House GOP minority leader race",
    "at": "2026-11-10T19:58:55.375Z"
+  },
+  {
+   "race": "MN-06",
+   "name": "Tom Emmer",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Hill",
+   "outlet": "thehill.com",
+   "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBIcUk4eUhCSllTNXV5TlpEelFqbXZNTzd1VEtNdGVrdnpMRVJKTW5XSTRoQXIzc0UwR3JsWjNiSlg0cGtqTHctalNhRklLLVg1M1RtS0JWUFptamh0dFY4Y0hsdjFWQVZKaTBpc9IBckFVX3lxTE1EMUxtMGk4aEM4TV9fN01BS0JlaGx0WDlRSWxmeGpzNDIwNmlMZnAwZjU2ekl4QmZaNnN1MjBuTHB1alF4RjNoampCVWY0V3ZOS0NBckVJeUF6V3VyMUExTHZDbnBmbF9McGxKR3pRSXAxUQ?oc=5",
+   "title": "Tom Emmer beats August Pfluger to be minority whip",
+   "at": "2026-11-10T20:00:00.000Z"
   }
  ],
  "races": {
@@ -6406,12 +6417,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "MN-06": {
+   "fox_winner": "Tom Emmer",
+   "agree": [
+    {
+     "publisher": "The Hill",
+     "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTFBIcUk4eUhCSllTNXV5TlpEelFqbXZNTzd1VEtNdGVrdnpMRVJKTW5XSTRoQXIzc0UwR3JsWjNiSlg0cGtqTHctalNhRklLLVg1M1RtS0JWUFptamh0dFY4Y0hsdjFWQVZKaTBpc9IBckFVX3lxTE1EMUxtMGk4aEM4TV9fN01BS0JlaGx0WDlRSWxmeGpzNDIwNmlMZnAwZjU2ekl4QmZaNnN1MjBuTHB1alF4RjNoampCVWY0V3ZOS0NBckVJeUF6V3VyMUExTHZDbnBmbF9McGxKR3pRSXAxUQ?oc=5",
+     "title": "Tom Emmer beats August Pfluger to be minority whip",
+     "winner": "Tom Emmer",
+     "party": "R",
+     "at": "2026-11-10T20:00:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 119,
+  "races_confirmed": 120,
   "races_disputed": 6,
   "races_reported_not_called": 5
  }

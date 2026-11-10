@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-10T19:12:07.693Z",
+ "updated": "2026-11-10T19:42:23.981Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3578,6 +3578,17 @@
    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOank0VzF1T0FJTE4tQkJNY0EwMWw0dWlvYWF3MUNENDRfaGtoaUNfejBkRkRKNDRyRnkweGRUQ1Nza2JsdnV0VWdoNmt3a1JEeEFJWURheGpFc3ppaDFFTFZqRlRhMkFTT0ZuSW9hcExTNlVlZ1hQNndSZ01ldm9ydUFxSVFoT1Fa?oc=5",
    "title": "Ohio GOP moves to weaken governor's veto after Acton win",
    "at": "2026-11-10T16:42:00.000Z"
+  },
+  {
+   "race": "OH-04",
+   "name": "Jim Jordan",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/jim-jordan-becomes-new-house-gop-leader-after-closed-door-vote-defeating-steve-scalise",
+   "title": "Jim Jordan wins House GOP minority leader race",
+   "at": "2026-11-10T19:42:23.980Z"
   }
  ],
  "races": {
@@ -6331,12 +6342,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "OH-04": {
+   "fox_winner": "Jim Jordan",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/jim-jordan-becomes-new-house-gop-leader-after-closed-door-vote-defeating-steve-scalise",
+     "title": "Jim Jordan wins House GOP minority leader race",
+     "winner": "Jim Jordan",
+     "party": "R",
+     "at": "2026-11-10T19:42:23.980Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 118,
+  "races_confirmed": 119,
   "races_disputed": 6,
   "races_reported_not_called": 5
  }

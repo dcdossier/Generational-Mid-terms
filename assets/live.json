@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-10T19:08:13.014Z",
- "fetched_at": "2026-11-10T19:08:25.100Z",
+ "source_last_updated": "2026-11-10T19:11:37.118Z",
+ "fetched_at": "2026-11-10T19:11:40.659Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,16 +20,16 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 16,
+   "remaining": 14,
    "parties": {
     "D": {
-     "won": 254,
+     "won": 255,
      "net_gain": 42,
      "flipped_to": 44,
      "majority_called": true
     },
     "R": {
-     "won": 165,
+     "won": 166,
      "net_gain": -42,
      "flipped_to": 2,
      "majority_called": false
@@ -2657,7 +2657,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 32,
-   "total_votes": 295126,
+   "total_votes": 295131,
    "called_at": "2026-11-04T01:29:35.869Z",
    "candidates": [
     {
@@ -2665,7 +2665,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 194417,
+     "votes": 194420,
      "pct": 65.88,
      "photo": null
     },
@@ -2674,7 +2674,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 100110,
+     "votes": 100112,
      "pct": 33.92,
      "photo": null
     },
@@ -6536,7 +6536,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 27.7,
-   "total_votes": 268251,
+   "total_votes": 268261,
    "called_at": "2026-11-04T02:28:58.884Z",
    "candidates": [
     {
@@ -6544,7 +6544,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 171220,
+     "votes": 171228,
      "pct": 63.83,
      "photo": null
     },
@@ -6553,7 +6553,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 97031,
+     "votes": 97033,
      "pct": 36.17,
      "photo": null
     }
@@ -20645,7 +20645,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 1.9,
-   "total_votes": 362983,
+   "total_votes": 362986,
    "called_at": "2026-11-05T16:59:42.774Z",
    "candidates": [
     {
@@ -20653,7 +20653,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 181725,
+     "votes": 181727,
      "pct": 50.06,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_MCGUIRE_JOHN_RVA_HOUSE.png"
     },
@@ -20662,7 +20662,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 174687,
+     "votes": 174688,
      "pct": 48.13,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_PERRIELLO_TOM_DVA_HOUSE.png"
     },
@@ -20990,7 +20990,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 7.8,
-   "total_votes": 253949,
+   "total_votes": 253998,
    "called_at": "2026-11-05T17:02:26.384Z",
    "candidates": [
     {
@@ -20998,7 +20998,7 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 127079,
+     "votes": 127089,
      "pct": 50.04,
      "photo": null
     },
@@ -21007,8 +21007,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 107373,
-     "pct": 42.28,
+     "votes": 107410,
+     "pct": 42.29,
      "photo": null
     },
     {
@@ -21016,7 +21016,7 @@
      "party": "IA",
      "incumbent": false,
      "winner": false,
-     "votes": 8424,
+     "votes": 8425,
      "pct": 3.32,
      "photo": null
     },
@@ -22447,6 +22447,109 @@
     "AP"
    ]
   },
+  "FL-07": {
+   "id": "FL-07",
+   "kind": "house",
+   "state": "FL",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.5,
+   "total_votes": 324454,
+   "called_at": "2026-11-10T19:09:20.705Z",
+   "candidates": [
+    {
+     "name": "Ryan Elijah",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 161300,
+     "pct": 49.71,
+     "photo": null
+    },
+    {
+     "name": "Bale Dalton",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 159669,
+     "pct": 49.21,
+     "photo": null
+    },
+    {
+     "name": "Christopher Dennison",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3485,
+     "pct": 1.07,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
+  "FL-09": {
+   "id": "FL-09",
+   "kind": "house",
+   "state": "FL",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.5,
+   "total_votes": 285122,
+   "called_at": "2026-11-10T19:09:32.793Z",
+   "candidates": [
+    {
+     "name": "Darren Soto",
+     "party": "D",
+     "incumbent": true,
+     "winner": true,
+     "votes": 143314,
+     "pct": 50.26,
+     "photo": "https://images.api.fox.com/elections/headshots/SOTO_DARREN_DFL_HOUSE.png"
+    },
+    {
+     "name": "Dan Green",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 141808,
+     "pct": 49.74,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22678,101 +22781,6 @@
      "winner": false,
      "votes": 12615,
      "pct": 3.31,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "FL-07": {
-   "id": "FL-07",
-   "kind": "house",
-   "state": "FL",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.5,
-   "total_votes": 324454,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Ryan Elijah",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 161300,
-     "pct": 49.71,
-     "photo": null
-    },
-    {
-     "name": "Bale Dalton",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 159669,
-     "pct": 49.21,
-     "photo": null
-    },
-    {
-     "name": "Christopher Dennison",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3485,
-     "pct": 1.07,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "FL-09": {
-   "id": "FL-09",
-   "kind": "house",
-   "state": "FL",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.5,
-   "total_votes": 285122,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Darren Soto",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 143314,
-     "pct": 50.26,
-     "photo": "https://images.api.fox.com/elections/headshots/SOTO_DARREN_DFL_HOUSE.png"
-    },
-    {
-     "name": "Dan Green",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 141808,
-     "pct": 49.74,
      "photo": null
     }
    ],
@@ -24691,7 +24699,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.9,
-   "total_votes": 3591886,
+   "total_votes": 3591894,
    "called_at": null,
    "candidates": [
     {
@@ -24699,7 +24707,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 2208632,
+     "votes": 2208635,
      "pct": 61.33,
      "photo": "https://images.api.fox.com/elections/headshots/WARNER_MARK_DVA_SENATE.png"
     },
@@ -24708,7 +24716,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1383254,
+     "votes": 1383259,
      "pct": 38.41,
      "photo": null
     }
@@ -26093,7 +26101,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.2,
-   "total_votes": 4928539,
+   "total_votes": 4928547,
    "called_at": null,
    "candidates": [
     {
@@ -26101,7 +26109,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 3018171,
+     "votes": 3018173,
      "pct": 60.45,
      "photo": "https://images.api.fox.com/elections/headshots/SHAPIRO_JOSH_DPA_GOVERNOR.png"
     },
@@ -26110,7 +26118,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1910368,
+     "votes": 1910374,
      "pct": 38.26,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_GARRITY_STACY_RPA_GOVERNOR.png"
     }
@@ -26592,6 +26600,22 @@
  },
  "latest_calls": [
   {
+   "id": "FL-09",
+   "kind": "house",
+   "party": "D",
+   "winner": "Darren Soto",
+   "flipped": false,
+   "at": "2026-11-10T19:09:32.793Z"
+  },
+  {
+   "id": "FL-07",
+   "kind": "house",
+   "party": "R",
+   "winner": "Ryan Elijah",
+   "flipped": false,
+   "at": "2026-11-10T19:09:20.705Z"
+  },
+  {
    "id": "CA-40",
    "kind": "house",
    "party": "R",
@@ -26974,32 +26998,16 @@
    "winner": "Stephanie Bice",
    "flipped": false,
    "at": "2026-11-04T22:10:38.344Z"
-  },
-  {
-   "id": "MI-07",
-   "kind": "house",
-   "party": "D",
-   "winner": "William Lawrence",
-   "flipped": true,
-   "at": "2026-11-04T19:05:49.862Z"
-  },
-  {
-   "id": "NY-04",
-   "kind": "house",
-   "party": "D",
-   "winner": "Laura Gillen",
-   "flipped": false,
-   "at": "2026-11-04T19:04:26.176Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-10T19:08:13.014Z",
+   "updated": "2026-11-10T19:11:37.118Z",
    "house": {
-    "D": 254,
-    "R": 165,
+    "D": 255,
+    "R": 166,
     "I": 0
    },
    "senate": {
@@ -27016,11 +27024,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-10T19:07:48.929000Z",
+   "updated": "2026-11-10T19:10:57.086000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 252,
-    "R": 165,
+    "D": 253,
+    "R": 166,
     "I": 0
    },
    "senate": {
@@ -27037,10 +27045,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-10T19:08:03.000Z",
+   "updated": "2026-11-10T19:11:21.000Z",
    "house": {
     "D": 252,
-    "R": 166,
+    "R": 167,
     "I": 0
    },
    "senate": {
@@ -27056,5 +27064,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-10T19:08:25.968Z"
+ "desks_checked_at": "2026-11-10T19:11:41.373Z"
 }

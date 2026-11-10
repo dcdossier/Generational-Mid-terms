@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-10T22:48:03.658Z",
- "fetched_at": "2026-11-10T22:48:19.575Z",
+ "source_last_updated": "2026-11-10T22:51:01.858Z",
+ "fetched_at": "2026-11-10T22:51:36.453Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20448,7 +20448,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 2.4,
-   "total_votes": 274508,
+   "total_votes": 274669,
    "called_at": "2026-11-05T16:58:47.607Z",
    "candidates": [
     {
@@ -20456,8 +20456,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 140495,
-     "pct": 51.18,
+     "votes": 140598,
+     "pct": 51.19,
      "photo": null
     },
     {
@@ -20465,8 +20465,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 134013,
-     "pct": 48.82,
+     "votes": 134071,
+     "pct": 48.81,
      "photo": null
     }
    ],
@@ -22559,6 +22559,53 @@
     "AP"
    ]
   },
+  "FL-27": {
+   "id": "FL-27",
+   "kind": "house",
+   "state": "FL",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.4,
+   "total_votes": 247952,
+   "called_at": "2026-11-10T22:47:46.907Z",
+   "candidates": [
+    {
+     "name": "Maria Elvira Salazar",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 124519,
+     "pct": 50.22,
+     "photo": "https://images.api.fox.com/elections/headshots/SALAZAR_MARIA_ELVIRA_RFL_HOUSE.png"
+    },
+    {
+     "name": "Eliott Rodriguez",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 123433,
+     "pct": 49.78,
+     "photo": "https://images.api.fox.com/elections/headshots/RODRIGUEZ_ELLIOT_DFL_HOUSE.png"
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22801,49 +22848,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "FL-27": {
-   "id": "FL-27",
-   "kind": "house",
-   "state": "FL",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.4,
-   "total_votes": 247952,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Maria Elvira Salazar",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 124519,
-     "pct": 50.22,
-     "photo": "https://images.api.fox.com/elections/headshots/SALAZAR_MARIA_ELVIRA_RFL_HOUSE.png"
-    },
-    {
-     "name": "Eliott Rodriguez",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 123433,
-     "pct": 49.78,
-     "photo": "https://images.api.fox.com/elections/headshots/RODRIGUEZ_ELLIOT_DFL_HOUSE.png"
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
   "ME-02": {
    "id": "ME-02",
    "kind": "house",
@@ -22970,7 +22974,7 @@
    "winner_party": null,
    "leader_party": "D",
    "margin_pct": 0.1,
-   "total_votes": 239227,
+   "total_votes": 239382,
    "called_at": null,
    "candidates": [
     {
@@ -22978,8 +22982,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 118242,
-     "pct": 49.43,
+     "votes": 118341,
+     "pct": 49.44,
      "photo": null
     },
     {
@@ -22987,8 +22991,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 117987,
-     "pct": 49.32,
+     "votes": 118040,
+     "pct": 49.31,
      "photo": null
     },
     {
@@ -22996,7 +23000,7 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 2998,
+     "votes": 3001,
      "pct": 1.25,
      "photo": null
     }
@@ -23863,7 +23867,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.3,
-   "total_votes": 2488432,
+   "total_votes": 2489715,
    "called_at": null,
    "candidates": [
     {
@@ -23871,8 +23875,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 1651134,
-     "pct": 63.39,
+     "votes": 1652341,
+     "pct": 63.4,
      "photo": "https://images.api.fox.com/elections/headshots/MARKEY_ED_DMA_SENATE.png"
     },
     {
@@ -23880,8 +23884,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 837298,
-     "pct": 32.14,
+     "votes": 837374,
+     "pct": 32.13,
      "photo": "https://images.api.fox.com/elections/headshots/DEATON_JOHN_RMA_SENATE.png"
     }
    ],
@@ -24098,7 +24102,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 19.7,
-   "total_votes": 4122547,
+   "total_votes": 4122851,
    "called_at": null,
    "candidates": [
     {
@@ -24106,7 +24110,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 2475642,
+     "votes": 2475846,
      "pct": 58.73,
      "photo": "https://images.api.fox.com/elections/headshots/COOPER_ROY_DNC_SENATE.png"
     },
@@ -24115,7 +24119,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1646905,
+     "votes": 1647005,
      "pct": 39.07,
      "photo": "https://images.api.fox.com/elections/headshots/WHATLEY_MICHAEL_RNC_SENATE.png"
     }
@@ -26609,6 +26613,14 @@
  },
  "latest_calls": [
   {
+   "id": "FL-27",
+   "kind": "house",
+   "party": "R",
+   "winner": "Maria Elvira Salazar",
+   "flipped": false,
+   "at": "2026-11-10T22:47:46.907Z"
+  },
+  {
    "id": "FL-09",
    "kind": "house",
    "party": "D",
@@ -26999,21 +27011,13 @@
    "winner": "Mike Flood",
    "flipped": false,
    "at": "2026-11-04T22:11:11.832Z"
-  },
-  {
-   "id": "OK-05",
-   "kind": "house",
-   "party": "R",
-   "winner": "Stephanie Bice",
-   "flipped": false,
-   "at": "2026-11-04T22:10:38.344Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-10T22:48:03.658Z",
+   "updated": "2026-11-10T22:51:01.858Z",
    "house": {
     "D": 255,
     "R": 167,
@@ -27033,7 +27037,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-10T22:47:46.907000Z",
+   "updated": "2026-11-10T22:50:40.064000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 253,
@@ -27054,10 +27058,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-10T22:47:54.000Z",
+   "updated": "2026-11-10T22:51:17.000Z",
    "house": {
     "D": 253,
-    "R": 167,
+    "R": 168,
     "I": 0
    },
    "senate": {
@@ -27073,5 +27077,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-10T22:48:20.414Z"
+ "desks_checked_at": "2026-11-10T22:51:37.151Z"
 }

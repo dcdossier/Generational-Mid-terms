@@ -9,8 +9,8 @@
  },
  "source_last_updated": "2026-11-11T19:00:40.685Z",
  "fetched_at": "2026-11-11T19:01:01.634Z",
- "ok": true,
- "error": null,
+ "ok": false,
+ "error": "https://www.foxnews.com/elections/2026/midterm-results/senate: HTTP 504",
  "chambers": {
   "house": {
    "not_up": {
@@ -27024,7 +27024,7 @@
  "desks": {
   "fox": {
    "name": "Fox News",
-   "ok": true,
+   "ok": false,
    "updated": "2026-11-11T19:00:40.685Z",
    "house": {
     "D": 255,
@@ -27045,7 +27045,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-11T18:59:13.632000Z",
+   "updated": "2026-11-11T19:02:52.569000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
@@ -27066,7 +27066,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-11T18:59:36.000Z",
+   "updated": "2026-11-11T19:04:24.000Z",
    "house": {
     "D": 254,
     "R": 169,
@@ -27085,5 +27085,6 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-11T19:01:02.130Z"
+ "desks_checked_at": "2026-11-11T19:04:54.423Z",
+ "last_attempt": "2026-11-11T19:04:17.755Z"
 }

@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-11T16:10:15.743Z",
- "fetched_at": "2026-11-11T16:11:44.584Z",
+ "source_last_updated": "2026-11-11T16:13:14.558Z",
+ "fetched_at": "2026-11-11T16:15:02.018Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,7 +20,7 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 13,
+   "remaining": 12,
    "parties": {
     "D": {
      "won": 255,
@@ -29,7 +29,7 @@
      "majority_called": true
     },
     "R": {
-     "won": 167,
+     "won": 168,
      "net_gain": -42,
      "flipped_to": 2,
      "majority_called": false
@@ -21362,7 +21362,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 2.3,
-   "total_votes": 272258,
+   "total_votes": 272474,
    "called_at": "2026-11-05T19:39:21.200Z",
    "candidates": [
     {
@@ -21370,8 +21370,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 139315,
-     "pct": 51.17,
+     "votes": 139404,
+     "pct": 51.16,
      "photo": null
     },
     {
@@ -21379,8 +21379,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 132943,
-     "pct": 48.83,
+     "votes": 133070,
+     "pct": 48.84,
      "photo": null
     }
    ],
@@ -22653,6 +22653,71 @@
     "AP"
    ]
   },
+  "SC-02": {
+   "id": "SC-02",
+   "kind": "house",
+   "state": "SC",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.9,
+   "total_votes": 296737,
+   "called_at": "2026-11-11T16:10:55.281Z",
+   "candidates": [
+    {
+     "name": "Joe Wilson",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 147785,
+     "pct": 49.8,
+     "photo": null
+    },
+    {
+     "name": "Zyon Khalifa",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 144945,
+     "pct": 48.85,
+     "photo": null
+    },
+    {
+     "name": "Dayna Smith",
+     "party": "SCW",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3673,
+     "pct": 1.24,
+     "photo": null
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 334,
+     "pct": 0.11,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -23168,67 +23233,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "SC-02": {
-   "id": "SC-02",
-   "kind": "house",
-   "state": "SC",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.9,
-   "total_votes": 296737,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Joe Wilson",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 147785,
-     "pct": 49.8,
-     "photo": null
-    },
-    {
-     "name": "Zyon Khalifa",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 144945,
-     "pct": 48.85,
-     "photo": null
-    },
-    {
-     "name": "Dayna Smith",
-     "party": "SCW",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3673,
-     "pct": 1.24,
-     "photo": null
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 334,
-     "pct": 0.11,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "R",
     "nbc": null
    },
    "consensus": null,
@@ -24106,7 +24110,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 19.7,
-   "total_votes": 4129553,
+   "total_votes": 4129763,
    "called_at": null,
    "candidates": [
     {
@@ -24114,8 +24118,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 2480849,
-     "pct": 58.76,
+     "votes": 2480938,
+     "pct": 58.75,
      "photo": "https://images.api.fox.com/elections/headshots/COOPER_ROY_DNC_SENATE.png"
     },
     {
@@ -24123,7 +24127,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1648704,
+     "votes": 1648825,
      "pct": 39.05,
      "photo": "https://images.api.fox.com/elections/headshots/WHATLEY_MICHAEL_RNC_SENATE.png"
     }
@@ -26617,6 +26621,14 @@
  },
  "latest_calls": [
   {
+   "id": "SC-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "Joe Wilson",
+   "flipped": false,
+   "at": "2026-11-11T16:10:55.281Z"
+  },
+  {
    "id": "CA-07",
    "kind": "house",
    "party": "D",
@@ -27007,24 +27019,16 @@
    "winner": "Lance Gooden",
    "flipped": false,
    "at": "2026-11-04T22:11:54.444Z"
-  },
-  {
-   "id": "TX-02",
-   "kind": "house",
-   "party": "R",
-   "winner": "Steve Toth",
-   "flipped": false,
-   "at": "2026-11-04T22:11:41.765Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-11T16:10:15.743Z",
+   "updated": "2026-11-11T16:13:14.558Z",
    "house": {
     "D": 255,
-    "R": 167,
+    "R": 168,
     "I": 0
    },
    "senate": {
@@ -27041,7 +27045,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-11T16:10:55.281000Z",
+   "updated": "2026-11-11T16:14:46.343000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
@@ -27062,10 +27066,10 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-11T16:11:05.000Z",
+   "updated": "2026-11-11T16:14:32.000Z",
    "house": {
     "D": 254,
-    "R": 168,
+    "R": 169,
     "I": 0
    },
    "senate": {
@@ -27081,5 +27085,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-11T16:11:45.633Z"
+ "desks_checked_at": "2026-11-11T16:15:03.229Z"
 }

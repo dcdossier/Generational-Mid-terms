@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-11T22:57:10.879Z",
- "fetched_at": "2026-11-11T22:57:11.847Z",
+ "source_last_updated": "2026-11-11T23:00:20.297Z",
+ "fetched_at": "2026-11-11T23:00:28.559Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -51,17 +51,17 @@
    },
    "up_tonight": 35,
    "total_seats": 100,
-   "remaining": 2,
+   "remaining": 1,
    "parties": {
     "D": {
-     "won": 20,
-     "net_gain": 7,
-     "flipped_to": 7,
+     "won": 21,
+     "net_gain": 8,
+     "flipped_to": 8,
      "majority_called": true
     },
     "R": {
      "won": 13,
-     "net_gain": -7,
+     "net_gain": -8,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -24050,6 +24050,53 @@
     "NBC News"
    ]
   },
+  "Senate-MS": {
+   "id": "Senate-MS",
+   "kind": "senate",
+   "state": "MS",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.5,
+   "total_votes": 942003,
+   "called_at": null,
+   "candidates": [
+    {
+     "name": "Scott Colom",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 473336,
+     "pct": 49.19,
+     "photo": "https://images.api.fox.com/elections/headshots/512x512_COLOM_SCOTT_DMS_SENATE.png"
+    },
+    {
+     "name": "Cindy Hyde-Smith",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 468667,
+     "pct": 48.71,
+     "photo": "https://images.api.fox.com/elections/headshots/HYDE_SMITH_CINDY_RMS_SENATE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": "D"
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP",
+    "NBC News"
+   ]
+  },
   "Senate-MT": {
    "id": "Senate-MT",
    "kind": "senate",
@@ -24881,49 +24928,6 @@
      "votes": 114676,
      "pct": 47.2,
      "photo": "https://images.api.fox.com/elections/headshots/SULLIVAN_DAN_RAK_SENATE.png"
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "Senate-MS": {
-   "id": "Senate-MS",
-   "kind": "senate",
-   "state": "MS",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.5,
-   "total_votes": 942003,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Scott Colom",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 473336,
-     "pct": 49.19,
-     "photo": "https://images.api.fox.com/elections/headshots/512x512_COLOM_SCOTT_DMS_SENATE.png"
-    },
-    {
-     "name": "Cindy Hyde-Smith",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 468667,
-     "pct": 48.71,
-     "photo": "https://images.api.fox.com/elections/headshots/HYDE_SMITH_CINDY_RMS_SENATE.png"
     }
    ],
    "desks": {
@@ -26122,7 +26126,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 22.2,
-   "total_votes": 4929732,
+   "total_votes": 4929791,
    "called_at": null,
    "candidates": [
     {
@@ -26130,7 +26134,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 3019106,
+     "votes": 3019149,
      "pct": 60.45,
      "photo": "https://images.api.fox.com/elections/headshots/SHAPIRO_JOSH_DPA_GOVERNOR.png"
     },
@@ -26139,7 +26143,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1910626,
+     "votes": 1910642,
      "pct": 38.26,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_GARRITY_STACY_RPA_GOVERNOR.png"
     }
@@ -27025,14 +27029,14 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-11T22:57:10.879Z",
+   "updated": "2026-11-11T23:00:20.297Z",
    "house": {
     "D": 255,
     "R": 168,
     "I": 0
    },
    "senate": {
-    "D": 20,
+    "D": 21,
     "R": 13,
     "I": 0
    },
@@ -27045,7 +27049,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-11T22:56:07.002000Z",
+   "updated": "2026-11-11T22:58:49.687000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
@@ -27053,7 +27057,7 @@
     "I": 0
    },
    "senate": {
-    "D": 20,
+    "D": 21,
     "R": 13,
     "I": 0
    },
@@ -27066,14 +27070,14 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-11T22:56:25.000Z",
+   "updated": "2026-11-11T22:58:57.000Z",
    "house": {
     "D": 254,
     "R": 169,
     "I": 0
    },
    "senate": {
-    "D": 19,
+    "D": 20,
     "R": 12,
     "I": 0
    },
@@ -27085,5 +27089,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-11T22:57:12.653Z"
+ "desks_checked_at": "2026-11-11T23:00:29.219Z"
 }

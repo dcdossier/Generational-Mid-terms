@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T21:18:55.593Z",
+ "updated": "2026-11-12T21:58:45.695Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -4205,6 +4205,17 @@
    "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOLWVfOHJhUVhleWRTRnBNcVJxbVExZlRyd0Fpbk9KcWl0UnRFbVRNZlV5Rl9WclI0ZEQ2bjcyM1k0aXU2Nkh5YVByMVNkazdxS0VyN3VKTk10OGllMDhOcmFTOTBpTTFJQ0hZQVRHSW5yZ2pkellYRlVwb3lLTnZJekZWYkRDbUpwVWfSAY8BQVVfeXFMTUZ3dTg4M0E2dmdBUm85QWE1SzRocU0yNkNHc0tqYjAxd2xVTHlfTnBoUGwtaTk5aE1jTkFTMmRuMnFrZUtZdlo1cWFVdXRPX2dKNHdoQTgyYi1qelFMa21RM0RBTHlDUjFUOGFnalZRMVJLR3pJb0lOQWxtaUIzbFBrOTdOUEh5QzIwSUNkSGM?oc=5",
    "title": "Cindy Holscher wins Kansas governor’s mansion, keeping it in Democrats’ hands",
    "at": "2026-11-12T20:04:00.000Z"
+  },
+  {
+   "race": "ME-02",
+   "name": "Paul LePage",
+   "party": "R",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/maine-ought-not-have-elected-paul-lepage",
+   "title": "Republican Paul LePage Wins Election to U.S. House in Maine’s 2nd Congressional District",
+   "at": "2026-11-12T21:58:45.693Z"
   }
  ],
  "races": {
@@ -7247,12 +7258,27 @@
      "at": "2026-11-12T20:04:00.000Z"
     }
    ]
+  },
+  "ME-02": {
+   "fox_winner": "Paul LePage",
+   "agree": [
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/maine-ought-not-have-elected-paul-lepage",
+     "title": "Republican Paul LePage Wins Election to U.S. House in Maine’s 2nd Congressional District",
+     "winner": "Paul LePage",
+     "party": "R",
+     "at": "2026-11-12T21:58:45.693Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 125,
+  "races_confirmed": 126,
   "races_disputed": 6,
   "races_reported_not_called": 5
  }

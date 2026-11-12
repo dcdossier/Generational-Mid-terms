@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-12T18:30:12.653Z",
- "fetched_at": "2026-11-12T18:30:36.470Z",
+ "source_last_updated": "2026-11-12T18:33:41.301Z",
+ "fetched_at": "2026-11-12T18:33:51.622Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,18 +20,18 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 12,
+   "remaining": 11,
    "parties": {
     "D": {
      "won": 255,
-     "net_gain": 42,
+     "net_gain": 41,
      "flipped_to": 44,
      "majority_called": true
     },
     "R": {
-     "won": 168,
-     "net_gain": -42,
-     "flipped_to": 2,
+     "won": 169,
+     "net_gain": -41,
+     "flipped_to": 3,
      "majority_called": false
     },
     "Oth": {
@@ -22718,6 +22718,71 @@
     "AP"
    ]
   },
+  "ME-02": {
+   "id": "ME-02",
+   "kind": "house",
+   "state": "ME",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 98,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 1.6,
+   "total_votes": 336322,
+   "called_at": "2026-11-12T18:31:29.417Z",
+   "candidates": [
+    {
+     "name": "Paul LePage",
+     "party": "R",
+     "incumbent": false,
+     "winner": true,
+     "votes": 170890,
+     "pct": 50.81,
+     "photo": null
+    },
+    {
+     "name": "Matthew Dunlap",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 165432,
+     "pct": 49.19,
+     "photo": "https://images.api.fox.com/elections/headshots/DUNLAP_MATT_DME_HOUSE.png"
+    },
+    {
+     "name": "Blank Votes",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 0,
+     "pct": 0,
+     "photo": null
+    },
+    {
+     "name": "Gregory Ward (write-in)",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 0,
+     "pct": 0,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22906,67 +22971,6 @@
      "winner": false,
      "votes": 12615,
      "pct": 3.31,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "ME-02": {
-   "id": "ME-02",
-   "kind": "house",
-   "state": "ME",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 98,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 1.6,
-   "total_votes": 341256,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Paul LePage",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 170265,
-     "pct": 49.89,
-     "photo": null
-    },
-    {
-     "name": "Matthew Dunlap",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 164845,
-     "pct": 48.31,
-     "photo": "https://images.api.fox.com/elections/headshots/DUNLAP_MATT_DME_HOUSE.png"
-    },
-    {
-     "name": "Blank Votes",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 6021,
-     "pct": 1.76,
-     "photo": null
-    },
-    {
-     "name": "Gregory Ward (write-in)",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 125,
-     "pct": 0.04,
      "photo": null
     }
    ],
@@ -26455,7 +26459,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 8,
-   "total_votes": 2668669,
+   "total_votes": 2668670,
    "called_at": null,
    "candidates": [
     {
@@ -26472,7 +26476,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1227676,
+     "votes": 1227677,
      "pct": 46,
      "photo": "https://images.api.fox.com/elections/headshots/TIFFANY_TOM_RWI_HOUSE.png"
     }
@@ -26624,6 +26628,14 @@
   }
  },
  "latest_calls": [
+  {
+   "id": "ME-02",
+   "kind": "house",
+   "party": "R",
+   "winner": "Paul LePage",
+   "flipped": true,
+   "at": "2026-11-12T18:31:29.417Z"
+  },
   {
    "id": "SC-02",
    "kind": "house",
@@ -27015,24 +27027,16 @@
    "winner": "Trever Nehls",
    "flipped": false,
    "at": "2026-11-04T22:12:10.165Z"
-  },
-  {
-   "id": "TX-05",
-   "kind": "house",
-   "party": "R",
-   "winner": "Lance Gooden",
-   "flipped": false,
-   "at": "2026-11-04T22:11:54.444Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-12T18:30:12.653Z",
+   "updated": "2026-11-12T18:33:41.301Z",
    "house": {
     "D": 255,
-    "R": 168,
+    "R": 169,
     "I": 0
    },
    "senate": {
@@ -27049,11 +27053,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-12T18:30:04.784000Z",
+   "updated": "2026-11-12T18:33:13.181000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
-    "R": 168,
+    "R": 169,
     "I": 0
    },
    "senate": {
@@ -27070,7 +27074,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-12T18:30:14.000Z",
+   "updated": "2026-11-12T18:33:23.000Z",
    "house": {
     "D": 254,
     "R": 169,
@@ -27089,5 +27093,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-12T18:30:37.205Z"
+ "desks_checked_at": "2026-11-12T18:33:52.299Z"
 }

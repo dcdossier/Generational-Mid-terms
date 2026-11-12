@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-12T22:41:25.243Z",
- "fetched_at": "2026-11-12T22:41:48.302Z",
+ "source_last_updated": "2026-11-12T22:44:34.803Z",
+ "fetched_at": "2026-11-12T22:45:03.390Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -7695,8 +7695,8 @@
    "pct_in": 99,
    "winner_party": "R",
    "leader_party": "R",
-   "margin_pct": 25,
-   "total_votes": 217637,
+   "margin_pct": 24.8,
+   "total_votes": 218733,
    "called_at": "2026-11-04T02:45:53.947Z",
    "candidates": [
     {
@@ -7704,8 +7704,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 132725,
-     "pct": 60.98,
+     "votes": 133158,
+     "pct": 60.88,
      "photo": null
     },
     {
@@ -7713,8 +7713,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 78241,
-     "pct": 35.95,
+     "votes": 78875,
+     "pct": 36.06,
      "photo": null
     },
     {
@@ -7722,8 +7722,8 @@
      "party": "I",
      "incumbent": false,
      "winner": false,
-     "votes": 6671,
-     "pct": 3.07,
+     "votes": 6700,
+     "pct": 3.06,
      "photo": null
     }
    ],
@@ -26620,11 +26620,14 @@
    ],
    "desks": {
     "fox": null,
-    "ap": null,
-    "nbc": null
+    "ap": "D",
+    "nbc": "D"
    },
-   "consensus": null,
-   "consensus_by": []
+   "consensus": "D",
+   "consensus_by": [
+    "AP",
+    "NBC News"
+   ]
   }
  },
  "latest_calls": [
@@ -27033,7 +27036,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-12T22:41:25.243Z",
+   "updated": "2026-11-12T22:44:34.803Z",
    "house": {
     "D": 255,
     "R": 169,
@@ -27053,7 +27056,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-12T22:39:42.976000Z",
+   "updated": "2026-11-12T22:44:18.300000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
@@ -27066,7 +27069,7 @@
     "I": 0
    },
    "governor": {
-    "D": 22,
+    "D": 23,
     "R": 12,
     "I": 0
    }
@@ -27074,7 +27077,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-12T22:40:18.000Z",
+   "updated": "2026-11-12T22:44:50.000Z",
    "house": {
     "D": 254,
     "R": 170,
@@ -27086,12 +27089,12 @@
     "I": 0
    },
    "governor": {
-    "D": 22,
+    "D": 23,
     "R": 12,
     "I": 0
    }
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-12T22:41:49.100Z"
+ "desks_checked_at": "2026-11-12T22:45:03.939Z"
 }

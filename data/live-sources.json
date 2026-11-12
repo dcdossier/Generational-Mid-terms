@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-12T01:16:59.806Z",
+ "updated": "2026-11-12T03:06:08.905Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -3712,6 +3712,17 @@
    "at": "2026-11-10T21:49:24.415Z"
   },
   {
+   "race": "MI-09",
+   "name": "Lisa McClain",
+   "party": "R",
+   "result": "won",
+   "publisher": "The Detroit News",
+   "outlet": "detroitnews.com",
+   "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOMzczZXBGbW9OcXVjelNFOXlFdi04WlpMcWdRcXFmaVRETHNxdkl2QnVrbThGNVJ0R21EZzlqdDQ5TlBlYUl5UGh1QjFndnVGRGFUa3Bud1FlWTlkNGE1SUs4TVBnSVg4amVxc1VackkxYi1QcGZwcmc0VW1wVWg5ek1xNjZXNTgyTXlHM1VEQVMyMllFQ1FVNnhUNnZ2WlV3Nl9MeVA1Znc5OEdvZEQ2bGlEMWxTc3phcmJES2xFcGVOLUl5bFBPT3hBeGI1US1rQk9zY1ljUkU?oc=5",
+   "title": "Lisa McClain wins reelection as House Republican Conference chair",
+   "at": "2026-11-10T22:22:00.000Z"
+  },
+  {
    "race": "OH-04",
    "name": "Jim Jordan",
    "party": "R",
@@ -6821,12 +6832,27 @@
      "at": "2026-11-11T15:08:16.000Z"
     }
    ]
+  },
+  "MI-09": {
+   "fox_winner": "Lisa McClain",
+   "agree": [
+    {
+     "publisher": "The Detroit News",
+     "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOMzczZXBGbW9OcXVjelNFOXlFdi04WlpMcWdRcXFmaVRETHNxdkl2QnVrbThGNVJ0R21EZzlqdDQ5TlBlYUl5UGh1QjFndnVGRGFUa3Bud1FlWTlkNGE1SUs4TVBnSVg4amVxc1VackkxYi1QcGZwcmc0VW1wVWg5ek1xNjZXNTgyTXlHM1VEQVMyMllFQ1FVNnhUNnZ2WlV3Nl9MeVA1Znc5OEdvZEQ2bGlEMWxTc3phcmJES2xFcGVOLUl5bFBPT3hBeGI1US1rQk9zY1ljUkU?oc=5",
+     "title": "Lisa McClain wins reelection as House Republican Conference chair",
+     "winner": "Lisa McClain",
+     "party": "R",
+     "at": "2026-11-10T22:22:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 124,
+  "races_confirmed": 125,
   "races_disputed": 6,
   "races_reported_not_called": 4
  }

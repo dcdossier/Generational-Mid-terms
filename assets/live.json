@@ -7,10 +7,10 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-13T00:41:18.713Z",
- "fetched_at": "2026-11-13T00:41:54.870Z",
- "ok": false,
- "error": "https://www.foxnews.com/elections/2026/midterm-results/senate: HTTP 504",
+ "source_last_updated": "2026-11-13T00:48:42.159Z",
+ "fetched_at": "2026-11-13T00:49:12.612Z",
+ "ok": true,
+ "error": null,
  "chambers": {
   "house": {
    "not_up": {
@@ -14601,11 +14601,11 @@
    "too_close": false,
    "flipped": true,
    "runoff": false,
-   "pct_in": 85,
+   "pct_in": 86,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 15.6,
-   "total_votes": 252962,
+   "margin_pct": 15.5,
+   "total_votes": 256103,
    "called_at": "2026-11-04T04:53:06.875Z",
    "candidates": [
     {
@@ -14613,8 +14613,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 146175,
-     "pct": 57.79,
+     "votes": 147862,
+     "pct": 57.74,
      "photo": null
     },
     {
@@ -14622,8 +14622,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 106787,
-     "pct": 42.21,
+     "votes": 108241,
+     "pct": 42.26,
      "photo": null
     }
    ],
@@ -22857,7 +22857,7 @@
    "winner_party": null,
    "leader_party": "D",
    "margin_pct": 4.1,
-   "total_votes": 202356,
+   "total_votes": 202665,
    "called_at": null,
    "candidates": [
     {
@@ -22865,8 +22865,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 105310,
-     "pct": 52.04,
+     "votes": 105482,
+     "pct": 52.05,
      "photo": null
     },
     {
@@ -22874,8 +22874,8 @@
      "party": "D",
      "incumbent": true,
      "winner": false,
-     "votes": 97046,
-     "pct": 47.96,
+     "votes": 97183,
+     "pct": 47.95,
      "photo": null
     }
    ],
@@ -25096,7 +25096,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 31.3,
-   "total_votes": 12492326,
+   "total_votes": 12495858,
    "called_at": null,
    "candidates": [
     {
@@ -25104,8 +25104,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 8200914,
-     "pct": 65.65,
+     "votes": 8202765,
+     "pct": 65.64,
      "photo": "https://images.api.fox.com/elections/headshots/BECERRA_XAVIER_DCA_GOVERNOR.png"
     },
     {
@@ -25113,8 +25113,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 4291412,
-     "pct": 34.35,
+     "votes": 4293093,
+     "pct": 34.36,
      "photo": "https://images.api.fox.com/elections/headshots/HILTON_STEVE_RCA_GOVERNOR.png"
     }
    ],
@@ -27036,8 +27036,8 @@
  "desks": {
   "fox": {
    "name": "Fox News",
-   "ok": false,
-   "updated": "2026-11-13T00:41:18.713Z",
+   "ok": true,
+   "updated": "2026-11-13T00:48:42.159Z",
    "house": {
     "D": 255,
     "R": 169,
@@ -27057,7 +27057,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-13T00:44:47.458000Z",
+   "updated": "2026-11-13T00:47:52.402000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 254,
@@ -27078,7 +27078,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-13T00:45:34.000Z",
+   "updated": "2026-11-13T00:48:17.000Z",
    "house": {
     "D": 254,
     "R": 170,
@@ -27097,6 +27097,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-13T00:45:47.898Z",
- "last_attempt": "2026-11-13T00:45:11.128Z"
+ "desks_checked_at": "2026-11-13T00:49:13.861Z"
 }

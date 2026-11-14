@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-14T06:10:50.205Z",
+ "updated": "2026-11-14T06:14:06.609Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -4469,6 +4469,17 @@
    "url": "https://ground.news/article/bobby-pulido-wins-latin-grammy-days-after-winning-house-race",
    "title": "Bobby Pulido wins Latin Grammy days after winning House race",
    "at": "2026-11-14T04:24:27.646Z"
+  },
+  {
+   "race": "Gov-AK",
+   "name": "Jonathan Kreiss-Tomkins",
+   "party": "D",
+   "result": "won",
+   "publisher": "Politico",
+   "outlet": "politico.com",
+   "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQkZ2b21RZE83VnY2NnhZdUw3Si1KdGlnZHc5ZmszSGJScmpKQzVnbGgxaXNwUlJSQXZyZTI4emxvU1g2VmI4WDFZUFNhWUp0d3V5eWhlaDh0OUgycGZxMGI3cjlvQlkySlZIeUpWT0VPVTBxcXBXM3M0TFNCTklLQkFZeWR4XzAtU2Z2Mjc2YzJ1ZWF1cU5COFRR?oc=5",
+   "title": "Democrat Jonathan Kreiss-Tomkins flips Alaska’s gubernatorial seat",
+   "at": "2026-11-14T05:07:00.000Z"
   }
  ],
  "races": {
@@ -7607,12 +7618,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "Gov-AK": {
+   "fox_winner": "Jonathan Kreiss-Tomkins",
+   "agree": [
+    {
+     "publisher": "Politico",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQQkZ2b21RZE83VnY2NnhZdUw3Si1KdGlnZHc5ZmszSGJScmpKQzVnbGgxaXNwUlJSQXZyZTI4emxvU1g2VmI4WDFZUFNhWUp0d3V5eWhlaDh0OUgycGZxMGI3cjlvQlkySlZIeUpWT0VPVTBxcXBXM3M0TFNCTklLQkFZeWR4XzAtU2Z2Mjc2YzJ1ZWF1cU5COFRR?oc=5",
+     "title": "Democrat Jonathan Kreiss-Tomkins flips Alaska’s gubernatorial seat",
+     "winner": "Jonathan Kreiss-Tomkins",
+     "party": "D",
+     "at": "2026-11-14T05:07:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
   "read": 66,
-  "races_confirmed": 128,
+  "races_confirmed": 129,
   "races_disputed": 7,
   "races_reported_not_called": 3
  }

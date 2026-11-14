@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-14T05:54:05.042Z",
- "fetched_at": "2026-11-14T05:53:22.072Z",
+ "source_last_updated": "2026-11-14T05:51:30.135Z",
+ "fetched_at": "2026-11-14T05:57:25.226Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -82,17 +82,17 @@
    },
    "up_tonight": 36,
    "total_seats": 50,
-   "remaining": 0,
+   "remaining": 1,
    "parties": {
     "D": {
-     "won": 24,
-     "net_gain": 6,
-     "flipped_to": 6,
+     "won": 23,
+     "net_gain": 5,
+     "flipped_to": 5,
      "majority_called": true
     },
     "R": {
      "won": 12,
-     "net_gain": -6,
+     "net_gain": -5,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -24950,53 +24950,6 @@
    "consensus": null,
    "consensus_by": []
   },
-  "Gov-AK": {
-   "id": "Gov-AK",
-   "kind": "governor",
-   "state": "AK",
-   "special": false,
-   "called": true,
-   "too_close": false,
-   "flipped": true,
-   "runoff": false,
-   "pct_in": 96,
-   "winner_party": "D",
-   "leader_party": "D",
-   "margin_pct": 22.7,
-   "total_votes": 216403,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Jonathan Kreiss-Tomkins",
-     "party": "D",
-     "incumbent": false,
-     "winner": true,
-     "votes": 139293,
-     "pct": 50.81,
-     "photo": "https://images.api.fox.com/elections/headshots/KREISS_TOMKINS_JONATHAN_DAK_SENATE.png"
-    },
-    {
-     "name": "Bernadette Wilson",
-     "party": "R",
-     "incumbent": false,
-     "winner": false,
-     "votes": 77110,
-     "pct": 28.13,
-     "photo": "https://images.api.fox.com/elections/headshots/WILSON_BERNADETTE_RAK_GOVERNOR.png"
-    }
-   ],
-   "desks": {
-    "fox": "D",
-    "ap": "D",
-    "nbc": "D"
-   },
-   "consensus": "D",
-   "consensus_by": [
-    "Fox News",
-    "AP",
-    "NBC News"
-   ]
-  },
   "Gov-AL": {
    "id": "Gov-AL",
    "kind": "governor",
@@ -26641,6 +26594,52 @@
     "AP",
     "NBC News"
    ]
+  },
+  "Gov-AK": {
+   "id": "Gov-AK",
+   "kind": "governor",
+   "state": "AK",
+   "special": false,
+   "called": false,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 88,
+   "winner_party": null,
+   "leader_party": "D",
+   "margin_pct": 21.4,
+   "total_votes": 198477,
+   "called_at": null,
+   "candidates": [
+    {
+     "name": "Jonathan Kreiss-Tomkins",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 126195,
+     "pct": 50.05,
+     "photo": "https://images.api.fox.com/elections/headshots/KREISS_TOMKINS_JONATHAN_DAK_SENATE.png"
+    },
+    {
+     "name": "Bernadette Wilson",
+     "party": "R",
+     "incumbent": false,
+     "winner": false,
+     "votes": 72282,
+     "pct": 28.67,
+     "photo": "https://images.api.fox.com/elections/headshots/WILSON_BERNADETTE_RAK_GOVERNOR.png"
+    }
+   ],
+   "desks": {
+    "fox": null,
+    "ap": "D",
+    "nbc": "D"
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "AP",
+    "NBC News"
+   ]
   }
  },
  "latest_calls": [
@@ -27049,7 +27048,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-14T05:54:05.042Z",
+   "updated": "2026-11-14T05:51:30.135Z",
    "house": {
     "D": 256,
     "R": 169,
@@ -27061,7 +27060,7 @@
     "I": 0
    },
    "governor": {
-    "D": 24,
+    "D": 23,
     "R": 12,
     "I": 0
    }
@@ -27109,5 +27108,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-14T05:54:05.937Z"
+ "desks_checked_at": "2026-11-14T05:57:26.099Z"
 }

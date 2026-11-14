@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-14T01:23:12.493Z",
- "fetched_at": "2026-11-14T01:22:48.341Z",
+ "source_last_updated": "2026-11-14T01:26:03.258Z",
+ "fetched_at": "2026-11-14T01:26:29.817Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -8639,7 +8639,7 @@
    "winner_party": "R",
    "leader_party": "R",
    "margin_pct": 17.3,
-   "total_votes": 243880,
+   "total_votes": 243936,
    "called_at": "2026-11-04T03:05:36.317Z",
    "candidates": [
     {
@@ -8647,8 +8647,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 141350,
-     "pct": 57.96,
+     "votes": 141399,
+     "pct": 57.97,
      "photo": null
     },
     {
@@ -8656,7 +8656,7 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 99121,
+     "votes": 99147,
      "pct": 40.64,
      "photo": null
     },
@@ -8665,8 +8665,8 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 3409,
-     "pct": 1.4,
+     "votes": 3390,
+     "pct": 1.39,
      "photo": null
     }
    ],
@@ -22839,6 +22839,53 @@
     "AP"
    ]
   },
+  "CA-04": {
+   "id": "CA-04",
+   "kind": "house",
+   "state": "CA",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 95,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 5,
+   "total_votes": 248063,
+   "called_at": "2026-11-14T01:25:15.131Z",
+   "candidates": [
+    {
+     "name": "Eric Jones",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 130246,
+     "pct": 52.51,
+     "photo": null
+    },
+    {
+     "name": "Mike Thompson",
+     "party": "D",
+     "incumbent": true,
+     "winner": false,
+     "votes": 117817,
+     "pct": 47.49,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -22889,49 +22936,6 @@
      "winner": false,
      "votes": 6726,
      "pct": 2.65,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "CA-04": {
-   "id": "CA-04",
-   "kind": "house",
-   "state": "CA",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 95,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 5,
-   "total_votes": 248063,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Eric Jones",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 130246,
-     "pct": 52.51,
-     "photo": null
-    },
-    {
-     "name": "Mike Thompson",
-     "party": "D",
-     "incumbent": true,
-     "winner": false,
-     "votes": 117817,
-     "pct": 47.49,
      "photo": null
     }
    ],
@@ -24071,7 +24075,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 0.8,
-   "total_votes": 950936,
+   "total_votes": 951011,
    "called_at": null,
    "candidates": [
     {
@@ -24079,7 +24083,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 479247,
+     "votes": 479279,
      "pct": 49.34,
      "photo": "https://images.api.fox.com/elections/headshots/512x512_COLOM_SCOTT_DMS_SENATE.png"
     },
@@ -24088,7 +24092,7 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 471689,
+     "votes": 471732,
      "pct": 48.56,
      "photo": "https://images.api.fox.com/elections/headshots/HYDE_SMITH_CINDY_RMS_SENATE.png"
     }
@@ -26637,6 +26641,14 @@
  },
  "latest_calls": [
   {
+   "id": "CA-04",
+   "kind": "house",
+   "party": "D",
+   "winner": "Eric Jones",
+   "flipped": false,
+   "at": "2026-11-14T01:25:15.131Z"
+  },
+  {
    "id": "CO-04",
    "kind": "house",
    "party": "D",
@@ -27027,21 +27039,13 @@
    "winner": "Jon Bonck",
    "flipped": false,
    "at": "2026-11-04T22:12:40.074Z"
-  },
-  {
-   "id": "TX-32",
-   "kind": "house",
-   "party": "R",
-   "winner": "Jace Yarbrough",
-   "flipped": true,
-   "at": "2026-11-04T22:12:21.225Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-14T01:23:12.493Z",
+   "updated": "2026-11-14T01:26:03.258Z",
    "house": {
     "D": 256,
     "R": 169,
@@ -27061,10 +27065,10 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-14T01:22:48.064000Z",
+   "updated": "2026-11-14T01:26:06.762000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
-    "D": 255,
+    "D": 256,
     "R": 169,
     "I": 0
    },
@@ -27082,9 +27086,9 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-14T01:22:54.000Z",
+   "updated": "2026-11-14T01:26:10.000Z",
    "house": {
-    "D": 255,
+    "D": 256,
     "R": 170,
     "I": 0
    },
@@ -27101,5 +27105,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-14T01:23:13.628Z"
+ "desks_checked_at": "2026-11-14T01:26:30.488Z"
 }

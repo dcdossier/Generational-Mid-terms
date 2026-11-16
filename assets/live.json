@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-16T20:52:47.424Z",
- "fetched_at": "2026-11-16T20:52:51.245Z",
+ "source_last_updated": "2026-11-16T20:55:53.437Z",
+ "fetched_at": "2026-11-16T20:56:16.088Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,7 +20,7 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 10,
+   "remaining": 9,
    "parties": {
     "D": {
      "won": 256,
@@ -29,7 +29,7 @@
      "majority_called": true
     },
     "R": {
-     "won": 169,
+     "won": 170,
      "net_gain": -42,
      "flipped_to": 3,
      "majority_called": false
@@ -9945,7 +9945,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 51.8,
-   "total_votes": 229556,
+   "total_votes": 229560,
    "called_at": "2026-11-04T03:31:50.028Z",
    "candidates": [
     {
@@ -9953,7 +9953,7 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 173891,
+     "votes": 173895,
      "pct": 75.75,
      "photo": null
     },
@@ -21658,7 +21658,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 6,
-   "total_votes": 316197,
+   "total_votes": 316200,
    "called_at": "2026-11-05T23:12:39.941Z",
    "candidates": [
     {
@@ -21666,7 +21666,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 167503,
+     "votes": 167505,
      "pct": 52.97,
      "photo": "https://images.api.fox.com/elections/headshots/CONLEY_CAIT_DNY_HOUSE.png"
     },
@@ -21675,7 +21675,7 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 148353,
+     "votes": 148354,
      "pct": 46.92,
      "photo": "https://images.api.fox.com/elections/headshots/LAWLER_MIKE_RNY_HOUSE.png"
     },
@@ -22958,6 +22958,62 @@
     "AP"
    ]
   },
+  "NC-07": {
+   "id": "NC-07",
+   "kind": "house",
+   "state": "NC",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": false,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "R",
+   "leader_party": "R",
+   "margin_pct": 0.7,
+   "total_votes": 322266,
+   "called_at": "2026-11-16T20:54:47.014Z",
+   "candidates": [
+    {
+     "name": "David Rouzer",
+     "party": "R",
+     "incumbent": true,
+     "winner": true,
+     "votes": 160702,
+     "pct": 49.87,
+     "photo": null
+    },
+    {
+     "name": "Kimberly Hardy",
+     "party": "D",
+     "incumbent": false,
+     "winner": false,
+     "votes": 158391,
+     "pct": 49.15,
+     "photo": null
+    },
+    {
+     "name": "Maad Abu-Ghazalah",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3173,
+     "pct": 0.98,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "R",
+    "ap": "R",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "R",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -23207,58 +23263,6 @@
      "winner": false,
      "votes": 7579,
      "pct": 2.64,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NC-07": {
-   "id": "NC-07",
-   "kind": "house",
-   "state": "NC",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "R",
-   "margin_pct": 0.7,
-   "total_votes": 322266,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "David Rouzer",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 160702,
-     "pct": 49.87,
-     "photo": null
-    },
-    {
-     "name": "Kimberly Hardy",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 158391,
-     "pct": 49.15,
-     "photo": null
-    },
-    {
-     "name": "Maad Abu-Ghazalah",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3173,
-     "pct": 0.98,
      "photo": null
     }
    ],
@@ -26717,6 +26721,14 @@
  },
  "latest_calls": [
   {
+   "id": "NC-07",
+   "kind": "house",
+   "party": "R",
+   "winner": "David Rouzer",
+   "flipped": false,
+   "at": "2026-11-16T20:54:47.014Z"
+  },
+  {
    "id": "CA-04",
    "kind": "house",
    "party": "D",
@@ -27107,24 +27119,16 @@
    "winner": "Michael Cloud",
    "flipped": false,
    "at": "2026-11-04T22:15:05.044Z"
-  },
-  {
-   "id": "TX-38",
-   "kind": "house",
-   "party": "R",
-   "winner": "Jon Bonck",
-   "flipped": false,
-   "at": "2026-11-04T22:12:40.074Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-16T20:52:47.424Z",
+   "updated": "2026-11-16T20:55:53.437Z",
    "house": {
     "D": 256,
-    "R": 169,
+    "R": 170,
     "I": 0
    },
    "senate": {
@@ -27141,11 +27145,11 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-16T20:52:35.951000Z",
+   "updated": "2026-11-16T20:54:47.014000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 256,
-    "R": 169,
+    "R": 170,
     "I": 0
    },
    "senate": {
@@ -27162,7 +27166,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-16T20:51:53.000Z",
+   "updated": "2026-11-16T20:55:02.000Z",
    "house": {
     "D": 256,
     "R": 170,
@@ -27181,5 +27185,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-16T20:52:51.915Z"
+ "desks_checked_at": "2026-11-16T20:56:16.887Z"
 }

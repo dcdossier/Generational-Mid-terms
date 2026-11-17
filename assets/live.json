@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-17T20:45:05.382Z",
- "fetched_at": "2026-11-17T20:46:19.110Z",
+ "source_last_updated": "2026-11-17T20:46:56.977Z",
+ "fetched_at": "2026-11-17T20:49:44.412Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 8,
+   "remaining": 7,
    "parties": {
     "D": {
-     "won": 256,
-     "net_gain": 42,
-     "flipped_to": 45,
+     "won": 257,
+     "net_gain": 43,
+     "flipped_to": 46,
      "majority_called": true
     },
     "R": {
      "won": 171,
-     "net_gain": -42,
+     "net_gain": -43,
      "flipped_to": 3,
      "majority_called": false
     },
@@ -16060,8 +16060,8 @@
    "pct_in": 99,
    "winner_party": "R",
    "leader_party": "R",
-   "margin_pct": 5.8,
-   "total_votes": 248482,
+   "margin_pct": 5.9,
+   "total_votes": 248563,
    "called_at": "2026-11-04T05:26:31.787Z",
    "candidates": [
     {
@@ -16069,8 +16069,8 @@
      "party": "R",
      "incumbent": true,
      "winner": true,
-     "votes": 126807,
-     "pct": 51.03,
+     "votes": 126859,
+     "pct": 51.04,
      "photo": null
     },
     {
@@ -16078,8 +16078,8 @@
      "party": "D",
      "incumbent": false,
      "winner": false,
-     "votes": 112283,
-     "pct": 45.19,
+     "votes": 112307,
+     "pct": 45.18,
      "photo": null
     },
     {
@@ -16087,7 +16087,7 @@
      "party": "LB",
      "incumbent": false,
      "winner": false,
-     "votes": 9392,
+     "votes": 9397,
      "pct": 3.78,
      "photo": null
     }
@@ -23061,6 +23061,62 @@
     "AP"
    ]
   },
+  "NC-03": {
+   "id": "NC-03",
+   "kind": "house",
+   "state": "NC",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.1,
+   "total_votes": 239614,
+   "called_at": "2026-11-17T20:45:05.431Z",
+   "candidates": [
+    {
+     "name": "Raymond Smith",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 118434,
+     "pct": 49.43,
+     "photo": null
+    },
+    {
+     "name": "Greg Murphy",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 118176,
+     "pct": 49.32,
+     "photo": null
+    },
+    {
+     "name": "Daniel Cavender",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 3004,
+     "pct": 1.25,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "AK-AL": {
    "id": "AK-AL",
    "kind": "house",
@@ -23169,58 +23225,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NC-03": {
-   "id": "NC-03",
-   "kind": "house",
-   "state": "NC",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.1,
-   "total_votes": 239614,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Raymond Smith",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 118434,
-     "pct": 49.43,
-     "photo": null
-    },
-    {
-     "name": "Greg Murphy",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 118176,
-     "pct": 49.32,
-     "photo": null
-    },
-    {
-     "name": "Daniel Cavender",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 3004,
-     "pct": 1.25,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
     "nbc": null
    },
    "consensus": null,
@@ -25654,7 +25658,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 1,
-   "total_votes": 1112483,
+   "total_votes": 1112560,
    "called_at": null,
    "candidates": [
     {
@@ -25662,7 +25666,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 561947,
+     "votes": 561977,
      "pct": 50.51,
      "photo": "https://images.api.fox.com/elections/headshots/HOLSCHER_CINDY_DKS_STATESEN.png"
     },
@@ -25671,7 +25675,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 550536,
+     "votes": 550583,
      "pct": 49.49,
      "photo": "https://images.api.fox.com/elections/headshots/MASTERSON_TY_RKS_GOVERNOR.png"
     }
@@ -26725,6 +26729,14 @@
  },
  "latest_calls": [
   {
+   "id": "NC-03",
+   "kind": "house",
+   "party": "D",
+   "winner": "Raymond Smith",
+   "flipped": true,
+   "at": "2026-11-17T20:45:05.431Z"
+  },
+  {
    "id": "CA-23",
    "kind": "house",
    "party": "R",
@@ -27115,23 +27127,15 @@
    "winner": "Marni von Wilpert",
    "flipped": true,
    "at": "2026-11-05T01:32:45.566Z"
-  },
-  {
-   "id": "CA-47",
-   "kind": "house",
-   "party": "D",
-   "winner": "Dave Min",
-   "flipped": false,
-   "at": "2026-11-05T01:15:59.925Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-17T20:45:05.382Z",
+   "updated": "2026-11-17T20:46:56.977Z",
    "house": {
-    "D": 256,
+    "D": 257,
     "R": 171,
     "I": 0
    },
@@ -27170,9 +27174,9 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-17T20:45:15.000Z",
+   "updated": "2026-11-17T20:48:22.000Z",
    "house": {
-    "D": 256,
+    "D": 257,
     "R": 172,
     "I": 0
    },
@@ -27189,5 +27193,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-17T20:46:20.574Z"
+ "desks_checked_at": "2026-11-17T20:49:45.577Z"
 }

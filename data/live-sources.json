@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-17T03:59:53.387Z",
+ "updated": "2026-11-17T04:03:27.620Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -54,49 +54,49 @@
    "name": "Michigan Advance",
    "domain": "michiganadvance.com",
    "state": "MI",
-   "ok": true
+   "ok": false
   },
   {
    "name": "MLive / Detroit News",
    "domain": "detroitnews.com",
    "state": "MI",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Nebraska Examiner",
    "domain": "nebraskaexaminer.com",
    "state": "NE",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Omaha World-Herald",
    "domain": "omaha.com",
    "state": "NE",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Lincoln Journal Star",
    "domain": "journalstar.com",
    "state": "NE",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NC Newsline",
    "domain": "ncnewsline.com",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Carolina Public Press",
    "domain": "carolinapublicpress.org",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "WUNC Politics (90.7 FM)",
    "domain": "wunc.org",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "The Assembly NC",
@@ -198,49 +198,49 @@
    "name": "NY State of Politics / Spectrum News",
    "domain": "nystateofpolitics.com",
    "state": "NY",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Times Union (Albany)",
    "domain": "timesunion.com",
    "state": "NY",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Ohio Capital Journal",
    "domain": "ohiocapitaljournal.com",
    "state": "OH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Cleveland Plain Dealer / Cleveland.com",
    "domain": "cleveland.com",
    "state": "OH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Columbus Dispatch",
    "domain": "dispatch.com",
    "state": "OH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Texas Tribune",
    "domain": "texastribune.org",
    "state": "TX",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Houston Chronicle",
    "domain": "houstonchronicle.com",
    "state": "TX",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Texas Observer",
    "domain": "texasobserver.org",
    "state": "TX",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Arizona Mirror",
@@ -342,49 +342,49 @@
    "name": "Richmond Times-Dispatch",
    "domain": "richmond.com",
    "state": "VA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Virginia Public Access Project (VPAP)",
    "domain": "vpap.org",
    "state": "VA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Washington State Standard",
    "domain": "washingtonstatestandard.com",
    "state": "WA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Crosscut",
    "domain": "crosscut.com",
    "state": "WA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Seattle Times",
    "domain": "seattletimes.com",
    "state": "WA",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Wisconsin Examiner",
    "domain": "wisconsinexaminer.com",
    "state": "WI",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Milwaukee Journal Sentinel",
    "domain": "jsonline.com",
    "state": "WI",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Wisconsin Watch",
    "domain": "wisconsinwatch.org",
    "state": "WI",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Financial Times",
@@ -4612,6 +4612,17 @@
    "url": "https://ground.news/article/desjarlais-concedes-tennessee-4th-congressional-district-to-democrat-victoria-broderick",
    "title": "DesJarlais concedes to Democrat in Tennessee House race",
    "at": "2026-11-16T21:59:49.604Z"
+  },
+  {
+   "race": "CA-23",
+   "name": "Jay Obernolte",
+   "party": "R",
+   "result": "won",
+   "publisher": "Los Angeles Times",
+   "outlet": "latimes.com",
+   "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOGlDM1pnTlhpcWtrczNVMFRHeGV4Y1FWNENSSmxJSENDT2UtS2FOYjF5VzczMG1fcHRwaVpaeXRvZmxPSHd1Q2NJdEp4UWk0SDh3RlZiZkI1VExqdFdlSEdYaVpMdTBhZ0ZZbm9SVHhvdm56MWVlR2VxQmF3YlEyTjR5V1FZTjZKNWVXZE02dHZiQWp0bG1STnhBWkdYUi1jandGZlQtSkNyQVJJRmlNekJWdE9hUQ?oc=5",
+   "title": "Republican Rep. Obernolte declared winner in tight Southern California congressional race",
+   "at": "2026-11-17T02:56:00.000Z"
   }
  ],
  "races": {
@@ -7821,12 +7832,27 @@
    ],
    "disagree": [],
    "reported": []
+  },
+  "CA-23": {
+   "fox_winner": "Jay Obernolte",
+   "agree": [
+    {
+     "publisher": "Los Angeles Times",
+     "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOGlDM1pnTlhpcWtrczNVMFRHeGV4Y1FWNENSSmxJSENDT2UtS2FOYjF5VzczMG1fcHRwaVpaeXRvZmxPSHd1Q2NJdEp4UWk0SDh3RlZiZkI1VExqdFdlSEdYaVpMdTBhZ0ZZbm9SVHhvdm56MWVlR2VxQmF3YlEyTjR5V1FZTjZKNWVXZE02dHZiQWp0bG1STnhBWkdYUi1jandGZlQtSkNyQVJJRmlNekJWdE9hUQ?oc=5",
+     "title": "Republican Rep. Obernolte declared winner in tight Southern California congressional race",
+     "winner": "Jay Obernolte",
+     "party": "R",
+     "at": "2026-11-17T02:56:00.000Z"
+    }
+   ],
+   "disagree": [],
+   "reported": []
   }
  },
  "counts": {
   "sources": 66,
-  "read": 58,
-  "races_confirmed": 129,
+  "read": 50,
+  "races_confirmed": 130,
   "races_disputed": 7,
   "races_reported_not_called": 3
  }

@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-18T04:31:22.905Z",
- "fetched_at": "2026-11-18T04:32:04.243Z",
+ "source_last_updated": "2026-11-18T04:35:20.366Z",
+ "fetched_at": "2026-11-18T04:35:21.483Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -23433,12 +23433,13 @@
    "desks": {
     "fox": "D",
     "ap": "D",
-    "nbc": null
+    "nbc": "D"
    },
    "consensus": "D",
    "consensus_by": [
     "Fox News",
-    "AP"
+    "AP",
+    "NBC News"
    ]
   },
   "Senate-AL": {
@@ -27136,7 +27137,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-18T04:31:22.905Z",
+   "updated": "2026-11-18T04:35:20.366Z",
    "house": {
     "D": 257,
     "R": 171,
@@ -27177,14 +27178,14 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-17T23:46:11.000Z",
+   "updated": "2026-11-18T04:33:44.000Z",
    "house": {
     "D": 257,
     "R": 172,
     "I": 0
    },
    "senate": {
-    "D": 20,
+    "D": 21,
     "R": 12,
     "I": 0
    },
@@ -27196,5 +27197,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-18T04:32:04.894Z"
+ "desks_checked_at": "2026-11-18T04:35:22.377Z"
 }

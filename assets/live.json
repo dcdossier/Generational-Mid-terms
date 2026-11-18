@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-18T03:19:50.185Z",
- "fetched_at": "2026-11-18T03:20:17.330Z",
+ "source_last_updated": "2026-11-18T03:23:32.769Z",
+ "fetched_at": "2026-11-18T03:23:59.745Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -51,17 +51,17 @@
    },
    "up_tonight": 35,
    "total_seats": 100,
-   "remaining": 1,
+   "remaining": 0,
    "parties": {
     "D": {
-     "won": 21,
-     "net_gain": 8,
-     "flipped_to": 8,
+     "won": 22,
+     "net_gain": 9,
+     "flipped_to": 9,
      "majority_called": true
     },
     "R": {
      "won": 13,
-     "net_gain": -8,
+     "net_gain": -9,
      "flipped_to": 0,
      "majority_called": false
     },
@@ -23395,6 +23395,52 @@
    "consensus": null,
    "consensus_by": []
   },
+  "Senate-AK": {
+   "id": "Senate-AK",
+   "kind": "senate",
+   "state": "AK",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 4.3,
+   "total_votes": 276146,
+   "called_at": null,
+   "candidates": [
+    {
+     "name": "Mary Peltola",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 144302,
+     "pct": 50.12,
+     "photo": "https://images.api.fox.com/elections/headshots/PELTOLA_MARY_DAK_HOUSE.png"
+    },
+    {
+     "name": "Dan Sullivan",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 131844,
+     "pct": 45.8,
+     "photo": "https://images.api.fox.com/elections/headshots/SULLIVAN_DAN_RAK_SENATE.png"
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "Senate-AL": {
    "id": "Senate-AL",
    "kind": "senate",
@@ -24990,49 +25036,6 @@
     "AP",
     "NBC News"
    ]
-  },
-  "Senate-AK": {
-   "id": "Senate-AK",
-   "kind": "senate",
-   "state": "AK",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 4.3,
-   "total_votes": 276146,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Mary Peltola",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 144302,
-     "pct": 50.12,
-     "photo": "https://images.api.fox.com/elections/headshots/PELTOLA_MARY_DAK_HOUSE.png"
-    },
-    {
-     "name": "Dan Sullivan",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 131844,
-     "pct": 45.8,
-     "photo": "https://images.api.fox.com/elections/headshots/SULLIVAN_DAN_RAK_SENATE.png"
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
   },
   "Gov-AK": {
    "id": "Gov-AK",
@@ -27133,14 +27136,14 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-18T03:19:50.185Z",
+   "updated": "2026-11-18T03:23:32.769Z",
    "house": {
     "D": 257,
     "R": 171,
     "I": 0
    },
    "senate": {
-    "D": 21,
+    "D": 22,
     "R": 13,
     "I": 0
    },
@@ -27193,5 +27196,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-18T03:20:18.254Z"
+ "desks_checked_at": "2026-11-18T03:24:00.909Z"
 }

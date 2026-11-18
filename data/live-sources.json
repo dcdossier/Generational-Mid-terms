@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18T04:02:00.127Z",
+ "updated": "2026-11-18T04:05:19.812Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -198,49 +198,49 @@
    "name": "NY State of Politics / Spectrum News",
    "domain": "nystateofpolitics.com",
    "state": "NY",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Times Union (Albany)",
    "domain": "timesunion.com",
    "state": "NY",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Ohio Capital Journal",
    "domain": "ohiocapitaljournal.com",
    "state": "OH",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Cleveland Plain Dealer / Cleveland.com",
    "domain": "cleveland.com",
    "state": "OH",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Columbus Dispatch",
    "domain": "dispatch.com",
    "state": "OH",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Texas Tribune",
    "domain": "texastribune.org",
    "state": "TX",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Houston Chronicle",
    "domain": "houstonchronicle.com",
    "state": "TX",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Texas Observer",
    "domain": "texasobserver.org",
    "state": "TX",
-   "ok": false
+   "ok": true
   },
   {
    "name": "Arizona Mirror",
@@ -4681,6 +4681,17 @@
   },
   {
    "race": "Senate-AK",
+   "name": "Dan Sullivan",
+   "party": "R",
+   "result": "won",
+   "publisher": "USA Today",
+   "outlet": null,
+   "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNaWtUM1VQei1FTmdUU1VPM21wV2FfY25ZallwT2lXUTVvZ3FHTHdGNVZ2UU1FbGNjbEVCQzFUdDZuZU1jazJXQ2NkMXVnMWVhQXN0eWNsSXdleE1CcWk0UFFxOGVpaEFzTThyZm0tVlFYb2lwUi1LZV9QalIyZ1MxcWRHU1ItYVd2TXRTeDNIc2RST2NtTjg0LTRZS0tRYnM3eHp5dUtiZmRNakNzVmNWSlcwNldNNzE4VHhoZ2lmdE1TZw?oc=5",
+   "title": "Mary Peltola defies 2 Dan Sullivans, Trump to win Alaska Senate seat",
+   "at": "2026-11-18T03:43:00.000Z"
+  },
+  {
+   "race": "Senate-AK",
    "name": "Mary Peltola",
    "party": "D",
    "result": "won",
@@ -7127,7 +7138,16 @@
      "at": "2026-11-18T03:32:11.000Z"
     }
    ],
-   "disagree": [],
+   "disagree": [
+    {
+     "publisher": "USA Today",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNaWtUM1VQei1FTmdUU1VPM21wV2FfY25ZallwT2lXUTVvZ3FHTHdGNVZ2UU1FbGNjbEVCQzFUdDZuZU1jazJXQ2NkMXVnMWVhQXN0eWNsSXdleE1CcWk0UFFxOGVpaEFzTThyZm0tVlFYb2lwUi1LZV9QalIyZ1MxcWRHU1ItYVd2TXRTeDNIc2RST2NtTjg0LTRZS0tRYnM3eHp5dUtiZmRNakNzVmNWSlcwNldNNzE4VHhoZ2lmdE1TZw?oc=5",
+     "title": "Mary Peltola defies 2 Dan Sullivans, Trump to win Alaska Senate seat",
+     "winner": "Dan Sullivan",
+     "party": "R",
+     "at": "2026-11-18T03:43:00.000Z"
+    }
+   ],
    "reported": []
   },
   "NC-06": {
@@ -7948,9 +7968,9 @@
  },
  "counts": {
   "sources": 66,
-  "read": 58,
+  "read": 66,
   "races_confirmed": 132,
-  "races_disputed": 7,
+  "races_disputed": 8,
   "races_reported_not_called": 2
  }
 }

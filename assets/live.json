@@ -9,8 +9,8 @@
  },
  "source_last_updated": "2026-11-18T12:09:03.476Z",
  "fetched_at": "2026-11-18T12:12:16.628Z",
- "ok": true,
- "error": null,
+ "ok": false,
+ "error": "https://www.foxnews.com/elections/2026/midterm-results/governor: HTTP 504",
  "chambers": {
   "house": {
    "not_up": {
@@ -27136,7 +27136,7 @@
  "desks": {
   "fox": {
    "name": "Fox News",
-   "ok": true,
+   "ok": false,
    "updated": "2026-11-18T12:09:03.476Z",
    "house": {
     "D": 257,
@@ -27197,5 +27197,6 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-18T12:12:17.182Z"
+ "desks_checked_at": "2026-11-18T12:16:09.198Z",
+ "last_attempt": "2026-11-18T12:15:30.567Z"
 }

@@ -9,8 +9,8 @@
  },
  "source_last_updated": "2026-11-20T10:10:04.091Z",
  "fetched_at": "2026-11-20T10:10:01.564Z",
- "ok": true,
- "error": null,
+ "ok": false,
+ "error": "https://www.foxnews.com/elections/2026/midterm-results/house: HTTP 504",
  "chambers": {
   "house": {
    "not_up": {
@@ -27140,7 +27140,7 @@
  "desks": {
   "fox": {
    "name": "Fox News",
-   "ok": true,
+   "ok": false,
    "updated": "2026-11-20T10:10:04.091Z",
    "house": {
     "D": 257,
@@ -27201,5 +27201,6 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-20T10:10:04.955Z"
+ "desks_checked_at": "2026-11-20T10:14:07.771Z",
+ "last_attempt": "2026-11-20T10:13:31.955Z"
 }

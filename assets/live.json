@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-20T18:27:44.114Z",
- "fetched_at": "2026-11-20T18:28:10.816Z",
+ "source_last_updated": "2026-11-20T18:26:16.110Z",
+ "fetched_at": "2026-11-20T18:31:38.265Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -1270,7 +1270,7 @@
    "pct_in": 89,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 100,
+   "margin_pct": null,
    "total_votes": 206925,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
@@ -1282,15 +1282,6 @@
      "votes": 206925,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/CLARK_KATHERINE_DMA_HOUSE.png"
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 0,
-     "pct": 0,
-     "photo": null
     }
    ],
    "desks": {
@@ -9859,15 +9850,6 @@
      "winner": false,
      "votes": 137445,
      "pct": 39.12,
-     "photo": null
-    },
-    {
-     "name": "Total Write-ins",
-     "party": "AO",
-     "incumbent": false,
-     "winner": false,
-     "votes": 0,
-     "pct": 0,
      "photo": null
     }
    ],
@@ -25414,11 +25396,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 99,
+   "pct_in": 98,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 19.2,
-   "total_votes": 1298133,
+   "margin_pct": 19.1,
+   "total_votes": 1296289,
    "called_at": null,
    "candidates": [
     {
@@ -25426,8 +25408,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 773377,
-     "pct": 59.58,
+     "votes": 772084,
+     "pct": 59.56,
      "photo": "https://images.api.fox.com/elections/headshots/LAMONT_NED_DCT_GOVERNOR.png"
     },
     {
@@ -25435,8 +25417,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 524756,
-     "pct": 40.42,
+     "votes": 524205,
+     "pct": 40.44,
      "photo": "https://images.api.fox.com/elections/headshots/FAZIO_RYAN_RCT_GOVERNOR.png"
     }
    ],
@@ -27222,7 +27204,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-20T18:27:44.114Z",
+   "updated": "2026-11-20T18:26:16.110Z",
    "house": {
     "D": 257,
     "R": 172,
@@ -27263,7 +27245,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-20T18:27:56.000Z",
+   "updated": "2026-11-20T18:28:32.000Z",
    "house": {
     "D": 257,
     "R": 173,
@@ -27282,5 +27264,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-20T18:28:11.959Z"
+ "desks_checked_at": "2026-11-20T18:31:39.273Z"
 }

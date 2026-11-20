@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-20T18:26:16.110Z",
- "fetched_at": "2026-11-20T18:31:38.265Z",
+ "source_last_updated": "2026-11-20T18:34:52.100Z",
+ "fetched_at": "2026-11-20T18:35:04.956Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -1270,7 +1270,7 @@
    "pct_in": 89,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": null,
+   "margin_pct": 100,
    "total_votes": 206925,
    "called_at": "2026-11-04T01:00:00.000Z",
    "candidates": [
@@ -1282,6 +1282,15 @@
      "votes": 206925,
      "pct": 100,
      "photo": "https://images.api.fox.com/elections/headshots/CLARK_KATHERINE_DMA_HOUSE.png"
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 0,
+     "pct": 0,
+     "photo": null
     }
    ],
    "desks": {
@@ -9850,6 +9859,15 @@
      "winner": false,
      "votes": 137445,
      "pct": 39.12,
+     "photo": null
+    },
+    {
+     "name": "Total Write-ins",
+     "party": "AO",
+     "incumbent": false,
+     "winner": false,
+     "votes": 0,
+     "pct": 0,
      "photo": null
     }
    ],
@@ -23897,7 +23915,7 @@
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 25.7,
-   "total_votes": 4153915,
+   "total_votes": 4153814,
    "called_at": null,
    "candidates": [
     {
@@ -23905,7 +23923,7 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 2619955,
+     "votes": 2619893,
      "pct": 62.07,
      "photo": "https://images.api.fox.com/elections/headshots/STRATTON_JULIANA_DIL_SENATE.png"
     },
@@ -23914,7 +23932,7 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 1533960,
+     "votes": 1533921,
      "pct": 36.34,
      "photo": "https://images.api.fox.com/elections/headshots/TRACY_DON_RIL_SENATE.png"
     }
@@ -24598,11 +24616,11 @@
    "too_close": false,
    "flipped": true,
    "runoff": false,
-   "pct_in": 99,
+   "pct_in": 98,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 5,
-   "total_votes": 4413391,
+   "margin_pct": 4.8,
+   "total_votes": 4398381,
    "called_at": null,
    "candidates": [
     {
@@ -24610,8 +24628,8 @@
      "party": "D",
      "incumbent": false,
      "winner": true,
-     "votes": 2323001,
-     "pct": 50.09,
+     "votes": 2310585,
+     "pct": 49.99,
      "photo": "https://images.api.fox.com/elections/headshots/BROWN_SHERROD_DOH_SENATE.png"
     },
     {
@@ -24619,8 +24637,8 @@
      "party": "R",
      "incumbent": true,
      "winner": false,
-     "votes": 2090390,
-     "pct": 45.07,
+     "votes": 2087796,
+     "pct": 45.17,
      "photo": "https://images.api.fox.com/elections/headshots/HUSTED_JON_ROH_SENATE.png"
     }
    ],
@@ -25396,11 +25414,11 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 98,
+   "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
-   "margin_pct": 19.1,
-   "total_votes": 1296289,
+   "margin_pct": 19.2,
+   "total_votes": 1298133,
    "called_at": null,
    "candidates": [
     {
@@ -25408,8 +25426,8 @@
      "party": "D",
      "incumbent": true,
      "winner": true,
-     "votes": 772084,
-     "pct": 59.56,
+     "votes": 773377,
+     "pct": 59.58,
      "photo": "https://images.api.fox.com/elections/headshots/LAMONT_NED_DCT_GOVERNOR.png"
     },
     {
@@ -25417,8 +25435,8 @@
      "party": "R",
      "incumbent": false,
      "winner": false,
-     "votes": 524205,
-     "pct": 40.44,
+     "votes": 524756,
+     "pct": 40.42,
      "photo": "https://images.api.fox.com/elections/headshots/FAZIO_RYAN_RCT_GOVERNOR.png"
     }
    ],
@@ -27204,7 +27222,7 @@
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-20T18:26:16.110Z",
+   "updated": "2026-11-20T18:34:52.100Z",
    "house": {
     "D": 257,
     "R": 172,
@@ -27264,5 +27282,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-20T18:31:39.273Z"
+ "desks_checked_at": "2026-11-20T18:35:06.053Z"
 }

@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22T17:51:09.357Z",
+ "updated": "2026-11-22T18:31:04.709Z",
  "about": "Cross-check of Fox News race calls against the outlets in the 2026 Mid-term source sheet, the Financial Times (headlines via Google News) and Ground News. Fox remains the source of calls and vote counts.",
  "sources": [
   {
@@ -102,49 +102,49 @@
    "name": "The Assembly NC",
    "domain": "theassemblync.com",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Cardinal & Pine",
    "domain": "cardinalpine.com",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NC Health News",
    "domain": "northcarolinahealthnews.org",
    "state": "NC",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NH Union Leader",
    "domain": "unionleader.com",
    "state": "NH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Concord Monitor",
    "domain": "concordmonitor.com",
    "state": "NH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Portsmouth Herald / Seacoast Online",
    "domain": "seacoastonline.com",
    "state": "NH",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NJ Spotlight News",
    "domain": "njspotlightnews.org",
    "state": "NJ",
-   "ok": true
+   "ok": false
   },
   {
    "name": "Insider NJ",
    "domain": "insidernj.com",
    "state": "NJ",
-   "ok": true
+   "ok": false
   },
   {
    "name": "NJ Monitor",
@@ -390,7 +390,7 @@
    "name": "Financial Times",
    "domain": "ft.com",
    "state": null,
-   "ok": true
+   "ok": false
   },
   {
    "name": "Ground News",
@@ -5019,6 +5019,17 @@
    "url": "https://ground.news/article/crypto-industry-faces-democratic-backlash-after-55m-sherrod-brown-defeat",
    "title": "Crypto industry faces Democratic backlash after $55M Sherrod Brown defeat",
    "at": "2026-11-20T15:30:00.787Z"
+  },
+  {
+   "race": "NC-05",
+   "name": "Chuck Hubbard",
+   "party": "D",
+   "result": "won",
+   "publisher": "Ground News",
+   "outlet": "ground.news",
+   "url": "https://ground.news/article/democrats-clinch-a-historic-house-majority-of-at-least-258-seats-the-largest-since-1992",
+   "title": "Democrats Reach 258 House Seats, Largest Majority Since 1992, as Chuck Hubbard Flips North Carolina Seat",
+   "at": "2026-11-22T18:31:04.708Z"
   }
  ],
  "races": {
@@ -8236,6 +8247,14 @@
      "winner": "Chuck Hubbard",
      "party": "D",
      "at": "2026-11-11T15:08:16.000Z"
+    },
+    {
+     "publisher": "Ground News",
+     "url": "https://ground.news/article/democrats-clinch-a-historic-house-majority-of-at-least-258-seats-the-largest-since-1992",
+     "title": "Democrats Reach 258 House Seats, Largest Majority Since 1992, as Chuck Hubbard Flips North Carolina Seat",
+     "winner": "Chuck Hubbard",
+     "party": "D",
+     "at": "2026-11-22T18:31:04.708Z"
     }
    ],
    "disagree": [],
@@ -8366,7 +8385,7 @@
  },
  "counts": {
   "sources": 66,
-  "read": 66,
+  "read": 57,
   "races_confirmed": 134,
   "races_disputed": 8,
   "races_reported_not_called": 1

@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-22T17:41:02.753Z",
- "fetched_at": "2026-11-22T17:47:34.074Z",
+ "source_last_updated": "2026-11-22T17:46:10.682Z",
+ "fetched_at": "2026-11-22T17:50:53.221Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -20,17 +20,17 @@
    },
    "up_tonight": 435,
    "total_seats": 435,
-   "remaining": 5,
+   "remaining": 4,
    "parties": {
     "D": {
-     "won": 257,
-     "net_gain": 43,
-     "flipped_to": 46,
+     "won": 258,
+     "net_gain": 44,
+     "flipped_to": 47,
      "majority_called": true
     },
     "R": {
      "won": 173,
-     "net_gain": -43,
+     "net_gain": -44,
      "flipped_to": 3,
      "majority_called": false
     },
@@ -23319,6 +23319,62 @@
     "AP"
    ]
   },
+  "NC-05": {
+   "id": "NC-05",
+   "kind": "house",
+   "state": "NC",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.1,
+   "total_votes": 286786,
+   "called_at": "2026-11-22T17:44:07.768Z",
+   "candidates": [
+    {
+     "name": "Chuck Hubbard",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 139769,
+     "pct": 48.74,
+     "photo": null
+    },
+    {
+     "name": "Virginia Foxx",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 139439,
+     "pct": 48.62,
+     "photo": null
+    },
+    {
+     "name": "Robert Luffman",
+     "party": "LB",
+     "incumbent": false,
+     "winner": false,
+     "votes": 7578,
+     "pct": 2.64,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "MN-01": {
    "id": "MN-01",
    "kind": "house",
@@ -23366,58 +23422,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "NC-05": {
-   "id": "NC-05",
-   "kind": "house",
-   "state": "NC",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.1,
-   "total_votes": 286786,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Chuck Hubbard",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 139769,
-     "pct": 48.74,
-     "photo": null
-    },
-    {
-     "name": "Virginia Foxx",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 139439,
-     "pct": 48.62,
-     "photo": null
-    },
-    {
-     "name": "Robert Luffman",
-     "party": "LB",
-     "incumbent": false,
-     "winner": false,
-     "votes": 7578,
-     "pct": 2.64,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
     "nbc": null
    },
    "consensus": null,
@@ -26822,6 +26826,14 @@
  },
  "latest_calls": [
   {
+   "id": "NC-05",
+   "kind": "house",
+   "party": "D",
+   "winner": "Chuck Hubbard",
+   "flipped": true,
+   "at": "2026-11-22T17:44:07.768Z"
+  },
+  {
    "id": "NC-10",
    "kind": "house",
    "party": "R",
@@ -27212,23 +27224,15 @@
    "winner": "Cyril Jefferson",
    "flipped": true,
    "at": "2026-11-05T16:58:47.607Z"
-  },
-  {
-   "id": "NC-01",
-   "kind": "house",
-   "party": "D",
-   "winner": "Don Davis",
-   "flipped": false,
-   "at": "2026-11-05T16:58:36.782Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-22T17:41:02.753Z",
+   "updated": "2026-11-22T17:46:10.682Z",
    "house": {
-    "D": 257,
+    "D": 258,
     "R": 173,
     "I": 0
    },
@@ -27286,5 +27290,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-22T17:47:34.800Z"
+ "desks_checked_at": "2026-11-22T17:50:54.284Z"
 }

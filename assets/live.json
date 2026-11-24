@@ -7,8 +7,8 @@
    "governor": "https://www.foxnews.com/elections/2026/midterm-results/governor"
   }
  },
- "source_last_updated": "2026-11-24T17:13:24.913Z",
- "fetched_at": "2026-11-24T17:19:55.672Z",
+ "source_last_updated": "2026-11-24T17:19:56.283Z",
+ "fetched_at": "2026-11-24T17:23:11.042Z",
  "ok": true,
  "error": null,
  "chambers": {
@@ -15251,7 +15251,7 @@
    "too_close": false,
    "flipped": false,
    "runoff": false,
-   "pct_in": 99,
+   "pct_in": 98,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 32.8,
@@ -20438,7 +20438,7 @@
    "too_close": false,
    "flipped": true,
    "runoff": false,
-   "pct_in": 98,
+   "pct_in": 99,
    "winner_party": "D",
    "leader_party": "D",
    "margin_pct": 19.7,
@@ -23375,6 +23375,71 @@
     "AP"
    ]
   },
+  "TN-04": {
+   "id": "TN-04",
+   "kind": "house",
+   "state": "TN",
+   "special": false,
+   "called": true,
+   "too_close": false,
+   "flipped": true,
+   "runoff": false,
+   "pct_in": 99,
+   "winner_party": "D",
+   "leader_party": "D",
+   "margin_pct": 0.2,
+   "total_votes": 195774,
+   "called_at": "2026-11-24T17:12:29.993Z",
+   "candidates": [
+    {
+     "name": "Victoria Broderick",
+     "party": "D",
+     "incumbent": false,
+     "winner": true,
+     "votes": 95722,
+     "pct": 48.89,
+     "photo": null
+    },
+    {
+     "name": "Scott DesJarlais",
+     "party": "R",
+     "incumbent": true,
+     "winner": false,
+     "votes": 95361,
+     "pct": 48.71,
+     "photo": null
+    },
+    {
+     "name": "Jacob Anders",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 2836,
+     "pct": 1.45,
+     "photo": null
+    },
+    {
+     "name": "Clay Faircloth",
+     "party": "I",
+     "incumbent": false,
+     "winner": false,
+     "votes": 1855,
+     "pct": 0.95,
+     "photo": null
+    }
+   ],
+   "desks": {
+    "fox": "D",
+    "ap": "D",
+    "nbc": null,
+    "nbc_state_ok": true
+   },
+   "consensus": "D",
+   "consensus_by": [
+    "Fox News",
+    "AP"
+   ]
+  },
   "MN-01": {
    "id": "MN-01",
    "kind": "house",
@@ -23422,67 +23487,6 @@
    "desks": {
     "fox": null,
     "ap": null,
-    "nbc": null
-   },
-   "consensus": null,
-   "consensus_by": []
-  },
-  "TN-04": {
-   "id": "TN-04",
-   "kind": "house",
-   "state": "TN",
-   "special": false,
-   "called": false,
-   "too_close": false,
-   "flipped": false,
-   "runoff": false,
-   "pct_in": 99,
-   "winner_party": null,
-   "leader_party": "D",
-   "margin_pct": 0.2,
-   "total_votes": 195774,
-   "called_at": null,
-   "candidates": [
-    {
-     "name": "Victoria Broderick",
-     "party": "D",
-     "incumbent": false,
-     "winner": false,
-     "votes": 95722,
-     "pct": 48.89,
-     "photo": null
-    },
-    {
-     "name": "Scott DesJarlais",
-     "party": "R",
-     "incumbent": true,
-     "winner": false,
-     "votes": 95361,
-     "pct": 48.71,
-     "photo": null
-    },
-    {
-     "name": "Jacob Anders",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 2836,
-     "pct": 1.45,
-     "photo": null
-    },
-    {
-     "name": "Clay Faircloth",
-     "party": "I",
-     "incumbent": false,
-     "winner": false,
-     "votes": 1855,
-     "pct": 0.95,
-     "photo": null
-    }
-   ],
-   "desks": {
-    "fox": null,
-    "ap": "D",
     "nbc": null
    },
    "consensus": null,
@@ -26826,6 +26830,14 @@
  },
  "latest_calls": [
   {
+   "id": "TN-04",
+   "kind": "house",
+   "party": "D",
+   "winner": "Victoria Broderick",
+   "flipped": true,
+   "at": "2026-11-24T17:12:29.993Z"
+  },
+  {
    "id": "NC-05",
    "kind": "house",
    "party": "D",
@@ -27216,21 +27228,13 @@
    "winner": "Paul Barringer",
    "flipped": true,
    "at": "2026-11-05T16:59:02.063Z"
-  },
-  {
-   "id": "NC-06",
-   "kind": "house",
-   "party": "D",
-   "winner": "Cyril Jefferson",
-   "flipped": true,
-   "at": "2026-11-05T16:58:47.607Z"
   }
  ],
  "desks": {
   "fox": {
    "name": "Fox News",
    "ok": true,
-   "updated": "2026-11-24T17:13:24.913Z",
+   "updated": "2026-11-24T17:19:56.283Z",
    "house": {
     "D": 259,
     "R": 173,
@@ -27250,7 +27254,7 @@
   "ap": {
    "name": "AP",
    "ok": true,
-   "updated": "2026-11-24T17:19:25.540000Z",
+   "updated": "2026-11-24T17:22:53.794000Z",
    "via": "apnews.com, also shown by Politico",
    "house": {
     "D": 259,
@@ -27271,7 +27275,7 @@
   "nbc": {
    "name": "NBC News",
    "ok": true,
-   "updated": "2026-11-24T17:19:36.000Z",
+   "updated": "2026-11-24T17:23:04.000Z",
    "house": {
     "D": 259,
     "R": 173,
@@ -27290,5 +27294,5 @@
   }
  },
  "consensus_rule": "A seat counts as won when two of three decision desks (Fox News, AP, NBC News) call it for the same party. Politico shows AP calls.",
- "desks_checked_at": "2026-11-24T17:19:56.639Z"
+ "desks_checked_at": "2026-11-24T17:23:11.849Z"
 }
